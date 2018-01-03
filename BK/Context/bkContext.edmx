@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bkModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="bkModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="announcements">
           <Key>
             <PropertyRef Name="AnnoucementID" />
@@ -40,16 +40,16 @@
             <PropertyRef Name="FamilyID" />
           </Key>
           <Property Name="FamilyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FamilyNumber" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="NukhID" Type="int" Nullable="false" />
-          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="FamilyNumber" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="NukhID" Type="int" />
+          <Property Name="CategoryID" Type="int" />
           <Property Name="Phone1" Type="varchar" MaxLength="15" />
           <Property Name="Phone2" Type="varchar" MaxLength="15" />
-          <Property Name="Address1" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="50" />
           <Property Name="Address2" Type="varchar" MaxLength="50" />
-          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="State" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="PostalCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="10" />
           <Property Name="Country" Type="varchar" MaxLength="50" />
           <Property Name="OAddress1" Type="varchar" MaxLength="20" />
           <Property Name="OAddress2" Type="varchar" MaxLength="50" />
@@ -58,8 +58,8 @@
           <Property Name="OPostalCode" Type="varchar" MaxLength="10" />
           <Property Name="OCountry" Type="varchar" MaxLength="50" />
           <Property Name="Website" Type="varchar" MaxLength="100" />
-          <Property Name="CreatedOn" Type="datetime" Precision="6" Nullable="false" />
-          <Property Name="CreatedBy" Type="datetime" Precision="6" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Precision="6" />
+          <Property Name="CreatedBy" Type="datetime" Precision="6" />
           <Property Name="ModifiedOn" Type="datetime" Precision="6" />
           <Property Name="ModifiedBy" Type="int" />
         </EntityType>
@@ -250,7 +250,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Families_lkCategories">
-          <End Role="lkcategories" Type="Self.lkcategories" Multiplicity="1" />
+          <End Role="lkcategories" Type="Self.lkcategories" Multiplicity="0..1" />
           <End Role="families" Type="Self.families" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lkcategories">
@@ -262,7 +262,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Families_lkNukhs">
-          <End Role="lknukhs" Type="Self.lknukhs" Multiplicity="1" />
+          <End Role="lknukhs" Type="Self.lknukhs" Multiplicity="0..1" />
           <End Role="families" Type="Self.families" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lknukhs">
@@ -463,8 +463,7 @@
             <End Role="matrimonials" EntitySet="matrimonials" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -499,42 +498,10 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="ModifiedOn" Type="DateTime" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="family" Relationship="Self.FK_Events_Families" FromRole="events" ToRole="families" />
           <NavigationProperty Name="familymember" Relationship="Self.FK_Events_FamilyMembers" FromRole="events" ToRole="familymembers" />
           <NavigationProperty Name="familymember1" Relationship="Self.FK_Events_FamilyMembers1" FromRole="events" ToRole="familymembers" />
           <NavigationProperty Name="lkeventtype" Relationship="Self.FK_Events_lkEventTypes" FromRole="events" ToRole="lkeventtypes" />
-        </EntityType>
-        <EntityType Name="family">
-          <Key>
-            <PropertyRef Name="FamilyID" />
-          </Key>
-          <Property Name="FamilyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FamilyNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NukhID" Type="Int32" Nullable="false" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OAddress1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="OAddress2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="OCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
-          <Property Name="CreatedBy" Type="DateTime" Nullable="false" />
-          <Property Name="ModifiedOn" Type="DateTime" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="events" Relationship="Self.FK_Events_Families" FromRole="families" ToRole="events" />
-          <NavigationProperty Name="lkcategory" Relationship="Self.FK_Families_lkCategories" FromRole="families" ToRole="lkcategories" />
-          <NavigationProperty Name="lknukh" Relationship="Self.FK_Families_lkNukhs" FromRole="families" ToRole="lknukhs" />
-          <NavigationProperty Name="familymembers" Relationship="Self.FK_FamilyMembers_Families" FromRole="families" ToRole="familymembers" />
+          <NavigationProperty Name="family" Relationship="bkModel.FK_Events_Families" FromRole="event" ToRole="family" />
         </EntityType>
         <EntityType Name="familymember">
           <Key>
@@ -573,7 +540,6 @@
           <NavigationProperty Name="announcements1" Relationship="Self.FK_Announcements_FamilyMembers1" FromRole="familymembers" ToRole="announcements" />
           <NavigationProperty Name="events" Relationship="Self.FK_Events_FamilyMembers" FromRole="familymembers" ToRole="events" />
           <NavigationProperty Name="events1" Relationship="Self.FK_Events_FamilyMembers1" FromRole="familymembers" ToRole="events" />
-          <NavigationProperty Name="family" Relationship="Self.FK_FamilyMembers_Families" FromRole="familymembers" ToRole="families" />
           <NavigationProperty Name="familymembers1" Relationship="Self.FK_FamilyMembers_FamilyMembers" FromRole="familymembers" ToRole="familymembers1" />
           <NavigationProperty Name="familymember1" Relationship="Self.FK_FamilyMembers_FamilyMembers" FromRole="familymembers1" ToRole="familymembers" />
           <NavigationProperty Name="familymembers11" Relationship="Self.FK_FamilyMembers_FamilyMembers1" FromRole="familymembers" ToRole="familymembers1" />
@@ -583,6 +549,7 @@
           <NavigationProperty Name="matrimonialinterests" Relationship="Self.FK_MatrimonialInterests_FamilyMembers" FromRole="familymembers" ToRole="matrimonialinterests" />
           <NavigationProperty Name="matrimonials" Relationship="Self.FK_Matrimonials_FamilyMembers" FromRole="familymembers" ToRole="matrimonials" />
           <NavigationProperty Name="matrimonials1" Relationship="Self.FK_Matrimonials_FamilyMembers1" FromRole="familymembers" ToRole="matrimonials" />
+          <NavigationProperty Name="family" Relationship="bkModel.FK_FamilyMembers_Families" FromRole="familymember" ToRole="family" />
         </EntityType>
         <EntityType Name="lkcategory">
           <Key>
@@ -590,7 +557,7 @@
           </Key>
           <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="families" Relationship="Self.FK_Families_lkCategories" FromRole="lkcategories" ToRole="families" />
+          <NavigationProperty Name="families" Relationship="bkModel.FK_Families_lkCategories" FromRole="lkcategory" ToRole="family" />
         </EntityType>
         <EntityType Name="lkeventtype">
           <Key>
@@ -613,7 +580,7 @@
           </Key>
           <Property Name="NukhID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NukhName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="families" Relationship="Self.FK_Families_lkNukhs" FromRole="lknukhs" ToRole="families" />
+          <NavigationProperty Name="families" Relationship="bkModel.FK_Families_lkNukhs" FromRole="lknukh" ToRole="family" />
         </EntityType>
         <EntityType Name="lkrelationtype">
           <Key>
@@ -698,18 +665,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Events_Families">
-          <End Role="families" Type="Self.family" Multiplicity="1" />
-          <End Role="events" Type="Self.event" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="families">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="events">
-              <PropertyRef Name="FamilyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Events_FamilyMembers">
           <End Role="familymembers" Type="Self.familymember" Multiplicity="1" />
           <End Role="events" Type="Self.event" Multiplicity="*" />
@@ -743,42 +698,6 @@
             </Principal>
             <Dependent Role="events">
               <PropertyRef Name="EventTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Families_lkCategories">
-          <End Role="lkcategories" Type="Self.lkcategory" Multiplicity="1" />
-          <End Role="families" Type="Self.family" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lkcategories">
-              <PropertyRef Name="CategoryID" />
-            </Principal>
-            <Dependent Role="families">
-              <PropertyRef Name="CategoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Families_lkNukhs">
-          <End Role="lknukhs" Type="Self.lknukh" Multiplicity="1" />
-          <End Role="families" Type="Self.family" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lknukhs">
-              <PropertyRef Name="NukhID" />
-            </Principal>
-            <Dependent Role="families">
-              <PropertyRef Name="NukhID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FamilyMembers_Families">
-          <End Role="families" Type="Self.family" Multiplicity="1" />
-          <End Role="familymembers" Type="Self.familymember" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="families">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="familymembers">
-              <PropertyRef Name="FamilyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -881,7 +800,6 @@
         <EntityContainer Name="bkContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="announcements" EntityType="Self.announcement" />
           <EntitySet Name="events" EntityType="Self.event" />
-          <EntitySet Name="families" EntityType="Self.family" />
           <EntitySet Name="familymembers" EntityType="Self.familymember" />
           <EntitySet Name="lkcategories" EntityType="Self.lkcategory" />
           <EntitySet Name="lkeventtypes" EntityType="Self.lkeventtype" />
@@ -899,10 +817,6 @@
             <End Role="familymembers" EntitySet="familymembers" />
             <End Role="announcements" EntitySet="announcements" />
           </AssociationSet>
-          <AssociationSet Name="FK_Events_Families" Association="Self.FK_Events_Families">
-            <End Role="families" EntitySet="families" />
-            <End Role="events" EntitySet="events" />
-          </AssociationSet>
           <AssociationSet Name="FK_Events_FamilyMembers" Association="Self.FK_Events_FamilyMembers">
             <End Role="familymembers" EntitySet="familymembers" />
             <End Role="events" EntitySet="events" />
@@ -914,18 +828,6 @@
           <AssociationSet Name="FK_Events_lkEventTypes" Association="Self.FK_Events_lkEventTypes">
             <End Role="lkeventtypes" EntitySet="lkeventtypes" />
             <End Role="events" EntitySet="events" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Families_lkCategories" Association="Self.FK_Families_lkCategories">
-            <End Role="lkcategories" EntitySet="lkcategories" />
-            <End Role="families" EntitySet="families" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Families_lkNukhs" Association="Self.FK_Families_lkNukhs">
-            <End Role="lknukhs" EntitySet="lknukhs" />
-            <End Role="families" EntitySet="families" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FamilyMembers_Families" Association="Self.FK_FamilyMembers_Families">
-            <End Role="families" EntitySet="families" />
-            <End Role="familymembers" EntitySet="familymembers" />
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMembers_FamilyMembers" Association="Self.FK_FamilyMembers_FamilyMembers">
             <End Role="familymembers" EntitySet="familymembers" />
@@ -959,7 +861,104 @@
             <End Role="matrimonials" EntitySet="matrimonials" />
             <End Role="matrimonialinterests" EntitySet="matrimonialinterests" />
           </AssociationSet>
+          <EntitySet Name="families" EntityType="bkModel.family" />
+          <AssociationSet Name="FK_Events_Families" Association="bkModel.FK_Events_Families">
+            <End Role="family" EntitySet="families" />
+            <End Role="event" EntitySet="events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Families_lkCategories" Association="bkModel.FK_Families_lkCategories">
+            <End Role="lkcategory" EntitySet="lkcategories" />
+            <End Role="family" EntitySet="families" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Families_lkNukhs" Association="bkModel.FK_Families_lkNukhs">
+            <End Role="lknukh" EntitySet="lknukhs" />
+            <End Role="family" EntitySet="families" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyMembers_Families" Association="bkModel.FK_FamilyMembers_Families">
+            <End Role="family" EntitySet="families" />
+            <End Role="familymember" EntitySet="familymembers" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="family">
+          <Key>
+            <PropertyRef Name="FamilyID" />
+          </Key>
+          <Property Name="FamilyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FamilyNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NukhID" Type="Int32" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OAddress1" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OAddress2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OState" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="OCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" />
+          <Property Name="CreatedBy" Type="DateTime" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="events" Relationship="bkModel.FK_Events_Families" FromRole="family" ToRole="event" />
+          <NavigationProperty Name="lkcategory" Relationship="bkModel.FK_Families_lkCategories" FromRole="family" ToRole="lkcategory" />
+          <NavigationProperty Name="lknukh" Relationship="bkModel.FK_Families_lkNukhs" FromRole="family" ToRole="lknukh" />
+          <NavigationProperty Name="familymembers" Relationship="bkModel.FK_FamilyMembers_Families" FromRole="family" ToRole="familymember" />
+        </EntityType>
+        <Association Name="FK_Events_Families">
+          <End Type="bkModel.family" Role="family" Multiplicity="1" />
+          <End Type="bkModel.event" Role="event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="family">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="event">
+              <PropertyRef Name="FamilyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Families_lkCategories">
+          <End Type="bkModel.lkcategory" Role="lkcategory" Multiplicity="0..1" />
+          <End Type="bkModel.family" Role="family" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lkcategory">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="family">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Families_lkNukhs">
+          <End Type="bkModel.lknukh" Role="lknukh" Multiplicity="0..1" />
+          <End Type="bkModel.family" Role="family" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lknukh">
+              <PropertyRef Name="NukhID" />
+            </Principal>
+            <Dependent Role="family">
+              <PropertyRef Name="NukhID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMembers_Families">
+          <End Type="bkModel.family" Role="family" Multiplicity="1" />
+          <End Type="bkModel.familymember" Role="familymember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="family">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="familymember">
+              <PropertyRef Name="FamilyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -991,35 +990,6 @@
                 <ScalarProperty Name="EventTime" ColumnName="EventTime" />
                 <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
                 <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="families">
-            <EntityTypeMapping TypeName="bkModel.family">
-              <MappingFragment StoreEntitySet="families">
-                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
-                <ScalarProperty Name="FamilyNumber" ColumnName="FamilyNumber" />
-                <ScalarProperty Name="NukhID" ColumnName="NukhID" />
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="OAddress1" ColumnName="OAddress1" />
-                <ScalarProperty Name="OAddress2" ColumnName="OAddress2" />
-                <ScalarProperty Name="OCity" ColumnName="OCity" />
-                <ScalarProperty Name="OState" ColumnName="OState" />
-                <ScalarProperty Name="OPostalCode" ColumnName="OPostalCode" />
-                <ScalarProperty Name="OCountry" ColumnName="OCountry" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
@@ -1147,6 +1117,35 @@
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="families">
+            <EntityTypeMapping TypeName="bkModel.family">
+              <MappingFragment StoreEntitySet="families">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="OCountry" ColumnName="OCountry" />
+                <ScalarProperty Name="OPostalCode" ColumnName="OPostalCode" />
+                <ScalarProperty Name="OState" ColumnName="OState" />
+                <ScalarProperty Name="OCity" ColumnName="OCity" />
+                <ScalarProperty Name="OAddress2" ColumnName="OAddress2" />
+                <ScalarProperty Name="OAddress1" ColumnName="OAddress1" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="NukhID" ColumnName="NukhID" />
+                <ScalarProperty Name="FamilyNumber" ColumnName="FamilyNumber" />
+                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

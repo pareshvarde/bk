@@ -7,10 +7,9 @@
       <Diagram DiagramId="3852d57c4e5843c899aa62d9930215e2" Name="Diagram1">
         <EntityTypeShape EntityType="bkModel.announcement" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bkModel.event" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="bkModel.family" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bkModel.familymember" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
         <EntityTypeShape EntityType="bkModel.lkcategory" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="bkModel.lkeventtype" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="bkModel.lkeventtype" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bkModel.lkgotra" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="bkModel.lknukh" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="bkModel.lkrelationtype" Width="1.5" PointX="6" PointY="7" IsExpanded="true" />
@@ -19,13 +18,9 @@
         <EntityTypeShape EntityType="bkModel.matrimonial" Width="1.5" PointX="10.5" PointY="15.5" IsExpanded="true" />
         <AssociationConnector Association="bkModel.FK_Announcements_FamilyMembers" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_Announcements_FamilyMembers1" ManuallyRouted="false" />
-        <AssociationConnector Association="bkModel.FK_Events_Families" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_Events_FamilyMembers" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_Events_FamilyMembers1" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_Events_lkEventTypes" ManuallyRouted="false" />
-        <AssociationConnector Association="bkModel.FK_Families_lkCategories" ManuallyRouted="false" />
-        <AssociationConnector Association="bkModel.FK_Families_lkNukhs" ManuallyRouted="false" />
-        <AssociationConnector Association="bkModel.FK_FamilyMembers_Families" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_FamilyMembers_FamilyMembers" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_FamilyMembers_FamilyMembers1" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_FamilyMembers_lkRelationTypes" ManuallyRouted="false" />
@@ -34,6 +29,11 @@
         <AssociationConnector Association="bkModel.FK_Matrimonials_FamilyMembers" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_Matrimonials_FamilyMembers1" ManuallyRouted="false" />
         <AssociationConnector Association="bkModel.FK_MatrimonialInterests_Matrimonials" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="bkModel.family" Width="1.5" PointX="3" PointY="8.25" />
+        <AssociationConnector Association="bkModel.FK_Events_Families" />
+        <AssociationConnector Association="bkModel.FK_Families_lkCategories" />
+        <AssociationConnector Association="bkModel.FK_Families_lkNukhs" />
+        <AssociationConnector Association="bkModel.FK_FamilyMembers_Families" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

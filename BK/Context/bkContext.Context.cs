@@ -27,7 +27,6 @@ namespace BK.Context
     
         public virtual DbSet<announcement> announcements { get; set; }
         public virtual DbSet<@event> events { get; set; }
-        public virtual DbSet<family> families { get; set; }
         public virtual DbSet<familymember> familymembers { get; set; }
         public virtual DbSet<lkcategory> lkcategories { get; set; }
         public virtual DbSet<lkeventtype> lkeventtypes { get; set; }
@@ -37,5 +36,6 @@ namespace BK.Context
         public virtual DbSet<login> logins { get; set; }
         public virtual DbSet<matrimonialinterest> matrimonialinterests { get; set; }
         public virtual DbSet<matrimonial> matrimonials { get; set; }
+        public virtual DbSet<family> families { get; set; }
     }
 }

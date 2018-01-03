@@ -67,7 +67,6 @@ namespace BK.Context
         public virtual ICollection<@event> events { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<@event> events1 { get; set; }
-        public virtual family family { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<familymember> familymembers1 { get; set; }
         public virtual familymember familymember1 { get; set; }
@@ -83,5 +82,6 @@ namespace BK.Context
         public virtual ICollection<matrimonial> matrimonials { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<matrimonial> matrimonials1 { get; set; }
+        public virtual family family { get; set; }
     }
 }

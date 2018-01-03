@@ -27,9 +27,9 @@ namespace BK.Context
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
     
-        public virtual family family { get; set; }
         public virtual familymember familymember { get; set; }
         public virtual familymember familymember1 { get; set; }
         public virtual lkeventtype lkeventtype { get; set; }
+        public virtual family family { get; set; }
     }
 }

@@ -24,17 +24,20 @@ namespace BK
             using (bkContext _context = new bkContext())
             {
                 fMember = _context.familymembers.FirstOrDefault(m => m.EmailAddress == context.UserName);
-                if (fMember != null)
+                if (fMember == null)
                 {
-                    login fLogin = _context.logins.FirstOrDefault(l => l.Password == context.Password && l.Active == true);
-                    fLogin.LastLoginOn = DateTime.UtcNow;
-                    await _context.SaveChangesAsync();
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
 
-                    if (fLogin == null)
-                    {
-                        context.SetError("invalid_grant", "The user name or password is incorrect.");
-                        return;
-                    }
+                login fLogin = _context.logins.FirstOrDefault(l => l.Password == context.Password && l.Active == true);
+                fLogin.LastLoginOn = DateTime.UtcNow;
+                await _context.SaveChangesAsync();
+
+                if (fLogin == null)
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
                 }
             }
 
@@ -45,6 +48,6 @@ namespace BK
             identity.AddClaim(new Claim("familyMemberId", fMember.FamilyMemberID.ToString()));
 
             context.Validated(identity);
-        }        
+        }
     }
 }
