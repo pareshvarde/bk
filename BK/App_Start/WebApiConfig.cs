@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using BK.Filters;
+using FluentValidation.WebApi;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace BK
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.Filters.Add(new ValidateModelStateFilter());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -21,6 +24,8 @@ namespace BK
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            FluentValidationModelValidatorProvider.Configure(config);
 
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

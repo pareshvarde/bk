@@ -27,6 +27,9 @@ namespace BK
                 if (fMember != null)
                 {
                     login fLogin = _context.logins.FirstOrDefault(l => l.Password == context.Password && l.Active == true);
+                    fLogin.LastLoginOn = DateTime.UtcNow;
+                    await _context.SaveChangesAsync();
+
                     if (fLogin == null)
                     {
                         context.SetError("invalid_grant", "The user name or password is incorrect.");
