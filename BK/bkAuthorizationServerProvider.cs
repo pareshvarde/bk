@@ -45,6 +45,6 @@ namespace BK
             identity.AddClaim(new Claim("familyMemberId", fMember.FamilyMemberID.ToString()));
 
             context.Validated(identity);
-        }
+        }        
     }
 }
