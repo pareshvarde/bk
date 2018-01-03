@@ -884,7 +884,7 @@
             <PropertyRef Name="FamilyID" />
           </Key>
           <Property Name="FamilyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FamilyNumber" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FamilyNumber" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="false" />
           <Property Name="NukhID" Type="Int32" />
           <Property Name="CategoryID" Type="Int32" />
           <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />

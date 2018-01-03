@@ -16,6 +16,7 @@ namespace BK
             // Web API configuration and services
             config.Filters.Add(new ValidateModelStateFilter());
             config.Filters.Add(new ExceptionFilter());
+            config.MessageHandlers.Add(new ResponseWrappingHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();

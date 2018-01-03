@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Attributes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Web;
 
 namespace BK.ViewModel
 {
+    [Validator(typeof(RegisterValidator))]
     public class Register
     {
         [JsonProperty("firstName")]
@@ -26,10 +28,10 @@ namespace BK.ViewModel
     {
         public RegisterValidator()
         {
-            RuleFor(x => x.FirstName).NotEmpty().NotNull().WithMessage("First Name cannot be blank");
-            RuleFor(x => x.LastName).NotEmpty().NotNull().WithMessage("Last Name cannot be blank");
-            RuleFor(x => x.EmailAddress).NotEmpty().NotNull().WithMessage("Email address cannot be blank").EmailAddress().WithMessage("Invalid email address");
-            RuleFor(x => x.Password).NotNull().NotEmpty().WithMessage("Password cannot be blank");
+            RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
+            RuleFor(x => x.EmailAddress).NotEmpty().WithMessage("Email address cannot be blank").EmailAddress().WithMessage("Invalid email address");
+            RuleFor(x => x.Password).NotNull().WithMessage("Password cannot be blank");
         }
     }
 }
