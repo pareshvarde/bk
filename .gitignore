@@ -3,3 +3,4 @@ BK/bin/
 BK/obj/
 packages/
 BK/BK.csproj.user
+BK/bk-ui/node_modules/
