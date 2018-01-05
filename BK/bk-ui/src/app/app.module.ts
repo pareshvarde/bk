@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { MaterialModule } from './modules/material.module';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LayoutComponent } from './components/layout/layout.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent
+    LayoutComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
