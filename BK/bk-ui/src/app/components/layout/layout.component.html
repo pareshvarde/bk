@@ -1,6 +1,9 @@
-<p>
-  <button mat-button>Material Button</button>        
-    <mat-checkbox>Check me!</mat-checkbox>
-    <mat-icon>home</mat-icon>
-    <router-outlet></router-outlet>
-</p>
+<div fxLayout="column">
+    <div id="header" fxLayout="row">        
+        <div id="headerRight" style="background-color:aquamarine">Header</div>
+    </div>
+    <div id="bottom" fxLayout="row">
+        <div id="sideBar" style="background-color:blanchedalmond">Side bar</div>
+        <div id="content" style="background-color:burlywood"><router-outlet>Content</router-outlet></div>
+    </div>
+</div>
