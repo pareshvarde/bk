@@ -1,9 +1,9 @@
-<div fxLayout="column">
-    <div id="header" fxLayout="row">        
-        <div id="headerRight" style="background-color:aquamarine">Header</div>
-    </div>
-    <div id="bottom" fxLayout="row">
-        <div id="sideBar" style="background-color:blanchedalmond">Side bar</div>
-        <div id="content" style="background-color:burlywood"><router-outlet>Content</router-outlet></div>
-    </div>
+<div id="appContainer" class="container-fluid">
+  <div class="row">
+  <div class="col-2" style="background-color: orange">Side bar</div>
+  <div class="col">
+      <div class="row" style="background-color: green">Header</div>
+      <div class="row" style="background-color: gray">Main Content</div>
+  </div>
+</div>
 </div>
