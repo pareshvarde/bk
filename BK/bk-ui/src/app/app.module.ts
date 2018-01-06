@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FlexLayoutModule} from '@angular/flex-layout'
+import { NgModule, NO_ERRORS_SCHEMA  } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MaterialModule } from './modules/material.module';
+import { MDBBootstrapModule,  } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LayoutComponent } from './components/layout/layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -16,11 +15,11 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,    
-    FlexLayoutModule,
-    MaterialModule,
+    AppRoutingModule,
+    MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule
   ],
+  schemas:  [ NO_ERRORS_SCHEMA ],
   providers: [],
   bootstrap: [AppComponent]
 })
