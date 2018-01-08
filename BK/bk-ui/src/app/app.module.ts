@@ -5,13 +5,15 @@ import { AppComponent } from './app.component';
 import { MDBBootstrapModule,  } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { LayoutComponent } from './components/layout/layout.component';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SidebarComponent } from './components/layout/sidebar.component';
+import { HeaderComponent } from './components/layout/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
-    SidebarComponent
+    SidebarComponent,
+    HeaderComponent    
   ],
   imports: [
     BrowserModule,
