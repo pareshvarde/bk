@@ -3,6 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { MaterialModule} from './modules/material-module.module';
 import { SidebarComponent } from './components/layout/sidebar.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { HeaderComponent } from './components/layout/header.component'
@@ -17,7 +18,8 @@ import { HeaderComponent } from './components/layout/header.component'
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule    
+    AppRoutingModule,
+    MaterialModule    
   ],  
   providers: [],
   bootstrap: [AppComponent]
