@@ -17,12 +17,7 @@
                 <div class="logo ml-16">
                     <img class="logo-icon" src="assets/images/logos/fuse.svg">
                 </div>
-            </div>
-
-            <div class="px-8 px-mat-16">
-                <fuse-shortcuts></fuse-shortcuts>
-            </div>
-
+            </div>            
         </div>
 
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
@@ -56,11 +51,6 @@
             </mat-menu>
 
             <div class="toolbar-separator"></div>
-
-            <fuse-search-bar (onInput)="search($event)"></fuse-search-bar>
-
-            <div class="toolbar-separator"></div>
-
             <button mat-button fxHide fxShow.gt-xs
                     class="language-button"
                     [matMenuTriggerFor]="languageMenu">
@@ -79,17 +69,7 @@
                     </div>
                 </button>
 
-            </mat-menu>
-
-            <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
-
-            <button mat-icon-button
-                    class="mat-icon-button quick-panel-toggle-button"
-                    fuseMatSidenavToggler="quick-panel"
-                    aria-label="Toggle quick panel">
-                <mat-icon class="icon">format_list_bulleted</mat-icon>
-            </button>
-
+            </mat-menu>          
         </div>
     </div>
 </mat-toolbar>
