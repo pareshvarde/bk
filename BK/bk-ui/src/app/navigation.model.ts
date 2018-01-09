@@ -15,7 +15,7 @@ export class NavigationModel
                         'id'   : 'origin',
                         'title': 'Origin',
                         'type' : 'item',
-                        'url'  : '/pages/auth/login'
+                        'url'  : 'origin'
                     },                                                  
                     {
                         'id'   : 'nukh',
