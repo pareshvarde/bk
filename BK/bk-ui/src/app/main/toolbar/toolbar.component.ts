@@ -56,12 +56,7 @@ export class FuseToolbarComponent
                 'id'   : 'en',
                 'title': 'English',
                 'flag' : 'us'
-            },
-            {
-                'id'   : 'tr',
-                'title': 'Turkish',
-                'flag' : 'tr'
-            }
+            }            
         ];
 
         this.selectedLanguage = this.languages[0];
