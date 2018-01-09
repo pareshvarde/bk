@@ -17,12 +17,12 @@ import { OriginComponent } from './main/content/origin/origin.component';
 
 const appRoutes: Routes = [
     {
-        path      : '**',
-        component : HomeComponent        
-    },
-    {
         path : "origin",
         component: OriginComponent
+    },
+    {
+        path      : '**',
+        component : HomeComponent        
     }
 ];
 
