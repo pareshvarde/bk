@@ -76,8 +76,8 @@ export class NavigationModel
                 'icon'    : '',
                 'children': [
                     {
-                        'id'   : 'searchMatrimony',
-                        'title': 'Search Matrimony',
+                        'id'   : 'searchProfile',
+                        'title': 'Search Profile',
                         'type' : 'item',
                         'url'  : '/pages/auth/login'
                     },                                                  
