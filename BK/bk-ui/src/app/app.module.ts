@@ -13,11 +13,16 @@ import { FuseConfigService } from './core/services/config.service';
 import { FuseNavigationService } from './core/components/navigation/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { HomeComponent } from './main/content/home/home.component';
+import { OriginComponent } from './main/content/origin/origin.component';
 
 const appRoutes: Routes = [
     {
         path      : '**',
         component : HomeComponent        
+    },
+    {
+        path : "origin",
+        component: OriginComponent
     }
 ];
 

@@ -16,6 +16,7 @@ import { FuseThemeOptionsComponent } from '../core/components/theme-options/them
 import { FuseShortcutsModule } from '../core/components/shortcuts/shortcuts.module';
 import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.module';
 import { HomeComponent } from './content/home/home.component';
+import { OriginComponent } from './content/origin/origin.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +29,8 @@ import { HomeComponent } from './content/home/home.component';
         FuseNavbarVerticalToggleDirective,
         FuseThemeOptionsComponent,
         FuseQuickPanelComponent,
-        HomeComponent
+        HomeComponent,
+        OriginComponent
     ],
     imports     : [
         SharedModule,
