@@ -1,0 +1,30 @@
+// Fix: "Icon button ripple radius is not correct on Edge & Safari"
+.mat-icon-button {
+
+    .mat-button-ripple {
+        border-radius: 50%;
+    }
+}
+
+// Fix: "Inconsistent font sizes across elements"
+.mat-input-wrapper {
+    font-size: 16px;
+}
+
+.mat-checkbox {
+    font-size: 16px;
+}
+
+.mat-radio-button {
+    font-size: 16px;
+}
+
+.mat-pseudo-checkbox-checked:after {
+    width: 14px;
+    height: 7px;
+}
+
+// Fix: "Input underlines has wrong color opacity value"
+.mat-form-field-underline {
+    background-color: rgba(0, 0, 0, 0.12);
+}
