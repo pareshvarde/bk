@@ -1,3 +1,49 @@
-<p>
-  nukh works!
-</p>
+<p>We have drawn information regarding sub castes/ Nukhs from different publications of Hindi and Gujarati including Marwari Brahmkshatriya Directory 1988 edited by Sh. Sukhdeo Prasad Kiri and published by Akhil Bhartiya Marwari Brahmkshtriya Mahasabha H.Q. Jodhpur. There is scope of spelling mistakes. We might have missed some facts, for updating the same your kind cooperation is solicited</p>
+<div class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="mainNukh">
+      <mat-header-cell *matHeaderCellDef>Main Nukhs</mat-header-cell>
+      <mat-cell *matCellDef="let nukh">{{nukh.mainNukh}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh1">      
+        <mat-header-cell *matHeaderCellDef>Sub Nukhs</mat-header-cell>
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh1}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh2">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh2}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh3">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh3}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh4">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh4}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh5">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh5}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh6">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh6}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh7">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh7}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh8">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh8}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh9">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh9}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh10">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh10}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh11">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh11}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="subNukh12">      
+      <mat-cell *matCellDef="let nukh">{{nukh.subNukh12}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
