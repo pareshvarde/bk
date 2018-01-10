@@ -15,6 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HomeComponent } from './main/content/home/home.component';
 import { OriginComponent } from './main/content/origin/origin.component';
 import { NukhComponent } from './main/content/nukh/nukh.component';
+import { GotraComponent } from './main/content/gotra/gotra.component';
 
 const appRoutes: Routes = [
     {
@@ -22,8 +23,12 @@ const appRoutes: Routes = [
         component: OriginComponent
     },
     {
-        path: "nukh",
+        path: "nukhs",
         component: NukhComponent
+    },
+    {
+        path: "gotras",
+        component: GotraComponent
     },
     {
         path      : '**',

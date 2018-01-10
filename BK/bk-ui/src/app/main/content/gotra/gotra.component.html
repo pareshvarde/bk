@@ -1,0 +1,47 @@
+<p>Information regarding Gotras has been drawn from different Gujarati and Hindi publications including SORTHIA DARPAN - 4th
+  Edition dated 13th March, 1994 (Published by Shri Sorthia Brahmkshatriya Panch, Mumbai). There may be some spelling mistakes.
+  The information requires to be updated also. Your kind cooperation is solicited for making it perfect.</p>
+<div id="gotraContainer" class="mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+    <ng-container matColumnDef="gotraName">
+      <mat-header-cell *matHeaderCellDef>
+        <b>Gotra</b>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let gotra">
+        <b>{{gotra.gotraName}}</b>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nukh1">
+      <mat-header-cell *matHeaderCellDef>
+        <b>Nukhs</b>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let gotra">{{gotra.nukh1}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nukh2">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let gotra">{{gotra.nukh2}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nukh3">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let gotra">{{gotra.nukh3}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nukh4">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let gotra">{{gotra.nukh4}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nukh5">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let gotra">{{gotra.nukh5}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nukh6">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let gotra">{{gotra.nukh6}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="nukh7">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let gotra">{{gotra.nukh7}}</mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

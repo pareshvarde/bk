@@ -21,13 +21,13 @@ export class NavigationModel
                         'id'   : 'nukh',
                         'title': 'Nukh',
                         'type' : 'item',
-                        'url'  : 'nukh'
+                        'url'  : 'nukhs'
                     },
                     {
                         'id'   : 'gotras',
                         'title': 'Gotra',
                         'type' : 'item',
-                        'url'  : '/pages/auth/mail-confirm'
+                        'url'  : 'gotras'
                     },
                     {
                         'id'   : 'temples',

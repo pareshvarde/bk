@@ -18,6 +18,7 @@ import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.mo
 import { HomeComponent } from './content/home/home.component';
 import { OriginComponent } from './content/origin/origin.component';
 import { NukhComponent } from './content/nukh/nukh.component';
+import { GotraComponent } from './content/gotra/gotra.component';
 
 @NgModule({
     declarations: [
@@ -32,7 +33,8 @@ import { NukhComponent } from './content/nukh/nukh.component';
         FuseQuickPanelComponent,
         HomeComponent,
         OriginComponent,
-        NukhComponent
+        NukhComponent,
+        GotraComponent
     ],
     imports     : [
         SharedModule,
