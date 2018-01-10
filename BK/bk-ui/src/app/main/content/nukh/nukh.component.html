@@ -3,7 +3,7 @@
   H.Q. Jodhpur. There is scope of spelling mistakes. We might have missed some facts, for updating the same your kind cooperation
   is solicited</p>
 <h2>Divisions (Mool Shakhas) And Sub - Divisions (Nukhs) Of Brahmkshatriya Community</h2>
-<div id="nukhContainer" class="mat-elevation-z8">
+<div class="mat-elevation-z8" fxShow fxHide.lt-md>
   <mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="mainNukh">
       <mat-header-cell *matHeaderCellDef>
@@ -63,8 +63,33 @@
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
       <mat-cell *matCellDef="let nukh">{{nukh.subNukh12}}</mat-cell>
     </ng-container>
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+</div>
+<div flexLayout="row" fxLayoutWrap fxHide fxShow.lt-md>
+  <div *ngFor="let nukh of dataSource.filteredData">
+    <div  class="fuse-card nukhCardContainer">            
+        <div class="p-16">
+            <div class="h1">{{nukh.mainNukh}}</div>      
+        </div>    
+        <div class="p-16 pt-0 line-height-1.75">
+          Sub Nukhs:
+            <ol>
+              <li>{{nukh.subNukh1}}</li>
+              <li>{{nukh.subNukh2}}</li>
+              <li>{{nukh.subNukh3}}</li>
+              <li>{{nukh.subNukh4}}</li>
+              <li>{{nukh.subNukh5}}</li>
+              <li>{{nukh.subNukh6}}</li>
+              <li>{{nukh.subNukh7}}</li>
+              <li>{{nukh.subNukh8}}</li>
+              <li>{{nukh.subNukh9}}</li>
+              <li>{{nukh.subNukh10}}</li>
+              <li>{{nukh.subNukh11}}</li>
+              <li>{{nukh.subNukh12}}</li>
+            </ol>
+        </div>    
+    </div>
+  </div>
 </div>
