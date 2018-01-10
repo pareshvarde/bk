@@ -46,6 +46,10 @@ const appRoutes: Routes = [
         component: TempleComponent
     },
     {
+        path: "home",
+        component: HomeComponent
+    },
+    {
         path      : '**',
         component : HomeComponent        
     }

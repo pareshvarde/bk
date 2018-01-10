@@ -12,6 +12,12 @@ export class NavigationModel
                 'icon'    : '',
                 'children': [
                     {
+                        'id'   : 'home',
+                        'title': 'Home',
+                        'type' : 'item',
+                        'url'  : 'home'
+                    }, 
+                    {
                         'id'   : 'origin',
                         'title': 'Origin',
                         'type' : 'item',
