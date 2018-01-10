@@ -33,19 +33,19 @@ export class NavigationModel
                         'id'   : 'temples',
                         'title': 'Temples',
                         'type' : 'item',
-                        'url'  : '/pages/auth/mail-confirm'
+                        'url'  : 'temples'
                     },
                     {
                         'id'   : 'hostels',
                         'title': 'Hostels',
                         'type' : 'item',
-                        'url'  : '/pages/auth/mail-confirm'
+                        'url'  : 'hostels'
                     },
                     {
                         'id'   : 'organizations',
                         'title': 'Organizations',
                         'type' : 'item',
-                        'url'  : '/pages/auth/mail-confirm'
+                        'url'  : 'organizations'
                     }                    
                 ]
             },

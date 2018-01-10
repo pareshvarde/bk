@@ -19,6 +19,9 @@ import { HomeComponent } from './content/home/home.component';
 import { OriginComponent } from './content/origin/origin.component';
 import { NukhComponent } from './content/nukh/nukh.component';
 import { GotraComponent } from './content/gotra/gotra.component';
+import { HostelComponent } from './content/hostel/hostel.component';
+import { OrganizationComponent } from './content/organization/organization.component';
+import { TempleComponent } from './content/temple/temple.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +37,10 @@ import { GotraComponent } from './content/gotra/gotra.component';
         HomeComponent,
         OriginComponent,
         NukhComponent,
-        GotraComponent
+        GotraComponent,
+        HostelComponent,
+        OrganizationComponent,
+        TempleComponent
     ],
     imports     : [
         SharedModule,
