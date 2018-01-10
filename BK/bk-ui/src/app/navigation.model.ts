@@ -21,7 +21,7 @@ export class NavigationModel
                         'id'   : 'nukh',
                         'title': 'Nukh',
                         'type' : 'item',
-                        'url'  : '/pages/auth/mail-confirm'
+                        'url'  : 'nukh'
                     },
                     {
                         'id'   : 'gotras',

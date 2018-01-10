@@ -14,12 +14,17 @@ import { FuseNavigationService } from './core/components/navigation/navigation.s
 import { TranslateModule } from '@ngx-translate/core';
 import { HomeComponent } from './main/content/home/home.component';
 import { OriginComponent } from './main/content/origin/origin.component';
+import { NukhComponent } from './main/content/nukh/nukh.component';
 
 const appRoutes: Routes = [
     {
         path : "origin",
         component: OriginComponent
     },
+    {
+        path: "nukh",
+        component: NukhComponent
+    }
     {
         path      : '**',
         component : HomeComponent        

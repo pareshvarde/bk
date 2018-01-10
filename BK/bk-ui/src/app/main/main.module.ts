@@ -17,6 +17,7 @@ import { FuseShortcutsModule } from '../core/components/shortcuts/shortcuts.modu
 import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.module';
 import { HomeComponent } from './content/home/home.component';
 import { OriginComponent } from './content/origin/origin.component';
+import { NukhComponent } from './content/nukh/nukh.component';
 
 @NgModule({
     declarations: [
@@ -30,7 +31,8 @@ import { OriginComponent } from './content/origin/origin.component';
         FuseThemeOptionsComponent,
         FuseQuickPanelComponent,
         HomeComponent,
-        OriginComponent
+        OriginComponent,
+        NukhComponent
     ],
     imports     : [
         SharedModule,
