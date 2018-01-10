@@ -24,7 +24,7 @@ const appRoutes: Routes = [
     {
         path: "nukh",
         component: NukhComponent
-    }
+    },
     {
         path      : '**',
         component : HomeComponent        
