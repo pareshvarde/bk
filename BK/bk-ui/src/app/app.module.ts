@@ -64,7 +64,7 @@ const appRoutes: Routes = [
         HttpModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(appRoutes),
+        RouterModule.forRoot(appRoutes, { useHash: true }),
         SharedModule,
         TranslateModule.forRoot(),
         FuseMainModule        
@@ -72,7 +72,7 @@ const appRoutes: Routes = [
     providers   : [
         FuseSplashScreenService,
         FuseConfigService,
-        FuseNavigationService
+        FuseNavigationService        
     ],
     bootstrap   : [
         AppComponent
