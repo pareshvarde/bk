@@ -67,9 +67,8 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
-<div flexLayout="row" fxLayoutWrap fxHide fxShow.lt-md>
-  <div *ngFor="let nukh of dataSource.filteredData">
-    <div  class="fuse-card nukhCardContainer">            
+<div flexLayout="row" fxLayoutAlign="start stretch"  fxLayoutWrap fxHide fxShow.lt-md>  
+    <div *ngFor="let nukh of dataSource.filteredData"  class="fuse-card nukhCardContainer">            
         <div class="p-16">
             <div class="h1">{{nukh.mainNukh}}</div>      
         </div>    
@@ -89,7 +88,6 @@
               <li *ngIf=nukh.subNukh11>{{nukh.subNukh11}}</li>
               <li *ngIf=nukh.subNukh12>{{nukh.subNukh12}}</li>
             </ol>
-        </div>    
-    </div>
+        </div>        
   </div>
 </div>
