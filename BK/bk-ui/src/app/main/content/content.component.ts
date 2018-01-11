@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { fuseAnimations } from '../../core/animations';
 import { FuseConfigService } from '../../core/services/config.service';
 import { Subscription } from 'rxjs/Subscription';
+import { Platform } from '@angular/cdk/platform';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 
@@ -26,7 +27,8 @@ export class FuseContentComponent implements OnInit, OnDestroy
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private fuseConfig: FuseConfigService
+        private fuseConfig: FuseConfigService,
+        private platform: Platform
     )
     {
         this.router.events
@@ -70,5 +72,9 @@ export class FuseContentComponent implements OnInit, OnDestroy
     ngOnDestroy()
     {
         this.onSettingsChanged.unsubscribe();
+    }
+
+    isMobile() : boolean{
+        return this.platform.ANDROID || this.platform.IOS;
     }
 }
