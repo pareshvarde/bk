@@ -1,7 +1,7 @@
 <p>Information regarding Gotras has been drawn from different Gujarati and Hindi publications including SORTHIA DARPAN - 4th
   Edition dated 13th March, 1994 (Published by Shri Sorthia Brahmkshatriya Panch, Mumbai). There may be some spelling mistakes.
   The information requires to be updated also. Your kind cooperation is solicited for making it perfect.</p>
-<div id="gotraContainer" class="mat-elevation-z8">
+<div id="gotraContainer" class="mat-elevation-z8" fxShow fxHide.lt-md>
   <mat-table #table [dataSource]="dataSource">
     <ng-container matColumnDef="gotraName">
       <mat-header-cell *matHeaderCellDef>
@@ -44,4 +44,25 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+</div>
+<div flexLayout="row" fxLayoutWrap fxHide fxShow.lt-md>
+  <div *ngFor="let gotra of dataSource.filteredData">
+      <div  class="fuse-card gotraCardContainer">            
+          <div class="p-16">
+              <div class="h1">{{gotra.gotraName}}</div>      
+          </div>    
+          <div class="p-16 pt-0 line-height-1.75">
+            Sub Nukhs:
+              <ol>
+                <li *ngIf=gotra.nukh1>{{gotra.nukh1}}</li>
+                <li *ngIf=gotra.nukh2>{{gotra.nukh2}}</li>
+                <li *ngIf=gotra.nukh3>{{gotra.nukh3}}</li>
+                <li *ngIf=gotra.nukh4>{{gotra.nukh4}}</li>
+                <li *ngIf=gotra.nukh5>{{gotra.nukh5}}</li>
+                <li *ngIf=gotra.nukh6>{{gotra.nukh6}}</li>
+                <li *ngIf=gotra.nukh7>{{gotra.nukh7}}</li>            
+              </ol>
+          </div>    
+      </div>
+  </div>
 </div>

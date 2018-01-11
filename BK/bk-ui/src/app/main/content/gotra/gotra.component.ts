@@ -32,7 +32,7 @@ export interface GotraModel {
 
 const GOTRA_DATA: GotraModel[] = [
   {    
-    gotraName: "Jamdagngodhiya",
+    gotraName: "1. Jamdagngodhiya",
     nukh1: "Jesbahar",
     nukh2: "Jajal",
     nukh3: "Jogi",
@@ -42,7 +42,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Mandata",
+    gotraName: "2. Mandata",
     nukh1: "Mamtur",
     nukh2: "Mavarba",
     nukh3: "Mavdasya",
@@ -52,7 +52,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "Vachha",    
   },  
   {    
-    gotraName: "Dakshan",
+    gotraName: "3. Dakshan",
     nukh1: "Dubal",
     nukh2: "Kosara",
     nukh3: "Ghanghra",
@@ -62,7 +62,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "Gadiy",    
   },  
   {    
-    gotraName: "Sudarshan",
+    gotraName: "4. Sudarshan",
     nukh1: "Sonishor",
     nukh2: "Seta",
     nukh3: "Sodiya",
@@ -72,7 +72,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Shandilay",
+    gotraName: "5. Shandilay",
     nukh1: "Sanischara",
     nukh2: "Sonpal",
     nukh3: "Sandhava",
@@ -82,7 +82,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Uttari",
+    gotraName: "6. Uttari",
     nukh1: "Ashra",
     nukh2: "Mamlatura",
     nukh3: "Dagagaden",
@@ -92,7 +92,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Kaushik",
+    gotraName: "7. Kaushik",
     nukh1: "Kakaiya",
     nukh2: "Kaku",
     nukh3: "Kukar",
@@ -102,7 +102,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Agastya",
+    gotraName: "8. Agastya",
     nukh1: "Arora",
     nukh2: "Asalchinva",
     nukh3: "Jagodhar",
@@ -112,7 +112,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Shankhpal",
+    gotraName: "9. Shankhpal",
     nukh1: "Sorthiya",
     nukh2: "Soneji",
     nukh3: "Degra",
@@ -122,7 +122,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Bhardwaj",
+    gotraName: "10. Bhardwaj",
     nukh1: "Bhoot",
     nukh2: "Bheva",
     nukh3: "Bichhra",
@@ -132,7 +132,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "Bhahel",    
   },  
   {    
-    gotraName: "Rahugan",
+    gotraName: "11. Rahugan",
     nukh1: "Rasputra",
     nukh2: "Rasbhukhra",
     nukh3: "Raja",
@@ -142,7 +142,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Dhanjiy",
+    gotraName: "12. Dhanjiy",
     nukh1: "Dhandha",
     nukh2: "Dharare",
     nukh3: "Dhandenya",
@@ -152,7 +152,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Sudhgal",
+    gotraName: "13. Sudhgal",
     nukh1: "Makriya",
     nukh2: "Makori",
     nukh3: "Meghiya",
@@ -162,7 +162,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Badrayan",
+    gotraName: "14. Badrayan",
     nukh1: "Bagriya",
     nukh2: "Borachya",
     nukh3: "Hargan",
@@ -172,7 +172,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Gargiy",
+    gotraName: "15. Gargiy",
     nukh1: "Gajkaran",
     nukh2: "Gumra",
     nukh3: "Chakla",
@@ -182,7 +182,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Vatsa",
+    gotraName: "16. Vatsa",
     nukh1: "Vama",
     nukh2: "Vajri",
     nukh3: "Vinchhi",
@@ -192,7 +192,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Gautam",
+    gotraName: "17. Gautam",
     nukh1: "Girachh",
     nukh2: "Goratela",
     nukh3: "Dhela",
@@ -202,7 +202,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Vamdeo",
+    gotraName: "18. Vamdeo",
     nukh1: "Veredre",
     nukh2: "Lemriya",
     nukh3: "Liya",
@@ -212,7 +212,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Kashyap",
+    gotraName: "19. Kashyap",
     nukh1: "Katbamna",
     nukh2: "Kandhara",
     nukh3: "Hargan",
@@ -222,7 +222,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Kamak",
+    gotraName: "20. Kamak",
     nukh1: "Keherach",
     nukh2: "Karcha",
     nukh3: "Tokle",
@@ -232,7 +232,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Kanav",
+    gotraName: "21. Kanav",
     nukh1: "Keri",
     nukh2: "Dagiya",
     nukh3: "Daiyani",
@@ -242,7 +242,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Vaman",
+    gotraName: "22. Vaman",
     nukh1: "Vadel",
     nukh2: "Dhavriya",
     nukh3: "Dror",
@@ -252,7 +252,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Taitar",
+    gotraName: "23. Taitar",
     nukh1: "Tenyodha",
     nukh2: "Thegra",
     nukh3: "Duda",
@@ -262,7 +262,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Vashishtha",
+    gotraName: "24. Vashishtha",
     nukh1: "Valel",
     nukh2: "Chhatbar",
     nukh3: "Chhanang",
@@ -272,7 +272,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Bhabhroy",
+    gotraName: "25. Bhabhroy",
     nukh1: "Vasoma",
     nukh2: "Vadva",
     nukh3: "Papuriya",
@@ -282,7 +282,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Nartyojan",
+    gotraName: "26. Nartyojan",
     nukh1: "Nansi",
     nukh2: "Neman",
     nukh3: "Naysar",
@@ -292,7 +292,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Rushan",
+    gotraName: "27. Rushan",
     nukh1: "Karatela",
     nukh2: "Karchala",
     nukh3: "Khakhar",
@@ -302,7 +302,7 @@ const GOTRA_DATA: GotraModel[] = [
     nukh7: "",    
   },  
   {    
-    gotraName: "Parashar",
+    gotraName: "28. Parashar",
     nukh1: "Panjabhoot",
     nukh2: "Patar",
     nukh3: "Mamotra",
