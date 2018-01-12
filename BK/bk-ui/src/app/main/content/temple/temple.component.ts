@@ -72,28 +72,28 @@ const TEMPLE_DATA: TempleModel[] = [
     phoneNumber: "<NOT AVAILABLE>"    
   },
   {    
-    name: "Hinglaj Mandir, Daheli",
-    image: "noImage.jpg",
-    latitude: "121.445454",
-    longitude: "-80.454541",
-    address: "Samaj Bhavan",
-    city: "Daheli",
-    state: "Gujarat",
+    name: "Hinglaj Mandir",
+    image: "jodhpur.jpg",
+    latitude: "26.270186",
+    longitude: "72.9128087",
+    address: "Chopasani Rd, Shanti Priya Nagar, Shyam Nagar",
+    city: "Jodhpur",
+    state: "Rajastha",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
   },
   {    
-    name: "Hinglaj Mandir, Daheli",
-    image: "noImage.jpg",
-    latitude: "121.445454",
-    longitude: "-80.454541",
-    address: "Samaj Bhavan",
+    name: "Hinglaj Mandir",
+    image: "daheli.jpg",
+    latitude: "21.5612752",
+    longitude: "73.2183229",
+    address: "Samaj Bhavan, Daheli",
     city: "Daheli",
     state: "Gujarat",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
   },
   {    
     name: "Hinglaj Mandir, Daheli",
