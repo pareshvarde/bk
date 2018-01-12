@@ -154,29 +154,5 @@ const TEMPLE_DATA: TempleModel[] = [
     country: "India",
     contactName: "<NOT AVAILABLE>",
     phoneNumber: "<NOT AVAILABLE>"
-  },
-  {    
-    name: "Hinglaj Mandir, Daheli",
-    image: "noImage.jpg",
-    latitude: "121.445454",
-    longitude: "-80.454541",
-    address: "Samaj Bhavan",
-    city: "Daheli",
-    state: "Gujarat",
-    country: "India",
-    contactName: "<NOT AVAILABLE>",
-    phoneNumber: "<NOT AVAILABLE>"
-  },
-  {    
-    name: "Hinglaj Mandir, Daheli",
-    image: "noImage.jpg",
-    latitude: "121.445454",
-    longitude: "-80.454541",
-    address: "Samaj Bhavan",
-    city: "Daheli",
-    state: "Gujarat",
-    country: "India",
-    contactName: "<NOT AVAILABLE>",
-    phoneNumber: "<NOT AVAILABLE>" 
   }
 ];
