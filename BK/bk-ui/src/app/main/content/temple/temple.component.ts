@@ -144,13 +144,13 @@ const TEMPLE_DATA: TempleModel[] = [
     phoneNumber: "<NOT AVAILABLE>"
   },
   {    
-    name: "Hinglaj Mandir, Daheli",
-    image: "noImage.jpg",
-    latitude: "121.445454",
-    longitude: "-80.454541",
+    name: "Hinglaj Mandir, Lodurva",
+    image: "lodurva.jpg",
+    latitude: "26.9853088",
+    longitude: "70.800758",
     address: "Samaj Bhavan",
-    city: "Daheli",
-    state: "Gujarat",
+    city: "Lodurva",
+    state: "Rajasthan",
     country: "India",
     contactName: "<NOT AVAILABLE>",
     phoneNumber: "<NOT AVAILABLE>"
