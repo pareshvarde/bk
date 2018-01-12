@@ -96,16 +96,28 @@ const TEMPLE_DATA: TempleModel[] = [
     phoneNumber: "<NOT AVAILABLE>"
   },
   {    
-    name: "Hinglaj Mandir, Daheli",
-    image: "noImage.jpg",
-    latitude: "121.445454",
-    longitude: "-80.454541",
-    address: "Samaj Bhavan",
-    city: "Daheli",
-    state: "Gujarat",
+    name: "Hinglaj Mandir, Jaisalmer",
+    image: "jaisalmer.jpg",
+    latitude: "26.9194822",
+    longitude: "70.9211933",
+    address: "Samaj Bhavan Mohangarh Rd, Ghandi Colony",
+    city: "Jaisalmer",
+    state: "Rajasthan",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
+  },
+  {    
+    name: "Hinglaj Mandir, Raniwara",
+    image: "raniwara.jpg",
+    latitude: "24.7505301",
+    longitude: "72.2033211",
+    address: "Bhinmal Raniwara Road",
+    city: "Raniwara",
+    state: "Rajasthan",
+    country: "India",
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
   },
   {    
     name: "Hinglaj Mandir, Daheli",
@@ -116,8 +128,8 @@ const TEMPLE_DATA: TempleModel[] = [
     city: "Daheli",
     state: "Gujarat",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
   },
   {    
     name: "Hinglaj Mandir, Daheli",
@@ -128,8 +140,8 @@ const TEMPLE_DATA: TempleModel[] = [
     city: "Daheli",
     state: "Gujarat",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
   },
   {    
     name: "Hinglaj Mandir, Daheli",
@@ -140,8 +152,8 @@ const TEMPLE_DATA: TempleModel[] = [
     city: "Daheli",
     state: "Gujarat",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
   },
   {    
     name: "Hinglaj Mandir, Daheli",
@@ -152,8 +164,8 @@ const TEMPLE_DATA: TempleModel[] = [
     city: "Daheli",
     state: "Gujarat",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>"
   },
   {    
     name: "Hinglaj Mandir, Daheli",
@@ -164,19 +176,7 @@ const TEMPLE_DATA: TempleModel[] = [
     city: "Daheli",
     state: "Gujarat",
     country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
-  },
-  {    
-    name: "Hinglaj Mandir, Daheli",
-    image: "noImage.jpg",
-    latitude: "121.445454",
-    longitude: "-80.454541",
-    address: "Samaj Bhavan",
-    city: "Daheli",
-    state: "Gujarat",
-    country: "India",
-    contactName: "Paresh Varde",
-    phoneNumber: "9970339703"    
+    contactName: "<NOT AVAILABLE>",
+    phoneNumber: "<NOT AVAILABLE>" 
   }
 ];
