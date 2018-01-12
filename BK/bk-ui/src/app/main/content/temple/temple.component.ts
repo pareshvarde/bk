@@ -10,10 +10,6 @@ export class TempleComponent implements OnInit {
 
   constructor() { }
 
-  displayedColumns = ['mainNukh', 'subNukh1', 'subNukh2', 'subNukh3', 'subNukh4',
-  'subNukh5', 'subNukh6', 'subNukh7', 'subNukh8',
-  'subNukh9', 'subNukh10', 'subNukh11', 'subNukh12'];
-
   dataSource = new MatTableDataSource<TempleModel>(TEMPLE_DATA);
 
   ngOnInit() {

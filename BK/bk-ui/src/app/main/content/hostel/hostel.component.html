@@ -1,3 +1,41 @@
-<p>
-  hostel works!
-</p>
+<div flexLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap>
+  <div class="fuse-card hostelCard" *ngFor="let hostel of dataSource.filteredData">
+    <div class="p-16">
+      <div class="h3">{{hostel.name}}</div>
+      <div class="h5 secondary-text">{{hostel.address}}</div>
+      <div class="h5 secondary-text">{{hostel.city}}, {{hostel.state}}, {{hostel.country}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Contact Person</div>
+      <div class="h5 secondary-text">{{hostel.contactPerson}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Phone Number</div>
+      <div class="h5 secondary-text">{{hostel.phoneNumber}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Email</div>
+      <div class="h5 secondary-text">{{hostel.emailAddress}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Established On</div>
+      <div class="h5 secondary-text">{{hostel.estOn}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Courses</div>
+      <div class="h5 secondary-text">{{hostel.courses}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Admission Starts On</div>
+      <div class="h5 secondary-text">{{hostel.admissionStartsOn}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+        <div class="h4">Last Date of Application</div>
+        <div class="h5 secondary-text">{{hostel.lastDateOfApplication}}</div>
+      </div>
+      <div class="p-16 pt-0 line-height-1.75">
+        <div class="h4">Session Starts from</div>
+        <div class="h5 secondary-text">{{hostel.sessionStartsOn}}</div>
+      </div>
+  </div>
+</div>
