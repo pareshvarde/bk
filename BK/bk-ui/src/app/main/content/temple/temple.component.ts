@@ -86,8 +86,8 @@ const TEMPLE_DATA: TempleModel[] = [
   {    
     name: "Hinglaj Mandir",
     image: "daheli.jpg",
-    latitude: "21.5612752",
-    longitude: "73.2183229",
+    latitude: "21.5615828",
+    longitude: "73.2185125",
     address: "Samaj Bhavan, Daheli",
     city: "Daheli",
     state: "Gujarat",
