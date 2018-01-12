@@ -74,7 +74,7 @@ const TEMPLE_DATA: TempleModel[] = [
     longitude: "72.9128087",
     address: "Chopasani Rd, Shanti Priya Nagar, Shyam Nagar",
     city: "Jodhpur",
-    state: "Rajastha",
+    state: "Rajasthan",
     country: "India",
     contactName: "<NOT AVAILABLE>",
     phoneNumber: "<NOT AVAILABLE>"
