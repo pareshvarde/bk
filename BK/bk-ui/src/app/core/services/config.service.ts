@@ -30,7 +30,7 @@ export class FuseConfigService
             },
             colorClasses    : {
                 toolbar: 'mat-orange-400-bg',
-                navbar : 'mat-orange-700-bg',
+                navbar : 'mat-orange-800-bg',
                 footer : 'mat-orange-900-bg'
             },
             customScrollbars: true,
