@@ -1,3 +1,25 @@
-<p>
-  organization works!
-</p>
+<div flexLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap>
+  <div class="fuse-card orgCardContainer" *ngFor="let org of dataSource.filteredData">
+    <div class="p-16">
+      <div class="h3">{{org.name}}</div>
+      <div class="h5 secondary-text">{{org.address}}</div>
+      <div class="h5 secondary-text">{{org.city}}, {{org.state}}, {{org.country}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Contact Person</div>
+      <div class="h5 secondary-text">{{org.contactPerson}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Phone Number</div>
+      <div class="h5 secondary-text">{{org.phoneNumber}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Email</div>
+      <div class="h5 secondary-text">{{org.emailAddress}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      <div class="h4">Established On</div>
+      <div class="h5 secondary-text">{{org.estOn}}</div>
+    </div>   
+  </div>
+</div>

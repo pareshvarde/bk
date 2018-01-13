@@ -9,49 +9,56 @@ export class NavigationModel
                 'id'      : 'portal',
                 'title'   : 'Portal',
                 'type'    : 'collapse',
-                'icon'    : '',
+                'icon'    : 'public',
                 'children': [
                     {
                         'id'   : 'home',
                         'title': 'Home',
                         'type' : 'item',
-                        'url'  : 'home'
+                        'url'  : 'home',
+                        'icon': 'home'
                     }, 
                     {
                         'id'   : 'origin',
                         'title': 'Origin',
                         'type' : 'item',
-                        'url'  : 'origin'
+                        'url'  : 'origin',
+                        'icon' : 'history'
                     },                                                  
                     {
                         'id'   : 'nukh',
                         'title': 'Nukh',
                         'type' : 'item',
-                        'url'  : 'nukhs'
+                        'url'  : 'nukhs',
+                        'icon': 'movie'
                     },
                     {
                         'id'   : 'gotras',
                         'title': 'Gotra',
                         'type' : 'item',
-                        'url'  : 'gotras'
+                        'url'  : 'gotras',
+                        'icon' : 'movie_filter'
                     },
                     {
                         'id'   : 'temples',
                         'title': 'Temples',
                         'type' : 'item',
-                        'url'  : 'temples'
+                        'url'  : 'temples',
+                        'icon' : 'local_activity'
                     },
                     {
                         'id'   : 'hostels',
                         'title': 'Hostels',
                         'type' : 'item',
-                        'url'  : 'hostels'
+                        'url'  : 'hostels',
+                        'icon' : 'school'
                     },
                     {
                         'id'   : 'organizations',
                         'title': 'Organizations',
                         'type' : 'item',
-                        'url'  : 'organizations'
+                        'url'  : 'organizations',
+                        'icon' : 'business'
                     }                    
                 ]
             },
