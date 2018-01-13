@@ -29,7 +29,7 @@ export class FuseConfigService
                 mode            : 'fullwidth' // 'boxed', 'fullwidth'
             },
             colorClasses    : {
-                toolbar: 'mat-orange-500-bg',
+                toolbar: 'mat-orange-400-bg',
                 navbar : 'mat-orange-700-bg',
                 footer : 'mat-orange-900-bg'
             },
