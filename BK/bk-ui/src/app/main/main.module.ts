@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../core/modules/shared.module';
-
+import {ScrollToModule} from 'ng2-scroll-to';
 import { FuseMainComponent } from './main.component';
 import { FuseContentComponent } from './content/content.component';
 import { FuseFooterComponent } from './footer/footer.component';
@@ -33,7 +33,7 @@ import { TempleComponent } from './content/temple/temple.component';
         FuseToolbarComponent,
         FuseNavbarVerticalToggleDirective,
         FuseThemeOptionsComponent,
-        FuseQuickPanelComponent,
+        FuseQuickPanelComponent,        
         HomeComponent,
         OriginComponent,
         NukhComponent,
@@ -45,6 +45,7 @@ import { TempleComponent } from './content/temple/temple.component';
     imports     : [
         SharedModule,
         RouterModule,
+        ScrollToModule.forRoot(),
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule
