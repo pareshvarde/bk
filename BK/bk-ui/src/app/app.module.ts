@@ -19,6 +19,7 @@ import { GotraComponent } from './main/content/gotra/gotra.component';
 import { HostelComponent } from './main/content/hostel/hostel.component';
 import { OrganizationComponent } from './main/content/organization/organization.component';
 import { TempleComponent } from './main/content/temple/temple.component';
+import { LoginComponent } from './main/content/login/login.component';
 
 const appRoutes: Routes = [
     {
@@ -48,6 +49,10 @@ const appRoutes: Routes = [
     {
         path: "home",
         component: HomeComponent
+    },
+    {
+        path: "login",
+        component: LoginComponent
     },
     {
         path      : '**',

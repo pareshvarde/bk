@@ -22,6 +22,7 @@ import { GotraComponent } from './content/gotra/gotra.component';
 import { HostelComponent } from './content/hostel/hostel.component';
 import { OrganizationComponent } from './content/organization/organization.component';
 import { TempleComponent } from './content/temple/temple.component';
+import { LoginComponent } from './content/login/login.component';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { TempleComponent } from './content/temple/temple.component';
         GotraComponent,
         HostelComponent,
         OrganizationComponent,
-        TempleComponent
+        TempleComponent,
+        LoginComponent
     ],
     imports     : [
         SharedModule,
