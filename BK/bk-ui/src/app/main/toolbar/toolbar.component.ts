@@ -23,7 +23,7 @@ export class FuseToolbarComponent
         private router: Router,
         private fuseConfig: FuseConfigService,
         private translate: TranslateService,
-        private sharedService: bkSharedService
+        public sharedService: bkSharedService
     )
     {
         this.userStatusOptions = [
