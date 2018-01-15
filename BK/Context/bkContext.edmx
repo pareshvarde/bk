@@ -1,0 +1,574 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Families">
+          <Key>
+            <PropertyRef Name="FamilyID" />
+          </Key>
+          <Property Name="FamilyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentFamilyID" Type="int" />
+          <Property Name="FamilySID" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="Nukh" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Category" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="15" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="15" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Website" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="FamilyMemberAssociation">
+          <Key>
+            <PropertyRef Name="FamilyId" />
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="FamilyId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="HeadOfFamily" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lkRelationTypes">
+          <Key>
+            <PropertyRef Name="RelationTypeId" />
+          </Key>
+          <Property Name="RelationTypeId" Type="int" Nullable="false" />
+          <Property Name="RelationType" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matrimonials">
+          <Key>
+            <PropertyRef Name="MatrimonialID" />
+          </Key>
+          <Property Name="MatrimonialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MatrimonialSID" Type="nvarchar" MaxLength="18" Nullable="false" />
+          <Property Name="MemberID" Type="int" Nullable="false" />
+          <Property Name="MaternalNukh" Type="nvarchar" MaxLength="50" />
+          <Property Name="BirthTime" Type="time" Precision="7" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="Height" Type="int" />
+          <Property Name="BodyType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Complexion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Smoke" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Drink" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Disability" Type="bit" Nullable="false" />
+          <Property Name="Diet" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AnnualIncome" Type="nvarchar" MaxLength="50" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProfileText" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="ExpiresOn" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="MemberRelations">
+          <Key>
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="RelatedMemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="RelatedMemberId" Type="int" Nullable="false" />
+          <Property Name="RelationTypeId" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemberSID" Type="nvarchar" MaxLength="18" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="DOB" Type="datetime2" Precision="7" />
+          <Property Name="UseFamilyAddress" Type="bit" Nullable="false" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="50" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="EducationLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="EducationField" Type="nvarchar" MaxLength="50" />
+          <Property Name="WorkingWith" Type="nvarchar" MaxLength="50" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="InstagramHandle" Type="nvarchar" MaxLength="50" />
+          <Property Name="FacebookHandle" Type="nvarchar" MaxLength="50" />
+          <Property Name="TwitterHandle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Password" Type="nvarchar" MaxLength="300" />
+          <Property Name="LastLoginOn" Type="datetime2" Precision="7" />
+          <Property Name="PasswordUID" Type="uniqueidentifier" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <Association Name="FK_FamilyMemberAssociation_Families">
+          <End Role="Families" Type="Self.Families" Multiplicity="1" />
+          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Families">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMemberAssociation_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matrimonials_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="Matrimonials" Type="Self.Matrimonials" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Matrimonials">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberRelations_lkRelationTypes">
+          <End Role="lkRelationTypes" Type="Self.lkRelationTypes" Multiplicity="1" />
+          <End Role="MemberRelations" Type="Self.MemberRelations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lkRelationTypes">
+              <PropertyRef Name="RelationTypeId" />
+            </Principal>
+            <Dependent Role="MemberRelations">
+              <PropertyRef Name="RelationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberRelations_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="1" />
+          <End Role="MemberRelations" Type="Self.MemberRelations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="MemberRelations">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bkModelStoreContainer">
+          <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FamilyMemberAssociation" EntityType="Self.FamilyMemberAssociation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lkRelationTypes" EntityType="Self.lkRelationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matrimonials" EntityType="Self.Matrimonials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberRelations" EntityType="Self.MemberRelations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="Self.FK_FamilyMemberAssociation_Families">
+            <End Role="Families" EntitySet="Families" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="Self.FK_FamilyMemberAssociation_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matrimonials_Members" Association="Self.FK_Matrimonials_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Matrimonials" EntitySet="Matrimonials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberRelations_lkRelationTypes" Association="Self.FK_MemberRelations_lkRelationTypes">
+            <End Role="lkRelationTypes" EntitySet="lkRelationTypes" />
+            <End Role="MemberRelations" EntitySet="MemberRelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberRelations_Members" Association="Self.FK_MemberRelations_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberRelations" EntitySet="MemberRelations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Family">
+          <Key>
+            <PropertyRef Name="FamilyID" />
+          </Key>
+          <Property Name="FamilyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentFamilyID" Type="Int32" />
+          <Property Name="FamilySID" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nukh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="FamilyMemberAssociations" Relationship="Self.FK_FamilyMemberAssociation_Families" FromRole="Families" ToRole="FamilyMemberAssociation" />
+        </EntityType>
+        <EntityType Name="FamilyMemberAssociation">
+          <Key>
+            <PropertyRef Name="FamilyId" />
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="FamilyId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="HeadOfFamily" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Family" Relationship="Self.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Families" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="lkRelationType">
+          <Key>
+            <PropertyRef Name="RelationTypeId" />
+          </Key>
+          <Property Name="RelationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="RelationType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MemberRelations" Relationship="Self.FK_MemberRelations_lkRelationTypes" FromRole="lkRelationTypes" ToRole="MemberRelations" />
+        </EntityType>
+        <EntityType Name="Matrimonial">
+          <Key>
+            <PropertyRef Name="MatrimonialID" />
+          </Key>
+          <Property Name="MatrimonialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MatrimonialSID" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="MaternalNukh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BirthTime" Type="Time" Precision="7" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="BodyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Complexion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Smoke" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Drink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Disability" Type="Boolean" Nullable="false" />
+          <Property Name="Diet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AnnualIncome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ExpiresOn" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_Matrimonials_Members" FromRole="Matrimonials" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="MemberRelation">
+          <Key>
+            <PropertyRef Name="MemberId" />
+            <PropertyRef Name="RelatedMemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="RelatedMemberId" Type="Int32" Nullable="false" />
+          <Property Name="RelationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="lkRelationType" Relationship="Self.FK_MemberRelations_lkRelationTypes" FromRole="MemberRelations" ToRole="lkRelationTypes" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_MemberRelations_Members" FromRole="MemberRelations" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberID" />
+          </Key>
+          <Property Name="MemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberSID" Type="String" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="7" />
+          <Property Name="UseFamilyAddress" Type="Boolean" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EducationLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EducationField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="WorkingWith" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="InstagramHandle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookHandle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterHandle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="LastLoginOn" Type="DateTime" Precision="7" />
+          <Property Name="PasswordUID" Type="Guid" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="FamilyMemberAssociations" Relationship="Self.FK_FamilyMemberAssociation_Members" FromRole="Members" ToRole="FamilyMemberAssociation" />
+          <NavigationProperty Name="Matrimonials" Relationship="Self.FK_Matrimonials_Members" FromRole="Members" ToRole="Matrimonials" />
+          <NavigationProperty Name="MemberRelations" Relationship="Self.FK_MemberRelations_Members" FromRole="Members" ToRole="MemberRelations" />
+        </EntityType>
+        <Association Name="FK_FamilyMemberAssociation_Families">
+          <End Role="Families" Type="Self.Family" Multiplicity="1" />
+          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Families">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMemberAssociation_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberRelations_lkRelationTypes">
+          <End Role="lkRelationTypes" Type="Self.lkRelationType" Multiplicity="1" />
+          <End Role="MemberRelations" Type="Self.MemberRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lkRelationTypes">
+              <PropertyRef Name="RelationTypeId" />
+            </Principal>
+            <Dependent Role="MemberRelations">
+              <PropertyRef Name="RelationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matrimonials_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="Matrimonials" Type="Self.Matrimonial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Matrimonials">
+              <PropertyRef Name="MemberID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberRelations_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="1" />
+          <End Role="MemberRelations" Type="Self.MemberRelation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="MemberRelations">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bkContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Families" EntityType="Self.Family" />
+          <EntitySet Name="FamilyMemberAssociations" EntityType="Self.FamilyMemberAssociation" />
+          <EntitySet Name="lkRelationTypes" EntityType="Self.lkRelationType" />
+          <EntitySet Name="Matrimonials" EntityType="Self.Matrimonial" />
+          <EntitySet Name="MemberRelations" EntityType="Self.MemberRelation" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="Self.FK_FamilyMemberAssociation_Families">
+            <End Role="Families" EntitySet="Families" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="Self.FK_FamilyMemberAssociation_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberRelations_lkRelationTypes" Association="Self.FK_MemberRelations_lkRelationTypes">
+            <End Role="lkRelationTypes" EntitySet="lkRelationTypes" />
+            <End Role="MemberRelations" EntitySet="MemberRelations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matrimonials_Members" Association="Self.FK_Matrimonials_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Matrimonials" EntitySet="Matrimonials" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberRelations_Members" Association="Self.FK_MemberRelations_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberRelations" EntitySet="MemberRelations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bkModelStoreContainer" CdmEntityContainer="bkContext">
+          <EntitySetMapping Name="Families">
+            <EntityTypeMapping TypeName="bkModel.Family">
+              <MappingFragment StoreEntitySet="Families">
+                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
+                <ScalarProperty Name="ParentFamilyID" ColumnName="ParentFamilyID" />
+                <ScalarProperty Name="FamilySID" ColumnName="FamilySID" />
+                <ScalarProperty Name="Nukh" ColumnName="Nukh" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FamilyMemberAssociations">
+            <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
+              <MappingFragment StoreEntitySet="FamilyMemberAssociation">
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="HeadOfFamily" ColumnName="HeadOfFamily" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lkRelationTypes">
+            <EntityTypeMapping TypeName="bkModel.lkRelationType">
+              <MappingFragment StoreEntitySet="lkRelationTypes">
+                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
+                <ScalarProperty Name="RelationType" ColumnName="RelationType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matrimonials">
+            <EntityTypeMapping TypeName="bkModel.Matrimonial">
+              <MappingFragment StoreEntitySet="Matrimonials">
+                <ScalarProperty Name="MatrimonialID" ColumnName="MatrimonialID" />
+                <ScalarProperty Name="MatrimonialSID" ColumnName="MatrimonialSID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MaternalNukh" ColumnName="MaternalNukh" />
+                <ScalarProperty Name="BirthTime" ColumnName="BirthTime" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+                <ScalarProperty Name="Complexion" ColumnName="Complexion" />
+                <ScalarProperty Name="Smoke" ColumnName="Smoke" />
+                <ScalarProperty Name="Drink" ColumnName="Drink" />
+                <ScalarProperty Name="Disability" ColumnName="Disability" />
+                <ScalarProperty Name="Diet" ColumnName="Diet" />
+                <ScalarProperty Name="AnnualIncome" ColumnName="AnnualIncome" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="ProfileText" ColumnName="ProfileText" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberRelations">
+            <EntityTypeMapping TypeName="bkModel.MemberRelation">
+              <MappingFragment StoreEntitySet="MemberRelations">
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="RelatedMemberId" ColumnName="RelatedMemberId" />
+                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="bkModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MemberSID" ColumnName="MemberSID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="UseFamilyAddress" ColumnName="UseFamilyAddress" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+                <ScalarProperty Name="EducationField" ColumnName="EducationField" />
+                <ScalarProperty Name="WorkingWith" ColumnName="WorkingWith" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
+                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
+                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastLoginOn" ColumnName="LastLoginOn" />
+                <ScalarProperty Name="PasswordUID" ColumnName="PasswordUID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

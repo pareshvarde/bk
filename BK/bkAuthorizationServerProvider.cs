@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using BK.Context;
 
 namespace BK
 {
@@ -18,33 +19,25 @@ namespace BK
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            //familymember fMember = null;
+            Member fMember = null;
 
-            //using (bkContext _context = new bkContext())
-            //{
-            //    fMember = _context.familymembers.FirstOrDefault(m => m.EmailAddress == context.UserName);
-            //    if (fMember == null)
-            //    {
-            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //        return;
-            //    }
-
-            //    login fLogin = _context.logins.FirstOrDefault(l => l.Password == context.Password && l.Active == true);
-            //    fLogin.LastLoginOn = DateTime.UtcNow;
-            //    await _context.SaveChangesAsync();
-
-            //    if (fLogin == null)
-            //    {
-            //        context.SetError("invalid_grant", "The user name or password is incorrect.");
-            //        return;
-            //    }
-            //}
+            using (bkContext _context = new bkContext())
+            {
+                fMember = _context.Members.FirstOrDefault(m => m.EmailAddress == context.UserName && m.Password == context.Password && m.Active);
+                if (fMember == null)
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
+                                                
+                fMember.LastLoginOn = DateTime.UtcNow;
+                await _context.SaveChangesAsync();               
+            }
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            //identity.AddClaim(new Claim("sub", context.UserName));
-            //identity.AddClaim(new Claim("role", "user"));
-            //identity.AddClaim(new Claim("familyId", fMember.FamilyID.ToString()));
-            //identity.AddClaim(new Claim("familyMemberId", fMember.FamilyMemberID.ToString()));
+            identity.AddClaim(new Claim("email", fMember.EmailAddress));
+            identity.AddClaim(new Claim("role", "user"));            
+            identity.AddClaim(new Claim("memberid", fMember.MemberID.ToString()));
 
             context.Validated(identity);
         }

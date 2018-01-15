@@ -148,6 +148,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Context\bkContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>bkContext.edmx</DependentUpon>
+      <LastGenOutput>bkContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Context\bkContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>bkContext.edmx</DependentUpon>
+      <LastGenOutput>bkContext.cs</LastGenOutput>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -156,6 +166,39 @@
     <Compile Include="AppLogger.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="bkAuthorizationServerProvider.cs" />
+    <Compile Include="Context\bkContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bkContext.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\bkContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\bkContext.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>bkContext.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Family.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\FamilyMemberAssociation.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\lkRelationType.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Matrimonial.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\Member.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context\MemberRelation.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\ResponseWrappingHandler.cs" />
@@ -169,6 +212,13 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="EntLib.config" />
+    <EntityDeploy Include="Context\bkContext.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>bkContext.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Context\bkContext.edmx.diagram">
+      <DependentUpon>bkContext.edmx</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -178,7 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Business\" />
-    <Folder Include="Context\" />
     <Folder Include="HtmlTemplates\" />
   </ItemGroup>
   <ItemGroup>
