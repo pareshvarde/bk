@@ -19,7 +19,7 @@ namespace BK
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            Member fMember = null;
+            Member fMember = null;            
 
             using (bkContext _context = new bkContext())
             {
@@ -28,7 +28,7 @@ namespace BK
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");
                     return;
-                }
+                }                
                                                 
                 fMember.LastLoginOn = DateTime.UtcNow;
                 await _context.SaveChangesAsync();               
