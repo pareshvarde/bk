@@ -1,2 +1,6 @@
 // Import Fuse main library
 @import "app/core/scss/core";
+
+.mat-form-field--no-underline .mat-input-underline {
+    background-color: transparent;
+  }
