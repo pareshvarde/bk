@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { bkDataService } from '../../services/bk-data.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  providers: [bkDataService]
 })
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  loginFormErrors: any;
+  loginFormErrors: any;  
 
-  constructor(private formBuilder: FormBuilder) { 
+  constructor(private formBuilder: FormBuilder, private dataService: bkDataService) { 
     this.loginFormErrors = {
       email   : {},
       password: {}
@@ -49,5 +51,6 @@ export class LoginComponent implements OnInit {
   }
 
   processLogin(){
+    let token = this.dataService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value)
   }
 }
