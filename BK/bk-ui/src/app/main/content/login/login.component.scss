@@ -29,8 +29,9 @@ app-login
 
             #login-form {
                 width: 384px;
-                max-width: 384px;
-                padding: 32px;
+                max-width: 384px;            
+                padding-left: 32px;
+                padding-right: 32px;
                 background: #FFFFFF;
                 text-align: center;
                 @include mat-elevation(7);
@@ -47,7 +48,7 @@ app-login
 
                 .title {
                     font-size: 20px;
-                    margin: 16px 0 32px 0;
+                    margin: 16px 0 16px 0;
                 }
 
                 form {
