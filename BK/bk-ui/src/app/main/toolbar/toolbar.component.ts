@@ -96,4 +96,11 @@ export class FuseToolbarComponent
         // Use the selected language for translations
         this.translate.use(lang.id);
     }
+
+    logout()
+    {
+        let localStorage = window.localStorage;
+        localStorage.removeItem('token');
+        this.router.navigate(['home']);        
+    }
 }
