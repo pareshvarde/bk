@@ -34,6 +34,7 @@
     "@swimlane/ngx-datatable": "11.1.4",
     "@withinpixels/ngx-dnd": "3.1.0",
     "angular-calendar": "0.22.1",
+    "angular2-notifications": "0.9.7",
     "classlist.js": "1.1.20150312",
     "core-js": "2.5.1",
     "d3": "4.12.0",

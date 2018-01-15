@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { bkDataService } from '../../services/bk-data.service';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginFormErrors: any;  
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService) { 
+  constructor(private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService,
+    private alertService: NotificationsService) 
+  { 
     this.loginFormErrors = {
       email   : {},
       password: {}
@@ -64,6 +67,8 @@ export class LoginComponent implements OnInit {
       },
       (err) =>{        
         let error = JSON.parse((<any>err)._body)
+        debugger;
+        this.alertService.error('Login Failed', error.error_description);
         console.log(err);
       }
     );    

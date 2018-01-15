@@ -16,6 +16,11 @@ import 'rxjs/add/operator/map';
 export class FuseContentComponent implements OnInit, OnDestroy {
     onSettingsChanged: Subscription;
     fuseSettings: any;
+    public alertOptions  = {
+        position: ["bottom", "right"],
+        timeOut: 5000,
+        lastOnBottom: true     
+    }
 
     @HostBinding('@routerTransitionUp') routeAnimationUp = false;
     @HostBinding('@routerTransitionDown') routeAnimationDown = false;

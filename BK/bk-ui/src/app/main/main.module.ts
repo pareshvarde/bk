@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../core/modules/shared.module';
-import {ScrollToModule} from 'ng2-scroll-to';
+import { ScrollToModule } from 'ng2-scroll-to';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { FuseMainComponent } from './main.component';
 import { FuseContentComponent } from './content/content.component';
 import { FuseFooterComponent } from './footer/footer.component';
@@ -48,6 +49,7 @@ import { LoginComponent } from './content/login/login.component';
         SharedModule,
         RouterModule,
         ScrollToModule.forRoot(),
+        SimpleNotificationsModule.forRoot(),
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule
