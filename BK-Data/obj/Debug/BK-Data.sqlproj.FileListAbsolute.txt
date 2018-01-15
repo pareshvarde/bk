@@ -1,9 +1,0 @@
-E:\bk-git\BK-Data\bin\Debug\BK-Data.dacpac
-E:\bk-git\BK-Data\bin\Debug\BK_Data.dll
-E:\bk-git\BK-Data\bin\Debug\BK_Data.pdb
-E:\bk-git\BK-Data\obj\Debug\Model.xml
-E:\bk-git\BK-Data\obj\Debug\refactor.xml
-E:\bk-git\BK-Data\obj\Debug\postdeploy.sql
-E:\bk-git\BK-Data\obj\Debug\predeploy.sql
-E:\bk-git\BK-Data\obj\Debug\BK_Data.dll
-E:\bk-git\BK-Data\obj\Debug\BK_Data.pdb
