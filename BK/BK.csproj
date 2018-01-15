@@ -94,11 +94,6 @@
       <HintPath>..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.10.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <HintPath>..\packages\MySql.Data.6.10.5\lib\net452\MySql.Data.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -153,64 +148,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bk-ui\src\app\app.component.css" />
-    <Content Include="bk-ui\src\app\app.component.html" />
-    <Content Include="bk-ui\src\app\core\components\confirm-dialog\confirm-dialog.component.html" />
-    <Content Include="bk-ui\src\app\core\components\countdown\countdown.component.html" />
-    <Content Include="bk-ui\src\app\core\components\demo\demo-content\demo-content.component.html" />
-    <Content Include="bk-ui\src\app\core\components\demo\demo-sidenav\demo-sidenav.component.html" />
-    <Content Include="bk-ui\src\app\core\components\material-color-picker\material-color-picker.component.html" />
-    <Content Include="bk-ui\src\app\core\components\navigation\horizontal\nav-collapse\nav-horizontal-collapse.component.html" />
-    <Content Include="bk-ui\src\app\core\components\navigation\horizontal\nav-item\nav-horizontal-item.component.html" />
-    <Content Include="bk-ui\src\app\core\components\navigation\navigation.component.html" />
-    <Content Include="bk-ui\src\app\core\components\navigation\vertical\nav-collapse\nav-vertical-collapse.component.html" />
-    <Content Include="bk-ui\src\app\core\components\navigation\vertical\nav-group\nav-vertical-group.component.html" />
-    <Content Include="bk-ui\src\app\core\components\navigation\vertical\nav-item\nav-vertical-item.component.html" />
-    <Content Include="bk-ui\src\app\core\components\search-bar\search-bar.component.html" />
-    <Content Include="bk-ui\src\app\core\components\shortcuts\shortcuts.component.html" />
-    <Content Include="bk-ui\src\app\core\components\theme-options\theme-options.component.html" />
-    <Content Include="bk-ui\src\app\core\components\widget\widget.component.html" />
-    <Content Include="bk-ui\src\app\main\content\content.component.html" />
-    <Content Include="bk-ui\src\app\main\content\gotra\gotra.component.html" />
-    <Content Include="bk-ui\src\app\main\content\home\home.component.html" />
-    <Content Include="bk-ui\src\app\main\content\hostel\hostel.component.html" />
-    <Content Include="bk-ui\src\app\main\content\login\login.component.html" />
-    <Content Include="bk-ui\src\app\main\content\nukh\nukh.component.html" />
-    <Content Include="bk-ui\src\app\main\content\organization\organization.component.html" />
-    <Content Include="bk-ui\src\app\main\content\origin\origin.component.html" />
-    <Content Include="bk-ui\src\app\main\content\temple\temple.component.html" />
-    <Content Include="bk-ui\src\app\main\footer\footer.component.html" />
-    <Content Include="bk-ui\src\app\main\main.component.html" />
-    <Content Include="bk-ui\src\app\main\navbar\horizontal\navbar-horizontal.component.html" />
-    <Content Include="bk-ui\src\app\main\navbar\vertical\navbar-vertical.component.html" />
-    <Content Include="bk-ui\src\app\main\quick-panel\quick-panel.component.html" />
-    <Content Include="bk-ui\src\app\main\toolbar\toolbar.component.html" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\demo-files\demo.css" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\demo-files\demo.js" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\demo.html" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\fonts\meteocons.svg" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\Read Me.txt" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\style.css" />
-    <Content Include="bk-ui\src\assets\images\avatars\profile.jpg" />
-    <Content Include="bk-ui\src\assets\images\backgrounds\header-bg.png" />
-    <Content Include="bk-ui\src\assets\images\chant.png" />
-    <Content Include="bk-ui\src\assets\images\flags\us.png" />
-    <Content Include="bk-ui\src\assets\images\logo.png" />
-    <Content Include="bk-ui\src\assets\images\logo_2.png" />
-    <Content Include="bk-ui\src\assets\images\mata.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\amd1.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\baluchistan.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\barmer.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\bhagli.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\daheli.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\jaisalmer.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\jasai.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\jodhpur.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\lodurva.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\noImage.jpg" />
-    <Content Include="bk-ui\src\assets\images\temples\raniwara.jpg" />
-    <Content Include="bk-ui\src\favicon.ico" />
-    <Content Include="bk-ui\src\index.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -232,73 +169,6 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="EntLib.config" />
-    <Content Include="bk-ui\.angular-cli.json" />
-    <Content Include="bk-ui\package.json" />
-    <Content Include="bk-ui\src\assets\.gitkeep" />
-    <Content Include="bk-ui\src\tsconfig.app.json" />
-    <Content Include="bk-ui\tsconfig.json" />
-    <Content Include="bk-ui\src\styles.scss" />
-    <Content Include="bk-ui\package-lock.json" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\fonts\meteocons.ttf" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\fonts\meteocons.woff" />
-    <Content Include="bk-ui\src\assets\icons\meteocons\selection.json" />
-    <Content Include="bk-ui\src\app\core\components\confirm-dialog\confirm-dialog.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\countdown\countdown.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\demo\demo-content\demo-content.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\demo\demo-sidenav\demo-sidenav.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\hljs\hljs.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\material-color-picker\material-color-picker.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\navigation\horizontal\nav-collapse\nav-horizontal-collapse.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\navigation\horizontal\nav-item\nav-horizontal-item.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\navigation\navigation.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\navigation\vertical\nav-collapse\nav-vertical-collapse.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\navigation\vertical\nav-group\nav-vertical-group.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\navigation\vertical\nav-item\nav-vertical-item.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\search-bar\search-bar.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\shortcuts\shortcuts.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\theme-options\theme-options.component.scss" />
-    <Content Include="bk-ui\src\app\core\components\widget\widget.component.scss" />
-    <Content Include="bk-ui\src\app\core\scss\core.scss" />
-    <Content Include="bk-ui\src\app\core\scss\fuse.scss" />
-    <Content Include="bk-ui\src\app\core\scss\mixins\_breakpoints.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\plugins\_highlight.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\plugins\_ng-pick-datetime.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\plugins\_ngx-color-picker.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\plugins\_ngx-datatable.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\plugins\_perfect-scrollbar.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\plugins\_plugins.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_angular-material-fix.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_cards.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_colors.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_forms.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_global.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_helpers.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_icons.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_material.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_navigation.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_normalize.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_page-layouts.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_print.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_reset.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_scrollbars.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_toolbar.scss" />
-    <Content Include="bk-ui\src\app\core\scss\partials\_typography.scss" />
-    <Content Include="bk-ui\src\app\core\scss\variables\_theme.scss" />
-    <Content Include="bk-ui\src\app\main\content\content.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\gotra\gotra.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\home\home.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\hostel\hostel.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\login\login.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\nukh\nukh.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\organization\organization.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\origin\origin.component.scss" />
-    <Content Include="bk-ui\src\app\main\content\temple\temple.component.scss" />
-    <Content Include="bk-ui\src\app\main\footer\footer.component.scss" />
-    <Content Include="bk-ui\src\app\main\main.component.scss" />
-    <Content Include="bk-ui\src\app\main\navbar\horizontal\navbar-horizontal.component.scss" />
-    <Content Include="bk-ui\src\app\main\navbar\vertical\navbar-vertical.component.scss" />
-    <Content Include="bk-ui\src\app\main\quick-panel\quick-panel.component.scss" />
-    <Content Include="bk-ui\src\app\main\toolbar\toolbar.component.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -307,7 +177,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="bk-ui\src\app\modules\" />
     <Folder Include="Business\" />
     <Folder Include="Context\" />
     <Folder Include="HtmlTemplates\" />
@@ -315,81 +184,6 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <TypeScriptCompile Include="bk-ui\src\app\app.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\app.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\animations.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\confirm-dialog\confirm-dialog.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\copier\copier.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\countdown\countdown.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\demo\demo-content\demo-content.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\demo\demo-sidenav\demo-sidenav.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\demo\demo.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\hljs\hljs.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\material-color-picker\material-color-picker.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\horizontal\nav-collapse\nav-horizontal-collapse.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\horizontal\nav-item\nav-horizontal-item.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\navigation.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\navigation.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\navigation.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\vertical\nav-collapse\nav-vertical-collapse.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\vertical\nav-group\nav-vertical-group.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\navigation\vertical\nav-item\nav-vertical-item.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\search-bar\search-bar.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\search-bar\search-bar.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\shortcuts\shortcuts.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\shortcuts\shortcuts.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\theme-options\theme-options.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\widget\widget-toggle.directive.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\widget\widget.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\components\widget\widget.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\directives\fuse-if-on-dom\fuse-if-on-dom.directive.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\directives\fuse-mat-sidenav-helper\fuse-mat-sidenav-helper.directive.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\directives\fuse-mat-sidenav-helper\fuse-mat-sidenav-helper.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\directives\fuse-perfect-scrollbar\fuse-perfect-scrollbar.directive.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\fuseUtils.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\matColors.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\modules\material.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\modules\shared.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\pipes\camelCaseToDash.pipe.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\pipes\filter.pipe.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\pipes\getById.pipe.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\pipes\htmlToPlaintext.pipe.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\pipes\keys.pipe.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\pipes\pipes.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\services\config.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\services\match-media.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\services\splash-screen.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\core\services\translation-loader.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\content.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\gotra\gotra.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\home\home.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\hostel\hostel.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\login\login.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\nukh\nukh.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\organization\organization.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\origin\origin.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\content\temple\temple.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\footer\footer.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\main.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\main.module.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\navbar\horizontal\navbar-horizontal.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\navbar\vertical\navbar-vertical-toggle.directive.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\navbar\vertical\navbar-vertical.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\navbar\vertical\navbar-vertical.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\quick-panel\quick-panel.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\services\bk-data.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\services\shared.service.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\main\toolbar\toolbar.component.ts" />
-    <TypeScriptCompile Include="bk-ui\src\app\navigation.model.ts" />
-    <TypeScriptCompile Include="bk-ui\src\environments\environment.hmr.ts" />
-    <TypeScriptCompile Include="bk-ui\src\environments\environment.prod.ts" />
-    <TypeScriptCompile Include="bk-ui\src\environments\environment.ts" />
-    <TypeScriptCompile Include="bk-ui\src\hmr.ts" />
-    <TypeScriptCompile Include="bk-ui\src\main.ts" />
-    <TypeScriptCompile Include="bk-ui\src\polyfills.ts" />
-    <TypeScriptCompile Include="bk-ui\src\typings.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

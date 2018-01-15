@@ -43,8 +43,8 @@ namespace BK.Controllers
 
             //    context.SaveChanges();
 
-                return Ok();
-            }
-        }       
+            return Ok();
+        }
     }
 }
+
