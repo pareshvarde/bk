@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
     let passwordValue = this.loginForm.controls.password.value;
 
     this.loginForm.reset();
+    (<HTMLElement>document.querySelector('input[formControlName=email]')).focus();
     
     this.dataService.login(emailValue, passwordValue).subscribe(
       (res) =>{      
