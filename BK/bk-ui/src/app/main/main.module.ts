@@ -25,6 +25,7 @@ import { OrganizationComponent } from './content/organization/organization.compo
 import { TempleComponent } from './content/temple/temple.component';
 import { LoginComponent } from './content/login/login.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
+import { ResetPasswordComponent } from './content/resetPassword/resetPassword.component';
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import { AutoFocusDirective } from './directives/auto-focus.directive';
         OrganizationComponent,
         TempleComponent,
         LoginComponent,
+        ResetPasswordComponent,
         AutoFocusDirective
     ],
     imports     : [
