@@ -6,3 +6,16 @@
     padding: 10px 10px 10px 10px;  
     overflow: auto;  
 }
+:host ::ng-deep simple-notifications .sn-content {
+    font-size: 14px;
+}
+
+:host ::ng-deep simple-notifications .sn-title {
+    font-size: 16px;
+}
+
+:host ::ng-deep simple-notifications .icon 
+{
+    width: 40px;
+    height: 40px;
+}
