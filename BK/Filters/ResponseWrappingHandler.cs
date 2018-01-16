@@ -34,24 +34,28 @@ namespace BK.Filters
                     //Step 3: If content is an error, return nothing for the Result.
                     content = null; //We have errors, so don't return any content
                                     //Step 4: Insert the ModelState errors              
+
+                    //Read as string
+                    var httpErrorObject = response.Content.ReadAsStringAsync().Result;
+
+                    //Convert to anonymous object
+                    var anonymousErrorObject = new { message = "", ModelState = new Dictionary<string, string[]>() };
+
+                    // Deserialize anonymous object
+                    var deserializedErrorObject = JsonConvert.DeserializeAnonymousType(httpErrorObject, anonymousErrorObject);
+
+                    // Get error messages from ModelState object
                     if (error.ModelState != null)
                     {
-                        //Read as string
-                        var httpErrorObject = response.Content.ReadAsStringAsync().Result;
-
-                        //Convert to anonymous object
-                        var anonymousErrorObject = new { message = "", ModelState = new Dictionary<string, string[]>() };
-
-                        // Deserialize anonymous object
-                        var deserializedErrorObject = JsonConvert.DeserializeAnonymousType(httpErrorObject, anonymousErrorObject);
-
-                        // Get error messages from ModelState object
                         var modelStateValues = deserializedErrorObject.ModelState.Select(kvp => string.Join(". ", kvp.Value));
 
                         for (int i = 0; i < modelStateValues.Count(); i++)
-                        {
                             modelStateErrors.Add(modelStateValues.ElementAt(i));
-                        }
+                    }
+                    else
+                    {
+                        foreach (var item in error)
+                            modelStateErrors.Add(item.Value.ToString());
                     }
                 }
             }
@@ -61,7 +65,7 @@ namespace BK.Filters
 
             //Step 6: Add Back the Response Headers
             foreach (var header in response.Headers) //Add back the response headers            
-                newResponse.Headers.Add(header.Key, header.Value);            
+                newResponse.Headers.Add(header.Key, header.Value);
 
             return newResponse;
         }

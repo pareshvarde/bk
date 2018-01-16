@@ -15,7 +15,7 @@ export class ForgotPasswordComponent implements OnInit
     forgotPasswordForm: FormGroup;
     forgotPasswordFormErrors: any;
 
-    constructor(private formBuilder: FormBuilder)
+    constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService)
     {
         this.forgotPasswordFormErrors = {
             email: {}
@@ -46,12 +46,26 @@ export class ForgotPasswordComponent implements OnInit
             this.forgotPasswordFormErrors[field] = {};
 
             // Get the control
-            const control = this.forgotPasswordFormErrors.get(field);
+            const control = this.forgotPasswordForm.get(field);
 
             if ( control && control.dirty && !control.valid )
             {
                 this.forgotPasswordFormErrors[field] = control.errors;
             }
         }
+    }
+
+    processForgotPassword(){
+        let emailValue = this.forgotPasswordForm.controls.email.value;
+        this.dataService.sendResetPasswordEmail(emailValue).subscribe(
+            (res) => {
+                debugger;                
+                this.alertService.success("Please check your inbox for password reset link");
+            },
+            (err) => {
+                debugger;                                
+                this.alertService.error(err.errors[0]);
+            }
+        );
     }
 }

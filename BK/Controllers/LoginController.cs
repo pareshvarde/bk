@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BK.Context;
 
 namespace BK.Controllers
 {
@@ -44,6 +45,33 @@ namespace BK.Controllers
             //    context.SaveChanges();
 
             return Ok();
+        }
+
+        [Route("api/isEmailAvailable")]
+        public IHttpActionResult IsEmailAvailable(string emailAddress)
+        {
+            using (bkContext context = new bkContext())
+            {
+                if (context.Members.Any(m => m.EmailAddress == emailAddress))
+                    return Ok(false);
+                else
+                    return Ok(true);
+            }
+        }
+
+        [Route("api/sendResetPasswordEmail")]
+        [HttpGet]
+        public IHttpActionResult SendResetPasswordEmail(string emailAddress)
+        {
+            using (bkContext context = new bkContext())
+            {
+                if (!context.Members.Any(m => m.EmailAddress == emailAddress))
+                    return BadRequest("Email address is not registered");
+                
+                                
+            }
+
+            return Ok(true);
         }
     }
 }

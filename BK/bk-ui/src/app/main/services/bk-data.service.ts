@@ -18,4 +18,14 @@ export class bkDataService {
       }
     );
   };
+
+  sendResetPasswordEmail(emailAddress: string) {
+    return this.http.get(this.API_URL + "sendResetPasswordEmail?emailAddress=" + emailAddress).map(response => {
+      return JSON.parse((<any>response)._body);
+    },
+      (err: HttpErrorResponse) => {
+        return JSON.parse((<any>err)._body);
+      }
+    );
+  };
 }
