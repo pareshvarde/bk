@@ -24,6 +24,7 @@ import { HostelComponent } from './content/hostel/hostel.component';
 import { OrganizationComponent } from './content/organization/organization.component';
 import { TempleComponent } from './content/temple/temple.component';
 import { LoginComponent } from './content/login/login.component';
+import { AutoFocusDirective } from './directives/auto-focus.directive';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { LoginComponent } from './content/login/login.component';
         HostelComponent,
         OrganizationComponent,
         TempleComponent,
-        LoginComponent
+        LoginComponent,
+        AutoFocusDirective
     ],
     imports     : [
         SharedModule,
