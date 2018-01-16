@@ -36,19 +36,18 @@ app-login
                 text-align: center;
                 @include mat-elevation(7);
 
-                @include media-breakpoint('xs') {
-                    padding: 24px;
+                @include media-breakpoint('xs') {                    
                     width: 100%;
                 }
 
                 .logo {
                     width: 128px;
-                    margin: 32px auto;
+                    margin: 10px auto;
                 }
 
                 .title {
                     font-size: 20px;
-                    margin: 16px 0 16px 0;
+                    margin: 10px 0 10px 0;
                 }
 
                 form {
@@ -68,13 +67,13 @@ app-login
                         margin-top: 8px;
 
                         .remember-me {
-                            margin-bottom: 16px
+                            margin-bottom: 10px
                         }
 
                         .forgot-password {
                             font-size: 13px;
                             font-weight: 500;
-                            margin-bottom: 16px
+                            margin-bottom: 10px
                         }
                     }
 
@@ -90,7 +89,7 @@ app-login
                 }
 
                 .register {
-                    margin: 32px auto 24px auto;
+                    margin: 10px auto 10px auto;
                     font-weight: 500;
 
                     .text {
