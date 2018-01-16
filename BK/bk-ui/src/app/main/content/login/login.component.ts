@@ -66,10 +66,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['home']);
       },
       (err) =>{        
-        let error = JSON.parse((<any>err)._body)
-        debugger;
-        this.alertService.error('Login Failed', error.error_description);
-        console.log(err);
+        let error = JSON.parse((<any>err)._body)        
+        this.alertService.error('Login Failed', error.error_description);        
       }
     );    
   }
