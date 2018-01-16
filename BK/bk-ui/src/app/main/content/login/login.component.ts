@@ -59,13 +59,18 @@ export class LoginComponent implements OnInit {
     let localStorage = window.localStorage;
     localStorage.removeItem('token');
 
-    this.dataService.login(this.loginForm.controls.email.value, this.loginForm.controls.password.value).subscribe(
+    let emailValue = this.loginForm.controls.email.value;
+    let passwordValue = this.loginForm.controls.password.value;
+
+    this.loginForm.reset();
+    
+    this.dataService.login(emailValue, passwordValue).subscribe(
       (res) =>{      
         let result = JSON.parse((<any>res)._body)        
         localStorage.setItem('token', result.access_token);
         this.router.navigate(['home']);
       },
-      (err) =>{        
+      (err) =>{                       
         let error = JSON.parse((<any>err)._body)        
         this.alertService.error('Login Failed', error.error_description);        
       }
