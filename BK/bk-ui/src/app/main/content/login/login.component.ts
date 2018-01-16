@@ -66,12 +66,18 @@ export class LoginComponent implements OnInit {
     (<HTMLElement>document.querySelector('input[formControlName=email]')).focus();
     
     this.dataService.login(emailValue, passwordValue).subscribe(
-      (res) =>{      
+      (res) =>{              
         let result = JSON.parse((<any>res)._body)        
         localStorage.setItem('token', result.access_token);
         this.router.navigate(['home']);
       },
-      (err) =>{                       
+      (err) =>{                  
+        if (err.message)           
+        {
+          this.alertService.error('Login Failed', err.message);        
+          return;
+        }
+
         let error = JSON.parse((<any>err)._body)        
         this.alertService.error('Login Failed', error.error_description);        
       }
