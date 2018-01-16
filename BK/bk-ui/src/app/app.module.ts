@@ -20,7 +20,7 @@ import { HostelComponent } from './main/content/hostel/hostel.component';
 import { OrganizationComponent } from './main/content/organization/organization.component';
 import { TempleComponent } from './main/content/temple/temple.component';
 import { LoginComponent } from './main/content/login/login.component';
-import { ResetPasswordComponent } from './main/content/resetPassword/resetPassword.component';
+import { ForgotPasswordComponent } from './main/content/forgotPassword/forgotPassword.component';
 
 const appRoutes: Routes = [
     {
@@ -56,8 +56,8 @@ const appRoutes: Routes = [
         component: LoginComponent
     },
     {
-        path: "resetPassword",
-        component: ResetPasswordComponent
+        path: "forgotPassword",
+        component: ForgotPasswordComponent
     },
     {
         path      : '**',
