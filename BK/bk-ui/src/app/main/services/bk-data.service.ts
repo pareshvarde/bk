@@ -22,7 +22,18 @@ export class bkDataService {
 
   sendResetPasswordEmail(emailAddress: string) {
     return this.http.get(this.API_URL + "sendResetPasswordEmail?emailAddress=" + emailAddress).map((res) => {
-      return JSON.parse((<any>res)._body);
-    }).catch((error: any) => Observable.throw(error.message || JSON.parse((<any>error)._body)));
+      return this.handleAPIResponse(res);
+    }).catch((error: any) => this.handleAPIError(error));
+  };
+
+  private handleAPIResponse(response: any) {
+    return JSON.parse(response._body);
+  }
+
+  private handleAPIError(error: any): any {
+    if (error.message)
+      return Observable.throw(error.message);
+    else
+      return Observable.throw(JSON.parse((<any>error)._body))
   };
 }
