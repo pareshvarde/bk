@@ -26,6 +26,7 @@ import { TempleComponent } from './content/temple/temple.component';
 import { LoginComponent } from './content/login/login.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ForgotPasswordComponent } from './content/forgotPassword/forgotPassword.component';
+import { ResetPasswordComponent } from './content/reset-password/reset-password.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +48,8 @@ import { ForgotPasswordComponent } from './content/forgotPassword/forgotPassword
         TempleComponent,
         LoginComponent,
         ForgotPasswordComponent,
-        AutoFocusDirective
+        AutoFocusDirective,
+        ResetPasswordComponent
     ],
     imports     : [
         SharedModule,

@@ -21,6 +21,7 @@ import { OrganizationComponent } from './main/content/organization/organization.
 import { TempleComponent } from './main/content/temple/temple.component';
 import { LoginComponent } from './main/content/login/login.component';
 import { ForgotPasswordComponent } from './main/content/forgotPassword/forgotPassword.component';
+import { ResetPasswordComponent } from './main/content/reset-password/reset-password.component';
 
 const appRoutes: Routes = [
     {
@@ -58,6 +59,10 @@ const appRoutes: Routes = [
     {
         path: "forgotPassword",
         component: ForgotPasswordComponent
+    },
+    {
+        path: "resetPassword",
+        component: ResetPasswordComponent
     },
     {
         path      : '**',
