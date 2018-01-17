@@ -7,6 +7,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using BK.Context;
+using System.IO;
+using System.Net.Mail;
+using System.Reflection;
 
 namespace BK.Controllers
 {
@@ -67,8 +70,29 @@ namespace BK.Controllers
             {
                 if (!context.Members.Any(m => m.EmailAddress == emailAddress))
                     return BadRequest("Email address is not registered");
-                
-                                
+
+                Member member = context.Members.FirstOrDefault(m => m.EmailAddress == emailAddress);
+                if (member == null)
+                    return BadRequest("Your account information cannot be loaded. Please contact Administrator for help");
+
+                member.PasswordUID = Guid.NewGuid();
+                context.SaveChanges();
+
+                string templatePath = System.Web.Hosting.HostingEnvironment.MapPath("~/HtmlTemplates/password_reset.html");
+                string html = File.ReadAllText(templatePath);
+
+                html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
+                html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/resetPassword/{member.PasswordUID.Value.ToString()} ");
+
+                MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress);
+                mailMessage.Body = html;
+                mailMessage.IsBodyHtml = true;
+                mailMessage.Subject = "Brahmkshatriya Online Portal - Password Reset";
+
+                using (SmtpClient sClient = new SmtpClient())
+                {
+                    sClient.Send(mailMessage);
+                }
             }
 
             return Ok(true);
