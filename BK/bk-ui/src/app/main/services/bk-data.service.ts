@@ -6,7 +6,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class bkDataService {
-  private API_URL = "http://localhost:600677/api/";
+  private API_URL = "http://localhost:60067/api/";
 
   constructor(private http: Http) { }
 
