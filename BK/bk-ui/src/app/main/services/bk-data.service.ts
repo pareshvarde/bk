@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class bkDataService {
-  private API_URL = "http://localhost:60067/api/";
+  private API_URL = "http://localhost:600677/api/";
 
   constructor(private http: Http) { }
 
@@ -20,12 +21,8 @@ export class bkDataService {
   };
 
   sendResetPasswordEmail(emailAddress: string) {
-    return this.http.get(this.API_URL + "sendResetPasswordEmail?emailAddress=" + emailAddress).map(response => {
-      return JSON.parse((<any>response)._body);
-    },
-      (err: HttpErrorResponse) => {
-        return JSON.parse((<any>err)._body);
-      }
-    );
+    return this.http.get(this.API_URL + "sendResetPasswordEmail?emailAddress=" + emailAddress).map((res) => {
+      return JSON.parse((<any>res)._body);
+    }).catch((error: any) => Observable.throw(error.message || JSON.parse((<any>error)._body)));
   };
 }
