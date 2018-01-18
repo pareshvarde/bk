@@ -17,9 +17,10 @@
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar" src="assets/images/avatars/profile.jpg">
                     <span class="username mr-12" fxHide fxShow.gt-sm>Paresh Varde</span>
-                    <mat-icon clsas="s-16" fxHide.xs>keybaord_arrow_down</mat-icon>
-                </div>
+                    <mat-icon clsas="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>                
             </button>
+            <div *ngIf="sharedService.authenticated()" class="toolbar-separator"></div>
 
             <mat-menu #userMenu="matMenu">
                 <button mat-menu-item>
@@ -36,10 +37,10 @@
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <mat-icon class="s-16 mr-8">power_settings_new</mat-icon>
                     <span class="username" fxHide fxShow.gt-sm>Log Out</span>
-                </div>
+                </div>                
             </button>
-
-            <div class="toolbar-separator"></div>
+            <div *ngIf="sharedService.authenticated()" class="toolbar-separator"></div>
+            
             <button mat-button fxHide fxShow.gt-xs class="language-button" [matMenuTriggerFor]="languageMenu">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="flag mr-8" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
