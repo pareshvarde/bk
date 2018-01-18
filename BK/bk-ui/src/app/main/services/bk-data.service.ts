@@ -3,6 +3,7 @@ import { Http, Response, Headers  } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { error } from 'selenium-webdriver';
 import { changePasswordViewModel } from '../content/change-password/change-password.component';
 
@@ -53,11 +54,13 @@ export class bkDataService {
   }
 
   private handleAPIResponse(response: any) {
+    debugger;
     return JSON.parse(response._body);
   }
 
   private handleAPIError(error: any): any {
-    if (error.message)
+    debugger;
+    if (error.message)    
       return Observable.throw(error.message);
     else
       return Observable.throw(JSON.parse((<any>error)._body))
