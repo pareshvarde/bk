@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/catch';
+import { error } from 'selenium-webdriver';
 
 @Injectable()
 export class bkDataService {
@@ -25,6 +26,13 @@ export class bkDataService {
       return this.handleAPIResponse(res);
     }).catch((error: any) => this.handleAPIError(error));
   };
+
+  resetPassword(password: string, token: string)
+  {
+    return this.http.get(this.API_URL + "resetPassword?password=" + password + "&token=" + token).map((res)=>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
 
   private handleAPIResponse(response: any) {
     return JSON.parse(response._body);

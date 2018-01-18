@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
 import { NotificationsService } from 'angular2-notifications';
 
@@ -15,12 +15,15 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPasswordForm: FormGroup;
   resetPasswordFormErrors: any;
+  resetToken: string
 
-  constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService) {
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService, private alertService: NotificationsService) {
     this.resetPasswordFormErrors = {
       newPassword: {},
       confirmPassword:{}
     };
+
+    this.route.params.subscribe(params => this.resetToken = params.token);
   }
 
   ngOnInit() {
@@ -53,6 +56,21 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resetPassword() {
-
+    let password = this.resetPasswordForm.controls.newPassword.value;    
+    this.resetPasswordForm.reset();
+    (<HTMLElement>document.querySelector('input[formControlName=newPassword]')).focus();   
+    
+    this.dataService.resetPassword(password, this.resetToken).subscribe(
+      (res) => {
+          this.alertService.success("Password has been reset, Please login with your new password now.");
+          this.router.navigate(['login']);
+      },
+      (err) => {
+          if (err.errors)
+              this.alertService.error(err.errors[0]);
+          else
+              this.alertService.error(err);
+      }
+  );
   }
 }

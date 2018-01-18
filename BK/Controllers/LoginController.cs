@@ -97,6 +97,30 @@ namespace BK.Controllers
 
             return Ok(true);
         }
+
+        [Route("api/resetPassword")]
+        [HttpGet]
+        public IHttpActionResult ResetPassword(string password, string token)
+        {
+            using (bkContext context = new bkContext())
+            {
+                Guid resetToken = new Guid();
+                if (!Guid.TryParse(token, out resetToken))
+                    return BadRequest("Invalid Token, please regenerate your password reset request");
+
+                Member member = context.Members.FirstOrDefault(m => m.PasswordUID == resetToken);
+
+                if (member == null)
+                    return BadRequest("Invalid Token, please regenerate your password reset request");
+
+                member.PasswordUID = null;
+                member.Password = password;
+
+                context.SaveChanges();                
+            }
+
+            return Ok(true);
+        }
     }
 }
 
