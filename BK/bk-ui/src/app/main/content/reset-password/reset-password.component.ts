@@ -13,16 +13,10 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class ResetPasswordComponent implements OnInit {
 
-  resetPasswordForm: FormGroup;
-  resetPasswordFormErrors: any;
+  resetPasswordForm: FormGroup;  
   resetToken: string
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService, private alertService: NotificationsService) {
-    this.resetPasswordFormErrors = {
-      newPassword: {},
-      confirmPassword:{}
-    };
-
+  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService, private alertService: NotificationsService) {    
     this.route.params.subscribe(params => this.resetToken = params.token);
   }
 
@@ -30,29 +24,7 @@ export class ResetPasswordComponent implements OnInit {
     this.resetPasswordForm = this.formBuilder.group({
       newPassword: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required)      
-    });
-
-    this.resetPasswordForm.valueChanges.subscribe(() => {
-      this.onResetPasswordFormValuesChanged();
-    });
-  }
-
-  onResetPasswordFormValuesChanged() {
-    for (const field in this.resetPasswordFormErrors) {
-      if (!this.resetPasswordFormErrors.hasOwnProperty(field)) {
-        continue;
-      }
-
-      // Clear previous errors
-      this.resetPasswordFormErrors[field] = {};
-
-      // Get the control
-      const control = this.resetPasswordForm.get(field);
-
-      if (control && control.dirty && !control.valid) {
-        this.resetPasswordFormErrors[field] = control.errors;
-      }
-    }
+    });  
   }
 
   resetPassword() {

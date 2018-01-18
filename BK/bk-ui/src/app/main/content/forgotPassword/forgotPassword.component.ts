@@ -11,41 +11,16 @@ import { NotificationsService } from 'angular2-notifications';
     providers: [bkDataService]
 })
 export class ForgotPasswordComponent implements OnInit {
-    forgotPasswordForm: FormGroup;
-    forgotPasswordFormErrors: any;
+    forgotPasswordForm: FormGroup;    
 
     constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService) {
-        this.forgotPasswordFormErrors = {
-            email: {}
-        };
+    
     }
 
     ngOnInit() {
         this.forgotPasswordForm = this.formBuilder.group({
             email: ['', [Validators.required, Validators.email]]
-        });
-
-        this.forgotPasswordForm.valueChanges.subscribe(() => {
-            this.onForgotPasswordFormValuesChanged();
-        });
-    }
-
-    onForgotPasswordFormValuesChanged() {
-        for (const field in this.forgotPasswordFormErrors) {
-            if (!this.forgotPasswordFormErrors.hasOwnProperty(field)) {
-                continue;
-            }
-
-            // Clear previous errors
-            this.forgotPasswordFormErrors[field] = {};
-
-            // Get the control
-            const control = this.forgotPasswordForm.get(field);
-
-            if (control && control.dirty && !control.valid) {
-                this.forgotPasswordFormErrors[field] = control.errors;
-            }
-        }
+        });        
     }
 
     processForgotPassword() {

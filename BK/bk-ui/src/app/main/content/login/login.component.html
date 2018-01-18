@@ -10,20 +10,12 @@
       <form name="loginForm" [formGroup]="loginForm" novalidate>
 
         <mat-form-field>
-          <input matInput bkAutofocus placeholder="Email" formControlName="email">
-          <mat-error *ngIf="loginFormErrors.email.required">
-            Email is required
-          </mat-error>
-          <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
-            Please enter a valid email address
-          </mat-error>
+          <input matInput bkAutofocus placeholder="Email" formControlName="email">                   
+          <mat-error *ngIf="loginForm.controls['email'].hasError('email')">Please enter a valid email address</mat-error>          
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Password" formControlName="password" type="password">
-          <mat-error *ngIf="loginFormErrors.password.required">
-            Password is required
-          </mat-error>
+          <input matInput placeholder="Password" formControlName="password" type="password">          
         </mat-form-field>
 
         <div class="remember-forgot-password" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">

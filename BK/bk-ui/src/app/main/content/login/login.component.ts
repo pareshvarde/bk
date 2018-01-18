@@ -13,16 +13,12 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
-  loginFormErrors: any;  
+  loginForm: FormGroup;  
 
   constructor(private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService) 
   { 
-    this.loginFormErrors = {
-      email   : {},
-      password: {}
-  };
+   
   }
 
   ngOnInit() {
@@ -30,29 +26,7 @@ export class LoginComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       rememberMe: new FormControl(false, null)
-    });
-
-    this.loginForm.valueChanges.subscribe(() => {
-      this.onLoginFormValuesChanged();
-    });
-  }
-
-  onLoginFormValuesChanged() {
-    for (const field in this.loginFormErrors) {
-      if (!this.loginFormErrors.hasOwnProperty(field)) {
-        continue;
-      }
-
-      // Clear previous errors
-      this.loginFormErrors[field] = {};
-
-      // Get the control
-      const control = this.loginForm.get(field);
-
-      if (control && control.dirty && !control.valid) {
-        this.loginFormErrors[field] = control.errors;
-      }
-    }
+    }); 
   }
 
   processLogin(){
