@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch';
 import { error } from 'selenium-webdriver';
 
