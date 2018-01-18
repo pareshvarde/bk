@@ -8,6 +8,7 @@ using System.Web.Http;
 
 namespace BK.Controllers
 {
+    [Authorize]
     public class MemberController : ApiController
     {
         [Route("api/changePassword")]

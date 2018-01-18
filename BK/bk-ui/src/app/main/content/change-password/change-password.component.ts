@@ -28,8 +28,7 @@ export class ChangePasswordComponent implements OnInit {
     });    
   }
 
-  changePassword(){
-    debugger;
+  changePassword(){    
     this.dataService.changePassword(this.formModel).subscribe(
       (res) => {
           this.changePasswordForm.reset();          
