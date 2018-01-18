@@ -58,8 +58,7 @@ export class bkDataService {
     return JSON.parse(response._body);
   }
 
-  private handleAPIError(error: HttpErrorResponse): any {     
-    debugger;   
+  private handleAPIError(error: HttpErrorResponse): any {         
     if (error.message)    
       return Observable.throw(error.message);
     else
