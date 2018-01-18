@@ -34,8 +34,7 @@ namespace BK
                 await _context.SaveChangesAsync();               
             }
 
-            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("email", fMember.EmailAddress));
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);            
             identity.AddClaim(new Claim("role", "user"));            
             identity.AddClaim(new Claim("memberid", fMember.MemberID.ToString()));
 
