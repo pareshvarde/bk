@@ -43,10 +43,11 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
-  private getHeader(): Headers{
+  private getHeader(): Headers{    
     const headers = new Headers(
       {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': window.localStorage.getItem('token')
       }
     );
 
@@ -57,7 +58,8 @@ export class bkDataService {
     return JSON.parse(response._body);
   }
 
-  private handleAPIError(error: HttpErrorResponse): any {        
+  private handleAPIError(error: HttpErrorResponse): any {     
+    debugger;   
     if (error.message)    
       return Observable.throw(error.message);
     else

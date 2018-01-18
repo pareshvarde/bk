@@ -16,7 +16,7 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
   formModel: changePasswordViewModel;
 
-  constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService) { 
+  constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService) {
     this.formModel = new changePasswordViewModel();
   }
 
@@ -24,27 +24,29 @@ export class ChangePasswordComponent implements OnInit {
     this.changePasswordForm = this.formBuilder.group({
       currentPassword: new FormControl('', Validators.required),
       newPassword: new FormControl('', Validators.required),
-      confirmPassword: new FormControl('', Validators.required)      
-    });    
+      confirmPassword: new FormControl('', Validators.required)
+    });
   }
 
-  changePassword(){    
+  changePassword() {  
     this.dataService.changePassword(this.formModel).subscribe(
-      (res) => {
-          this.changePasswordForm.reset();          
-          this.alertService.success("Your password has been changed.");          
+      (res) => {    
+        this.changePasswordForm.reset();    
+        this.alertService.success("Your password has been changed.");
       },
-      (err) => {
-          if (err.errors)
-              this.alertService.error(err.errors[0]);
-          else
-              this.alertService.error(err);
+      (err) => {    
+        this.changePasswordForm.reset();  
+        
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
       }
-  );
+    );
   }
 }
 
-export class changePasswordViewModel{
+export class changePasswordViewModel {
   currentPassword: string;
   newPassword: string;
 }
