@@ -28,15 +28,17 @@ export class ChangePasswordComponent implements OnInit {
     });
   }
 
-  changePassword() {  
-    this.dataService.changePassword(this.formModel).subscribe(
-      (res) => {    
-        this.changePasswordForm.reset();    
+  changePassword() {
+    (<HTMLElement>document.querySelector('input[formControlName=currentPassword]')).focus();
+
+    const tFormModel = (JSON.parse(JSON.stringify(this.formModel)));
+    this.changePasswordForm.reset();
+
+    this.dataService.changePassword(tFormModel).subscribe(
+      (res) => {      
         this.alertService.success("Your password has been changed.");
       },
-      (err) => {    
-        this.changePasswordForm.reset();  
-        
+      (err) => {        
         if (err.errors)
           this.alertService.error(err.errors[0]);
         else
