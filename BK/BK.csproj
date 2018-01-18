@@ -201,6 +201,7 @@
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\ResponseWrappingHandler.cs" />
     <Compile Include="Filters\ValidateModelStateFilter.cs" />
@@ -213,7 +214,8 @@
     <Compile Include="ResponsePackage.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\IDGenerator.cs" />
-    <Compile Include="ViewModel\Register.cs" />
+    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

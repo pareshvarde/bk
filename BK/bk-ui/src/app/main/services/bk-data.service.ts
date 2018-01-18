@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers  } from '@angular/http';
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/operator/catch';
 import { error } from 'selenium-webdriver';
+import { changePasswordViewModel } from '../content/change-password/change-password.component';
 
 @Injectable()
 export class bkDataService {
@@ -32,6 +33,23 @@ export class bkDataService {
     return this.http.get(this.API_URL + "resetPassword?password=" + password + "&token=" + token).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  changePassword(model: changePasswordViewModel)
+  {        
+    return this.http.post(this.API_URL + "changePassword", model,{headers: this.getHeader()}).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  private getHeader(): Headers{
+    const headers = new Headers(
+      {
+        'Content-Type': 'application/json'
+      }
+    );
+
+    return headers;
   }
 
   private handleAPIResponse(response: any) {

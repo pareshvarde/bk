@@ -17,7 +17,7 @@ namespace BK.Controllers
     {
         [Route("api/register")]
         [HttpPost]
-        public IHttpActionResult Register(Register register)
+        public IHttpActionResult Register(RegisterViewModel register)
         {
             //using (bkContext context = new bkContext())
             //{

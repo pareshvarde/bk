@@ -14,9 +14,10 @@ import { NotificationsService } from 'angular2-notifications';
 export class ChangePasswordComponent implements OnInit {
 
   changePasswordForm: FormGroup;
+  formModel: changePasswordViewModel;
 
   constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService) { 
-
+    this.formModel = new changePasswordViewModel();
   }
 
   ngOnInit() {
@@ -28,6 +29,23 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword(){
-
+    debugger;
+    this.dataService.changePassword(this.formModel).subscribe(
+      (res) => {
+          this.changePasswordForm.reset();          
+          this.alertService.success("Your password has been changed.");          
+      },
+      (err) => {
+          if (err.errors)
+              this.alertService.error(err.errors[0]);
+          else
+              this.alertService.error(err);
+      }
+  );
   }
+}
+
+export class changePasswordViewModel{
+  currentPassword: string;
+  newPassword: string;
 }

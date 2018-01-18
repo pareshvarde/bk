@@ -9,8 +9,8 @@ using System.Web;
 
 namespace BK.ViewModel
 {
-    [Validator(typeof(RegisterValidator))]
-    public class Register
+    [Validator(typeof(RegisterValidatorViewModel))]
+    public class RegisterViewModel
     {
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
@@ -24,9 +24,9 @@ namespace BK.ViewModel
         public bool Male { get; set; }
     }
 
-    public class RegisterValidator : AbstractValidator<Register>
+    public class RegisterValidatorViewModel : AbstractValidator<RegisterViewModel>
     {
-        public RegisterValidator()
+        public RegisterValidatorViewModel()
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
