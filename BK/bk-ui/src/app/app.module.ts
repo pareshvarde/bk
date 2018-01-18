@@ -22,6 +22,7 @@ import { TempleComponent } from './main/content/temple/temple.component';
 import { LoginComponent } from './main/content/login/login.component';
 import { ForgotPasswordComponent } from './main/content/forgotPassword/forgotPassword.component';
 import { ResetPasswordComponent } from './main/content/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './main/content/change-password/change-password.component';
 
 const appRoutes: Routes = [
     {
@@ -63,6 +64,10 @@ const appRoutes: Routes = [
     {
         path: "resetPassword/:token",
         component: ResetPasswordComponent
+    },
+    {
+        path: "changePassword",
+        component: ChangePasswordComponent
     },
     {
         path      : '**',

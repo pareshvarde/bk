@@ -27,6 +27,7 @@ import { LoginComponent } from './content/login/login.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ForgotPasswordComponent } from './content/forgotPassword/forgotPassword.component';
 import { ResetPasswordComponent } from './content/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './content/change-password/change-password.component';
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { ResetPasswordComponent } from './content/reset-password/reset-password.
         LoginComponent,
         ForgotPasswordComponent,
         AutoFocusDirective,
-        ResetPasswordComponent
+        ResetPasswordComponent,
+        ChangePasswordComponent
     ],
     imports     : [
         SharedModule,
