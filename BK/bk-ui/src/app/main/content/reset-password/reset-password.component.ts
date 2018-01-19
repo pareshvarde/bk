@@ -4,6 +4,7 @@ import { bkDataService } from '../../services/bk-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
 import { NotificationsService } from 'angular2-notifications';
+import { PasswordValidators } from 'ng2-validators'
 
 @Component({
   selector: 'app-reset-password',
@@ -21,10 +22,10 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resetPasswordForm = this.formBuilder.group({
+    this.resetPasswordForm = new FormGroup({
       newPassword: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required)      
-    });  
+    },PasswordValidators.mismatchedPasswords('newPassword','confirmPassword'));  
   }
 
   resetPassword() {

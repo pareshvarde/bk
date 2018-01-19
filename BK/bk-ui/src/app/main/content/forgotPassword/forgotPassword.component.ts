@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
@@ -18,9 +18,10 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.forgotPasswordForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.email]]
-        });        
+
+        this.forgotPasswordForm = new FormGroup({
+            email: new FormControl('', [Validators.required, Validators.email])
+        });         
     }
 
     processForgotPassword() {
