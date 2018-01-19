@@ -3,6 +3,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { FuseConfigService } from '../../core/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { bkSharedService } from '../services/shared.service';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
     selector   : 'fuse-toolbar',
@@ -23,7 +24,8 @@ export class FuseToolbarComponent
         private router: Router,
         private fuseConfig: FuseConfigService,
         private translate: TranslateService,
-        public sharedService: bkSharedService
+        private alertService: NotificationsService,
+        public sharedService: bkSharedService        
     )
     {
         this.languages = [
@@ -73,6 +75,7 @@ export class FuseToolbarComponent
     {
         let localStorage = window.localStorage;
         localStorage.removeItem('token');
-        this.router.navigate(['home']);        
+        this.router.navigate(['home']);  
+        this.alertService.success("You have been logged out from secure portal");      
     }
 }
