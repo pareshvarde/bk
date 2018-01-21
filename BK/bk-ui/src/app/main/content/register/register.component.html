@@ -1,3 +1,76 @@
-<p>
-  register works!
-</p>
+<div id="register" fxLayout="column">
+  <div id="register-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
+    <div id="register-form">
+      <div class="logo">
+        <img src="assets/images/logo_2.png">
+      </div>
+
+      <div class="title">MEMBER REGISTRATION FORM</div>
+
+      <form name="registerForm" [formGroup]="registerForm" novalidate>
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput placeholder="First Name" formControlName="firstName" bkAutofocus>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Last Name" formControlName="lastName">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Email" formControlName="email">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Phone Number" formControlName="phoneNumber">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+          </mat-form-field>
+          
+          <mat-radio-group formControlName="aadhaarNumber">
+            <mat-radio-button [value]="1">
+              Male
+            </mat-radio-button>
+            <mat-radio-button [value]="1">
+              Female
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Date Of Birth">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Address 1" formControlName="address1">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Address 2" formControlName="address2">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="City" formControlName="city">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="State" formControlName="state">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Country" formControlName="country">
+          </mat-form-field>
+
+        </div>
+
+        <button mat-raised-button (click)="processLogin()" color="accent" class="submit-button" aria-label="REGISTER" [disabled]="registerForm.invalid">
+          REGISTER
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
