@@ -7,6 +7,7 @@ import 'rxjs/add/observable/throw';
 import { error } from 'selenium-webdriver';
 import { changePasswordViewModel } from '../content/change-password/change-password.component';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
+import { registerViewModel } from '../content/register/register.component';
 
 @Injectable()
 export class bkDataService {
@@ -47,16 +48,35 @@ export class bkDataService {
   { 
     this.blockUI.start("Please wait...");
            
-    return this.http.post(this.API_URL + "changePassword", model,{headers: this.getHeader()}).map((res) =>{
+    return this.http.post(this.API_URL + "changePassword", model,{headers: this.getAuthHeader()}).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
 
-  private getHeader(): Headers{    
+  register(model: registerViewModel)
+  {
+    this.blockUI.start("Please wait...");
+           
+    return this.http.post(this.API_URL + "register", model,{headers: this.getPublicHeader()}).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  private getAuthHeader(): Headers{    
     const headers = new Headers(
       {
         'Content-Type': 'application/json',
         'Authorization': window.localStorage.getItem('token')
+      }
+    );
+
+    return headers;
+  }
+
+  private getPublicHeader(): Headers{    
+    const headers = new Headers(
+      {
+        'Content-Type': 'application/json'        
       }
     );
 

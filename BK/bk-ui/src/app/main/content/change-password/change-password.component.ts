@@ -17,7 +17,7 @@ export class ChangePasswordComponent implements OnInit {
   changePasswordForm: FormGroup;
   formModel: changePasswordViewModel;
 
-  constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService) {
+  constructor(private dataService: bkDataService, private alertService: NotificationsService) {
     this.formModel = new changePasswordViewModel();
   }
 

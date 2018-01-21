@@ -1,19 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
 import { EmailValidators, UniversalValidators } from 'ng2-validators';
+import { bkDataService } from '../../services/bk-data.service';
+import { NotificationsService } from 'angular2-notifications';
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  providers: [bkDataService]
 })
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;  
-  formModel: RegisterViewModel;
+  formModel: registerViewModel;
   
-  constructor() { 
-    this.formModel = new RegisterViewModel();
+  constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
+    this.formModel = new registerViewModel();
   }
 
   ngOnInit() {
@@ -34,11 +38,24 @@ export class RegisterComponent implements OnInit {
   }
 
   processRegistration(){
+    
+    const tFormModel = (JSON.parse(JSON.stringify(this.formModel)));    
 
+    this.dataService.register(tFormModel).subscribe(
+      (res) => {      
+        this.alertService.success("Your registration completed successfully. Please check your email for your usename and password.");
+      },
+      (err) => {        
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
   }
 }
 
-export class RegisterViewModel{
+export class registerViewModel{
   firstName: string;
   lastName: string;
   email: string;
