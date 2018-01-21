@@ -17,7 +17,7 @@ export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;  
   resetToken: string
 
-  constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService, private alertService: NotificationsService) {    
+  constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService, private alertService: NotificationsService) {    
     this.route.params.subscribe(params => this.resetToken = params.token);
   }
 

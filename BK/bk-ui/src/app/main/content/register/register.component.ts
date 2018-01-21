@@ -3,6 +3,7 @@ import { FormGroup, FormControl,Validators } from '@angular/forms';
 import { EmailValidators, UniversalValidators } from 'ng2-validators';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;  
   formModel: registerViewModel;
   
-  constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
+  constructor(private router: Router, private dataService: bkDataService, private alertService: NotificationsService) { 
     this.formModel = new registerViewModel();   
   }
 
@@ -46,7 +47,8 @@ export class RegisterComponent implements OnInit {
 
     this.dataService.register(tFormModel).subscribe(
       (res) => {      
-        this.alertService.success("Your registration completed successfully. Please check your email for your usename and password.");
+        this.alertService.success("Your registration completed successfully. Please check your email for your username and password.");
+        this.router.navigate(['login']);
       },
       (err) => {        
         if (err.errors)
