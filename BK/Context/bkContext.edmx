@@ -12,7 +12,7 @@
           <Property Name="FamilyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ParentFamilyID" Type="int" />
           <Property Name="FamilySID" Type="nvarchar" MaxLength="18" Nullable="false" />
-          <Property Name="Nukh" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NukhID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="Phone1" Type="nvarchar" MaxLength="15" />
           <Property Name="Phone2" Type="nvarchar" MaxLength="15" />
@@ -208,30 +208,6 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Family">
-          <Key>
-            <PropertyRef Name="FamilyID" />
-          </Key>
-          <Property Name="FamilyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ParentFamilyID" Type="Int32" />
-          <Property Name="FamilySID" Type="String" MaxLength="18" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Nukh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CreatedBy" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="FamilyMemberAssociations" Relationship="Self.FK_FamilyMemberAssociation_Families" FromRole="Families" ToRole="FamilyMemberAssociation" />
-          <Property Name="CategoryID" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="FamilyMemberAssociation">
           <Key>
             <PropertyRef Name="FamilyId" />
@@ -242,11 +218,11 @@
           <Property Name="HeadOfFamily" Type="Boolean" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Family" Relationship="Self.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Families" />
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <Property Name="ApprovedOn" Type="DateTime" Precision="7" />
           <Property Name="ApprovedBy" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
+          <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
         </EntityType>
         <EntityType Name="lkRelationType">
           <Key>
@@ -296,18 +272,6 @@
           <NavigationProperty Name="lkRelationType" Relationship="Self.FK_MemberRelations_lkRelationTypes" FromRole="MemberRelations" ToRole="lkRelationTypes" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_MemberRelations_Members" FromRole="MemberRelation" ToRole="Member" />
         </EntityType>
-        <Association Name="FK_FamilyMemberAssociation_Families">
-          <End Role="Families" Type="Self.Family" Multiplicity="1" />
-          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Families">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="FamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MemberRelations_lkRelationTypes">
           <End Role="lkRelationTypes" Type="Self.lkRelationType" Multiplicity="1" />
           <End Role="MemberRelations" Type="Self.MemberRelation" Multiplicity="*" />
@@ -321,15 +285,10 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="bkContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Families" EntityType="Self.Family" />
           <EntitySet Name="FamilyMemberAssociations" EntityType="Self.FamilyMemberAssociation" />
           <EntitySet Name="lkRelationTypes" EntityType="Self.lkRelationType" />
           <EntitySet Name="Matrimonials" EntityType="Self.Matrimonial" />
           <EntitySet Name="MemberRelations" EntityType="Self.MemberRelation" />
-          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="Self.FK_FamilyMemberAssociation_Families">
-            <End Role="Families" EntitySet="Families" />
-            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
-          </AssociationSet>
           <AssociationSet Name="FK_MemberRelations_lkRelationTypes" Association="Self.FK_MemberRelations_lkRelationTypes">
             <End Role="lkRelationTypes" EntitySet="lkRelationTypes" />
             <End Role="MemberRelations" EntitySet="MemberRelations" />
@@ -346,6 +305,11 @@
           <AssociationSet Name="FK_MemberRelations_Members" Association="bkModel.FK_MemberRelations_Members">
             <End Role="Member" EntitySet="Members" />
             <End Role="MemberRelation" EntitySet="MemberRelations" />
+          </AssociationSet>
+          <EntitySet Name="Families" EntityType="bkModel.Family" />
+          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="bkModel.FK_FamilyMemberAssociation_Families">
+            <End Role="Family" EntitySet="Families" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Member">
@@ -417,36 +381,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Family">
+          <Key>
+            <PropertyRef Name="FamilyID" />
+          </Key>
+          <Property Name="FamilyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentFamilyID" Type="Int32" />
+          <Property Name="FamilySID" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
+          <Property Name="NukhID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="Family" ToRole="FamilyMemberAssociation" />
+        </EntityType>
+        <Association Name="FK_FamilyMemberAssociation_Families">
+          <End Type="bkModel.Family" Role="Family" Multiplicity="1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Family">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="bkModelStoreContainer" CdmEntityContainer="bkContext">
-          <EntitySetMapping Name="Families">
-            <EntityTypeMapping TypeName="bkModel.Family">
-              <MappingFragment StoreEntitySet="Families">
-                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
-                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
-                <ScalarProperty Name="ParentFamilyID" ColumnName="ParentFamilyID" />
-                <ScalarProperty Name="FamilySID" ColumnName="FamilySID" />
-                <ScalarProperty Name="Nukh" ColumnName="Nukh" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="FamilyMemberAssociations">
             <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
               <MappingFragment StoreEntitySet="FamilyMemberAssociation">
@@ -535,6 +511,30 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MemberSID" ColumnName="MemberSID" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Families">
+            <EntityTypeMapping TypeName="bkModel.Family">
+              <MappingFragment StoreEntitySet="Families">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="NukhID" ColumnName="NukhID" />
+                <ScalarProperty Name="FamilySID" ColumnName="FamilySID" />
+                <ScalarProperty Name="ParentFamilyID" ColumnName="ParentFamilyID" />
+                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

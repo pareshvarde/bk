@@ -27,14 +27,20 @@ namespace BK.Controllers
                 if (context.Members.Any(f => f.Phone == register.PhoneNumber.Trim()))
                     return BadRequest("Phone number already registered. Please contact Administrator for help");
 
+                if (register.AadhaarNumber.HasValue)
+                    if (context.Members.Any(f => f.AadhaarNumber == register.AadhaarNumber))
+                        return BadRequest("Aadhar number already registered. Please contact Administrator for help");
+
                 Family family = new Family();
                 family.FamilySID = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
-
                 family.Address1 = register.Address1;
                 family.Address2 = register.Address2;
                 family.City = register.City;
                 family.State = register.State;
+                family.PostalCode = register.PostalCode;
                 family.Country = register.Country;
+                family.CategoryID = register.CategoryId;
+                family.NukhID = register.NukhId;                
 
                 Member member = new Member();
                 member.FirstName = register.FirstName;
@@ -44,39 +50,43 @@ namespace BK.Controllers
                 member.Phone = register.PhoneNumber;
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;
+                member.Password = System.Web.Security.Membership.GeneratePassword(8, 2);
+                member.MemberSID = IDGenerator.CreateSID(IDGenerator.Prefixes.MEMBER);
+                member.Active = true;
+
+                FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
+                fmAssociation.Member = member;
+                fmAssociation.Family = family;
+                fmAssociation.HeadOfFamily = true;
+                fmAssociation.Approved = true;                
+                fmAssociation.CreatedBy = 0;
 
                 context.Families.Add(family);
                 context.Members.Add(member);
+                context.FamilyMemberAssociations.Add(fmAssociation);
+
+                context.SaveChanges();
+
+                string templatePath = System.Web.Hosting.HostingEnvironment.MapPath("~/HtmlTemplates/welcome.html");
+                string html = File.ReadAllText(templatePath);
+
+                html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
+                html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/login/ ");
+                html = html.Replace("{{username}}", member.EmailAddress);
+                html = html.Replace("{{password}}", member.Password);
+
+                MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress);
+                mailMessage.Body = html;
+                mailMessage.IsBodyHtml = true;
+                mailMessage.Subject = "Brahmkshatriya Online Portal - Welcome Letter";
+
+                using (SmtpClient sClient = new SmtpClient())
+                {
+                    sClient.Send(mailMessage);
+                }
             }
-                //using (bkContext context = new bkContext())
-                //{
-                //    if (context.familymembers.Any(f => f.EmailAddress == register.EmailAddress.Trim()))
-                //        return BadRequest("Email address already registered");
 
-                //    List<login> logins = new List<login>();
-                //    logins.Add(new login()
-                //    {
-                //        Active = true,
-                //        Password = register.Password
-                //    });
-
-                //    family fam = new family();
-                //    fam.FamilyNumber = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
-
-                //    fam.familymembers.Add(new familymember()
-                //    {
-                //        EmailAddress = register.EmailAddress,
-                //        FirstName = register.FirstName,
-                //        LastName = register.LastName,
-                //        Gender = register.Male,
-                //        logins = logins
-                //    });
-
-                //    context.families.Add(fam);
-
-                //    context.SaveChanges();
-
-                return Ok();
+            return Ok();
         }
 
         [Route("api/isEmailAvailable")]
@@ -145,7 +155,7 @@ namespace BK.Controllers
                 member.PasswordUID = null;
                 member.Password = password;
 
-                context.SaveChanges();                
+                context.SaveChanges();
             }
 
             return Ok(true);

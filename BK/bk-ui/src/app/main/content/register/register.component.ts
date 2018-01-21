@@ -28,12 +28,14 @@ export class RegisterComponent implements OnInit {
       phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
       categoryId: new FormControl(1, [Validators.required]),
+      nukhId: new FormControl(1, [Validators.required]),
       gender: new FormControl('', null),
       dob: new FormControl('', [Validators.required]),
       address1: new FormControl('', null),
       address2: new FormControl('', null),
       city: new FormControl('', [Validators.required]),
-      state: new FormControl('', [Validators.required]),
+      postalCode: new FormControl('', [Validators.required]),
+      state: new FormControl('', [Validators.required]),      
       country: new FormControl('', [Validators.required]),
     }); 
   }

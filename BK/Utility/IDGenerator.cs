@@ -94,7 +94,8 @@ namespace BK.Utility
 
         public class Prefixes
         {
-            public const string FAMILY = "FAM";         
+            public const string FAMILY = "FAM";
+            public const string MEMBER = "MEM";
         }
     }
 }

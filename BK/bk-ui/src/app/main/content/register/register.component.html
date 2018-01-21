@@ -37,6 +37,14 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field>
+          <mat-select placeholder="Nukh" [(ngModel)]="formModel.nukhId" formControlName="nukhId">
+            <mat-option value="1">Varde</mat-option>
+            <mat-option value="2">Kiri</mat-option>
+            <mat-option value="3">Bichhada</mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-radio-group [(ngModel)]="formModel.gender" formControlName="aadhaarNumber">
           <span class="gender">Gender</span>
           <mat-radio-button [value]=true ng-checked="true">
@@ -68,6 +76,10 @@
 
         <mat-form-field>
           <input matInput [(ngModel)]="formModel.state" placeholder="State" formControlName="state">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
         </mat-form-field>
 
         <mat-form-field>

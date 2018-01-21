@@ -20,8 +20,12 @@ namespace BK.ViewModel
         public string EmailAddress { get; set; }
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
-        [JsonProperty("aadhaarNumber")]
+        [JsonProperty("aadhaarNumber")]        
         public long? AadhaarNumber { get; set; }
+        [JsonProperty("categoryId")]
+        public int CategoryId { get; set; }
+        [JsonProperty("nukhId")]
+        public int NukhId { get; set; }
         [JsonProperty("gender")]
         public bool Gender { get; set; }
         [JsonProperty("dob")]
@@ -32,6 +36,8 @@ namespace BK.ViewModel
         public string Address2 { get; set; }
         [JsonProperty("city")]
         public string City { get; set; }
+        [JsonProperty("postalCode")]       
+        public string PostalCode { get; set; }
         [JsonProperty("state")]
         public string State { get; set; }
         [JsonProperty("country")]
@@ -50,6 +56,8 @@ namespace BK.ViewModel
             RuleFor(x => x.State).NotEmpty().WithMessage("State cannot be blank");
             RuleFor(x => x.Country).NotEmpty().WithMessage("Country cannot be blank");
             RuleFor(x => x.DateOfBirth).NotEmpty().WithMessage("Date Of Birth cannot be blank");
+            RuleFor(x => x.CategoryId).NotEmpty().WithMessage("Category cannot be blank");
+            RuleFor(x => x.NukhId).NotEmpty().WithMessage("Nukh cannot be blank");
         }
     }
 }
