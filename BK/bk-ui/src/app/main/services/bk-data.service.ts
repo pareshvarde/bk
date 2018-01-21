@@ -16,11 +16,10 @@ export class bkDataService {
   constructor(private http: Http) { }
 
   login(userName: string, password: string): Observable<any> {
-    debugger;
+    
     this.blockUI.start("Please wait...");
 
-    return this.http.post(this.API_URL + "login", "username=" + userName + "&password=" + password + "&grant_type=password").map(response => {
-      debugger;
+    return this.http.post(this.API_URL + "login", "username=" + userName + "&password=" + password + "&grant_type=password").map(response => {    
       this.blockUI.stop();
       return response;
     }).catch((error: any) => this.handleAPIError(error));      
@@ -63,6 +62,8 @@ export class bkDataService {
   }
 
   private handleAPIError(error: HttpErrorResponse): any {         
+    this.blockUI.stop();
+    
     if (error.message)    
       return Observable.throw(error.message);
     else
