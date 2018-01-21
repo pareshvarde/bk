@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   formModel: registerViewModel;
   
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
-    this.formModel = new registerViewModel();
+    this.formModel = new registerViewModel();   
   }
 
   ngOnInit() {
@@ -25,15 +25,16 @@ export class RegisterComponent implements OnInit {
       firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
       lastName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
       email: new FormControl('', [EmailValidators.normal,Validators.required]),
-      phoneNumber: new FormControl('', [UniversalValidators.isNumber]),
+      phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
-      gender: new FormControl(1, null),
+      categoryId: new FormControl(1, [EmailValidators.normal,Validators.required]),
+      gender: new FormControl('', null),
       dob: new FormControl('', [Validators.required]),
       address1: new FormControl('', null),
       address2: new FormControl('', null),
       city: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),
-      country: new FormControl('India', [Validators.required]),
+      country: new FormControl('', [Validators.required]),
     }); 
   }
 

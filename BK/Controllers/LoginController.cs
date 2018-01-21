@@ -19,35 +19,64 @@ namespace BK.Controllers
         [HttpPost]
         public IHttpActionResult Register(RegisterViewModel register)
         {
-            //using (bkContext context = new bkContext())
-            //{
-            //    if (context.familymembers.Any(f => f.EmailAddress == register.EmailAddress.Trim()))
-            //        return BadRequest("Email address already registered");
+            using (bkContext context = new bkContext())
+            {
+                if (context.Members.Any(f => f.EmailAddress == register.EmailAddress.Trim()))
+                    return BadRequest("Email address already registered. Please use forgot password on login page to recover your account");
 
-            //    List<login> logins = new List<login>();
-            //    logins.Add(new login()
-            //    {
-            //        Active = true,
-            //        Password = register.Password
-            //    });
+                if (context.Members.Any(f => f.Phone == register.PhoneNumber.Trim()))
+                    return BadRequest("Phone number already registered. Please contact Administrator for help");
 
-            //    family fam = new family();
-            //    fam.FamilyNumber = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
+                Family family = new Family();
+                family.FamilySID = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
 
-            //    fam.familymembers.Add(new familymember()
-            //    {
-            //        EmailAddress = register.EmailAddress,
-            //        FirstName = register.FirstName,
-            //        LastName = register.LastName,
-            //        Gender = register.Male,
-            //        logins = logins
-            //    });
+                family.Address1 = register.Address1;
+                family.Address2 = register.Address2;
+                family.City = register.City;
+                family.State = register.State;
+                family.Country = register.Country;
 
-            //    context.families.Add(fam);
+                Member member = new Member();
+                member.FirstName = register.FirstName;
+                member.LastName = register.LastName;
+                member.DOB = register.DateOfBirth;
+                member.EmailAddress = register.EmailAddress;
+                member.Phone = register.PhoneNumber;
+                member.AadhaarNumber = register.AadhaarNumber;
+                member.Gender = register.Gender;
 
-            //    context.SaveChanges();
+                context.Families.Add(family);
+                context.Members.Add(member);
+            }
+                //using (bkContext context = new bkContext())
+                //{
+                //    if (context.familymembers.Any(f => f.EmailAddress == register.EmailAddress.Trim()))
+                //        return BadRequest("Email address already registered");
 
-            return Ok();
+                //    List<login> logins = new List<login>();
+                //    logins.Add(new login()
+                //    {
+                //        Active = true,
+                //        Password = register.Password
+                //    });
+
+                //    family fam = new family();
+                //    fam.FamilyNumber = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
+
+                //    fam.familymembers.Add(new familymember()
+                //    {
+                //        EmailAddress = register.EmailAddress,
+                //        FirstName = register.FirstName,
+                //        LastName = register.LastName,
+                //        Gender = register.Male,
+                //        logins = logins
+                //    });
+
+                //    context.families.Add(fam);
+
+                //    context.SaveChanges();
+
+                return Ok();
         }
 
         [Route("api/isEmailAvailable")]

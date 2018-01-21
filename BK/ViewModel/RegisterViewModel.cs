@@ -21,11 +21,11 @@ namespace BK.ViewModel
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
         [JsonProperty("aadhaarNumber")]
-        public string AadhaarNumber { get; set; }
+        public long? AadhaarNumber { get; set; }
         [JsonProperty("gender")]
         public bool Gender { get; set; }
         [JsonProperty("dob")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         [JsonProperty("address1")]
         public string Address1 { get; set; }
         [JsonProperty("address2")]
@@ -45,7 +45,11 @@ namespace BK.ViewModel
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
-            RuleFor(x => x.EmailAddress).NotEmpty().WithMessage("Email address cannot be blank").EmailAddress().WithMessage("Invalid email address");            
+            RuleFor(x => x.EmailAddress).NotEmpty().WithMessage("Email address cannot be blank").EmailAddress().WithMessage("Invalid email address");
+            RuleFor(x => x.City).NotEmpty().WithMessage("City cannot be blank");
+            RuleFor(x => x.State).NotEmpty().WithMessage("State cannot be blank");
+            RuleFor(x => x.Country).NotEmpty().WithMessage("Country cannot be blank");
+            RuleFor(x => x.DateOfBirth).NotEmpty().WithMessage("Date Of Birth cannot be blank");
         }
     }
 }
