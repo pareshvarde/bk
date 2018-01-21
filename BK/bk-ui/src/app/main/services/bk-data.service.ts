@@ -27,6 +27,8 @@ export class bkDataService {
 
   sendResetPasswordEmail(emailAddress: string) {
 
+    this.blockUI.start("Please wait...");
+
     return this.http.get(this.API_URL + "sendResetPasswordEmail?emailAddress=" + emailAddress).map((res) => {
       return this.handleAPIResponse(res);
     }).catch((error: any) => this.handleAPIError(error));
@@ -34,13 +36,17 @@ export class bkDataService {
 
   resetPassword(password: string, token: string)
   {
+    this.blockUI.start("Please wait...");
+
     return this.http.get(this.API_URL + "resetPassword?password=" + password + "&token=" + token).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
 
   changePassword(model: changePasswordViewModel)
-  {        
+  { 
+    this.blockUI.start("Please wait...");
+           
     return this.http.post(this.API_URL + "changePassword", model,{headers: this.getHeader()}).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
@@ -58,6 +64,7 @@ export class bkDataService {
   }
 
   private handleAPIResponse(response: any) {    
+    this.blockUI.stop();
     return JSON.parse(response._body);
   }
 

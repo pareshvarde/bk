@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, UrlSerializer } from '@angular/router';
 import 'hammerjs';
 import { SharedModule } from './core/modules/shared.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import { FuseNavigationService } from './core/components/navigation/navigation.s
 import { TranslateModule } from '@ngx-translate/core';
 import { bkRoutes } from './app.routes'
 import { BlockUIModule } from 'ng-block-ui';
+import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,11 @@ import { BlockUIModule } from 'ng-block-ui';
     providers   : [
         FuseSplashScreenService,
         FuseConfigService,
-        FuseNavigationService        
+        FuseNavigationService,
+        {
+            provide: UrlSerializer,
+            useClass: LowerCaseUrlSerializer
+        }
     ],
     bootstrap   : [
         AppComponent
