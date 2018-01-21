@@ -18,6 +18,7 @@
     [WorkingWith]      NVARCHAR (50)    NULL,
     [JobTitle]         NVARCHAR (50)    NULL,
     [EmailAddress]     NVARCHAR (100)   NULL,
+    [AadhaarNumber]    BIGINT           NULL,
     [InstagramHandle]  NVARCHAR (50)    NULL,
     [FacebookHandle]   NVARCHAR (50)    NULL,
     [TwitterHandle]    NVARCHAR (50)    NULL,
@@ -32,4 +33,6 @@
     [ModifiedBy]       INT              NULL,
     CONSTRAINT [PK_FamilyMembers_1] PRIMARY KEY CLUSTERED ([MemberID] ASC)
 );
+
+
 
