@@ -29,18 +29,12 @@ namespace BK.Context
         public string NickName { get; set; }
         public bool Gender { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
-        public bool UseFamilyAddress { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string PostalCode { get; set; }
-        public string Country { get; set; }
         public string EducationLevel { get; set; }
         public string EducationField { get; set; }
         public string WorkingWith { get; set; }
         public string JobTitle { get; set; }
         public string EmailAddress { get; set; }
+        public Nullable<long> AadhaarNumber { get; set; }
         public string InstagramHandle { get; set; }
         public string FacebookHandle { get; set; }
         public string TwitterHandle { get; set; }

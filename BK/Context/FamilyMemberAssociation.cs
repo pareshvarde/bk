@@ -19,6 +19,9 @@ namespace BK.Context
         public bool HeadOfFamily { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
+        public bool Approved { get; set; }
+        public Nullable<System.DateTime> ApprovedOn { get; set; }
+        public Nullable<System.DateTime> ApprovedBy { get; set; }
     
         public virtual Family Family { get; set; }
         public virtual Member Member { get; set; }

@@ -3,7 +3,7 @@
     [ParentFamilyID] INT            NULL,
     [FamilySID]      NVARCHAR (18)  NOT NULL,
     [Nukh]           NVARCHAR (50)  NOT NULL,
-    [Category]       NVARCHAR (50)  NOT NULL,
+    [CategoryID]       INT  NOT NULL,
     [Phone1]         NVARCHAR (15)  NULL,
     [Phone2]         NVARCHAR (15)  NULL,
     [Address1]       NVARCHAR (50)  NOT NULL,

@@ -24,7 +24,6 @@ namespace BK.Context
         public Nullable<int> ParentFamilyID { get; set; }
         public string FamilySID { get; set; }
         public string Nukh { get; set; }
-        public string Category { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Address1 { get; set; }
@@ -38,6 +37,7 @@ namespace BK.Context
         public System.DateTime CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        public int CategoryID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }

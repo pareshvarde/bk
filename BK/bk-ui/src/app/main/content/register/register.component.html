@@ -30,10 +30,10 @@
         </mat-form-field>
 
         <mat-form-field>
-          <mat-select [(value)]="selected" [(ngModel)]="formModel.categoryId">
-            <mat-option value="option1">Marwari</mat-option>
-            <mat-option value="option2">Gujarati</mat-option>
-            <mat-option value="option3">Punjabi</mat-option>
+          <mat-select placeholder="Category" [(ngModel)]="formModel.categoryId" formControlName="categoryId">
+            <mat-option value="1">Marwari</mat-option>
+            <mat-option value="2">Gujarati</mat-option>
+            <mat-option value="3">Punjabi</mat-option>
           </mat-select>
         </mat-form-field>
 
