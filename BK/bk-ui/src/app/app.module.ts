@@ -13,6 +13,7 @@ import { FuseConfigService } from './core/services/config.service';
 import { FuseNavigationService } from './core/components/navigation/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { bkRoutes } from './app.routes'
+import { BlockUIModule } from 'ng-block-ui';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { bkRoutes } from './app.routes'
         RouterModule.forRoot(bkRoutes, { useHash: true }),
         SharedModule,
         TranslateModule.forRoot(),
-        FuseMainModule        
+        FuseMainModule,
+        BlockUIModule
     ],
     providers   : [
         FuseSplashScreenService,
