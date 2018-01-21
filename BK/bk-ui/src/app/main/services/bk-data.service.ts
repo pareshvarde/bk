@@ -61,12 +61,12 @@ export class bkDataService {
     return JSON.parse(response._body);
   }
 
-  private handleAPIError(error: HttpErrorResponse): any {         
+  private handleAPIError(error: any): any {         
     this.blockUI.stop();
-    
+
     if (error.message)    
       return Observable.throw(error.message);
     else
-      return Observable.throw(JSON.parse((<any>error)._body))
+      return Observable.throw(JSON.parse(error._body));
   };
 }

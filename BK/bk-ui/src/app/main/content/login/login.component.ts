@@ -51,9 +51,8 @@ export class LoginComponent implements OnInit {
           this.alertService.error('Login Failed', err.message);        
           return;
         }
-
-        let error = JSON.parse((<any>err)._body)        
-        this.alertService.error('Login Failed', error.error_description);        
+              
+        this.alertService.error('Login Failed', err.error_description);        
       }
     );    
   }
