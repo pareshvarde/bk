@@ -31,8 +31,8 @@ export class RegisterComponent implements OnInit {
       email: new FormControl('', [EmailValidators.normal,Validators.required]),
       phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
-      categoryId: new FormControl(1, [Validators.required]),
-      nukhId: new FormControl(1, [Validators.required]),
+      categoryId: new FormControl('', [Validators.required]),
+      nukhId: new FormControl('', [Validators.required]),
       gender: new FormControl('', null),
       dob: new FormControl('', [Validators.required]),
       address1: new FormControl('', null),
@@ -69,11 +69,14 @@ export class registerViewModel{
   email: string;
   phoneNumber: number;
   aadhaarNumber: number;
+  categoryId: number;
+  nukhId: number;
   gender: boolean;
   dob: Date;
   address1: string;
   address2: string;
   city: string;
+  postalCode: string;
   state: string;
   country: string;
 }
