@@ -15,6 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { bkRoutes } from './app.routes'
 import { BlockUIModule } from 'ng-block-ui';
 import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
         {
             provide: UrlSerializer,
             useClass: LowerCaseUrlSerializer
-        }
+        },
+        {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
     ],
     bootstrap   : [
         AppComponent
