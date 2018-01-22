@@ -37,7 +37,6 @@
           </mat-select>
         </mat-form-field>
 
-
         <mat-form-field>
           <mat-select placeholder="Nukh" [(ngModel)]="formModel.nukhId" formControlName="nukhId">
             <mat-option *ngFor="let n of nukhs.data" [value]="n.id">
@@ -46,7 +45,7 @@
           </mat-select>
         </mat-form-field>
 
-        <mat-radio-group [(ngModel)]="formModel.gender" formControlName="aadhaarNumber">
+        <mat-radio-group [(ngModel)]="formModel.gender" formControlName="gender">
           <span class="gender">Gender</span>
           <mat-radio-button [value]=true ng-checked="true">
             Male
