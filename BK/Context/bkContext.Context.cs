@@ -29,7 +29,7 @@ namespace BK.Context
         public virtual DbSet<lkRelationType> lkRelationTypes { get; set; }
         public virtual DbSet<Matrimonial> Matrimonials { get; set; }
         public virtual DbSet<MemberRelation> MemberRelations { get; set; }
-        public virtual DbSet<Member> Members { get; set; }
         public virtual DbSet<Family> Families { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
     }
 }

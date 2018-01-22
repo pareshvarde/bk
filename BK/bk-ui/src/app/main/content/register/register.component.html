@@ -49,14 +49,17 @@
             </mat-select>
           </mat-form-field>
         </div>
+        <span class="gender">Gender</span>
         <div fxLayout="row" fxLayoutWrap>
-          <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="formModel.gender" formControlName="gender">
-            <span class="gender">Gender</span>
-            <mat-radio-button class="mr-8" [value]=true ng-checked="true">
+          <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="formModel.gender" formControlName="gender">            
+            <mat-radio-button class="mr-8" value='M'>
               Male
             </mat-radio-button>
-            <mat-radio-button class="mr-8" [value]=false>
+            <mat-radio-button class="mr-8" value='F'>
               Female
+            </mat-radio-button>
+            <mat-radio-button class="mr-8" value='O'>
+              Other
             </mat-radio-button>
           </mat-radio-group>
 

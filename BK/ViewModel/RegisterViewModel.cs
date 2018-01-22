@@ -27,7 +27,7 @@ namespace BK.ViewModel
         [JsonProperty("nukhId")]
         public int NukhId { get; set; }
         [JsonProperty("gender")]
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
         [JsonProperty("dob")]
         public DateTime? DateOfBirth { get; set; }
         [JsonProperty("address1")]

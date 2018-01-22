@@ -27,7 +27,7 @@ namespace BK.Context
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string NickName { get; set; }
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string EducationLevel { get; set; }
         public string EducationField { get; set; }

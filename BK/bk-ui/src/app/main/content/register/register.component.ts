@@ -22,8 +22,9 @@ export class RegisterComponent implements OnInit {
     private alertService: NotificationsService, public nukhs: NukhData, public categories:CategoryData) 
   {         
     this.formModel = new registerViewModel();
+    this.formModel.gender = "M";
   }
-  
+
   ngOnInit() {
     this.registerForm = new FormGroup({      
       firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
@@ -33,7 +34,7 @@ export class RegisterComponent implements OnInit {
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
       categoryId: new FormControl('', [Validators.required]),
       nukhId: new FormControl('', [Validators.required]),
-      gender: new FormControl('', null),
+      gender: new FormControl('M', null),
       dob: new FormControl('', [Validators.required]),
       address1: new FormControl('', null),
       address2: new FormControl('', null),
@@ -71,7 +72,7 @@ export class registerViewModel{
   aadhaarNumber: number;
   categoryId: number;
   nukhId: number;
-  gender: boolean;
+  gender: string;
   dob: Date;
   address1: string;
   address2: string;

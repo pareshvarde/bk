@@ -23,7 +23,7 @@ namespace BK.Context
         public Nullable<System.DateTime> ApprovedOn { get; set; }
         public Nullable<System.DateTime> ApprovedBy { get; set; }
     
-        public virtual Member Member { get; set; }
         public virtual Family Family { get; set; }
+        public virtual Member Member { get; set; }
     }
 }

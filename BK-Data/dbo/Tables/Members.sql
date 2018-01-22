@@ -4,7 +4,7 @@
     [FirstName]        NVARCHAR (50)    NOT NULL,
     [LastName]         NVARCHAR (50)    NOT NULL,
     [NickName]         NVARCHAR (50)    NULL,
-    [Gender]           BIT              CONSTRAINT [DF_FamilyMembers_Gender] DEFAULT ((1)) NOT NULL,
+    [Gender]           CHAR              CONSTRAINT [DF_FamilyMembers_Gender] DEFAULT ((1)) NOT NULL,
     [DOB]              DATETIME2 (7)    NULL,
     [EducationLevel]   NVARCHAR (50)    NULL,
     [EducationField]   NVARCHAR (50)    NULL,
