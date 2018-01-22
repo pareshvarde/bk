@@ -10,7 +10,7 @@ export class NukhModel {
 @Injectable()
 export class NukhData
 {
-    data: NukhModel[] = [
+    public data: NukhModel[] = [
         {id:1, nukh: 'Amariya'},
         {id:2, nukh: 'Arora'},
         {id:3, nukh: 'Ashra'},

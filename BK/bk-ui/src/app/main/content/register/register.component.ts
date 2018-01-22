@@ -19,11 +19,11 @@ export class RegisterComponent implements OnInit {
   formModel: registerViewModel;    
 
   constructor(private router: Router, private dataService: bkDataService, 
-    private alertService: NotificationsService, private nukhs: NukhData, private categories:CategoryData) 
-  {     
+    private alertService: NotificationsService, public nukhs: NukhData, public categories:CategoryData) 
+  {         
     this.formModel = new registerViewModel();
   }
-
+  
   ngOnInit() {
     this.registerForm = new FormGroup({      
       firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),

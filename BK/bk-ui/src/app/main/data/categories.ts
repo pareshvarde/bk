@@ -10,7 +10,7 @@ export class CategoryModel {
 @Injectable()
 export class CategoryData
 {
-    data: CategoryModel[] = [
+    public data: CategoryModel[] = [
         {id:1, category: 'Gujarati'},
         {id:2, category: 'Marwari'},
         {id:3, category: 'Punjabi'},
