@@ -25,15 +25,12 @@ namespace BK.Context
         public string FamilySID { get; set; }
         public int NukhID { get; set; }
         public int CategoryID { get; set; }
-        public string Phone1 { get; set; }
-        public string Phone2 { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public string Website { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public System.DateTime CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }

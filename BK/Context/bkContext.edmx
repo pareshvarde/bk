@@ -14,15 +14,12 @@
           <Property Name="FamilySID" Type="nvarchar" MaxLength="18" Nullable="false" />
           <Property Name="NukhID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="Phone1" Type="nvarchar" MaxLength="15" />
-          <Property Name="Phone2" Type="nvarchar" MaxLength="15" />
           <Property Name="Address1" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Address2" Type="nvarchar" MaxLength="50" />
           <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PostalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
-          <Property Name="Website" Type="nvarchar" MaxLength="100" />
           <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CreatedBy" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
@@ -390,15 +387,12 @@
           <Property Name="FamilySID" Type="String" Nullable="false" MaxLength="18" FixedLength="false" Unicode="true" />
           <Property Name="NukhID" Type="Int32" Nullable="false" />
           <Property Name="CategoryID" Type="Int32" Nullable="false" />
-          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Address1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CreatedBy" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
@@ -521,15 +515,12 @@
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="Address2" ColumnName="Address2" />
                 <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
                 <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
                 <ScalarProperty Name="NukhID" ColumnName="NukhID" />
                 <ScalarProperty Name="FamilySID" ColumnName="FamilySID" />
