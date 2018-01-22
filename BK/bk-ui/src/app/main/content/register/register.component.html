@@ -31,17 +31,18 @@
 
         <mat-form-field>
           <mat-select placeholder="Category" [(ngModel)]="formModel.categoryId" formControlName="categoryId">
-            <mat-option value="1">Marwari</mat-option>
-            <mat-option value="2">Gujarati</mat-option>
-            <mat-option value="3">Punjabi</mat-option>
+              <mat-option *ngFor="let n of categories.data" [value]="n.id">
+                  {{ n.category }}
+                </mat-option>
           </mat-select>
         </mat-form-field>
 
+
         <mat-form-field>
           <mat-select placeholder="Nukh" [(ngModel)]="formModel.nukhId" formControlName="nukhId">
-            <mat-option value="1">Varde</mat-option>
-            <mat-option value="2">Kiri</mat-option>
-            <mat-option value="3">Bichhada</mat-option>
+            <mat-option *ngFor="let n of nukhs.data" [value]="n.id">
+              {{ n.nukh }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
 

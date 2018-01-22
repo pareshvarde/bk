@@ -4,21 +4,24 @@ import { EmailValidators, UniversalValidators } from 'ng2-validators';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Router } from '@angular/router';
-
+import { NukhData }  from '../../data/nukhs';
+import { CategoryData }  from '../../data/categories';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  providers: [bkDataService]
+  providers: [bkDataService, NukhData, CategoryData]
 })
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;  
-  formModel: registerViewModel;
-  
-  constructor(private router: Router, private dataService: bkDataService, private alertService: NotificationsService) { 
-    this.formModel = new registerViewModel();   
+  formModel: registerViewModel;    
+
+  constructor(private router: Router, private dataService: bkDataService, 
+    private alertService: NotificationsService, private nukhs: NukhData, private categories:CategoryData) 
+  {     
+    this.formModel = new registerViewModel();
   }
 
   ngOnInit() {
