@@ -9,83 +9,91 @@
 
       <form name="registerForm" [formGroup]="registerForm" novalidate>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
-        </mat-form-field>
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.lastName" placeholder="Last Name" formControlName="lastName">
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.lastName" placeholder="Last Name" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.email" placeholder="Email" formControlName="email">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.email" placeholder="Email" formControlName="email">
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+          </mat-form-field>
+        </div>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
-        </mat-form-field>
-
-        <mat-form-field>
-          <mat-select placeholder="Category" [(ngModel)]="formModel.categoryId" formControlName="categoryId">
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <mat-select placeholder="Category" [(ngModel)]="formModel.categoryId" formControlName="categoryId">
               <mat-option *ngFor="let n of categories.data" [value]="n.id">
-                  {{ n.category }}
-                </mat-option>
-          </mat-select>
-        </mat-form-field>
+                {{ n.category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-select placeholder="Nukh" [(ngModel)]="formModel.nukhId" formControlName="nukhId">
-            <mat-option *ngFor="let n of nukhs.data" [value]="n.id">
-              {{ n.nukh }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Nukh" [(ngModel)]="formModel.nukhId" formControlName="nukhId">
+              <mat-option *ngFor="let n of nukhs.data" [value]="n.id">
+                {{ n.nukh }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="formModel.gender" formControlName="gender">
+            <span class="gender">Gender</span>
+            <mat-radio-button class="mr-8" [value]=true ng-checked="true">
+              Male
+            </mat-radio-button>
+            <mat-radio-button class="mr-8" [value]=false>
+              Female
+            </mat-radio-button>
+          </mat-radio-group>
 
-        <mat-radio-group [(ngModel)]="formModel.gender" formControlName="gender">
-          <span class="gender">Gender</span>
-          <mat-radio-button [value]=true ng-checked="true">
-            Male
-          </mat-radio-button>
-          <mat-radio-button [value]=false>
-            Female
-          </mat-radio-button>
-        </mat-radio-group>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
+              formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.address1" placeholder="Address 1" formControlName="address1">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
-            formControlName="dob">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.address2" placeholder="Address 2" formControlName="address2">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.address1" placeholder="Address 1" formControlName="address1">
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.city" placeholder="City" formControlName="city">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.address2" placeholder="Address 2" formControlName="address2">
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.state" placeholder="State" formControlName="state">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.city" placeholder="City" formControlName="city">
-        </mat-form-field>
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
+          </mat-form-field>
 
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.state" placeholder="State" formControlName="state">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput [(ngModel)]="formModel.country" placeholder="Country" formControlName="country">
-        </mat-form-field>
-
+          <mat-form-field>
+            <input matInput [(ngModel)]="formModel.country" placeholder="Country" formControlName="country">
+          </mat-form-field>
+        </div>
         <button mat-raised-button (click)="processRegistration()" color="accent" class="submit-button" aria-label="REGISTER" [disabled]="registerForm.invalid">
           REGISTER
         </button>
