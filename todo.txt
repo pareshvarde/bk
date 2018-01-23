@@ -1,0 +1,11 @@
+password strength
+	reset password	
+	change password
+	
+remember me
+	login page (refresh token?)
+	
+register
+	validation
+	
+route guard 
