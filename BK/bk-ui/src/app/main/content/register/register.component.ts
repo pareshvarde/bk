@@ -6,6 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { Router } from '@angular/router';
 import { NukhData }  from '../../data/nukhs';
 import { CategoryData }  from '../../data/categories';
+import { RegisterModel } from '../../models/registerModel';
 
 @Component({
   selector: 'app-register',
@@ -15,13 +16,13 @@ import { CategoryData }  from '../../data/categories';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm: FormGroup;  
-  formModel: registerViewModel;    
+  registerForm: FormGroup;
+  formModel: RegisterModel;    
 
   constructor(private router: Router, private dataService: bkDataService, 
     private alertService: NotificationsService, public nukhs: NukhData, public categories:CategoryData) 
   {         
-    this.formModel = new registerViewModel();
+    this.formModel = new RegisterModel();
     this.formModel.gender = "M";
   }
 
@@ -62,22 +63,4 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-}
-
-export class registerViewModel{
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: number;
-  aadhaarNumber: number;
-  categoryId: number;
-  nukhId: number;
-  gender: string;
-  dob: Date;
-  address1: string;
-  address2: string;
-  city: string;
-  postalCode: string;
-  state: string;
-  country: string;
 }

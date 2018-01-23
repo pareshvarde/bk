@@ -7,7 +7,7 @@ import 'rxjs/add/observable/throw';
 import { error } from 'selenium-webdriver';
 import { changePasswordViewModel } from '../content/change-password/change-password.component';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
-import { registerViewModel } from '../content/register/register.component';
+import { RegisterModel } from '../models/registerModel';
 
 @Injectable()
 export class bkDataService {
@@ -53,7 +53,7 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
-  register(model: registerViewModel)
+  register(model: RegisterModel)
   {
     this.blockUI.start("Please wait...");
            
