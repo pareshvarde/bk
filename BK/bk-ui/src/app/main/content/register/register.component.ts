@@ -47,9 +47,9 @@ export class RegisterComponent implements OnInit {
 
   processRegistration(){
     
-    const tFormModel = (JSON.parse(JSON.stringify(this.formModel)));    
+    this.formModel.dob.setMinutes(this.formModel.dob.getMinutes() - this.formModel.dob.getTimezoneOffset())
 
-    this.dataService.register(tFormModel).subscribe(
+    this.dataService.register(this.formModel).subscribe(
       (res) => {      
         this.alertService.success("Your registration completed successfully. Please check your email for your username and password.");
         this.router.navigate(['login']);
