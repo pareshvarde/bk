@@ -214,6 +214,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\IDGenerator.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModel\ProfileViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

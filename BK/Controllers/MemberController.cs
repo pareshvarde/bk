@@ -32,5 +32,37 @@ namespace BK.Controllers
 
             return Ok(true);
         }
+
+        [Route("api/getProfile")]
+        [HttpGet]
+        public IHttpActionResult GetProfile()
+        {
+            using (bkContext context = new bkContext())
+            {
+                Member member = context.Members.Where(x => x.MemberID == LoggedInMemberId).FirstOrDefault();
+                if (member == null)
+                    return BadRequest("Your record cannot be loaded. Please try again or contact Administrator for help");
+
+                ProfileViewModel vm = new ProfileViewModel() {
+                    FirstName = member.FirstName,
+                    LastName = member.LastName,
+                    NickName = member.NickName,
+                    Email = member.EmailAddress,
+                    PhoneNumber = member.Phone,
+                    AadhaarNumber = member.AadhaarNumber,
+                    Gender = member.Gender,
+                    DOB = member.DOB,
+                    EducationLevel = member.EducationLevel,
+                    EducationField = member.EducationField,
+                    CompanyName = member.WorkingWith,
+                    JobTitle = member.JobTitle,
+                    InstagramHandle = member.InstagramHandle,
+                    FacebookHandle = member.FacebookHandle,
+                    TwitterHandle = member.TwitterHandle
+                };
+                                   
+                return Ok(vm);
+            }
+        }
     }
 }
