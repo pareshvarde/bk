@@ -36,7 +36,7 @@
             <div *ngIf="sharedService.authenticated()" class="toolbar-separator"></div>
 
             <mat-menu #userMenu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item routerLink="profile">
                     <mat-icon>account_circle</mat-icon>
                     <span>My Profile</span>
                 </button>

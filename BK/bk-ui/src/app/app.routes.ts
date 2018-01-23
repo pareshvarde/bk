@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './main/content/forgotPassword/forgotPas
 import { ResetPasswordComponent } from './main/content/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './main/content/change-password/change-password.component';
 import { RegisterComponent } from './main/content/register/register.component';
+import { ProfileComponent } from './main/content/profile/profile.component';
 
 export const bkRoutes: Routes = [
     {
@@ -60,6 +61,10 @@ export const bkRoutes: Routes = [
     {
         path: "register",
         component: RegisterComponent
+    },
+    {
+        path: "profile",
+        component: ProfileComponent
     },
     {
         path      : '**',
