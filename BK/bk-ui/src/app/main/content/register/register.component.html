@@ -7,6 +7,16 @@
 
       <div class="title">MEMBER REGISTRATION FORM</div>
 
+      <div class="information" fxLayout="column" fxLayoutAlign="top left">
+        <ol>
+          <li>Please provide correct email address. You will receive your login information on provided email address</li>          
+          <li>Try to provide both Phone number and Aadhaar number to keep you unique in the system</li>
+          <li>This registration will create a new family for you (Head Of Family as you). If you want to be a member of existing family please ask them
+            to add you with your email address</li>
+        </ol>
+      </div>
+      <br/>
+
       <form name="registerForm" [formGroup]="registerForm" novalidate>
 
         <div fxLayout="row" fxLayoutWrap>
@@ -51,7 +61,7 @@
         </div>
         <span class="gender">Gender</span>
         <div fxLayout="row" fxLayoutWrap>
-          <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="formModel.gender" formControlName="gender">            
+          <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="formModel.gender" formControlName="gender">
             <mat-radio-button class="mr-8" value='M'>
               Male
             </mat-radio-button>

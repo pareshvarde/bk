@@ -19,10 +19,14 @@
                 padding: 16px;
             }
 
+            .information{
+                text-align: left !important;
+            }
+
             #register-form {
           
-                padding-left: 32px;
-                padding-right: 32px;
+                padding-left: 15px;
+                padding-right: 15px;
                 background: #FFFFFF;
                 text-align: center;
                 @include mat-elevation(7);
