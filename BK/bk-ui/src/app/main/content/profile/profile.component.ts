@@ -67,7 +67,19 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfile(){
-
+    
+    this.dataService.saveProfile(this.model).subscribe(
+      (res) => {      
+        this.alertService.success("Profile has been updated successfully.");        
+        this.cancelEdit();
+      },
+      (err) => {        
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
   }
 
   cancelEdit(){

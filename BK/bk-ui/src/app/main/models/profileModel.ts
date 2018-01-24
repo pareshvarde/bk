@@ -1,4 +1,5 @@
 export class ProfileModel {
+    memberId: number;
     firstName: string;
     lastName: string;
     nickName: string;

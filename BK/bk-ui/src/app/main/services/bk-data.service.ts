@@ -8,6 +8,7 @@ import { error } from 'selenium-webdriver';
 import { changePasswordViewModel } from '../content/change-password/change-password.component';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
 import { RegisterModel } from '../models/registerModel';
+import { ProfileModel } from '../models/profileModel';
 
 @Injectable()
 export class bkDataService {
@@ -66,6 +67,14 @@ export class bkDataService {
     this.blockUI.start("Please wait...");
 
     return this.http.get(this.API_URL + "getProfile", {headers: this.getAuthHeader()}).map((res)=>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  saveProfile(model: ProfileModel){
+    this.blockUI.start("Please wait...");
+           
+    return this.http.post(this.API_URL + "saveProfile", model,{headers: this.getAuthHeader()}).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

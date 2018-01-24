@@ -8,6 +8,8 @@ namespace BK.ViewModel
 {
     public class ProfileViewModel
     {
+        [JsonProperty("memberId")]
+        public int MemberID { get; set; }
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
         [JsonProperty("lastName")]
