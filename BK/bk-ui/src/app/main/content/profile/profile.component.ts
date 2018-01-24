@@ -48,10 +48,10 @@ export class ProfileComponent implements OnInit {
     }); 
         
     this.profileForm.disable();
-    this.loadProfile();
+    this.loadMember();
   }
 
-  loadProfile()
+  loadMember()
   {
     return this.dataService.getMember().subscribe(
       (res) => {        
@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
     );    
   }
 
-  saveProfile(){
+  saveMember(){
     
     if (this.model.dob && this.profileForm.controls['dob'].dirty)    
       this.model.dob.setMinutes(this.model.dob.getMinutes() - this.model.dob.getTimezoneOffset());    
@@ -76,7 +76,7 @@ export class ProfileComponent implements OnInit {
 
     this.dataService.saveMember(this.model).subscribe(
       (res) => {      
-        this.alertService.success("Profile has been updated.");        
+        this.alertService.success("Member details has been updated.");        
         this.cancelEdit();
       },
       (err) => {        

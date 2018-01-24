@@ -112,7 +112,7 @@
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="top center">
-        <button *ngIf="editMode" mat-raised-button (click)="saveProfile()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="profileForm.invalid">
+        <button *ngIf="editMode" mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="profileForm.invalid">
           SAVE
         </button>
         <button *ngIf="editMode" mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
