@@ -1,4 +1,4 @@
-export class ProfileModel {
+export class MemberModel {
     memberId: number;
     firstName: string;
     lastName: string;

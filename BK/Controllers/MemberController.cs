@@ -33,9 +33,9 @@ namespace BK.Controllers
             return Ok(true);
         }
 
-        [Route("api/getProfile")]
+        [Route("api/getMember")]
         [HttpGet]
-        public IHttpActionResult GetProfile()
+        public IHttpActionResult GetMember()
         {
             using (bkContext context = new bkContext())
             {
@@ -43,7 +43,7 @@ namespace BK.Controllers
                 if (member == null)
                     return BadRequest("Your record cannot be loaded. Please try again or contact Administrator for help");
 
-                ProfileViewModel vm = new ProfileViewModel() {
+                MemberViewModel vm = new MemberViewModel() {
                     MemberID = member.MemberID,
                     FirstName = member.FirstName,
                     LastName = member.LastName,
@@ -70,9 +70,9 @@ namespace BK.Controllers
             }
         }
 
-        [Route("api/saveProfile")]
+        [Route("api/saveMember")]
         [HttpPost]
-        public IHttpActionResult SaveProfile(ProfileViewModel model)
+        public IHttpActionResult SaveMember(MemberViewModel model)
         {
 
             using (bkContext context = new bkContext())

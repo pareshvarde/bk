@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
-import { ProfileModel } from '../../models/profileModel';
+import { MemberModel } from '../../models/memberModel';
 import { EmailValidators, UniversalValidators } from 'ng2-validators';
 
 @Component({
@@ -14,7 +14,7 @@ import { EmailValidators, UniversalValidators } from 'ng2-validators';
 export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
-  model: ProfileModel;
+  model: MemberModel;
   editMode: boolean;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.editMode = false;    
-    this.model = new ProfileModel();    
+    this.model = new MemberModel();    
 
     this.profileForm =  new FormGroup({      
       firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
 
   loadProfile()
   {
-    return this.dataService.getProfile().subscribe(
+    return this.dataService.getMember().subscribe(
       (res) => {        
         this.model = res.result;        
       },
@@ -74,7 +74,7 @@ export class ProfileComponent implements OnInit {
     if (this.model.dod && this.profileForm.controls['dod'].dirty)          
       this.model.dod.setMinutes(this.model.dod.getMinutes() - this.model.dod.getTimezoneOffset());    
 
-    this.dataService.saveProfile(this.model).subscribe(
+    this.dataService.saveMember(this.model).subscribe(
       (res) => {      
         this.alertService.success("Profile has been updated.");        
         this.cancelEdit();

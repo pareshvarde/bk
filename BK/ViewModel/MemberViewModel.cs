@@ -8,8 +8,8 @@ using System.Web;
 
 namespace BK.ViewModel
 {
-    [Validator(typeof(ProfileViewModelValidator))]
-    public class ProfileViewModel
+    [Validator(typeof(MemberViewModelValidator))]
+    public class MemberViewModel
     {
         [JsonProperty("memberId")]
         public int MemberID { get; set; }
@@ -53,9 +53,9 @@ namespace BK.ViewModel
         public string TwitterHandle { get; set; }
     }
 
-    public class ProfileViewModelValidator : AbstractValidator<ProfileViewModel>
+    public class MemberViewModelValidator : AbstractValidator<MemberViewModel>
     {
-        public ProfileViewModelValidator()
+        public MemberViewModelValidator()
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
