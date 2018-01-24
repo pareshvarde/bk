@@ -52,6 +52,8 @@ namespace BK.Controllers
                     AadhaarNumber = member.AadhaarNumber,
                     Gender = member.Gender,
                     DOB = member.DOB,
+                    Alive = member.Alive,
+                    DOD = member.DOD,
                     EducationLevel = member.EducationLevel,
                     EducationField = member.EducationField,
                     CompanyName = member.WorkingWith,

@@ -7,6 +7,8 @@ export class ProfileModel {
     aadhaarNumber: number;        
     gender: string;
     dob: Date;
+    alive: boolean;
+    dod:Date;
     educationLevel: string;
     educationField: string;
     companyName: string;

@@ -14,26 +14,27 @@ export class ProfileComponent implements OnInit {
 
   profileForm: FormGroup;
   model: ProfileModel;
+  editMode: boolean;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { }
 
   ngOnInit() {
+    this.editMode = true;
+
     this.profileForm = new FormGroup({
       currentPassword: new FormControl('', Validators.required)      
     });
     
-    this.model = this.getProfile();
+    this.loadProfile();
   }
 
-  getProfile(): ProfileModel
+  loadProfile()
   {
     return this.dataService.getProfile().subscribe(
-      (res) => {
-        debugger;
-        return res.result;
+      (res) => {        
+        this.model = res.result;        
       },
-      (err) => {
-        debugger;
+      (err) => {        
         if (err.errors)
           this.alertService.error(err.errors[0]);
         else

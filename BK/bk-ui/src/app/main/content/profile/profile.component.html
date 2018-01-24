@@ -3,9 +3,12 @@
       <div id="profile-form">    
         <div class="title">MY PROFILE</div>
   
-        <form name="profileForm" [formGroup]="profileForm" novalidate>
-  
+        <form *ngIf="editMode" name="profileForm" [formGroup]="profileForm" novalidate>
+          Edit Mode
         </form>
+        <div *ngIf="!editMode">
+          Non Edit Mode
+        </div>
       </div>
     </div>
   </div>
