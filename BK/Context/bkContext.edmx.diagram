@@ -12,11 +12,11 @@
         <AssociationConnector Association="bkModel.FK_MemberRelations_lkRelationTypes" ManuallyRouted="false" />
         <EntityTypeShape EntityType="bkModel.Family" Width="1.5" PointX="0.75" PointY="1" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Families" />
-        <EntityTypeShape EntityType="bkModel.Member" Width="1.5" PointX="0.75" PointY="8.125" />
+        <EntityTypeShape EntityType="bkModel.Member" Width="1.5" PointX="0.75" PointY="7.875" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Members" />
         <AssociationConnector Association="bkModel.FK_Matrimonials_Members" />
         <AssociationConnector Association="bkModel.FK_MemberRelations_Members" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

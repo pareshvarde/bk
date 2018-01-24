@@ -54,6 +54,7 @@ namespace BK.Controllers
                     DOB = member.DOB,
                     Alive = member.Alive,
                     DOD = member.DOD,
+                    DeathPlace = member.DeathPlace,
                     EducationLevel = member.EducationLevel,
                     EducationField = member.EducationField,
                     CompanyName = member.WorkingWith,

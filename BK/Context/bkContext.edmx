@@ -94,8 +94,9 @@
           <Property Name="NickName" Type="nvarchar" MaxLength="50" />
           <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="DOB" Type="datetime2" Precision="7" />
-          <Property Name="Alive" Type="bit" Nullable="false" />
+          <Property Name="Alive" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="DOD" Type="datetime2" Precision="7" />
+          <Property Name="DeathPlace" Type="nvarchar" MaxLength="50" />
           <Property Name="EducationLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="EducationField" Type="nvarchar" MaxLength="50" />
           <Property Name="WorkingWith" Type="nvarchar" MaxLength="50" />
@@ -355,6 +356,9 @@
           <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="DOB" Type="DateTime" Precision="7" />
+          <Property Name="Alive" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="DOD" Type="DateTime" Precision="7" />
+          <Property Name="DeathPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EducationLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EducationField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="WorkingWith" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -376,8 +380,6 @@
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonials" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
           <NavigationProperty Name="MemberRelations" Relationship="bkModel.FK_MemberRelations_Members" FromRole="Member" ToRole="MemberRelation" />
-          <Property Name="Alive" Type="Boolean" Nullable="false" />
-          <Property Name="DOD" Type="DateTime" Precision="7" />
         </EntityType>
         <Association Name="FK_FamilyMemberAssociation_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -415,7 +417,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -505,8 +507,6 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="bkModel.Member">
               <MappingFragment StoreEntitySet="Members">
-                <ScalarProperty Name="DOD" ColumnName="DOD" />
-                <ScalarProperty Name="Alive" ColumnName="Alive" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -525,6 +525,9 @@
                 <ScalarProperty Name="WorkingWith" ColumnName="WorkingWith" />
                 <ScalarProperty Name="EducationField" ColumnName="EducationField" />
                 <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+                <ScalarProperty Name="DeathPlace" ColumnName="DeathPlace" />
+                <ScalarProperty Name="DOD" ColumnName="DOD" />
+                <ScalarProperty Name="Alive" ColumnName="Alive" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />

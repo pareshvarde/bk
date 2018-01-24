@@ -27,8 +27,7 @@
               <input matInput [(ngModel)]="model.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
             </mat-form-field>
           </div>
-  
-          <span class="radioGroupTitle">Gender</span>
+            
           <div fxLayout="row" fxLayoutWrap>
             <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.gender" formControlName="gender">
               <mat-radio-button class="mr-8" value='M'>
@@ -41,6 +40,15 @@
                 Other
               </mat-radio-button>
             </mat-radio-group>
+            
+            <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.alive" formControlName="gender">              
+                <mat-radio-button class="mr-8" value='A'>
+                  Alive
+                </mat-radio-button>
+                <mat-radio-button class="mr-8" value='D'>
+                  Deceased
+                </mat-radio-button>               
+              </mat-radio-group>
   
             <mat-form-field>
               <input matInput [(ngModel)]="model.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
@@ -48,6 +56,13 @@
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+
+            <mat-form-field *ngIf="!model.alive">
+                <input matInput [(ngModel)]="model.dod" (focus)="dodPicker.open()" [matDatepicker]="dodPicker" placeholder="Date Of Death"
+                  formControlName="dod">
+                <mat-datepicker-toggle matSuffix [for]="dodPicker"></mat-datepicker-toggle>
+                <mat-datepicker #dodPicker></mat-datepicker>
+              </mat-form-field>
           </div>
 
           <!-- <button mat-raised-button (click)="processRegistration()" color="accent" class="submit-button" aria-label="REGISTER" [disabled]="registerForm.invalid">
