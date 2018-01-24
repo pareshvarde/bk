@@ -35,10 +35,16 @@ export class ProfileComponent implements OnInit {
       dob: new FormControl('', [Validators.required]),
       dod: new FormControl('', null),
       birthPlace: new FormControl('', null),
-      deathPlace: new FormControl('', null)
+      deathPlace: new FormControl('', null),
+      educationLevel: new FormControl('', null),
+      educationField: new FormControl('', null),
+      companyName: new FormControl('', null),
+      jobTitle: new FormControl('', null),
+      facebookHandle: new FormControl('', [UniversalValidators.noWhitespace]),
+      instagramHandle: new FormControl('', [UniversalValidators.noWhitespace]),
+      twitterHandle: new FormControl('', [UniversalValidators.noWhitespace])
     }); 
-    
-    this.profileForm.disable();
+        
     this.loadProfile();
   }
 
