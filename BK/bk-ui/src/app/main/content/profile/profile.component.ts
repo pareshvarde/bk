@@ -26,6 +26,7 @@ export class ProfileComponent implements OnInit {
     this.profileForm =  new FormGroup({      
       firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
       lastName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
+      nickName: new FormControl('', [UniversalValidators.noWhitespace]),
       email: new FormControl('', [EmailValidators.normal,Validators.required]),
       phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),      

@@ -100,7 +100,7 @@
           <Property Name="DeathPlace" Type="nvarchar" MaxLength="50" />
           <Property Name="EducationLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="EducationField" Type="nvarchar" MaxLength="50" />
-          <Property Name="WorkingWith" Type="nvarchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
           <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
           <Property Name="AadhaarNumber" Type="bigint" />
@@ -357,12 +357,13 @@
           <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="DOB" Type="DateTime" Precision="7" />
+          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Alive" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="DOD" Type="DateTime" Precision="7" />
           <Property Name="DeathPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EducationLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EducationField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="WorkingWith" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="AadhaarNumber" Type="Int64" />
@@ -381,7 +382,6 @@
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonials" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
           <NavigationProperty Name="MemberRelations" Relationship="bkModel.FK_MemberRelations_Members" FromRole="Member" ToRole="MemberRelation" />
-          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_FamilyMemberAssociation_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -509,7 +509,6 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="bkModel.Member">
               <MappingFragment StoreEntitySet="Members">
-                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -525,12 +524,13 @@
                 <ScalarProperty Name="AadhaarNumber" ColumnName="AadhaarNumber" />
                 <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-                <ScalarProperty Name="WorkingWith" ColumnName="WorkingWith" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="EducationField" ColumnName="EducationField" />
                 <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
                 <ScalarProperty Name="DeathPlace" ColumnName="DeathPlace" />
                 <ScalarProperty Name="DOD" ColumnName="DOD" />
                 <ScalarProperty Name="Alive" ColumnName="Alive" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="NickName" ColumnName="NickName" />

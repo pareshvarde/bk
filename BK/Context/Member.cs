@@ -29,12 +29,13 @@ namespace BK.Context
         public string NickName { get; set; }
         public string Gender { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
+        public string BirthPlace { get; set; }
         public string Alive { get; set; }
         public Nullable<System.DateTime> DOD { get; set; }
         public string DeathPlace { get; set; }
         public string EducationLevel { get; set; }
         public string EducationField { get; set; }
-        public string WorkingWith { get; set; }
+        public string CompanyName { get; set; }
         public string JobTitle { get; set; }
         public string EmailAddress { get; set; }
         public Nullable<long> AadhaarNumber { get; set; }
@@ -50,7 +51,6 @@ namespace BK.Context
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
-        public string BirthPlace { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }

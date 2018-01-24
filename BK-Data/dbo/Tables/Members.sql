@@ -12,7 +12,7 @@
     [DeathPlace]      NVARCHAR (50)    NULL,
     [EducationLevel]  NVARCHAR (50)    NULL,
     [EducationField]  NVARCHAR (50)    NULL,
-    [WorkingWith]     NVARCHAR (50)    NULL,
+    [CompanyName]     NVARCHAR (50)    NULL,
     [JobTitle]        NVARCHAR (50)    NULL,
     [EmailAddress]    NVARCHAR (100)   NULL,
     [AadhaarNumber]   BIGINT           NULL,

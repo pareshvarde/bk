@@ -58,7 +58,7 @@ namespace BK.Controllers
                     DeathPlace = member.DeathPlace,
                     EducationLevel = member.EducationLevel,
                     EducationField = member.EducationField,
-                    CompanyName = member.WorkingWith,
+                    CompanyName = member.CompanyName,
                     JobTitle = member.JobTitle,
                     InstagramHandle = member.InstagramHandle,
                     FacebookHandle = member.FacebookHandle,
