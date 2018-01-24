@@ -74,6 +74,9 @@ export class ProfileComponent implements OnInit {
     if (this.model.dod && this.profileForm.controls['dod'].dirty)          
       this.model.dod.setMinutes(this.model.dod.getMinutes() - this.model.dod.getTimezoneOffset());    
 
+    if (this.model.alive === 'A' && this.model.dod)
+      this.model.dod = null;
+
     this.dataService.saveMember(this.model).subscribe(
       (res) => {      
         this.alertService.success("Member details has been updated.");    
