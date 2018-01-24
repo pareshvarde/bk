@@ -34,6 +34,8 @@
           <Property Name="MemberId" Type="int" Nullable="false" />
           <Property Name="HeadOfFamily" Type="bit" Nullable="false" />
           <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="RelatedId" Type="int" />
+          <Property Name="RelationTypeId" Type="int" />
           <Property Name="ApprovedOn" Type="datetime2" Precision="7" />
           <Property Name="ApprovedBy" Type="datetime2" Precision="7" />
           <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
@@ -71,17 +73,6 @@
           <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
           <Property Name="ModifiedBy" Type="int" />
           <Property Name="ExpiresOn" Type="datetime2" Precision="7" />
-        </EntityType>
-        <EntityType Name="MemberRelations">
-          <Key>
-            <PropertyRef Name="MemberId" />
-            <PropertyRef Name="RelatedMemberId" />
-          </Key>
-          <Property Name="MemberId" Type="int" Nullable="false" />
-          <Property Name="RelatedMemberId" Type="int" Nullable="false" />
-          <Property Name="RelationTypeId" Type="int" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Members">
           <Key>
@@ -141,6 +132,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FamilyMemberAssociation_Related">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="RelatedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Matrimonials_Members">
           <End Role="Members" Type="Self.Members" Multiplicity="1" />
           <End Role="Matrimonials" Type="Self.Matrimonials" Multiplicity="*" />
@@ -153,36 +156,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MemberRelations_lkRelationTypes">
-          <End Role="lkRelationTypes" Type="Self.lkRelationTypes" Multiplicity="1" />
-          <End Role="MemberRelations" Type="Self.MemberRelations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lkRelationTypes">
-              <PropertyRef Name="RelationTypeId" />
-            </Principal>
-            <Dependent Role="MemberRelations">
-              <PropertyRef Name="RelationTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MemberRelations_Members">
-          <End Role="Members" Type="Self.Members" Multiplicity="1" />
-          <End Role="MemberRelations" Type="Self.MemberRelations" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Members">
-              <PropertyRef Name="MemberID" />
-            </Principal>
-            <Dependent Role="MemberRelations">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="bkModelStoreContainer">
           <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMemberAssociation" EntityType="Self.FamilyMemberAssociation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lkRelationTypes" EntityType="Self.lkRelationTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Matrimonials" EntityType="Self.Matrimonials" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MemberRelations" EntityType="Self.MemberRelations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="Self.FK_FamilyMemberAssociation_Families">
             <End Role="Families" EntitySet="Families" />
@@ -192,17 +170,13 @@
             <End Role="Members" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
           </AssociationSet>
+          <AssociationSet Name="FK_FamilyMemberAssociation_Related" Association="Self.FK_FamilyMemberAssociation_Related">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
+          </AssociationSet>
           <AssociationSet Name="FK_Matrimonials_Members" Association="Self.FK_Matrimonials_Members">
             <End Role="Members" EntitySet="Members" />
             <End Role="Matrimonials" EntitySet="Matrimonials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberRelations_lkRelationTypes" Association="Self.FK_MemberRelations_lkRelationTypes">
-            <End Role="lkRelationTypes" EntitySet="lkRelationTypes" />
-            <End Role="MemberRelations" EntitySet="MemberRelations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MemberRelations_Members" Association="Self.FK_MemberRelations_Members">
-            <End Role="Members" EntitySet="Members" />
-            <End Role="MemberRelations" EntitySet="MemberRelations" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -224,6 +198,9 @@
           <Property Name="ApprovedBy" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
+          <Property Name="RelatedId" Type="Int32" />
+          <Property Name="RelationTypeId" Type="Int32" />
+          <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
         </EntityType>
         <EntityType Name="lkRelationType">
           <Key>
@@ -231,7 +208,6 @@
           </Key>
           <Property Name="RelationTypeId" Type="Int32" Nullable="false" />
           <Property Name="RelationType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="MemberRelations" Relationship="Self.FK_MemberRelations_lkRelationTypes" FromRole="lkRelationTypes" ToRole="MemberRelations" />
         </EntityType>
         <EntityType Name="Matrimonial">
           <Key>
@@ -260,40 +236,10 @@
           <Property Name="ExpiresOn" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Matrimonial" ToRole="Member" />
         </EntityType>
-        <EntityType Name="MemberRelation">
-          <Key>
-            <PropertyRef Name="MemberId" />
-            <PropertyRef Name="RelatedMemberId" />
-          </Key>
-          <Property Name="MemberId" Type="Int32" Nullable="false" />
-          <Property Name="RelatedMemberId" Type="Int32" Nullable="false" />
-          <Property Name="RelationTypeId" Type="Int32" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="lkRelationType" Relationship="Self.FK_MemberRelations_lkRelationTypes" FromRole="MemberRelations" ToRole="lkRelationTypes" />
-          <NavigationProperty Name="Member" Relationship="bkModel.FK_MemberRelations_Members" FromRole="MemberRelation" ToRole="Member" />
-        </EntityType>
-        <Association Name="FK_MemberRelations_lkRelationTypes">
-          <End Role="lkRelationTypes" Type="Self.lkRelationType" Multiplicity="1" />
-          <End Role="MemberRelations" Type="Self.MemberRelation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lkRelationTypes">
-              <PropertyRef Name="RelationTypeId" />
-            </Principal>
-            <Dependent Role="MemberRelations">
-              <PropertyRef Name="RelationTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="bkContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FamilyMemberAssociations" EntityType="Self.FamilyMemberAssociation" />
           <EntitySet Name="lkRelationTypes" EntityType="Self.lkRelationType" />
           <EntitySet Name="Matrimonials" EntityType="Self.Matrimonial" />
-          <EntitySet Name="MemberRelations" EntityType="Self.MemberRelation" />
-          <AssociationSet Name="FK_MemberRelations_lkRelationTypes" Association="Self.FK_MemberRelations_lkRelationTypes">
-            <End Role="lkRelationTypes" EntitySet="lkRelationTypes" />
-            <End Role="MemberRelations" EntitySet="MemberRelations" />
-          </AssociationSet>
           <EntitySet Name="Families" EntityType="bkModel.Family" />
           <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="bkModel.FK_FamilyMemberAssociation_Families">
             <End Role="Family" EntitySet="Families" />
@@ -308,9 +254,9 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="Matrimonial" EntitySet="Matrimonials" />
           </AssociationSet>
-          <AssociationSet Name="FK_MemberRelations_Members" Association="bkModel.FK_MemberRelations_Members">
+          <AssociationSet Name="FK_FamilyMemberAssociation_Related" Association="bkModel.FK_FamilyMemberAssociation_Related">
             <End Role="Member" EntitySet="Members" />
-            <End Role="MemberRelation" EntitySet="MemberRelations" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Family">
@@ -381,7 +327,7 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonials" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
-          <NavigationProperty Name="MemberRelations" Relationship="bkModel.FK_MemberRelations_Members" FromRole="Member" ToRole="MemberRelation" />
+          <NavigationProperty Name="FamilyMemberAssociations1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="Member" ToRole="FamilyMemberAssociation" />
         </EntityType>
         <Association Name="FK_FamilyMemberAssociation_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -407,15 +353,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MemberRelations_Members">
-          <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
-          <End Type="bkModel.MemberRelation" Role="MemberRelation" Multiplicity="*" />
+        <Association Name="FK_FamilyMemberAssociation_Related">
+          <End Type="bkModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Member">
               <PropertyRef Name="MemberID" />
             </Principal>
-            <Dependent Role="MemberRelation">
-              <PropertyRef Name="MemberId" />
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="RelatedId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -428,6 +374,8 @@
           <EntitySetMapping Name="FamilyMemberAssociations">
             <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
               <MappingFragment StoreEntitySet="FamilyMemberAssociation">
+                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
+                <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
                 <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
                 <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
                 <ScalarProperty Name="Approved" ColumnName="Approved" />
@@ -471,17 +419,6 @@
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MemberRelations">
-            <EntityTypeMapping TypeName="bkModel.MemberRelation">
-              <MappingFragment StoreEntitySet="MemberRelations">
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="RelatedMemberId" ColumnName="RelatedMemberId" />
-                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

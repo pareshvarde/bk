@@ -64,7 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\lkRelationTypes.sql" />
-    <Build Include="dbo\Tables\MemberRelations.sql" />
     <Build Include="dbo\Tables\FamilyMemberAssociation.sql" />
     <Build Include="dbo\Tables\Matrimonials.sql" />
     <Build Include="dbo\Tables\Families.sql" />

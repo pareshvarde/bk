@@ -16,3 +16,5 @@ ModifiedBy
 ModifiedOn
 
 401 redirect
+angular-font-awesome
+sign up captcha

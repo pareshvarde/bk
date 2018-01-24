@@ -19,7 +19,7 @@ namespace BK.Context
         {
             this.FamilyMemberAssociations = new HashSet<FamilyMemberAssociation>();
             this.Matrimonials = new HashSet<Matrimonial>();
-            this.MemberRelations = new HashSet<MemberRelation>();
+            this.FamilyMemberAssociations1 = new HashSet<FamilyMemberAssociation>();
         }
     
         public int MemberID { get; set; }
@@ -57,6 +57,6 @@ namespace BK.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matrimonial> Matrimonials { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MemberRelation> MemberRelations { get; set; }
+        public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations1 { get; set; }
     }
 }

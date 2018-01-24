@@ -68,15 +68,15 @@ export class ProfileComponent implements OnInit {
 
   saveProfile(){
     
-    if (this.model.dob && this.profileForm.controls['dob'].dirty)
-      this.model.dob.setMinutes(this.model.dob.getMinutes() - this.model.dob.getTimezoneOffset());
+    if (this.model.dob && this.profileForm.controls['dob'].dirty)    
+      this.model.dob.setMinutes(this.model.dob.getMinutes() - this.model.dob.getTimezoneOffset());    
 
-    if (this.model.dod && this.profileForm.controls['dod'].dirty)
-      this.model.dod.setMinutes(this.model.dod.getMinutes() - this.model.dod.getTimezoneOffset());
+    if (this.model.dod && this.profileForm.controls['dod'].dirty)          
+      this.model.dod.setMinutes(this.model.dod.getMinutes() - this.model.dod.getTimezoneOffset());    
 
     this.dataService.saveProfile(this.model).subscribe(
       (res) => {      
-        this.alertService.success("Profile has been updated successfully.");        
+        this.alertService.success("Profile has been updated.");        
         this.cancelEdit();
       },
       (err) => {        

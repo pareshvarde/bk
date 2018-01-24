@@ -195,9 +195,6 @@
     <Compile Include="Context\Member.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\MemberRelation.cs">
-      <DependentUpon>bkContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
