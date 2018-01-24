@@ -60,7 +60,7 @@ namespace BK.ViewModel
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
             RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
             RuleFor(x => x.Email).NotEmpty().WithMessage("Email address cannot be blank").EmailAddress().WithMessage("Invalid email address");            
-            RuleFor(x => x.DOD).NotEmpty().WithMessage("Date Of Birth cannot be blank");
+            RuleFor(x => x.DOB).NotEmpty().WithMessage("Date Of Birth cannot be blank");
         }
     }
 }

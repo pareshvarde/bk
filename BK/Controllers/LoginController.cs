@@ -52,6 +52,7 @@ namespace BK.Controllers
                 member.Gender = register.Gender;
                 member.Password = System.Web.Security.Membership.GeneratePassword(8, 2);
                 member.MemberSID = IDGenerator.CreateSID(IDGenerator.Prefixes.MEMBER);
+                member.Alive = "A";
                 member.Active = true;
 
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();

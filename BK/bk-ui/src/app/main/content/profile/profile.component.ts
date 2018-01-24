@@ -76,7 +76,8 @@ export class ProfileComponent implements OnInit {
 
     this.dataService.saveMember(this.model).subscribe(
       (res) => {      
-        this.alertService.success("Member details has been updated.");        
+        this.alertService.success("Member details has been updated.");    
+        this.profileForm.markAsPristine();    
         this.cancelEdit();
       },
       (err) => {        
