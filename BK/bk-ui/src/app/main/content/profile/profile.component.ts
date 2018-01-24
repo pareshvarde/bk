@@ -30,9 +30,11 @@ export class ProfileComponent implements OnInit {
       phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),      
       gender: new FormControl('M', null),
-      alive: new FormControl(true, null),
+      alive: new FormControl('A', null),
       dob: new FormControl('', [Validators.required]),
-      dod: new FormControl('', null)
+      dod: new FormControl('', null),
+      birthPlace: new FormControl('', null),
+      deathPlace: new FormControl('', null)
     }); 
     
     this.profileForm.disable();

@@ -41,7 +41,7 @@
               </mat-radio-button>
             </mat-radio-group>
             
-            <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.alive" formControlName="gender">              
+            <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.alive" formControlName="alive">              
                 <mat-radio-button class="mr-8" value='A'>
                   Alive
                 </mat-radio-button>
@@ -57,7 +57,7 @@
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field *ngIf="!model.alive">
+            <mat-form-field *ngIf="model.alive === 'D'">
                 <input matInput [(ngModel)]="model.dod" (focus)="dodPicker.open()" [matDatepicker]="dodPicker" placeholder="Date Of Death"
                   formControlName="dod">
                 <mat-datepicker-toggle matSuffix [for]="dodPicker"></mat-datepicker-toggle>

@@ -94,6 +94,7 @@
           <Property Name="NickName" Type="nvarchar" MaxLength="50" />
           <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="DOB" Type="datetime2" Precision="7" />
+          <Property Name="BirthPlace" Type="nvarchar" MaxLength="50" />
           <Property Name="Alive" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="DOD" Type="datetime2" Precision="7" />
           <Property Name="DeathPlace" Type="nvarchar" MaxLength="50" />
@@ -380,6 +381,7 @@
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonials" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
           <NavigationProperty Name="MemberRelations" Relationship="bkModel.FK_MemberRelations_Members" FromRole="Member" ToRole="MemberRelation" />
+          <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_FamilyMemberAssociation_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -507,6 +509,7 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="bkModel.Member">
               <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

@@ -24,6 +24,8 @@ namespace BK.ViewModel
         public string Gender { get; set; }
         [JsonProperty("dob")]
         public DateTime? DOB { get; set; }
+        [JsonProperty("birthPlace")]
+        public string BirthPlace { get; set; }
         [JsonProperty("alive")]
         public string Alive { get; set; }
         [JsonProperty("dod")]
