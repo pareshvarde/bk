@@ -111,18 +111,21 @@
             <input matInput [(ngModel)]="model.twitterHandle" placeholder="Twitter Handle" formControlName="twitterHandle">
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutAlign="top center">
-        <button *ngIf="editMode" mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="profileForm.invalid">
-          SAVE
-        </button>
-        <button *ngIf="editMode" mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
-          CANCEL
-        </button>       
-      </div>
-      </form>      
-      <button *ngIf="!editMode" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
-          EDIT
-      </button>
+
+        <div *ngIf="editMode" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="profileForm.invalid">
+            SAVE
+          </button>
+          <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            CANCEL
+          </button>
+        </div>
+        <div *ngIf="!editMode" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+            EDIT
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

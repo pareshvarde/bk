@@ -46,9 +46,8 @@
                         margin-right: 20px;
                     }
 
-                    .submit-button {
-                        width: 220px;
-                        margin: 16px auto;
+                    .submit-button {                        
+                        margin: 16px;
                         display: block;
 
                         @include media-breakpoint('xs') {
