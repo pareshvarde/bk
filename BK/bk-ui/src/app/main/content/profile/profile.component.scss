@@ -58,10 +58,8 @@
                   
                     mat-radio-group{
                         margin-right: 20px;
-
-                        @include media-breakpoint('xs') {
-                            margin-bottom: 20px;
-                        }
+                        margin-bottom: 20px;
+                        width: 300px;                        
                     }
                 }                              
             }
