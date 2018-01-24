@@ -35,13 +35,15 @@
                     font-size: 20px;
                     margin: 16px 0 32px 0;
                 }
+               
 
                 form {
                     width: 100%;
                     text-align: left;
 
                     mat-form-field {
-                        width: 100%;
+                        width: 300px;
+                        margin-right: 20px;
                     }
 
                     .submit-button {
@@ -53,7 +55,22 @@
                             width: 90%;
                         }
                     }
-                }              
+
+                    .gender{
+                        color: rgba(0, 0, 0, 0.54);                        
+                        font-size: 16px;
+                        font-weight: 400;
+                        line-height: 1.125;
+                    }
+
+                    mat-radio-group{
+                        margin-right: 20px;
+
+                        @include media-breakpoint('xs') {
+                            margin-bottom: 20px;
+                        }
+                    }
+                }                              
             }
         }
     }

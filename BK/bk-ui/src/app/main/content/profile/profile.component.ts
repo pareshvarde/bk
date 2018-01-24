@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ProfileModel } from '../../models/profileModel';
+import { EmailValidators, UniversalValidators } from 'ng2-validators';
 
 @Component({
   selector: 'app-profile',
@@ -19,12 +20,20 @@ export class ProfileComponent implements OnInit {
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { }
 
   ngOnInit() {
-    this.editMode = true;
+    this.editMode = false;
+    this.model = new ProfileModel();
 
-    this.profileForm = new FormGroup({
-      currentPassword: new FormControl('', Validators.required)      
-    });
+    this.profileForm =  new FormGroup({      
+      firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
+      lastName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
+      email: new FormControl('', [EmailValidators.normal,Validators.required]),
+      phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required]),
+      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),      
+      gender: new FormControl('M', null),
+      dob: new FormControl('', [Validators.required])
+    }); 
     
+    this.profileForm.disable();
     this.loadProfile();
   }
 
