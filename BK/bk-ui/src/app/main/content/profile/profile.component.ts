@@ -17,11 +17,13 @@ export class ProfileComponent implements OnInit {
   model: ProfileModel;
   editMode: boolean;
 
-  constructor(private dataService: bkDataService, private alertService: NotificationsService) { }
+  constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
+    
+  }
 
   ngOnInit() {
-    this.editMode = false;
-    this.model = new ProfileModel();
+    this.editMode = false;    
+    this.model = new ProfileModel();    
 
     this.profileForm =  new FormGroup({      
       firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
@@ -45,6 +47,7 @@ export class ProfileComponent implements OnInit {
       twitterHandle: new FormControl('', [UniversalValidators.noWhitespace])
     }); 
         
+    this.profileForm.disable();
     this.loadProfile();
   }
 
@@ -61,5 +64,19 @@ export class ProfileComponent implements OnInit {
           this.alertService.error(err);        
       }
     );    
+  }
+
+  saveProfile(){
+
+  }
+
+  cancelEdit(){
+    this.editMode = false;
+    this.profileForm.disable();
+  }
+
+  edit(){
+    this.editMode = true;
+    this.profileForm.enable();
   }
 }
