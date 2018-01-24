@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using FluentValidation;
+using FluentValidation.Attributes;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +8,7 @@ using System.Web;
 
 namespace BK.ViewModel
 {
+    [Validator(typeof(ProfileViewModelValidator))]
     public class ProfileViewModel
     {
         [JsonProperty("memberId")]
@@ -48,5 +51,16 @@ namespace BK.ViewModel
         public string FacebookHandle { get; set; }
         [JsonProperty("twitterHandle")]
         public string TwitterHandle { get; set; }
+    }
+
+    public class ProfileViewModelValidator : AbstractValidator<ProfileViewModel>
+    {
+        public ProfileViewModelValidator()
+        {
+            RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
+            RuleFor(x => x.Email).NotEmpty().WithMessage("Email address cannot be blank").EmailAddress().WithMessage("Invalid email address");            
+            RuleFor(x => x.DOD).NotEmpty().WithMessage("Date Of Birth cannot be blank");
+        }
     }
 }
