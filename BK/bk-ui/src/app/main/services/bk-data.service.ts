@@ -79,6 +79,15 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
+  loadFamilyLookup()
+  {
+    this.blockUI.start("Please wait...");
+               
+    return this.http.get(this.API_URL + "familyLookup", {headers: this.getAuthHeader()}).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
   private getAuthHeader(): Headers{    
     const headers = new Headers(
       {

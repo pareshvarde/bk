@@ -3,9 +3,9 @@
     <div id="family-form">
       <div class="title">MY FAMILY</div>
       <mat-form-field>
-        <mat-select placeholder="Family">
-          <mat-option *ngFor="let n of models" [value]="n.familyId">
-            {{ n.headOfFamily }}
+        <mat-select placeholder="Family" [(ngModel)]="currentFamilyId">
+          <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
+            {{ n.hof }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -54,33 +54,7 @@
             <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
           </mat-form-field>
         </div>
-      </form>
-      <mat-table #table [dataSource]="dataSource">
-        <ng-container matColumnDef="Name">
-          <mat-header-cell *matHeaderCellDef>
-            <b>Main Nukhs</b>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let nukh">
-            <b>{{nukh.mainNukh}}</b>
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Gender">
-          <mat-header-cell *matHeaderCellDef>
-            <b>Sub Nukhs</b>
-          </mat-header-cell>
-          <mat-cell *matCellDef="let nukh">{{nukh.subNukh1}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Date Of Birth">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let nukh">{{nukh.subNukh2}}</mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="subNukh3">
-          <mat-header-cell *matHeaderCellDef></mat-header-cell>
-          <mat-cell *matCellDef="let nukh">{{nukh.subNukh3}}</mat-cell>
-        </ng-container>       
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
+      </form>     
     </div>
   </div>
 </div>
