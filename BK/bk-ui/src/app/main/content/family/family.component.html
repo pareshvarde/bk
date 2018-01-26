@@ -3,7 +3,7 @@
     <div id="family-form">
       <div class="title">MY FAMILY</div>
       <mat-form-field>
-        <mat-select placeholder="Family" [(ngModel)]="currentFamilyId">
+        <mat-select placeholder="Family" (change)="loadFamily($event)" [(ngModel)]="currentFamilyId">
           <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
             {{ n.hof }}
           </mat-option>

@@ -48,10 +48,13 @@ export class FamilyComponent implements OnInit {
   loadFamilyLookup() {
     this.dataService.loadFamilyLookup().subscribe(
       (res) => {      
-        this.familyLookup = res.result;
-        debugger;
+        this.familyLookup = res.result;        
+        
         if (this.familyLookup && this.familyLookup.length > 0)
+        {
           this.currentFamilyId = this.familyLookup[0].familyId;
+          this.loadFamily(null);
+        }
       },
       (err) => {        
         if (err.errors)
@@ -60,5 +63,9 @@ export class FamilyComponent implements OnInit {
           this.alertService.error(err);
       }
     );
+  }
+
+  loadFamily(ev){
+    alert(this.currentFamilyId);
   }
 }
