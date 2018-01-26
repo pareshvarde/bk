@@ -63,7 +63,8 @@ namespace BK.Controllers
                     JobTitle = member.JobTitle,
                     InstagramHandle = member.InstagramHandle,
                     FacebookHandle = member.FacebookHandle,
-                    TwitterHandle = member.TwitterHandle
+                    TwitterHandle = member.TwitterHandle,
+                    Married = member.Married
                 };
                                    
                 return Ok(vm);
@@ -100,6 +101,7 @@ namespace BK.Controllers
                 member.NickName = model.NickName;
                 member.Phone = model.PhoneNumber;
                 member.TwitterHandle = model.TwitterHandle;
+                member.Married = model.Married;
 
                 context.SaveChanges();                           
 

@@ -89,6 +89,7 @@
           <Property Name="Alive" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="DOD" Type="datetime2" Precision="7" />
           <Property Name="DeathPlace" Type="nvarchar" MaxLength="50" />
+          <Property Name="Married" Type="bit" Nullable="false" />
           <Property Name="EducationLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="EducationField" Type="nvarchar" MaxLength="50" />
           <Property Name="CompanyName" Type="nvarchar" MaxLength="50" />
@@ -197,9 +198,9 @@
           <Property Name="ApprovedOn" Type="DateTime" Precision="7" />
           <Property Name="ApprovedBy" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
-          <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
           <Property Name="RelatedId" Type="Int32" />
           <Property Name="RelationTypeId" Type="Int32" />
+          <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
         </EntityType>
         <EntityType Name="lkRelationType">
@@ -250,13 +251,13 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
-          <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Matrimonial" EntitySet="Matrimonials" />
-          </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Related" Association="bkModel.FK_FamilyMemberAssociation_Related">
             <End Role="Member" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Matrimonial" EntitySet="Matrimonials" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Family">
@@ -307,6 +308,7 @@
           <Property Name="Alive" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="DOD" Type="DateTime" Precision="7" />
           <Property Name="DeathPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Married" Type="Boolean" Nullable="false" />
           <Property Name="EducationLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EducationField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -326,8 +328,8 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
-          <NavigationProperty Name="Matrimonials" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
           <NavigationProperty Name="FamilyMemberAssociations1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="Member" ToRole="FamilyMemberAssociation" />
+          <NavigationProperty Name="Matrimonials" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
         </EntityType>
         <Association Name="FK_FamilyMemberAssociation_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -341,18 +343,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Matrimonials_Members">
-          <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
-          <End Type="bkModel.Matrimonial" Role="Matrimonial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberID" />
-            </Principal>
-            <Dependent Role="Matrimonial">
-              <PropertyRef Name="MemberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FamilyMemberAssociation_Related">
           <End Type="bkModel.Member" Role="Member" Multiplicity="0..1" />
           <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
@@ -362,6 +352,18 @@
             </Principal>
             <Dependent Role="FamilyMemberAssociation">
               <PropertyRef Name="RelatedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matrimonials_Members">
+          <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="bkModel.Matrimonial" Role="Matrimonial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="Matrimonial">
+              <PropertyRef Name="MemberID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -464,6 +466,7 @@
                 <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
                 <ScalarProperty Name="EducationField" ColumnName="EducationField" />
                 <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+                <ScalarProperty Name="Married" ColumnName="Married" />
                 <ScalarProperty Name="DeathPlace" ColumnName="DeathPlace" />
                 <ScalarProperty Name="DOD" ColumnName="DOD" />
                 <ScalarProperty Name="Alive" ColumnName="Alive" />

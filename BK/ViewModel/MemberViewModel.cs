@@ -37,6 +37,8 @@ namespace BK.ViewModel
         public DateTime? DOD { get; set; }
         [JsonProperty("deathPlace")]
         public string DeathPlace { get; set; }
+        [JsonProperty("married")]
+        public bool Married { get; set; }
         [JsonProperty("educationLevel")]
         public string EducationLevel { get; set; }
         [JsonProperty("educationField")]

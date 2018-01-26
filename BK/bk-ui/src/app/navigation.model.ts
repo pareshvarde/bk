@@ -78,7 +78,7 @@ export class NavigationModel
                         'id'   : 'myAccount',
                         'title': 'My Family',
                         'type' : 'item',
-                        'url'  : '/pages/auth/mail-confirm'
+                        'url'  : 'family'
                     }                   
                 ]
             },

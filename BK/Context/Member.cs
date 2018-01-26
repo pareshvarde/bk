@@ -18,8 +18,8 @@ namespace BK.Context
         public Member()
         {
             this.FamilyMemberAssociations = new HashSet<FamilyMemberAssociation>();
-            this.Matrimonials = new HashSet<Matrimonial>();
             this.FamilyMemberAssociations1 = new HashSet<FamilyMemberAssociation>();
+            this.Matrimonials = new HashSet<Matrimonial>();
         }
     
         public int MemberID { get; set; }
@@ -33,6 +33,7 @@ namespace BK.Context
         public string Alive { get; set; }
         public Nullable<System.DateTime> DOD { get; set; }
         public string DeathPlace { get; set; }
+        public bool Married { get; set; }
         public string EducationLevel { get; set; }
         public string EducationField { get; set; }
         public string CompanyName { get; set; }
@@ -55,8 +56,8 @@ namespace BK.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Matrimonial> Matrimonials { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Matrimonial> Matrimonials { get; set; }
     }
 }

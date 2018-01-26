@@ -12,6 +12,7 @@ import { ResetPasswordComponent } from './main/content/reset-password/reset-pass
 import { ChangePasswordComponent } from './main/content/change-password/change-password.component';
 import { RegisterComponent } from './main/content/register/register.component';
 import { ProfileComponent } from './main/content/profile/profile.component';
+import { FamilyComponent } from './main/content/family/family.component';
 
 export const bkRoutes: Routes = [
     {
@@ -65,6 +66,10 @@ export const bkRoutes: Routes = [
     {
         path: "profile",
         component: ProfileComponent
+    },
+    {
+        path: "family",
+        component: FamilyComponent  
     },
     {
         path      : '**',

@@ -79,6 +79,8 @@
         </div>
 
         <div fxLayout="row" fxLayoutWrap>
+          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.married" formControlName="married">Married?</mat-checkbox>
+
           <mat-form-field>
             <input matInput [(ngModel)]="model.educationLevel" placeholder="Education Level" formControlName="educationLevel">
           </mat-form-field>

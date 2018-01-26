@@ -1,0 +1,86 @@
+<div id="family" fxLayout="column">
+  <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
+    <div id="family-form">
+      <div class="title">MY FAMILY</div>
+      <mat-form-field>
+        <mat-select placeholder="Family">
+          <mat-option *ngFor="let n of models" [value]="n.familyId">
+            {{ n.headOfFamily }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <form name="familyForm" [formGroup]="familyForm" novalidate>
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <mat-select placeholder="Category" [(ngModel)]="model.categoryId" formControlName="categoryId">
+              <mat-option *ngFor="let n of categories.data" [value]="n.id">
+                {{ n.category }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Nukh" [(ngModel)]="model.nukhId" formControlName="nukhId">
+              <mat-option *ngFor="let n of nukhs.data" [value]="n.id">
+                {{ n.nukh }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.postalCode" placeholder="Postal Code" formControlName="postalCode">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
+          </mat-form-field>
+        </div>
+      </form>
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="Name">
+          <mat-header-cell *matHeaderCellDef>
+            <b>Main Nukhs</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let nukh">
+            <b>{{nukh.mainNukh}}</b>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Gender">
+          <mat-header-cell *matHeaderCellDef>
+            <b>Sub Nukhs</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let nukh">{{nukh.subNukh1}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="Date Of Birth">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let nukh">{{nukh.subNukh2}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="subNukh3">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let nukh">{{nukh.subNukh3}}</mat-cell>
+        </ng-container>       
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+    </div>
+  </div>
+</div>

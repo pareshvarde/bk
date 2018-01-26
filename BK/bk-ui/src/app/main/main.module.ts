@@ -30,6 +30,7 @@ import { ResetPasswordComponent } from './content/reset-password/reset-password.
 import { ChangePasswordComponent } from './content/change-password/change-password.component';
 import { RegisterComponent } from './content/register/register.component';
 import { ProfileComponent } from './content/profile/profile.component';
+import { FamilyComponent } from './content/family/family.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import { ProfileComponent } from './content/profile/profile.component';
         ResetPasswordComponent,
         ChangePasswordComponent,
         RegisterComponent,
-        ProfileComponent
+        ProfileComponent,
+        FamilyComponent
     ],
     imports     : [
         SharedModule,

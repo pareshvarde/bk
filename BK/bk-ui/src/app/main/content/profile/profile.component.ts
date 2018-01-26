@@ -38,6 +38,7 @@ export class ProfileComponent implements OnInit {
       dod: new FormControl('', null),
       birthPlace: new FormControl('', null),
       deathPlace: new FormControl('', null),
+      married: new FormControl('', null),
       educationLevel: new FormControl('', null),
       educationField: new FormControl('', null),
       companyName: new FormControl('', null),

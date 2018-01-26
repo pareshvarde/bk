@@ -12,6 +12,7 @@ export class MemberModel {
     alive: string;
     dod:Date;
     deathPlace: string;
+    married: boolean;
     educationLevel: string;
     educationField: string;
     companyName: string;

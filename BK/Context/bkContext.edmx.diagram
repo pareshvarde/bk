@@ -12,8 +12,8 @@
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Families" />
         <EntityTypeShape EntityType="bkModel.Member" Width="1.5" PointX="0.75" PointY="7.75" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Members" />
-        <AssociationConnector Association="bkModel.FK_Matrimonials_Members" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Related" />
+        <AssociationConnector Association="bkModel.FK_Matrimonials_Members" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
