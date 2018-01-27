@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import { MomentModule } from 'angular2-moment';
 import { SharedModule } from '../core/modules/shared.module';
 import { ScrollToModule } from 'ng2-scroll-to';
 import { SimpleNotificationsModule } from 'angular2-notifications';
@@ -57,7 +57,7 @@ import { FamilyComponent } from './content/family/family.component';
         ChangePasswordComponent,
         RegisterComponent,
         ProfileComponent,
-        FamilyComponent
+        FamilyComponent        
     ],
     imports     : [
         SharedModule,
@@ -66,7 +66,8 @@ import { FamilyComponent } from './content/family/family.component';
         SimpleNotificationsModule.forRoot(),
         FuseNavigationModule,
         FuseShortcutsModule,
-        FuseSearchBarModule
+        FuseSearchBarModule,
+        MomentModule
     ],
     exports     : [
         FuseMainComponent

@@ -91,7 +91,7 @@
             <mat-header-cell *matHeaderCellDef>
               <b>Date Of Birth</b>
             </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.dob}}</mat-cell>
+            <mat-cell *matCellDef="let member">{{member.dob | amDateFormat:'LL'}}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="married">
             <mat-header-cell *matHeaderCellDef>
