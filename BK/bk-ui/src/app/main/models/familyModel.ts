@@ -15,8 +15,7 @@ export class FamilyModel{
 
 export class FamilyMemberModel{
     memberId: number;
-    firstName: string;
-    lastName: string;
+    name: string;    
     dob: Date;
     married: boolean;
     hof: boolean;

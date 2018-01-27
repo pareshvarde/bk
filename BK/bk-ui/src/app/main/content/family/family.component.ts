@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FamilyModel } from '../../models/familyModel';
+import { FamilyModel, FamilyMemberModel } from '../../models/familyModel';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { NukhData } from '../../data/nukhs';
@@ -23,13 +23,14 @@ export class FamilyComponent implements OnInit {
   currentFamilyId: number;
   familyLookup: FamilyLookupModel[];
   editMode: boolean;
+  dataSource: any;
 
   constructor(private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public nukhs: NukhData, public categories: CategoryData) {
-    this.model = new FamilyModel();
+    this.model = new FamilyModel();    
   }
 
-  displayedColumns = ['name'];
+  displayedColumns = ['name', 'dob', 'married', 'hof', 'relation'];  
 
   ngOnInit() {
     this.familyForm = new FormGroup({
@@ -69,8 +70,9 @@ export class FamilyComponent implements OnInit {
 
   loadFamily(ev){
     this.dataService.getFamilyDetail(this.currentFamilyId).subscribe(
-      (res) => {      
+      (res) => {            
         this.model = res.result;                        
+        this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
       },
       (err) => {        
         if (err.errors)

@@ -55,19 +55,57 @@
           </mat-form-field>
         </div>
         <div *ngIf="editMode" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
-              SAVE
-            </button>
-            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
-              CANCEL
-            </button>
-          </div>
-          <div *ngIf="!editMode" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
-              EDIT
-            </button>
-          </div>
-      </form>     
+          <button mat-raised-button (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
+            SAVE
+          </button>
+          <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            CANCEL
+          </button>
+        </div>
+        <div *ngIf="!editMode" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+            EDIT
+          </button>
+        </div>
+      </form>
+
+      <mat-table #table [dataSource]="dataSource">
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>
+            <b>Name</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let member">{{member.name}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="dob">
+          <mat-header-cell *matHeaderCellDef>
+            <b>Date Of Birth</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let member">{{member.dob}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="married">
+          <mat-header-cell *matHeaderCellDef>
+            <b>Married</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let member">{{member.married}}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="hof">
+          <mat-header-cell *matHeaderCellDef>
+            <b>Head Of Family</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let member">
+            <mat-icon>done</mat-icon>
+          </mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="relation">
+          <mat-header-cell *matHeaderCellDef>
+            <b>Relation</b>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </div>
   </div>
 </div>
