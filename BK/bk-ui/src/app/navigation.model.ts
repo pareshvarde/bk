@@ -65,22 +65,9 @@ export class NavigationModel
             {
                 'id'      : 'directory',
                 'title'   : 'Directory',
-                'type'    : 'collapse',
-                'icon'    : '',
-                'children': [
-                    {
-                        'id'   : 'searchDirectory',
-                        'title': 'Search Directory',
-                        'type' : 'item',
-                        'url'  : '/pages/auth/login'
-                    },                                                  
-                    {
-                        'id'   : 'myAccount',
-                        'title': 'My Family',
-                        'type' : 'item',
-                        'url'  : 'family'
-                    }                   
-                ]
+                'type'    : 'item',
+                'url'     : 'directory',
+                'icon'    : 'local_library',                
             },
             {
                 'id'      : 'matrimony',
