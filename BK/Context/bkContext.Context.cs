@@ -12,6 +12,8 @@ namespace BK.Context
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class bkContext : DbContext
     {
@@ -30,5 +32,14 @@ namespace BK.Context
         public virtual DbSet<Matrimonial> Matrimonials { get; set; }
         public virtual DbSet<Family> Families { get; set; }
         public virtual DbSet<Member> Members { get; set; }
+    
+        public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
+        {
+            var familyIDParameter = familyID.HasValue ?
+                new ObjectParameter("FamilyID", familyID) :
+                new ObjectParameter("FamilyID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
+        }
     }
 }

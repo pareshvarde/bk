@@ -47,13 +47,26 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [(ngModel)]="model.postalCode" placeholder="Postal Code" formControlName="postalCode">
+            <input matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
           </mat-form-field>
         </div>
+        <div *ngIf="editMode" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
+              SAVE
+            </button>
+            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+              CANCEL
+            </button>
+          </div>
+          <div *ngIf="!editMode" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+              EDIT
+            </button>
+          </div>
       </form>     
     </div>
   </div>

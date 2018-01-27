@@ -9,6 +9,7 @@ import { changePasswordViewModel } from '../content/change-password/change-passw
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
 import { RegisterModel } from '../models/registerModel';
 import { MemberModel } from '../models/memberModel';
+import { FamilyModel } from '../models/familyModel';
 
 @Injectable()
 export class bkDataService {
@@ -79,11 +80,28 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
-  loadFamilyLookup()
+  saveFamily(model: FamilyModel){
+    this.blockUI.start("Please wait...");
+           
+    return this.http.post(this.API_URL + "saveFamily", model,{headers: this.getAuthHeader()}).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  getFamilyLookup()
   {
     this.blockUI.start("Please wait...");
                
     return this.http.get(this.API_URL + "familyLookup", {headers: this.getAuthHeader()}).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  getFamilyDetail(familyId: number)
+  {
+    this.blockUI.start("Please wait...");
+               
+    return this.http.get(this.API_URL + "family?familyId=" + familyId, {headers: this.getAuthHeader()}).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

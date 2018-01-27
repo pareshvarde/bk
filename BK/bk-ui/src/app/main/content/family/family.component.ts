@@ -22,6 +22,7 @@ export class FamilyComponent implements OnInit {
   familyForm: FormGroup;
   currentFamilyId: number;
   familyLookup: FamilyLookupModel[];
+  editMode: boolean;
 
   constructor(private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public nukhs: NukhData, public categories: CategoryData) {
@@ -42,11 +43,12 @@ export class FamilyComponent implements OnInit {
       country: new FormControl('', [Validators.required]),
     });
 
+    this.familyForm.disable();
     this.loadFamilyLookup();
   }
 
   loadFamilyLookup() {
-    this.dataService.loadFamilyLookup().subscribe(
+    this.dataService.getFamilyLookup().subscribe(
       (res) => {      
         this.familyLookup = res.result;        
         
@@ -66,6 +68,42 @@ export class FamilyComponent implements OnInit {
   }
 
   loadFamily(ev){
-    alert(this.currentFamilyId);
+    this.dataService.getFamilyDetail(this.currentFamilyId).subscribe(
+      (res) => {      
+        this.model = res.result;                        
+      },
+      (err) => {        
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
+  }
+
+  saveFamily(){
+    this.dataService.saveFamily(this.model).subscribe(
+      (res) => {      
+        this.alertService.success("Family details has been updated.");    
+        this.familyForm.markAsPristine();    
+        this.cancelEdit();
+      },
+      (err) => {        
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
+  }
+
+  cancelEdit(){
+    this.editMode = false;
+    this.familyForm.disable();
+  }
+
+  edit(){
+    this.editMode = true;
+    this.familyForm.enable();
   }
 }

@@ -157,6 +157,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="bk_GetFamilyMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FamilyID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="bkModelStoreContainer">
           <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMemberAssociation" EntityType="Self.FamilyMemberAssociation" Schema="dbo" store:Type="Tables" />
@@ -259,6 +262,9 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="Matrimonial" EntitySet="Matrimonials" />
           </AssociationSet>
+          <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
+          <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Family">
           <Key>
@@ -367,6 +373,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="bk_GetFamilyMembers_Result">
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="Boolean" Name="Married" Nullable="false" />
+          <Property Type="Boolean" Name="HeadOfFamily" Nullable="false" />
+          <Property Type="String" Name="rFirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="rLastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RelationType" Nullable="true" MaxLength="20" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -481,6 +498,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="bk_GetFamilyMembers" FunctionName="bkModel.Store.bk_GetFamilyMembers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bkModel.bk_GetFamilyMembers_Result">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Married" ColumnName="Married" />
+                <ScalarProperty Name="HeadOfFamily" ColumnName="HeadOfFamily" />
+                <ScalarProperty Name="rFirstName" ColumnName="rFirstName" />
+                <ScalarProperty Name="RelationType" ColumnName="RelationType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

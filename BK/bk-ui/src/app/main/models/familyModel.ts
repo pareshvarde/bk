@@ -1,7 +1,6 @@
 import { MemberModel } from "./memberModel";
 
-export class FamilyModel{
-    headOfFamily: string;
+export class FamilyModel{    
     familyId: number;
     nukhId: number;
     categoryId: number;
@@ -9,7 +8,17 @@ export class FamilyModel{
     address2: string;
     city: string;
     state: string;
-    postalCode: string;
+    postalcode: string;
     country: string;    
-    members: MemberModel[];
+    members: FamilyMemberModel[];
+}
+
+export class FamilyMemberModel{
+    memberId: number;
+    firstName: string;
+    lastName: string;
+    dob: Date;
+    married: boolean;
+    hof: boolean;
+    relation: string;
 }
