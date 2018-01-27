@@ -77,8 +77,24 @@
       </div>
       <br/>
       <div class="bk-card">
-        <div fxLayout="row">
-          <span class="mat-title">Family Members</span>
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <span class="mat-title famiyMemberHeader">Family Members</span>
+          <button mat-button color="accent" [matMenuTriggerFor]="memberMenu" class="user-button">
+              <div fxLayout="row" fxLayoutAlign="center center">                  
+                  <span>Action</span>
+                  <mat-icon clsas="s-16">keyboard_arrow_down</mat-icon>
+              </div>
+          </button>
+          <mat-menu #memberMenu="matMenu">
+              <button mat-menu-item>
+                  <mat-icon>person_add</mat-icon>
+                  <span>Add New Member</span>
+              </button>
+              <button mat-menu-item>
+                  <mat-icon>person_add</mat-icon>
+                  <span>Add Existing Member</span>
+              </button>          
+          </mat-menu>          
         </div>
         <mat-table #table [dataSource]="dataSource">
           <ng-container matColumnDef="name">
