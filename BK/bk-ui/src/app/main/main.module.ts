@@ -29,7 +29,6 @@ import { ForgotPasswordComponent } from './content/forgotPassword/forgotPassword
 import { ResetPasswordComponent } from './content/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './content/change-password/change-password.component';
 import { RegisterComponent } from './content/register/register.component';
-import { ProfileComponent } from './content/profile/profile.component';
 import { FamilyComponent } from './content/family/family.component';
 import { AddMemberComponent } from './content/add-member/add-member.component';
 
@@ -56,8 +55,7 @@ import { AddMemberComponent } from './content/add-member/add-member.component';
         AutoFocusDirective,
         ResetPasswordComponent,
         ChangePasswordComponent,
-        RegisterComponent,
-        ProfileComponent,
+        RegisterComponent,        
         FamilyComponent,
         AddMemberComponent        
     ],

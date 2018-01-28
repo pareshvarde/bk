@@ -7,7 +7,8 @@ import { MemberModel } from '../../models/memberModel';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators, EmailValidators } from 'ng2-validators';
 import { RelationTypeData, RelationTypeModel } from '../../data/relations';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
+import { FamilyLookupModel } from '../../models/familyLookupModel';
 
 @Component({
   selector: 'app-add-member',
@@ -21,13 +22,16 @@ export class AddMemberComponent implements OnInit {
   currentFamily: FamilyModel;
   memberModel: MemberModel;
   familyId: number;
-  addExisting: boolean;
+  memberId: number;
+  familyLookup: FamilyLookupModel[];
   memberForm: FormGroup;
+  editMode: boolean;
+  addMode: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public relationTypes: RelationTypeData, private location: Location) {
     this.route.params.subscribe(params => this.familyId = params.familyId);
-    this.addExisting = true;
+    this.route.params.subscribe(params => this.memberId = params.memberId);
     this.memberModel = new MemberModel();
     this.memberModel.gender = 'M';
     this.memberModel.alive = 'A';
@@ -61,13 +65,66 @@ export class AddMemberComponent implements OnInit {
       relatedMemberId: new FormControl('', [Validators.required])
     });
 
-    this.loadFamily();
+    this.loadFamilyLookup();
+
+    if (this.familyId){
+      this.loadFamily();
+      this.addMode = true;
+    }
+
+    if (this.memberId){
+      this.loadMember();
+      this.memberForm.disable();
+      this.addMode = false;      
+    }
+
+    if (!this.familyId && !this.memberId){
+      this.addMode = false;
+      this.memberForm.disable();
+      this.loadMember();
+    }
   }
+
+  loadFamilyLookup() {
+    this.dataService.getFamilyLookup().subscribe(
+      (res) => {
+        this.familyLookup = res.result;
+
+        if (this.familyLookup && this.familyLookup.length > 0) {
+          if (!this.familyId) {
+            this.familyId = this.familyLookup[0].familyId;
+            this.loadFamily();
+          }
+        }
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
+  }
+
+  loadMember() {
+    return this.dataService.getMember().subscribe(
+      (res) => {
+        this.memberModel = res.result;
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
+  }
+
 
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
       (res) => {
-        this.currentFamily = res.result;
+        this.currentFamily = res.result;        
       },
       (err) => {
         if (err.errors)
@@ -97,11 +154,13 @@ export class AddMemberComponent implements OnInit {
     if (this.memberModel.alive === 'A' && this.memberModel.dod)
       this.memberModel.dod = null;
 
+    this.memberModel.familyId = this.familyId;
+
     this.dataService.saveMember(this.memberModel).subscribe(
       (res) => {
         this.alertService.success("Member details has been updated.");
         this.memberForm.markAsPristine();
-        this.cancelAdd();
+        this.cancelEdit();
       },
       (err) => {
         if (err.errors)
@@ -112,7 +171,13 @@ export class AddMemberComponent implements OnInit {
     );
   }
 
-  cancelAdd() {
+  cancelEdit() {
+    this.editMode = false;
     this.location.back();
+  }
+
+  edit(){
+    this.editMode = true;
+    this.memberForm.enable();
   }
 }

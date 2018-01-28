@@ -120,13 +120,17 @@ namespace BK.Controllers
                     if (!model.RelationTypeId.HasValue)
                         return BadRequest("Please specify member relation in family");
 
+                    FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
+                    if (mAssociation != null)
+                        context.FamilyMemberAssociations.Remove(mAssociation);
+
                     member.FamilyMemberAssociations.Add(new FamilyMemberAssociation() {
                         Approved = true,
                         FamilyId = model.FamilyId.Value,
                         RelatedId = model.RelatedMemberId.Value,
                         RelationTypeId = model.RelationTypeId.Value,
                         CreatedOn = DateTime.Now,
-                        CreatedBy = LoggedInMemberId,                                          
+                        CreatedBy = LoggedInMemberId                  
                     });
                 }
 

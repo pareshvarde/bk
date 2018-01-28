@@ -11,7 +11,6 @@ import { ForgotPasswordComponent } from './main/content/forgotPassword/forgotPas
 import { ResetPasswordComponent } from './main/content/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './main/content/change-password/change-password.component';
 import { RegisterComponent } from './main/content/register/register.component';
-import { ProfileComponent } from './main/content/profile/profile.component';
 import { FamilyComponent } from './main/content/family/family.component';
 import { AddMemberComponent } from './main/content/add-member/add-member.component';
 
@@ -65,17 +64,21 @@ export const bkRoutes: Routes = [
         component: RegisterComponent
     },
     {
-        path: "profile",
-        component: ProfileComponent
-    },
-    {
         path: "family",
         component: FamilyComponent  
     },
     {
-        path: "addMember/:familyId",
+        path: "addMember/:familyId/:memberId",
         component: AddMemberComponent
     },
+    {
+        path: "addMember/:familyId",
+        component: AddMemberComponent
+    },    
+    {
+        path: "addMember",
+        component: AddMemberComponent
+    },    
     {
         path      : '**',
         redirectTo : "home"              

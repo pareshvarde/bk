@@ -1,8 +1,17 @@
 <div id="addMember" fxLayout="column">
   <div id="addMember-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="addMember-form">
-      <div class="title">MY PROFILE</div>
-      <div id="newMember">
+      <div class="title">HEADER</div>
+      <div fxLayout="row">
+        <mat-form-field>
+          <mat-select placeholder="Head Of Family" (change)="loadFamily($event)" [(ngModel)]="familyId">
+            <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
+              {{ n.hof }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
         <form name="memberForm" [formGroup]="memberForm" novalidate>
 
           <div fxLayout="row" fxLayoutWrap>
@@ -83,7 +92,7 @@
             <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="memberModel.married" formControlName="married">Married?</mat-checkbox>
 
             <mat-form-field>
-              <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">                
+              <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
                 <mat-option *ngFor="let n of getRelations()" [value]="n.relationTypeId">
                   {{ n.relationType }}
                 </mat-option>
@@ -133,12 +142,17 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutAlign="center center">
+          <div *ngIf="editMode || addMode" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
               SAVE
             </button>
-            <button mat-raised-button (click)="cancelAdd()" class="submit-button" aria-label="CANCEL">
+            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
               CANCEL
+            </button>
+          </div>
+          <div *ngIf="!editMode && !addMode" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+              EDIT
             </button>
           </div>
         </form>
