@@ -83,15 +83,15 @@
             <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="memberModel.married" formControlName="married">Married?</mat-checkbox>
 
             <mat-form-field>
-              <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
-                <mat-option *ngFor="let n of relationTypes.data" [value]="n.id">
+              <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">                
+                <mat-option *ngFor="let n of getRelations()" [value]="n.relationTypeId">
                   {{ n.relationType }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
 
             <mat-form-field>
-              <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
+              <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relatedMemberId" formControlName="relatedMemberId">
                 <mat-option *ngFor="let n of currentFamily.members" [value]="n.memberId">
                   {{ n.name }}
                 </mat-option>

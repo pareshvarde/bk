@@ -6,7 +6,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { MemberModel } from '../../models/memberModel';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators, EmailValidators } from 'ng2-validators';
-import { RelationTypeData } from '../../data/relations';
+import { RelationTypeData, RelationTypeModel } from '../../data/relations';
 
 @Component({
   selector: 'app-add-member',
@@ -55,8 +55,8 @@ export class AddMemberComponent implements OnInit {
       facebookHandle: new FormControl('', [UniversalValidators.noWhitespace]),
       instagramHandle: new FormControl('', [UniversalValidators.noWhitespace]),
       twitterHandle: new FormControl('', [UniversalValidators.noWhitespace]),
-      relationTypeId: new FormControl('', null),
-      relatedMemberId: new FormControl('', null)
+      relationTypeId: new FormControl('', [Validators.required]),
+      relatedMemberId: new FormControl('', [Validators.required])
     }); 
     
     this.loadFamily();
@@ -66,7 +66,6 @@ export class AddMemberComponent implements OnInit {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
       (res) => {            
         this.currentFamily = res.result;        
-        debugger;                        
       },
       (err) => {        
         if (err.errors)
@@ -75,6 +74,15 @@ export class AddMemberComponent implements OnInit {
           this.alertService.error(err);
       }
     );
+  }
+
+  getRelations():RelationTypeModel[]{    
+    if (this.memberModel.gender === 'M')      
+      return this.relationTypes.data.filter(x => x.male);
+    else if (this.memberModel.gender === 'F')
+      return this.relationTypes.data.filter(x => !x.male);
+    else
+      return this.relationTypes.data;
   }
 
   saveMember(){
