@@ -61,8 +61,8 @@ export class MemberComponent implements OnInit {
       facebookHandle: new FormControl('', [UniversalValidators.noWhitespace]),
       instagramHandle: new FormControl('', [UniversalValidators.noWhitespace]),
       twitterHandle: new FormControl('', [UniversalValidators.noWhitespace]),
-      relationTypeId: new FormControl('', [Validators.required]),
-      relatedMemberId: new FormControl('', [Validators.required])
+      relationTypeId: new FormControl('', null),
+      relatedMemberId: new FormControl('', null)
     });
 
     this.loadFamilyLookup();
@@ -92,8 +92,7 @@ export class MemberComponent implements OnInit {
 
         if (this.familyLookup && this.familyLookup.length > 0) {
           if (!this.familyId) {
-            this.familyId = this.familyLookup[0].familyId;
-            this.loadFamily();
+            this.familyId = this.familyLookup[0].familyId;            
           }
         }
       },
