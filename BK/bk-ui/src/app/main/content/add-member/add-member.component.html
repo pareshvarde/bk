@@ -1,3 +1,148 @@
-<p>
-  add-member works!
-</p>
+<div id="addMember" fxLayout="column">
+  <div id="addMember-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
+    <div id="addMember-form">
+      <div class="title">MY PROFILE</div>
+      <div id="newMember">
+        <form name="memberForm" [formGroup]="memberForm" novalidate>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.lastName" placeholder="Last Name" formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.nickName" placeholder="Nick Name" formControlName="nickName">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.gender" formControlName="gender">
+              <mat-radio-button class="mr-8" value='M'>
+                Male
+              </mat-radio-button>
+              <mat-radio-button class="mr-8" value='F'>
+                Female
+              </mat-radio-button>
+              <mat-radio-button class="mr-8" value='O'>
+                Other
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
+                formControlName="dob">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.birthPlace" placeholder="Birth Place" formControlName="birthPlace">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.alive" formControlName="alive">
+              <mat-radio-button class="mr-8" value='A'>
+                Alive
+              </mat-radio-button>
+              <mat-radio-button class="mr-8" value='D'>
+                Deceased
+              </mat-radio-button>
+            </mat-radio-group>
+
+            <mat-form-field *ngIf="memberModel.alive === 'D'">
+              <input matInput [(ngModel)]="memberModel.dod" (focus)="dodPicker.open()" [matDatepicker]="dodPicker" placeholder="Date Of Death"
+                formControlName="dod">
+              <mat-datepicker-toggle matSuffix [for]="dodPicker"></mat-datepicker-toggle>
+              <mat-datepicker #dodPicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="memberModel.alive === 'D'">
+              <input matInput [(ngModel)]="memberModel.deathPlace" placeholder="Death Place" formControlName="deathPlace">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="memberModel.married" formControlName="married">Married?</mat-checkbox>
+
+            <mat-form-field>
+              <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
+                <mat-option *ngFor="let n of relationTypes.data" [value]="n.id">
+                  {{ n.relationType }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
+                <mat-option *ngFor="let n of currentFamily.members" [value]="n.memberId">
+                  {{ n.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.educationField" placeholder="Education Field" formControlName="educationField">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.companyName" placeholder="Company Name" formControlName="companyName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.jobTitle" placeholder="Job Title" formControlName="jobTitle">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.instagramHandle" placeholder="Instagram Handle" formControlName="instagramHandle">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.twitterHandle" placeholder="Twitter Handle" formControlName="twitterHandle">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
+              SAVE
+            </button>
+            <button mat-raised-button (click)="cancelAdd()" class="submit-button" aria-label="CANCEL">
+              CANCEL
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

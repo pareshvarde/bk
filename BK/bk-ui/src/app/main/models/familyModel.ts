@@ -1,6 +1,11 @@
 import { MemberModel } from "./memberModel";
 
 export class FamilyModel{    
+
+    constructor(){
+        this.members = new Array<FamilyMemberModel>();
+    }
+
     familyId: number;
     nukhId: number;
     categoryId: number;

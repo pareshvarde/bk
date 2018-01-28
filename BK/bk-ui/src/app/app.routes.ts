@@ -73,7 +73,7 @@ export const bkRoutes: Routes = [
         component: FamilyComponent  
     },
     {
-        path: "addMember/:id",
+        path: "addMember/:familyId",
         component: AddMemberComponent
     },
     {

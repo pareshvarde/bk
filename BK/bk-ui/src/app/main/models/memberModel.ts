@@ -20,6 +20,8 @@ export class MemberModel {
     instagramHandle: string;
     facebookHandle: string;
     twitterHandle: string;
+    relationTypeId:number;
+    relatedMemberId: number;
 
     constructor() { }
 }
