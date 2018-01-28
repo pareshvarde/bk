@@ -111,6 +111,6 @@ export class FamilyComponent implements OnInit {
   }
 
   addMember(){
-    this.router.navigate(['addMember/' + this.currentFamilyId]);    
+    this.router.navigate(['member/' + this.currentFamilyId]);    
   }
 }

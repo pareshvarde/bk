@@ -11,13 +11,13 @@ import { Location } from '@angular/common';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
 
 @Component({
-  selector: 'app-add-member',
-  templateUrl: './add-member.component.html',
-  styleUrls: ['./add-member.component.scss'],
+  selector: 'app-member',
+  templateUrl: './member.component.html',
+  styleUrls: ['./member.component.scss'],
   providers: [bkDataService, RelationTypeData]
 })
 
-export class AddMemberComponent implements OnInit {
+export class MemberComponent implements OnInit {
 
   currentFamily: FamilyModel;
   memberModel: MemberModel;
@@ -107,7 +107,7 @@ export class AddMemberComponent implements OnInit {
   }
 
   loadMember() {
-    return this.dataService.getMember().subscribe(
+    return this.dataService.getMember(this.familyId).subscribe(
       (res) => {
         this.memberModel = res.result;
       },
