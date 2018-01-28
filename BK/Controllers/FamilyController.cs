@@ -19,15 +19,16 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                var result = (from m in context.Members.Where(x => x.MemberID == LoggedInMemberId)                              
-                              join f in context.Families on m.MemberID equals f.HeadOfFamilyID
+                var result = (from f in context.Families
+                              join fma in context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId) on f.FamilyID equals fma.FamilyId
+                              join m in context.Members on f.HeadOfFamilyID equals m.MemberID
                               select new
                               {
-                                  f.FamilyID,                                  
+                                  f.FamilyID,
                                   m.FirstName,
-                                  m.LastName                                  
-                              }).ToList();
-
+                                  m.LastName
+                              }).Distinct().ToList();
+                
                 List<FamilyLookupViewModel> response = new List<FamilyLookupViewModel>();
 
                 foreach (var item in result)
@@ -105,6 +106,7 @@ namespace BK.Controllers
                 family.NukhID = model.NukhID;
                 family.PostalCode =  model.PostalCode;
                 family.State =  model.State;
+                family.HeadOfFamilyID = model.HeadOfFamilyID;
 
                 context.SaveChanges();
             }

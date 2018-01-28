@@ -7,6 +7,7 @@ import { MemberModel } from '../../models/memberModel';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators, EmailValidators } from 'ng2-validators';
 import { RelationTypeData, RelationTypeModel } from '../../data/relations';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-member',
@@ -24,7 +25,7 @@ export class AddMemberComponent implements OnInit {
   memberForm: FormGroup;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public relationTypes: RelationTypeData) {
+    private alertService: NotificationsService, public relationTypes: RelationTypeData, private location: Location) {
     this.route.params.subscribe(params => this.familyId = params.familyId);
     this.addExisting = true;
     this.memberModel = new MemberModel();
@@ -112,6 +113,6 @@ export class AddMemberComponent implements OnInit {
   }
 
   cancelAdd() {
-
+    this.location.back();
   }
 }
