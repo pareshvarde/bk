@@ -107,7 +107,7 @@ export class MemberComponent implements OnInit {
   }
 
   loadMember() {
-    return this.dataService.getMember(this.familyId).subscribe(
+    return this.dataService.getMember().subscribe(
       (res) => {
         this.memberModel = res.result;
       },
