@@ -12,7 +12,7 @@ namespace BK.ViewModel
     public class MemberViewModel
     {
         [JsonProperty("memberId")]
-        public int MemberID { get; set; }
+        public int? MemberID { get; set; }
 
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
@@ -73,6 +73,15 @@ namespace BK.ViewModel
 
         [JsonProperty("twitterHandle")]
         public string TwitterHandle { get; set; }
+
+        [JsonProperty("relationTypeId")]
+        public int? RelationTypeId { get; set; }
+
+        [JsonProperty("relatedMemberId")]
+        public int? RelatedMemberId { get; set; }
+
+        [JsonProperty("familyId")]
+        public int? FamilyId { get; set; }
     }
 
     public class MemberViewModelValidator : AbstractValidator<MemberViewModel>

@@ -75,12 +75,21 @@ namespace BK.Controllers
         [HttpPost]
         public IHttpActionResult SaveMember(MemberViewModel model)
         {
-
             using (bkContext context = new bkContext())
             {
-                Member member = context.Members.Where(x => x.MemberID == LoggedInMemberId).FirstOrDefault();
-                if (member == null)
-                    return BadRequest("Your record cannot be loaded. Please try again or contact Administrator for help");                
+                Member member = null;
+
+                if (model.MemberID.HasValue)
+                {
+                    member = context.Members.Where(x => x.MemberID == model.MemberID).FirstOrDefault();
+                    if (member == null)
+                        return BadRequest("Member record cannot be loaded. Please try again or contact Administrator for help");
+                }                
+                else
+                {
+                    member = new Member();
+                    context.Members.Add(member);
+                }
 
                 member.AadhaarNumber = model.AadhaarNumber;
                 member.Alive = model.Alive;
@@ -103,10 +112,29 @@ namespace BK.Controllers
                 member.TwitterHandle = model.TwitterHandle;
                 member.Married = model.Married;
 
+                if (model.FamilyId.HasValue)
+                {
+                    if (!model.RelatedMemberId.HasValue)
+                        return BadRequest("Please specify member relation in family");
+
+                    if (!model.RelationTypeId.HasValue)
+                        return BadRequest("Please specify member relation in family");
+
+                    member.FamilyMemberAssociations.Add(new FamilyMemberAssociation() {
+                        Approved = true,
+                        FamilyId = model.FamilyId.Value,
+                        RelatedId = model.RelatedMemberId.Value,
+                        RelationTypeId = model.RelationTypeId.Value,
+                        CreatedOn = DateTime.Now,
+                        CreatedBy = LoggedInMemberId,                                          
+                    });
+                }
+
                 context.SaveChanges();                           
 
                 return Ok();
             }
         }
+
     }
 }
