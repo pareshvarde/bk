@@ -10,10 +10,7 @@ namespace BK.ViewModel
     {
         [JsonProperty("familyId")]
         public int FamilyID { get; set; }
-
-        [JsonProperty("familySID")]
-        public string FamilySID { get; set; }
-
+        
         [JsonProperty("hof")]
         public string HeadOfFamily { get; set; }    
     }

@@ -18,7 +18,7 @@ namespace BK.Context
         public string LastName { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public bool Married { get; set; }
-        public bool HeadOfFamily { get; set; }
+        public int HeadOfFamilyID { get; set; }
         public string rFirstName { get; set; }
         public string rLastName { get; set; }
         public string RelationType { get; set; }

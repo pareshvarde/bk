@@ -1,5 +1,4 @@
 export class FamilyLookupModel{
-    familyId: number;
-    familySID: string;
+    familyId: number;    
     hof: string;
 }

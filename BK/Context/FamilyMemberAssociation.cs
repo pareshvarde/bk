@@ -16,17 +16,17 @@ namespace BK.Context
     {
         public int FamilyId { get; set; }
         public int MemberId { get; set; }
-        public bool HeadOfFamily { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
         public bool Approved { get; set; }
-        public Nullable<System.DateTime> ApprovedOn { get; set; }
-        public Nullable<System.DateTime> ApprovedBy { get; set; }
         public Nullable<int> RelatedId { get; set; }
         public Nullable<int> RelationTypeId { get; set; }
+        public Nullable<System.DateTime> ApprovedOn { get; set; }
+        public Nullable<System.DateTime> ApprovedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public int CreatedBy { get; set; }
     
-        public virtual Family Family { get; set; }
+        public virtual lkRelationType lkRelationType { get; set; }
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }
+        public virtual Family Family { get; set; }
     }
 }

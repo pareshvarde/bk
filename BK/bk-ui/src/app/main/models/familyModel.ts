@@ -14,7 +14,8 @@ export class FamilyModel{
     city: string;
     state: string;
     postalcode: string;
-    country: string;    
+    country: string; 
+    hofId: number;   
     members: FamilyMemberModel[];
 }
 
@@ -22,7 +23,6 @@ export class FamilyMemberModel{
     memberId: number;
     name: string;    
     dob: Date;
-    married: boolean;
-    hof: boolean;
+    married: boolean;    
     relation: string;
 }

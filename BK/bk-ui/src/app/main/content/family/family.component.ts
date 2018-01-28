@@ -30,7 +30,7 @@ export class FamilyComponent implements OnInit {
     this.model = new FamilyModel();    
   }
 
-  displayedColumns = ['name', 'dob', 'married', 'hof', 'relation'];  
+  displayedColumns = ['memberId','name', 'dob', 'married', 'relation'];  
 
   ngOnInit() {
     this.familyForm = new FormGroup({
@@ -42,6 +42,7 @@ export class FamilyComponent implements OnInit {
       postalCode: new FormControl('', [Validators.required]),
       state: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
+      hof: new FormControl('', [Validators.required])
     });
 
     this.familyForm.disable();

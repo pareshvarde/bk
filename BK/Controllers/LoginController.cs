@@ -31,17 +31,6 @@ namespace BK.Controllers
                     if (context.Members.Any(f => f.AadhaarNumber == register.AadhaarNumber))
                         return BadRequest("Aadhar number already registered. Please contact Administrator for help");
 
-                Family family = new Family();
-                family.FamilySID = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
-                family.Address1 = register.Address1;
-                family.Address2 = register.Address2;
-                family.City = register.City;
-                family.State = register.State;
-                family.PostalCode = register.PostalCode;
-                family.Country = register.Country;
-                family.CategoryID = register.CategoryId;
-                family.NukhID = register.NukhId;                
-
                 Member member = new Member();
                 member.FirstName = register.FirstName;
                 member.LastName = register.LastName;
@@ -55,10 +44,21 @@ namespace BK.Controllers
                 member.Alive = "A";
                 member.Active = true;
 
+                Family family = new Family();
+                family.FamilySID = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
+                family.Address1 = register.Address1;
+                family.Address2 = register.Address2;
+                family.City = register.City;
+                family.State = register.State;
+                family.PostalCode = register.PostalCode;
+                family.Country = register.Country;
+                family.CategoryID = register.CategoryId;
+                family.NukhID = register.NukhId;
+                family.Member = member;                
+
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
                 fmAssociation.Member = member;
-                fmAssociation.Family = family;
-                fmAssociation.HeadOfFamily = true;
+                fmAssociation.Family = family;                
                 fmAssociation.Approved = true;                
                 fmAssociation.CreatedBy = 0;
 

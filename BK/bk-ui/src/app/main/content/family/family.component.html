@@ -32,6 +32,14 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Head Of Family" [(ngModel)]="model.hofId" formControlName="hof">
+                <mat-option *ngFor="let n of model.members" [value]="n.memberId">
+                  {{ n.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
@@ -80,11 +88,17 @@
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Family Members</span>
           <button mat-raised-button (click)="addMember()" class="ml-8" router color="accent" aria-label="Add Member">
-              <mat-icon>person_add</mat-icon>
-              <span>Add</span>
-          </button>          
+            <mat-icon>person_add</mat-icon>
+            <span>Add</span>
+          </button>
         </div>
         <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="memberId">
+            <mat-header-cell *matHeaderCellDef>
+              <b>ID</b>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let member">{{member.memberId}}</mat-cell>
+          </ng-container>
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef>
               <b>Name</b>
@@ -102,14 +116,6 @@
               <b>Married</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">{{member.married}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="hof">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Head Of Family</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">
-              <mat-icon>done</mat-icon>
-            </mat-cell>
           </ng-container>
           <ng-container matColumnDef="relation">
             <mat-header-cell *matHeaderCellDef>

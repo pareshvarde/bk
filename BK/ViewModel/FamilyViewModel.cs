@@ -22,6 +22,9 @@ namespace BK.ViewModel
         [JsonProperty("categoryId")]
         public int CategoryID { get; set; }
 
+        [JsonProperty("hofId")]
+        public int HeadOfFamilyID { get; set; }
+
         [JsonProperty("address1")]
         public string Address1 { get; set; }
 
@@ -57,10 +60,7 @@ namespace BK.ViewModel
 
         [JsonProperty("married")]
         public bool Married { get; set; }
-
-        [JsonProperty("hof")]
-        public bool HOF { get; set; }
-
+        
         [JsonProperty("relation")]
         public string Relation { get; set; }
     }

@@ -19,13 +19,11 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                var result = (from m in context.Members.Where(x => x.MemberID == LoggedInMemberId)
-                              join mfa in context.FamilyMemberAssociations.Where(x => x.HeadOfFamily) on m.MemberID equals mfa.MemberId
-                              join f in context.Families on mfa.FamilyId equals f.FamilyID
+                var result = (from m in context.Members.Where(x => x.MemberID == LoggedInMemberId)                              
+                              join f in context.Families on m.MemberID equals f.HeadOfFamilyID
                               select new
                               {
-                                  f.FamilyID,
-                                  f.FamilySID,
+                                  f.FamilyID,                                  
                                   m.FirstName,
                                   m.LastName                                  
                               }).ToList();
@@ -36,8 +34,7 @@ namespace BK.Controllers
                 {
                     response.Add(new FamilyLookupViewModel()
                     {
-                        FamilyID = item.FamilyID,
-                        FamilySID = item.FamilySID,
+                        FamilyID = item.FamilyID,                        
                         HeadOfFamily = $"{item.FirstName} {item.LastName}"
 
                     });
@@ -69,13 +66,13 @@ namespace BK.Controllers
                 fvm.NukhID = f.NukhID;
                 fvm.PostalCode = f.PostalCode;
                 fvm.State = f.State;
+                fvm.HeadOfFamilyID = f.HeadOfFamilyID;
 
                 foreach(var item in members)
                 {
                     var tmp = new FamilyMemberViewModel();
 
-                    tmp.DOB = item.DOB;
-                    tmp.HOF = item.HeadOfFamily;
+                    tmp.DOB = item.DOB;                    
                     tmp.Married = item.Married;
                     tmp.MemberID = item.MemberID;
                     tmp.Name = $"{item.FirstName} {item.LastName}";

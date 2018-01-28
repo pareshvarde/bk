@@ -30,8 +30,8 @@ namespace BK.Context
         public virtual DbSet<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }
         public virtual DbSet<lkRelationType> lkRelationTypes { get; set; }
         public virtual DbSet<Matrimonial> Matrimonials { get; set; }
-        public virtual DbSet<Family> Families { get; set; }
         public virtual DbSet<Member> Members { get; set; }
+        public virtual DbSet<Family> Families { get; set; }
     
         public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
         {
