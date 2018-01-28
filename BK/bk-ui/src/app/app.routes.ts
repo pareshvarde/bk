@@ -13,6 +13,7 @@ import { ChangePasswordComponent } from './main/content/change-password/change-p
 import { RegisterComponent } from './main/content/register/register.component';
 import { ProfileComponent } from './main/content/profile/profile.component';
 import { FamilyComponent } from './main/content/family/family.component';
+import { AddMemberComponent } from './main/content/add-member/add-member.component';
 
 export const bkRoutes: Routes = [
     {
@@ -70,6 +71,10 @@ export const bkRoutes: Routes = [
     {
         path: "family",
         component: FamilyComponent  
+    },
+    {
+        path: "addMember/:id",
+        component: AddMemberComponent
     },
     {
         path      : '**',

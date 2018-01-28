@@ -108,4 +108,8 @@ export class FamilyComponent implements OnInit {
     this.editMode = true;
     this.familyForm.enable();
   }
+
+  addMember(){
+    this.router.navigate(['addMember/' + this.currentFamilyId]);    
+  }
 }
