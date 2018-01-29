@@ -16,8 +16,7 @@
             padding: 32px;
 
             @include media-breakpoint('xs') {
-                padding-left: 0px;
-                padding-right: 0px;
+                padding: 16px;
             }
 
             .information{
@@ -36,9 +35,7 @@
                 text-align: center;
                 @include mat-elevation(7);
 
-                @include media-breakpoint('xs') {       
-                    padding-left: 0px;
-                    padding-right: 0px;             
+                @include media-breakpoint('xs') {                    
                     width: 100%;
                 }
 

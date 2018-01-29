@@ -15,8 +15,7 @@
             flex: 1 0 auto;            
 
             @include media-breakpoint('xs') {
-                padding-left: 0px;
-                padding-right: 0px;
+                padding: 16px;
             }
 
             mat-table{
@@ -26,12 +25,6 @@
             .bk-card {                
                 @include mat-elevation(7);
                 padding: 16px 32px 16px 32px;
-
-                @include media-breakpoint('xs') {
-                    padding-left: 0px;
-                    padding-right: 0px;
-                    width: 100%;
-                }        
             }
 
             #family-form {       
