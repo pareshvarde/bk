@@ -6,6 +6,10 @@ using System.Web.Http;
 using Microsoft.Owin;
 using Owin;
 using Microsoft.Owin.Security.OAuth;
+using System.Configuration;
+using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.Owin.Security.Jwt;
+using Microsoft.Owin.Security;
 
 [assembly: OwinStartup(typeof(BK.Startup))]
 namespace BK
@@ -16,7 +20,8 @@ namespace BK
         {
             HttpConfiguration config = new HttpConfiguration();
             ConfigureOAuth(app);
-            WebApiConfig.Register(config);
+            ConfigureOAuthTokenConsumption(app);
+            WebApiConfig.Register(config);  
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
         }
@@ -28,11 +33,31 @@ namespace BK
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/login"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
-                Provider = new bkAuthorizationServerProvider()
+                Provider = new bkAuthorizationServerProvider(),
+                AccessTokenFormat = new bkTokenFormat("http://localhost:4200")
             };
 
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthAuthorizationServer(OAuthServerOptions);            
+            //app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+        }
+
+        private void ConfigureOAuthTokenConsumption(IAppBuilder app)
+        {
+            var issuer = "http://localhost:4200";
+            string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
+            byte[] audienceSecret = TextEncodings.Base64Url.Decode
+            (ConfigurationManager.AppSettings["as:AudienceSecret"]);
+                        
+            app.UseJwtBearerAuthentication(
+                new JwtBearerAuthenticationOptions
+                {
+                    AuthenticationMode = AuthenticationMode.Active,
+                    AllowedAudiences = new[] { audienceId },
+                    IssuerSecurityTokenProviders = new IIssuerSecurityTokenProvider[]
+                    {
+                        new SymmetricKeyIssuerSecurityTokenProvider(issuer, audienceSecret)
+                    }
+                });
         }
     }
 }

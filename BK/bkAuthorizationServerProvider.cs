@@ -6,6 +6,7 @@ using System.Web;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using BK.Context;
+using Microsoft.Owin.Security;
 
 namespace BK
 {
@@ -34,11 +35,14 @@ namespace BK
                 await _context.SaveChangesAsync();               
             }
 
-            var identity = new ClaimsIdentity(context.Options.AuthenticationType);            
+
+            var identity = new ClaimsIdentity("JWT");            
             identity.AddClaim(new Claim("role", "user"));            
             identity.AddClaim(new Claim("memberid", fMember.MemberID.ToString()));
 
-            context.Validated(identity);
+            var ticket = new AuthenticationTicket(identity, null);
+
+            context.Validated(ticket);
         }
     }
 }
