@@ -30,8 +30,17 @@ export class MemberComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public relationTypes: RelationTypeData, private location: Location) {
-    this.route.params.subscribe(params => this.familyId = params.familyId);
-    this.route.params.subscribe(params => this.memberId = params.memberId);
+
+    this.route.params.subscribe(params => {
+      if (params.familyId > 0)
+        this.familyId = params.familyId;
+    });
+
+    this.route.params.subscribe(params => {
+      if (this.memberId > 0)
+        this.memberId = params.memberId;
+    });
+
     this.memberModel = new MemberModel();
     this.memberModel.gender = 'M';
     this.memberModel.alive = 'A';

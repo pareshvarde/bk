@@ -4,7 +4,7 @@ import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { NukhData } from '../../data/nukhs';
 import { CategoryData } from '../../data/categories';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
@@ -20,17 +20,23 @@ export class FamilyComponent implements OnInit {
 
   model: FamilyModel;
   familyForm: FormGroup;
-  currentFamilyId: number;
+  familyId: number;
   familyLookup: FamilyLookupModel[];
   editMode: boolean;
   dataSource: any;
 
-  constructor(private router: Router, private dataService: bkDataService,
+  constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public nukhs: NukhData, public categories: CategoryData) {
-    this.model = new FamilyModel();    
+
+    this.route.params.subscribe(params => {
+      if (params.familyId > 0)
+        this.familyId = params.familyId;
+    });
+
+    this.model = new FamilyModel();
   }
 
-  displayedColumns = ['memberId','name', 'dob', 'married', 'relation'];  
+  displayedColumns = ['memberId', 'name', 'dob', 'married', 'relation'];
 
   ngOnInit() {
     this.familyForm = new FormGroup({
@@ -51,16 +57,15 @@ export class FamilyComponent implements OnInit {
 
   loadFamilyLookup() {
     this.dataService.getFamilyLookup().subscribe(
-      (res) => {      
-        this.familyLookup = res.result;        
-        
-        if (this.familyLookup && this.familyLookup.length > 0)
-        {
-          this.currentFamilyId = this.familyLookup[0].familyId;
+      (res) => {
+        this.familyLookup = res.result;
+
+        if (this.familyLookup && this.familyLookup.length > 0) {
+          this.familyId = this.familyLookup[0].familyId;
           this.loadFamily(null);
         }
       },
-      (err) => {        
+      (err) => {
         if (err.errors)
           this.alertService.error(err.errors[0]);
         else
@@ -69,13 +74,13 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  loadFamily(ev){
-    this.dataService.getFamilyDetail(this.currentFamilyId).subscribe(
-      (res) => {            
-        this.model = res.result;                        
+  loadFamily(ev) {
+    this.dataService.getFamilyDetail(this.familyId).subscribe(
+      (res) => {
+        this.model = res.result;
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
       },
-      (err) => {        
+      (err) => {
         if (err.errors)
           this.alertService.error(err.errors[0]);
         else
@@ -84,14 +89,14 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  saveFamily(){
+  saveFamily() {
     this.dataService.saveFamily(this.model).subscribe(
-      (res) => {      
-        this.alertService.success("Family details has been updated.");    
-        this.familyForm.markAsPristine();    
+      (res) => {
+        this.alertService.success("Family details has been updated.");
+        this.familyForm.markAsPristine();
         this.cancelEdit();
       },
-      (err) => {        
+      (err) => {
         if (err.errors)
           this.alertService.error(err.errors[0]);
         else
@@ -100,17 +105,17 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  cancelEdit(){
+  cancelEdit() {
     this.editMode = false;
     this.familyForm.disable();
   }
 
-  edit(){
+  edit() {
     this.editMode = true;
     this.familyForm.enable();
   }
 
-  addMember(){
-    this.router.navigate(['member/' + this.currentFamilyId]);    
+  addMember() {
+    this.router.navigate(['member/' + this.familyId]);
   }
 }

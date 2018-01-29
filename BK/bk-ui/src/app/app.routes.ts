@@ -64,19 +64,11 @@ export const bkRoutes: Routes = [
         component: RegisterComponent
     },
     {
-        path: "family",
+        path: "family/:familyId",
         component: FamilyComponent  
     },
     {
         path: "member/:familyId/:memberId",
-        component: MemberComponent
-    },
-    {
-        path: "member/:familyId",
-        component: MemberComponent
-    },    
-    {
-        path: "member",
         component: MemberComponent
     },    
     {

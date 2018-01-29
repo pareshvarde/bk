@@ -36,11 +36,11 @@
             <div *ngIf="authService.authenticated()" class="toolbar-separator"></div>
 
             <mat-menu #userMenu="matMenu">
-                <button mat-menu-item routerLink="member">
+                <button mat-menu-item (click)="loadProfile()">
                     <mat-icon>person</mat-icon>
                     <span>My Profile</span>
                 </button>
-                <button mat-menu-item routerLink="family">
+                <button mat-menu-item (click)="loadFamily()">
                         <mat-icon>group</mat-icon>
                         <span>My Family</span>
                     </button>
