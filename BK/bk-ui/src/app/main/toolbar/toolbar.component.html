@@ -19,21 +19,21 @@
             </div>
         </div>
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
-            <button *ngIf="!sharedService.authenticated()" routerLink="login" mat-button class="user-button">
+            <button *ngIf="!authService.authenticated()" routerLink="login" mat-button class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <mat-icon class="s-16 mr-8">album</mat-icon>
                     <span class="username mr-12">Login</span>
                 </div>
             </button>
 
-            <button *ngIf="sharedService.authenticated()" mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+            <button *ngIf="authService.authenticated()" mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar" src="assets/images/avatars/profile.jpg">
                     <span class="username mr-12" fxHide fxShow.gt-sm>Paresh Varde</span>
                     <mat-icon clsas="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
             </button>
-            <div *ngIf="sharedService.authenticated()" class="toolbar-separator"></div>
+            <div *ngIf="authService.authenticated()" class="toolbar-separator"></div>
 
             <mat-menu #userMenu="matMenu">
                 <button mat-menu-item routerLink="member">
@@ -50,13 +50,13 @@
                 </button>
             </mat-menu>
 
-            <button *ngIf="sharedService.authenticated()" (click)="logout()" mat-button class="user-button">
+            <button *ngIf="authService.authenticated()" (click)="logout()" mat-button class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <mat-icon class="s-16 mr-8">power_settings_new</mat-icon>
                     <span class="username" fxHide fxShow.gt-sm>Log Out</span>
                 </div>
             </button>
-            <div *ngIf="sharedService.authenticated()" class="toolbar-separator"></div>
+            <div *ngIf="authService.authenticated()" class="toolbar-separator"></div>
 
             <button mat-button fxHide fxShow.gt-xs class="language-button" [matMenuTriggerFor]="languageMenu">
                 <div fxLayout="row" fxLayoutAlign="center center">
