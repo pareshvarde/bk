@@ -16,7 +16,7 @@
             padding: 32px;
 
             @include media-breakpoint('xs') {
-                padding: 16px;
+                padding: 5px;
             }
 
             #addMember-form {       
@@ -27,7 +27,7 @@
                 @include mat-elevation(7);
 
                 @include media-breakpoint('xs') {
-                    padding: 24px;
+                    padding: 16px;
                     width: 100%;
                 }
              
