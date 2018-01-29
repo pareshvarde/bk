@@ -59,11 +59,12 @@ export class FamilyComponent implements OnInit {
     this.dataService.getFamilyLookup().subscribe(
       (res) => {
         this.familyLookup = res.result;
-
-        if (this.familyLookup && this.familyLookup.length > 0) {
-          this.familyId = this.familyLookup[0].familyId;
-          this.loadFamily(null);
+        
+        if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId) {
+          this.familyId = this.familyLookup[0].familyId;          
         }
+
+        this.loadFamily();
       },
       (err) => {
         if (err.errors)
@@ -74,7 +75,7 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  loadFamily(ev) {
+  loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
       (res) => {
         this.model = res.result;
@@ -116,6 +117,6 @@ export class FamilyComponent implements OnInit {
   }
 
   addMember() {
-    this.router.navigate(['member/' + this.familyId]);
+    this.router.navigate(['member/' + this.familyId + "/0"]);
   }
 }

@@ -37,7 +37,7 @@ export class MemberComponent implements OnInit {
     });
 
     this.route.params.subscribe(params => {
-      if (this.memberId > 0)
+      if (params.memberId > 0)
         this.memberId = params.memberId;
     });
 
@@ -75,22 +75,14 @@ export class MemberComponent implements OnInit {
     });
 
     this.loadFamilyLookup();
-
-    if (this.familyId){
-      this.loadFamily();
-      this.addMode = true;
-    }
-
-    if (this.memberId){
-      this.loadMember();
+  
+    if (this.memberId > 0){      
       this.memberForm.disable();
       this.addMode = false;      
-    }
-
-    if (!this.familyId && !this.memberId){
-      this.addMode = false;
-      this.memberForm.disable();
-      this.loadMember();
+    }    
+    else
+    {
+      this.addMode = true;
     }
   }
 
@@ -100,10 +92,14 @@ export class MemberComponent implements OnInit {
         this.familyLookup = res.result;
 
         if (this.familyLookup && this.familyLookup.length > 0) {
-          if (!this.familyId) {
-            this.familyId = this.familyLookup[0].familyId;            
-          }
+          if (!this.familyId)
+            this.familyId = this.familyLookup[0].familyId;                                
         }
+
+        this.loadFamily();
+
+        if (this.memberId > 0)
+          this.loadMember();
       },
       (err) => {
         if (err.errors)
@@ -115,7 +111,7 @@ export class MemberComponent implements OnInit {
   }
 
   loadMember() {
-    return this.dataService.getMember().subscribe(
+    return this.dataService.getMember(this.memberId, this.familyId).subscribe(
       (res) => {
         this.memberModel = res.result;
       },

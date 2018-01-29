@@ -65,10 +65,10 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
-  getMember(){
+  getMember(memberId: number, familyId: number){
     this.blockUI.start("Please wait...");
 
-    return this.authHttp.get(this.API_URL + "getMember").map((res)=>{
+    return this.authHttp.get(this.API_URL + "getMember?memberId=" + memberId + "&familyId=" + familyId).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

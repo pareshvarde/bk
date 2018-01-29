@@ -35,13 +35,19 @@ namespace BK.Controllers
 
         [Route("api/getMember")]
         [HttpGet]
-        public IHttpActionResult GetMember()
+        public IHttpActionResult GetMember(int? memberId, int familyId)
         {
             using (bkContext context = new bkContext())
             {
-                Member member = context.Members.Where(x => x.MemberID == LoggedInMemberId).FirstOrDefault();
+                int id = LoggedInMemberId;                
+                if (memberId.HasValue)
+                    id = memberId.Value;
+
+                Member member = context.Members.Where(x => x.MemberID == id).FirstOrDefault();
                 if (member == null)
                     return BadRequest("Your record cannot be loaded. Please try again or contact Administrator for help");
+
+                FamilyMemberAssociation fma = member.FamilyMemberAssociations.FirstOrDefault(x => x.FamilyId == familyId);                
 
                 MemberViewModel vm = new MemberViewModel() {
                     MemberID = member.MemberID,
@@ -66,6 +72,12 @@ namespace BK.Controllers
                     TwitterHandle = member.TwitterHandle,
                     Married = member.Married
                 };
+
+                if (fma != null)
+                {
+                    vm.RelatedMemberId = fma.RelatedId;
+                    vm.RelationTypeId = fma.RelationTypeId;
+                }
                                    
                 return Ok(vm);
             }
@@ -112,7 +124,7 @@ namespace BK.Controllers
                 member.TwitterHandle = model.TwitterHandle;
                 member.Married = model.Married;
 
-                if (model.FamilyId.HasValue && model.RelatedMemberId.HasValue && model.RelationTypeId.HasValue)
+                if (model.FamilyId.HasValue)
                 {                    
                     FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
                     if (mAssociation != null)
@@ -121,8 +133,8 @@ namespace BK.Controllers
                     member.FamilyMemberAssociations.Add(new FamilyMemberAssociation() {
                         Approved = true,
                         FamilyId = model.FamilyId.Value,
-                        RelatedId = model.RelatedMemberId.Value,
-                        RelationTypeId = model.RelationTypeId.Value,
+                        RelatedId = model.RelatedMemberId,
+                        RelationTypeId = model.RelationTypeId,
                         CreatedOn = DateTime.Now,
                         CreatedBy = LoggedInMemberId                  
                     });
