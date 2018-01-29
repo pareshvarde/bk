@@ -37,8 +37,7 @@ namespace BK
                 AccessTokenFormat = new bkTokenFormat("http://localhost:4200")
             };
 
-            app.UseOAuthAuthorizationServer(OAuthServerOptions);            
-            //app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+            app.UseOAuthAuthorizationServer(OAuthServerOptions);                        
         }
 
         private void ConfigureOAuthTokenConsumption(IAppBuilder app)
