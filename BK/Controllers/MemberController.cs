@@ -112,14 +112,8 @@ namespace BK.Controllers
                 member.TwitterHandle = model.TwitterHandle;
                 member.Married = model.Married;
 
-                if (model.FamilyId.HasValue)
-                {
-                    if (!model.RelatedMemberId.HasValue)
-                        return BadRequest("Please specify member relation in family");
-
-                    if (!model.RelationTypeId.HasValue)
-                        return BadRequest("Please specify member relation in family");
-
+                if (model.FamilyId.HasValue && model.RelatedMemberId.HasValue && model.RelationTypeId.HasValue)
+                {                    
                     FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
                     if (mAssociation != null)
                         context.FamilyMemberAssociations.Remove(mAssociation);

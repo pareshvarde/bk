@@ -29,6 +29,19 @@
           </div>
           <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.lastName" placeholder="Last Name" formControlName="lastName">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="memberModel.nickName" placeholder="Nick Name" formControlName="nickName">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
               <input matInput [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
             </mat-form-field>
 

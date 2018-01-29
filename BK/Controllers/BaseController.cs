@@ -15,7 +15,7 @@ namespace BK.Controllers
             get
             {
                 ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
-                return Convert.ToInt32(principal.Claims.Where(c => c.Type == "memberid").Single().Value);                
+                return Convert.ToInt32(principal.Claims.Where(c => c.Type == "memberId").Single().Value);                
             }
         }
     }
