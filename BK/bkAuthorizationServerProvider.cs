@@ -38,7 +38,8 @@ namespace BK
 
             var identity = new ClaimsIdentity("JWT");            
             identity.AddClaim(new Claim("role", "user"));            
-            identity.AddClaim(new Claim("memberid", fMember.MemberID.ToString()));
+            identity.AddClaim(new Claim("memberId", fMember.MemberID.ToString(), ClaimValueTypes.Integer));
+            identity.AddClaim(new Claim("name", fMember.FirstName));
 
             var ticket = new AuthenticationTicket(identity, null);
 
