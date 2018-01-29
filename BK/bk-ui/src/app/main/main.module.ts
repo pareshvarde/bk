@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { MomentModule } from 'angular2-moment';
 import { SharedModule } from '../core/modules/shared.module';
 import { ScrollToModule } from 'ng2-scroll-to';
+import { AuthModule } from './auth/authModule'
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { FuseMainComponent } from './main.component';
 import { FuseContentComponent } from './content/content.component';
@@ -67,7 +68,8 @@ import { MemberComponent } from './content/member/member.component';
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule,
-        MomentModule
+        MomentModule,
+        AuthModule
     ],
     exports     : [
         FuseMainComponent

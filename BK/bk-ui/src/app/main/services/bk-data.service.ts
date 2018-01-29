@@ -10,13 +10,14 @@ import { NgBlockUI, BlockUI } from 'ng-block-ui';
 import { RegisterModel } from '../models/registerModel';
 import { MemberModel } from '../models/memberModel';
 import { FamilyModel } from '../models/familyModel';
+import { AuthHttp } from 'angular2-jwt';
 
 @Injectable()
 export class bkDataService {
   private API_URL = "http://localhost:60067/api/";
   @BlockUI() blockUI: NgBlockUI;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, public authHttp: AuthHttp) { }
 
   login(userName: string, password: string): Observable<any> {
     
@@ -50,7 +51,7 @@ export class bkDataService {
   { 
     this.blockUI.start("Please wait...");
            
-    return this.http.post(this.API_URL + "changePassword", model,{headers: this.getAuthHeader()}).map((res) =>{
+    return this.authHttp.post(this.API_URL + "changePassword", model).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -67,7 +68,7 @@ export class bkDataService {
   getMember(){
     this.blockUI.start("Please wait...");
 
-    return this.http.get(this.API_URL + "getMember", {headers: this.getAuthHeader()}).map((res)=>{
+    return this.authHttp.get(this.API_URL + "getMember").map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -75,7 +76,7 @@ export class bkDataService {
   saveMember(model: MemberModel){
     this.blockUI.start("Please wait...");
            
-    return this.http.post(this.API_URL + "saveMember", model,{headers: this.getAuthHeader()}).map((res) =>{
+    return this.authHttp.post(this.API_URL + "saveMember", model).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -83,7 +84,7 @@ export class bkDataService {
   saveFamily(model: FamilyModel){
     this.blockUI.start("Please wait...");
            
-    return this.http.post(this.API_URL + "saveFamily", model,{headers: this.getAuthHeader()}).map((res) =>{
+    return this.authHttp.post(this.API_URL + "saveFamily", model).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -92,7 +93,7 @@ export class bkDataService {
   {
     this.blockUI.start("Please wait...");
                
-    return this.http.get(this.API_URL + "familyLookup", {headers: this.getAuthHeader()}).map((res) =>{
+    return this.authHttp.get(this.API_URL + "familyLookup").map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -101,20 +102,9 @@ export class bkDataService {
   {
     this.blockUI.start("Please wait...");
                
-    return this.http.get(this.API_URL + "family?familyId=" + familyId, {headers: this.getAuthHeader()}).map((res) =>{
+    return this.authHttp.get(this.API_URL + "family?familyId=" + familyId).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
-  }
-
-  private getAuthHeader(): Headers{    
-    const headers = new Headers(
-      {
-        'Content-Type': 'application/json',
-        'Authorization': window.localStorage.getItem('token')
-      }
-    );
-
-    return headers;
   }
 
   private getPublicHeader(): Headers{    

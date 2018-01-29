@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     this.dataService.login(emailValue, passwordValue).subscribe(
       (res) =>{              
         let result = JSON.parse((<any>res)._body)        
-        localStorage.setItem('token', "bearer " + result.access_token);
+        localStorage.setItem('token', result.access_token);
         this.router.navigate(['home']);
       },
       (err) =>{                  
