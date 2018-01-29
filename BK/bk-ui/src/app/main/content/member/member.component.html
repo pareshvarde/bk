@@ -4,7 +4,7 @@
       <div class="title">HEADER</div>
       <div fxLayout="row">
         <mat-form-field>
-          <mat-select placeholder="Head Of Family" (change)="loadFamily($event)" [(ngModel)]="familyId">
+          <mat-select placeholder="Head Of Family" (change)="loadFamily()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
               {{ n.hof }}
             </mat-option>
