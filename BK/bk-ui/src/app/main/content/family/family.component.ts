@@ -36,7 +36,7 @@ export class FamilyComponent implements OnInit {
     this.model = new FamilyModel();
   }
 
-  displayedColumns = ['memberId', 'name', 'dob', 'married', 'relation'];
+  displayedColumns = ['memberId', 'name', 'dob', 'married', 'relation', 'actions'];
 
   ngOnInit() {
     this.familyForm = new FormGroup({
@@ -120,5 +120,13 @@ export class FamilyComponent implements OnInit {
 
   addMember() {
     this.router.navigate(['member/' + this.familyId + "/0"]);
+  }
+
+  deleteMember(memberId: number){
+    alert('delete ' + memberId);
+  }
+
+  editMember(memberId: number){
+    alert('edit ' + memberId);
   }
 }

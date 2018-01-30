@@ -103,7 +103,9 @@
             <mat-header-cell *matHeaderCellDef>
               <b>Name</b>
             </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.name}}</mat-cell>
+            <mat-cell *matCellDef="let member">
+              <a href="member/{{familyId}}/{{member.memberId}}">{{member.name}}</a>              
+            </mat-cell>
           </ng-container>
           <ng-container matColumnDef="dob">
             <mat-header-cell *matHeaderCellDef>
@@ -123,7 +125,13 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
           </ng-container>
-
+          <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+            <mat-cell *matCellDef="let member">
+              <button mat-icon-button (click)="deleteMember(member.memberId)"><mat-icon>delete</mat-icon></button>              
+              <button mat-icon-button (click)="editMember(member.memberId)"><mat-icon>mode_edit</mat-icon></button>
+            </mat-cell>
+          </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
