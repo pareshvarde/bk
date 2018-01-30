@@ -76,14 +76,9 @@ export class MemberComponent implements OnInit {
 
     this.loadFamilyLookup();
   
-    if (this.memberId > 0){      
-      this.memberForm.disable();
-      this.addMode = false;      
-    }    
-    else
-    {
-      this.addMode = true;
-    }
+    this.addMode = this.memberId == null;
+    if (!this.addMode)
+      this.memberForm.disable();    
   }
 
   loadFamilyLookup() {
