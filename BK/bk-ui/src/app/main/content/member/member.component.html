@@ -1,17 +1,30 @@
-<div id="addMember" fxLayout="column">
-  <div id="addMember-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
-    <div id="addMember-form">
-      <div class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
-      <div fxLayout="row">
+<div id="member" fxLayout="column">
+  <div id="member-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
+    <div id="member-form">
+      <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
+      <div fxLayout="row" fxLayoutWrap>
         <mat-form-field>
-          <mat-select placeholder="Head Of Family" (change)="loadFamily()" [(ngModel)]="familyId">
+          <mat-select placeholder="Family" (change)="loadFamily()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
               {{ n.hof }}
             </mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-radio-group *ngIf="addMode" fxLayoutAlign="start center" [(ngModel)]="existingAdd">
+          <mat-radio-button class="mr-8" [value]="false">
+            New
+          </mat-radio-button>
+          <mat-radio-button class="mr-8" [value]="true">
+            Existing
+          </mat-radio-button>
+        </mat-radio-group>
       </div>
-      <div>
+      <div *ngIf="addMode && existingAdd == null" fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button (click)="cancelEdit()" color="accent" class="submit-button" aria-label="CANCEL">
+              BACK
+          </button>
+      </div>
+      <div *ngIf="existingAdd === false || !addMode">
         <form name="memberForm" [formGroup]="memberForm" novalidate>
 
           <div fxLayout="row" fxLayoutWrap>
@@ -163,6 +176,9 @@
             </button>
           </div>
         </form>
+      </div>
+      <div *ngIf="existingAdd">
+        Add Existing Member
       </div>
     </div>
   </div>

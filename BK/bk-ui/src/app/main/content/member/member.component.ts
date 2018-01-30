@@ -28,6 +28,7 @@ export class MemberComponent implements OnInit {
   memberForm: FormGroup;
   editMode: boolean;
   addMode: boolean;
+  existingAdd: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public relationTypes: RelationTypeData, 
@@ -48,8 +49,7 @@ export class MemberComponent implements OnInit {
     this.memberModel.alive = 'A';
     this.memberModel.familyId = this.familyId;
     this.memberModel.canEdit = true;
-    this.currentFamily = new FamilyModel();
-  
+    this.currentFamily = new FamilyModel();      
   }
 
   ngOnInit() {

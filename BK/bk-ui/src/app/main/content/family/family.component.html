@@ -4,7 +4,7 @@
       <div class="title">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
       <div fxLayout="row" *ngIf="model.canEdit">
         <mat-form-field>
-          <mat-select placeholder="Head Of Family" (change)="loadFamily()" [(ngModel)]="familyId">
+          <mat-select placeholder="Family" (change)="loadFamily()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
               {{ n.hof }}
             </mat-option>
