@@ -89,11 +89,11 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
-  getFamilyLookup()
+  getFamilyLookup(memberId: number)
   {
     this.blockUI.start("Please wait...");
                
-    return this.authHttp.get(this.API_URL + "familyLookup").map((res) =>{
+    return this.authHttp.get(this.API_URL + "familyLookup?memberId=" + memberId).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

@@ -8,13 +8,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
-import { debuglog } from 'util';
+import { bkAuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
   styleUrls: ['./family.component.scss'],
-  providers: [bkDataService, NukhData, CategoryData]
+  providers: [bkDataService, NukhData, CategoryData, bkAuthService]
 })
 export class FamilyComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class FamilyComponent implements OnInit {
   dataSource: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public nukhs: NukhData, public categories: CategoryData) {
+    private alertService: NotificationsService, public nukhs: NukhData, public authService: bkAuthService, public categories: CategoryData) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -56,7 +56,9 @@ export class FamilyComponent implements OnInit {
   }
 
   loadFamilyLookup() {
-    this.dataService.getFamilyLookup().subscribe(
+    var mId = this.authService.memberId();
+
+    this.dataService.getFamilyLookup(mId).subscribe(
       (res) => {
         this.familyLookup = res.result;
         

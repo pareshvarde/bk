@@ -9,12 +9,13 @@ import { UniversalValidators, EmailValidators } from 'ng2-validators';
 import { RelationTypeData, RelationTypeModel } from '../../data/relations';
 import { Location } from '@angular/common';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
+import { bkAuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.scss'],
-  providers: [bkDataService, RelationTypeData]
+  providers: [bkDataService, RelationTypeData, bkAuthService]
 })
 
 export class MemberComponent implements OnInit {
@@ -29,7 +30,8 @@ export class MemberComponent implements OnInit {
   addMode: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public relationTypes: RelationTypeData, private location: Location) {
+    private alertService: NotificationsService, public relationTypes: RelationTypeData, 
+    public authService: bkAuthService, private location: Location) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -81,8 +83,12 @@ export class MemberComponent implements OnInit {
       this.memberForm.disable();    
   }
 
-  loadFamilyLookup() {
-    this.dataService.getFamilyLookup().subscribe(
+  loadFamilyLookup() {    
+    var mId = this.memberId;
+    if (this.addMode)
+      mId = this.authService.memberId();
+
+    this.dataService.getFamilyLookup(mId).subscribe(
       (res) => {
         this.familyLookup = res.result;
 
@@ -118,7 +124,6 @@ export class MemberComponent implements OnInit {
       }
     );
   }
-
 
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).subscribe(

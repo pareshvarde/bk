@@ -15,12 +15,12 @@ namespace BK.Controllers
 
         [Route("api/familyLookup")]
         [HttpGet]
-        public IHttpActionResult GetFamliyLookup()
+        public IHttpActionResult GetFamilyLookup(int memberId)
         {
             using (bkContext context = new bkContext())
             {
                 var result = (from f in context.Families
-                              join fma in context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId) on f.FamilyID equals fma.FamilyId
+                              join fma in context.FamilyMemberAssociations.Where(x => x.MemberId == memberId) on f.FamilyID equals fma.FamilyId
                               join m in context.Members on f.HeadOfFamilyID equals m.MemberID
                               select new
                               {
