@@ -20,9 +20,9 @@
         </mat-radio-group>
       </div>
       <div *ngIf="addMode && existingAdd == null" fxLayout="row" fxLayoutAlign="center center">
-          <button mat-raised-button (click)="cancelEdit()" color="accent" class="submit-button" aria-label="CANCEL">
-              BACK
-          </button>
+        <button mat-raised-button (click)="cancelEdit()" color="accent" class="submit-button" aria-label="CANCEL">
+          BACK
+        </button>
       </div>
       <div *ngIf="existingAdd === false || !addMode">
         <form name="memberForm" [formGroup]="memberForm" novalidate>
@@ -115,7 +115,7 @@
 
             <mat-form-field>
               <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relatedMemberId" formControlName="relatedMemberId">
-                <mat-option *ngFor="let n of currentFamily.members" [value]="n.memberId">
+                <mat-option *ngFor="let n of familyModel.members" [value]="n.memberId">
                   {{ n.name }}
                 </mat-option>
               </mat-select>
@@ -178,7 +178,40 @@
         </form>
       </div>
       <div *ngIf="existingAdd">
-        Add Existing Member
+        <form name="searchForm" [formGroup]="searchForm" novalidate>
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+              <input matInput [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
+            </mat-form-field>            
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+              <input matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
+            </mat-form-field>            
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>            
+            <mat-form-field>
+              <input matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutWrap>         
+            <mat-form-field>
+              <input matInput [(ngModel)]="searchModel.emailAddress" placeholder="Email Address" formControlName="emailAddress">
+            </mat-form-field>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+              <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
+                SEARCH
+              </button>
+              <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+                CANCEL
+              </button>
+            </div>
+        </form>
       </div>
     </div>
   </div>

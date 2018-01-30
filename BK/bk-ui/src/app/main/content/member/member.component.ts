@@ -10,6 +10,7 @@ import { RelationTypeData, RelationTypeModel } from '../../data/relations';
 import { Location } from '@angular/common';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
+import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
 
 @Component({
   selector: 'app-member',
@@ -20,12 +21,14 @@ import { bkAuthService } from '../../services/auth-service';
 
 export class MemberComponent implements OnInit {
 
-  currentFamily: FamilyModel;
+  familyModel: FamilyModel;
   memberModel: MemberModel;
+  searchModel: MemberSearchBasicModel;
   familyId: number;
   memberId: number;
   familyLookup: FamilyLookupModel[];
   memberForm: FormGroup;
+  searchForm: FormGroup;
   editMode: boolean;
   addMode: boolean;
   existingAdd: boolean;
@@ -49,7 +52,9 @@ export class MemberComponent implements OnInit {
     this.memberModel.alive = 'A';
     this.memberModel.familyId = this.familyId;
     this.memberModel.canEdit = true;
-    this.currentFamily = new FamilyModel();      
+
+    this.familyModel = new FamilyModel();      
+    this.searchModel = new MemberSearchBasicModel();
   }
 
   ngOnInit() {
@@ -76,6 +81,13 @@ export class MemberComponent implements OnInit {
       twitterHandle: new FormControl('', [UniversalValidators.noWhitespace]),
       relationTypeId: new FormControl('', null),
       relatedMemberId: new FormControl('', null)
+    });
+
+    this.searchForm = new FormGroup({
+      memberId: new FormControl('', [UniversalValidators.isNumber]),
+      phoneNumber: new FormControl('', [UniversalValidators.isNumber]),
+      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
+      emailAddress: new FormControl('', [EmailValidators.normal])
     });
 
     this.loadFamilyLookup();
@@ -132,7 +144,7 @@ export class MemberComponent implements OnInit {
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
       (res) => {
-        this.currentFamily = res.result;        
+        this.familyModel = res.result;        
       },
       (err) => {
         if (err.errors)
@@ -177,6 +189,14 @@ export class MemberComponent implements OnInit {
           this.alertService.error(err);
       }
     );
+  }
+
+  searchMember(){
+    
+  }
+
+  addToFamily(memberId: number){
+
   }
 
   cancelEdit() {
