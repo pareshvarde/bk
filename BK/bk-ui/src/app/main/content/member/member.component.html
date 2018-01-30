@@ -1,7 +1,7 @@
 <div id="addMember" fxLayout="column">
   <div id="addMember-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="addMember-form">
-      <div class="title">HEADER</div>
+      <div class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
       <div fxLayout="row">
         <mat-form-field>
           <mat-select placeholder="Head Of Family" (change)="loadFamily()" [(ngModel)]="familyId">

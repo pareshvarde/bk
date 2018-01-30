@@ -91,8 +91,13 @@ namespace BK.Controllers
         [HttpPost]
         public IHttpActionResult Save(MemberViewModel model)
         {
-            if (!CanEditMember(model.FamilyId.Value, model.MemberID.Value))
-                return BadRequest("You do not have permission to edit this member");
+            if (!model.MemberID.HasValue)
+                if (!CanEditFamily(model.FamilyId.Value))
+                    return BadRequest("You do not have permission to edit this family");
+
+            if (model.MemberID.HasValue)
+                if (!CanEditMember(model.FamilyId.Value, model.MemberID.Value))
+                    return BadRequest("You do not have permission to edit this member");
 
             using (bkContext context = new bkContext())
             {

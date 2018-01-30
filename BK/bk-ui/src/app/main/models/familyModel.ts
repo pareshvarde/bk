@@ -17,6 +17,8 @@ export class FamilyModel{
     country: string; 
     hofId: number;   
     canEdit: boolean;
+    hofFirstName: string;
+    hofLastName: string;
     members: FamilyMemberModel[];
 }
 

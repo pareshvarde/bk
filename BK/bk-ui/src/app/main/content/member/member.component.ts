@@ -47,7 +47,9 @@ export class MemberComponent implements OnInit {
     this.memberModel.gender = 'M';
     this.memberModel.alive = 'A';
     this.memberModel.familyId = this.familyId;
+    this.memberModel.canEdit = true;
     this.currentFamily = new FamilyModel();
+  
   }
 
   ngOnInit() {

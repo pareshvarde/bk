@@ -70,6 +70,13 @@ namespace BK.Controllers
                 fvm.HeadOfFamilyID = f.HeadOfFamilyID;
                 fvm.CanEdit = CanEditFamily(f.FamilyID);
 
+                Member hofMember = f.Member;
+                if (hofMember != null)
+                {
+                    fvm.HeadOfFirstName = hofMember.FirstName;
+                    fvm.HeadOfLastName = hofMember.LastName;
+                }
+
                 foreach(var item in members)
                 {
                     var tmp = new FamilyMemberViewModel();
@@ -102,7 +109,7 @@ namespace BK.Controllers
             {
                 Family family = context.Families.Where(f => f.FamilyID == model.FamilyID).FirstOrDefault();
                 if (family == null)
-                    return BadRequest("Family record cannot be loaded. Please try again later");
+                    return BadRequest("Family record cannot be loaded. Please try again later");                
 
                 family.Address1 = model.Address1;
                 family.Address2 =  model.Address2;
@@ -112,7 +119,7 @@ namespace BK.Controllers
                 family.NukhID = model.NukhID;
                 family.PostalCode =  model.PostalCode;
                 family.State =  model.State;
-                family.HeadOfFamilyID = model.HeadOfFamilyID;
+                family.HeadOfFamilyID = model.HeadOfFamilyID;                
 
                 context.SaveChanges();
             }

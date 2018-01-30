@@ -25,6 +25,12 @@ namespace BK.ViewModel
         [JsonProperty("hofId")]
         public int HeadOfFamilyID { get; set; }
 
+        [JsonProperty("hofFirstName")]
+        public string HeadOfFirstName { get; set; }
+
+        [JsonProperty("hofLastName")]
+        public string HeadOfLastName { get; set; }
+
         [JsonProperty("address1")]
         public string Address1 { get; set; }
 
