@@ -123,10 +123,21 @@ export class FamilyComponent implements OnInit {
   }
 
   deleteMember(memberId: number){
-    alert('delete ' + memberId);
+    this.dataService.deleteMember(this.familyId, memberId).subscribe(
+      (res) => {
+        this.alertService.success("Member has been removed from the family");
+        this.loadFamily();
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
   }
 
   editMember(memberId: number){
-    alert('edit ' + memberId);
+    this.router.navigate(['member/' + this.familyId + "/" + memberId]);    
   }
 }

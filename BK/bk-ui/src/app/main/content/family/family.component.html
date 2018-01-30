@@ -104,7 +104,7 @@
               <b>Name</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <a href="member/{{familyId}}/{{member.memberId}}">{{member.name}}</a>              
+              <a (click)="editMember(member.memberId)" >{{member.name}}</a>                            
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="dob">

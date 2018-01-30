@@ -12,7 +12,7 @@ namespace BK.Controllers
     [Authorize]
     public class MemberController : BaseController
     {
-        [Route("api/changePassword")]
+        [Route("api/member/changePassword")]
         [HttpPost]
         public IHttpActionResult ChangePassword(ChangePasswordViewModel model)
         {
@@ -33,9 +33,9 @@ namespace BK.Controllers
             return Ok(true);
         }
 
-        [Route("api/getMember")]
+        [Route("api/member")]
         [HttpGet]
-        public IHttpActionResult GetMember(int? memberId, int familyId)
+        public IHttpActionResult Get(int? memberId, int familyId)
         {
             using (bkContext context = new bkContext())
             {
@@ -83,9 +83,9 @@ namespace BK.Controllers
             }
         }
 
-        [Route("api/saveMember")]
+        [Route("api/member/save")]
         [HttpPost]
-        public IHttpActionResult SaveMember(MemberViewModel model)
+        public IHttpActionResult Save(MemberViewModel model)
         {
             using (bkContext context = new bkContext())
             {
@@ -146,5 +146,35 @@ namespace BK.Controllers
             }
         }
 
+        [Route("api/member/delete")]
+        [HttpGet]
+        public IHttpActionResult Delete(int familyId, int memberId)
+        {
+            using (bkContext context = new bkContext())
+            {
+                Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
+                if (member == null)
+                    return BadRequest("Member profile cannot be loaded. Please try again later");
+
+                List<FamilyMemberAssociation> mAssociations = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId).ToList();
+                Family family = context.Families.Where(x => x.FamilyID == familyId).FirstOrDefault();                
+                FamilyMemberAssociation currentAssociation = mAssociations.Where(x => x.FamilyId == familyId).FirstOrDefault();
+
+                if (currentAssociation == null)
+                    return BadRequest("Member association to current family cannot be loaded. Please try again later");
+
+                context.FamilyMemberAssociations.Remove(currentAssociation);
+
+                if (mAssociations.Count == 1)
+                    context.Members.Remove(member);
+
+                if (family.FamilyMemberAssociations.Count == 1)
+                    context.Families.Remove(family);                
+
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
     }
 }

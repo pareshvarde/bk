@@ -51,7 +51,7 @@ export class bkDataService {
   { 
     this.blockUI.start("Please wait...");
            
-    return this.authHttp.post(this.API_URL + "changePassword", model).map((res) =>{
+    return this.authHttp.post(this.API_URL + "/member/changePassword", model).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -68,7 +68,7 @@ export class bkDataService {
   getMember(memberId: number, familyId: number){
     this.blockUI.start("Please wait...");
 
-    return this.authHttp.get(this.API_URL + "getMember?memberId=" + memberId + "&familyId=" + familyId).map((res)=>{
+    return this.authHttp.get(this.API_URL + "/member?memberId=" + memberId + "&familyId=" + familyId).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -76,7 +76,16 @@ export class bkDataService {
   saveMember(model: MemberModel){
     this.blockUI.start("Please wait...");
            
-    return this.authHttp.post(this.API_URL + "saveMember", model).map((res) =>{
+    return this.authHttp.post(this.API_URL + "member/save", model).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  deleteMember(familyId: number, memberId: number)
+  {
+    this.blockUI.start("Please wait...");
+
+    return this.authHttp.get(this.API_URL + "/member/delete?familyId=" + familyId + "&memberId=" + memberId).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -84,7 +93,7 @@ export class bkDataService {
   saveFamily(model: FamilyModel){
     this.blockUI.start("Please wait...");
            
-    return this.authHttp.post(this.API_URL + "saveFamily", model).map((res) =>{
+    return this.authHttp.post(this.API_URL + "family/save", model).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
@@ -93,7 +102,7 @@ export class bkDataService {
   {
     this.blockUI.start("Please wait...");
                
-    return this.authHttp.get(this.API_URL + "familyLookup?memberId=" + memberId).map((res) =>{
+    return this.authHttp.get(this.API_URL + "family/lookup?memberId=" + memberId).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

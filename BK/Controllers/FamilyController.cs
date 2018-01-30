@@ -13,9 +13,9 @@ namespace BK.Controllers
     public class FamilyController : BaseController
     {
 
-        [Route("api/familyLookup")]
+        [Route("api/family/lookup")]
         [HttpGet]
-        public IHttpActionResult GetFamilyLookup(int memberId)
+        public IHttpActionResult GetLookup(int memberId)
         {
             using (bkContext context = new bkContext())
             {
@@ -47,7 +47,7 @@ namespace BK.Controllers
 
         [Route("api/family")]
         [HttpGet]
-        public IHttpActionResult GetFamily(int familyId)
+        public IHttpActionResult Get(int familyId)
         {
             using (bkContext context = new bkContext())
             {
@@ -88,9 +88,9 @@ namespace BK.Controllers
             }            
         }
 
-        [Route("api/saveFamily")]
+        [Route("api/family/save")]
         [HttpPost]
-        public IHttpActionResult SaveFamily(FamilyViewModel model)
+        public IHttpActionResult Save(FamilyViewModel model)
         {
             using (bkContext context = new bkContext())
             {
