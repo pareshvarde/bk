@@ -23,6 +23,7 @@ export class MemberComponent implements OnInit {
 
   familyModel: FamilyModel;
   memberModel: MemberModel;
+  searchMemberModel: MemberModel;
   searchModel: MemberSearchBasicModel;
   familyId: number;
   memberId: number;
@@ -192,7 +193,7 @@ export class MemberComponent implements OnInit {
   }
 
   searchMember(){
-    
+
   }
 
   addToFamily(memberId: number){

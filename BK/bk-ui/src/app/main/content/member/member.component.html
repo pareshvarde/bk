@@ -204,7 +204,7 @@
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">
-              <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
+              <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="searchForm.invalid">
                 SEARCH
               </button>
               <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
@@ -212,6 +212,18 @@
               </button>
             </div>
         </form>
+        <div id="searchResult" *ngIf="searchMemberModel">
+          <span>Name: {{searchMemberModel.firstName}},{{searchMemberModel.lastName}}</span>
+          <span>Address: {{searchMemberModel.city}},{{searchMemberModel.state}}</span>
+          <span>Mobile: {{searchMemberModel.phoneNumber}}</span>
+          <span>Aadhaar: {{searchMemberModel.aadhaarNumber}}</span>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+              <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="SAVE">
+                  Add
+              </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
