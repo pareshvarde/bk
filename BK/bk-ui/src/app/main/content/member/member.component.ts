@@ -85,7 +85,7 @@ export class MemberComponent implements OnInit {
 
   loadFamilyLookup() {    
     var mId = this.memberId;
-    if (this.addMode)
+    if (!mId)
       mId = this.authService.memberId();
 
     this.dataService.getFamilyLookup(mId).subscribe(
@@ -94,7 +94,9 @@ export class MemberComponent implements OnInit {
 
         if (this.familyLookup && this.familyLookup.length > 0) {
           if (!this.familyId)
-            this.familyId = this.familyLookup[0].familyId;                                
+            this.familyId = this.familyLookup[0].familyId;   
+          else
+            this.familyId = this.familyId * 1; //TRICK TO BIND IT BACK TO UI
         }
 
         this.loadFamily();
