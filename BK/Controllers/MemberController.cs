@@ -158,6 +158,41 @@ namespace BK.Controllers
             }
         }
 
+        [Route("api/member/addtofamily")]
+        [HttpGet]
+        public IHttpActionResult AddToFamily(int familyId, int memberId)
+        {
+            if (!CanEditFamily(familyId))
+                return BadRequest("You do not have permission to edit this family");
+
+            using (bkContext context = new bkContext())
+            {
+                if (context.FamilyMemberAssociations.Any(x => x.FamilyId == familyId && x.MemberId == memberId))
+                    return BadRequest("Member is already a part of selected family");
+
+                Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
+                if (member == null)
+                    return BadRequest("Member cannot be located. Please try again later");
+
+                FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
+                fmAssociation.Approved = false;
+                fmAssociation.CreatedBy = LoggedInMemberId;
+                fmAssociation.CreatedOn = DateTime.Now;
+                fmAssociation.FamilyId = familyId;
+                fmAssociation.MemberId = memberId;
+
+                context.FamilyMemberAssociations.Add(fmAssociation);
+                context.SaveChanges();
+
+                if (!string.IsNullOrWhiteSpace(member.EmailAddress))
+                {
+                    //send email
+                }
+            }
+
+            return Ok();
+        }
+
         [Route("api/member/delete")]
         [HttpGet]
         public IHttpActionResult Delete(int familyId, int memberId)
@@ -190,6 +225,35 @@ namespace BK.Controllers
             }
 
             return Ok();
+        }
+
+        [Route("api/member/basicsearch")]
+        [HttpPost]
+        public IHttpActionResult BasicSearch(MemberBasicSearchModel model)
+        {
+            int? memberId = model.MemberID.HasValue && model.MemberID.Value > 0 ? model.MemberID : null;
+            string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
+            long? aadhaarNumber = model.AadhaarNumber.HasValue && model.AadhaarNumber.Value > 0 ? model.AadhaarNumber : null;
+            string emailAddress = string.IsNullOrWhiteSpace(model.EmailAddress) ? null : model.EmailAddress.Trim();
+
+            MemberViewModel mvm = null;
+            
+            using (bkContext context = new bkContext())
+            {
+                bk_MemberSearchBasic_Result result = context.bk_MemberSearchBasic(memberId, phoneNumber, aadhaarNumber, emailAddress).FirstOrDefault();
+
+                if (result != null)
+                {
+                    mvm = new MemberViewModel();
+                    mvm.FirstName = result.FirstName;
+                    mvm.LastName = result.LastName;
+                    mvm.DOB = result.DOB;
+                    mvm.MemberID = result.MemberID;
+                    mvm.Gender = result.Gender;
+                }
+            }            
+
+            return Ok(mvm);
         }
     }
 }

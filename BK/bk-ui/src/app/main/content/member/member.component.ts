@@ -194,10 +194,40 @@ export class MemberComponent implements OnInit {
 
   searchMember(){
 
+    return this.dataService.basicSearchMember(this.searchModel).subscribe(
+      (res) => {
+        debugger;
+        if (res.result == null)
+        {
+          this.alertService.error("No member found with provided search criteria. Please try again");
+          this.searchMemberModel = null;
+          return;
+        }
+
+        this.searchMemberModel = res.result;
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
   }
 
-  addToFamily(memberId: number){
-
+  addToFamily(){
+    return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId).subscribe(
+      (res) => {        
+        this.alertService.success("Member is added to your family");
+        this.cancelEdit();
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error(err.errors[0]);
+        else
+          this.alertService.error(err);
+      }
+    );
   }
 
   cancelEdit() {

@@ -88,19 +88,7 @@ namespace BK.Controllers
             }
 
             return Ok();
-        }
-
-        [Route("api/isEmailAvailable")]
-        public IHttpActionResult IsEmailAvailable(string emailAddress)
-        {
-            using (bkContext context = new bkContext())
-            {
-                if (context.Members.Any(m => m.EmailAddress == emailAddress))
-                    return Ok(false);
-                else
-                    return Ok(true);
-            }
-        }
+        }       
 
         [Route("api/sendResetPasswordEmail")]
         [HttpGet]

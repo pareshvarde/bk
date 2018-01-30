@@ -184,6 +184,12 @@
         <Function Name="bk_GetFamilyMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FamilyID" Type="int" Mode="In" />
         </Function>
+        <Function Name="bk_MemberSearchBasic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MemberID" Type="int" Mode="In" />
+          <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
+          <Parameter Name="AadhaarNumber" Type="bigint" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="bkModelStoreContainer">
           <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMemberAssociation" EntityType="Self.FamilyMemberAssociation" Schema="dbo" store:Type="Tables" />
@@ -250,7 +256,13 @@
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
           <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
-            <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="bk_MemberSearchBasic" ReturnType="Collection(bkModel.bk_MemberSearchBasic_Result)">
+            <Parameter Name="MemberID" Mode="In" Type="Int32" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
+            <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="FamilyMemberAssociation">
@@ -452,6 +464,13 @@
           <Property Type="String" Name="rLastName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="RelationType" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <ComplexType Name="bk_MemberSearchBasic_Result">
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -578,6 +597,17 @@
                 <ScalarProperty Name="rFirstName" ColumnName="rFirstName" />
                 <ScalarProperty Name="rLastName" ColumnName="rLastName" />
                 <ScalarProperty Name="RelationType" ColumnName="RelationType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="bk_MemberSearchBasic" FunctionName="bkModel.Store.bk_MemberSearchBasic">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bkModel.bk_MemberSearchBasic_Result">
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

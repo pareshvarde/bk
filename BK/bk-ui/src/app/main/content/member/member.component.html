@@ -182,46 +182,46 @@
           <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
-            </mat-form-field>            
+            </mat-form-field>
           </div>
 
           <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
-            </mat-form-field>            
+            </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>            
+          <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>         
+          <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.emailAddress" placeholder="Email Address" formControlName="emailAddress">
             </mat-form-field>
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">
-              <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="searchForm.invalid">
-                SEARCH
-              </button>
-              <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
-                CANCEL
-              </button>
-            </div>
+            <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="searchForm.invalid">
+              SEARCH
+            </button>
+            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+              CANCEL
+            </button>
+          </div>
         </form>
         <div id="searchResult" *ngIf="searchMemberModel">
-          <span>Name: {{searchMemberModel.firstName}},{{searchMemberModel.lastName}}</span>
-          <span>Address: {{searchMemberModel.city}},{{searchMemberModel.state}}</span>
-          <span>Mobile: {{searchMemberModel.phoneNumber}}</span>
-          <span>Aadhaar: {{searchMemberModel.aadhaarNumber}}</span>
+          <span fxLayout="row" class="mat-subheading-1">Name: {{searchMemberModel.firstName}} {{searchMemberModel.lastName}}</span>
+          <span fxLayout="row" class="mat-subheading-1">Gender: {{searchMemberModel.gender}}</span>
+          <span fxLayout="row" class="mat-subheading-1">Date Of Birth: {{searchMemberModel.dob | amDateFormat:'LL'}}</span>
+                          
 
           <div fxLayout="row" fxLayoutAlign="center center">
-              <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="SAVE">
-                  Add
-              </button>
+            <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="SAVE">
+              Add
+            </button>
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import { RegisterModel } from '../models/registerModel';
 import { MemberModel } from '../models/memberModel';
 import { FamilyModel } from '../models/familyModel';
 import { AuthHttp } from 'angular2-jwt';
+import { MemberSearchBasicModel } from '../models/memberSearchBasicModel';
 
 @Injectable()
 export class bkDataService {
@@ -61,6 +62,23 @@ export class bkDataService {
     this.blockUI.start("Please wait...");
            
     return this.http.post(this.API_URL + "register", model,{headers: this.getPublicHeader()}).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  basicSearchMember(model: MemberSearchBasicModel){
+    this.blockUI.start("Please wait...");
+           
+    return this.authHttp.post(this.API_URL + "member/basicsearch", model).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  addMemberToFamily(familyId: number, memberId:number)
+  {
+    this.blockUI.start("Please wait...");
+
+    return this.authHttp.get(this.API_URL + "/member/addtofamily?familyId=" + familyId + "&memberId=" + memberId).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
