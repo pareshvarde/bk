@@ -87,10 +87,9 @@
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
-          <button mat-raised-button (click)="addMember()" class="ml-8" router color="accent" aria-label="Add Member">
-            <mat-icon>person_add</mat-icon>
-            <span>Add</span>
-          </button>
+          <button  mat-mini-fab color="accent" (click)="addMember()" class="ml-8">
+              <mat-icon>person_add</mat-icon>
+          </button>          
         </div>
         <mat-table #table [dataSource]="dataSource">
           <ng-container matColumnDef="memberId">

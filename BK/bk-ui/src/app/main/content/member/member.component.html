@@ -152,8 +152,14 @@
             </button>
           </div>
           <div *ngIf="!editMode && !addMode" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button (click)="loadFamilyInfo()" color="accent" class="submit-button" aria-label="FAMILY">
+              FAMILY
+            </button>
             <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
               EDIT
+            </button>
+            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+              BACK
             </button>
           </div>
         </form>

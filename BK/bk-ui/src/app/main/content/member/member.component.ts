@@ -186,4 +186,8 @@ export class MemberComponent implements OnInit {
     this.editMode = true;
     this.memberForm.enable();
   }
+
+  loadFamilyInfo(){
+    this.router.navigate(['family/' + this.familyId]);    
+  }
 }
