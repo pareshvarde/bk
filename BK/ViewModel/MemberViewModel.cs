@@ -82,6 +82,9 @@ namespace BK.ViewModel
 
         [JsonProperty("familyId")]
         public int? FamilyId { get; set; }
+
+        [JsonProperty("canEdit")]
+        public bool canEdit { get; set; }
     }
 
     public class MemberViewModelValidator : AbstractValidator<MemberViewModel>

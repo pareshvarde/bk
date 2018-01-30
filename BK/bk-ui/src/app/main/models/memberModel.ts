@@ -23,6 +23,7 @@ export class MemberModel {
     relationTypeId:number;
     relatedMemberId: number;
     familyId: number;
+    canEdit: boolean;
 
     constructor() { }
 }

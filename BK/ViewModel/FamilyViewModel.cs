@@ -43,6 +43,9 @@ namespace BK.ViewModel
         [JsonProperty("country")]
         public string Country { get; set; }
 
+        [JsonProperty("canEdit")]
+        public bool CanEdit { get; set; }
+
         [JsonProperty("members")]
         public List<FamilyMemberViewModel> Members { get; set; }
     }
@@ -60,7 +63,10 @@ namespace BK.ViewModel
 
         [JsonProperty("married")]
         public bool Married { get; set; }
-        
+
+        [JsonProperty("canEdit")]
+        public bool CanEdit { get; set; }
+
         [JsonProperty("relation")]
         public string Relation { get; set; }
     }

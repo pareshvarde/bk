@@ -143,7 +143,7 @@
             </mat-form-field>
           </div>
 
-          <div *ngIf="editMode || addMode" fxLayout="row" fxLayoutAlign="center center">
+          <div *ngIf="(editMode || addMode) && memberModel.canEdit" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
               SAVE
             </button>
@@ -155,7 +155,7 @@
             <button mat-raised-button (click)="loadFamilyInfo()" color="accent" class="submit-button" aria-label="FAMILY">
               FAMILY
             </button>
-            <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+            <button *ngIf="memberModel.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
               EDIT
             </button>
             <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">

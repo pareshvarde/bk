@@ -68,6 +68,7 @@ namespace BK.Controllers
                 fvm.PostalCode = f.PostalCode;
                 fvm.State = f.State;
                 fvm.HeadOfFamilyID = f.HeadOfFamilyID;
+                fvm.CanEdit = CanEditFamily(f.FamilyID);
 
                 foreach(var item in members)
                 {
@@ -77,6 +78,8 @@ namespace BK.Controllers
                     tmp.Married = item.Married;
                     tmp.MemberID = item.MemberID;
                     tmp.Name = $"{item.FirstName} {item.LastName}";
+                    tmp.CanEdit = f.FamilyMemberAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved) &&
+                       f.FamilyMemberAssociations.Any(x => x.MemberId == item.MemberID && x.Approved);
 
                     if (!string.IsNullOrEmpty(item.RelationType))
                         tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";
@@ -92,6 +95,9 @@ namespace BK.Controllers
         [HttpPost]
         public IHttpActionResult Save(FamilyViewModel model)
         {
+            if (!CanEditFamily(model.FamilyID))
+                return BadRequest("You do not have permission to edit this family");
+
             using (bkContext context = new bkContext())
             {
                 Family family = context.Families.Where(f => f.FamilyID == model.FamilyID).FirstOrDefault();

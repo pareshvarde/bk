@@ -2,7 +2,7 @@
   <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="family-form">
       <div class="title">HEADER</div>
-      <div fxLayout="row">
+      <div fxLayout="row" *ngIf="model.canEdit">
         <mat-form-field>
           <mat-select placeholder="Head Of Family" (change)="loadFamily()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
@@ -68,7 +68,7 @@
               <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
             </mat-form-field>
           </div>
-          <div *ngIf="editMode" fxLayout="row" fxLayoutAlign="center center">
+          <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
               SAVE
             </button>
@@ -76,7 +76,7 @@
               CANCEL
             </button>
           </div>
-          <div *ngIf="!editMode" fxLayout="row" fxLayoutAlign="center center">
+          <div *ngIf="!editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
               EDIT
             </button>
@@ -87,7 +87,7 @@
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
-          <button  mat-mini-fab color="accent" (click)="addMember()" class="ml-8">
+          <button *ngIf="model.canEdit" mat-mini-fab color="accent" (click)="addMember()" class="ml-8">
               <mat-icon>person_add</mat-icon>
           </button>          
         </div>
@@ -127,8 +127,8 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <button mat-icon-button (click)="deleteMember(member.memberId)"><mat-icon>delete</mat-icon></button>              
-              <button mat-icon-button (click)="editMember(member.memberId)"><mat-icon>mode_edit</mat-icon></button>
+              <button *ngIf="member.canEdit" mat-icon-button (click)="deleteMember(member.memberId)"><mat-icon>delete</mat-icon></button>              
+              <button *ngIf="member.canEdit" mat-icon-button (click)="editMember(member.memberId)"><mat-icon>mode_edit</mat-icon></button>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

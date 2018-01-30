@@ -47,7 +47,7 @@ namespace BK.Controllers
                 if (member == null)
                     return BadRequest("Your record cannot be loaded. Please try again or contact Administrator for help");
 
-                FamilyMemberAssociation fma = member.FamilyMemberAssociations.FirstOrDefault(x => x.FamilyId == familyId);                
+                List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
 
                 MemberViewModel vm = new MemberViewModel() {
                     MemberID = member.MemberID,
@@ -73,12 +73,16 @@ namespace BK.Controllers
                     Married = member.Married
                 };
 
+                FamilyMemberAssociation fma = fmAssociation.FirstOrDefault(x => x.MemberId == memberId);
                 if (fma != null)
                 {
                     vm.RelatedMemberId = fma.RelatedId;
                     vm.RelationTypeId = fma.RelationTypeId;
                 }
-                                   
+
+                vm.canEdit = fmAssociation.Any(x => x.MemberId == LoggedInMemberId && x.Approved) &&
+                                fmAssociation.Any(x => x.MemberId == memberId && x.Approved);
+
                 return Ok(vm);
             }
         }
@@ -87,6 +91,9 @@ namespace BK.Controllers
         [HttpPost]
         public IHttpActionResult Save(MemberViewModel model)
         {
+            if (!CanEditMember(model.FamilyId.Value, model.MemberID.Value))
+                return BadRequest("You do not have permission to edit this member");
+
             using (bkContext context = new bkContext())
             {
                 Member member = null;
@@ -150,6 +157,9 @@ namespace BK.Controllers
         [HttpGet]
         public IHttpActionResult Delete(int familyId, int memberId)
         {
+            if (!CanEditMember(familyId, memberId))
+                return BadRequest("You do not have permission to edit this member");
+
             using (bkContext context = new bkContext())
             {
                 Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
