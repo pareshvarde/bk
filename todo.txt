@@ -22,3 +22,6 @@ sign up captcha
 relationship status instead of Married on member?
 birthday wish email
 anniversary?
+
+BUGS
+	1. when add member -> my profile do not load (router parameter switch do not reactive the form)
