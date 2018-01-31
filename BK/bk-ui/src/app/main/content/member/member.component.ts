@@ -223,6 +223,12 @@ export class MemberComponent implements OnInit {
   }
 
   addToFamily(){
+    if (!this.memberModel.relatedMemberId || !this.memberModel.relationTypeId)
+    {
+      this.alertService.error('','Please select relation type');
+      return;
+    }
+
     return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId, this.memberModel.relatedMemberId, this.memberModel.relationTypeId).subscribe(
       (res) => {        
         this.alertService.success("Member is added to your family");
