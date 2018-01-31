@@ -196,7 +196,7 @@ export class MemberComponent implements OnInit {
 
     return this.dataService.basicSearchMember(this.searchModel).subscribe(
       (res) => {
-        debugger;
+        
         if (res.result == null)
         {
           this.alertService.error("No member found with provided search criteria. Please try again");
