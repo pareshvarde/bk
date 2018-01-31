@@ -5,7 +5,7 @@
     [NukhID]         INT           NOT NULL,
     [CategoryID]     INT           NOT NULL,
     [HeadOfFamilyID] INT           NOT NULL,
-    [Address1]       NVARCHAR (50) NOT NULL,
+    [Address1]       NVARCHAR (50) NULL,
     [Address2]       NVARCHAR (50) NULL,
     [City]           NVARCHAR (50) NOT NULL,
     [State]          NVARCHAR (50) NOT NULL,
@@ -18,6 +18,8 @@
     CONSTRAINT [PK_Families] PRIMARY KEY CLUSTERED ([FamilyID] ASC),
     CONSTRAINT [FK_Families_HeadOfFamily] FOREIGN KEY ([HeadOfFamilyID]) REFERENCES [dbo].[Members] ([MemberID])
 );
+
+
 
 
 
