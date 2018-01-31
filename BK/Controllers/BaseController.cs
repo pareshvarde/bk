@@ -43,7 +43,7 @@ namespace BK.Controllers
         protected bool CanEditMember(List<FamilyMemberAssociation> fAssociations, int memberId)
         {
             bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId) &&
-                       fAssociations.Any(x => x.MemberId == memberId && x.Approved);
+                       fAssociations.Any(x => x.MemberId == memberId && (x.MemberId == LoggedInMemberId || x.Approved));
 
             return canEdit;
         }
