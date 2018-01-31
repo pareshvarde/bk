@@ -74,11 +74,13 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
-  addMemberToFamily(familyId: number, memberId:number)
+  addMemberToFamily(familyId: number, memberId:number, relatedId: number, relationTypeId: number)
   {
     this.blockUI.start("Please wait...");
 
-    return this.authHttp.get(this.API_URL + "/member/addtofamily?familyId=" + familyId + "&memberId=" + memberId).map((res)=>{
+    var url = this.API_URL + "/member/addtofamily?familyId=" + familyId + "&memberId=" + memberId + "&relatedId=" + relatedId + "&relationTypeId=" + relationTypeId;
+    
+    return this.authHttp.get(url).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

@@ -155,7 +155,7 @@ namespace BK.Controllers
 
         [Route("api/member/addtofamily")]
         [HttpGet]
-        public IHttpActionResult AddToFamily(int familyId, int memberId)
+        public IHttpActionResult AddToFamily(int familyId, int memberId, int relatedId, int relationTypeId)
         {
             if (!CanEditFamily(familyId))
                 return BadRequest("You do not have permission to edit this family");
@@ -169,12 +169,17 @@ namespace BK.Controllers
                 if (member == null)
                     return BadRequest("Member cannot be located. Please try again later");
 
+                if (!context.FamilyMemberAssociations.Any(x => x.MemberId == relatedId && x.FamilyId == familyId))
+                    return BadRequest("Related member is not part of the family");
+
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
                 fmAssociation.Approved = false;
                 fmAssociation.CreatedBy = LoggedInMemberId;
                 fmAssociation.CreatedOn = DateTime.Now;
                 fmAssociation.FamilyId = familyId;
                 fmAssociation.MemberId = memberId;
+                fmAssociation.RelatedId = relatedId;
+                fmAssociation.RelationTypeId = relationTypeId;
 
                 context.FamilyMemberAssociations.Add(fmAssociation);
                 context.SaveChanges();

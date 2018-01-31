@@ -223,7 +223,7 @@ export class MemberComponent implements OnInit {
   }
 
   addToFamily(){
-    return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId).subscribe(
+    return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId, this.memberModel.relatedMemberId, this.memberModel.relationTypeId).subscribe(
       (res) => {        
         this.alertService.success("Member is added to your family");
         this.cancelEdit();

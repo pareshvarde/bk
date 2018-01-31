@@ -216,7 +216,24 @@
           <span fxLayout="row" class="mat-subheading-1">Name: {{searchMemberModel.firstName}} {{searchMemberModel.lastName}}</span>
           <span fxLayout="row" class="mat-subheading-1">Gender: {{searchMemberModel.gender}}</span>
           <span fxLayout="row" class="mat-subheading-1">Date Of Birth: {{searchMemberModel.dob | amDateFormat:'LL'}}</span>
-                          
+
+          <div fxLayout="row" fxLayoutWrap>            
+            <mat-form-field>
+              <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId">
+                <mat-option *ngFor="let n of getRelations()" [value]="n.relationTypeId">
+                  {{ n.relationType }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relatedMemberId">
+                <mat-option *ngFor="let n of familyModel.members" [value]="n.memberId">
+                  {{ n.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="SAVE">
