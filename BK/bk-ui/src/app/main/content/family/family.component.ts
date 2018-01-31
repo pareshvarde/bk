@@ -131,6 +131,13 @@ export class FamilyComponent implements OnInit {
   }
 
   deleteMember(memberId: number){
+
+    if (this.model.hofId == memberId)
+    {
+      this.alertService.error('','Head Of Family cannot be deleted');
+      return;
+    }
+
     this.dataService.deleteMember(this.familyId, memberId).subscribe(
       (res) => {
         this.alertService.success("Member has been removed from the family");
