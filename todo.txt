@@ -27,3 +27,5 @@ un approved family member should not be able to be Head Of Family
 async emails
 
 <p> tags on email not working
+
+include child object in datacontext queries

@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Net.Mail;
+using System.Data.Entity;
 
 namespace BK.Controllers
 {
@@ -164,19 +165,19 @@ namespace BK.Controllers
 
             using (bkContext context = new bkContext())
             {
-                if (context.FamilyMemberAssociations.Any(x => x.FamilyId == familyId && x.MemberId == memberId))
-                    return BadRequest("Member is already a part of selected family");
-
-                Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
+                Member member = context.Members.Include(x => x.FamilyMemberAssociations).FirstOrDefault(x => x.MemberID == memberId);
                 if (member == null)
                     return BadRequest("Member cannot be located. Please try again later");
-                
-                if (!context.FamilyMemberAssociations.Any(x => x.MemberId == relatedId && x.FamilyId == familyId))
-                    return BadRequest("Related member is not part of the family");
 
-                Member relatedMember = context.Members.FirstOrDefault(x => x.MemberID == relatedId);
+                Member relatedMember = context.Members.Include(x => x.FamilyMemberAssociations).FirstOrDefault(x => x.MemberID == relatedId);
                 if (relatedMember == null)
                     return BadRequest("Related member cannot be located. Please try again later");
+                
+                if (member.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
+                    return BadRequest("Member is already a part of selected family");                
+                
+                if (!relatedMember.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
+                    return BadRequest("Related member is not part of the family");                
 
                 lkRelationType relationType = context.lkRelationTypes.FirstOrDefault(x => x.RelationTypeId == relationTypeId);
                 if (relationType == null)
