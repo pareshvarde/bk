@@ -24,7 +24,9 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                return context.FamilyMemberAssociations.Any(x => x.MemberId == LoggedInMemberId && x.FamilyId == familyId && x.Approved);
+                List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
+
+                return CanEditFamily(fmAssociation);                
             }            
         }
 
@@ -34,9 +36,23 @@ namespace BK.Controllers
             {
                 List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
 
-                return fmAssociation.Any(x => x.MemberId == LoggedInMemberId && x.Approved) &&
-                       fmAssociation.Any(x => x.MemberId == memberId && x.Approved);                
+                return CanEditMember(fmAssociation, memberId);
             }
+        }
+
+        protected bool CanEditMember(List<FamilyMemberAssociation> fAssociations, int memberId)
+        {
+            bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved) &&
+                       fAssociations.Any(x => x.MemberId == memberId && x.Approved);
+
+            return canEdit;
+        }
+
+        protected bool CanEditFamily(List<FamilyMemberAssociation> fAssociations)
+        {
+            bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved);
+
+            return canEdit;
         }
     }
 }

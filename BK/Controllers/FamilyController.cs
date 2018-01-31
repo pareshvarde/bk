@@ -68,7 +68,7 @@ namespace BK.Controllers
                 fvm.PostalCode = f.PostalCode;
                 fvm.State = f.State;
                 fvm.HeadOfFamilyID = f.HeadOfFamilyID;
-                fvm.CanEdit = CanEditFamily(f.FamilyID);
+                fvm.CanEdit = CanEditFamily(f.FamilyMemberAssociations.ToList());
 
                 Member hofMember = f.Member;
                 if (hofMember != null)
@@ -85,8 +85,7 @@ namespace BK.Controllers
                     tmp.Married = item.Married;
                     tmp.MemberID = item.MemberID;
                     tmp.Name = $"{item.FirstName} {item.LastName}";
-                    tmp.CanEdit = f.FamilyMemberAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved) &&
-                       f.FamilyMemberAssociations.Any(x => x.MemberId == item.MemberID && x.Approved);
+                    tmp.CanEdit = CanEditMember(f.FamilyMemberAssociations.ToList(), item.MemberID);
 
                     if (!string.IsNullOrEmpty(item.RelationType))
                         tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";

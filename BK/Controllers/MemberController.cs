@@ -35,15 +35,11 @@ namespace BK.Controllers
 
         [Route("api/member")]
         [HttpGet]
-        public IHttpActionResult Get(int? memberId, int familyId)
+        public IHttpActionResult Get(int memberId, int familyId)
         {
             using (bkContext context = new bkContext())
             {
-                int id = LoggedInMemberId;                
-                if (memberId.HasValue)
-                    id = memberId.Value;
-
-                Member member = context.Members.Where(x => x.MemberID == id).FirstOrDefault();
+                Member member = context.Members.Where(x => x.MemberID == memberId).FirstOrDefault();
                 if (member == null)
                     return BadRequest("Your record cannot be loaded. Please try again or contact Administrator for help");
 
@@ -80,8 +76,7 @@ namespace BK.Controllers
                     vm.RelationTypeId = fma.RelationTypeId;
                 }
 
-                vm.canEdit = fmAssociation.Any(x => x.MemberId == LoggedInMemberId && x.Approved) &&
-                                fmAssociation.Any(x => x.MemberId == memberId && x.Approved);
+                vm.canEdit = CanEditMember(fmAssociation, memberId);
 
                 return Ok(vm);
             }
@@ -197,7 +192,7 @@ namespace BK.Controllers
         [HttpGet]
         public IHttpActionResult Delete(int familyId, int memberId)
         {
-            if (!CanEditMember(familyId, memberId))
+            if (!CanEditFamily(familyId))
                 return BadRequest("You do not have permission to edit this member");
 
             using (bkContext context = new bkContext())
