@@ -16,6 +16,9 @@ namespace BK.Context
         public int AddedById { get; set; }
         public string AddedByFirstName { get; set; }
         public string AddedByLastName { get; set; }
+        public string AddedToFirstName { get; set; }
+        public string AddedToLastName { get; set; }
+        public int AddedToId { get; set; }
         public System.DateTime AddedOn { get; set; }
         public int FamilyId { get; set; }
     }

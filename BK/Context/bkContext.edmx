@@ -481,6 +481,9 @@
           <Property Type="Int32" Name="AddedById" Nullable="false" />
           <Property Type="String" Name="AddedByFirstName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="AddedByLastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AddedToFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AddedToLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="AddedToId" Nullable="false" />
           <Property Type="DateTime" Name="AddedOn" Nullable="false" />
           <Property Type="Int32" Name="FamilyId" Nullable="false" />
         </ComplexType>
@@ -630,6 +633,9 @@
                 <ScalarProperty Name="AddedById" ColumnName="AddedById" />
                 <ScalarProperty Name="AddedByFirstName" ColumnName="AddedByFirstName" />
                 <ScalarProperty Name="AddedByLastName" ColumnName="AddedByLastName" />
+                <ScalarProperty Name="AddedToFirstName" ColumnName="AddedToFirstName" />
+                <ScalarProperty Name="AddedToLastName" ColumnName="AddedToLastName" />
+                <ScalarProperty Name="AddedToId" ColumnName="AddedToId" />
                 <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
                 <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
               </ComplexTypeMapping>
