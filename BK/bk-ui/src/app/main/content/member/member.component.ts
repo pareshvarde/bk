@@ -41,13 +41,11 @@ export class MemberComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
-    });
-
-    this.route.params.subscribe(params => {
+      
       if (params.memberId > 0)
         this.memberId = params.memberId;
     });
-
+    
     this.memberModel = new MemberModel();
     this.memberModel.gender = 'M';
     this.memberModel.alive = 'A';
