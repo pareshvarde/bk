@@ -190,6 +190,9 @@
           <Parameter Name="AadhaarNumber" Type="bigint" Mode="In" />
           <Parameter Name="Email" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="bk_PendingApprovals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FamilyID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="bkModelStoreContainer">
           <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMemberAssociation" EntityType="Self.FamilyMemberAssociation" Schema="dbo" store:Type="Tables" />
@@ -263,6 +266,9 @@
             <Parameter Name="PhoneNumber" Mode="In" Type="String" />
             <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
             <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="bk_PendingApprovals" ReturnType="Collection(bkModel.bk_PendingApprovals_Result)">
+            <Parameter Name="FamilyID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="FamilyMemberAssociation">
@@ -471,6 +477,13 @@
           <Property Type="DateTime" Name="DOB" Nullable="true" />
           <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
         </ComplexType>
+        <ComplexType Name="bk_PendingApprovals_Result">
+          <Property Type="Int32" Name="AddedById" Nullable="false" />
+          <Property Type="String" Name="AddedByFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AddedByLastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="AddedOn" Nullable="false" />
+          <Property Type="Int32" Name="FamilyId" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -608,6 +621,17 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="bk_PendingApprovals" FunctionName="bkModel.Store.bk_PendingApprovals">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bkModel.bk_PendingApprovals_Result">
+                <ScalarProperty Name="AddedById" ColumnName="AddedById" />
+                <ScalarProperty Name="AddedByFirstName" ColumnName="AddedByFirstName" />
+                <ScalarProperty Name="AddedByLastName" ColumnName="AddedByLastName" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
