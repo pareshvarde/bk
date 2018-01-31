@@ -213,7 +213,7 @@ namespace BK.Controllers
                 if (mAssociations.Count == 1)
                     context.Members.Remove(member);
 
-                if (family.FamilyMemberAssociations.Count == 1)
+                if (family.FamilyMemberAssociations.Count == 0)
                     context.Families.Remove(family);                
 
                 context.SaveChanges();

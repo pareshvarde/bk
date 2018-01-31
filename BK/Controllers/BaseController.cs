@@ -42,7 +42,7 @@ namespace BK.Controllers
 
         protected bool CanEditMember(List<FamilyMemberAssociation> fAssociations, int memberId)
         {
-            bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved) &&
+            bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId) &&
                        fAssociations.Any(x => x.MemberId == memberId && x.Approved);
 
             return canEdit;
@@ -50,7 +50,7 @@ namespace BK.Controllers
 
         protected bool CanEditFamily(List<FamilyMemberAssociation> fAssociations)
         {
-            bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved);
+            bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId);
 
             return canEdit;
         }
