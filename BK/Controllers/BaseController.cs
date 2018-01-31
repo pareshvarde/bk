@@ -20,6 +20,15 @@ namespace BK.Controllers
             }
         }
 
+        protected string LoggedInMemberName
+        {
+            get
+            {
+                ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
+                return principal.Claims.Where(c => c.Type == "name").Single().Value;
+            }
+        }
+
         protected bool CanEditFamily(int familyId)
         {
             using (bkContext context = new bkContext())

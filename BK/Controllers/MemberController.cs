@@ -2,10 +2,12 @@
 using BK.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Net.Mail;
 
 namespace BK.Controllers
 {
@@ -168,9 +170,17 @@ namespace BK.Controllers
                 Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
                 if (member == null)
                     return BadRequest("Member cannot be located. Please try again later");
-
+                
                 if (!context.FamilyMemberAssociations.Any(x => x.MemberId == relatedId && x.FamilyId == familyId))
                     return BadRequest("Related member is not part of the family");
+
+                Member relatedMember = context.Members.FirstOrDefault(x => x.MemberID == relatedId);
+                if (relatedMember == null)
+                    return BadRequest("Related member cannot be located. Please try again later");
+
+                lkRelationType relationType = context.lkRelationTypes.FirstOrDefault(x => x.RelationTypeId == relationTypeId);
+                if (relationType == null)
+                    return BadRequest("Invalid relation type");
 
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
                 fmAssociation.Approved = false;
@@ -186,7 +196,26 @@ namespace BK.Controllers
 
                 if (!string.IsNullOrWhiteSpace(member.EmailAddress))
                 {
-                    //send email
+                    string templatePath = System.Web.Hosting.HostingEnvironment.MapPath("~/HtmlTemplates/familyAddition.html");
+                    string html = File.ReadAllText(templatePath);
+
+                    html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
+                    html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/login/ ");
+                    html = html.Replace("{{username}}", member.EmailAddress);
+                    html = html.Replace("{{password}}", member.Password);
+                    html = html.Replace("{{addedBy}}", LoggedInMemberName);
+                    html = html.Replace("{{addedOn}}", fmAssociation.CreatedOn.ToString("dddd, dd MMMM yyyy hh:mm tt"));
+                    html = html.Replace("{{relation}}", $"{relationType.RelationType} Of {relatedMember.FirstName} {relatedMember.LastName}");
+
+                    MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress);
+                    mailMessage.Body = html;
+                    mailMessage.IsBodyHtml = true;
+                    mailMessage.Subject = "Brahmkshatriya Online Portal - Notification";
+
+                    using (SmtpClient sClient = new SmtpClient())
+                    {
+                        sClient.Send(mailMessage);
+                    }
                 }
             }
 
@@ -254,6 +283,6 @@ namespace BK.Controllers
             }            
 
             return Ok(mvm);
-        }
+        }        
     }
 }

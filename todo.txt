@@ -23,5 +23,7 @@ relationship status instead of Married on member?
 birthday wish email
 anniversary?
 
-BUGS
-	1. when add member -> my profile do not load (router parameter switch do not reactive the form)
+un approved family member should not be able to be Head Of Family
+async emails
+
+<p> tags on email not working
