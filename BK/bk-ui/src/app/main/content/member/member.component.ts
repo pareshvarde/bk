@@ -128,9 +128,9 @@ export class MemberComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -142,9 +142,9 @@ export class MemberComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -156,9 +156,9 @@ export class MemberComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -192,9 +192,9 @@ export class MemberComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -206,7 +206,7 @@ export class MemberComponent implements OnInit {
         
         if (res.result == null)
         {
-          this.alertService.error("No member found with provided search criteria. Please try again");
+          this.alertService.error('', "No member found with provided search criteria. Please try again");
           this.searchMemberModel = null;
           return;
         }
@@ -215,9 +215,9 @@ export class MemberComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -236,9 +236,9 @@ export class MemberComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }

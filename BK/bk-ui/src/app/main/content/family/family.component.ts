@@ -78,9 +78,9 @@ export class FamilyComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -93,9 +93,9 @@ export class FamilyComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -109,9 +109,9 @@ export class FamilyComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
@@ -145,9 +145,9 @@ export class FamilyComponent implements OnInit {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error(err.errors[0]);
+          this.alertService.error('', err.errors[0]);
         else
-          this.alertService.error(err);
+          this.alertService.error('', err);
       }
     );
   }
