@@ -41,9 +41,15 @@ export class MemberComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
+      else
+        this.familyId = null;
       
       if (params.memberId > 0)
         this.memberId = params.memberId;
+      else
+        this.memberId = null;
+      
+      this.initializeComponent();      
     });
     
     this.memberModel = new MemberModel();
@@ -87,15 +93,18 @@ export class MemberComponent implements OnInit {
       phoneNumber: new FormControl('', [UniversalValidators.isNumber]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
       emailAddress: new FormControl('', [EmailValidators.normal])
-    });
+    });   
 
-    this.loadFamilyLookup();
-  
-    this.addMode = this.memberId == null;
     if (!this.addMode)
-      this.memberForm.disable();    
+      this.memberForm.disable();
   }
 
+  initializeComponent(){
+    this.loadFamilyLookup();
+  
+    this.addMode = this.memberId == null;    
+  }
+  
   loadFamilyLookup() {    
     var mId = this.memberId;
     if (!mId)
