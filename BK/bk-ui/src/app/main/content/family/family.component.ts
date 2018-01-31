@@ -31,6 +31,10 @@ export class FamilyComponent implements OnInit {
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
+      else
+        this.familyId = null;
+
+      this.initializeComponent();
     });
 
     this.model = new FamilyModel();
@@ -51,7 +55,10 @@ export class FamilyComponent implements OnInit {
       hof: new FormControl('', [Validators.required])
     });
 
-    this.familyForm.disable();
+    this.familyForm.disable();    
+  }
+
+  initializeComponent(){
     this.loadFamilyLookup();
   }
 
