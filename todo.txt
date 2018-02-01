@@ -24,41 +24,14 @@ birthday wish email
 anniversary?
 
 un approved family member should not be able to be Head Of Family
-async emails
 
 include child object in datacontext queries
 edits by minor?
 
+if you delete a member and he is part of only other family where approval is pending that needs to be deleted as well.
+
+optmization
+
+edit -> cancel reject changes
+
 =============
-
-
-ALTER PROCEDURE [dbo].[bk_PendingApprovals]
-(    
-	@FamilyID INT
-)    
-AS
-BEGIN
-	SELECT 
-		m2.MemberID AddedById,
-		m2.FirstName AddedByFirstName,
-		m2.LastName AddedByLastName,
-		fma.CreatedOn AddedOn,
-		fma.FamilyId
-	FROM 
-		FamilyMemberAssociation fma	
-		JOIN Members m2 on m2.MemberID = fma.CreatedBy
-		CROSS APPLY 
-		(
-			SELECT 
-				TOP 1 tfma.FamilyId
-			FROM 
-				FamilyMemberAssociation tfma
-				JOIN Members tm ON tm.MemberID = tfma.MemberId
-			WHERE
-				tfma.MemberId = fma.MemberId
-				AND tfma.Approved = 1
-				AND tfma.FamilyId = @FamilyID
-		) t
-	WHERE
-		fma.Approved = 0				
-END
