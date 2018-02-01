@@ -25,6 +25,8 @@
             .bk-card {                
                 @include mat-elevation(7);
                 padding: 16px 32px 16px 32px;
+                margin-top: 10px;
+                margin-bottom: 10px;
             }
 
             #family-form {       

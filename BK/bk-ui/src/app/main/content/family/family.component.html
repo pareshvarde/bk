@@ -16,7 +16,8 @@
           <span class="mat-title">Pending Approvals</span>
         </div>
         <div fxLayout="row" fxLayoutWrap *ngFor="let n of model.approvals">{{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn |
-          amDateFormat:'MMMM Do YYYY, hh:mm a'}} to family {{n.familyId}}</div>
+          amDateFormat:'MMMM Do YYYY, hh:mm a'}} to family {{n.familyId}}
+        </div>
       </div>
       <div class="bk-card">
         <div fxLayout="row">
@@ -89,8 +90,7 @@
             </button>
           </div>
         </form>
-      </div>
-      <br/>
+      </div>      
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
