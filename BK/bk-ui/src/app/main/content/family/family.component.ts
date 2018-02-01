@@ -155,4 +155,32 @@ export class FamilyComponent implements OnInit {
   editMember(memberId: number){
     this.router.navigate(['member/' + this.familyId + "/" + memberId]);    
   }
+
+  approveMember(memberId: number, familyId: number){
+    this.dataService.approveMember(this.familyId, memberId).subscribe(
+      (res) => {
+        this.alertService.success("Member has been removed from the family");        
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );
+  }
+
+  declineMember(memberId: number, familyId: number){
+    this.dataService.declineMember(this.familyId, memberId).subscribe(
+      (res) => {
+        this.alertService.success("Member has been removed from the family");        
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );
+  }
 }

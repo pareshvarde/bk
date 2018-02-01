@@ -5,7 +5,7 @@
     [RelatedId]      INT           NULL,
     [RelationTypeId] INT           NULL,
     [ApprovedOn]     DATETIME2 (7) NULL,
-    [ApprovedBy]     DATETIME2 (7) NULL,
+    [ApprovedBy]     INT           NULL,
     [CreatedOn]      DATETIME2 (7) CONSTRAINT [DF_FamilyMemberAssociation_CreatedOn] DEFAULT (getdate()) NOT NULL,
     [CreatedBy]      INT           NOT NULL,
     CONSTRAINT [PK_FamilyMemberAssociation] PRIMARY KEY CLUSTERED ([FamilyId] ASC, [MemberId] ASC),
@@ -14,6 +14,8 @@
     CONSTRAINT [FK_FamilyMemberAssociation_Members] FOREIGN KEY ([MemberId]) REFERENCES [dbo].[Members] ([MemberID]),
     CONSTRAINT [FK_FamilyMemberAssociation_Related] FOREIGN KEY ([RelatedId]) REFERENCES [dbo].[Members] ([MemberID])
 );
+
+
 
 
 

@@ -20,13 +20,13 @@ namespace BK.Context
         public Nullable<int> RelatedId { get; set; }
         public Nullable<int> RelationTypeId { get; set; }
         public Nullable<System.DateTime> ApprovedOn { get; set; }
-        public Nullable<System.DateTime> ApprovedBy { get; set; }
+        public Nullable<int> ApprovedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
     
+        public virtual Family Family { get; set; }
         public virtual lkRelationType lkRelationType { get; set; }
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }
-        public virtual Family Family { get; set; }
     }
 }

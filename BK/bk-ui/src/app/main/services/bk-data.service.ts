@@ -136,6 +136,22 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
+  approveMember(memberId: number, familyId: number){
+    this.blockUI.start("Please wait...");
+               
+    return this.authHttp.get(this.API_URL + "member/approve?memberId=" + memberId + "&familyId=" + familyId).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  declineMember(memberId: number, familyId: number){
+    this.blockUI.start("Please wait...");
+               
+    return this.authHttp.get(this.API_URL + "member/decline?memberId=" + memberId + "&familyId=" + familyId).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
   private getPublicHeader(): Headers{    
     const headers = new Headers(
       {

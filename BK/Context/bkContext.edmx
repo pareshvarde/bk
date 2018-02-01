@@ -37,7 +37,7 @@
           <Property Name="RelatedId" Type="int" />
           <Property Name="RelationTypeId" Type="int" />
           <Property Name="ApprovedOn" Type="datetime2" Precision="7" />
-          <Property Name="ApprovedBy" Type="datetime2" Precision="7" />
+          <Property Name="ApprovedBy" Type="int" />
           <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
@@ -229,10 +229,35 @@
     <edmx:ConceptualModels>
       <Schema Namespace="bkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="bkContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="FamilyMemberAssociations" EntityType="bkModel.FamilyMemberAssociation" />
           <EntitySet Name="lkRelationTypes" EntityType="bkModel.lkRelationType" />
           <EntitySet Name="Matrimonials" EntityType="bkModel.Matrimonial" />
           <EntitySet Name="Members" EntityType="bkModel.Member" />
+          <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Matrimonial" EntitySet="Matrimonials" />
+          </AssociationSet>
+          <EntitySet Name="Families" EntityType="bkModel.Family" />
+          <AssociationSet Name="FK_Families_HeadOfFamily" Association="bkModel.FK_Families_HeadOfFamily">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Family" EntitySet="Families" />
+          </AssociationSet>
+          <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
+          <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="bk_MemberSearchBasic" ReturnType="Collection(bkModel.bk_MemberSearchBasic_Result)">
+            <Parameter Name="MemberID" Mode="In" Type="Int32" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="bk_PendingApprovals" ReturnType="Collection(bkModel.bk_PendingApprovals_Result)">
+          <Parameter Name="MemberID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="FamilyMemberAssociations" EntityType="bkModel.FamilyMemberAssociation" />
+          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="bkModel.FK_FamilyMemberAssociation_Families">
+            <End Role="Family" EntitySet="Families" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_lkRelationTypes" Association="bkModel.FK_FamilyMemberAssociation_lkRelationTypes">
             <End Role="lkRelationType" EntitySet="lkRelationTypes" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
@@ -245,51 +270,7 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
-          <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Matrimonial" EntitySet="Matrimonials" />
-          </AssociationSet>
-          <EntitySet Name="Families" EntityType="bkModel.Family" />
-          <AssociationSet Name="FK_Families_HeadOfFamily" Association="bkModel.FK_Families_HeadOfFamily">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Family" EntitySet="Families" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="bkModel.FK_FamilyMemberAssociation_Families">
-            <End Role="Family" EntitySet="Families" />
-            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
-          </AssociationSet>
-          <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
-          <Parameter Name="FamilyID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="bk_MemberSearchBasic" ReturnType="Collection(bkModel.bk_MemberSearchBasic_Result)">
-            <Parameter Name="MemberID" Mode="In" Type="Int32" />
-            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
-            <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="bk_PendingApprovals" ReturnType="Collection(bkModel.bk_PendingApprovals_Result)">
-            <Parameter Name="MemberID" Mode="In" Type="Int32" />
-          </FunctionImport>
           </EntityContainer>
-        <EntityType Name="FamilyMemberAssociation">
-          <Key>
-            <PropertyRef Name="FamilyId" />
-            <PropertyRef Name="MemberId" />
-          </Key>
-          <Property Name="FamilyId" Type="Int32" Nullable="false" />
-          <Property Name="MemberId" Type="Int32" Nullable="false" />
-          <Property Name="Approved" Type="Boolean" Nullable="false" />
-          <Property Name="RelatedId" Type="Int32" />
-          <Property Name="RelationTypeId" Type="Int32" />
-          <Property Name="ApprovedOn" Type="DateTime" Precision="7" />
-          <Property Name="ApprovedBy" Type="DateTime" Precision="7" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="lkRelationType" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="FamilyMemberAssociation" ToRole="lkRelationType" />
-          <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
-          <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
-          <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
-        </EntityType>
         <EntityType Name="lkRelationType">
           <Key>
             <PropertyRef Name="RelationTypeId" />
@@ -359,47 +340,11 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
-          <NavigationProperty Name="FamilyMemberAssociations1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonials" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
           <NavigationProperty Name="Families" Relationship="bkModel.FK_Families_HeadOfFamily" FromRole="Member" ToRole="Family" />
+          <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
+          <NavigationProperty Name="FamilyMemberAssociations1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="Member" ToRole="FamilyMemberAssociation" />
         </EntityType>
-        <Association Name="FK_FamilyMemberAssociation_lkRelationTypes">
-          <End Type="bkModel.lkRelationType" Role="lkRelationType" Multiplicity="0..1" />
-          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lkRelationType">
-              <PropertyRef Name="RelationTypeId" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="RelationTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FamilyMemberAssociation_Members">
-          <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
-          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberID" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FamilyMemberAssociation_Related">
-          <End Type="bkModel.Member" Role="Member" Multiplicity="0..1" />
-          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Member">
-              <PropertyRef Name="MemberID" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="RelatedId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Matrimonials_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
           <End Type="bkModel.Matrimonial" Role="Matrimonial" Multiplicity="*" />
@@ -447,18 +392,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FamilyMemberAssociation_Families">
-          <End Type="bkModel.Family" Role="Family" Multiplicity="1" />
-          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Family">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="FamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="bk_GetFamilyMembers_Result">
           <Property Type="Int32" Name="MemberID" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
@@ -487,27 +420,79 @@
           <Property Type="DateTime" Name="AddedOn" Nullable="false" />
           <Property Type="Int32" Name="FamilyId" Nullable="false" />
         </ComplexType>
+        <EntityType Name="FamilyMemberAssociation">
+          <Key>
+            <PropertyRef Name="FamilyId" />
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="FamilyId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="RelatedId" Type="Int32" />
+          <Property Name="RelationTypeId" Type="Int32" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="7" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
+          <NavigationProperty Name="lkRelationType" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="FamilyMemberAssociation" ToRole="lkRelationType" />
+          <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
+        </EntityType>
+        <Association Name="FK_FamilyMemberAssociation_Families">
+          <End Type="bkModel.Family" Role="Family" Multiplicity="1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Family">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMemberAssociation_lkRelationTypes">
+          <End Type="bkModel.lkRelationType" Role="lkRelationType" Multiplicity="0..1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lkRelationType">
+              <PropertyRef Name="RelationTypeId" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="RelationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMemberAssociation_Members">
+          <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMemberAssociation_Related">
+          <End Type="bkModel.Member" Role="Member" Multiplicity="0..1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Member">
+              <PropertyRef Name="MemberID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="RelatedId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="bkModelStoreContainer" CdmEntityContainer="bkContext">
-          <EntitySetMapping Name="FamilyMemberAssociations">
-            <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
-              <MappingFragment StoreEntitySet="FamilyMemberAssociation">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
-                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
-                <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
-                <ScalarProperty Name="Approved" ColumnName="Approved" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="lkRelationTypes">
             <EntityTypeMapping TypeName="bkModel.lkRelationType">
               <MappingFragment StoreEntitySet="lkRelationTypes">
@@ -641,6 +626,21 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="FamilyMemberAssociations">
+            <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
+              <MappingFragment StoreEntitySet="FamilyMemberAssociation">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
+                <ScalarProperty Name="RelatedId" ColumnName="RelatedId" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

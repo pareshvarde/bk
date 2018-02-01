@@ -285,5 +285,49 @@ namespace BK.Controllers
 
             return Ok(mvm);
         }        
+
+        [Route("api/member/approve")]
+        [HttpGet]
+        public IHttpActionResult Approve(int memberId, int familyId)
+        {
+            using (bkContext context = new bkContext())
+            {               
+                if (!CanEditMember(familyId, memberId))
+                    return BadRequest("You do not have rights to manage this family and member");
+
+                FamilyMemberAssociation fmAssociation = context.FamilyMemberAssociations.FirstOrDefault(x => x.MemberId == memberId && x.FamilyId == familyId && !x.Approved);
+                if (fmAssociation == null)
+                    return BadRequest("No pending approval found");
+
+                fmAssociation.Approved = true;
+                fmAssociation.ApprovedBy = LoggedInMemberId;
+                fmAssociation.ApprovedOn = DateTime.Now;
+
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
+
+        [Route("api/member/decline")]
+        [HttpGet]
+        public IHttpActionResult Decline(int memberId, int familyId)
+        {
+            using (bkContext context = new bkContext())
+            {
+                if (!CanEditMember(familyId, memberId))
+                    return BadRequest("You do not have rights to manage this family and member");
+
+                FamilyMemberAssociation fmAssociation = context.FamilyMemberAssociations.FirstOrDefault(x => x.MemberId == memberId && x.FamilyId == familyId && !x.Approved);
+                if (fmAssociation == null)
+                    return BadRequest("No pending approval found");
+
+                context.FamilyMemberAssociations.Remove(fmAssociation);                
+
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
     }
 }
