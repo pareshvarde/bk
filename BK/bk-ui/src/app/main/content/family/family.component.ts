@@ -89,7 +89,7 @@ export class FamilyComponent implements OnInit {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
       (res) => {
         this.model = res.result;
-        this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
+        this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);        
       },
       (err) => {
         if (err.errors)

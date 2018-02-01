@@ -54,8 +54,8 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                List<FamilyMemberAssociation> fma1 = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId && x.Approved).ToList();
-                List<FamilyMemberAssociation> fma2 = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId && x.Approved).ToList();
+                List<int> fma1 = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId && x.Approved).Select(x => x.FamilyId).ToList();
+                List<int> fma2 = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId && x.Approved).Select(x => x.FamilyId).ToList();
 
                 return fma2.Intersect(fma2).Any();                               
             }
