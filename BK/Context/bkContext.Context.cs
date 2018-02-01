@@ -62,14 +62,5 @@ namespace BK.Context
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearchBasic_Result>("bk_MemberSearchBasic", memberIDParameter, phoneNumberParameter, aadhaarNumberParameter, emailParameter);
         }
-    
-        public virtual ObjectResult<bk_PendingApprovals_Result> bk_PendingApprovals(Nullable<int> familyID)
-        {
-            var familyIDParameter = familyID.HasValue ?
-                new ObjectParameter("FamilyID", familyID) :
-                new ObjectParameter("FamilyID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_PendingApprovals_Result>("bk_PendingApprovals", familyIDParameter);
-        }
     }
 }

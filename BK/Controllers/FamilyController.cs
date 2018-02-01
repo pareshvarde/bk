@@ -124,35 +124,6 @@ namespace BK.Controllers
             }
 
             return Ok();
-        }
-
-        [Route("api/family/pendingApprovals")]
-        public IHttpActionResult PendingApproval(int familyId)
-        {
-            using (bkContext context = new bkContext())
-            {
-                List<bk_PendingApprovals_Result> result = context.bk_PendingApprovals(familyId).ToList();
-
-                if (result == null)
-                    return Ok();
-
-                List<PendingApprovalsViewModel> approvals = new List<PendingApprovalsViewModel>();
-                foreach(var item in result)
-                {
-                    approvals.Add(new PendingApprovalsViewModel() {
-                         AddedByFirstName = item.AddedByFirstName,
-                         AddedByLastName = item.AddedByLastName,
-                         AddedById = item.AddedById,
-                         AddedOn = item.AddedOn,
-                         AddedToFirstName = item.AddedToFirstName,
-                         AddedToLastName = item.AddedToLastName,
-                         AddedToId = item.AddedToId,
-                         FamilyId = item.FamilyId
-                         
-                    });
-                }
-                return Ok(result);
-            }            
-        }
+        }       
     }
 }
