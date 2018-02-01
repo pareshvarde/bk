@@ -212,6 +212,7 @@ export class MemberComponent implements OnInit {
         }
 
         this.searchMemberModel = res.result;
+        this.memberModel.gender = this.searchMemberModel.gender;
       },
       (err) => {
         if (err.errors)
