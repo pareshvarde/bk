@@ -1,9 +1,11 @@
 import { MemberModel } from "./memberModel";
+import { PendingApproval } from "./pendingApproval";
 
 export class FamilyModel{    
 
     constructor(){
         this.members = new Array<FamilyMemberModel>();
+        this.approvals = new Array<PendingApproval>();
     }
 
     familyId: number;
@@ -20,6 +22,7 @@ export class FamilyModel{
     hofFirstName: string;
     hofLastName: string;
     members: FamilyMemberModel[];
+    approvals: PendingApproval[]
 }
 
 export class FamilyMemberModel{

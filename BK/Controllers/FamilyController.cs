@@ -93,6 +93,23 @@ namespace BK.Controllers
                     fvm.Members.Add(tmp);
                 }
 
+                List<bk_PendingApprovals_Result> approvals = context.bk_PendingApprovals(LoggedInMemberId).ToList();
+                foreach(var item in  approvals)
+                {
+                    var tmp = new PendingApprovalViewModel();
+
+                    tmp.AddedByFirstName = item.AddedByFirstName;
+                    tmp.AddedById = item.AddedById;
+                    tmp.AddedByLastName = item.AddedByLastName;
+                    tmp.AddedOn = item.AddedOn;
+                    tmp.AddedToFirstName = item.AddedToFirstName;
+                    tmp.AddedToId = item.AddedToId;
+                    tmp.AddedToLastName = item.AddedToLastName;
+                    tmp.FamilyId = item.FamilyId;
+
+                    fvm.PendingApprovals.Add(tmp);
+                }
+
                 return Ok(fvm);
             }            
         }
@@ -124,6 +141,6 @@ namespace BK.Controllers
             }
 
             return Ok();
-        }       
+        }               
     }
 }

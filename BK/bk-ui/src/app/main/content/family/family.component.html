@@ -11,6 +11,9 @@
           </mat-select>
         </mat-form-field>
       </div>
+      <div fxLayout="row" *ngIf="model.approvals">
+        <span *ngFor="let n of model.approvals">{{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn}}</span>
+      </div>
       <div class="bk-card">
         <div fxLayout="row">
           <span class="mat-title">Family Information</span>

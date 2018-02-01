@@ -10,6 +10,7 @@ namespace BK.ViewModel
     {
         public FamilyViewModel() {
             this.Members = new List<FamilyMemberViewModel>();
+            this.PendingApprovals = new List<PendingApprovalViewModel>();
         }
 
 
@@ -54,6 +55,9 @@ namespace BK.ViewModel
 
         [JsonProperty("members")]
         public List<FamilyMemberViewModel> Members { get; set; }
+
+        [JsonProperty("approvals")]
+        public List<PendingApprovalViewModel> PendingApprovals { get; set; }
     }
 
     public class FamilyMemberViewModel

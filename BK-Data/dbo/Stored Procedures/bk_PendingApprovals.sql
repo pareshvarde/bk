@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[bk_PendingApprovals]
 (    
-	@FamilyID INT
+	@MemberID INT
 )    
 AS
 BEGIN
@@ -8,24 +8,25 @@ BEGIN
 		m.MemberID AddedById,
 		m.FirstName AddedByFirstName,
 		m.LastName AddedByLastName,
+		m2.MemberID AddedToId,
+		m2.FirstName AddedToFirstName,
+		m2.LastName AddedToLastName,
 		fma.CreatedOn AddedOn,
 		fma.FamilyId
 	FROM 
 		FamilyMemberAssociation fma	
 		JOIN Members m on m.MemberID = fma.CreatedBy
 		JOIN Members m2 ON m2.MemberID = fma.MemberId
-		CROSS APPLY 
+		JOIN FamilyMemberAssociation fma2 ON fma2.MemberId = m2.MemberID AND fma2.Approved = 1	
+		CROSS APPLY
 		(
-			SELECT 
-				TOP 1 tfma.FamilyId
-			FROM 
-				FamilyMemberAssociation tfma
-				JOIN Members tm ON tm.MemberID = tfma.MemberId
+			SELECT FamilyId
+			FROM FamilyMemberAssociation tfma
 			WHERE
-				tfma.MemberId = fma.MemberId
-				AND tfma.Approved = 1
-				AND tfma.FamilyId = @FamilyID
+				tfma.MemberId = @MemberID 
+				AND Approved = 1
+				AND tfma.FamilyId = fma2.FamilyId
 		) t
 	WHERE
-		fma.Approved = 0				
+		fma.Approved = 0		
 END
