@@ -11,8 +11,12 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div *ngIf="model.approvals">        
-        <div fxLayout="row" fxLayoutWrap *ngFor="let n of model.approvals">{{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn | amDateFormat:'MMMM Do YYYY, hh:mm a'}} to family {{n.familyId}}</div>
+      <div *ngIf="model.approvals" class="bk-card">
+        <div fxLayout="row">
+          <span class="mat-title">Pending Approvals</span>
+        </div>
+        <div fxLayout="row" fxLayoutWrap *ngFor="let n of model.approvals">{{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn |
+          amDateFormat:'MMMM Do YYYY, hh:mm a'}} to family {{n.familyId}}</div>
       </div>
       <div class="bk-card">
         <div fxLayout="row">
@@ -91,8 +95,8 @@
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
           <button *ngIf="model.canEdit" mat-mini-fab color="accent" (click)="addMember()" class="ml-8">
-              <mat-icon>person_add</mat-icon>
-          </button>          
+            <mat-icon>person_add</mat-icon>
+          </button>
         </div>
         <mat-table #table [dataSource]="dataSource">
           <ng-container matColumnDef="memberId">
@@ -106,7 +110,7 @@
               <b>Name</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <a (click)="editMember(member.memberId)" >{{member.name}}</a>                            
+              <a (click)="editMember(member.memberId)">{{member.name}}</a>
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="dob">
@@ -130,8 +134,12 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId)"><mat-icon>delete</mat-icon></button>              
-              <button *ngIf="member.canEdit" mat-icon-button (click)="editMember(member.memberId)"><mat-icon>mode_edit</mat-icon></button>
+              <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId)">
+                <mat-icon>delete</mat-icon>
+              </button>
+              <button *ngIf="member.canEdit" mat-icon-button (click)="editMember(member.memberId)">
+                <mat-icon>mode_edit</mat-icon>
+              </button>
             </mat-cell>
           </ng-container>
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
