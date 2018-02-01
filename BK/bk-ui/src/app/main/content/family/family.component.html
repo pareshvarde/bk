@@ -101,7 +101,7 @@
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
-          <button *ngIf="model.canEdit" mat-mini-fab color="accent" (click)="addMember()" class="ml-8">
+          <button *ngIf="model.canEdit" mat-mini-fab color="accent" [routerLink]="['/member/',this.familyId,0]" class="ml-8">
             <mat-icon>person_add</mat-icon>
           </button>
         </div>
@@ -117,7 +117,7 @@
               <b>Name</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <a (click)="editMember(member.memberId)">{{member.name}}</a>
+              <a [routerLink]="['/member/',this.familyId,member.memberId]">{{member.name}}</a>
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="dob">
@@ -144,7 +144,7 @@
               <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit" mat-icon-button (click)="editMember(member.memberId)">
+              <button *ngIf="member.canEdit" mat-icon-button [routerLink]="['/member/',this.familyId,member.memberId]">
                 <mat-icon>mode_edit</mat-icon>
               </button>
             </mat-cell>

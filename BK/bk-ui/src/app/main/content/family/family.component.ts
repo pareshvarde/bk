@@ -126,10 +126,6 @@ export class FamilyComponent implements OnInit {
     this.familyForm.enable();
   }
 
-  addMember() {
-    this.router.navigate(['member/' + this.familyId + "/0"]);
-  }
-
   deleteMember(memberId: number){
 
     if (this.model.hofId == memberId)
@@ -150,10 +146,6 @@ export class FamilyComponent implements OnInit {
           this.alertService.error('', err);
       }
     );
-  }
-
-  editMember(memberId: number){
-    this.router.navigate(['member/' + this.familyId + "/" + memberId]);    
   }
 
   approveMember(memberId: number, familyId: number){

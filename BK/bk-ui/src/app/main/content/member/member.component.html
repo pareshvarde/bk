@@ -165,7 +165,7 @@
             </button>
           </div>
           <div *ngIf="!editMode && !addMode" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="loadFamilyInfo()" color="accent" class="submit-button" aria-label="FAMILY">
+            <button mat-raised-button [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
               FAMILY
             </button>
             <button *ngIf="memberModel.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
