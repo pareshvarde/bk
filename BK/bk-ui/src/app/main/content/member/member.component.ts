@@ -106,6 +106,7 @@ export class MemberComponent implements OnInit {
   }
   
   loadFamilyLookup() {    
+    
     var mId = this.memberId;
     if (!mId)
       mId = this.authService.memberId();
@@ -122,9 +123,6 @@ export class MemberComponent implements OnInit {
         }
 
         this.loadFamily();
-
-        if (this.memberId > 0)
-          this.loadMember();
       },
       (err) => {
         if (err.errors)
@@ -152,7 +150,10 @@ export class MemberComponent implements OnInit {
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
       (res) => {
-        this.familyModel = res.result;        
+        this.familyModel = res.result;   
+             
+        if (this.memberId > 0)
+          this.loadMember();
       },
       (err) => {
         if (err.errors)
