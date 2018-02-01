@@ -159,9 +159,8 @@ export class FamilyComponent implements OnInit {
   approveMember(memberId: number, familyId: number){
     this.dataService.approveMember(memberId, familyId).subscribe(
       (res) => {
-        this.alertService.success("Member family association approved");     
-        debugger;   
-        this.model.approvals = this.model.approvals.filter(x => x.addedToId != memberId && x.familyId != familyId);
+        this.alertService.success("Member family association approved");        
+        this.loadFamily();
       },
       (err) => {
         if (err.errors)
@@ -176,7 +175,7 @@ export class FamilyComponent implements OnInit {
     this.dataService.declineMember(memberId, familyId).subscribe(
       (res) => {
         this.alertService.success("Member family association removed");   
-        this.model.approvals = this.model.approvals.filter(x => x.addedToId != memberId && x.familyId != familyId);     
+        this.loadFamily();
       },
       (err) => {
         if (err.errors)
