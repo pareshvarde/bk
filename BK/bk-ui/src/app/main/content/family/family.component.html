@@ -11,8 +11,8 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div fxLayout="row" *ngIf="model.approvals">
-        <span *ngFor="let n of model.approvals">{{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn}}</span>
+      <div *ngIf="model.approvals">        
+        <div fxLayout="row" fxLayoutWrap *ngFor="let n of model.approvals">{{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn | amDateFormat:'MMMM Do YYYY, hh:mm a'}} to family {{n.familyId}}</div>
       </div>
       <div class="bk-card">
         <div fxLayout="row">
