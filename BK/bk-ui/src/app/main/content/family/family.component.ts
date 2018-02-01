@@ -126,6 +126,23 @@ export class FamilyComponent implements OnInit {
     this.familyForm.enable();
   }
 
+  delete(){
+    let tModel = new  FamilyModel();
+    tModel.familyId = this.model.familyId;
+
+    this.dataService.deleteFamily(tModel).subscribe(
+      (res) => {
+        this.alertService.success("Family has been deleted");                
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );
+  }
+
   deleteMember(memberId: number){
 
     if (this.model.hofId == memberId)

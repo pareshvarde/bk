@@ -142,5 +142,24 @@ namespace BK.Controllers
 
             return Ok();
         }               
+
+        [Route("api/family/delete")]
+        [HttpPost]
+        public IHttpActionResult Delete(FamilyViewModel model)
+        {
+            if (!CanEditFamily(model.FamilyID))
+                return BadRequest("You do not have rights to delete this family");
+
+            using (bkContext context = new bkContext())
+            {
+                Family family = context.Families.FirstOrDefault(x => x.FamilyID == model.FamilyID);
+                if (family == null)
+                    return BadRequest("Family record cannot be loaded");
+
+                List<FamilyMemberAssociation> fmAssociations = family.FamilyMemberAssociations.ToList();
+            }
+
+            return Ok();
+        }
     }
 }

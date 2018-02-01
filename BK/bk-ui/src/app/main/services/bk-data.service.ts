@@ -118,6 +118,14 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
+  deleteFamily(model: FamilyModel){
+    this.blockUI.start("Please wait...");
+           
+    return this.authHttp.post(this.API_URL + "family/delete", model).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
   getFamilyLookup(memberId: number)
   {
     this.blockUI.start("Please wait...");
