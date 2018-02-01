@@ -291,9 +291,9 @@ namespace BK.Controllers
         public IHttpActionResult Approve(int memberId, int familyId)
         {
             using (bkContext context = new bkContext())
-            {               
-                if (!CanEditMember(familyId, memberId))
-                    return BadRequest("You do not have rights to manage this family and member");
+            {
+                if (!CanApproveMember(memberId))
+                    return BadRequest("You do not have rights to approve this member");
 
                 FamilyMemberAssociation fmAssociation = context.FamilyMemberAssociations.FirstOrDefault(x => x.MemberId == memberId && x.FamilyId == familyId && !x.Approved);
                 if (fmAssociation == null)
@@ -315,8 +315,8 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                if (!CanEditMember(familyId, memberId))
-                    return BadRequest("You do not have rights to manage this family and member");
+                if (!CanApproveMember(memberId))
+                    return BadRequest("You do not have rights to approve this member");
 
                 FamilyMemberAssociation fmAssociation = context.FamilyMemberAssociations.FirstOrDefault(x => x.MemberId == memberId && x.FamilyId == familyId && !x.Approved);
                 if (fmAssociation == null)

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
+using System.Data.Entity;
 
 namespace BK.Controllers
 {
@@ -46,6 +47,18 @@ namespace BK.Controllers
                 List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
 
                 return CanEditMember(fmAssociation, memberId);
+            }
+        }
+
+        protected bool CanApproveMember(int memberId)
+        {
+            using (bkContext context = new bkContext())
+            {
+                Member member = context.Members.Include(x => x.FamilyMemberAssociations).FirstOrDefault(x => x.MemberID == memberId);
+                if (member == null)
+                    return false;                
+
+                return member.FamilyMemberAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved);                
             }
         }
 

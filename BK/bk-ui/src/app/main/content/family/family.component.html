@@ -22,8 +22,8 @@
           <button mat-mini-fab color="accent" (click)="declineMember(n.addedToId, n.familyId)" class="mr-8">
             <mat-icon>cancel</mat-icon>
           </button>
-          {{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn | amDateFormat:'MMMM
-          Do YYYY, hh:mm a'}} to family {{n.familyId}}
+          {{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} to family {{n.familyId}} on {{n.addedOn | amDateFormat:'MMMM
+          Do YYYY, hh:mm a'}}
         </div>
       </div>
       <div class="bk-card">
