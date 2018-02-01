@@ -54,11 +54,10 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                Member member = context.Members.Include(x => x.FamilyMemberAssociations).FirstOrDefault(x => x.MemberID == memberId);
-                if (member == null)
-                    return false;                
+                List<FamilyMemberAssociation> fma1 = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId && x.Approved).ToList();
+                List<FamilyMemberAssociation> fma2 = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId && x.Approved).ToList();
 
-                return member.FamilyMemberAssociations.Any(x => x.MemberId == LoggedInMemberId && x.Approved);                
+                return fma2.Intersect(fma2).Any();                               
             }
         }
 
