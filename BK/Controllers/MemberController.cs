@@ -208,15 +208,19 @@ namespace BK.Controllers
                     html = html.Replace("{{addedOn}}", fmAssociation.CreatedOn.ToString("dddd, dd MMMM yyyy hh:mm tt"));
                     html = html.Replace("{{relation}}", $"{relationType.RelationType} Of {relatedMember.FirstName} {relatedMember.LastName}");
 
-                    MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress);
-                    mailMessage.Body = html;
-                    mailMessage.IsBodyHtml = true;
-                    mailMessage.Subject = "Brahmkshatriya Online Portal - Notification";
+                    System.Threading.Tasks.Task.Factory.StartNew(() => {
+                        using (SmtpClient sClient = new SmtpClient())
+                        {
+                            using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
+                            {
+                                mailMessage.Body = html;
+                                mailMessage.IsBodyHtml = true;
+                                mailMessage.Subject = "Brahmkshatriya Online Portal - Notification";
 
-                    using (SmtpClient sClient = new SmtpClient())
-                    {
-                        sClient.Send(mailMessage);
-                    }
+                                sClient.Send(mailMessage);
+                            }
+                        }
+                    });
                 }
             }
 

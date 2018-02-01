@@ -10,6 +10,12 @@ namespace BK
     {
         private static LogWriter _logWriter;
 
+        public AppLogger()
+        {
+            if (_logWriter == null)
+                InitApplogger();
+        }
+
         public static void InitApplogger()
         {
             var factory = new LogWriterFactory();

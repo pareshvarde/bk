@@ -75,16 +75,20 @@ namespace BK.Controllers
                 html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/login/ ");
                 html = html.Replace("{{username}}", member.EmailAddress);
                 html = html.Replace("{{password}}", member.Password);
+                
+                System.Threading.Tasks.Task.Factory.StartNew(() => {
+                    using (SmtpClient sClient = new SmtpClient())
+                    {
+                        using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
+                        {
+                            mailMessage.Body = html;
+                            mailMessage.IsBodyHtml = true;
+                            mailMessage.Subject = "Brahmkshatriya Online Portal - Welcome Letter";
 
-                MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress);
-                mailMessage.Body = html;
-                mailMessage.IsBodyHtml = true;
-                mailMessage.Subject = "Brahmkshatriya Online Portal - Welcome Letter";
-
-                using (SmtpClient sClient = new SmtpClient())
-                {
-                    sClient.Send(mailMessage);
-                }
+                            sClient.Send(mailMessage);
+                        }
+                    }
+                });                
             }
 
             return Ok();
@@ -112,15 +116,19 @@ namespace BK.Controllers
                 html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
                 html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/resetPassword/{member.PasswordUID.Value.ToString()} ");
 
-                MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress);
-                mailMessage.Body = html;
-                mailMessage.IsBodyHtml = true;
-                mailMessage.Subject = "Brahmkshatriya Online Portal - Password Reset";
+                System.Threading.Tasks.Task.Factory.StartNew(() => {
+                    using (SmtpClient sClient = new SmtpClient())
+                    {
+                        using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
+                        {
+                            mailMessage.Body = html;
+                            mailMessage.IsBodyHtml = true;
+                            mailMessage.Subject = "Brahmkshatriya Online Portal - Password Reset";
 
-                using (SmtpClient sClient = new SmtpClient())
-                {
-                    sClient.Send(mailMessage);
-                }
+                            sClient.Send(mailMessage);
+                        }
+                    }
+                });                                              
             }
 
             return Ok(true);
