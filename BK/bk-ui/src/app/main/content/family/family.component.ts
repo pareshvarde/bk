@@ -159,7 +159,7 @@ export class FamilyComponent implements OnInit {
   approveMember(memberId: number, familyId: number){
     this.dataService.approveMember(this.familyId, memberId).subscribe(
       (res) => {
-        this.alertService.success("Member has been removed from the family");        
+        this.alertService.success("Member family association approved");        
       },
       (err) => {
         if (err.errors)
@@ -173,7 +173,7 @@ export class FamilyComponent implements OnInit {
   declineMember(memberId: number, familyId: number){
     this.dataService.declineMember(this.familyId, memberId).subscribe(
       (res) => {
-        this.alertService.success("Member has been removed from the family");        
+        this.alertService.success("Member family association removed");        
       },
       (err) => {
         if (err.errors)

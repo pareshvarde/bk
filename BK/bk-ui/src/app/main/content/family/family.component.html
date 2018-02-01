@@ -15,14 +15,15 @@
         <div fxLayout="row">
           <span class="mat-title">Pending Approvals</span>
         </div>
-        <div fxLayout="row" fxLayoutWrap fxLayoutAlign="left center" *ngFor="let n of model.approvals">{{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn |
-          amDateFormat:'MMMM Do YYYY, hh:mm a'}} to family {{n.familyId}}          
-          <button mat-mini-fab color="accent" (click)="approveMember(n.addedToId, n.familyId)" class="ml-8">
+        <div fxLayout="row" class="mb-8" fxLayoutWrap fxLayoutAlign="left center" *ngFor="let n of model.approvals">
+          <button mat-mini-fab color="accent" (click)="approveMember(n.addedToId, n.familyId)" class="mr-8">
             <mat-icon>done</mat-icon>
           </button>
-          <button mat-mini-fab color="accent" (click)="declineMember(n.addedToId, n.familyId)" class="ml-8">
-              <mat-icon>cancel</mat-icon>
+          <button mat-mini-fab color="accent" (click)="declineMember(n.addedToId, n.familyId)" class="mr-8">
+            <mat-icon>cancel</mat-icon>
           </button>
+          {{n.addedByFirstName}} {{n.addedByLastName}} added {{n.addedToFirstName}} {{n.addedToLastName}} on {{n.addedOn | amDateFormat:'MMMM
+          Do YYYY, hh:mm a'}} to family {{n.familyId}}
         </div>
       </div>
       <div class="bk-card">
