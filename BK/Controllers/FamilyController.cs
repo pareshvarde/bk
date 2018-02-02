@@ -152,11 +152,7 @@ namespace BK.Controllers
 
             using (bkContext context = new bkContext())
             {
-                Family family = context.Families.FirstOrDefault(x => x.FamilyID == model.FamilyID);
-                if (family == null)
-                    return BadRequest("Family record cannot be loaded");
-
-                List<FamilyMemberAssociation> fmAssociations = family.FamilyMemberAssociations.ToList();
+                context.bk_DeleteFamily(model.FamilyID);                
             }
 
             return Ok();

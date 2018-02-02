@@ -181,6 +181,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="bk_DeleteFamily" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FamilyID" Type="int" Mode="In" />
+        </Function>
         <Function Name="bk_GetFamilyMembers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FamilyID" Type="int" Mode="In" />
         </Function>
@@ -270,6 +273,9 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
+          <FunctionImport Name="bk_DeleteFamily">
+            <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="lkRelationType">
           <Key>
@@ -641,6 +647,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="bk_DeleteFamily" FunctionName="bkModel.Store.bk_DeleteFamily" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

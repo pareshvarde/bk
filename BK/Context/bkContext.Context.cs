@@ -71,5 +71,14 @@ namespace BK.Context
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_PendingApprovals_Result>("bk_PendingApprovals", memberIDParameter);
         }
+    
+        public virtual int bk_DeleteFamily(Nullable<int> familyID)
+        {
+            var familyIDParameter = familyID.HasValue ?
+                new ObjectParameter("FamilyID", familyID) :
+                new ObjectParameter("FamilyID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bk_DeleteFamily", familyIDParameter);
+        }
     }
 }

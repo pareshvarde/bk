@@ -32,3 +32,7 @@ if you delete a member and he is part of only other family where approval is pen
 
 optimization
 =============
+delete family	
+	delete family member association
+	delete family
+	delete members (member should not be part of other family as approved member, if unapprove member that association needs to be deleted as well)
