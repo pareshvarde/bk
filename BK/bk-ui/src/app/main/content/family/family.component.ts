@@ -19,7 +19,7 @@ import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 })
 export class FamilyComponent implements OnInit {
 
-  model: FamilyModel; 
+  model: FamilyModel;
   familyForm: FormGroup;
   familyId: number;
   familyLookup: FamilyLookupModel[];
@@ -132,15 +132,22 @@ export class FamilyComponent implements OnInit {
     let tModel = new FamilyModel();
     tModel.familyId = this.model.familyId;
 
-    this.dataService.deleteFamily(tModel).subscribe(
-      (res) => {
-        this.alertService.success("Family has been deleted");
-      },
-      (err) => {
-        if (err.errors)
-          this.alertService.error('', err.errors[0]);
-        else
-          this.alertService.error('', err);
+    this._confirmation.create('', 'Are you sure you want to delete this family?').subscribe(
+      (ans: ResolveEmit) => {
+        if (!ans.resolved)
+          return;
+
+        this.dataService.deleteFamily(tModel).subscribe(
+          (res) => {
+            this.alertService.success("Family has been deleted");
+          },
+          (err) => {
+            if (err.errors)
+              this.alertService.error('', err.errors[0]);
+            else
+              this.alertService.error('', err);
+          }
+        );
       }
     );
   }
@@ -154,24 +161,22 @@ export class FamilyComponent implements OnInit {
 
     this._confirmation.create('', "Are you sure you want to remove '" + name + "' from this family?").subscribe(
       (ans: ResolveEmit) => {
-        
-        if (!ans.resolved) {
-          return; 
-        }
-        else {
-          this.dataService.deleteMember(this.familyId, memberId).subscribe(
-            (res) => {
-              this.alertService.success("Member has been removed from the family");
-              this.loadFamily();
-            },
-            (err) => {
-              if (err.errors)
-                this.alertService.error('', err.errors[0]);
-              else
-                this.alertService.error('', err);
-            }
-          );
-        }
+
+        if (!ans.resolved)
+          return;
+
+        this.dataService.deleteMember(this.familyId, memberId).subscribe(
+          (res) => {
+            this.alertService.success("Member has been removed from the family");
+            this.loadFamily();
+          },
+          (err) => {
+            if (err.errors)
+              this.alertService.error('', err.errors[0]);
+            else
+              this.alertService.error('', err);
+          }
+        );
       })
   }
 
