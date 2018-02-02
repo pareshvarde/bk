@@ -152,7 +152,19 @@ namespace BK.Controllers
 
             using (bkContext context = new bkContext())
             {
-                context.bk_DeleteFamily(model.FamilyID);                
+                using (var tnx = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.bk_DeleteFamily(model.FamilyID);
+                        tnx.Commit();
+                    }
+                    catch
+                    {
+                        tnx.Rollback();
+                        throw;
+                    }
+                }
             }
 
             return Ok();
