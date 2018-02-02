@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
+import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 
 @Component({
   selector: 'app-family',
@@ -18,7 +19,7 @@ import { bkAuthService } from '../../services/auth-service';
 })
 export class FamilyComponent implements OnInit {
 
-  model: FamilyModel;
+  model: FamilyModel; 
   familyForm: FormGroup;
   familyId: number;
   familyLookup: FamilyLookupModel[];
@@ -26,7 +27,8 @@ export class FamilyComponent implements OnInit {
   dataSource: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public nukhs: NukhData, public authService: bkAuthService, public categories: CategoryData) {
+    private alertService: NotificationsService, public nukhs: NukhData, public authService: bkAuthService,
+    private _confirmation: ConfirmationService, public categories: CategoryData) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -55,10 +57,10 @@ export class FamilyComponent implements OnInit {
       hof: new FormControl('', [Validators.required])
     });
 
-    this.familyForm.disable();    
+    this.familyForm.disable();
   }
 
-  initializeComponent(){
+  initializeComponent() {
     this.loadFamilyLookup();
   }
 
@@ -68,9 +70,9 @@ export class FamilyComponent implements OnInit {
     this.dataService.getFamilyLookup(mId).subscribe(
       (res) => {
         this.familyLookup = res.result;
-        
+
         if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId)
-          this.familyId = this.familyLookup[0].familyId;                  
+          this.familyId = this.familyLookup[0].familyId;
         else
           this.familyId = this.familyId * 1; //TRICK TO BIND IT BACK TO UI
 
@@ -89,7 +91,7 @@ export class FamilyComponent implements OnInit {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
       (res) => {
         this.model = res.result;
-        this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);        
+        this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
       },
       (err) => {
         if (err.errors)
@@ -126,13 +128,13 @@ export class FamilyComponent implements OnInit {
     this.familyForm.enable();
   }
 
-  delete(){
-    let tModel = new  FamilyModel();
+  delete() {
+    let tModel = new FamilyModel();
     tModel.familyId = this.model.familyId;
 
     this.dataService.deleteFamily(tModel).subscribe(
       (res) => {
-        this.alertService.success("Family has been deleted");                
+        this.alertService.success("Family has been deleted");
       },
       (err) => {
         if (err.errors)
@@ -143,32 +145,40 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  deleteMember(memberId: number){
+  deleteMember(memberId: number, name: string) {
 
-    if (this.model.hofId == memberId)
-    {
-      this.alertService.error('','Head Of Family cannot be deleted');
+    if (this.model.hofId == memberId) {
+      this.alertService.error('', 'Head Of Family cannot be deleted');
       return;
     }
 
-    this.dataService.deleteMember(this.familyId, memberId).subscribe(
-      (res) => {
-        this.alertService.success("Member has been removed from the family");
-        this.loadFamily();
-      },
-      (err) => {
-        if (err.errors)
-          this.alertService.error('', err.errors[0]);
-        else
-          this.alertService.error('', err);
-      }
-    );
+    this._confirmation.create('', "Are you sure you want to remove '" + name + "' from this family?").subscribe(
+      (ans: ResolveEmit) => {
+        
+        if (!ans.resolved) {
+          return; 
+        }
+        else {
+          this.dataService.deleteMember(this.familyId, memberId).subscribe(
+            (res) => {
+              this.alertService.success("Member has been removed from the family");
+              this.loadFamily();
+            },
+            (err) => {
+              if (err.errors)
+                this.alertService.error('', err.errors[0]);
+              else
+                this.alertService.error('', err);
+            }
+          );
+        }
+      })
   }
 
-  approveMember(memberId: number, familyId: number){
+  approveMember(memberId: number, familyId: number) {
     this.dataService.approveMember(memberId, familyId).subscribe(
       (res) => {
-        this.alertService.success("Member family association approved");        
+        this.alertService.success("Member family association approved");
         this.loadFamily();
       },
       (err) => {
@@ -180,10 +190,10 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  declineMember(memberId: number, familyId: number){
+  declineMember(memberId: number, familyId: number) {
     this.dataService.declineMember(memberId, familyId).subscribe(
       (res) => {
-        this.alertService.success("Member family association removed");   
+        this.alertService.success("Member family association removed");
         this.loadFamily();
       },
       (err) => {

@@ -22,6 +22,14 @@ export class FuseContentComponent implements OnInit, OnDestroy {
         lastOnBottom: true     
     }
 
+    public confirmationOptions ={
+        overlay: true,
+        overlayClickToClose: false,
+        showCloseButton: false,
+        confirmText: 'Yes',
+        declineText: 'No'
+    }
+
     @HostBinding('@routerTransitionUp') routeAnimationUp = false;
     @HostBinding('@routerTransitionDown') routeAnimationDown = false;
     @HostBinding('@routerTransitionRight') routeAnimationRight = false;

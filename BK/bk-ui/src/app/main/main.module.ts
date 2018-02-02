@@ -5,6 +5,7 @@ import { SharedModule } from '../core/modules/shared.module';
 import { ScrollToModule } from 'ng2-scroll-to';
 import { AuthModule } from './auth/authModule'
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { JasperoConfirmationsModule } from '@jaspero/ng-confirmations'
 import { FuseMainComponent } from './main.component';
 import { FuseContentComponent } from './content/content.component';
 import { FuseFooterComponent } from './footer/footer.component';
@@ -32,6 +33,7 @@ import { ChangePasswordComponent } from './content/change-password/change-passwo
 import { RegisterComponent } from './content/register/register.component';
 import { FamilyComponent } from './content/family/family.component';
 import { MemberComponent } from './content/member/member.component';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
 
 @NgModule({
     declarations: [
@@ -60,11 +62,15 @@ import { MemberComponent } from './content/member/member.component';
         FamilyComponent,
         MemberComponent        
     ],
+    providers:[
+        ConfirmationService
+    ],
     imports     : [
         SharedModule,
         RouterModule,
         ScrollToModule.forRoot(),
         SimpleNotificationsModule.forRoot(),
+        JasperoConfirmationsModule,
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule,

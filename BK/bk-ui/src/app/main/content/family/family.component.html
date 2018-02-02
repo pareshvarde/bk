@@ -145,7 +145,7 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId)">
+              <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
               <button *ngIf="member.canEdit" mat-icon-button [routerLink]="['/member/',this.familyId,member.memberId]">
