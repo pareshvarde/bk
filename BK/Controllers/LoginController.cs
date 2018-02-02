@@ -1,5 +1,4 @@
-﻿using BK.Utility;
-using BK.ViewModel;
+﻿using BK.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,13 +38,11 @@ namespace BK.Controllers
                 member.Phone = register.PhoneNumber;
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;
-                member.Password = System.Web.Security.Membership.GeneratePassword(8, 2);
-                member.MemberSID = IDGenerator.CreateSID(IDGenerator.Prefixes.MEMBER);
+                member.Password = System.Web.Security.Membership.GeneratePassword(8, 2);                
                 member.Alive = "A";
                 member.Active = true;
 
-                Family family = new Family();
-                family.FamilySID = IDGenerator.CreateSID(IDGenerator.Prefixes.FAMILY);
+                Family family = new Family();                
                 family.Address1 = register.Address1;
                 family.Address2 = register.Address2;
                 family.City = register.City;

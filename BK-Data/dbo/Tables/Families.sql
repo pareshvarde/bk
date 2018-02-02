@@ -1,7 +1,5 @@
 ﻿CREATE TABLE [dbo].[Families] (
     [FamilyID]       INT           IDENTITY (1, 1) NOT NULL,
-    [ParentFamilyID] INT           NULL,
-    [FamilySID]      NVARCHAR (18) NOT NULL,
     [NukhID]         INT           NOT NULL,
     [CategoryID]     INT           NOT NULL,
     [HeadOfFamilyID] INT           NOT NULL,

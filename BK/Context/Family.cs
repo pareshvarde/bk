@@ -21,8 +21,6 @@ namespace BK.Context
         }
     
         public int FamilyID { get; set; }
-        public Nullable<int> ParentFamilyID { get; set; }
-        public string FamilySID { get; set; }
         public int NukhID { get; set; }
         public int CategoryID { get; set; }
         public int HeadOfFamilyID { get; set; }

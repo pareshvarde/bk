@@ -15,7 +15,6 @@ namespace BK.Context
     public partial class Matrimonial
     {
         public int MatrimonialID { get; set; }
-        public string MatrimonialSID { get; set; }
         public int MemberID { get; set; }
         public string MaternalNukh { get; set; }
         public Nullable<System.TimeSpan> BirthTime { get; set; }

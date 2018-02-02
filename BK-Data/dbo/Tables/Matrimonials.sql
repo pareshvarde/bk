@@ -1,6 +1,5 @@
 ﻿CREATE TABLE [dbo].[Matrimonials] (
     [MatrimonialID]  INT            IDENTITY (1, 1) NOT NULL,
-    [MatrimonialSID] NVARCHAR (18)  NOT NULL,
     [MemberID]       INT            NOT NULL,
     [MaternalNukh]   NVARCHAR (50)  NULL,
     [BirthTime]      TIME (7)       NULL,

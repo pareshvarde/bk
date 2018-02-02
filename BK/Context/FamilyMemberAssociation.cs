@@ -24,8 +24,8 @@ namespace BK.Context
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
     
-        public virtual Family Family { get; set; }
         public virtual lkRelationType lkRelationType { get; set; }
+        public virtual Family Family { get; set; }
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }
     }
