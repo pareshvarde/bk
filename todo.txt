@@ -30,8 +30,5 @@ edits by minor?
 
 if you delete a member and he is part of only other family where approval is pending that needs to be deleted as well.
 
-optmization
-
-edit -> cancel reject changes
-
+optimization
 =============

@@ -16,6 +16,8 @@ import { bkRoutes } from './app.routes'
 import { BlockUIModule } from 'ng-block-ui';
 import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
 import { MAT_DATE_LOCALE } from '@angular/material';
+import { bkAuthService } from './main/services/auth-service';
+import { AuthGuard } from './main/guards/auth-guard'
 
 @NgModule({
     declarations: [
@@ -41,6 +43,8 @@ import { MAT_DATE_LOCALE } from '@angular/material';
             useClass: LowerCaseUrlSerializer
         },
         {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
+        bkAuthService,
+        AuthGuard
     ],
     bootstrap   : [
         AppComponent

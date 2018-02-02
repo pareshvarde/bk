@@ -13,6 +13,7 @@ import { ChangePasswordComponent } from './main/content/change-password/change-p
 import { RegisterComponent } from './main/content/register/register.component';
 import { FamilyComponent } from './main/content/family/family.component';
 import { MemberComponent } from './main/content/member/member.component';
+import { AuthGuard } from './main/guards/auth-guard';
 
 export const bkRoutes: Routes = [
     {
@@ -57,7 +58,8 @@ export const bkRoutes: Routes = [
     },
     {
         path: "changePassword",
-        component: ChangePasswordComponent
+        component: ChangePasswordComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "register",
@@ -65,11 +67,13 @@ export const bkRoutes: Routes = [
     },
     {
         path: "family/:familyId",
-        component: FamilyComponent  
+        component: FamilyComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: "member/:familyId/:memberId",
-        component: MemberComponent
+        component: MemberComponent,
+        canActivate: [AuthGuard]
     },    
     {
         path      : '**',
