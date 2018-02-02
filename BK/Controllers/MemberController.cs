@@ -236,26 +236,19 @@ namespace BK.Controllers
 
             using (bkContext context = new bkContext())
             {
-                Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
-                if (member == null)
-                    return BadRequest("Member profile cannot be loaded. Please try again later");
-
-                List<FamilyMemberAssociation> mAssociations = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId).ToList();
-                Family family = context.Families.Where(x => x.FamilyID == familyId).FirstOrDefault();                
-                FamilyMemberAssociation currentAssociation = mAssociations.Where(x => x.FamilyId == familyId).FirstOrDefault();
-
-                if (currentAssociation == null)
-                    return BadRequest("Member association to current family cannot be loaded. Please try again later");
-
-                context.FamilyMemberAssociations.Remove(currentAssociation);
-
-                if (mAssociations.Count == 1)
-                    context.Members.Remove(member);
-
-                if (family.FamilyMemberAssociations.Count == 0)
-                    context.Families.Remove(family);                
-
-                context.SaveChanges();
+                using (var tnx = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        context.bk_DeleteMember(familyId, memberId);
+                        tnx.Commit();
+                    }
+                    catch
+                    {
+                        tnx.Rollback();
+                        throw;
+                    }
+                }
             }
 
             return Ok();

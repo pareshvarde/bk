@@ -8,8 +8,6 @@ remember me
 register
 	validation
 	
-route guard 
-
 createdBy
 createdOn
 ModifiedBy
@@ -23,16 +21,12 @@ relationship status instead of Married on member?
 birthday wish email
 anniversary?
 
-un approved family member should not be able to be Head Of Family
-
 include child object in datacontext queries
 edits by minor?
 
 if you delete a member and he is part of only other family where approval is pending that needs to be deleted as well.
 
+head of family required
+
 optimization
 =============
-delete family	
-	delete family member association
-	delete family
-	delete members (member should not be part of other family as approved member, if unapprove member that association needs to be deleted as well)

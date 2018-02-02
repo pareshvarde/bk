@@ -80,5 +80,18 @@ namespace BK.Context
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bk_DeleteFamily", familyIDParameter);
         }
+    
+        public virtual int bk_DeleteMember(Nullable<int> familyID, Nullable<int> memberID)
+        {
+            var familyIDParameter = familyID.HasValue ?
+                new ObjectParameter("FamilyID", familyID) :
+                new ObjectParameter("FamilyID", typeof(int));
+    
+            var memberIDParameter = memberID.HasValue ?
+                new ObjectParameter("MemberID", memberID) :
+                new ObjectParameter("MemberID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bk_DeleteMember", familyIDParameter, memberIDParameter);
+        }
     }
 }

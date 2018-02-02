@@ -48,6 +48,8 @@ export class MemberComponent implements OnInit {
         this.memberId = params.memberId;
       else
         this.memberId = null;
+
+      this.existingAdd = null;
       
       this.initializeComponent();      
     });
