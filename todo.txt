@@ -24,8 +24,6 @@ anniversary?
 include child object in datacontext queries
 edits by minor?
 
-if you delete a member and he is part of only other family where approval is pending that needs to be deleted as well.
-
 head of family required
 
 optimization
