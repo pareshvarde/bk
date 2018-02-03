@@ -242,7 +242,6 @@
     </Compile>
     <Compile Include="ResponsePackage.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Utility\IDGenerator.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\FamilyViewModel.cs" />
     <Compile Include="ViewModel\MemberBasicSearchModel.cs" />
