@@ -78,12 +78,4 @@ export class FuseToolbarComponent
         this.router.navigate(['home']);  
         this.alertService.success("You have been logged out from secure portal");      
     }
-
-    loadFamily(){
-        this.router.navigate(['family/0']);    
-    }
-
-    loadProfile(){
-        this.router.navigate(['member/0/' + this.authService.memberId()]);    
-    }
 }
