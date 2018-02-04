@@ -34,6 +34,7 @@ import { RegisterComponent } from './content/register/register.component';
 import { FamilyComponent } from './content/family/family.component';
 import { MemberComponent } from './content/member/member.component';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { ForkComponent } from './content/fork/fork.component';
 
 @NgModule({
     declarations: [
@@ -60,7 +61,8 @@ import { ConfirmationService } from '@jaspero/ng-confirmations';
         ChangePasswordComponent,
         RegisterComponent,        
         FamilyComponent,
-        MemberComponent        
+        MemberComponent,
+        ForkComponent        
     ],
     providers:[
         ConfirmationService
