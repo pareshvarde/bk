@@ -14,6 +14,7 @@ import { RegisterComponent } from './main/content/register/register.component';
 import { FamilyComponent } from './main/content/family/family.component';
 import { MemberComponent } from './main/content/member/member.component';
 import { AuthGuard } from './main/guards/auth-guard';
+import { ForkComponent } from './main/content/fork/fork.component';
 
 export const bkRoutes: Routes = [
     {
@@ -75,6 +76,11 @@ export const bkRoutes: Routes = [
         component: MemberComponent,
         canActivate: [AuthGuard]
     },    
+    {
+        path: "family/fork/:familyId",
+        component: ForkComponent,
+        canActivate: [AuthGuard]
+    },
     {
         path      : '**',
         redirectTo : "home"              
