@@ -27,7 +27,7 @@
   
               <mat-form-field>
                 <mat-select placeholder="Head Of Family" [(ngModel)]="model.hofId" formControlName="hof">
-                  <mat-option *ngFor="let n of model.members" [value]="n.memberId">
+                  <mat-option *ngFor="let n of model.members | callback: filterMember" [value]="n.memberId">
                     {{ n.name }}
                   </mat-option>
                 </mat-select>

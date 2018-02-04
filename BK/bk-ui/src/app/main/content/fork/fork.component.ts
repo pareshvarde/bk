@@ -77,6 +77,10 @@ export class ForkComponent implements OnInit {
     );
   }
 
+  filterMember(member: FamilyMemberModel) {
+    return member.selected === true;    
+  }
+
   forkFamily(){
     console.log(this.model);
   }
