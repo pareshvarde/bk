@@ -249,6 +249,12 @@ export class MemberComponent implements OnInit {
 
   cancelEdit() {
     this.editMode = false;
+    
+    if (!this.memberModel.memberId)
+      this.back();
+  }
+
+  back(){
     this.location.back();
   }
 

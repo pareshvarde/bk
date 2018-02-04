@@ -20,7 +20,7 @@
         </mat-radio-group>
       </div>
       <div *ngIf="addMode && existingAdd == null" fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button (click)="cancelEdit()" color="accent" class="submit-button" aria-label="CANCEL">
+        <button mat-raised-button (click)="back()" color="accent" class="submit-button" aria-label="CANCEL">
           BACK
         </button>
       </div>
@@ -171,7 +171,7 @@
             <button *ngIf="memberModel.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
               EDIT
             </button>
-            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
               BACK
             </button>
           </div>
@@ -207,7 +207,7 @@
             <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="searchForm.invalid">
               SEARCH
             </button>
-            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
               CANCEL
             </button>
           </div>
@@ -236,8 +236,8 @@
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="SAVE">
-              Add
+            <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="ADD">
+              ADD
             </button>
           </div>
         </div>
