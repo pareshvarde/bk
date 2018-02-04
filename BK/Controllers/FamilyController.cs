@@ -28,14 +28,14 @@ namespace BK.Controllers
                                   m.FirstName,
                                   m.LastName
                               }).Distinct().ToList();
-                
+
                 List<FamilyLookupViewModel> response = new List<FamilyLookupViewModel>();
 
                 foreach (var item in result)
                 {
                     response.Add(new FamilyLookupViewModel()
                     {
-                        FamilyID = item.FamilyID,                        
+                        FamilyID = item.FamilyID,
                         HeadOfFamily = $"{item.FirstName} {item.LastName}"
 
                     });
@@ -55,7 +55,7 @@ namespace BK.Controllers
                 if (f == null)
                     return BadRequest("Family record cannot be loaded.");
 
-                List<bk_GetFamilyMembers_Result> members =  context.bk_GetFamilyMembers(familyId).ToList();              
+                List<bk_GetFamilyMembers_Result> members = context.bk_GetFamilyMembers(familyId).ToList();
 
                 FamilyViewModel fvm = new FamilyViewModel();
                 fvm.Address1 = f.Address1;
@@ -77,11 +77,11 @@ namespace BK.Controllers
                     fvm.HeadOfLastName = hofMember.LastName;
                 }
 
-                foreach(var item in members)
+                foreach (var item in members)
                 {
                     var tmp = new FamilyMemberViewModel();
 
-                    tmp.DOB = item.DOB;                    
+                    tmp.DOB = item.DOB;
                     tmp.Married = item.Married;
                     tmp.MemberID = item.MemberID;
                     tmp.Name = $"{item.FirstName} {item.LastName}";
@@ -94,7 +94,7 @@ namespace BK.Controllers
                 }
 
                 List<bk_PendingApprovals_Result> approvals = context.bk_PendingApprovals(LoggedInMemberId).ToList();
-                foreach(var item in  approvals)
+                foreach (var item in approvals)
                 {
                     var tmp = new PendingApprovalViewModel();
 
@@ -111,7 +111,7 @@ namespace BK.Controllers
                 }
 
                 return Ok(fvm);
-            }            
+            }
         }
 
         [Route("api/family/save")]
@@ -125,23 +125,23 @@ namespace BK.Controllers
             {
                 Family family = context.Families.Where(f => f.FamilyID == model.FamilyID).FirstOrDefault();
                 if (family == null)
-                    return BadRequest("Family record cannot be loaded. Please try again later");                
+                    return BadRequest("Family record cannot be loaded. Please try again later");
 
                 family.Address1 = model.Address1;
-                family.Address2 =  model.Address2;
+                family.Address2 = model.Address2;
                 family.CategoryID = model.CategoryID;
-                family.City =  model.City;
+                family.City = model.City;
                 family.Country = model.Country;
                 family.NukhID = model.NukhID;
-                family.PostalCode =  model.PostalCode;
-                family.State =  model.State;
-                family.HeadOfFamilyID = model.HeadOfFamilyID;                
+                family.PostalCode = model.PostalCode;
+                family.State = model.State;
+                family.HeadOfFamilyID = model.HeadOfFamilyID;
 
                 context.SaveChanges();
             }
 
             return Ok();
-        }               
+        }
 
         [Route("api/family/delete")]
         [HttpPost]
@@ -168,6 +168,53 @@ namespace BK.Controllers
             }
 
             return Ok();
+        }
+
+        [Route("api/family/fork")]
+        [HttpPost]
+        public IHttpActionResult Fork(FamilyViewModel model)
+        {
+            if (!CanEditFamily(model.FamilyID))
+                return BadRequest("You do not have permission to manage this family");
+
+            if (model.Members.Where(x => x.Selected).Count() == 0)
+                return BadRequest("No valid members provided for fork family");
+
+            using (bkContext context = new bkContext())
+            {
+                Family family = context.Families.FirstOrDefault(x => x.FamilyID == model.FamilyID);
+                List<FamilyMemberAssociation> fmAssociations = family.FamilyMemberAssociations.Where(x => x.Approved).ToList();
+
+                foreach (var item in model.Members)
+                    if (!fmAssociations.Any(x => x.MemberId == item.MemberID))
+                        return BadRequest("Invalid members supplied for the family");
+
+                Family newFam = new Family();
+                newFam.Address1 = model.Address1;
+                newFam.Address2 = model.Address2;
+                newFam.City = model.City;
+                newFam.State = model.State;
+                newFam.PostalCode = model.PostalCode;
+                newFam.Country = model.Country;
+                newFam.CategoryID = model.CategoryID;
+                newFam.NukhID = model.NukhID;
+
+                foreach (var item in model.Members.Where(x => x.Selected))
+                {
+                    newFam.FamilyMemberAssociations.Add(new FamilyMemberAssociation()
+                    {
+                        Approved = true,
+                        CreatedBy = LoggedInMemberId,
+                        CreatedOn = DateTime.Now,
+                        MemberId = item.MemberID
+                    });
+                }
+
+                context.Families.Add(newFam);
+                context.SaveChanges();
+
+                return Ok(newFam.FamilyID);
+            }
         }
     }
 }

@@ -79,5 +79,8 @@ namespace BK.ViewModel
 
         [JsonProperty("relation")]
         public string Relation { get; set; }
+
+        [JsonProperty("selected")]
+        public bool Selected { get; set; }
     }
 }

@@ -82,6 +82,11 @@ export class ForkComponent implements OnInit {
   }
 
   forkFamily(){
+    if (this.model.members.filter(x => x.selected).length === 0)
+    {
+      this.alertService.alert('', 'Please select at least one family member to be part of new family');
+      return;
+    }
     console.log(this.model);
   }
 
