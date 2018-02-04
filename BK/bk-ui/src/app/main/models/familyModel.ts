@@ -26,6 +26,7 @@ export class FamilyModel{
 }
 
 export class FamilyMemberModel{
+    selected: boolean;
     memberId: number;
     name: string;    
     dob: Date;

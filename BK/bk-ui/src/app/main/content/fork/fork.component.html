@@ -1,24 +1,110 @@
-<div id="fork" fxLayout="column">
-    <div id="fork-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
-      <div id="fork-form">
-        
+<div id="family" fxLayout="column">
+    <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
+      <div id="family-form">
+        <div class="title">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>      
+
+        <div class="bk-card">
+          <div fxLayout="row">
+            <span class="mat-title">Family Information</span>
+          </div>
+          <form name="familyForm" [formGroup]="forkForm" novalidate>
+            <div fxLayout="row" fxLayoutWrap>
+              <mat-form-field>
+                <mat-select placeholder="Category" [(ngModel)]="model.categoryId" formControlName="categoryId">
+                  <mat-option *ngFor="let n of categories.data" [value]="n.id">
+                    {{ n.category }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
   
-        <div class="title">Family Fork</div>
+              <mat-form-field>
+                <mat-select placeholder="Nukh" [(ngModel)]="model.nukhId" formControlName="nukhId">
+                  <mat-option *ngFor="let n of nukhs.data" [value]="n.id">
+                    {{ n.nukh }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
   
-        <div class="information" fxLayout="column" fxLayoutAlign="top left">
-          <ol>
-            <li>Please provide correct email address. You will receive your login information on provided email address</li>          
-            <li>Try to provide both Phone number and Aadhaar number to keep you unique in the system</li>
-            <li>This registration will create a new family for you (Head Of Family as you). If you want to be a member of existing family please ask them
-              to add you with your email address</li>
-          </ol>
+              <mat-form-field>
+                <mat-select placeholder="Head Of Family" [(ngModel)]="model.hofId" formControlName="hof">
+                  <mat-option *ngFor="let n of model.members" [value]="n.memberId">
+                    {{ n.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutWrap>
+              <mat-form-field>
+                <input matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
+              </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutWrap>
+  
+              <mat-form-field>
+                <input matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
+              </mat-form-field>
+            </div>
+            <div *ngIf="model.canEdit" fxLayout="row" fxLayoutAlign="center center">
+              <button mat-raised-button (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK" [disabled]="forkForm.invalid">
+                FORK
+              </button>
+              <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+                CANCEL
+              </button>
+            </div>         
+          </form>
         </div>
-        <br/>
-  
-        <!-- <form name="forkForm" [formGroup]="forkForm" novalidate>
-  
-        
-        </form> -->
+        <div class="bk-card">
+          <div fxLayout="row" fxLayoutAlign="start center">
+                <span class="mat-title famiyMemberHeader">Members</span>                
+          </div>
+          <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="selected">
+              <mat-header-cell *matHeaderCellDef>
+                <b>SELECT</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member"><mat-checkbox [(ngModel)]="member.selected"></mat-checkbox></mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Name</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <a [routerLink]="['/member/',this.familyId,member.memberId]">{{member.name}}</a>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dob">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Date Of Birth</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">{{member.dob | amDateFormat:'LL'}}</mat-cell>
+            </ng-container>           
+            <ng-container matColumnDef="relation">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Relation</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
+            </ng-container>        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
       </div>
     </div>
   </div>
