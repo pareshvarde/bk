@@ -64,7 +64,7 @@
               <button mat-raised-button (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK" [disabled]="forkForm.invalid">
                 FORK
               </button>
-              <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+              <button mat-raised-button (click)="cancel()" class="submit-button" aria-label="CANCEL">
                 CANCEL
               </button>
             </div>         
@@ -77,7 +77,7 @@
           <mat-table #table [dataSource]="dataSource">
             <ng-container matColumnDef="selected">
               <mat-header-cell *matHeaderCellDef>
-                <b>SELECT</b>
+                
               </mat-header-cell>
               <mat-cell *matCellDef="let member"><mat-checkbox [(ngModel)]="member.selected"></mat-checkbox></mat-cell>
             </ng-container>

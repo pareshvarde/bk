@@ -189,6 +189,9 @@ namespace BK.Controllers
                     if (!fmAssociations.Any(x => x.MemberId == item.MemberID))
                         return BadRequest("Invalid members supplied for the family");
 
+                if (!fmAssociations.Any(x => x.MemberId == model.HeadOfFamilyID))
+                    return BadRequest("Invalid Head of Family supplied for the family");
+
                 Family newFam = new Family();
                 newFam.Address1 = model.Address1;
                 newFam.Address2 = model.Address2;
@@ -198,6 +201,7 @@ namespace BK.Controllers
                 newFam.Country = model.Country;
                 newFam.CategoryID = model.CategoryID;
                 newFam.NukhID = model.NukhID;
+                newFam.HeadOfFamilyID = model.HeadOfFamilyID;
 
                 foreach (var item in model.Members.Where(x => x.Selected))
                 {

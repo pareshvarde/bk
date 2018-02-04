@@ -118,6 +118,14 @@ export class bkDataService {
     }).catch((error : any) => this.handleAPIError(error));
   }
 
+  forkFamily(model: FamilyModel){
+    this.blockUI.start("Please wait...");
+           
+    return this.authHttp.post(this.API_URL + "family/fork", model).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }  
+
   deleteFamily(model: FamilyModel){
     this.blockUI.start("Please wait...");
            
@@ -143,7 +151,7 @@ export class bkDataService {
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }
-
+  
   approveMember(memberId: number, familyId: number){
     this.blockUI.start("Please wait...");
                

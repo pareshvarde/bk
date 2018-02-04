@@ -87,7 +87,19 @@ export class ForkComponent implements OnInit {
       this.alertService.alert('', 'Please select at least one family member to be part of new family');
       return;
     }
-    console.log(this.model);
+
+    this.dataService.forkFamily(this.model).subscribe(
+      (res) => {
+        this.alertService.success("New family created successfully");
+        this.router.navigate(['family', res.result]);
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );    
   }
 
   cancel(){

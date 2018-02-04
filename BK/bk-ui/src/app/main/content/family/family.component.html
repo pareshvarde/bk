@@ -96,7 +96,10 @@
             <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
               EDIT
             </button>
-            <button mat-raised-button (click)="delete()" color="accent" class="submit-button" aria-label="DELETE">
+            <button mat-raised-button [routerLink]="['/family/fork', this.familyId]" class="submit-button" aria-label="FORK">
+              FORK
+            </button>
+            <button mat-raised-button (click)="delete()" class="submit-button" aria-label="DELETE">
               DELETE
             </button>
           </div>
@@ -121,7 +124,7 @@
               <b>Name</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <a [routerLink]="['/member/',this.familyId,member.memberId]">{{member.name}}</a>
+              <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="dob">
@@ -148,7 +151,7 @@
               <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit" mat-icon-button [routerLink]="['/member/',this.familyId,member.memberId]">
+              <button *ngIf="member.canEdit" mat-icon-button >
                 <mat-icon>mode_edit</mat-icon>
               </button>
             </mat-cell>

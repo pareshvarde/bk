@@ -37,9 +37,7 @@ export class FamilyComponent implements OnInit {
         this.familyId = null;
 
       this.initializeComponent();
-    });
-
-    this.model = new FamilyModel();
+    });    
   }
 
   displayedColumns = ['memberId', 'name', 'dob', 'married', 'relation', 'actions'];
@@ -61,6 +59,10 @@ export class FamilyComponent implements OnInit {
   }
 
   initializeComponent() {
+    this.model = new FamilyModel();
+    this.familyLookup = new Array<FamilyLookupModel>();
+    this.dataSource = null;
+
     this.loadFamilyLookup();
   }
 
@@ -69,8 +71,7 @@ export class FamilyComponent implements OnInit {
 
     this.dataService.getFamilyLookup(mId).subscribe(
       (res) => {
-        this.familyLookup = res.result;
-
+        this.familyLookup = res.result;        
         if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId)
           this.familyId = this.familyLookup[0].familyId;
         else
@@ -89,7 +90,7 @@ export class FamilyComponent implements OnInit {
 
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
-      (res) => {
+      (res) => {        
         this.model = res.result;
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
       },
@@ -139,7 +140,7 @@ export class FamilyComponent implements OnInit {
 
         this.dataService.deleteFamily(tModel).subscribe(
           (res) => {
-            this.alertService.success("Family has been deleted");
+            this.alertService.success("Family has been deleted");            
           },
           (err) => {
             if (err.errors)
