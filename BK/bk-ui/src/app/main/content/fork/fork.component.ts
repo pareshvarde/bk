@@ -11,12 +11,13 @@ import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { Location } from '@angular/common';
+import { RelationTypeData } from '../../data/relations';
 
 @Component({
   selector: 'app-fork',
   templateUrl: './fork.component.html',
   styleUrls: ['./fork.component.scss'],
-  providers: [bkDataService, NukhData, CategoryData, bkAuthService]
+  providers: [bkDataService, NukhData, RelationTypeData, CategoryData, bkAuthService]
 })
 export class ForkComponent implements OnInit {
   
@@ -27,7 +28,8 @@ export class ForkComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public nukhs: NukhData, public authService: bkAuthService,
-    private _confirmation: ConfirmationService, public categories: CategoryData, private location: Location) {
+    private _confirmation: ConfirmationService, public categories: CategoryData, private location: Location,
+    public relationTypes: RelationTypeData) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -41,7 +43,7 @@ export class ForkComponent implements OnInit {
     this.model = new FamilyModel();
   }
 
-  displayedColumns = ['selected', 'name', 'dob', 'relation'];
+  displayedColumns = ['selected', 'name', 'relatedToId', 'relationTypeId'];
 
   ngOnInit() {
     this.forkForm = new FormGroup({
@@ -58,7 +60,7 @@ export class ForkComponent implements OnInit {
   }
 
   initializeComponent(){
-    this.loadFamily();
+    this.loadFamily();   
   }
 
   loadFamily() {
