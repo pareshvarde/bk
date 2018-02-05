@@ -37,7 +37,6 @@ namespace BK.Controllers
                     {
                         FamilyID = item.FamilyID,
                         HeadOfFamily = $"{item.FirstName} {item.LastName}"
-
                     });
                 }
 
@@ -185,13 +184,19 @@ namespace BK.Controllers
             {
                 Family family = context.Families.FirstOrDefault(x => x.FamilyID == model.FamilyID);
                 List<FamilyMemberAssociation> fmAssociations = family.FamilyMemberAssociations.Where(x => x.Approved).ToList();
+                List<FamilyMemberViewModel> selectedMembers = model.Members.Where(x => x.Selected).ToList();
 
-                foreach (var item in model.Members)
+                foreach (var item in selectedMembers)
+                {
                     if (!fmAssociations.Any(x => x.MemberId == item.MemberID))
                         return BadRequest("Invalid members supplied for the family");
 
-                if (!fmAssociations.Any(x => x.MemberId == model.HeadOfFamilyID))
-                    return BadRequest("Invalid Head of Family supplied for the family");
+                    if (!fmAssociations.Any(x => x.MemberId == item.RelatedToId) && model.HeadOfFamilyID != item.MemberID)
+                        return BadRequest("Please provide relations for member except for Head Of Family");
+                }
+
+                if (!fmAssociations.Any(x => x.MemberId == model.HeadOfFamilyID) || model.HeadOfFamilyID == 0)
+                    return BadRequest("Invalid Head of Family supplied for the family");         
 
                 Family newFam = new Family();
                 newFam.Address1 = model.Address1;
@@ -204,14 +209,16 @@ namespace BK.Controllers
                 newFam.NukhID = model.NukhID;
                 newFam.HeadOfFamilyID = model.HeadOfFamilyID;
 
-                foreach (var item in model.Members.Where(x => x.Selected))
+                foreach (var item in selectedMembers)
                 {
                     newFam.FamilyMemberAssociations.Add(new FamilyMemberAssociation()
                     {
                         Approved = true,
                         CreatedBy = LoggedInMemberId,
                         CreatedOn = DateTime.Now,
-                        MemberId = item.MemberID
+                        MemberId = item.MemberID,
+                        RelatedId = item.RelatedToId,
+                        RelationTypeId = item.RelationTypeId
                     });
                 }
 

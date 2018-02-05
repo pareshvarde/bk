@@ -38,9 +38,7 @@ export class ForkComponent implements OnInit {
         this.familyId = null;
 
       this.initializeComponent();
-    });
-
-    this.model = new FamilyModel();
+    });    
   }
 
   displayedColumns = ['selected', 'name', 'relationTypeId', 'relatedToId'];
@@ -60,6 +58,8 @@ export class ForkComponent implements OnInit {
   }
 
   initializeComponent(){
+    this.model = new FamilyModel();
+    this.dataSource = null;
     this.loadFamily();   
   }
 

@@ -87,9 +87,9 @@ namespace BK.ViewModel
         public bool Selected { get; set; }
 
         [JsonProperty("relatedToId")]
-        public int RelatedToId { get; set; }
+        public int? RelatedToId { get; set; }
 
         [JsonProperty("relationTypeId")]
-        public int RelationTypeId { get; set; }
+        public int? RelationTypeId { get; set; }
     }
 }
