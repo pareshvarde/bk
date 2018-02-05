@@ -10,13 +10,7 @@
                 <mat-icon>menu</mat-icon>
             </button>
 
-            <div class="toolbar-separator" fxHide.gt-md></div>
-
-            <div fxLayout="row" fxLayoutAlign="start center" *ngIf="horizontalNav">
-                <div class="logo ml-16">
-                    <!-- <img class="logo-icon" src="assets/images/logos/fuse.svg"> -->
-                </div>
-            </div>
+            <div class="toolbar-separator" fxHide.gt-md></div>            
         </div>
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
             <button *ngIf="!authService.authenticated()" routerLink="login" mat-button class="user-button">
@@ -57,24 +51,6 @@
                 </div>
             </button>
             <div *ngIf="authService.authenticated()" class="toolbar-separator"></div>
-
-            <button mat-button fxHide fxShow.gt-xs class="language-button" [matMenuTriggerFor]="languageMenu">
-                <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="flag mr-8" [src]="'assets/images/flags/'+selectedLanguage.flag+'.png'">
-                    <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
-                </div>
-            </button>
-
-            <mat-menu #languageMenu="matMenu">
-
-                <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang)">
-                    <div fxLayout="row" fxLayoutAlign="start center">
-                        <img class="flag mr-16" [src]="'assets/images/flags/'+lang.flag+'.png'">
-                        <span class="iso">{{lang.title}}</span>
-                    </div>
-                </button>
-
-            </mat-menu>
         </div>
     </div>
 </mat-toolbar>
