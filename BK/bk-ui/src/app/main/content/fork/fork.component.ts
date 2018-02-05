@@ -11,7 +11,8 @@ import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { Location } from '@angular/common';
-import { RelationTypeData, RelationTypeModel } from '../../data/relations';
+import { RelationTypeData } from '../../data/relations';
+import { RelationTypeLookupModel } from '../../models/relationTypeLookupModel';
 
 @Component({
   selector: 'app-fork',
@@ -83,7 +84,7 @@ export class ForkComponent implements OnInit {
     return member.selected === true;    
   }
 
-  getRelations(member: FamilyMemberModel): RelationTypeModel[] {
+  getRelations(member: FamilyMemberModel): RelationTypeLookupModel[] {
     if (member.gender === 'M')
       return this.relationTypes.data.filter(x => x.male);
     else if (member.gender === 'F')

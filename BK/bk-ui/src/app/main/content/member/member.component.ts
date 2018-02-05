@@ -6,11 +6,12 @@ import { NotificationsService } from 'angular2-notifications';
 import { MemberModel } from '../../models/memberModel';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators, EmailValidators } from 'ng2-validators';
-import { RelationTypeData, RelationTypeModel } from '../../data/relations';
+import { RelationTypeData } from '../../data/relations';
 import { Location } from '@angular/common';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
+import { RelationTypeLookupModel } from '../../models/relationTypeLookupModel';
 
 @Component({
   selector: 'app-member',
@@ -166,7 +167,7 @@ export class MemberComponent implements OnInit {
     );
   }
 
-  getRelations(): RelationTypeModel[] {
+  getRelations(): RelationTypeLookupModel[] {
     if (this.memberModel.gender === 'M')
       return this.relationTypes.data.filter(x => x.male);
     else if (this.memberModel.gender === 'F')

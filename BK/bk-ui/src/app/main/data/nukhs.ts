@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-
-export class NukhModel {
-    id: number;
-    nukh: string;
-
-    constructor() { }
-}
+import { NukhLookupModel } from '../models/nukhLookupModel';
 
 @Injectable()
 export class NukhData
 {
-    public data: NukhModel[] = [
+    public data: NukhLookupModel[] = [
         {id:1, nukh: 'Amariya'},
         {id:2, nukh: 'Arora'},
         {id:3, nukh: 'Ashra'},

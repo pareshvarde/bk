@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-
-export class CategoryModel {
-    id: number;
-    category: string;
-
-    constructor() { }
-}
+import { CategoryLookupModel } from '../models/categoryLookupModel';
 
 @Injectable()
 export class CategoryData
 {
-    public data: CategoryModel[] = [
+    public data: CategoryLookupModel[] = [
         {id:1, category: 'Gujarati'},
         {id:2, category: 'Halai'},       
         {id:3, category: 'Kachchhi'},    
