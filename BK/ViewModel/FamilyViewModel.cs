@@ -91,5 +91,8 @@ namespace BK.ViewModel
 
         [JsonProperty("relationTypeId")]
         public int? RelationTypeId { get; set; }
+
+        [JsonProperty("matrimonialId")]
+        public int? MatrimonialId { get; set; }
     }
 }

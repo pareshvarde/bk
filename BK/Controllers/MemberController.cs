@@ -79,6 +79,10 @@ namespace BK.Controllers
                     vm.RelationTypeId = fma.RelationTypeId;
                 }
 
+                Matrimonial mat = member.Matrimonials.FirstOrDefault();
+                if (mat != null)
+                    vm.MatrimonialId = mat.MatrimonialID;
+
                 vm.canEdit = CanEditMember(fmAssociation, memberId);
 
                 return Ok(vm);
