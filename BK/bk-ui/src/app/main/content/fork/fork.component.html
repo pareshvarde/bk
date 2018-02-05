@@ -28,7 +28,7 @@
               <mat-cell *matCellDef="let member">
                 <mat-form-field>
                   <mat-select placeholder="Relation" [(ngModel)]="member.relationTypeId">
-                    <mat-option *ngFor="let n of relationTypes.data" [value]="n.relationTypeId">
+                    <mat-option *ngFor="let n of getRelations(member)" [value]="n.relationTypeId">
                       {{ n.relationType }}
                     </mat-option>
                   </mat-select>

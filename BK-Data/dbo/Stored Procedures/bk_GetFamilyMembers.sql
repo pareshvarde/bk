@@ -11,6 +11,7 @@ BEGIN
 		m.LastName,
 		m.DOB,
 		m.Married,
+		m.Gender,
 		f.HeadOfFamilyID,
 		lkm.FirstName rFirstName,
 		lkm.LastName rLastName,

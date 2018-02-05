@@ -80,7 +80,16 @@ namespace BK.ViewModel
         [JsonProperty("relation")]
         public string Relation { get; set; }
 
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+
         [JsonProperty("selected")]
         public bool Selected { get; set; }
+
+        [JsonProperty("relatedToId")]
+        public int RelatedToId { get; set; }
+
+        [JsonProperty("relationTypeId")]
+        public int RelationTypeId { get; set; }
     }
 }

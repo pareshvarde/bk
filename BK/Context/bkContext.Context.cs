@@ -33,15 +33,6 @@ namespace BK.Context
         public virtual DbSet<Matrimonial> Matrimonials { get; set; }
         public virtual DbSet<Member> Members { get; set; }
     
-        public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
-        {
-            var familyIDParameter = familyID.HasValue ?
-                new ObjectParameter("FamilyID", familyID) :
-                new ObjectParameter("FamilyID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
-        }
-    
         public virtual ObjectResult<bk_MemberSearchBasic_Result> bk_MemberSearchBasic(Nullable<int> memberID, string phoneNumber, Nullable<long> aadhaarNumber, string email)
         {
             var memberIDParameter = memberID.HasValue ?
@@ -92,6 +83,15 @@ namespace BK.Context
                 new ObjectParameter("MemberID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bk_DeleteMember", familyIDParameter, memberIDParameter);
+        }
+    
+        public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
+        {
+            var familyIDParameter = familyID.HasValue ?
+                new ObjectParameter("FamilyID", familyID) :
+                new ObjectParameter("FamilyID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace BK.Context
         public string LastName { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public bool Married { get; set; }
+        public string Gender { get; set; }
         public int HeadOfFamilyID { get; set; }
         public string rFirstName { get; set; }
         public string rLastName { get; set; }
