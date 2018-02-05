@@ -14,6 +14,8 @@ export class bkAuthService {
 
   memberId() : number{    
     var token = localStorage.getItem('token');
+    if (!token)
+      return null;  
     var tokenDetail = this.jwtHelper.decodeToken(token);
     return tokenDetail.memberId;    
   }
