@@ -43,7 +43,7 @@ export class ForkComponent implements OnInit {
     this.model = new FamilyModel();
   }
 
-  displayedColumns = ['selected', 'name', 'relatedToId', 'relationTypeId'];
+  displayedColumns = ['selected', 'name', 'relationTypeId', 'relatedToId'];
 
   ngOnInit() {
     this.forkForm = new FormGroup({
