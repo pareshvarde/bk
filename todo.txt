@@ -24,3 +24,5 @@ edits by minor?
 
 optimization
 =============
+
+if alive, not married, adult allow matrimony 

@@ -26,7 +26,7 @@ namespace BK.Context
         public string Drink { get; set; }
         public bool Disability { get; set; }
         public string Diet { get; set; }
-        public string AnnualIncome { get; set; }
+        public Nullable<int> MonthlyIncome { get; set; }
         public string Language { get; set; }
         public string ProfileText { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
