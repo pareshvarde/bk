@@ -205,7 +205,10 @@ namespace BK.Controllers
                 }
 
                 if (!fmAssociations.Any(x => x.MemberId == model.HeadOfFamilyID) || model.HeadOfFamilyID == 0)
-                    return BadRequest("Invalid Head of Family supplied for the family");         
+                    return BadRequest("Invalid Head of Family supplied for the family");
+
+                if (!fmAssociations.Any(x => x.MemberId == model.HeadOfFamilyID && x.Approved))
+                    return BadRequest("Head Of Family is not approved member of the family");
 
                 Family newFam = new Family();
                 newFam.Address1 = model.Address1;
