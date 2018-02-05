@@ -127,6 +127,15 @@ namespace BK.Controllers
                 if (family == null)
                     return BadRequest("Family record cannot be loaded. Please try again later");
 
+                if (model.HeadOfFamilyID == 0)
+                    return BadRequest("please provide Head Of Family");
+
+                if (!family.FamilyMemberAssociations.Any(x => x.MemberId == model.HeadOfFamilyID))
+                    return BadRequest("Supplied Head Of Family is not part of family");
+
+                if (!family.FamilyMemberAssociations.Any(x => x.MemberId == model.HeadOfFamilyID && x.Approved))
+                    return BadRequest("Head Of family is not approved member of family");
+
                 family.Address1 = model.Address1;
                 family.Address2 = model.Address2;
                 family.CategoryID = model.CategoryID;
