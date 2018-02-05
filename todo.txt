@@ -5,8 +5,7 @@ password strength
 remember me
 	login page (refresh token?)
 	
-register
-	validation
+validations with messages
 	
 createdBy
 createdOn
@@ -17,14 +16,11 @@ ModifiedOn
 angular-font-awesome
 sign up captcha
 
-relationship status instead of Married on member?
 birthday wish email
 anniversary?
 
 include child object in datacontext queries
 edits by minor?
-
-head of family required
 
 optimization
 =============
