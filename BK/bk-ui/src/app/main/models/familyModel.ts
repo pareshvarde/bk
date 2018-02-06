@@ -37,4 +37,5 @@ export class FamilyMemberModel{
     relatedToId: number;
     relationTypeId: number;
     matrimonialId: number;
+    age: number;
 }
