@@ -38,7 +38,7 @@ export class FamilyComponent implements OnInit {
         this.familyId = null;
 
       this.initializeComponent();
-    });    
+    });
   }
 
   displayedColumns = ['memberId', 'name', 'age', 'married', 'relation', 'actions'];
@@ -74,7 +74,7 @@ export class FamilyComponent implements OnInit {
 
     this.dataService.getFamilyLookup(mId).subscribe(
       (res) => {
-        this.familyLookup = res.result;        
+        this.familyLookup = res.result;
         if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId)
           this.familyId = this.familyLookup[0].familyId;
         else
@@ -93,10 +93,19 @@ export class FamilyComponent implements OnInit {
 
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).subscribe(
-      (res) => {        
+      (res) => {
         this.model = res.result;
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
-        this.matrimonyDatasource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
+        this.matrimonyDatasource = new MatTableDataSource<FamilyMemberModel>(this.model.members.filter(x => {
+          if (x.matrimonialId > 0)
+            return true;
+
+          if (!x.married && x.gender == 'F' && x.age > 17)
+            return true;
+
+          if (!x.married && x.gender == 'M' && x.age > 20)
+            return true;
+        }));
       },
       (err) => {
         if (err.errors)
@@ -144,7 +153,7 @@ export class FamilyComponent implements OnInit {
 
         this.dataService.deleteFamily(tModel).subscribe(
           (res) => {
-            this.alertService.success("Family has been deleted");            
+            this.alertService.success("Family has been deleted");
           },
           (err) => {
             if (err.errors)
@@ -215,7 +224,7 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  deleteMatrimony(memberId: number, name: string){
+  deleteMatrimony(memberId: number, name: string) {
 
   }
 }
