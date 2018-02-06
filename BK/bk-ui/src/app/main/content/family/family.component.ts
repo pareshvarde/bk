@@ -25,6 +25,7 @@ export class FamilyComponent implements OnInit {
   familyLookup: FamilyLookupModel[];
   editMode: boolean;
   dataSource: any;
+  matrimonyDatasource: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public nukhs: NukhData, public authService: bkAuthService,
@@ -41,6 +42,7 @@ export class FamilyComponent implements OnInit {
   }
 
   displayedColumns = ['memberId', 'name', 'dob', 'married', 'relation', 'actions'];
+  matriDisplayedColumns = ['name', 'dob', 'relation', 'actions'];
 
   ngOnInit() {
     this.familyForm = new FormGroup({
@@ -62,6 +64,7 @@ export class FamilyComponent implements OnInit {
     this.model = new FamilyModel();
     this.familyLookup = new Array<FamilyLookupModel>();
     this.dataSource = null;
+    this.matrimonyDatasource = null;
 
     this.loadFamilyLookup();
   }
@@ -93,6 +96,7 @@ export class FamilyComponent implements OnInit {
       (res) => {        
         this.model = res.result;
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
+        this.matrimonyDatasource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
       },
       (err) => {
         if (err.errors)
@@ -209,5 +213,9 @@ export class FamilyComponent implements OnInit {
           this.alertService.error('', err);
       }
     );
+  }
+
+  deleteMatrimony(memberId: number, name: string){
+
   }
 }
