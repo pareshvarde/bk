@@ -191,10 +191,10 @@
               <button *ngIf="member.canEdit && member.matrimonialId" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && member.matrimonialId" mat-icon-button >
+              <button *ngIf="member.canEdit && member.matrimonialId" [routerLink]="['/matrimony/',member.memberId, member.matrimonyId]" mat-icon-button >
                 <mat-icon>mode_edit</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && !member.matrimonialId" mat-icon-button >
+              <button *ngIf="member.canEdit && !member.matrimonialId" [routerLink]="['/matrimony/',member.memberId, 0]" mat-icon-button >
                 <mat-icon>add_circle</mat-icon>
               </button>
             </mat-cell>

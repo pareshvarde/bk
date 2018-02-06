@@ -36,6 +36,7 @@ import { MemberComponent } from './content/member/member.component';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { ForkComponent } from './content/fork/fork.component';
 import { CallbackPipe } from './pipes/callback.pipe';
+import { MatrimonyComponent } from './content/matrimony/matrimony.component';
 
 @NgModule({
     declarations: [
@@ -64,7 +65,8 @@ import { CallbackPipe } from './pipes/callback.pipe';
         FamilyComponent,
         MemberComponent,
         ForkComponent,
-        CallbackPipe 
+        CallbackPipe,
+        MatrimonyComponent 
     ],
     providers:[
         ConfirmationService

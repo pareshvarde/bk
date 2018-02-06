@@ -15,6 +15,7 @@ import { FamilyComponent } from './main/content/family/family.component';
 import { MemberComponent } from './main/content/member/member.component';
 import { AuthGuard } from './main/guards/auth-guard';
 import { ForkComponent } from './main/content/fork/fork.component';
+import { MatrimonyComponent } from './main/content/matrimony/matrimony.component';
 
 export const bkRoutes: Routes = [
     {
@@ -79,6 +80,11 @@ export const bkRoutes: Routes = [
     {
         path: "family/fork/:familyId",
         component: ForkComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: "matrimony/:memberId/:matrimonyId",
+        component: MatrimonyComponent,
         canActivate: [AuthGuard]
     },
     {
