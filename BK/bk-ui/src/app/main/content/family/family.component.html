@@ -164,7 +164,7 @@
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Matrimony</span>          
         </div>
-        <mat-table #table [dataSource]="matrimonyDatasource">
+        <mat-table *ngIf="matrimonyDatasource && matrimonyDatasource.filteredData.length > 0" #table [dataSource]="matrimonyDatasource">
           <ng-container matColumnDef="name">
             <mat-header-cell *matHeaderCellDef>
               <b>Name</b>
@@ -199,6 +199,10 @@
           <mat-header-row *matHeaderRowDef="matriDisplayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: matriDisplayedColumns;"></mat-row>
         </mat-table>
+        <div *ngIf="!matrimonyDatasource || matrimonyDatasource.filteredData.length === 0">
+          <div fxLayout="row" fxLayoutAlign="start center">You do not have any member in family eligible for matrimonial profile</div>          
+          <div fxLayout="row" fxLayoutAlign="start center">Only un married, adult and alive members are eligible</div>          
+        </div>
       </div>
     </div>
   </div>
