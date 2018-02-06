@@ -41,8 +41,8 @@ export class FamilyComponent implements OnInit {
     });    
   }
 
-  displayedColumns = ['memberId', 'name', 'dob', 'married', 'relation', 'actions'];
-  matriDisplayedColumns = ['name', 'dob', 'relation', 'actions'];
+  displayedColumns = ['memberId', 'name', 'age', 'married', 'relation', 'actions'];
+  matriDisplayedColumns = ['name', 'age', 'relation', 'actions'];
 
   ngOnInit() {
     this.familyForm = new FormGroup({

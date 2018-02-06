@@ -127,11 +127,11 @@
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="dob">
+          <ng-container matColumnDef="age">
             <mat-header-cell *matHeaderCellDef>
-              <b>Date Of Birth</b>
+              <b>Age</b>
             </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.dob | amDateFormat:'LL'}}</mat-cell>
+            <mat-cell *matCellDef="let member">{{member.age}} Years</mat-cell>
           </ng-container>
           <ng-container matColumnDef="married">
             <mat-header-cell *matHeaderCellDef>
@@ -173,11 +173,11 @@
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </mat-cell>
           </ng-container>
-          <ng-container matColumnDef="dob">
+          <ng-container matColumnDef="age">
             <mat-header-cell *matHeaderCellDef>
               <b>Date Of Birth</b>
             </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.dob | amDateFormat:'LL'}}</mat-cell>
+            <mat-cell *matCellDef="let member">{{member.age}} Years</mat-cell>
           </ng-container>
           <ng-container matColumnDef="relation">
             <mat-header-cell *matHeaderCellDef>

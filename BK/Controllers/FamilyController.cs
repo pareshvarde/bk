@@ -89,7 +89,7 @@ namespace BK.Controllers
                     tmp.Gender = item.Gender;                    
 
                     if (!string.IsNullOrEmpty(item.RelationType))
-                        tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";
+                        tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";                    
 
                     fvm.Members.Add(tmp);
                 }

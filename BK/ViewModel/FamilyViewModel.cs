@@ -8,7 +8,8 @@ namespace BK.ViewModel
 {
     public class FamilyViewModel
     {
-        public FamilyViewModel() {
+        public FamilyViewModel()
+        {
             this.Members = new List<FamilyMemberViewModel>();
             this.PendingApprovals = new List<PendingApprovalViewModel>();
         }
@@ -94,5 +95,20 @@ namespace BK.ViewModel
 
         [JsonProperty("matrimonialId")]
         public int? MatrimonialId { get; set; }
+
+        [JsonProperty("age")]
+        public int Age
+        {
+            get {
+                if (!this.DOB.HasValue)
+                    return 0;
+
+                int age = DateTime.Today.Year - DOB.Value.Year;
+                if (age > 0 && this.DOB.Value > DateTime.Today.AddYears(-age))
+                    age--;
+
+                return age;
+            }
+        }
     }
 }
