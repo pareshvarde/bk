@@ -36,4 +36,5 @@ export class FamilyMemberModel{
     gender: string;
     relatedToId: number;
     relationTypeId: number;
+    matrimonialId: number;
 }
