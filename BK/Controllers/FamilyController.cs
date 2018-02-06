@@ -86,7 +86,8 @@ namespace BK.Controllers
                     tmp.Name = $"{item.FirstName} {item.LastName}";
                     tmp.CanEdit = CanEditMember(f.FamilyMemberAssociations.ToList(), item.MemberID);
                     tmp.MatrimonialId = item.MatrimonialID;
-                    tmp.Gender = item.Gender;                    
+                    tmp.Gender = item.Gender;
+                    tmp.Alive = item.Alive;
 
                     if (!string.IsNullOrEmpty(item.RelationType))
                         tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";                    

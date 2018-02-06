@@ -494,6 +494,7 @@
           <Property Type="String" Name="rLastName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="RelationType" Nullable="true" MaxLength="20" />
           <Property Type="Int32" Name="MatrimonialID" Nullable="true" />
+          <Property Type="String" Name="Alive" Nullable="false" MaxLength="1" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -646,6 +647,7 @@
                 <ScalarProperty Name="rLastName" ColumnName="rLastName" />
                 <ScalarProperty Name="RelationType" ColumnName="RelationType" />
                 <ScalarProperty Name="MatrimonialID" ColumnName="MatrimonialID" />
+                <ScalarProperty Name="Alive" ColumnName="Alive" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -100,10 +100,10 @@ export class FamilyComponent implements OnInit {
           if (x.matrimonialId > 0)
             return true;
 
-          if (!x.married && x.gender == 'F' && x.age > 17)
+          if (!x.married && x.gender == 'F' && x.alive == 'A' && x.age > 17)
             return true;
 
-          if (!x.married && x.gender == 'M' && x.age > 20)
+          if (!x.married && x.gender == 'M' && x.alive == 'A' && x.age > 20)
             return true;
         }));
       },
