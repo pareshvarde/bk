@@ -16,14 +16,15 @@ namespace BK.Context
     {
         public int MatrimonialID { get; set; }
         public int MemberID { get; set; }
-        public string MaternalNukh { get; set; }
+        public int MaternalNukhID { get; set; }
         public Nullable<System.TimeSpan> BirthTime { get; set; }
         public string MaritalStatus { get; set; }
         public Nullable<int> Height { get; set; }
         public string BodyType { get; set; }
         public string Complexion { get; set; }
-        public string Smoke { get; set; }
-        public string Drink { get; set; }
+        public bool Smoke { get; set; }
+        public bool Tobacco { get; set; }
+        public bool Drink { get; set; }
         public bool Disability { get; set; }
         public string Diet { get; set; }
         public Nullable<int> MonthlyIncome { get; set; }

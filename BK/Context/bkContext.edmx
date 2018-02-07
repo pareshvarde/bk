@@ -52,14 +52,15 @@
           </Key>
           <Property Name="MatrimonialID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MemberID" Type="int" Nullable="false" />
-          <Property Name="MaternalNukh" Type="nvarchar" MaxLength="50" />
+          <Property Name="MaternalNukhID" Type="int" Nullable="false" />
           <Property Name="BirthTime" Type="time" Precision="7" />
           <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
           <Property Name="Height" Type="int" />
           <Property Name="BodyType" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Complexion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Smoke" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Drink" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Smoke" Type="bit" Nullable="false" />
+          <Property Name="Tobacco" Type="bit" Nullable="false" />
+          <Property Name="Drink" Type="bit" Nullable="false" />
           <Property Name="Disability" Type="bit" Nullable="false" />
           <Property Name="Diet" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MonthlyIncome" Type="int" />
@@ -272,14 +273,14 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
+          <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
+          <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          </FunctionImport>
           <EntitySet Name="Matrimonials" EntityType="bkModel.Matrimonial" />
           <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
             <End Role="Member" EntitySet="Members" />
             <End Role="Matrimonial" EntitySet="Matrimonials" />
           </AssociationSet>
-          <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
-            <Parameter Name="FamilyID" Mode="In" Type="Int32" />
-          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="bk_MemberSearchBasic_Result">
           <Property Type="Int32" Name="MemberID" Nullable="false" />
@@ -444,20 +445,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="bk_GetFamilyMembers_Result">
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="Boolean" Name="Married" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="HeadOfFamilyID" Nullable="false" />
+          <Property Type="String" Name="rFirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="rLastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RelationType" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="MatrimonialID" Nullable="true" />
+          <Property Type="String" Name="Alive" Nullable="false" MaxLength="1" />
+        </ComplexType>
         <EntityType Name="Matrimonial">
           <Key>
             <PropertyRef Name="MatrimonialID" />
           </Key>
           <Property Name="MatrimonialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MemberID" Type="Int32" Nullable="false" />
-          <Property Name="MaternalNukh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaternalNukhID" Type="Int32" Nullable="false" />
           <Property Name="BirthTime" Type="Time" Precision="7" />
           <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Height" Type="Int32" />
           <Property Name="BodyType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Complexion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Smoke" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Drink" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Smoke" Type="Boolean" Nullable="false" />
+          <Property Name="Tobacco" Type="Boolean" Nullable="false" />
+          <Property Name="Drink" Type="Boolean" Nullable="false" />
           <Property Name="Disability" Type="Boolean" Nullable="false" />
           <Property Name="Diet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MonthlyIncome" Type="Int32" />
@@ -482,20 +498,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="bk_GetFamilyMembers_Result">
-          <Property Type="Int32" Name="MemberID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="DOB" Nullable="true" />
-          <Property Type="Boolean" Name="Married" Nullable="false" />
-          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
-          <Property Type="Int32" Name="HeadOfFamilyID" Nullable="false" />
-          <Property Type="String" Name="rFirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="rLastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="RelationType" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="MatrimonialID" Nullable="true" />
-          <Property Type="String" Name="Alive" Nullable="false" MaxLength="1" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -607,32 +609,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Matrimonials">
-            <EntityTypeMapping TypeName="bkModel.Matrimonial">
-              <MappingFragment StoreEntitySet="Matrimonials">
-                <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ProfileText" ColumnName="ProfileText" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
-                <ScalarProperty Name="Diet" ColumnName="Diet" />
-                <ScalarProperty Name="Disability" ColumnName="Disability" />
-                <ScalarProperty Name="Drink" ColumnName="Drink" />
-                <ScalarProperty Name="Smoke" ColumnName="Smoke" />
-                <ScalarProperty Name="Complexion" ColumnName="Complexion" />
-                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
-                <ScalarProperty Name="BirthTime" ColumnName="BirthTime" />
-                <ScalarProperty Name="MaternalNukh" ColumnName="MaternalNukh" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="MatrimonialID" ColumnName="MatrimonialID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="bk_GetFamilyMembers" FunctionName="bkModel.Store.bk_GetFamilyMembers">
             <ResultMapping>
               <ComplexTypeMapping TypeName="bkModel.bk_GetFamilyMembers_Result">
@@ -651,6 +627,33 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Matrimonials">
+            <EntityTypeMapping TypeName="bkModel.Matrimonial">
+              <MappingFragment StoreEntitySet="Matrimonials">
+                <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ProfileText" ColumnName="ProfileText" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
+                <ScalarProperty Name="Diet" ColumnName="Diet" />
+                <ScalarProperty Name="Disability" ColumnName="Disability" />
+                <ScalarProperty Name="Drink" ColumnName="Drink" />
+                <ScalarProperty Name="Tobacco" ColumnName="Tobacco" />
+                <ScalarProperty Name="Smoke" ColumnName="Smoke" />
+                <ScalarProperty Name="Complexion" ColumnName="Complexion" />
+                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="BirthTime" ColumnName="BirthTime" />
+                <ScalarProperty Name="MaternalNukhID" ColumnName="MaternalNukhID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MatrimonialID" ColumnName="MatrimonialID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
