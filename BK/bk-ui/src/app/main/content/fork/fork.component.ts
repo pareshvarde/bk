@@ -11,7 +11,7 @@ import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { Location } from '@angular/common';
 import { RELATION_TYPES_DATA } from '../../data/relations';
 import { CATEGORIES_DATA} from '../../data/categories';
-import { NUKHS_DATA} from '../../data/nukhs';
+import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 
 @Component({
   selector: 'app-fork',
@@ -25,6 +25,8 @@ export class ForkComponent implements OnInit {
   forkForm: FormGroup;
   familyId: number;
   dataSource: any;
+  readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
+  readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService,

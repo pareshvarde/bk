@@ -9,7 +9,7 @@ import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { CATEGORIES_DATA } from '../../data/categories';
-import { NUKHS_DATA } from '../../data/nukhs';
+import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 
 @Component({
   selector: 'app-family',
@@ -26,6 +26,8 @@ export class FamilyComponent implements OnInit {
   editMode: boolean;
   dataSource: any;
   matrimonyDatasource: any;
+  readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
+  readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService,

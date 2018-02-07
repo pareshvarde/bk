@@ -61,7 +61,7 @@
             <div fxLayout="row" fxLayoutWrap>
               <mat-form-field>
                 <mat-select placeholder="Category" [(ngModel)]="model.categoryId" formControlName="categoryId">
-                  <mat-option *ngFor="let n of CATEGORIES_DATA" [value]="n.id">
+                  <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
                     {{ n.category }}
                   </mat-option>
                 </mat-select>
@@ -69,7 +69,7 @@
   
               <mat-form-field>
                 <mat-select placeholder="Nukh" [(ngModel)]="model.nukhId" formControlName="nukhId">
-                  <mat-option *ngFor="let n of NUKHS_DATA" [value]="n.id">
+                  <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
                     {{ n.nukh }}
                   </mat-option>
                 </mat-select>
