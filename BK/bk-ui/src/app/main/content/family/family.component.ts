@@ -5,7 +5,6 @@ import { NotificationsService } from 'angular2-notifications';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
-import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { CATEGORIES_DATA } from '../../data/categories';
@@ -22,7 +21,7 @@ export class FamilyComponent implements OnInit {
   model: FamilyModel;
   familyForm: FormGroup;
   familyId: number;
-  familyLookup: FamilyLookupModel[];
+  familyLookup: any[];
   editMode: boolean;
   dataSource: any;
   matrimonyDatasource: any;
@@ -64,7 +63,7 @@ export class FamilyComponent implements OnInit {
 
   initializeComponent() {
     this.model = new FamilyModel();
-    this.familyLookup = new Array<FamilyLookupModel>();
+    this.familyLookup = new Array<any>();
     this.dataSource = null;
     this.matrimonyDatasource = null;
 

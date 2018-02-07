@@ -7,7 +7,6 @@ import { MemberModel } from '../../models/memberModel';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators, EmailValidators } from 'ng2-validators';
 import { Location } from '@angular/common';
-import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
 import { RELATION_TYPES_DATA } from '../../data/relations';
@@ -27,7 +26,7 @@ export class MemberComponent implements OnInit {
   searchModel: MemberSearchBasicModel;
   familyId: number;
   memberId: number;
-  familyLookup: FamilyLookupModel[];
+  familyLookup: any[];
   memberForm: FormGroup;
   searchForm: FormGroup;
   editMode: boolean;
