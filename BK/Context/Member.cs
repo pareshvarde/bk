@@ -30,7 +30,7 @@ namespace BK.Context
         public string Gender { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
         public string BirthPlace { get; set; }
-        public string Alive { get; set; }
+        public bool Alive { get; set; }
         public Nullable<System.DateTime> DOD { get; set; }
         public string DeathPlace { get; set; }
         public bool Married { get; set; }

@@ -24,6 +24,6 @@ namespace BK.Context
         public string rLastName { get; set; }
         public string RelationType { get; set; }
         public Nullable<int> MatrimonialID { get; set; }
-        public string Alive { get; set; }
+        public bool Alive { get; set; }
     }
 }

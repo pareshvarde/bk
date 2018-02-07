@@ -82,7 +82,7 @@ namespace BK.ViewModel
         public string Relation { get; set; }
 
         [JsonProperty("alive")]
-        public string Alive { get; set; }
+        public bool Alive { get; set; }
 
         [JsonProperty("gender")]
         public string Gender { get; set; }

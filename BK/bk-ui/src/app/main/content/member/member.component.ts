@@ -49,16 +49,7 @@ export class MemberComponent implements OnInit {
       this.existingAdd = null;
       
       this.initializeComponent();      
-    });
-    
-    this.memberModel = new MemberModel();
-    this.memberModel.gender = 'M';
-    this.memberModel.alive = 'A';
-    this.memberModel.familyId = this.familyId;
-    this.memberModel.canEdit = true;
-
-    this.familyModel = new FamilyModel();      
-    this.searchModel = new MemberSearchBasicModel();
+    });    
   }
 
   ngOnInit() {
@@ -69,8 +60,8 @@ export class MemberComponent implements OnInit {
       email: new FormControl('', [EmailValidators.normal]),
       phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
-      gender: new FormControl('M', [Validators.required]),
-      alive: new FormControl('A', [Validators.required]),
+      gender: new FormControl('', [Validators.required]),
+      alive: new FormControl('', [Validators.required]),
       dob: new FormControl('', [Validators.required]),
       dod: new FormControl('', null),
       birthPlace: new FormControl('', null),
@@ -99,9 +90,18 @@ export class MemberComponent implements OnInit {
   }
 
   initializeComponent(){
-    this.loadFamilyLookup();
-  
+    this.familyModel = new FamilyModel();      
+    this.searchModel = new MemberSearchBasicModel();    
+    this.memberModel = new MemberModel();
+
+    this.memberModel.gender = 'M';
+    this.memberModel.alive = true;
+    this.memberModel.familyId = this.familyId;
+    this.memberModel.canEdit = true;
+        
     this.addMode = this.memberId == null;    
+
+    this.loadFamilyLookup();    
   }
   
   loadFamilyLookup() {    
@@ -135,7 +135,7 @@ export class MemberComponent implements OnInit {
   loadMember() {
     return this.dataService.getMember(this.memberId, this.familyId).subscribe(
       (res) => {
-        this.memberModel = res.result;
+        this.memberModel = res.result;        
       },
       (err) => {
         if (err.errors)
@@ -179,7 +179,7 @@ export class MemberComponent implements OnInit {
     if (this.memberModel.dod && this.memberForm.controls['dod'].dirty)
       this.memberModel.dod.setMinutes(this.memberModel.dod.getMinutes() - this.memberModel.dod.getTimezoneOffset());
 
-    if (this.memberModel.alive === 'A' && this.memberModel.dod)
+    if (this.memberModel.alive === true && this.memberModel.dod)
       this.memberModel.dod = null;
 
     this.memberModel.familyId = this.familyId;

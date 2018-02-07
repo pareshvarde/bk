@@ -42,7 +42,7 @@ namespace BK.ViewModel
         public string BirthPlace { get; set; }
 
         [JsonProperty("alive")]
-        public string Alive { get; set; }
+        public bool Alive { get; set; }
 
         [JsonProperty("dod")]
         public DateTime? DOD { get; set; }

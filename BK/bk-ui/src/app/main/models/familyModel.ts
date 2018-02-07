@@ -34,7 +34,7 @@ export class FamilyMemberModel{
     relation: string;
     canEdit: boolean;
     gender: string;
-    alive: string;
+    alive: boolean;
     relatedToId: number;
     relationTypeId: number;
     matrimonialId: number;

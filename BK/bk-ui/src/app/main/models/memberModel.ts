@@ -9,7 +9,7 @@ export class MemberModel {
     gender: string;
     dob: Date;
     birthPlace: string;
-    alive: string;
+    alive: boolean;
     dod:Date;
     deathPlace: string;
     married: boolean;

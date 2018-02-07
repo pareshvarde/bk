@@ -82,22 +82,22 @@
 
           <div fxLayout="row" fxLayoutWrap>
             <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.alive" formControlName="alive">
-              <mat-radio-button class="mr-8" value='A'>
+              <mat-radio-button class="mr-8" [value]=true>
                 Alive
               </mat-radio-button>
-              <mat-radio-button class="mr-8" value='D'>
+              <mat-radio-button class="mr-8" [value]=false>
                 Deceased
               </mat-radio-button>
             </mat-radio-group>
 
-            <mat-form-field *ngIf="memberModel.alive === 'D'">
+            <mat-form-field *ngIf="!memberModel.alive">
               <input matInput [(ngModel)]="memberModel.dod" (focus)="dodPicker.open()" [matDatepicker]="dodPicker" placeholder="Date Of Death"
                 formControlName="dod">
               <mat-datepicker-toggle matSuffix [for]="dodPicker"></mat-datepicker-toggle>
               <mat-datepicker #dodPicker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field *ngIf="memberModel.alive === 'D'">
+            <mat-form-field *ngIf="memberModel.alive">
               <input matInput [(ngModel)]="memberModel.deathPlace" placeholder="Death Place" formControlName="deathPlace">
             </mat-form-field>
           </div>

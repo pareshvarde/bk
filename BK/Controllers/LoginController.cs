@@ -39,7 +39,7 @@ namespace BK.Controllers
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;
                 member.Password = System.Web.Security.Membership.GeneratePassword(8, 2);                
-                member.Alive = "A";
+                member.Alive = true;
                 member.Active = true;
 
                 Family family = new Family();                
