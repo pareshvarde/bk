@@ -40,6 +40,13 @@ BEGIN
 
 	DELETE m 
 	FROM 
+		Matrimonials m
+		JOIN @Members tm ON tm.MemberID = m.MemberID
+	WHERE
+		tm.CanDelete = 1	
+
+	DELETE m 
+	FROM 
 		Members m
 		JOIN @Members tm ON tm.MemberID = m.MemberID
 	WHERE

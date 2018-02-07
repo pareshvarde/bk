@@ -27,6 +27,7 @@ BEGIN
 
 	IF (@ApprovedCount = 0)
 	BEGIN
+		DELETE FROM Matrimonials WHERE MemberID = @MemberID
 		DELETE FROM Members WHERE MemberID = @MemberID
 	END
 			
