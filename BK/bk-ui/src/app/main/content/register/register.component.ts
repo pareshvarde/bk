@@ -4,15 +4,13 @@ import { EmailValidators, UniversalValidators } from 'ng2-validators';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Router } from '@angular/router';
-import { NukhData }  from '../../data/nukhs';
-import { CategoryData }  from '../../data/categories';
 import { RegisterModel } from '../../models/registerModel';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  providers: [bkDataService, NukhData, CategoryData]
+  providers: [bkDataService]
 })
 export class RegisterComponent implements OnInit {
 
@@ -20,7 +18,7 @@ export class RegisterComponent implements OnInit {
   formModel: RegisterModel;    
 
   constructor(private router: Router, private dataService: bkDataService, 
-    private alertService: NotificationsService, public nukhs: NukhData, public categories:CategoryData) 
+    private alertService: NotificationsService) 
   {         
     this.formModel = new RegisterModel();
     this.formModel.gender = "M";

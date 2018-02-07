@@ -6,18 +6,17 @@ import { NotificationsService } from 'angular2-notifications';
 import { MemberModel } from '../../models/memberModel';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators, EmailValidators } from 'ng2-validators';
-import { RelationTypeData } from '../../data/relations';
 import { Location } from '@angular/common';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
-import { RelationTypeLookupModel } from '../../models/relationTypeLookupModel';
+import { RELATION_TYPES_DATA } from '../../data/relations';
 
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
   styleUrls: ['./member.component.scss'],
-  providers: [bkDataService, RelationTypeData, bkAuthService]
+  providers: [bkDataService, bkAuthService]
 })
 
 export class MemberComponent implements OnInit {
@@ -36,8 +35,7 @@ export class MemberComponent implements OnInit {
   existingAdd: boolean;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public relationTypes: RelationTypeData, 
-    public authService: bkAuthService, private location: Location) {
+    private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -167,13 +165,13 @@ export class MemberComponent implements OnInit {
     );
   }
 
-  getRelations(): RelationTypeLookupModel[] {
+  getRelations(): any[] {
     if (this.memberModel.gender === 'M')
-      return this.relationTypes.data.filter(x => x.male);
+      return RELATION_TYPES_DATA.filter(x => x.male);
     else if (this.memberModel.gender === 'F')
-      return this.relationTypes.data.filter(x => !x.male);
+      return RELATION_TYPES_DATA.filter(x => !x.male);
     else
-      return this.relationTypes.data;
+      return RELATION_TYPES_DATA;
   }
 
   saveMember() {

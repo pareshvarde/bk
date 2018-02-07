@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FamilyModel, FamilyMemberModel } from '../../models/familyModel';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
-import { NukhData } from '../../data/nukhs';
-import { CategoryData } from '../../data/categories';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
@@ -11,14 +9,15 @@ import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { Location } from '@angular/common';
-import { RelationTypeData } from '../../data/relations';
-import { RelationTypeLookupModel } from '../../models/relationTypeLookupModel';
+import { RELATION_TYPES_DATA } from '../../data/relations';
+import { CATEGORIES_DATA} from '../../data/categories';
+import { NUKHS_DATA} from '../../data/nukhs';
 
 @Component({
   selector: 'app-fork',
   templateUrl: './fork.component.html',
   styleUrls: ['./fork.component.scss'],
-  providers: [bkDataService, NukhData, RelationTypeData, CategoryData, bkAuthService]
+  providers: [bkDataService, bkAuthService]
 })
 export class ForkComponent implements OnInit {
   
@@ -28,9 +27,8 @@ export class ForkComponent implements OnInit {
   dataSource: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public nukhs: NukhData, public authService: bkAuthService,
-    private _confirmation: ConfirmationService, public categories: CategoryData, private location: Location,
-    public relationTypes: RelationTypeData) {
+    private alertService: NotificationsService, public authService: bkAuthService,
+    private _confirmation: ConfirmationService, private location: Location) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -84,13 +82,13 @@ export class ForkComponent implements OnInit {
     return member.selected === true;    
   }
 
-  getRelations(member: FamilyMemberModel): RelationTypeLookupModel[] {
+  getRelations(member: FamilyMemberModel): any[] {
     if (member.gender === 'M')
-      return this.relationTypes.data.filter(x => x.male);
+      return RELATION_TYPES_DATA.filter(x => x.male);
     else if (member.gender === 'F')
-      return this.relationTypes.data.filter(x => !x.male);
+      return RELATION_TYPES_DATA.filter(x => !x.male);
     else
-      return this.relationTypes.data;
+      return RELATION_TYPES_DATA;
   }
   
   forkFamily(){

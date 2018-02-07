@@ -2,20 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { FamilyModel, FamilyMemberModel } from '../../models/familyModel';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
-import { NukhData } from '../../data/nukhs';
-import { CategoryData } from '../../data/categories';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
 import { FamilyLookupModel } from '../../models/familyLookupModel';
 import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
+import { CATEGORIES_DATA } from '../../data/categories';
+import { NUKHS_DATA } from '../../data/nukhs';
 
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
   styleUrls: ['./family.component.scss'],
-  providers: [bkDataService, NukhData, CategoryData, bkAuthService]
+  providers: [bkDataService, bkAuthService]
 })
 export class FamilyComponent implements OnInit {
 
@@ -28,8 +28,8 @@ export class FamilyComponent implements OnInit {
   matrimonyDatasource: any;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public nukhs: NukhData, public authService: bkAuthService,
-    private _confirmation: ConfirmationService, public categories: CategoryData) {
+    private alertService: NotificationsService, public authService: bkAuthService,
+    private _confirmation: ConfirmationService) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
