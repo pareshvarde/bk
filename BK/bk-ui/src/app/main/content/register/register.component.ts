@@ -9,8 +9,7 @@ import { RegisterModel } from '../../models/registerModel';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  providers: [bkDataService]
+  styleUrls: ['./register.component.scss']  
 })
 export class RegisterComponent implements OnInit {
 

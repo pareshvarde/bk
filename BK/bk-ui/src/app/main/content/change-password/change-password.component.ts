@@ -9,8 +9,7 @@ import { PasswordValidators } from 'ng2-validators'
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.scss'],
-  providers: [bkDataService]
+  styleUrls: ['./change-password.component.scss']  
 })
 export class ChangePasswordComponent implements OnInit {
 

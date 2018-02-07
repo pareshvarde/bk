@@ -15,8 +15,7 @@ import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 @Component({
   selector: 'app-fork',
   templateUrl: './fork.component.html',
-  styleUrls: ['./fork.component.scss'],
-  providers: [bkDataService, bkAuthService]
+  styleUrls: ['./fork.component.scss']  
 })
 export class ForkComponent implements OnInit {
   

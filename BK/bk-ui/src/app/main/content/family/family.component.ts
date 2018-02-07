@@ -13,8 +13,7 @@ import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
-  styleUrls: ['./family.component.scss'],
-  providers: [bkDataService, bkAuthService]
+  styleUrls: ['./family.component.scss']  
 })
 export class FamilyComponent implements OnInit {
 

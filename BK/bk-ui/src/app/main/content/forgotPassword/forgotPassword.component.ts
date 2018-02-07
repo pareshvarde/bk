@@ -7,8 +7,7 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
     selector: 'app-forgot-password',
     templateUrl: 'forgotPassword.component.html',
-    styleUrls: ['forgotPassword.component.scss'],
-    providers: [bkDataService]
+    styleUrls: ['forgotPassword.component.scss']    
 })
 export class ForgotPasswordComponent implements OnInit {
     forgotPasswordForm: FormGroup;    

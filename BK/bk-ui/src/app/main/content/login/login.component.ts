@@ -8,8 +8,7 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: [bkDataService]
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
 

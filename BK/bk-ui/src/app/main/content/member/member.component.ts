@@ -14,8 +14,7 @@ import { RELATION_TYPES_DATA } from '../../data/relations';
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
-  styleUrls: ['./member.component.scss'],
-  providers: [bkDataService, bkAuthService]
+  styleUrls: ['./member.component.scss']  
 })
 
 export class MemberComponent implements OnInit {

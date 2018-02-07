@@ -37,6 +37,8 @@ import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { ForkComponent } from './content/fork/fork.component';
 import { CallbackPipe } from './pipes/callback.pipe';
 import { MatrimonyComponent } from './content/matrimony/matrimony.component';
+import { bkAuthService } from './services/auth-service';
+import { bkDataService } from './services/bk-data.service';
 
 @NgModule({
     declarations: [
@@ -69,7 +71,9 @@ import { MatrimonyComponent } from './content/matrimony/matrimony.component';
         MatrimonyComponent 
     ],
     providers:[
-        ConfirmationService
+        ConfirmationService,
+        bkAuthService,
+        bkDataService
     ],
     imports     : [
         SharedModule,
