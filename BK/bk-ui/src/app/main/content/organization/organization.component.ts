@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
-import { ORGANIZATIONS_DATE } from '../../data/organizations';
+import { ORGANIZATIONS_DATA } from '../../data/organizations';
 
 @Component({
   selector: 'app-organization',
@@ -11,7 +11,7 @@ export class OrganizationComponent implements OnInit {
 
   constructor() { }
 
-  dataSource = new MatTableDataSource<any>(ORGANIZATIONS_DATE);
+  dataSource = new MatTableDataSource<any>(ORGANIZATIONS_DATA);
 
   ngOnInit() {
   }

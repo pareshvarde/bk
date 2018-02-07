@@ -1,4 +1,4 @@
-export const ORGANIZATIONS_DATE: any[] =
+export const ORGANIZATIONS_DATA: any[] =
 [
     {
       name: "Marwari Brahmkshatriya Samaj, Daheli",
