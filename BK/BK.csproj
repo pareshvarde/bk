@@ -230,6 +230,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\FamilyController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MatrimonyController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Filters\ExceptionFilter.cs" />
     <Compile Include="Filters\ResponseWrappingHandler.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\FamilyViewModel.cs" />
+    <Compile Include="ViewModel\MatrimonyViewModel.cs" />
     <Compile Include="ViewModel\MemberBasicSearchModel.cs" />
     <Compile Include="ViewModel\MemberViewModel.cs" />
     <Compile Include="ViewModel\FamilyLookupViewModel.cs" />

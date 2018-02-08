@@ -12,6 +12,7 @@ import { MemberModel } from '../models/memberModel';
 import { FamilyModel } from '../models/familyModel';
 import { AuthHttp } from 'angular2-jwt';
 import { MemberSearchBasicModel } from '../models/memberSearchBasicModel';
+import { MatrimonyModel } from '../models/matrimonyModel';
 
 @Injectable()
 export class bkDataService {
@@ -164,6 +165,32 @@ export class bkDataService {
     this.blockUI.start("Please wait...");
                
     return this.authHttp.get(this.API_URL + "member/decline?memberId=" + memberId + "&familyId=" + familyId).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  getMatrimony(memberId:number){
+    this.blockUI.start("Please wait...");
+               
+    return this.authHttp.get(this.API_URL + "matrimony?memberId=" + memberId).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  saveMatrimony(model: MatrimonyModel){
+    this.blockUI.start("Please wait...");
+           
+    return this.authHttp.post(this.API_URL + "matrimony/save", model).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  
+  deleteMatrimony(memberId: number)
+  {
+    this.blockUI.start("Please wait...");
+
+    return this.authHttp.get(this.API_URL + "/matrimony/delete?memberId=" + memberId).map((res)=>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

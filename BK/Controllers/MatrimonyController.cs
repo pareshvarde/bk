@@ -13,6 +13,7 @@ namespace BK.Controllers
     public class MatrimonyController : BaseController
     {
         [Route("api/matrimony")]
+        [HttpGet]
         public IHttpActionResult Get(int memberId)
         {
 
@@ -48,7 +49,8 @@ namespace BK.Controllers
             }
         }
 
-        [Route("api/delete")]
+        [Route("api/matrimony/delete")]
+        [HttpGet]
         public IHttpActionResult Delete(int memberId)
         {
             using (bkContext context = new bkContext())
@@ -64,7 +66,8 @@ namespace BK.Controllers
             return Ok();
         }
 
-        [Route("api/save")]
+        [Route("api/matrimony/save")]
+        [HttpPost]
         public IHttpActionResult Save(MatrimonyViewModel model)
         {
             using (bkContext context = new bkContext())
