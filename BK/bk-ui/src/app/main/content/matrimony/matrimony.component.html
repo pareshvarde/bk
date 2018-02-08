@@ -19,38 +19,39 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
 
+        <div fxLayout="row" fxLayoutWrap>
           <mat-form-field>
-              <mat-select placeholder="Height" [(ngModel)]="model.height" formControlName="height">
-                <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
-                  {{ n.feet }}
-                </mat-option>
-              </mat-select>
+            <mat-select placeholder="Height" [(ngModel)]="model.height" formControlName="height">
+              <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
+                {{ n.feet }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field>
-              <input matInput [(ngModel)]="model.weight" placeholder="Weight" formControlName="weight">              
+            <input matInput [(ngModel)]="model.weight" placeholder="Weight" formControlName="weight">
           </mat-form-field>
-
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-          <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
+          <button mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
             SAVE
           </button>
-          <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+          <button mat-raised-button class="submit-button" aria-label="CANCEL">
             CANCEL
           </button>
         </div>
-        <div *ngIf="!model.matrimonyId" fxLayout="row" fxLayoutAlign="center center">          
-          <button *ngIf="model.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+        <div *ngIf="!model.matrimonialID" fxLayout="row" fxLayoutAlign="center center">
+          <button *ngIf="model.canEdit" mat-raised-button color="accent" class="submit-button" aria-label="EDIT">
             EDIT
           </button>
-          <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
+          <button mat-raised-button class="submit-button" aria-label="CANCEL">
             BACK
           </button>
         </div>
-      </form>    
+      </form>
     </div>
   </div>
 </div>

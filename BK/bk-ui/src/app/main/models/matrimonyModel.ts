@@ -3,7 +3,7 @@ export class MatrimonyModel {
     memberID: number;
     maternalNukhId: number;
     birthTime: string;
-    maritalStatus: string;
+    maritalStatusId: number;
     height: number;
     weight: number;
     bodyType: string;
