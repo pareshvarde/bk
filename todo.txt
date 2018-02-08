@@ -24,5 +24,13 @@ edits by minor?
 
 optimization
 =============
-
 if alive, not married, adult allow matrimony 
+
+Marital Status:
+	Never Married
+	Awaiting Divorce
+	Divorced
+	Widowed
+	Annulled
+	
+manglik non-manglik aanshik manglik
