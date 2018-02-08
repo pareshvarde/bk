@@ -54,7 +54,7 @@ export class MatrimonyComponent implements OnInit {
       height: new FormControl('', [Validators.required]),
       weight: new FormControl('', [Validators.required]),
       bodyTypeId: new FormControl('', [Validators.required]),
-      complexion: new FormControl('', [Validators.required]),
+      complexionTypeId: new FormControl('', [Validators.required]),
       smoke: new FormControl('', [Validators.required]),
       alcohol: new FormControl('', [Validators.required]),      
       tobacco: new FormControl('', [Validators.required]),

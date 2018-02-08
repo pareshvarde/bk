@@ -63,7 +63,8 @@
           <Property Name="Tobacco" Type="bit" Nullable="false" />
           <Property Name="Alcohol" Type="bit" Nullable="false" />
           <Property Name="Disability" Type="bit" Nullable="false" />
-          <Property Name="Diet" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vegetarian" Type="bit" Nullable="false" />
+          <Property Name="Manglik" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="MonthlyIncome" Type="int" Nullable="false" />
           <Property Name="Language" Type="nvarchar" MaxLength="50" />
           <Property Name="ProfileText" Type="nvarchar" MaxLength="255" />
@@ -477,7 +478,8 @@
           <Property Name="Tobacco" Type="Boolean" Nullable="false" />
           <Property Name="Alcohol" Type="Boolean" Nullable="false" />
           <Property Name="Disability" Type="Boolean" Nullable="false" />
-          <Property Name="Diet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Vegetarian" Type="Boolean" Nullable="false" />
+          <Property Name="Manglik" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="MonthlyIncome" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProfileText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -640,7 +642,8 @@
                 <ScalarProperty Name="ProfileText" ColumnName="ProfileText" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
-                <ScalarProperty Name="Diet" ColumnName="Diet" />
+                <ScalarProperty Name="Manglik" ColumnName="Manglik" />
+                <ScalarProperty Name="Vegetarian" ColumnName="Vegetarian" />
                 <ScalarProperty Name="Disability" ColumnName="Disability" />
                 <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />
                 <ScalarProperty Name="Tobacco" ColumnName="Tobacco" />

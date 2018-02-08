@@ -27,7 +27,8 @@ namespace BK.Context
         public bool Tobacco { get; set; }
         public bool Alcohol { get; set; }
         public bool Disability { get; set; }
-        public string Diet { get; set; }
+        public bool Vegetarian { get; set; }
+        public string Manglik { get; set; }
         public int MonthlyIncome { get; set; }
         public string Language { get; set; }
         public string ProfileText { get; set; }
