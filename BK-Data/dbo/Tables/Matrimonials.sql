@@ -13,6 +13,7 @@
     [Alcohol]          BIT            CONSTRAINT [DF_Matrimonials_Drink] DEFAULT ((0)) NOT NULL,
     [Disability]       BIT            CONSTRAINT [DF_Matrimonials_Disability] DEFAULT ((0)) NOT NULL,
     [Vegetarian]       BIT            CONSTRAINT [DF_Matrimonials_Vegetarian] DEFAULT ((1)) NOT NULL,
+    [OwnHome]          BIT            CONSTRAINT [DF_Matrimonials_OwnHome] DEFAULT ((0)) NOT NULL,
     [Manglik]          CHAR (1)       CONSTRAINT [DF_Matrimonials_Manglik] DEFAULT ('N') NOT NULL,
     [MonthlyIncome]    INT            NOT NULL,
     [Language]         NVARCHAR (50)  NULL,
@@ -25,6 +26,8 @@
     CONSTRAINT [PK_Matrimonials] PRIMARY KEY CLUSTERED ([MatrimonialID] ASC),
     CONSTRAINT [FK_Matrimonials_Members] FOREIGN KEY ([MemberID]) REFERENCES [dbo].[Members] ([MemberID])
 );
+
+
 
 
 

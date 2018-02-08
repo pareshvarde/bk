@@ -37,6 +37,7 @@ namespace BK.Context
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ExpiresOn { get; set; }
+        public bool OwnHome { get; set; }
     
         public virtual Member Member { get; set; }
     }

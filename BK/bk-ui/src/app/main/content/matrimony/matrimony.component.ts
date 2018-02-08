@@ -60,15 +60,15 @@ export class MatrimonyComponent implements OnInit {
       bodyTypeId: new FormControl('', [Validators.required]),
       complexionTypeId: new FormControl('', [Validators.required]),
       manglik: new FormControl('', [Validators.required]),
-      smoke: new FormControl('', [Validators.required]),
-      alcohol: new FormControl('', [Validators.required]),      
-      tobacco: new FormControl('', [Validators.required]),
-      disability: new FormControl('', [Validators.required]),
-      vegetarian: new FormControl('', [Validators.required]),
-      diet: new FormControl('', [Validators.required]),
+      smoke: new FormControl('', null),
+      alcohol: new FormControl('', null),      
+      tobacco: new FormControl('', null),
+      disability: new FormControl('', null),
+      vegetarian: new FormControl('', null),      
+      ownHome: new FormControl('', null),      
       monthlyIncome: new FormControl('', [Validators.required, UniversalValidators.isNumber]),
       language: new FormControl('', [Validators.required]),
-      profileText: new FormControl('', [Validators.required,UniversalValidators.min(50),UniversalValidators.max(250)])      
+      profileText: new FormControl('', [Validators.required])      
     })
   }
 

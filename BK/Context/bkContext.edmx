@@ -64,6 +64,7 @@
           <Property Name="Alcohol" Type="bit" Nullable="false" />
           <Property Name="Disability" Type="bit" Nullable="false" />
           <Property Name="Vegetarian" Type="bit" Nullable="false" />
+          <Property Name="OwnHome" Type="bit" Nullable="false" />
           <Property Name="Manglik" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="MonthlyIncome" Type="int" Nullable="false" />
           <Property Name="Language" Type="nvarchar" MaxLength="50" />
@@ -489,6 +490,7 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ExpiresOn" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Matrimonial" ToRole="Member" />
+          <Property Name="OwnHome" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Matrimonials_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -634,6 +636,7 @@
           <EntitySetMapping Name="Matrimonials">
             <EntityTypeMapping TypeName="bkModel.Matrimonial">
               <MappingFragment StoreEntitySet="Matrimonials">
+                <ScalarProperty Name="OwnHome" ColumnName="OwnHome" />
                 <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />

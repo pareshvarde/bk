@@ -90,10 +90,11 @@
         <div fxLayout="row" fxLayoutWrap>
           <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.disability" formControlName="disability">Disability?</mat-checkbox>
           <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.vegetarian" formControlName="vegetarian">Vegetarian?</mat-checkbox>
+          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.ownHome" formControlName="ownHome">Own Home?</mat-checkbox>
         </div>
 
         <div fxLayout="row" fxLayoutWrap>
-          <mat-form-field>
+          <mat-form-field class="mat-form-field-fullwidth">
             <textarea matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="5" formControlName="profileText"></textarea>
           </mat-form-field>

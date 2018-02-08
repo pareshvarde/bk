@@ -13,6 +13,7 @@ export class MatrimonyModel {
     tobacco: boolean;
     alcohol: boolean;
     disability: string;
+    ownHome: boolean;
     vegetarian: boolean;
     monthlyIncome: number;
     language: number;
