@@ -26,6 +26,7 @@ export class MatrimonyComponent implements OnInit {
   readonly MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
   editMode: boolean;
+  addMode: boolean;
   
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
@@ -55,7 +56,7 @@ export class MatrimonyComponent implements OnInit {
       bodyTypeId: new FormControl('', [Validators.required]),
       complexion: new FormControl('', [Validators.required]),
       smoke: new FormControl('', [Validators.required]),
-      drink: new FormControl('', [Validators.required]),      
+      alcohol: new FormControl('', [Validators.required]),      
       tobacco: new FormControl('', [Validators.required]),
       disability: new FormControl('', [Validators.required]),
       diet: new FormControl('', [Validators.required]),

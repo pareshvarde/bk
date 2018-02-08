@@ -54,16 +54,17 @@
           <Property Name="MemberID" Type="int" Nullable="false" />
           <Property Name="MaternalNukhID" Type="int" Nullable="false" />
           <Property Name="BirthTime" Type="time" Precision="7" />
-          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="50" />
-          <Property Name="Height" Type="int" />
-          <Property Name="BodyType" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Complexion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaritalStatusID" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="BodyTypeID" Type="int" Nullable="false" />
+          <Property Name="ComplexionTypeID" Type="int" Nullable="false" />
           <Property Name="Smoke" Type="bit" Nullable="false" />
           <Property Name="Tobacco" Type="bit" Nullable="false" />
-          <Property Name="Drink" Type="bit" Nullable="false" />
+          <Property Name="Alcohol" Type="bit" Nullable="false" />
           <Property Name="Disability" Type="bit" Nullable="false" />
           <Property Name="Diet" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="MonthlyIncome" Type="int" />
+          <Property Name="MonthlyIncome" Type="int" Nullable="false" />
           <Property Name="Language" Type="nvarchar" MaxLength="50" />
           <Property Name="ProfileText" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedOn" Type="datetime2" Precision="7" />
@@ -263,7 +264,6 @@
           <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
           <Parameter Name="FamilyID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Matrimonials" EntityType="bkModel.Matrimonial" />
           <EntitySet Name="Members" EntityType="bkModel.Member" />
           <AssociationSet Name="FK_Families_HeadOfFamily" Association="bkModel.FK_Families_HeadOfFamily">
             <End Role="Member" EntitySet="Members" />
@@ -277,6 +277,7 @@
             <End Role="Member" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
+          <EntitySet Name="Matrimonials" EntityType="bkModel.Matrimonial" />
           <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
             <End Role="Member" EntitySet="Members" />
             <End Role="Matrimonial" EntitySet="Matrimonials" />
@@ -385,33 +386,6 @@
           <Property Type="Int32" Name="MatrimonialID" Nullable="true" />
           <Property Type="Boolean" Name="Alive" Nullable="false" />
         </ComplexType>
-        <EntityType Name="Matrimonial">
-          <Key>
-            <PropertyRef Name="MatrimonialID" />
-          </Key>
-          <Property Name="MatrimonialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MemberID" Type="Int32" Nullable="false" />
-          <Property Name="MaternalNukhID" Type="Int32" Nullable="false" />
-          <Property Name="BirthTime" Type="Time" Precision="7" />
-          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Height" Type="Int32" />
-          <Property Name="BodyType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Complexion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Smoke" Type="Boolean" Nullable="false" />
-          <Property Name="Tobacco" Type="Boolean" Nullable="false" />
-          <Property Name="Drink" Type="Boolean" Nullable="false" />
-          <Property Name="Disability" Type="Boolean" Nullable="false" />
-          <Property Name="Diet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="MonthlyIncome" Type="Int32" />
-          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ProfileText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="7" />
-          <Property Name="CreatedBy" Type="Int32" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
-          <Property Name="ModifiedBy" Type="Int32" />
-          <Property Name="ExpiresOn" Type="DateTime" Precision="7" />
-          <NavigationProperty Name="Member" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Matrimonial" ToRole="Member" />
-        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="MemberID" />
@@ -486,6 +460,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Matrimonial">
+          <Key>
+            <PropertyRef Name="MatrimonialID" />
+          </Key>
+          <Property Name="MatrimonialID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemberID" Type="Int32" Nullable="false" />
+          <Property Name="MaternalNukhID" Type="Int32" Nullable="false" />
+          <Property Name="BirthTime" Type="Time" Precision="7" />
+          <Property Name="MaritalStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="BodyTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ComplexionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Smoke" Type="Boolean" Nullable="false" />
+          <Property Name="Tobacco" Type="Boolean" Nullable="false" />
+          <Property Name="Alcohol" Type="Boolean" Nullable="false" />
+          <Property Name="Disability" Type="Boolean" Nullable="false" />
+          <Property Name="Diet" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MonthlyIncome" Type="Int32" Nullable="false" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProfileText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="ExpiresOn" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Member" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Matrimonial" ToRole="Member" />
+        </EntityType>
         <Association Name="FK_Matrimonials_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
           <End Type="bkModel.Matrimonial" Role="Matrimonial" Multiplicity="*" />
@@ -592,33 +594,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Matrimonials">
-            <EntityTypeMapping TypeName="bkModel.Matrimonial">
-              <MappingFragment StoreEntitySet="Matrimonials">
-                <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ProfileText" ColumnName="ProfileText" />
-                <ScalarProperty Name="Language" ColumnName="Language" />
-                <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
-                <ScalarProperty Name="Diet" ColumnName="Diet" />
-                <ScalarProperty Name="Disability" ColumnName="Disability" />
-                <ScalarProperty Name="Drink" ColumnName="Drink" />
-                <ScalarProperty Name="Tobacco" ColumnName="Tobacco" />
-                <ScalarProperty Name="Smoke" ColumnName="Smoke" />
-                <ScalarProperty Name="Complexion" ColumnName="Complexion" />
-                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
-                <ScalarProperty Name="Height" ColumnName="Height" />
-                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
-                <ScalarProperty Name="BirthTime" ColumnName="BirthTime" />
-                <ScalarProperty Name="MaternalNukhID" ColumnName="MaternalNukhID" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="MatrimonialID" ColumnName="MatrimonialID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="bkModel.Member">
               <MappingFragment StoreEntitySet="Members">
@@ -651,6 +626,34 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matrimonials">
+            <EntityTypeMapping TypeName="bkModel.Matrimonial">
+              <MappingFragment StoreEntitySet="Matrimonials">
+                <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ProfileText" ColumnName="ProfileText" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
+                <ScalarProperty Name="Diet" ColumnName="Diet" />
+                <ScalarProperty Name="Disability" ColumnName="Disability" />
+                <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />
+                <ScalarProperty Name="Tobacco" ColumnName="Tobacco" />
+                <ScalarProperty Name="Smoke" ColumnName="Smoke" />
+                <ScalarProperty Name="ComplexionTypeID" ColumnName="ComplexionTypeID" />
+                <ScalarProperty Name="BodyTypeID" ColumnName="BodyTypeID" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="MaritalStatusID" ColumnName="MaritalStatusID" />
+                <ScalarProperty Name="BirthTime" ColumnName="BirthTime" />
+                <ScalarProperty Name="MaternalNukhID" ColumnName="MaternalNukhID" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="MatrimonialID" ColumnName="MatrimonialID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

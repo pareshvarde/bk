@@ -35,6 +35,13 @@
           </mat-form-field>
         </div>
 
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.smoke" formControlName="smoke">Smoke?</mat-checkbox>
+            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.alcohol" formControlName="alcohol">Alcohol?</mat-checkbox>
+            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.tobacco" formControlName="tobacco">Tobacco?</mat-checkbox>
+            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.disability" formControlName="disability">Disability?</mat-checkbox>
+        </div>
+
         <div fxLayout="row" fxLayoutAlign="center center">
           <button mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
             SAVE

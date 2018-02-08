@@ -10,7 +10,7 @@ export class MatrimonyModel {
     complexion: string;
     smoke: boolean;
     tobacco: boolean;
-    drink: boolean;
+    alcohol: boolean;
     disability: string;
     diet: string;
     monthlyIncome: number;

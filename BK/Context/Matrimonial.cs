@@ -18,16 +18,17 @@ namespace BK.Context
         public int MemberID { get; set; }
         public int MaternalNukhID { get; set; }
         public Nullable<System.TimeSpan> BirthTime { get; set; }
-        public string MaritalStatus { get; set; }
-        public Nullable<int> Height { get; set; }
-        public string BodyType { get; set; }
-        public string Complexion { get; set; }
+        public int MaritalStatusID { get; set; }
+        public int Height { get; set; }
+        public int Weight { get; set; }
+        public int BodyTypeID { get; set; }
+        public int ComplexionTypeID { get; set; }
         public bool Smoke { get; set; }
         public bool Tobacco { get; set; }
-        public bool Drink { get; set; }
+        public bool Alcohol { get; set; }
         public bool Disability { get; set; }
         public string Diet { get; set; }
-        public Nullable<int> MonthlyIncome { get; set; }
+        public int MonthlyIncome { get; set; }
         public string Language { get; set; }
         public string ProfileText { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
