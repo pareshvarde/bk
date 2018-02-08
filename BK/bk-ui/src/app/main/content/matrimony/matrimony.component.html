@@ -20,6 +20,18 @@
             </mat-select>
           </mat-form-field>
 
+          <mat-form-field>
+              <mat-select placeholder="Height" [(ngModel)]="model.height" formControlName="height">
+                <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
+                  {{ n.feet }}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+              <input matInput [(ngModel)]="model.weight" placeholder="Weight" formControlName="weight">              
+          </mat-form-field>
+
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">

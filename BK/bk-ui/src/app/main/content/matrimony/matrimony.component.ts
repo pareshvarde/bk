@@ -9,6 +9,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators } from 'ng2-validators';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
+import { HEIGHT_DATA } from '../../data/height'
 
 @Component({
   selector: 'app-matrimony',
@@ -23,6 +24,7 @@ export class MatrimonyComponent implements OnInit {
   matrimonyForm: FormGroup;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   readonly MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA;
+  readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
   
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
@@ -48,6 +50,7 @@ export class MatrimonyComponent implements OnInit {
       birthTime: new FormControl('', [Validators.required]),
       maritalStatusId: new FormControl('',[Validators.required]),
       height: new FormControl('', [Validators.required]),
+      weight: new FormControl('', [Validators.required]),
       bodyTypeId: new FormControl('', [Validators.required]),
       complexion: new FormControl('', [Validators.required]),
       smoke: new FormControl('', [Validators.required]),
@@ -62,6 +65,7 @@ export class MatrimonyComponent implements OnInit {
   }
 
   initializeComponent(){
+    console.log(this.MARITAL_STATUS_DATA_LOCAL);
     this.model = new MatrimonyModel();
   }
 }

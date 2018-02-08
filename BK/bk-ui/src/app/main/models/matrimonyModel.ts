@@ -5,6 +5,7 @@ export class MatrimonyModel {
     birthTime: string;
     maritalStatus: string;
     height: number;
+    weight: number;
     bodyType: string;
     complexion: string;
     smoke: boolean;

@@ -4,7 +4,8 @@
     [MaternalNukhID] INT            NOT NULL,
     [BirthTime]      TIME (7)       NULL,
     [MaritalStatus]  NVARCHAR (50)  NULL,
-    [Height]         INT            NULL,
+    [Height]         INT            NOT NULL,
+    [Weight]         INT            NOT NULL,
     [BodyType]       NVARCHAR (50)  NOT NULL,
     [Complexion]     NVARCHAR (50)  NOT NULL,
     [Smoke]          BIT            CONSTRAINT [DF_Matrimonials_Smoke] DEFAULT ((0)) NOT NULL,
@@ -23,6 +24,8 @@
     CONSTRAINT [PK_Matrimonials] PRIMARY KEY CLUSTERED ([MatrimonialID] ASC),
     CONSTRAINT [FK_Matrimonials_Members] FOREIGN KEY ([MemberID]) REFERENCES [dbo].[Members] ([MemberID])
 );
+
+
 
 
 
