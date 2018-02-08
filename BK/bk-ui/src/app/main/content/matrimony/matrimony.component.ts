@@ -25,6 +25,7 @@ export class MatrimonyComponent implements OnInit {
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   readonly MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
+  editMode: boolean;
   
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {

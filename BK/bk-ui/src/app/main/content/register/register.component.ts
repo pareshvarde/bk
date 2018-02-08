@@ -5,6 +5,8 @@ import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { Router } from '@angular/router';
 import { RegisterModel } from '../../models/registerModel';
+import { CATEGORIES_DATA } from '../../data/categories';
+import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +17,9 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   formModel: RegisterModel;    
-
+  readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
+  readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
+  
   constructor(private router: Router, private dataService: bkDataService, 
     private alertService: NotificationsService) 
   {         
