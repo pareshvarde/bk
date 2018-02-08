@@ -1,7 +1,44 @@
 <div id="matrimony" fxLayout="column">
   <div id="matrimony-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
-    <div id="matrimony-form">      
-      Matrimony Works!    
+    <div id="matrimony-form">
+      <form name="matrimonyForm" [formGroup]="matrimonyForm" novalidate>
+
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.maternalNukhId" formControlName="maternalNukhId">
+              <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
+                {{ n.nukh }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Marital Status" [(ngModel)]="model.maritalStatusId" formControlName="maritalStatusId">
+              <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
+                {{ n.status }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
+            SAVE
+          </button>
+          <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            CANCEL
+          </button>
+        </div>
+        <div *ngIf="!model.matrimonyId" fxLayout="row" fxLayoutAlign="center center">          
+          <button *ngIf="model.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+            EDIT
+          </button>
+          <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
+            BACK
+          </button>
+        </div>
+      </form>    
     </div>
   </div>
 </div>

@@ -15,5 +15,6 @@ export class MatrimonyModel {
     monthlyIncome: number;
     language: number;
     profileText: string;
-    expiresOn: Date
+    expiresOn: Date;
+    canEdit: boolean;
 }
