@@ -10,6 +10,8 @@ import { UniversalValidators } from 'ng2-validators';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 import { HEIGHT_DATA } from '../../data/height'
+import { BODY_TYPE_DATA } from '../../data/bodyType';
+import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
 
 @Component({
   selector: 'app-matrimony',
@@ -25,6 +27,8 @@ export class MatrimonyComponent implements OnInit {
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   readonly MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
+  readonly BODYTYPE_DATA_LOCAL = BODY_TYPE_DATA;
+  readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;
   editMode: boolean;
   addMode: boolean;
   
@@ -52,17 +56,19 @@ export class MatrimonyComponent implements OnInit {
       birthTime: new FormControl('', [Validators.required]),
       maritalStatusId: new FormControl('',[Validators.required]),
       height: new FormControl('', [Validators.required]),
-      weight: new FormControl('', [Validators.required]),
+      weight: new FormControl('', [Validators.required, UniversalValidators.isNumber]),
       bodyTypeId: new FormControl('', [Validators.required]),
       complexionTypeId: new FormControl('', [Validators.required]),
+      manglik: new FormControl('', [Validators.required]),
       smoke: new FormControl('', [Validators.required]),
       alcohol: new FormControl('', [Validators.required]),      
       tobacco: new FormControl('', [Validators.required]),
       disability: new FormControl('', [Validators.required]),
+      vegetarian: new FormControl('', [Validators.required]),
       diet: new FormControl('', [Validators.required]),
-      monthlyIncome: new FormControl('', [Validators.required]),
+      monthlyIncome: new FormControl('', [Validators.required, UniversalValidators.isNumber]),
       language: new FormControl('', [Validators.required]),
-      profileText: new FormControl('', [Validators.required])      
+      profileText: new FormControl('', [Validators.required,UniversalValidators.min(50),UniversalValidators.max(250)])      
     })
   }
 

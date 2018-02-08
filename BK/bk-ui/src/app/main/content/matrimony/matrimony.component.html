@@ -23,6 +23,10 @@
 
         <div fxLayout="row" fxLayoutWrap>
           <mat-form-field>
+            <input matInput type="time" [(ngModel)]="model.birthTime" placeholder="Birth Time" formControlName="birthTime">
+          </mat-form-field>
+
+          <mat-form-field>
             <mat-select placeholder="Height" [(ngModel)]="model.height" formControlName="height">
               <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
                 {{ n.feet }}
@@ -36,10 +40,63 @@
         </div>
 
         <div fxLayout="row" fxLayoutWrap>
-            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.smoke" formControlName="smoke">Smoke?</mat-checkbox>
-            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.alcohol" formControlName="alcohol">Alcohol?</mat-checkbox>
-            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.tobacco" formControlName="tobacco">Tobacco?</mat-checkbox>
-            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.disability" formControlName="disability">Disability?</mat-checkbox>
+          <mat-form-field>
+            <mat-select placeholder="Body" [(ngModel)]="model.bodyTypeID" formControlName="bodyTypeId">
+              <mat-option *ngFor="let n of BODYTYPE_DATA_LOCAL" [value]="n.id">
+                {{ n.type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Complexion" [(ngModel)]="model.complexionTypeId" formControlName="complexionTypeId">
+              <mat-option *ngFor="let n of COMPLEXION_DATA_LOCAL" [value]="n.id">
+                {{ n.type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Manglik" [(ngModel)]="model.manglik" formControlName="manglik">
+              <mat-option value='N'>
+                NOT MANGLIK
+              </mat-option>
+              <mat-option value='A'>
+                AANSHIK MANGLIK
+              </mat-option>
+              <mat-option value='M'>
+                MANGLIK
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.language" placeholder="Mother Tongue" formControlName="language">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.smoke" formControlName="smoke">Smoke?</mat-checkbox>
+          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.alcohol" formControlName="alcohol">Alcohol?</mat-checkbox>
+          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.tobacco" formControlName="tobacco">Tobacco?</mat-checkbox>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.disability" formControlName="disability">Disability?</mat-checkbox>
+          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.vegetarian" formControlName="vegetarian">Vegetarian?</mat-checkbox>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap>
+          <mat-form-field>
+            <textarea matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
+              matAutosizeMaxRows="5" formControlName="profileText"></textarea>
+          </mat-form-field>
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">

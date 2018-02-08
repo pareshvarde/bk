@@ -8,11 +8,12 @@ export class MatrimonyModel {
     weight: number;
     bodyTypeId: number;
     complexionTypeId: number;
+    manglik: string;
     smoke: boolean;
     tobacco: boolean;
     alcohol: boolean;
     disability: string;
-    diet: string;
+    vegetarian: boolean;
     monthlyIncome: number;
     language: number;
     profileText: string;
