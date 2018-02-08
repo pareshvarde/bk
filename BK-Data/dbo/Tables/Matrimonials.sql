@@ -14,7 +14,7 @@
     [Disability]       BIT            CONSTRAINT [DF_Matrimonials_Disability] DEFAULT ((0)) NOT NULL,
     [Vegetarian]       BIT            CONSTRAINT [DF_Matrimonials_Vegetarian] DEFAULT ((1)) NOT NULL,
     [OwnHome]          BIT            CONSTRAINT [DF_Matrimonials_OwnHome] DEFAULT ((0)) NOT NULL,
-    [Manglik]          CHAR (1)       CONSTRAINT [DF_Matrimonials_Manglik] DEFAULT ('N') NOT NULL,
+    [Manglal]          CHAR (1)       CONSTRAINT [DF_Matrimonials_Manglik] DEFAULT ('N') NOT NULL,
     [MonthlyIncome]    INT            NOT NULL,
     [Language]         NVARCHAR (50)  NULL,
     [ProfileText]      NVARCHAR (255) NULL,

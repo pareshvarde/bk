@@ -65,7 +65,7 @@
           <Property Name="Disability" Type="bit" Nullable="false" />
           <Property Name="Vegetarian" Type="bit" Nullable="false" />
           <Property Name="OwnHome" Type="bit" Nullable="false" />
-          <Property Name="Manglik" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Mangal" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="MonthlyIncome" Type="int" Nullable="false" />
           <Property Name="Language" Type="nvarchar" MaxLength="50" />
           <Property Name="ProfileText" Type="nvarchar" MaxLength="255" />
@@ -480,7 +480,8 @@
           <Property Name="Alcohol" Type="Boolean" Nullable="false" />
           <Property Name="Disability" Type="Boolean" Nullable="false" />
           <Property Name="Vegetarian" Type="Boolean" Nullable="false" />
-          <Property Name="Manglik" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="OwnHome" Type="Boolean" Nullable="false" />
+          <Property Name="Mangal" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="MonthlyIncome" Type="Int32" Nullable="false" />
           <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ProfileText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -490,7 +491,6 @@
           <Property Name="ModifiedBy" Type="Int32" />
           <Property Name="ExpiresOn" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Matrimonial" ToRole="Member" />
-          <Property Name="OwnHome" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Matrimonials_Members">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -636,7 +636,6 @@
           <EntitySetMapping Name="Matrimonials">
             <EntityTypeMapping TypeName="bkModel.Matrimonial">
               <MappingFragment StoreEntitySet="Matrimonials">
-                <ScalarProperty Name="OwnHome" ColumnName="OwnHome" />
                 <ScalarProperty Name="ExpiresOn" ColumnName="ExpiresOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
@@ -645,7 +644,8 @@
                 <ScalarProperty Name="ProfileText" ColumnName="ProfileText" />
                 <ScalarProperty Name="Language" ColumnName="Language" />
                 <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
-                <ScalarProperty Name="Manglik" ColumnName="Manglik" />
+                <ScalarProperty Name="Mangal" ColumnName="Mangal" />
+                <ScalarProperty Name="OwnHome" ColumnName="OwnHome" />
                 <ScalarProperty Name="Vegetarian" ColumnName="Vegetarian" />
                 <ScalarProperty Name="Disability" ColumnName="Disability" />
                 <ScalarProperty Name="Alcohol" ColumnName="Alcohol" />

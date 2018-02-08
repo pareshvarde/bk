@@ -57,7 +57,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <mat-select placeholder="Manglik" [(ngModel)]="model.manglik" formControlName="manglik">
+            <mat-select placeholder="Mangal" [(ngModel)]="model.mangal" formControlName="manglik">
               <mat-option value='N'>
                 NOT MANGLIK
               </mat-option>
@@ -82,15 +82,76 @@
         </div>
 
         <div fxLayout="row" fxLayoutWrap>
-          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.smoke" formControlName="smoke">Smoke?</mat-checkbox>
-          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.alcohol" formControlName="alcohol">Alcohol?</mat-checkbox>
-          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.tobacco" formControlName="tobacco">Tobacco?</mat-checkbox>
+
+          <mat-form-field>
+            <mat-select placeholder="Smoke" [(ngModel)]="model.smoke" formControlName="smoke">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <mat-select placeholder="Alcohol" [(ngModel)]="model.alcohol" formControlName="alcohol">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Tobacco" [(ngModel)]="model.tobacco" formControlName="tobacco">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
 
         <div fxLayout="row" fxLayoutWrap>
-          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.disability" formControlName="disability">Disability?</mat-checkbox>
-          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.vegetarian" formControlName="vegetarian">Vegetarian?</mat-checkbox>
-          <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="model.ownHome" formControlName="ownHome">Own Home?</mat-checkbox>
+          <mat-form-field>
+            <mat-select placeholder="Disability" [(ngModel)]="model.disability" formControlName="disability">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Vegetarian" [(ngModel)]="model.vegetarian" formControlName="vegetarian">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Own Home" [(ngModel)]="model.ownHome" formControlName="ownHome">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
         </div>
 
         <div fxLayout="row" fxLayoutWrap>

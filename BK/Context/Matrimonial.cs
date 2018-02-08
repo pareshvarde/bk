@@ -28,7 +28,8 @@ namespace BK.Context
         public bool Alcohol { get; set; }
         public bool Disability { get; set; }
         public bool Vegetarian { get; set; }
-        public string Manglik { get; set; }
+        public bool OwnHome { get; set; }
+        public string Mangal { get; set; }
         public int MonthlyIncome { get; set; }
         public string Language { get; set; }
         public string ProfileText { get; set; }
@@ -37,7 +38,6 @@ namespace BK.Context
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> ExpiresOn { get; set; }
-        public bool OwnHome { get; set; }
     
         public virtual Member Member { get; set; }
     }

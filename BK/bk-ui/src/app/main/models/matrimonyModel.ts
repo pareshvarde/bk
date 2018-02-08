@@ -1,6 +1,6 @@
 export class MatrimonyModel {
-    matrimonialID: number;
-    memberID: number;
+    matrimonialId: number;
+    memberId: number;
     maternalNukhId: number;
     birthTime: string;
     maritalStatusId: number;
@@ -8,7 +8,7 @@ export class MatrimonyModel {
     weight: number;
     bodyTypeId: number;
     complexionTypeId: number;
-    manglik: string;
+    mangal: string;
     smoke: boolean;
     tobacco: boolean;
     alcohol: boolean;
