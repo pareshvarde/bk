@@ -100,7 +100,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutAlign="center center">
+        <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
           <button mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
             SAVE
           </button>
@@ -108,7 +108,7 @@
             CANCEL
           </button>
         </div>
-        <div *ngIf="!model.matrimonialID" fxLayout="row" fxLayoutAlign="center center">
+        <div *ngIf="!editMode" fxLayout="row" fxLayoutAlign="center center">
           <button *ngIf="model.canEdit" mat-raised-button color="accent" class="submit-button" aria-label="EDIT">
             EDIT
           </button>
