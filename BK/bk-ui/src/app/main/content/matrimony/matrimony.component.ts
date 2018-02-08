@@ -75,5 +75,27 @@ export class MatrimonyComponent implements OnInit {
   initializeComponent(){
     console.log(this.MARITAL_STATUS_DATA_LOCAL);
     this.model = new MatrimonyModel();
+
+    if (this.matrimonyId > 0)
+      this.loadMatrimony();
+  }
+
+  loadMatrimony(){
+
+  }
+
+  edit(){
+    this.editMode = true;
+  }
+
+  cancelEdit(){
+    this.editMode = false;    
+
+    if (!this.matrimonyId)
+      this.back();
+  }
+
+  back(){
+    this.location.back();
   }
 }
