@@ -161,22 +161,14 @@
           </mat-form-field>
         </div>
 
-        <div *ngIf="(editMode || addMode)" fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutAlign="center center">
           <button (click)="save()" mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
             SAVE
           </button>
           <button (click)="cancelEdit()" mat-raised-button class="submit-button" aria-label="CANCEL">
             CANCEL
           </button>
-        </div>
-        <div *ngIf="!editMode && !addMode" fxLayout="row" fxLayoutAlign="center center">
-          <button *ngIf="model.canEdit" mat-raised-button color="accent" class="submit-button" aria-label="EDIT">
-            EDIT
-          </button>
-          <button (click)="back()" mat-raised-button class="submit-button" aria-label="CANCEL">
-            BACK
-          </button>
-        </div>
+        </div>        
       </form>
     </div>
   </div>

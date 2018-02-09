@@ -172,8 +172,8 @@
               <b>Name</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <a *ngIf="member.matrimonyId" [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
-              <span *ngIf="!member.matrimonyId">{{member.name}}</span>
+              <a *ngIf="member.matrimonialId" [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
+              <span *ngIf="!member.matrimonialId">{{member.name}}</span>
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="age">

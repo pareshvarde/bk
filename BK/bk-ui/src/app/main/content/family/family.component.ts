@@ -224,7 +224,27 @@ export class FamilyComponent implements OnInit {
     );
   }
 
-  deleteMatrimony(memberId: number, name: string) {
+  
+  deleteMatrimony(memberId: number, name: string)
+  {    
+    this._confirmation.create('', "Are you sure you want to remove matrimony profile of '" + name + "'?").subscribe(
+      (ans: ResolveEmit) => {
 
+        if (!ans.resolved)
+          return;
+
+        this.dataService.deleteMatrimony(memberId).subscribe(
+          (res) => {
+            this.alertService.success("Matrimony profile has been removed");            
+            this.loadFamily();
+          },
+          (err) => {
+            if (err.errors)
+              this.alertService.error('', err.errors[0]);
+            else
+              this.alertService.error('', err);
+          }
+        );
+      })
   }
 }
