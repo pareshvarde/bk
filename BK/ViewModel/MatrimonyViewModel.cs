@@ -61,8 +61,5 @@ namespace BK.ViewModel
 
         [JsonProperty("profileText")]
         public string ProfileText  { get; set; }
-
-        [JsonProperty("canEdit")]
-        public string CanEdit { get; set; }
     }
 }
