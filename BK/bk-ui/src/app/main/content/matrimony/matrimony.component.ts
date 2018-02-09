@@ -36,7 +36,7 @@ export class MatrimonyComponent implements OnInit {
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
     
       this.route.params.subscribe(params => {
-        if (params.familyId > 0)
+        if (params.memberId > 0)
           this.memberId = params.memberId;
         else
           this.memberId = null;
@@ -78,10 +78,41 @@ export class MatrimonyComponent implements OnInit {
 
     if (this.matrimonyId > 0)
       this.loadMatrimony();
+
+    if (!this.matrimonyId){
+      this.addMode = true;
+      this.model.memberId = this.memberId;
+    }
   }
 
   loadMatrimony(){
+    return this.dataService.getMatrimony(this.memberId).subscribe(
+      (res) => {
+        this.model = res.result;        
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );
+  }
 
+  save(){
+    this.dataService.saveMatrimony(this.model).subscribe(
+      (res) => {
+        this.alertService.success("Matrimony profile has been updated.");
+        this.matrimonyForm.markAsPristine();
+        this.cancelEdit();
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );
   }
 
   edit(){
@@ -91,7 +122,7 @@ export class MatrimonyComponent implements OnInit {
   cancelEdit(){
     this.editMode = false;    
 
-    if (!this.matrimonyId)
+    if (this.addMode)
       this.back();
   }
 

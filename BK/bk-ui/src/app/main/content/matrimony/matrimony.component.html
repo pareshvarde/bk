@@ -5,7 +5,7 @@
 
         <div fxLayout="row" fxLayoutWrap>
           <mat-form-field>
-            <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.maternalNukhId" formControlName="maternalNukhId">
+            <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.maternalNukhId" formControlName="maternalNukhId" bkAutofocus>
               <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
                 {{ n.nukh }}
               </mat-option>
@@ -161,19 +161,19 @@
           </mat-form-field>
         </div>
 
-        <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
-          <button mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
+        <div *ngIf="(editMode || addMode)" fxLayout="row" fxLayoutAlign="center center">
+          <button (click)="save()" mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
             SAVE
           </button>
-          <button mat-raised-button class="submit-button" aria-label="CANCEL">
+          <button (click)="cancelEdit()" mat-raised-button class="submit-button" aria-label="CANCEL">
             CANCEL
           </button>
         </div>
-        <div *ngIf="!editMode" fxLayout="row" fxLayoutAlign="center center">
+        <div *ngIf="!editMode && !addMode" fxLayout="row" fxLayoutAlign="center center">
           <button *ngIf="model.canEdit" mat-raised-button color="accent" class="submit-button" aria-label="EDIT">
             EDIT
           </button>
-          <button mat-raised-button class="submit-button" aria-label="CANCEL">
+          <button (click)="back()" mat-raised-button class="submit-button" aria-label="CANCEL">
             BACK
           </button>
         </div>
