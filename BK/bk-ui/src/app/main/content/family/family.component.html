@@ -138,7 +138,7 @@
               <b>Married</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <mat-checkbox disabled=true [checked]="member.married"></mat-checkbox>              
+              <mat-checkbox disabled=true [checked]="member.married"></mat-checkbox>
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="relation">
@@ -153,7 +153,7 @@
               <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button >
+              <button *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button>
                 <mat-icon>mode_edit</mat-icon>
               </button>
             </mat-cell>
@@ -164,7 +164,7 @@
       </div>
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
-          <span class="mat-title famiyMemberHeader">Matrimony</span>          
+          <span class="mat-title famiyMemberHeader">Matrimony</span>
         </div>
         <mat-table *ngIf="matrimonyDatasource && matrimonyDatasource.filteredData.length > 0" #table [dataSource]="matrimonyDatasource">
           <ng-container matColumnDef="name">
@@ -173,31 +173,14 @@
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
               <a *ngIf="member.matrimonialExists" [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
-              <span *ngIf="!member.matrimonialExists">{{member.name}}</span>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="age">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Age</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.age}} Years</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="relation">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Relation</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let member">
+              <span *ngIf="!member.matrimonialExists">{{member.name}} ({{member.age}} Years)</span>
               <button *ngIf="member.canEdit && member.matrimonialExists" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'edit']" mat-icon-button >
+              <button *ngIf="member.canEdit && member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'edit']" mat-icon-button>
                 <mat-icon>mode_edit</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && !member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'add']" mat-icon-button >
+              <button *ngIf="member.canEdit && !member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'add']" mat-icon-button>
                 <mat-icon>add_circle</mat-icon>
               </button>
             </mat-cell>
@@ -206,8 +189,8 @@
           <mat-row *matRowDef="let row; columns: matriDisplayedColumns;"></mat-row>
         </mat-table>
         <div *ngIf="!matrimonyDatasource || matrimonyDatasource.filteredData.length === 0">
-          <div fxLayout="row" fxLayoutAlign="start center">You do not have any member in family eligible for matrimonial profile</div>          
-          <div fxLayout="row" fxLayoutAlign="start center">Only un married, adult and alive members are eligible</div>          
+          <div fxLayout="row" fxLayoutAlign="start center">You do not have any member in family eligible for matrimonial profile</div>
+          <div fxLayout="row" fxLayoutAlign="start center">Only un married, adult and alive members are eligible</div>
         </div>
       </div>
     </div>

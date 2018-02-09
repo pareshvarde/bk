@@ -42,7 +42,7 @@ export class FamilyComponent implements OnInit {
   }
 
   displayedColumns = ['memberId', 'name', 'age', 'married', 'relation', 'actions'];
-  matriDisplayedColumns = ['name', 'age', 'relation', 'actions'];
+  matriDisplayedColumns = ['name'];
 
   ngOnInit() {
     this.familyForm = new FormGroup({
