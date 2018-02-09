@@ -41,7 +41,7 @@
 
         <div fxLayout="row" fxLayoutWrap>
           <mat-form-field>
-            <mat-select placeholder="Body" [(ngModel)]="model.bodyTypeID" formControlName="bodyTypeId">
+            <mat-select placeholder="Body" [(ngModel)]="model.bodyTypeId" formControlName="bodyTypeId">
               <mat-option *ngFor="let n of BODYTYPE_DATA_LOCAL" [value]="n.id">
                 {{ n.type }}
               </mat-option>
