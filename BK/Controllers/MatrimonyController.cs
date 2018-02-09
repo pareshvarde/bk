@@ -54,9 +54,9 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
-                if (!CanEditMember(fmAssociation, memberId))
-                    return BadRequest("You do not have permission to delete this record");
+                //List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
+                //if (!CanEditMember(fmAssociation, memberId))
+                //    return BadRequest("You do not have permission to delete this record");
 
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == memberId);
                 if (mat == null)
@@ -75,22 +75,23 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
-                if (!CanEditMember(fmAssociation, model.MemberId))
-                    return BadRequest("You do not have permission to udpate this record");
+                //List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
+                //if (!CanEditMember(fmAssociation, model.MemberId))
+                //    return BadRequest("You do not have permission to udpate this record");
 
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == model.MemberId); ;
 
                 if (mat != null)
                 {                                        
                     mat.ModifiedBy = LoggedInMemberId;
-                    mat.ModifiedOn = DateTime.Now;
+                    mat.ModifiedOn = DateTime.Now;                    
                 }
                 else
                 {
                     mat = new Matrimonial();
                     mat.CreatedBy = LoggedInMemberId;
                     mat.CreatedOn = DateTime.Now;
+                    mat.MemberID = model.MemberId;
                     context.Matrimonials.Add(mat);
                 }
 
@@ -103,8 +104,7 @@ namespace BK.Controllers
                 mat.Language = model.Language;
                 mat.Mangal = model.Mangal;
                 mat.MaritalStatusID = model.MaritalStatusId;
-                mat.MaternalNukhID = model.MaternalNukhId;
-                mat.MemberID = model.MemberId;
+                mat.MaternalNukhID = model.MaternalNukhId;                
                 mat.MonthlyIncome = model.MonthlyIncome;
                 mat.OwnHome = model.OwnHome;
                 mat.ProfileText = model.ProfileText;

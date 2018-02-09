@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { bkAuthService } from '../../services/auth-service';
 import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
 import { RELATION_TYPES_DATA } from '../../data/relations';
+import { OCCUPATIONS_DATA } from '../../data/occupations';
 
 @Component({
   selector: 'app-member',
@@ -31,6 +32,7 @@ export class MemberComponent implements OnInit {
   editMode: boolean;
   addMode: boolean;
   existingAdd: boolean;
+  readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
@@ -69,7 +71,8 @@ export class MemberComponent implements OnInit {
       married: new FormControl('', null),
       educationLevel: new FormControl('', null),
       educationField: new FormControl('', null),
-      companyName: new FormControl('', null),
+      occupationId: new FormControl('', null),
+      companyName: new FormControl('', null),      
       jobTitle: new FormControl('', null),
       facebookHandle: new FormControl('', [UniversalValidators.noWhitespace]),
       instagramHandle: new FormControl('', [UniversalValidators.noWhitespace]),

@@ -64,6 +64,7 @@ namespace BK.Controllers
                     DeathPlace = member.DeathPlace,
                     EducationLevel = member.EducationLevel,
                     EducationField = member.EducationField,
+                    OccupationId = member.OccupationID,
                     CompanyName = member.CompanyName,
                     JobTitle = member.JobTitle,
                     InstagramHandle = member.InstagramHandle,
@@ -127,6 +128,7 @@ namespace BK.Controllers
                 member.FirstName = model.FirstName;
                 member.Gender = model.Gender;
                 member.InstagramHandle = model.InstagramHandle;
+                member.OccupationID = model.OccupationId;
                 member.JobTitle = model.JobTitle;
                 member.LastName = model.LastName;
                 member.NickName = model.NickName;

@@ -59,6 +59,9 @@ namespace BK.ViewModel
         [JsonProperty("educationField")]
         public string EducationField { get; set; }
 
+        [JsonProperty("occupationId")]
+        public int OccupationId { get; set; }
+
         [JsonProperty("companyName")]
         public string CompanyName { get; set; }
 

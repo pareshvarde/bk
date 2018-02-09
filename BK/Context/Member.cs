@@ -35,6 +35,7 @@ namespace BK.Context
         public bool Married { get; set; }
         public string EducationLevel { get; set; }
         public string EducationField { get; set; }
+        public int OccupationID { get; set; }
         public string CompanyName { get; set; }
         public string JobTitle { get; set; }
         public string EmailAddress { get; set; }

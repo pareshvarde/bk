@@ -10,11 +10,11 @@
         <EntityTypeShape EntityType="bkModel.lkRelationType" Width="1.5" PointX="3" PointY="12.875" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Families" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" />
-        <EntityTypeShape EntityType="bkModel.Member" Width="1.5" PointX="0.75" PointY="3" />
+        <EntityTypeShape EntityType="bkModel.Matrimonial" Width="1.5" PointX="3" PointY="15.875" />
+        <EntityTypeShape EntityType="bkModel.Member" Width="1.5" PointX="0.75" PointY="7.625" />
         <AssociationConnector Association="bkModel.FK_Families_HeadOfFamily" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Members" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Related" />
-        <EntityTypeShape EntityType="bkModel.Matrimonial" Width="1.5" PointX="3" PointY="15.875" />
         <AssociationConnector Association="bkModel.FK_Matrimonials_Members" />
       </Diagram>
     </edmx:Diagrams>

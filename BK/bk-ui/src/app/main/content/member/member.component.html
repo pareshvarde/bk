@@ -134,6 +134,14 @@
 
           <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
+              <mat-select placeholder="Occupation" [(ngModel)]="memberModel.occupationId" formControlName="occupationId">
+                <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
+                  {{ n.occupation }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
               <input matInput [(ngModel)]="memberModel.companyName" placeholder="Company Name" formControlName="companyName">
             </mat-form-field>
 
@@ -217,7 +225,7 @@
           <span fxLayout="row" class="mat-subheading-1">Gender: {{searchMemberModel.gender}}</span>
           <span fxLayout="row" class="mat-subheading-1">Date Of Birth: {{searchMemberModel.dob | amDateFormat:'LL'}}</span>
 
-          <div fxLayout="row" fxLayoutWrap>            
+          <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
               <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId">
                 <mat-option *ngFor="let n of getRelations()" [value]="n.relationTypeId">

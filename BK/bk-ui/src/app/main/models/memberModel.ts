@@ -15,6 +15,7 @@ export class MemberModel {
     married: boolean;
     educationLevel: string;
     educationField: string;
+    occupationId: number;
     companyName: string;
     jobTitle: string;
     instagramHandle: string;

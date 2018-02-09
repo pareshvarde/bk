@@ -12,6 +12,7 @@
     [Married]         BIT              CONSTRAINT [DF_Members_Married] DEFAULT ((0)) NOT NULL,
     [EducationLevel]  NVARCHAR (50)    NULL,
     [EducationField]  NVARCHAR (50)    NULL,
+    [OccupationID]    INT              NOT NULL,
     [CompanyName]     NVARCHAR (50)    NULL,
     [JobTitle]        NVARCHAR (50)    NULL,
     [EmailAddress]    NVARCHAR (100)   NULL,
@@ -30,6 +31,8 @@
     [ModifiedBy]      INT              NULL,
     CONSTRAINT [PK_FamilyMembers_1] PRIMARY KEY CLUSTERED ([MemberID] ASC)
 );
+
+
 
 
 

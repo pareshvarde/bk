@@ -23,6 +23,7 @@ import { ResolveEmit } from '@jaspero/ng-confirmations';
 export class MatrimonyComponent implements OnInit {
 
   memberId: number;  
+  addMode: boolean;
   model: MatrimonyModel;
   matrimonyForm: FormGroup;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
@@ -41,6 +42,8 @@ export class MatrimonyComponent implements OnInit {
       else
         this.memberId = null;      
 
+      this.addMode = params.action === 'add'
+      
       this.initializeComponent();
     });
   }
@@ -71,7 +74,10 @@ export class MatrimonyComponent implements OnInit {
     console.log(this.MARITAL_STATUS_DATA_LOCAL);
     this.model = new MatrimonyModel();
 
-    this.loadMatrimony();    
+    if (!this.addMode)
+      this.loadMatrimony();   
+    else
+      this.model.memberId = this.memberId; 
   }
 
   loadMatrimony() {
