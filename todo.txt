@@ -13,7 +13,6 @@ ModifiedBy
 ModifiedOn
 
 401 redirect
-angular-font-awesome
 sign up captcha
 
 birthday wish email
@@ -24,13 +23,3 @@ edits by minor?
 
 optimization
 =============
-if alive, not married, adult allow matrimony 
-
-Marital Status:
-	Never Married
-	Awaiting Divorce
-	Divorced
-	Widowed
-	Annulled
-	
-manglik non-manglik aanshik manglik
