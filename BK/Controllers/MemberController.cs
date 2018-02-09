@@ -291,7 +291,7 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                if (!CanApproveMember(memberId))
+                if (!CanEditMember(memberId))
                     return BadRequest("You do not have rights to approve this member");
 
                 FamilyMemberAssociation fmAssociation = context.FamilyMemberAssociations.FirstOrDefault(x => x.MemberId == memberId && x.FamilyId == familyId && !x.Approved);
@@ -314,7 +314,7 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                if (!CanApproveMember(memberId))
+                if (!CanEditMember(memberId))
                     return BadRequest("You do not have rights to approve this member");
 
                 FamilyMemberAssociation fmAssociation = context.FamilyMemberAssociations.FirstOrDefault(x => x.MemberId == memberId && x.FamilyId == familyId && !x.Approved);

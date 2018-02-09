@@ -50,7 +50,7 @@ namespace BK.Controllers
             }
         }
 
-        protected bool CanApproveMember(int memberId)
+        protected bool CanEditMember(int memberId)
         {
             using (bkContext context = new bkContext())
             {

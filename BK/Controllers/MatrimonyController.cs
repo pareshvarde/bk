@@ -53,10 +53,9 @@ namespace BK.Controllers
         public IHttpActionResult Delete(int memberId)
         {
             using (bkContext context = new bkContext())
-            {
-                //List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
-                //if (!CanEditMember(fmAssociation, memberId))
-                //    return BadRequest("You do not have permission to delete this record");
+            {                
+                if (!CanEditMember(memberId))
+                    return BadRequest("You do not have permission to delete this record");
 
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == memberId);
                 if (mat == null)
@@ -75,9 +74,8 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                //List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
-                //if (!CanEditMember(fmAssociation, model.MemberId))
-                //    return BadRequest("You do not have permission to udpate this record");
+                if (!CanEditMember(model.MemberId))
+                    return BadRequest("You do not have permission to udpate this record");
 
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == model.MemberId); ;
 
