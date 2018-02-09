@@ -10,10 +10,7 @@ namespace BK.ViewModel
     {
         [JsonProperty("memberId")]
         public int MemberId { get; set; }
-
-        [JsonProperty("matrimonialID")]
-        public int? MatrimonyId { get; set; }
-
+        
         [JsonProperty("maternalNukhId")]
         public int MaternalNukhId { get; set; }
 

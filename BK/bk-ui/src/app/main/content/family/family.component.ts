@@ -97,7 +97,7 @@ export class FamilyComponent implements OnInit {
         this.model = res.result;
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
         this.matrimonyDatasource = new MatTableDataSource<FamilyMemberModel>(this.model.members.filter(x => {
-          if (x.matrimonialId > 0)
+          if (x.matrimonialExists > 0)
             return true;
 
           if (!x.married && x.gender == 'F' && x.alive && x.age > 17)

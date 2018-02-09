@@ -17,7 +17,7 @@ BEGIN
 		lkm.FirstName rFirstName,
 		lkm.LastName rLastName,
 		lk.RelationType,
-		mat.MatrimonialID
+		CAST(CASE WHEN mat.MemberID IS NOT NULL THEN 1 ELSE 0 END AS BIT) AS MatrimonialExists		
 	FROM
 		Members m 
 		JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID

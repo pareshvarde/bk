@@ -22,8 +22,7 @@ export class MemberModel {
     twitterHandle: string;
     relationTypeId:number;
     relatedMemberId: number;
-    familyId: number;
-    matrimonialId: number;
+    familyId: number;    
     canEdit: boolean;
 
     constructor() { }

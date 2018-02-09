@@ -22,16 +22,14 @@ import { ResolveEmit } from '@jaspero/ng-confirmations';
 })
 export class MatrimonyComponent implements OnInit {
 
-  memberId: number;
-  matrimonyId: number;
+  memberId: number;  
   model: MatrimonyModel;
   matrimonyForm: FormGroup;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   readonly MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
   readonly BODYTYPE_DATA_LOCAL = BODY_TYPE_DATA;
-  readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;
-  addMode: boolean;
+  readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;  
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, 
@@ -41,12 +39,7 @@ export class MatrimonyComponent implements OnInit {
       if (params.memberId > 0)
         this.memberId = params.memberId;
       else
-        this.memberId = null;
-
-      if (params.matrimonyId > 0)
-        this.matrimonyId = params.matrimonyId;
-      else
-        this.matrimonyId = null;
+        this.memberId = null;      
 
       this.initializeComponent();
     });
@@ -78,13 +71,7 @@ export class MatrimonyComponent implements OnInit {
     console.log(this.MARITAL_STATUS_DATA_LOCAL);
     this.model = new MatrimonyModel();
 
-    if (this.matrimonyId > 0)
-      this.loadMatrimony();
-
-    if (!this.matrimonyId) {
-      this.addMode = true;
-      this.model.memberId = this.memberId;
-    }
+    this.loadMatrimony();    
   }
 
   loadMatrimony() {

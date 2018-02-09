@@ -83,7 +83,7 @@ export const bkRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: "matrimony/:memberId/:matrimonyId",
+        path: "matrimony/:memberId",
         component: MatrimonyComponent,
         canActivate: [AuthGuard]
     },

@@ -172,8 +172,8 @@
               <b>Name</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <a *ngIf="member.matrimonialId" [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
-              <span *ngIf="!member.matrimonialId">{{member.name}}</span>
+              <a *ngIf="member.matrimonialExists" [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
+              <span *ngIf="!member.matrimonialExists">{{member.name}}</span>
             </mat-cell>
           </ng-container>
           <ng-container matColumnDef="age">
@@ -191,13 +191,13 @@
           <ng-container matColumnDef="actions">
             <mat-header-cell *matHeaderCellDef></mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <button *ngIf="member.canEdit && member.matrimonialId" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
+              <button *ngIf="member.canEdit && member.matrimonialExists" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && member.matrimonialId" [routerLink]="['/matrimony/',member.memberId, member.matrimonialId]" mat-icon-button >
+              <button *ngIf="member.canEdit && member.matrimonialExists" [routerLink]="['/matrimony/',member.memberId]" mat-icon-button >
                 <mat-icon>mode_edit</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && !member.matrimonialId" [routerLink]="['/matrimony/',member.memberId, 0]" mat-icon-button >
+              <button *ngIf="member.canEdit && !member.matrimonialExists" [routerLink]="['/matrimony/',member.memberId, 0]" mat-icon-button >
                 <mat-icon>add_circle</mat-icon>
               </button>
             </mat-cell>

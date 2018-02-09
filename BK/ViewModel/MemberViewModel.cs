@@ -81,10 +81,7 @@ namespace BK.ViewModel
         public int? RelatedMemberId { get; set; }
 
         [JsonProperty("familyId")]
-        public int? FamilyId { get; set; }
-
-        [JsonProperty("matrimonialId")]
-        public int? MatrimonialId { get; set; }
+        public int? FamilyId { get; set; }    
 
         [JsonProperty("canEdit")]
         public bool canEdit { get; set; }

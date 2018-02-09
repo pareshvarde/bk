@@ -1,5 +1,4 @@
 export class MatrimonyModel {
-    matrimonialId: number;
     memberId: number;
     maternalNukhId: number;
     birthTime: string;
@@ -19,5 +18,5 @@ export class MatrimonyModel {
     language: number;
     profileText: string;
     expiresOn: Date;
-    canEdit: boolean;
+    canEdit: boolean;    
 }

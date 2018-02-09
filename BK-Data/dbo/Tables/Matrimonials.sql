@@ -1,5 +1,4 @@
 ﻿CREATE TABLE [dbo].[Matrimonials] (
-    [MatrimonialID]    INT            IDENTITY (1, 1) NOT NULL,
     [MemberID]         INT            NOT NULL,
     [MaternalNukhID]   INT            NOT NULL,
     [BirthTime]        TIME (7)       NULL,
@@ -14,7 +13,7 @@
     [Disability]       BIT            CONSTRAINT [DF_Matrimonials_Disability] DEFAULT ((0)) NOT NULL,
     [Vegetarian]       BIT            CONSTRAINT [DF_Matrimonials_Vegetarian] DEFAULT ((1)) NOT NULL,
     [OwnHome]          BIT            CONSTRAINT [DF_Matrimonials_OwnHome] DEFAULT ((0)) NOT NULL,
-    [Mangal]          CHAR (1)       CONSTRAINT [DF_Matrimonials_Manglik] DEFAULT ('N') NOT NULL,
+    [Mangal]           CHAR (1)       CONSTRAINT [DF_Matrimonials_Manglik] DEFAULT ('N') NOT NULL,
     [MonthlyIncome]    INT            NOT NULL,
     [Language]         NVARCHAR (50)  NULL,
     [ProfileText]      NVARCHAR (255) NULL,
@@ -23,9 +22,11 @@
     [ModifiedOn]       DATETIME2 (7)  NULL,
     [ModifiedBy]       INT            NULL,
     [ExpiresOn]        DATETIME2 (7)  NULL,
-    CONSTRAINT [PK_Matrimonials] PRIMARY KEY CLUSTERED ([MatrimonialID] ASC),
+    CONSTRAINT [PK_Matrimonials_1] PRIMARY KEY CLUSTERED ([MemberID] ASC),
     CONSTRAINT [FK_Matrimonials_Members] FOREIGN KEY ([MemberID]) REFERENCES [dbo].[Members] ([MemberID])
 );
+
+
 
 
 

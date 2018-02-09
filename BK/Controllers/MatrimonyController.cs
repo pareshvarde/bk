@@ -34,8 +34,7 @@ namespace BK.Controllers
                 model.Language = mat.Language;
                 model.Mangal = mat.Mangal;
                 model.MaritalStatusId = mat.MaritalStatusID;
-                model.MaternalNukhId = mat.MaternalNukhID;
-                model.MatrimonyId = mat.MatrimonialID;
+                model.MaternalNukhId = mat.MaternalNukhID;                
                 model.MemberId = mat.MemberID;
                 model.MonthlyIncome = mat.MonthlyIncome;
                 model.OwnHome = mat.OwnHome;
@@ -55,6 +54,10 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
+                List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
+                if (!CanEditMember(fmAssociation, memberId))
+                    return BadRequest("You do not have permission to delete this record");
+
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == memberId);
                 if (mat == null)
                     return BadRequest("Matrimony profile cannot be loaded");
@@ -72,13 +75,16 @@ namespace BK.Controllers
         {
             using (bkContext context = new bkContext())
             {
-                Matrimonial mat = null;
+                List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId).ToList();
+                if (!CanEditMember(fmAssociation, model.MemberId))
+                    return BadRequest("You do not have permission to udpate this record");
 
-                if (model.MatrimonyId.HasValue)
-                {
-                    mat = context.Matrimonials.FirstOrDefault(x => x.MatrimonialID == model.MatrimonyId);
-                    if (mat == null)
-                        return BadRequest("Matrimony profile cannot be loaded");
+                Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == model.MemberId); ;
+
+                if (mat != null)
+                {                                        
+                    mat.ModifiedBy = LoggedInMemberId;
+                    mat.ModifiedOn = DateTime.Now;
                 }
                 else
                 {
@@ -108,12 +114,9 @@ namespace BK.Controllers
                 mat.Weight = model.Weight;
 
                 context.SaveChanges();
-
             }
 
             return Ok();
         }
-
-
     }
 }
