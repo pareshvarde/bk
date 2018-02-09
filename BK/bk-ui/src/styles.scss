@@ -1,2 +1,7 @@
 // Import Fuse main library
 @import "app/core/scss/core";
+
+//this to fix underline hidden issue when browser zoom level changes
+.mat-form-field-underline{
+    transform: perspective(1px);
+}
