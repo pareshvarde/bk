@@ -242,6 +242,9 @@ namespace BK.Controllers
                 {
                     try
                     {
+                        if (context.Families.Any(x => x.FamilyID == familyId && x.HeadOfFamilyID == memberId))
+                            return BadRequest("Head Of Family cannot be deleted");
+
                         context.bk_DeleteMember(familyId, memberId);
                         tnx.Commit();
                     }
