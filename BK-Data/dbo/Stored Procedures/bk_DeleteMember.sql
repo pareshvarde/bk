@@ -28,6 +28,7 @@ BEGIN
 	IF (@ApprovedCount = 0)
 	BEGIN
 		DELETE FROM Matrimonials WHERE MemberID = @MemberID
+		UPDATE FamilyMemberAssociation SET RelatedId = NULL, RelationTypeId = NULL WHERE RelatedId = @MemberID
 		DELETE FROM Members WHERE MemberID = @MemberID
 	END
 			
