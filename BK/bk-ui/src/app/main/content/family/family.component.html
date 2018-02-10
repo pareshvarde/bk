@@ -92,14 +92,17 @@
               CANCEL
             </button>
           </div>
-          <div *ngIf="!editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button *ngIf="!editMode && model.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
               EDIT
             </button>
-            <button mat-raised-button [routerLink]="['/family/fork', this.familyId]" class="submit-button" aria-label="FORK">
+            <button *ngIf="!editMode" mat-raised-button (click)="back()" class="submit-button" aria-label="BACK">
+              BACK
+            </button>
+            <button *ngIf="!editMode && model.canEdit" mat-raised-button [routerLink]="['/family/fork', this.familyId]" class="submit-button" aria-label="FORK">
               FORK
             </button>
-            <button mat-raised-button (click)="delete()" class="submit-button" aria-label="DELETE">
+            <button *ngIf="!editMode && model.canEdit" mat-raised-button (click)="delete()" class="submit-button" aria-label="DELETE">
               DELETE
             </button>
           </div>

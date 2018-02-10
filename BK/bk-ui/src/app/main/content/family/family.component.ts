@@ -9,6 +9,7 @@ import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { CATEGORIES_DATA } from '../../data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-family',
@@ -29,7 +30,7 @@ export class FamilyComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService,
-    private _confirmation: ConfirmationService) {
+    private _confirmation: ConfirmationService,  private location: Location) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -246,5 +247,9 @@ export class FamilyComponent implements OnInit {
           }
         );
       })
+  }
+
+  back(){
+    this.location.back();
   }
 }
