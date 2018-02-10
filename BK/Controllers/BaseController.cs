@@ -57,7 +57,7 @@ namespace BK.Controllers
                 List<int> fma1 = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId && x.Approved).Select(x => x.FamilyId).ToList();
                 List<int> fma2 = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId && x.Approved).Select(x => x.FamilyId).ToList();
 
-                return fma2.Intersect(fma2).Any();                               
+                return fma1.Intersect(fma2).Any();                               
             }
         }
 
