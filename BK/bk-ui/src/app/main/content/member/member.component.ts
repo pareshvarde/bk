@@ -249,6 +249,7 @@ export class MemberComponent implements OnInit {
 
   cancelEdit() {
     this.editMode = false;
+    this.memberForm.disable();
     
     if (!this.memberModel.memberId)
       this.back();
