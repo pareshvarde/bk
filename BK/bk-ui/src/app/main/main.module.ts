@@ -39,6 +39,7 @@ import { CallbackPipe } from './pipes/callback.pipe';
 import { MatrimonyComponent } from './content/matrimony/matrimony.component';
 import { bkAuthService } from './services/auth-service';
 import { bkDataService } from './services/bk-data.service';
+import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.component';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { bkDataService } from './services/bk-data.service';
         MemberComponent,
         ForkComponent,
         CallbackPipe,
-        MatrimonyComponent 
+        MatrimonyComponent,
+        MatrimonyViewComponent 
     ],
     providers:[
         ConfirmationService,
