@@ -112,10 +112,10 @@
             </div>
             <div *ngIf="model.canEdit" fxLayout="row" fxLayoutAlign="center center">
               <button mat-raised-button (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK" [disabled]="forkForm.invalid">
-                FORK
+                <mat-icon>device_hub</mat-icon>&nbsp;FORK
               </button>
               <button mat-raised-button (click)="cancel()" class="submit-button" aria-label="CANCEL">
-                CANCEL
+                <mat-icon>cancel</mat-icon>&nbsp;CANCEL
               </button>
             </div>         
           </form>

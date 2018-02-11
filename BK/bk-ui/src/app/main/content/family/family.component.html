@@ -86,24 +86,24 @@
           </div>
           <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
-              SAVE
+              <mat-icon>save</mat-icon>&nbsp;SAVE
             </button>
             <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
-              CANCEL
+              <mat-icon>cancel</mat-icon>&nbsp;CANCEL
             </button>
           </div>
           <div fxLayout="row" fxLayoutAlign="center center">
             <button *ngIf="!editMode && model.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
-              EDIT
+              <mat-icon>edit</mat-icon>&nbsp;EDIT
             </button>
             <button *ngIf="!editMode" mat-raised-button (click)="back()" class="submit-button" aria-label="BACK">
-              BACK
+              <mat-icon>backspace</mat-icon>&nbsp;BACK
             </button>
             <button *ngIf="!editMode && model.canEdit" mat-raised-button [routerLink]="['/family/fork', this.familyId]" class="submit-button" aria-label="FORK">
-              FORK
+              <mat-icon>device_hub</mat-icon>&nbsp;FORK
             </button>
             <button *ngIf="!editMode && model.canEdit" mat-raised-button (click)="delete()" class="submit-button" aria-label="DELETE">
-              DELETE
+              <mat-icon>delete_forever</mat-icon>&nbsp;DELETE
             </button>
           </div>
         </form>

@@ -21,7 +21,7 @@
       </div>
       <div *ngIf="addMode && existingAdd == null" fxLayout="row" fxLayoutAlign="center center">
         <button mat-raised-button (click)="back()" color="accent" class="submit-button" aria-label="CANCEL">
-          BACK
+          <mat-icon>cancel</mat-icon>&nbsp;CANCEL
         </button>
       </div>
       <div *ngIf="existingAdd === false || !addMode">
@@ -166,21 +166,21 @@
 
           <div *ngIf="(editMode || addMode) && memberModel.canEdit" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
-              SAVE
+              <mat-icon>save</mat-icon>&nbsp;SAVE
             </button>
             <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
-              CANCEL
+              <mat-icon>cancel</mat-icon>&nbsp;CANCEL
             </button>
           </div>
           <div *ngIf="!editMode && !addMode" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
-              FAMILY
+              <mat-icon>group</mat-icon>&nbsp;FAMILY
             </button>
             <button *ngIf="memberModel.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
-              EDIT
+              <mat-icon>edit</mat-icon>&nbsp;EDIT
             </button>
             <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
-              BACK
+              <mat-icon>backspace</mat-icon>&nbsp;BACK
             </button>
           </div>
         </form>
@@ -213,10 +213,10 @@
 
           <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="searchForm.invalid">
-              SEARCH
+              <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>
             <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
-              CANCEL
+              <mat-icon>cancel</mat-icon>&nbsp;CANCEL
             </button>
           </div>
         </form>
@@ -245,7 +245,7 @@
 
           <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="ADD">
-              ADD
+              <mat-icon>add_box</mat-icon>&nbsp;ADD
             </button>
           </div>
         </div>
