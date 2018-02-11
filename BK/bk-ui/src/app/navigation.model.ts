@@ -72,22 +72,9 @@ export class NavigationModel
             {
                 'id'      : 'matrimony',
                 'title'   : 'Matrimony',
-                'type'    : 'collapse',
-                'icon'    : '',
-                'children': [
-                    {
-                        'id'   : 'searchProfile',
-                        'title': 'Search Profile',
-                        'type' : 'item',
-                        'url'  : '/pages/auth/login'
-                    },                                                  
-                    {
-                        'id'   : 'myProfile',
-                        'title': 'My Profile',
-                        'type' : 'item',
-                        'url'  : '/pages/auth/mail-confirm'
-                    }                   
-                ]
+                'type'    : 'item',
+                'url'     : 'directory',
+                'icon'    : 'wc',    
             }
         ];
     }
