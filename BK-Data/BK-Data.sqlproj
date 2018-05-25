@@ -75,7 +75,4 @@
     <Build Include="dbo\Stored Procedures\bk_DeleteFamily.sql" />
     <Build Include="dbo\Stored Procedures\bk_DeleteMember.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="BK-Data.refactorlog" />
-  </ItemGroup>
 </Project>
