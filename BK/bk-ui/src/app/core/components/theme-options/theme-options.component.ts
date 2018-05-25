@@ -1,9 +1,6 @@
 import { Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { style, animate, AnimationBuilder, AnimationPlayer } from '@angular/animations';
-import { Subscription } from 'rxjs/Subscription';
-import { FuseConfigService } from '../../services/config.service';
 import { fuseAnimations } from '../../animations';
-import { FuseNavigationService } from '../navigation/navigation.service';
 
 @Component({
     selector   : 'fuse-theme-options',
@@ -11,35 +8,22 @@ import { FuseNavigationService } from '../navigation/navigation.service';
     styleUrls  : ['./theme-options.component.scss'],
     animations : fuseAnimations
 })
-export class FuseThemeOptionsComponent implements OnInit, OnDestroy
+export class FuseThemeOptionsComponent implements OnInit
 {
     @ViewChild('openButton') openButton;
     @ViewChild('panel') panel;
     @ViewChild('overlay') overlay: ElementRef;
 
     public player: AnimationPlayer;
-    fuseSettings: any;
-
-    onSettingsChanged: Subscription;
 
     @HostBinding('class.bar-closed') barClosed: boolean;
 
     constructor(
-        private animationBuilder: AnimationBuilder,
-        private fuseConfig: FuseConfigService,
-        private navigationService: FuseNavigationService,
+        private animationBuilder: AnimationBuilder,        
         private renderer: Renderer2
     )
     {
-        this.barClosed = true;
-
-        this.onSettingsChanged =
-            this.fuseConfig.onSettingsChanged
-                .subscribe(
-                    (newSettings) => {
-                        this.fuseSettings = newSettings;
-                    }
-                );        
+        this.barClosed = true;          
     }
 
     ngOnInit()
@@ -47,11 +31,6 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
         this.renderer.listen(this.overlay.nativeElement, 'click', () => {
             this.closeBar();
         });
-    }
-
-    onSettingsChange()
-    {
-        this.fuseConfig.setSettings(this.fuseSettings);
     }
 
     closeBar()
@@ -82,10 +61,5 @@ export class FuseThemeOptionsComponent implements OnInit, OnDestroy
                 ]).create(this.panel.nativeElement);
 
         this.player.play();
-    }
-
-    ngOnDestroy()
-    {
-        this.onSettingsChanged.unsubscribe();
     }
 }
