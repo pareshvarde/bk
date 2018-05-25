@@ -23,3 +23,16 @@ edits by minor?
 
 optimization
 =============
+
+Directory Search
+=======================
+default search order by City
+
+search options
+	First Name
+	Last Name
+	Nukh
+	City
+	State
+	Email
+	Phone Number

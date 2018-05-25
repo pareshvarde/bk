@@ -10,6 +10,60 @@
         <mat-icon>close</mat-icon>
     </button>
 
+    <div class=".searchOptions">
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.firstName" placeholder="First Name">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.lastName" placeholder="Last Name">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <mat-select placeholder="Category" [(ngModel)]="searchParameter.categoryId" formControlName="categoryId">
+                    <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
+                        {{ n.category }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <mat-select placeholder="Nukh" [(ngModel)]="searchParameter.nukhId" formControlName="nukhId">
+                    <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
+                        {{ n.nukh }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.city" placeholder="City Name">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.state" placeholder="State Name">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.email" placeholder="Email Name">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutWrap>
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.phoneNumber" placeholder="Phone Number">
+            </mat-form-field>
+        </div>
+    </div>
+
     <div class="theme-options-panel-inner" fxLayout="column" fxLayoutAlign="start start">
         <mat-divider></mat-divider>
     </div>

@@ -1,13 +1,16 @@
-
-<ul class="meal-list">
-  <li *ngFor="let meal of meals | paginate: { itemsPerPage: 5, currentPage: page }">
+<div flexLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap>
+  <ul class="meal-list">
+    <li *ngFor="let meal of meals | paginate: { itemsPerPage: 5, currentPage: page }">
       {{ meal }}
-  </li>
-</ul>
-<div class="has-text-centered">
-  <pagination-controls class="my-pagination" (pageChange)="page = $event"></pagination-controls>
+    </li>
+  </ul>  
+</div>
+<div fxLayout="row" fxLayoutWrap>
+    <div class="has-text-centered">
+        <pagination-controls class="my-pagination" (pageChange)="page = $event"></pagination-controls>
+      </div>
 </div>
 
 <fuse-theme-options>
-
+  
 </fuse-theme-options>
