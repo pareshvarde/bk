@@ -24,7 +24,7 @@
 
         <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
-                <mat-select placeholder="Category" [(ngModel)]="searchParameter.categoryId" formControlName="categoryId">
+                <mat-select placeholder="Category" [(ngModel)]="searchParameter.categoryId">
                     <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
                         {{ n.category }}
                     </mat-option>
@@ -34,7 +34,7 @@
 
         <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
-                <mat-select placeholder="Nukh" [(ngModel)]="searchParameter.nukhId" formControlName="nukhId">
+                <mat-select placeholder="Nukh" [(ngModel)]="searchParameter.nukhId">
                     <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
                         {{ n.nukh }}
                     </mat-option>
@@ -44,7 +44,7 @@
 
         <div fxLayout="row" fxLayoutWrap>
             <mat-form-field>
-                <input matInput [(ngModel)]="searchParameter.city" placeholder="City Name">
+                <input matInput [(ngModel)]="searchParameter.city" placeholder="City">
             </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutWrap>

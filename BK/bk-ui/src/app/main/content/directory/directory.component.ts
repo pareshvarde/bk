@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Input} from "@angular/core";
 import { SearchParameter } from '../../models/searchParameter';
-import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
-import { CATEGORIES_DATA } from '../../data/categories';
 
 @Component({
   selector: 'app-directory',
@@ -15,9 +13,6 @@ export class DirectoryComponent implements OnInit {
     this.searchParameter = new SearchParameter();
   }
 
-  readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
-  readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
-  
   searchParameter: SearchParameter;
   meals: any[];
   page: number = 1;
