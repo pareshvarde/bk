@@ -40,6 +40,7 @@ import { MatrimonyComponent } from './content/matrimony/matrimony.component';
 import { bkAuthService } from './services/auth-service';
 import { bkDataService } from './services/bk-data.service';
 import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.component';
+import { DirectoryComponent } from './content/directory/directory.component';
 
 @NgModule({
     declarations: [
@@ -70,7 +71,8 @@ import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.
         ForkComponent,
         CallbackPipe,
         MatrimonyComponent,
-        MatrimonyViewComponent 
+        MatrimonyViewComponent,
+        DirectoryComponent 
     ],
     providers:[
         ConfirmationService,

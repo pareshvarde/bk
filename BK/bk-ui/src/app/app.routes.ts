@@ -17,6 +17,7 @@ import { AuthGuard } from './main/guards/auth-guard';
 import { ForkComponent } from './main/content/fork/fork.component';
 import { MatrimonyComponent } from './main/content/matrimony/matrimony.component';
 import { MatrimonyViewComponent } from './main/content/matrimony-view/matrimony-view.component';
+import { DirectoryComponent } from './main/content/directory/directory.component';
 
 export const bkRoutes: Routes = [
     {
@@ -92,6 +93,11 @@ export const bkRoutes: Routes = [
         path: "matrimony-view/:memberId",
         component: MatrimonyViewComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: "directory",
+        component: DirectoryComponent,
+        canActivate: [AuthGuard]        
     },
     {
         path      : '**',
