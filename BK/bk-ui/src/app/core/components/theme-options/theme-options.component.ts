@@ -1,9 +1,10 @@
-import { Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2, ViewChild, Input } from '@angular/core';
+import { Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { style, animate, AnimationBuilder, AnimationPlayer } from '@angular/animations';
 import { fuseAnimations } from '../../animations';
-import { SearchParameter } from '../../../main/models/searchParameter';
 import { CATEGORIES_DATA } from '../../../main/data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../../main/data/nukhsLookup';
+import { MemberSearchParameter } from '../../../main/models/memberSearchParameter';
+
 
 @Component({
     selector   : 'fuse-theme-options',
@@ -17,7 +18,9 @@ export class FuseThemeOptionsComponent implements OnInit
     @ViewChild('panel') panel;
     @ViewChild('overlay') overlay: ElementRef;
 
-    @Input() searchParameter: SearchParameter;
+    searchParameter: MemberSearchParameter;
+    @Output() performSearch = new EventEmitter<MemberSearchParameter>();
+    @Output() clearSearch = new EventEmitter<MemberSearchParameter>();
     readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
     readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
     
@@ -30,7 +33,8 @@ export class FuseThemeOptionsComponent implements OnInit
         private renderer: Renderer2
     )
     {
-        this.barClosed = true;          
+        this.barClosed = true;         
+        this.searchParameter = new MemberSearchParameter(); 
     }
 
     ngOnInit()
@@ -68,5 +72,14 @@ export class FuseThemeOptionsComponent implements OnInit
                 ]).create(this.panel.nativeElement);
 
         this.player.play();
+    }
+
+    search(){
+        this.performSearch.emit(this.searchParameter);
+    }
+
+    clear(){
+        this.searchParameter = new MemberSearchParameter();
+        this.clearSearch.emit(this.searchParameter);
     }
 }

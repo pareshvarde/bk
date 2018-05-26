@@ -41,7 +41,6 @@ import { bkAuthService } from './services/auth-service';
 import { bkDataService } from './services/bk-data.service';
 import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.component';
 import { DirectoryComponent } from './content/directory/directory.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
     declarations: [
@@ -90,8 +89,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
         FuseShortcutsModule,
         FuseSearchBarModule,
         MomentModule,
-        AuthModule,
-        NgxPaginationModule
+        AuthModule        
     ],
     exports     : [
         FuseMainComponent

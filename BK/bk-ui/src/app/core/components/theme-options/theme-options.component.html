@@ -63,10 +63,10 @@
             </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button color="accent" class="submit-button" aria-label="Search">
+            <button mat-raised-button color="accent" (click)="search()" class="submit-button" aria-label="Search">
                 <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>&nbsp;&nbsp;
-            <button mat-raised-button class="submit-button" aria-label="CLEAR">
+            <button mat-raised-button class="submit-button" (click)="clear()" aria-label="CLEAR">
                 <mat-icon>settings_backup_restore</mat-icon>&nbsp;CLEAR
             </button>
         </div>

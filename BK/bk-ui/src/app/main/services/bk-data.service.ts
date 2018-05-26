@@ -13,6 +13,7 @@ import { FamilyModel } from '../models/familyModel';
 import { AuthHttp } from 'angular2-jwt';
 import { MemberSearchBasicModel } from '../models/memberSearchBasicModel';
 import { MatrimonyModel } from '../models/matrimonyModel';
+import { MemberSearchParameter } from '../models/memberSearchParameter';
 
 @Injectable()
 export class bkDataService {
@@ -98,6 +99,12 @@ export class bkDataService {
     this.blockUI.start("Please wait...");
            
     return this.authHttp.post(this.API_URL + "member/save", model).map((res) =>{
+      return this.handleAPIResponse(res);
+    }).catch((error : any) => this.handleAPIError(error));
+  }
+
+  searchMember(model: MemberSearchParameter){
+    return this.authHttp.post(this.API_URL + "member/search", model).map((res) =>{
       return this.handleAPIResponse(res);
     }).catch((error : any) => this.handleAPIError(error));
   }

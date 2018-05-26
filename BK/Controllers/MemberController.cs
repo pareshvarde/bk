@@ -48,7 +48,8 @@ namespace BK.Controllers
 
                 List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
 
-                MemberViewModel vm = new MemberViewModel() {
+                MemberViewModel vm = new MemberViewModel()
+                {
                     MemberID = member.MemberID,
                     FirstName = member.FirstName,
                     LastName = member.LastName,
@@ -70,7 +71,7 @@ namespace BK.Controllers
                     InstagramHandle = member.InstagramHandle,
                     FacebookHandle = member.FacebookHandle,
                     TwitterHandle = member.TwitterHandle,
-                    Married = member.Married                    
+                    Married = member.Married
                 };
 
                 FamilyMemberAssociation fma = fmAssociation.FirstOrDefault(x => x.MemberId == memberId);
@@ -79,7 +80,7 @@ namespace BK.Controllers
                     vm.RelatedMemberId = fma.RelatedId;
                     vm.RelationTypeId = fma.RelationTypeId;
                 }
-                                
+
                 vm.canEdit = CanEditMember(fmAssociation, memberId);
 
                 return Ok(vm);
@@ -107,7 +108,7 @@ namespace BK.Controllers
                     member = context.Members.Where(x => x.MemberID == model.MemberID).FirstOrDefault();
                     if (member == null)
                         return BadRequest("Member record cannot be loaded. Please try again or contact Administrator for help");
-                }                
+                }
                 else
                 {
                     member = new Member();
@@ -137,22 +138,23 @@ namespace BK.Controllers
                 member.Married = model.Married;
 
                 if (model.FamilyId.HasValue)
-                {                    
+                {
                     FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
                     if (mAssociation != null)
                         context.FamilyMemberAssociations.Remove(mAssociation);
 
-                    member.FamilyMemberAssociations.Add(new FamilyMemberAssociation() {
+                    member.FamilyMemberAssociations.Add(new FamilyMemberAssociation()
+                    {
                         Approved = true,
                         FamilyId = model.FamilyId.Value,
                         RelatedId = model.RelatedMemberId,
                         RelationTypeId = model.RelationTypeId,
                         CreatedOn = DateTime.Now,
-                        CreatedBy = LoggedInMemberId                  
+                        CreatedBy = LoggedInMemberId
                     });
                 }
 
-                context.SaveChanges();                           
+                context.SaveChanges();
 
                 return Ok();
             }
@@ -174,12 +176,12 @@ namespace BK.Controllers
                 Member relatedMember = context.Members.Include(x => x.FamilyMemberAssociations).FirstOrDefault(x => x.MemberID == relatedId);
                 if (relatedMember == null)
                     return BadRequest("Related member cannot be located. Please try again later");
-                
+
                 if (member.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
-                    return BadRequest("Member is already a part of selected family");                
-                
+                    return BadRequest("Member is already a part of selected family");
+
                 if (!relatedMember.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
-                    return BadRequest("Related member is not part of the family");                
+                    return BadRequest("Related member is not part of the family");
 
                 lkRelationType relationType = context.lkRelationTypes.FirstOrDefault(x => x.RelationTypeId == relationTypeId);
                 if (relationType == null)
@@ -210,7 +212,8 @@ namespace BK.Controllers
                     html = html.Replace("{{addedOn}}", fmAssociation.CreatedOn.ToString("dddd, dd MMMM yyyy hh:mm tt"));
                     html = html.Replace("{{relation}}", $"{relationType.RelationType} Of {relatedMember.FirstName} {relatedMember.LastName}");
 
-                    System.Threading.Tasks.Task.Factory.StartNew(() => {
+                    System.Threading.Tasks.Task.Factory.StartNew(() =>
+                    {
                         using (SmtpClient sClient = new SmtpClient())
                         {
                             using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
@@ -269,7 +272,7 @@ namespace BK.Controllers
             string emailAddress = string.IsNullOrWhiteSpace(model.EmailAddress) ? null : model.EmailAddress.Trim();
 
             MemberViewModel mvm = null;
-            
+
             using (bkContext context = new bkContext())
             {
                 bk_MemberSearchBasic_Result result = context.bk_MemberSearchBasic(memberId, phoneNumber, aadhaarNumber, emailAddress).FirstOrDefault();
@@ -283,10 +286,10 @@ namespace BK.Controllers
                     mvm.MemberID = result.MemberID;
                     mvm.Gender = result.Gender;
                 }
-            }            
+            }
 
             return Ok(mvm);
-        }        
+        }
 
         [Route("api/member/approve")]
         [HttpGet]
@@ -324,12 +327,52 @@ namespace BK.Controllers
                 if (fmAssociation == null)
                     return BadRequest("No pending approval found");
 
-                context.FamilyMemberAssociations.Remove(fmAssociation);                
+                context.FamilyMemberAssociations.Remove(fmAssociation);
 
                 context.SaveChanges();
             }
 
             return Ok();
         }
+
+        [Route("api/member/search")]
+        [HttpPost]
+        public IHttpActionResult Search(MemberSearchModel model)
+        {
+            string firstName = string.IsNullOrWhiteSpace(model.FirstName) ? null : model.FirstName.Trim();
+            string lastName = string.IsNullOrWhiteSpace(model.LastName) ? null : model.LastName.Trim();
+            int? categoryId = model.CategoryID.HasValue && model.CategoryID.Value > 0 ? model.CategoryID : null;
+            int? nukhId = model.NukhID.HasValue && model.NukhID.Value > 0 ? model.NukhID : null;
+            string city = string.IsNullOrWhiteSpace(model.City) ? null : model.City.Trim();
+            string state = string.IsNullOrWhiteSpace(model.State) ? null : model.State.Trim();
+            string emailAddress = string.IsNullOrWhiteSpace(model.Email) ? null : model.Email.Trim();
+            string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
+
+            List<MemberSearchResultModel> mvm = new List<MemberSearchResultModel>();
+
+            using (bkContext context = new bkContext())
+            {
+                List<bk_MemberSearch_Result> result = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber, 0, 0).ToList();
+
+                foreach (var item in result)
+                {
+                    mvm.Add(new MemberSearchResultModel()
+                    {
+                        Adderess2 = item.Address2,
+                        Address1 = item.Address1,
+                        City = item.City,
+                        Country = item.Country,
+                        FamilyId = item.FamilyID,
+                        FirstName = item.FirstName,
+                        LastName = item.LastName,
+                        MemberId = item.MemberID,
+                        State = item.State
+                    });
+                }
+            }
+
+            return Ok(mvm);
+        }
     }
 }
+
