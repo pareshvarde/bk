@@ -6,6 +6,8 @@ export class MemberSearchParameter{
     public categoryId: number;
     public nukhId: number;    
     public city: string;
-    public state: string    
+    public state: string;
+    public currentPage: number;
+    public pageSize: number;
   }
   

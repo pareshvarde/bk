@@ -34,6 +34,9 @@ namespace BK.ViewModel
 
         [JsonProperty("country")]
         public string Country { get; set; }
+
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
     }
 }
 

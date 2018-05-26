@@ -8,4 +8,5 @@ export class MemberSearchResult {
     public city: string;
     public state: string;
     public country: string;
+    public gender: string;
 }

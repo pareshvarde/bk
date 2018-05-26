@@ -13,6 +13,7 @@ namespace BK.Context
     
     public partial class bk_MemberSearch_Result
     {
+        public Nullable<long> RowNum { get; set; }
         public int MemberID { get; set; }
         public int FamilyID { get; set; }
         public string FirstName { get; set; }
@@ -22,5 +23,6 @@ namespace BK.Context
         public string City { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
+        public string Gender { get; set; }
     }
 }

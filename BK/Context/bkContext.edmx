@@ -529,6 +529,7 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="bk_MemberSearch_Result">
+          <Property Type="Int64" Name="RowNum" Nullable="true" />
           <Property Type="Int32" Name="MemberID" Nullable="false" />
           <Property Type="Int32" Name="FamilyID" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
@@ -538,6 +539,7 @@
           <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="State" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -701,6 +703,7 @@
           <FunctionImportMapping FunctionImportName="bk_MemberSearch" FunctionName="bkModel.Store.bk_MemberSearch">
             <ResultMapping>
               <ComplexTypeMapping TypeName="bkModel.bk_MemberSearch_Result">
+                <ScalarProperty Name="RowNum" ColumnName="RowNum" />
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -710,6 +713,7 @@
                 <ScalarProperty Name="City" ColumnName="City" />
                 <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

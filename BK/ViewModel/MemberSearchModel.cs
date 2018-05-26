@@ -31,5 +31,11 @@ namespace BK.ViewModel
 
         [JsonProperty("state")]
         public string State { get; set; }
+
+        [JsonProperty("currentPage")]
+        public int? CurrentPage { get; set; }
+
+        [JsonProperty("pageSize")]
+        public int? PageSize { get; set; }
     }
 }

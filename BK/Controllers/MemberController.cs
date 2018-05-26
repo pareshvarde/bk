@@ -347,12 +347,14 @@ namespace BK.Controllers
             string state = string.IsNullOrWhiteSpace(model.State) ? null : model.State.Trim();
             string emailAddress = string.IsNullOrWhiteSpace(model.Email) ? null : model.Email.Trim();
             string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
+            int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
+            int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
 
             List<MemberSearchResultModel> mvm = new List<MemberSearchResultModel>();
 
             using (bkContext context = new bkContext())
             {
-                List<bk_MemberSearch_Result> result = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber, 0, 0).ToList();
+                List<bk_MemberSearch_Result> result = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber,pageSize, currentPage).ToList();
 
                 foreach (var item in result)
                 {
@@ -366,7 +368,8 @@ namespace BK.Controllers
                         FirstName = item.FirstName,
                         LastName = item.LastName,
                         MemberId = item.MemberID,
-                        State = item.State
+                        State = item.State,
+                        Gender = item.Gender                         
                     });
                 }
             }

@@ -21,6 +21,12 @@ BEGIN
 	DECLARE @FirstRecord INT
 	DECLARE @LastRecord INT
 
+	IF (@PageSize IS NULL)
+		SET @PageSize = 50
+
+	IF (@CurrentPage IS NULL)
+		SET @CurrentPage = 1
+
 	SELECT @FirstRecord = (@CurrentPage - 1) * @PageSize
 	SELECT @LastRecord = (@CurrentPage * @PageSize + 1);
 
@@ -36,7 +42,8 @@ BEGIN
 			f.Address2,
 			f.City,
 			f.State,
-			f.Country		
+			f.Country,
+			m.Gender
 		FROM
 			Members m 
 			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
