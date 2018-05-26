@@ -62,10 +62,13 @@
                 <input matInput [(ngModel)]="searchParameter.phoneNumber" placeholder="Phone Number">
             </mat-form-field>
         </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button color="accent" class="submit-button" aria-label="Search">
+                <mat-icon>search</mat-icon>&nbsp;SEARCH
+            </button>&nbsp;&nbsp;
+            <button mat-raised-button class="submit-button" aria-label="CLEAR">
+                <mat-icon>settings_backup_restore</mat-icon>&nbsp;CLEAR
+            </button>
+        </div>
     </div>
-
-    <div class="theme-options-panel-inner" fxLayout="column" fxLayoutAlign="start start">
-        <mat-divider></mat-divider>
-    </div>
-
 </div>
