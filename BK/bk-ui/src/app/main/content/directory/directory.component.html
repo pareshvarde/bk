@@ -1,9 +1,12 @@
 <div flexLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap>
-  <ul class="meal-list">
-    <li *ngFor="let result of results">
-      {{ result.firstName }}
-    </li>
-  </ul> 
+  <div class="fuse-card memberCard" *ngFor="let result of results">      
+      <div class="row profileHeader" fxLayoutAlign="start center">
+          <img class="avatar" src="/assets/images/avatars/img_avatar_male.png" />
+          <div class="h4"><a [routerLink]="['/member/', result.familyId, result.memberId]">{{result.firstName}} {{result.lastName}}</a></div>
+      </div>      
+      <div class="h5">{{result.address1}}, {{result.address2}}</div>
+      <div class="h5">{{result.city}}, {{result.state}}, {{result.country}}</div>
+  </div>
 </div>
 
 <fuse-theme-options (performSearch)="search($event)" (clearSearch)="clear($event)">

@@ -20,13 +20,15 @@ export class DirectoryComponent implements OnInit {
   }
       
   ngOnInit() {
-        
+    this.search(new MemberSearchParameter());
   }
 
   search(searchParameter: MemberSearchParameter){
+
+    this.results = [];
+
     this.dataService.searchMember(searchParameter).subscribe(
-      (res) => {
-        debugger;
+      (res) => {        
         res.result.forEach(element => {
           this.results.push(element);
         });         
@@ -40,7 +42,8 @@ export class DirectoryComponent implements OnInit {
     );
   }
 
-  clear(searchParameter: MemberSearchParameter){         
+  clear(searchParameter: MemberSearchParameter){    
+      this.results = [];     
       this.search(searchParameter);
   }
 }
