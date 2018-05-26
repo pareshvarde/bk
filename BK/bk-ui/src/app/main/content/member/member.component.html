@@ -97,7 +97,7 @@
               <mat-datepicker #dodPicker></mat-datepicker>
             </mat-form-field>
 
-            <mat-form-field *ngIf="memberModel.alive">
+            <mat-form-field *ngIf="!memberModel.alive">
               <input matInput [(ngModel)]="memberModel.deathPlace" placeholder="Death Place" formControlName="deathPlace">
             </mat-form-field>
           </div>
