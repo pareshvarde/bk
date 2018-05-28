@@ -32,7 +32,14 @@ search options
 	First Name
 	Last Name
 	Nukh
+	Category
 	City
 	State
 	Email
 	Phone Number
+	
+UPGRADE=============
+	remove angular2-jwt
+	update rxJS 
+	remove scroll to
+	
