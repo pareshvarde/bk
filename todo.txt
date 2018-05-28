@@ -42,4 +42,3 @@ UPGRADE=============
 	removed angular2-jwt	
 	removed scroll to
 	removed block ui
-	

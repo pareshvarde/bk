@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { NgxDnDModule } from '@withinpixels/ngx-dnd';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { FuseMatSidenavHelperDirective, FuseMatSidenavTogglerDirective } from '../directives/fuse-mat-sidenav-helper/fuse-mat-sidenav-helper.directive';
@@ -41,8 +40,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FormsModule,
         FusePipesModule,
         ReactiveFormsModule,
-        ColorPickerModule,
-        NgxDnDModule,
+        ColorPickerModule,        
         NgxDatatableModule
     ],
     exports        : [
@@ -57,8 +55,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FuseHljsComponent,
         FusePerfectScrollbarDirective,
         ReactiveFormsModule,
-        ColorPickerModule,
-        NgxDnDModule,
+        ColorPickerModule,        
         NgxDatatableModule,
         FuseIfOnDomDirective,
         FuseMaterialColorPickerComponent,
