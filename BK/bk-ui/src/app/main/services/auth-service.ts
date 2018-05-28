@@ -1,24 +1,38 @@
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from "@auth0/angular-jwt"
 
 @Injectable()
 export class bkAuthService {
 
   constructor() { }
-
-  authenticated() : boolean{
-    return true;    
-  }
-
-  memberId() : number{    
+  jwtHelper: JwtHelperService = new JwtHelperService();
+  
+  authenticated(): boolean {
     var token = localStorage.getItem('token');
+
     if (!token)
-      return null;  
-
-    return 1;    
+      return null;
+      
+    return !this.jwtHelper.isTokenExpired(token);    
   }
 
-  name() : string{    
+  memberId(): number {
     var token = localStorage.getItem('token');
-    return "Paresh";
+
+    if (!token)
+      return null;
+
+    var tokenDetail = this.jwtHelper.decodeToken(token);
+    return tokenDetail.memberId;
+  }
+
+  name(): string {
+    var token = localStorage.getItem('token');
+    
+    if (!token)
+      return null;
+
+    var tokenDetail = this.jwtHelper.decodeToken(token);
+    return tokenDetail.name;
   }
 }
