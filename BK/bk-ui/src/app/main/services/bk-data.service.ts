@@ -2,6 +2,7 @@ import { throwError as observableThrowError,  Observable } from 'rxjs';
 import { map, catchError} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers  } from '@angular/http';
+import { HttpClient } from '@angular/common/http'
 import { HttpErrorResponse } from '@angular/common/http/src/response';
 import { error } from 'selenium-webdriver';
 import { changePasswordViewModel } from '../content/change-password/change-password.component';
@@ -16,7 +17,7 @@ import { MemberSearchParameter } from '../models/memberSearchParameter';
 export class bkDataService {
   private API_URL = "http://localhost:60067/api/";
   
-  constructor(private http: Http, public authHttp: Http) { }
+  constructor(private http: Http, public authHttp: HttpClient) { }
 
   login(userName: string, password: string): Observable<any> {
     

@@ -29,6 +29,7 @@
     "@angular/platform-browser": "6.0.3",
     "@angular/platform-browser-dynamic": "6.0.3",
     "@angular/router": "6.0.3",
+    "@auth0/angular-jwt": "2.0.0",
     "@jaspero/ng-confirmations": "0.4.7",
     "@ngx-translate/core": "10.0.2",
     "@swimlane/ngx-charts": "8.0.2",

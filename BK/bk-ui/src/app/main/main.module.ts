@@ -39,6 +39,11 @@ import { bkAuthService } from './services/auth-service';
 import { bkDataService } from './services/bk-data.service';
 import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.component';
 import { DirectoryComponent } from './content/directory/directory.component';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+    return localStorage.getItem('token');
+}
 
 @NgModule({
     declarations: [
@@ -85,7 +90,14 @@ import { DirectoryComponent } from './content/directory/directory.component';
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule,
-        MomentModule      
+        MomentModule,
+        JwtModule.forRoot({
+            config: {
+              tokenGetter: tokenGetter,
+              whitelistedDomains: ['localhost:60067'],
+              blacklistedRoutes: ['localhost:60067/auth/']          
+            }
+        })     
     ],
     exports     : [
         FuseMainComponent
