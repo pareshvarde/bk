@@ -211,7 +211,8 @@ export class bkDataService {
 
   private handleAPIResponse(response: any) {    
  //   this.blockUI.stop();
-    return JSON.parse(response._body);
+    return response;
+    //return JSON.parse(response.result);
   }
 
   private handleAPIError(error: any): any {         
