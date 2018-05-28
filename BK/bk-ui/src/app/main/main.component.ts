@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { FuseConfigService } from '../core/services/config.service';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';

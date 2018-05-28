@@ -1,11 +1,13 @@
+
+import {map, filter} from 'rxjs/operators';
 import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { fuseAnimations } from '../../core/animations';
 import { FuseConfigService } from '../../core/services/config.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { Platform } from '@angular/cdk/platform';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
+
+
 
 @Component({
     selector: 'fuse-content',
@@ -42,9 +44,9 @@ export class FuseContentComponent implements OnInit, OnDestroy {
         private fuseConfig: FuseConfigService,
         private platform: Platform
     ) {
-        this.router.events
-            .filter((event) => event instanceof NavigationEnd)
-            .map(() => this.activatedRoute)
+        this.router.events.pipe(
+            filter((event) => event instanceof NavigationEnd),
+            map(() => this.activatedRoute),)
             .subscribe((event) => {
                 switch (this.fuseSettings.routerAnimation) {
                     case 'fadeIn':
@@ -65,8 +67,8 @@ export class FuseContentComponent implements OnInit, OnDestroy {
                 }
             });
 
-        this.router.events
-            .filter(event => event instanceof NavigationEnd)
+        this.router.events.pipe(
+            filter(event => event instanceof NavigationEnd))
             .subscribe(() => {
                 const contentContainer = document.querySelector('.mainContent');
                 contentContainer.scrollTo(0, 0);

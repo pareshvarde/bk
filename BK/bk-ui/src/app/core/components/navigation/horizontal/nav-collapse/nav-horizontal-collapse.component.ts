@@ -1,7 +1,7 @@
 import { Component, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
 import { fuseAnimations } from '../../../../animations';
 import { FuseConfigService } from '../../../../services/config.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector   : 'fuse-nav-horizontal-collapse',

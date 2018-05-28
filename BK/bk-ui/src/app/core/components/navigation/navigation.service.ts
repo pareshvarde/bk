@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { NavigationModel } from '../../../navigation.model';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class FuseNavigationService

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MomentModule } from 'angular2-moment';
 import { SharedModule } from '../core/modules/shared.module';
-import { ScrollToModule } from 'ng2-scroll-to';
-import { AuthModule } from './auth/authModule'
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { JasperoConfirmationsModule } from '@jaspero/ng-confirmations'
 import { FuseMainComponent } from './main.component';
@@ -81,15 +79,13 @@ import { DirectoryComponent } from './content/directory/directory.component';
     ],
     imports     : [
         SharedModule,
-        RouterModule,
-        ScrollToModule.forRoot(),
+        RouterModule,        
         SimpleNotificationsModule.forRoot(),
         JasperoConfirmationsModule,
         FuseNavigationModule,
         FuseShortcutsModule,
         FuseSearchBarModule,
-        MomentModule,
-        AuthModule        
+        MomentModule      
     ],
     exports     : [
         FuseMainComponent

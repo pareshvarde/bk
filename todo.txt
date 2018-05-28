@@ -39,7 +39,7 @@ search options
 	Phone Number
 	
 UPGRADE=============
-	remove angular2-jwt
-	update rxJS 
-	remove scroll to
+	removed angular2-jwt	
+	removed scroll to
+	removed block ui
 	

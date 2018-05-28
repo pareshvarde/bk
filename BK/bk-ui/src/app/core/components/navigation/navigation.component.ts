@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FuseNavigationService } from './navigation.service';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector     : 'fuse-navigation',
