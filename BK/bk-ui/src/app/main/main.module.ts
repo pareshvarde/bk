@@ -40,6 +40,7 @@ import { bkDataService } from './services/bk-data.service';
 import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.component';
 import { DirectoryComponent } from './content/directory/directory.component';
 import { JwtModule } from '@auth0/angular-jwt';
+import { ScrollToModule } from 'ng2-scroll-to';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -91,6 +92,7 @@ export function tokenGetter() {
         FuseShortcutsModule,
         FuseSearchBarModule,
         MomentModule,
+        ScrollToModule.forRoot(),
         JwtModule.forRoot({
             config: {
               tokenGetter: tokenGetter,
