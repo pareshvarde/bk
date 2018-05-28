@@ -2,7 +2,7 @@
   <div id="member-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="member-form">
       <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
-      <div fxLayout="row" fxLayoutWrap>
+      <div fxLayout="row wrap">
         <mat-form-field>
           <mat-select placeholder="Family" (change)="loadFamily()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
@@ -27,7 +27,7 @@
       <div *ngIf="existingAdd === false || !addMode">
         <form name="memberForm" [formGroup]="memberForm" novalidate>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
             </mat-form-field>
@@ -41,7 +41,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
             </mat-form-field>
@@ -55,7 +55,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.gender" formControlName="gender">
               <mat-radio-button class="mr-8" value='M'>
                 Male
@@ -80,7 +80,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.alive" formControlName="alive">
               <mat-radio-button class="mr-8" [value]=true>
                 Alive
@@ -102,7 +102,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="memberModel.married" formControlName="married">Married?</mat-checkbox>
 
             <mat-form-field>
@@ -122,7 +122,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
             </mat-form-field>
@@ -132,7 +132,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <mat-select placeholder="Occupation" [(ngModel)]="memberModel.occupationId" formControlName="occupationId">
                 <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
@@ -150,7 +150,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
             </mat-form-field>
@@ -187,25 +187,25 @@
       </div>
       <div *ngIf="existingAdd">
         <form name="searchForm" [formGroup]="searchForm" novalidate>
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
             </mat-form-field>
           </div>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.emailAddress" placeholder="Email Address" formControlName="emailAddress">
             </mat-form-field>
@@ -225,7 +225,7 @@
           <span fxLayout="row" class="mat-subheading-1">Gender: {{searchMemberModel.gender}}</span>
           <span fxLayout="row" class="mat-subheading-1">Date Of Birth: {{searchMemberModel.dob | amDateFormat:'LL'}}</span>
 
-          <div fxLayout="row" fxLayoutWrap>
+          <div fxLayout="row wrap">
             <mat-form-field>
               <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId">
                 <mat-option *ngFor="let n of getRelations()" [value]="n.relationTypeId">

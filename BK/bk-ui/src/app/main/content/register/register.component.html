@@ -19,7 +19,7 @@
 
       <form name="registerForm" [formGroup]="registerForm" novalidate>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
           </mat-form-field>
@@ -28,7 +28,7 @@
             <input matInput [(ngModel)]="formModel.lastName" placeholder="Last Name" formControlName="lastName">
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.email" placeholder="Email" formControlName="email">
           </mat-form-field>
@@ -42,7 +42,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <mat-select placeholder="Category" [(ngModel)]="formModel.categoryId" formControlName="categoryId">
               <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
@@ -60,7 +60,7 @@
           </mat-form-field>
         </div>
         <span class="gender">Gender</span>
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="formModel.gender" formControlName="gender">
             <mat-radio-button class="mr-8" value='M'>
               Male
@@ -80,7 +80,7 @@
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.address1" placeholder="Address 1" formControlName="address1">
           </mat-form-field>
@@ -89,7 +89,7 @@
             <input matInput [(ngModel)]="formModel.address2" placeholder="Address 2" formControlName="address2">
           </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.city" placeholder="City" formControlName="city">

@@ -45,7 +45,7 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
-<div flexLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap fxHide fxShow.lt-md>
+<div fxLayout="row wrap" fxLayoutAlign="start stretch" fxHide fxShow.lt-md>
   
       <div *ngFor="let gotra of dataSource.filteredData"  class="fuse-card gotraCardContainer">            
           <div class="p-16">

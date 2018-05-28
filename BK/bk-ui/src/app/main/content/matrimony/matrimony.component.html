@@ -3,7 +3,7 @@
     <div id="matrimony-form">
       <form name="matrimonyForm" [formGroup]="matrimonyForm" novalidate>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.maternalNukhId" formControlName="maternalNukhId" bkAutofocus>
               <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
@@ -21,7 +21,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput type="time" [(ngModel)]="model.birthTime" placeholder="Birth Time" formControlName="birthTime">
           </mat-form-field>
@@ -39,7 +39,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <mat-select placeholder="Body" [(ngModel)]="model.bodyTypeId" formControlName="bodyTypeId">
               <mat-option *ngFor="let n of BODYTYPE_DATA_LOCAL" [value]="n.id">
@@ -71,7 +71,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput [(ngModel)]="model.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
           </mat-form-field>
@@ -81,7 +81,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
 
           <mat-form-field>
             <mat-select placeholder="Smoke" [(ngModel)]="model.smoke" formControlName="smoke">
@@ -118,7 +118,7 @@
           </mat-form-field>
         </div>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field>
             <mat-select placeholder="Disability" [(ngModel)]="model.disability" formControlName="disability">
               <mat-option [value]=true>
@@ -154,7 +154,7 @@
 
         </div>
 
-        <div fxLayout="row" fxLayoutWrap>
+        <div fxLayout="row wrap">
           <mat-form-field class="mat-form-field-fullwidth">
             <textarea matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="5" formControlName="profileText"></textarea>

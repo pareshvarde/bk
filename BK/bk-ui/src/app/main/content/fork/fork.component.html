@@ -58,7 +58,7 @@
             <span class="mat-title">Family Information</span>
           </div>
           <form name="familyForm" [formGroup]="forkForm" novalidate>
-            <div fxLayout="row" fxLayoutWrap>
+            <div fxLayout="row wrap">
               <mat-form-field>
                 <mat-select placeholder="Category" [(ngModel)]="model.categoryId" formControlName="categoryId">
                   <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
@@ -83,7 +83,7 @@
                 </mat-select>
               </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutWrap>
+            <div fxLayout="row wrap">
               <mat-form-field>
                 <input matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
               </mat-form-field>
@@ -92,7 +92,7 @@
                 <input matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
               </mat-form-field>
             </div>
-            <div fxLayout="row" fxLayoutWrap>
+            <div fxLayout="row wrap">
   
               <mat-form-field>
                 <input matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
