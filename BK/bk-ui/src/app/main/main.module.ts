@@ -41,7 +41,6 @@ import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.
 import { DirectoryComponent } from './content/directory/directory.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ScrollToModule } from 'ng2-scroll-to';
-import { InfiniteScrollModule } from 'ngx-infinite-scroll'
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -93,8 +92,7 @@ export function tokenGetter() {
         FuseShortcutsModule,
         FuseSearchBarModule,
         MomentModule,
-        ScrollToModule.forRoot(),
-        InfiniteScrollModule,
+        ScrollToModule.forRoot(),        
         JwtModule.forRoot({
             config: {
               tokenGetter: tokenGetter,

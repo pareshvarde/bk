@@ -1,4 +1,4 @@
-<div infiniteScroll infiniteScrollDistance=4 alwaysCallback="true" fromRoot="true" (scrolled)="performSearch()" [infiniteScrollContainer]="fuse-content" fxLayout="row wrap" style="width: 500px;" fxLayoutAlign="start stretch">
+<div infiniteScroll (scrolled)="performSearch()" fxLayout="row wrap" style="width: 500px;" fxLayoutAlign="start stretch">
   <div class="fuse-card memberCard" *ngFor="let result of results">      
       <div class="row profileHeader" fxLayoutAlign="start center">
           <img class="avatar" src="/assets/images/avatars/img_avatar_male.png" />
