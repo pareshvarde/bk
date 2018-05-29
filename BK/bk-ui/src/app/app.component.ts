@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FuseSplashScreenService } from './core/services/splash-screen.service';
 import { TranslateService } from '@ngx-translate/core';
-
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
     selector   : 'fuse-root',
@@ -10,6 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent
 {
+    @BlockUI() blockUI: NgBlockUI;    
+
     constructor(
         private fuseSplashScreen: FuseSplashScreenService,
         private translate: TranslateService

@@ -13,6 +13,7 @@ import { FuseConfigService } from './core/services/config.service';
 import { FuseNavigationService } from './core/components/navigation/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { bkRoutes } from './app.routes'
+import { BlockUIModule } from 'ng-block-ui';
 import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { bkAuthService } from './main/services/auth-service';
@@ -30,7 +31,8 @@ import { AuthGuard } from './main/guards/auth-guard'
         RouterModule.forRoot(bkRoutes, { useHash: true }),
         SharedModule,
         TranslateModule.forRoot(),
-        FuseMainModule        
+        FuseMainModule,
+        BlockUIModule.forRoot()
     ],
     providers   : [
         FuseSplashScreenService,
