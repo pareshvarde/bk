@@ -13,21 +13,27 @@ import { NotificationsService } from 'angular2-notifications';
 export class DirectoryComponent implements OnInit {
 
   results: MemberSearchResult[]=[];
+  searchParameter: MemberSearchParameter;
   page: number = 1;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
-    
+    this.searchParameter = new MemberSearchParameter();
   }
       
   ngOnInit() {
-    this.search(new MemberSearchParameter());
+    this.search(this.searchParameter);
   }
 
   search(searchParameter: MemberSearchParameter){
 
     this.results = [];
+    this.searchParameter = searchParameter;
+    this.performSearch();    
+  }
 
-    this.dataService.searchMember(searchParameter).subscribe(
+  performSearch(){
+    debugger;
+    this.dataService.searchMember(this.searchParameter).subscribe(
       (res) => {        
         res.result.forEach(element => {
           this.results.push(element);
