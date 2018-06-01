@@ -7,8 +7,6 @@ import { FuseConfigService } from '../../core/services/config.service';
 import { Subscription } from 'rxjs';
 import { Platform } from '@angular/cdk/platform';
 
-
-
 @Component({
     selector: 'fuse-content',
     templateUrl: './content.component.html',
@@ -32,7 +30,7 @@ export class FuseContentComponent implements OnInit, OnDestroy {
         confirmText: 'Yes',
         declineText: 'No'
     }
-
+    
     @HostBinding('@routerTransitionUp') routeAnimationUp = false;
     @HostBinding('@routerTransitionDown') routeAnimationDown = false;
     @HostBinding('@routerTransitionRight') routeAnimationRight = false;
@@ -94,9 +92,5 @@ export class FuseContentComponent implements OnInit, OnDestroy {
 
     isMobile(): boolean {
         return this.platform.ANDROID || this.platform.IOS;
-    }
-
-    contentScrolled(){
-        console.log("content scrolled");
-    }
+    }   
 }
