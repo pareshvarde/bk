@@ -1,3 +1,4 @@
+<div class="row header" fxLayoutAlign="center center">Displaying {{results.length}} of {{totalCount}} members</div>   
 <div infiniteScroll [infiniteScrollContainer]="'.mainContent'" [fromRoot]="true" (scrolled)="performSearch()" fxLayout="row wrap" fxLayoutAlign="start stretch">
   <div class="fuse-card memberCard" *ngFor="let result of results">      
       <div class="row profileHeader" fxLayoutAlign="start center">
@@ -8,7 +9,7 @@
       <div class="h5">{{result.city}}, {{result.state}}, {{result.country}}</div>
   </div>  
 </div>
-<div class="row" fxLayoutAlign="center center" *ngIf="!hasResult">END OF SEARCH RESULT</div>   
+<div class="row footer" fxLayoutAlign="center center" *ngIf="!hasResult">END OF SEARCH RESULT</div>   
 
 <fuse-theme-options (performSearch)="search($event)" (clearSearch)="clear($event)">
 

@@ -13,9 +13,11 @@ import { NotificationsService } from 'angular2-notifications';
 export class DirectoryComponent implements OnInit {
 
   results: MemberSearchResult[]=[];
+  totalCount: number = 0;
   searchParameter: MemberSearchParameter;
   pageNumber: number = 0;
   hasResult: boolean;
+  readonly PAGE_SIZE: number = 5;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
     this.searchParameter = new MemberSearchParameter();    
@@ -31,7 +33,7 @@ export class DirectoryComponent implements OnInit {
     this.hasResult = true;
     this.pageNumber = 0;
     this.searchParameter = searchParameter;
-    this.searchParameter.pageSize = 20;
+    this.searchParameter.pageSize = this.PAGE_SIZE;
     this.performSearch();    
   }
 
@@ -54,6 +56,11 @@ export class DirectoryComponent implements OnInit {
         res.result.results.forEach(element => {
           this.results.push(element);
         });         
+
+        this.totalCount = res.result.totalRecords;
+
+        if (!this.hasScroll())
+          this.performSearch();
       },
       (err) => {
         if (err.errors)
@@ -66,7 +73,16 @@ export class DirectoryComponent implements OnInit {
 
   clear(searchParameter: MemberSearchParameter){    
       this.results = [];           
-      searchParameter.pageSize = 20;
+      searchParameter.pageSize = this.PAGE_SIZE;  
       this.search(searchParameter);
+  }
+
+  hasScroll(): boolean{
+    var container = document.getElementsByClassName("mainContent")[0];
+
+    if (container.scrollHeight - container.clientHeight >= 0)
+      return true;
+    else
+      return false;
   }
 }
