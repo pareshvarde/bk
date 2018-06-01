@@ -74,14 +74,12 @@ export class FuseThemeOptionsComponent implements OnInit
         this.player.play();
     }
 
-    search(){
-        this.searchParameter.pageSize = 20;
+    search(){        
         this.performSearch.emit(this.searchParameter);
     }
 
     clear(){
-        this.searchParameter = new MemberSearchParameter();
-        this.searchParameter.pageSize = 20;
+        this.searchParameter = new MemberSearchParameter();        
         this.clearSearch.emit(this.searchParameter);
     }
 }

@@ -6,9 +6,9 @@
       </div>      
       <div class="h5">{{result.address1}}, {{result.address2}}</div>
       <div class="h5">{{result.city}}, {{result.state}}, {{result.country}}</div>
-  </div>
-  <div *ngIf="!hasResult">END OF SEARCH RESULT</div>   
+  </div>  
 </div>
+<div class="row" fxLayoutAlign="center center" *ngIf="!hasResult">END OF SEARCH RESULT</div>   
 
 <fuse-theme-options (performSearch)="search($event)" (clearSearch)="clear($event)">
 

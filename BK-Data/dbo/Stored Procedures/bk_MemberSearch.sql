@@ -1,5 +1,4 @@
-﻿
-CREATE PROCEDURE [dbo].[bk_MemberSearch]
+﻿CREATE PROCEDURE [dbo].[bk_MemberSearch]
 (    
 	@FirstName NVARCHAR(50) = NULL,
 	@LastName NVARCHAR(50) = NULL,
@@ -58,9 +57,7 @@ BEGIN
 			AND (@State IS NULL OR f.State = @State)
 			AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
 			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)		
-	)
-		
-	SELECT @TotalRecords = COUNT(1) FROM TempResult
+	)		
 
 	SELECT 
 		TOP (@LastRecord -1) *
@@ -70,6 +67,22 @@ BEGIN
 		RowNum > @FirstRecord
 		AND RowNum < @LastRecord
 
+	SELECT
+		@TotalRecords = COUNT(1)
+	FROM
+		Members m 
+		JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
+		JOIN Families f ON f.FamilyID = fma.FamilyId		
+	WHERE
+		(@FirstName IS NULL OR m.FirstName = @FirstName)
+		AND (@LastName IS NULL OR m.LastName = @LastName)
+		AND (@CategoryID IS NULL OR f.CategoryID = @CategoryID)
+		AND (@NukhID IS NULL OR f.NukhID = @NukhID)
+		AND (@City IS NULL OR f.City = @City)
+		AND (@State IS NULL OR f.State = @State)
+		AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
+		AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)		
+			
 END
 
 SET NOCOUNT OFF

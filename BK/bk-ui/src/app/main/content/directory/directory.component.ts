@@ -31,6 +31,7 @@ export class DirectoryComponent implements OnInit {
     this.hasResult = true;
     this.pageNumber = 0;
     this.searchParameter = searchParameter;
+    this.searchParameter.pageSize = 20;
     this.performSearch();    
   }
 
@@ -43,7 +44,13 @@ export class DirectoryComponent implements OnInit {
     this.searchParameter.currentPage = this.pageNumber;
 
     this.dataService.searchMember(this.searchParameter).subscribe(
-      (res) => {                
+      (res) => {     
+        
+        if (res.result.results.length < this.searchParameter.pageSize)
+          this.hasResult = false;
+        else
+          this.hasResult = true;
+        
         res.result.results.forEach(element => {
           this.results.push(element);
         });         
@@ -59,6 +66,7 @@ export class DirectoryComponent implements OnInit {
 
   clear(searchParameter: MemberSearchParameter){    
       this.results = [];           
+      searchParameter.pageSize = 20;
       this.search(searchParameter);
   }
 }
