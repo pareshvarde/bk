@@ -34,11 +34,13 @@
         max-height: calc(100vh - 200px);
         padding: 24px;
         overflow: auto;
+        border-radius: 15px;
 
         @include media-breakpoint-down('xs') {
             top: -120px;
-            max-height: calc(100vh - 100px);
+            max-height: calc(100vh - 130px);
             width: 90vw;
+            margin-top: 30px;
         }
 
         .close-button {
