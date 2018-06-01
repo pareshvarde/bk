@@ -5,6 +5,7 @@
 .mainContent{
     padding: 10px 10px 10px 10px;  
     overflow: auto;  
+    height: 100%;
 }
 :host ::ng-deep simple-notifications .sn-content {
     font-size: 14px;

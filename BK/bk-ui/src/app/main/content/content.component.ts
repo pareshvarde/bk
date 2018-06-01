@@ -17,7 +17,8 @@ import { Platform } from '@angular/cdk/platform';
 })
 export class FuseContentComponent implements OnInit, OnDestroy {
     onSettingsChanged: Subscription;
-    fuseSettings: any;
+    fuseSettings: any;    
+
     public alertOptions  = {
         position: ["bottom", "right"],
         timeOut: 5000,
@@ -93,5 +94,9 @@ export class FuseContentComponent implements OnInit, OnDestroy {
 
     isMobile(): boolean {
         return this.platform.ANDROID || this.platform.IOS;
+    }
+
+    contentScrolled(){
+        console.log("content scrolled");
     }
 }

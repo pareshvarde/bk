@@ -17,8 +17,7 @@ export class DirectoryComponent implements OnInit {
   page: number = 1;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
-    this.searchParameter = new MemberSearchParameter();
-    this.initializeScrollEvent();
+    this.searchParameter = new MemberSearchParameter();    
   }
       
   ngOnInit() {
@@ -32,17 +31,8 @@ export class DirectoryComponent implements OnInit {
     this.performSearch();    
   }
 
-  initializeScrollEvent(){    
-    var element = document.getElementsByClassName("mainContent")[0];
-    element.addEventListener("scroll", function(){
-      
-      if (element.scrollTop + element.clientHeight >= element.scrollHeight - 250)
-        alert('scroll end');
-    })
-  }
-
   performSearch(){
-        
+            
     this.dataService.searchMember(this.searchParameter).subscribe(
       (res) => {        
         res.result.forEach(element => {
