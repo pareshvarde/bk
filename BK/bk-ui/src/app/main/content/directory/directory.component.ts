@@ -31,10 +31,6 @@ export class DirectoryComponent implements OnInit {
     this.performSearch();    
   }
 
-  contentScrolled(){
-    console.log("search performed");
-  }
-
   performSearch(){
             
     this.dataService.searchMember(this.searchParameter).subscribe(

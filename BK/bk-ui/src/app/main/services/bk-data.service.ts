@@ -103,6 +103,8 @@ export class bkDataService {
   }
 
   searchMember(model: MemberSearchParameter){
+    this.blockUI.start("Please wait...");
+
     return this.authHttp.post(this.API_URL + "member/search", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
     }),catchError((error : any) => this.handleAPIError(error)),);
@@ -213,8 +215,7 @@ export class bkDataService {
 
   private handleAPIResponse(response: any) {    
     this.blockUI.stop();
-    return response;
-    //return JSON.parse(response.result);
+    return response;    
   }
 
   private handleAPIError(error: any): any {         
