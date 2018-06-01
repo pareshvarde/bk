@@ -1,5 +1,7 @@
-<div class="mainContent" infiniteScroll [infiniteScrollContainer]="'.mainContent'" [fromRoot]="true" (scrolled)="contentScrolled()">
-    <simple-notifications [options]="alertOptions"></simple-notifications>
-    <jaspero-confirmations [defaultSettings]="confirmationOptions"></jaspero-confirmations>
-    <router-outlet></router-outlet>    
+<div class="mainContent" >
+    <div infiniteScroll [infiniteScrollContainer]="'.mainContent'" [fromRoot]="true" (scrolled)="contentScrolled()">
+        <router-outlet></router-outlet>
+        <simple-notifications [options]="alertOptions"></simple-notifications>
+        <jaspero-confirmations [defaultSettings]="confirmationOptions"></jaspero-confirmations>
+    </div>
 </div>
