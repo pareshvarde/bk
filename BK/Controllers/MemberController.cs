@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Net.Mail;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 
 namespace BK.Controllers
 {
@@ -348,17 +349,21 @@ namespace BK.Controllers
             string emailAddress = string.IsNullOrWhiteSpace(model.Email) ? null : model.Email.Trim();
             string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
             int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
-            int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
+            int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;            
 
-            List<MemberSearchResultModel> mvm = new List<MemberSearchResultModel>();
+            MemberSearchResultModel mvm = new MemberSearchResultModel();
 
             using (bkContext context = new bkContext())
             {
-                List<bk_MemberSearch_Result> result = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber,pageSize, currentPage).ToList();
+                ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
+
+                List<bk_MemberSearch_Result> result = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber,pageSize, currentPage, oParameter).ToList();
+
+                mvm.TotalRecords = (int)oParameter.Value;
 
                 foreach (var item in result)
                 {
-                    mvm.Add(new MemberSearchResultModel()
+                    mvm.Results.Add(new MemberSearchResultItemModel()
                     {
                         Adderess2 = item.Address2,
                         Address1 = item.Address1,

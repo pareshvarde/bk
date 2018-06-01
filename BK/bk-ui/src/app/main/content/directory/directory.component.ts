@@ -14,7 +14,8 @@ export class DirectoryComponent implements OnInit {
 
   results: MemberSearchResult[]=[];
   searchParameter: MemberSearchParameter;
-  page: number = 1;
+  pageNumber: number = 0;
+  hasResult: boolean;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
     this.searchParameter = new MemberSearchParameter();    
@@ -27,15 +28,23 @@ export class DirectoryComponent implements OnInit {
   search(searchParameter: MemberSearchParameter){
 
     this.results = [];
+    this.hasResult = true;
+    this.pageNumber = 0;
     this.searchParameter = searchParameter;
     this.performSearch();    
   }
 
   performSearch(){
-            
+  
+    if (!this.hasResult)
+      return;
+
+    this.pageNumber = this.pageNumber + 1;
+    this.searchParameter.currentPage = this.pageNumber;
+
     this.dataService.searchMember(this.searchParameter).subscribe(
-      (res) => {        
-        res.result.forEach(element => {
+      (res) => {                
+        res.result.results.forEach(element => {
           this.results.push(element);
         });         
       },
@@ -49,7 +58,7 @@ export class DirectoryComponent implements OnInit {
   }
 
   clear(searchParameter: MemberSearchParameter){    
-      this.results = [];     
+      this.results = [];           
       this.search(searchParameter);
   }
 }

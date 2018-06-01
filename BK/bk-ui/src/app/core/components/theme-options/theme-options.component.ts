@@ -75,11 +75,13 @@ export class FuseThemeOptionsComponent implements OnInit
     }
 
     search(){
+        this.searchParameter.pageSize = 20;
         this.performSearch.emit(this.searchParameter);
     }
 
     clear(){
         this.searchParameter = new MemberSearchParameter();
+        this.searchParameter.pageSize = 20;
         this.clearSearch.emit(this.searchParameter);
     }
 }

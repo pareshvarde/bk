@@ -10,7 +10,8 @@ CREATE PROCEDURE [dbo].[bk_MemberSearch]
 	@EmailAddress NVARCHAR(100) = NULL,
 	@PhoneNumber NVARCHAR(15) = NULL,
 	@PageSize INT = 50,
-	@CurrentPage INT = 1
+	@CurrentPage INT = 1,
+	@TotalRecords INT OUTPUT
 )    
 AS
 
@@ -59,6 +60,8 @@ BEGIN
 			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)		
 	)
 		
+	SELECT @TotalRecords = COUNT(1) FROM TempResult
+
 	SELECT 
 		TOP (@LastRecord -1) *
 	FROM

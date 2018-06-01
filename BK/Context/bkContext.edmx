@@ -202,6 +202,7 @@
           <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
           <Parameter Name="PageSize" Type="int" Mode="In" />
           <Parameter Name="CurrentPage" Type="int" Mode="In" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
         </Function>
         <Function Name="bk_MemberSearchBasic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MemberID" Type="int" Mode="In" />
@@ -307,6 +308,7 @@
             <Parameter Name="PhoneNumber" Mode="In" Type="String" />
             <Parameter Name="PageSize" Mode="In" Type="Int32" />
             <Parameter Name="CurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="bk_MemberSearchBasic_Result">

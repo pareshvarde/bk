@@ -8,6 +8,20 @@ namespace BK.ViewModel
 {
     public class MemberSearchResultModel
     {
+        public MemberSearchResultModel()
+        {
+            this.Results = new List<MemberSearchResultItemModel>();
+        }
+
+        [JsonProperty("results")]
+        public List<MemberSearchResultItemModel> Results;
+
+        [JsonProperty("totalRecords")]
+        public int TotalRecords;
+    }
+
+    public class MemberSearchResultItemModel
+    {
         [JsonProperty("memberId")]
         public int MemberId { get; set; }
 
