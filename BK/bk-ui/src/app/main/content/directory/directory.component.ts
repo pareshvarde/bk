@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectionStrategy, Input} from "@angular/core";
-import { MemberSearchResult } from '../../models/memberSearchResult';
 import { MemberSearchParameter } from '../../models/memberSearchParameter';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -12,7 +11,7 @@ import { NotificationsService } from 'angular2-notifications';
 })
 export class DirectoryComponent implements OnInit {
 
-  results: MemberSearchResult[]=[];
+  results: any[]=[];
   totalCount: number = 0;
   searchParameter: MemberSearchParameter;
   pageNumber: number = 0;
@@ -78,9 +77,10 @@ export class DirectoryComponent implements OnInit {
   }
 
   hasScroll(): boolean{
+    
     var container = document.getElementsByClassName("mainContent")[0];
 
-    if (container.scrollHeight - container.clientHeight >= 0)
+    if (container.scrollHeight - container.clientHeight > 0)
       return true;
     else
       return false;
