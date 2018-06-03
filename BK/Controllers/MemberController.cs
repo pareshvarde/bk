@@ -357,25 +357,22 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                List<bk_MemberSearch_Result> result = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber,pageSize, currentPage, oParameter).ToList();
+                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber,pageSize, currentPage, oParameter).ToList();
 
                 mvm.TotalRecords = (int)oParameter.Value;
 
-                foreach (var item in result)
+                foreach (var result in results)
                 {
-                    mvm.Results.Add(new MemberSearchResultItemModel()
-                    {
-                        Adderess2 = item.Address2,
-                        Address1 = item.Address1,
-                        City = item.City,
-                        Country = item.Country,
-                        FamilyId = item.FamilyID,
-                        FirstName = item.FirstName,
-                        LastName = item.LastName,
-                        MemberId = item.MemberID,
-                        State = item.State,
-                        Gender = item.Gender                         
-                    });
+                    var item = new MemberSearchResultItemModel();
+
+                    item.Name = $"{result.FirstName} {result.LastName}";
+                    item.Address1 = $"{result.Address1}, {result.Address2}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
+                    item.Address2 = $"{result.City}, {result.State}, {result.Country}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
+                    item.MemberId = result.MemberID;
+                    item.FamilyId = result.FamilyID;
+                    item.Gender = result.Gender;
+
+                    mvm.Results.Add(item);
                 }
             }
 
