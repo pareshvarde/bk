@@ -6,8 +6,8 @@
           <img class="avatar" src="/assets/images/avatars/img_avatar_male.png" />
           <div class="h4"><a [routerLink]="['/member/', result.familyId, result.memberId]">{{result.name}}</a></div>
       </div>      
-      <div class="h5" *ngIf="result.address1">{{result.address1}}</div>
-      <div class="h5" *ngIf="result.address2">{{result.address2}}</div>
+      <div class="h5">{{result.address1}}</div>
+      <div class="h5">{{result.address2}}</div>
   </div>  
   <div class="row footer" fxLayoutAlign="center center" *ngIf="!hasResult">END OF SEARCH RESULT</div>
 </div>
