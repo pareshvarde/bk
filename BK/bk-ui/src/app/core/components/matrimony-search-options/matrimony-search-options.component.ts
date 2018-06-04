@@ -3,7 +3,7 @@ import { style, animate, AnimationBuilder, AnimationPlayer } from '@angular/anim
 import { fuseAnimations } from '../../animations';
 import { CATEGORIES_DATA } from '../../../main/data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../../main/data/nukhsLookup';
-import { MemberSearchParameter } from '../../../main/models/memberSearchParameter';
+import { MatrimonySearchParameter } from '../../../main/models/matrimonySearchParameter';
 
 
 @Component({
@@ -18,9 +18,9 @@ export class MatrimonySearchOptionsComponent implements OnInit
     @ViewChild('panel') panel;
     @ViewChild('overlay') overlay: ElementRef;
 
-    searchParameter: MemberSearchParameter;
-    @Output() performSearch = new EventEmitter<MemberSearchParameter>();
-    @Output() clearSearch = new EventEmitter<MemberSearchParameter>();
+    searchParameter: MatrimonySearchParameter;
+    @Output() performSearch = new EventEmitter<MatrimonySearchParameter>();
+    @Output() clearSearch = new EventEmitter<MatrimonySearchParameter>();
     readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
     readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
     
@@ -34,7 +34,7 @@ export class MatrimonySearchOptionsComponent implements OnInit
     )
     {
         this.barClosed = true;         
-        this.searchParameter = new MemberSearchParameter(); 
+        this.searchParameter = new MatrimonySearchParameter(); 
     }
 
     ngOnInit()
@@ -79,7 +79,7 @@ export class MatrimonySearchOptionsComponent implements OnInit
     }
 
     clear(){
-        this.searchParameter = new MemberSearchParameter();        
+        this.searchParameter = new MatrimonySearchParameter();        
         this.clearSearch.emit(this.searchParameter);
     }
 }

@@ -73,7 +73,7 @@ export class NavigationModel
                 'id'      : 'matrimony',
                 'title'   : 'Matrimony',
                 'type'    : 'item',
-                'url'     : 'directory',
+                'url'     : 'matrimony-search',
                 'icon'    : 'wc',    
             }
         ];
