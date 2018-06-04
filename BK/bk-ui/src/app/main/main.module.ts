@@ -14,7 +14,6 @@ import { FuseNavbarVerticalToggleDirective } from './navbar/vertical/navbar-vert
 import { FuseNavbarHorizontalComponent } from './navbar/horizontal/navbar-horizontal.component';
 import { FuseQuickPanelComponent } from './quick-panel/quick-panel.component';
 import { MemberSearchOptionsComponent } from '../core/components/member-search-options/member-search-options.component';
-import { FuseShortcutsModule } from '../core/components/shortcuts/shortcuts.module';
 import { HomeComponent } from './content/home/home.component';
 import { OriginComponent } from './content/origin/origin.component';
 import { NukhComponent } from './content/nukh/nukh.component';
@@ -92,8 +91,7 @@ export function tokenGetter() {
         RouterModule,        
         SimpleNotificationsModule.forRoot(),
         JasperoConfirmationsModule,
-        FuseNavigationModule,
-        FuseShortcutsModule,        
+        FuseNavigationModule,             
         MomentModule,
         ScrollToModule.forRoot(),  
         InfiniteScrollModule,      
