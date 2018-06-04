@@ -17,7 +17,6 @@ import { FuseNavbarVerticalService } from '../../main/navbar/vertical/navbar-ver
 import { FuseHljsComponent } from '../components/hljs/hljs.component';
 import { FusePerfectScrollbarDirective } from '../directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseIfOnDomDirective } from '../directives/fuse-if-on-dom/fuse-if-on-dom.directive';
-import { FuseMaterialColorPickerComponent } from '../components/material-color-picker/material-color-picker.component';
 import { FuseTranslationLoaderService } from '../services/translation-loader.service';
 import { CookieService } from 'ngx-cookie-service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -30,8 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FuseCountdownComponent,
         FuseHljsComponent,
         FuseIfOnDomDirective,
-        FusePerfectScrollbarDirective,
-        FuseMaterialColorPickerComponent
+        FusePerfectScrollbarDirective        
     ],
     imports        : [
         FlexLayoutModule,
@@ -58,7 +56,6 @@ import { TranslateModule } from '@ngx-translate/core';
         ColorPickerModule,        
         NgxDatatableModule,
         FuseIfOnDomDirective,
-        FuseMaterialColorPickerComponent,
         TranslateModule
     ],
     entryComponents: [
