@@ -1,37 +1,37 @@
 <div id="matrimony-view" fxLayout="column">
   <div id="matrimony-view-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
-    <div id="matrimony-view-form">
+    <div *ngIf="model" id="matrimony-view-form">
       <form name="matrimonyForm-view">
           <div fxLayout="row wrap">
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
+                <input matInput [(ngModel)]="model.memberModel.firstName" placeholder="First Name" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.lastName" placeholder="Last Name" formControlName="lastName">
+                <input matInput [(ngModel)]="model.memberModel.lastName" placeholder="Last Name" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.nickName" placeholder="Nick Name" formControlName="nickName">
+                <input matInput [(ngModel)]="model.memberModel.nickName" placeholder="Nick Name" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
             </div>
   
             <div fxLayout="row wrap">
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
+                <input matInput [(ngModel)]="model.memberModel.email" placeholder="Email" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+                <input matInput [(ngModel)]="model.memberModel.phoneNumber" placeholder="Phone Number" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+                <input matInput [(ngModel)]="model.memberModel.aadhaarNumber" placeholder="Aadhaar Number" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
             </div>
   
             <div fxLayout="row wrap">
-              <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.gender" formControlName="gender">
+              <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.memberModel.gender" [ngModelOptions]="{standalone: true}">
                 <mat-radio-button class="mr-8" value='M'>
                   Male
                 </mat-radio-button>
@@ -44,72 +44,29 @@
               </mat-radio-group>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
-                  formControlName="dob">
+                <input matInput [(ngModel)]="model.memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth" [ngModelOptions]="{standalone: true}">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.birthPlace" placeholder="Birth Place" formControlName="birthPlace">
+                <input matInput [(ngModel)]="model.memberModel.birthPlace" placeholder="Birth Place" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
-            </div>
+            </div>              
   
             <div fxLayout="row wrap">
-              <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.alive" formControlName="alive">
-                <mat-radio-button class="mr-8" [value]=true>
-                  Alive
-                </mat-radio-button>
-                <mat-radio-button class="mr-8" [value]=false>
-                  Deceased
-                </mat-radio-button>
-              </mat-radio-group>
-  
-              <mat-form-field *ngIf="!memberModel.alive">
-                <input matInput [(ngModel)]="memberModel.dod" (focus)="dodPicker.open()" [matDatepicker]="dodPicker" placeholder="Date Of Death"
-                  formControlName="dod">
-                <mat-datepicker-toggle matSuffix [for]="dodPicker"></mat-datepicker-toggle>
-                <mat-datepicker #dodPicker></mat-datepicker>
-              </mat-form-field>
-  
-              <mat-form-field *ngIf="!memberModel.alive">
-                <input matInput [(ngModel)]="memberModel.deathPlace" placeholder="Death Place" formControlName="deathPlace">
-              </mat-form-field>
-            </div>
-  
-            <div fxLayout="row wrap">
-              <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="memberModel.married" formControlName="married">Married?</mat-checkbox>
-  
               <mat-form-field>
-                <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
-                  <mat-option *ngFor="let n of getRelations()" [value]="n.relationTypeId">
-                    {{ n.relationType }}
-                  </mat-option>
-                </mat-select>
+                <input matInput [(ngModel)]="model.memberModel.educationLevel" placeholder="Education Level" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relatedMemberId" formControlName="relatedMemberId">
-                  <mat-option *ngFor="let n of familyModel.members" [value]="n.memberId">
-                    {{ n.name }}
-                  </mat-option>
-                </mat-select>
+                <input matInput [(ngModel)]="model.memberModel.educationField" placeholder="Education Field" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
             </div>
   
             <div fxLayout="row wrap">
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.educationField" placeholder="Education Field" formControlName="educationField">
-              </mat-form-field>
-            </div>
-  
-            <div fxLayout="row wrap">
-              <mat-form-field>
-                <mat-select placeholder="Occupation" [(ngModel)]="memberModel.occupationId" formControlName="occupationId">
+                <mat-select placeholder="Occupation" [(ngModel)]="model.memberModel.occupationId" [ngModelOptions]="{standalone: true}">
                   <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
                     {{ n.occupation }}
                   </mat-option>
@@ -117,25 +74,25 @@
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.companyName" placeholder="Company Name" formControlName="companyName">
+                <input matInput [(ngModel)]="model.memberModel.companyName" placeholder="Company Name" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.jobTitle" placeholder="Job Title" formControlName="jobTitle">
+                <input matInput [(ngModel)]="model.memberModel.jobTitle" placeholder="Job Title" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
             </div>
   
             <div fxLayout="row wrap">
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
+                <input matInput [(ngModel)]="model.memberModel.facebookHandle" placeholder="Facebook Handle" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.instagramHandle" placeholder="Instagram Handle" formControlName="instagramHandle">
+                <input matInput [(ngModel)]="model.memberModel.instagramHandle" placeholder="Instagram Handle" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
   
               <mat-form-field>
-                <input matInput [(ngModel)]="memberModel.twitterHandle" placeholder="Twitter Handle" formControlName="twitterHandle">
+                <input matInput [(ngModel)]="model.memberModel.twitterHandle" placeholder="Twitter Handle" [ngModelOptions]="{standalone: true}">
               </mat-form-field>
             </div>
   

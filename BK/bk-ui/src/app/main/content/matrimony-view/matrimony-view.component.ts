@@ -22,7 +22,7 @@ export class MatrimonyViewComponent implements OnInit {
           this.memberId = params.memberId;
         else
           this.memberId = null;          
-
+                
         if (this.memberId > 0)
           this.loadMatrimony();
       });    
@@ -33,7 +33,7 @@ export class MatrimonyViewComponent implements OnInit {
 
   loadMatrimony(){
     return this.dataService.getViewOnlyMatrimony(this.memberId).subscribe(
-      (res) => {
+      (res) => {        
         this.model = res.result;        
       },
       (err) => {
