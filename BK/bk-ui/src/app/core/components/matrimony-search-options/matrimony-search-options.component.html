@@ -1,0 +1,74 @@
+<button #openButton mat-icon-button class="open-button mat-primary-bg mat-elevation-z2" (click)="openBar()">
+    <mat-icon>search</mat-icon>
+</button>
+
+<div class="theme-options-panel-overlay" #overlay [fxHide]="barClosed" [@fadeInOut]="!barClosed"></div>
+
+<div #panel class="theme-options-panel mat-white-bg mat-elevation-z8">
+
+    <button mat-icon-button class="close-button" (click)="closeBar()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <div class=".searchOptions">
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.firstName" placeholder="First Name">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.lastName" placeholder="Last Name">
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <mat-select placeholder="Category" [(ngModel)]="searchParameter.categoryId">
+                    <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
+                        {{ n.category }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <mat-select placeholder="Nukh" [(ngModel)]="searchParameter.nukhId">
+                    <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
+                        {{ n.nukh }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.city" placeholder="City">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.state" placeholder="State">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.email" placeholder="Email">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.phoneNumber" placeholder="Phone Number">
+            </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button color="accent" (click)="search()" class="submit-button" aria-label="Search">
+                <mat-icon>search</mat-icon>&nbsp;SEARCH
+            </button>&nbsp;&nbsp;
+            <button mat-raised-button class="submit-button" (click)="clear()" aria-label="CLEAR">
+                <mat-icon>settings_backup_restore</mat-icon>&nbsp;CLEAR
+            </button>
+        </div>
+    </div>
+</div>
