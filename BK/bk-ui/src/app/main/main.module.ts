@@ -13,7 +13,7 @@ import { FuseNavigationModule } from '../core/components/navigation/navigation.m
 import { FuseNavbarVerticalToggleDirective } from './navbar/vertical/navbar-vertical-toggle.directive';
 import { FuseNavbarHorizontalComponent } from './navbar/horizontal/navbar-horizontal.component';
 import { FuseQuickPanelComponent } from './quick-panel/quick-panel.component';
-import { FuseThemeOptionsComponent } from '../core/components/theme-options/theme-options.component';
+import { MemberSearchOptionsComponent } from '../core/components/member-search-options/member-search-options.component';
 import { FuseShortcutsModule } from '../core/components/shortcuts/shortcuts.module';
 import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.module';
 import { HomeComponent } from './content/home/home.component';
@@ -56,7 +56,7 @@ export function tokenGetter() {
         FuseNavbarHorizontalComponent,
         FuseToolbarComponent,
         FuseNavbarVerticalToggleDirective,
-        FuseThemeOptionsComponent,
+        MemberSearchOptionsComponent,        
         FuseQuickPanelComponent,        
         HomeComponent,
         OriginComponent,

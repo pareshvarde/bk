@@ -7,12 +7,12 @@ import { MemberSearchParameter } from '../../../main/models/memberSearchParamete
 
 
 @Component({
-    selector   : 'fuse-theme-options',
-    templateUrl: './theme-options.component.html',
-    styleUrls  : ['./theme-options.component.scss'],
+    selector   : 'member-search-options',
+    templateUrl: './member-search-options.component.html',
+    styleUrls  : ['./member-search-options.component.scss'],
     animations : fuseAnimations
 })
-export class FuseThemeOptionsComponent implements OnInit
+export class MemberSearchOptionsComponent implements OnInit
 {
     @ViewChild('openButton') openButton;
     @ViewChild('panel') panel;
