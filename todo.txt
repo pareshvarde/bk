@@ -25,3 +25,15 @@ optimization
 =============
 	
 default member family - this is required when you see a matrimony profile should load the default one.
+
+Matrimony Serch
+	Name
+	Category
+	Nukh
+	City
+	State
+	Country
+	Gender
+	Occupation
+	Age
+	Marital Status
