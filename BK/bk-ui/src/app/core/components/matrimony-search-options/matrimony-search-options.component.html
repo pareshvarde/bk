@@ -11,16 +11,6 @@
     </button>
 
     <div class=".searchOptions">
-        <div fxLayout="row wrap">
-            <mat-form-field>
-                <input matInput [(ngModel)]="searchParameter.firstName" placeholder="First Name">
-            </mat-form-field>
-        </div>
-        <div fxLayout="row wrap">
-            <mat-form-field>
-                <input matInput [(ngModel)]="searchParameter.lastName" placeholder="Last Name">
-            </mat-form-field>
-        </div>
 
         <div fxLayout="row wrap">
             <mat-form-field>
@@ -47,16 +37,29 @@
                 <input matInput [(ngModel)]="searchParameter.city" placeholder="City">
             </mat-form-field>
         </div>
+
         <div fxLayout="row wrap">
             <mat-form-field>
                 <input matInput [(ngModel)]="searchParameter.state" placeholder="State">
             </mat-form-field>
         </div>
+
         <div fxLayout="row wrap">
             <mat-form-field>
                 <input matInput [(ngModel)]="searchParameter.country" placeholder="Country">
             </mat-form-field>
         </div>
+
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <mat-select placeholder="Marital Status" [(ngModel)]="searchParameter.maritalStatusId">
+                  <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
+                    {{ n.status }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+
         <div fxLayout="row wrap">
             <mat-form-field>
                 <mat-select placeholder="Gender" [(ngModel)]="searchParameter.gender">
@@ -68,6 +71,20 @@
             </mat-form-field>
         </div>
 
+        
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.minimumAge" placeholder="Minimum Age">
+            </mat-form-field>
+        </div>
+
+        
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <input matInput [(ngModel)]="searchParameter.maximumAge" placeholder="Maximum Age">
+            </mat-form-field>
+        </div>
+        
         <div fxLayout="row wrap">
             <mat-form-field>
               <mat-select placeholder="Occupation" [(ngModel)]="searchParameter.occupationId">
