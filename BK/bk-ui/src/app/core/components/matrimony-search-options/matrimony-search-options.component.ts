@@ -22,9 +22,9 @@ export class MatrimonySearchOptionsComponent implements OnInit
     searchParameter: MatrimonySearchParameter;
     @Output() performSearch = new EventEmitter<MatrimonySearchParameter>();
     @Output() clearSearch = new EventEmitter<MatrimonySearchParameter>();
-    readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
-    readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
-    readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
+    NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA.slice();
+    CATEGORIES_DATA_LOCAL = CATEGORIES_DATA.slice();
+    OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA.slice();
     
     public player: AnimationPlayer;
 
@@ -37,6 +37,10 @@ export class MatrimonySearchOptionsComponent implements OnInit
     {
         this.barClosed = true;         
         this.searchParameter = new MatrimonySearchParameter(); 
+
+        this.NUKHS_LOOKUP_DATA_LOCAL.unshift({id:null, occupation: ''});
+        this.CATEGORIES_DATA_LOCAL.unshift({id:null, category: ''});
+        this.OCCUPATION_DATA_LOCAL.unshift({id:null, occupation: ''});
     }
 
     ngOnInit()
