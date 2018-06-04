@@ -57,6 +57,16 @@
                 <input matInput [(ngModel)]="searchParameter.country" placeholder="Country">
             </mat-form-field>
         </div>
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <mat-select placeholder="Gender" [(ngModel)]="searchParameter.gender">
+                    <mat-option value="">All</mat-option>
+                    <mat-option value="M">Male</mat-option>
+                    <mat-option value="F">Female</mat-option>
+                    <mat-option value="O">Other</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button color="accent" (click)="search()" class="submit-button" aria-label="Search">
