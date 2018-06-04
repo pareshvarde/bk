@@ -1,6 +1,4 @@
-export class MatrimonySearchParameter{
-    public firstName: string;
-    public lastName: string;    
+export class MatrimonySearchParameter{    
     public categoryId: number;
     public nukhId: number;    
     public city: string;
@@ -9,8 +7,8 @@ export class MatrimonySearchParameter{
     public gender: string;
     public occupationId: number;
     public maritalStatusId: number;
-    public ageFrom: number;
-    public ageTo: number;
+    public minimumAge: number;
+    public maximumAge: number;
     public currentPage: number;
     public pageSize: number;
   }
