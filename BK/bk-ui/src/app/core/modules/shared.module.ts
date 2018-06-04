@@ -11,7 +11,6 @@ import { FuseMatSidenavHelperService } from '../directives/fuse-mat-sidenav-help
 import { FusePipesModule } from '../pipes/pipes.module';
 import { FuseMatchMedia } from '../services/match-media.service';
 import { FuseNavbarVerticalService } from '../../main/navbar/vertical/navbar-vertical.service';
-import { FuseHljsComponent } from '../components/hljs/hljs.component';
 import { FusePerfectScrollbarDirective } from '../directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseIfOnDomDirective } from '../directives/fuse-if-on-dom/fuse-if-on-dom.directive';
 import { FuseTranslationLoaderService } from '../services/translation-loader.service';
@@ -21,8 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
     declarations   : [
         FuseMatSidenavHelperDirective,
-        FuseMatSidenavTogglerDirective,        
-        FuseHljsComponent,
+        FuseMatSidenavTogglerDirective,                
         FuseIfOnDomDirective,
         FusePerfectScrollbarDirective        
     ],
@@ -41,8 +39,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FormsModule,
         FuseMatSidenavHelperDirective,
         FuseMatSidenavTogglerDirective,
-        FusePipesModule,        
-        FuseHljsComponent,
+        FusePipesModule,                
         FusePerfectScrollbarDirective,
         ReactiveFormsModule,        
         FuseIfOnDomDirective,
