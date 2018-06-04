@@ -43,6 +43,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ScrollToModule } from 'ng2-scroll-to';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { MatrimonySearchComponent } from './content/matrimony-search/matrimony-search.component';
+import { MatrimonySearchOptionsComponent } from '../core/components/matrimony-search-options/matrimony-search-options.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -57,7 +58,8 @@ export function tokenGetter() {
         FuseNavbarHorizontalComponent,
         FuseToolbarComponent,
         FuseNavbarVerticalToggleDirective,
-        MemberSearchOptionsComponent,        
+        MemberSearchOptionsComponent, 
+        MatrimonySearchOptionsComponent,       
         FuseQuickPanelComponent,        
         HomeComponent,
         OriginComponent,
