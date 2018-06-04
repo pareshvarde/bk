@@ -15,7 +15,6 @@ import { FuseNavbarHorizontalComponent } from './navbar/horizontal/navbar-horizo
 import { FuseQuickPanelComponent } from './quick-panel/quick-panel.component';
 import { MemberSearchOptionsComponent } from '../core/components/member-search-options/member-search-options.component';
 import { FuseShortcutsModule } from '../core/components/shortcuts/shortcuts.module';
-import { FuseSearchBarModule } from '../core/components/search-bar/search-bar.module';
 import { HomeComponent } from './content/home/home.component';
 import { OriginComponent } from './content/origin/origin.component';
 import { NukhComponent } from './content/nukh/nukh.component';
@@ -94,8 +93,7 @@ export function tokenGetter() {
         SimpleNotificationsModule.forRoot(),
         JasperoConfirmationsModule,
         FuseNavigationModule,
-        FuseShortcutsModule,
-        FuseSearchBarModule,
+        FuseShortcutsModule,        
         MomentModule,
         ScrollToModule.forRoot(),  
         InfiniteScrollModule,      
