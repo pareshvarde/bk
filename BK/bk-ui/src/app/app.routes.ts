@@ -18,6 +18,7 @@ import { ForkComponent } from './main/content/fork/fork.component';
 import { MatrimonyComponent } from './main/content/matrimony/matrimony.component';
 import { MatrimonyViewComponent } from './main/content/matrimony-view/matrimony-view.component';
 import { DirectoryComponent } from './main/content/directory/directory.component';
+import { MatrimonySearchComponent } from './main/content/matrimony-search/matrimony-search.component';
 
 export const bkRoutes: Routes = [
     {
@@ -97,6 +98,11 @@ export const bkRoutes: Routes = [
     {
         path: "directory",
         component: DirectoryComponent,
+        canActivate: [AuthGuard]        
+    },
+    {
+        path: "matrimony-search",
+        component: MatrimonySearchComponent,
         canActivate: [AuthGuard]        
     },
     {

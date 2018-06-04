@@ -42,6 +42,7 @@ import { DirectoryComponent } from './content/directory/directory.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { ScrollToModule } from 'ng2-scroll-to';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { MatrimonySearchComponent } from './content/matrimony-search/matrimony-search.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -77,7 +78,8 @@ export function tokenGetter() {
         CallbackPipe,
         MatrimonyComponent,
         MatrimonyViewComponent,
-        DirectoryComponent 
+        DirectoryComponent,
+        MatrimonySearchComponent 
     ],
     providers:[
         ConfirmationService,
