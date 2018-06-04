@@ -23,22 +23,5 @@ edits by minor?
 
 optimization
 =============
-
-Directory Search
-=======================
-default search order by City
-
-search options
-	First Name
-	Last Name
-	Nukh
-	Category
-	City
-	State
-	Email
-	Phone Number
 	
-UPGRADE=============
-	removed angular2-jwt	
-	removed scroll to
-	removed block ui
+default member family - this is required when you see a matrimony profile should load the default one.
