@@ -9,7 +9,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FuseMatSidenavHelperDirective, FuseMatSidenavTogglerDirective } from '../directives/fuse-mat-sidenav-helper/fuse-mat-sidenav-helper.directive';
 import { FuseMatSidenavHelperService } from '../directives/fuse-mat-sidenav-helper/fuse-mat-sidenav-helper.service';
 import { FusePipesModule } from '../pipes/pipes.module';
-import { FuseConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { FuseMatchMedia } from '../services/match-media.service';
 import { FuseNavbarVerticalService } from '../../main/navbar/vertical/navbar-vertical.service';
 import { FuseHljsComponent } from '../components/hljs/hljs.component';
@@ -22,8 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
     declarations   : [
         FuseMatSidenavHelperDirective,
-        FuseMatSidenavTogglerDirective,
-        FuseConfirmDialogComponent,        
+        FuseMatSidenavTogglerDirective,        
         FuseHljsComponent,
         FuseIfOnDomDirective,
         FusePerfectScrollbarDirective        
@@ -51,7 +49,7 @@ import { TranslateModule } from '@ngx-translate/core';
         TranslateModule
     ],
     entryComponents: [
-        FuseConfirmDialogComponent
+        
     ],
     providers      : [
         CookieService,
