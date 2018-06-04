@@ -1,109 +1,267 @@
 <div id="matrimony-view" fxLayout="column">
   <div id="matrimony-view-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div *ngIf="model" id="matrimony-view-form">
-      <form name="matrimonyForm-view">
-          <div fxLayout="row wrap">
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.firstName" placeholder="First Name" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.lastName" placeholder="Last Name" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.nickName" placeholder="Nick Name" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-            </div>
-  
-            <div fxLayout="row wrap">
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.email" placeholder="Email" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.phoneNumber" placeholder="Phone Number" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.aadhaarNumber" placeholder="Aadhaar Number" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-            </div>
-  
-            <div fxLayout="row wrap">
-              <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.memberModel.gender" [ngModelOptions]="{standalone: true}">
-                <mat-radio-button class="mr-8" value='M'>
-                  Male
-                </mat-radio-button>
-                <mat-radio-button class="mr-8" value='F'>
-                  Female
-                </mat-radio-button>
-                <mat-radio-button class="mr-8" value='O'>
-                  Other
-                </mat-radio-button>
-              </mat-radio-group>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth" [ngModelOptions]="{standalone: true}">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.birthPlace" placeholder="Birth Place" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-            </div>              
-  
-            <div fxLayout="row wrap">
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.educationLevel" placeholder="Education Level" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.educationField" placeholder="Education Field" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-            </div>
-  
-            <div fxLayout="row wrap">
-              <mat-form-field>
-                <mat-select placeholder="Occupation" [(ngModel)]="model.memberModel.occupationId" [ngModelOptions]="{standalone: true}">
-                  <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
-                    {{ n.occupation }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.companyName" placeholder="Company Name" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.jobTitle" placeholder="Job Title" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-            </div>
-  
-            <div fxLayout="row wrap">
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.facebookHandle" placeholder="Facebook Handle" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.instagramHandle" placeholder="Instagram Handle" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.memberModel.twitterHandle" placeholder="Twitter Handle" [ngModelOptions]="{standalone: true}">
-              </mat-form-field>
-            </div>
-  
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <button mat-raised-button [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
-                <mat-icon>group</mat-icon>&nbsp;FAMILY
-              </button>              
-              <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
-                <mat-icon>backspace</mat-icon>&nbsp;BACK
-              </button>
-            </div>
+      <form name="matrimonyViewForm" [formGroup]="matrimonyViewForm">
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.firstName" placeholder="First Name" formControlName="firstName">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.lastName" placeholder="Last Name" formControlName="lastName">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.nickName" placeholder="Nick Name" formControlName="nickName">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.email" placeholder="Email" formControlName="email">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.memberModel.gender" formControlName="gender">
+            <mat-radio-button class="mr-8" value='M'>
+              Male
+            </mat-radio-button>
+            <mat-radio-button class="mr-8" value='F'>
+              Female
+            </mat-radio-button>
+            <mat-radio-button class="mr-8" value='O'>
+              Other
+            </mat-radio-button>
+          </mat-radio-group>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
+              formControlName="dob">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.birthPlace" placeholder="Birth Place" formControlName="birthPlace">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.educationField" placeholder="Education Field" formControlName="educationField">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <mat-select placeholder="Occupation" [(ngModel)]="model.memberModel.occupationId" formControlName="occupationId">
+              <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
+                {{ n.occupation }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.companyName" placeholder="Company Name" formControlName="companyName">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.jobTitle" placeholder="Job Title" formControlName="jobTitle">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.instagramHandle" placeholder="Instagram Handle" formControlName="instagramHandle">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.memberModel.twitterHandle" placeholder="Twitter Handle" formControlName="twitterHandle">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.matrimonyModel.maternalNukhId" formControlName="maternalNukhId" bkAutofocus>
+              <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
+                {{ n.nukh }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Marital Status" [(ngModel)]="model.matrimonyModel.maritalStatusId" formControlName="maritalStatusId">
+              <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
+                {{ n.status }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <input matInput type="time" [(ngModel)]="model.matrimonyModel.birthTime" placeholder="Birth Time" formControlName="birthTime">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Height" [(ngModel)]="model.matrimonyModel.height" formControlName="height">
+              <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
+                {{ n.feet }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.matrimonyModel.weight" placeholder="Weight" formControlName="weight">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <mat-select placeholder="Body" [(ngModel)]="model.matrimonyModel.bodyTypeId" formControlName="bodyTypeId">
+              <mat-option *ngFor="let n of BODYTYPE_DATA_LOCAL" [value]="n.id">
+                {{ n.type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Complexion" [(ngModel)]="model.matrimonyModel.complexionTypeId" formControlName="complexionTypeId">
+              <mat-option *ngFor="let n of COMPLEXION_DATA_LOCAL" [value]="n.id">
+                {{ n.type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Mangal" [(ngModel)]="model.matrimonyModel.mangal" formControlName="manglik">
+              <mat-option value='N'>
+                NOT MANGLIK
+              </mat-option>
+              <mat-option value='A'>
+                AANSHIK MANGLIK
+              </mat-option>
+              <mat-option value='M'>
+                MANGLIK
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.matrimonyModel.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput [(ngModel)]="model.matrimonyModel.language" placeholder="Mother Tongue" formControlName="language">
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+
+          <mat-form-field>
+            <mat-select placeholder="Smoke" [(ngModel)]="model.matrimonyModel.smoke" formControlName="smoke">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <mat-select placeholder="Alcohol" [(ngModel)]="model.matrimonyModel.alcohol" formControlName="alcohol">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Tobacco" [(ngModel)]="model.matrimonyModel.tobacco" formControlName="tobacco">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field>
+            <mat-select placeholder="Disability" [(ngModel)]="model.matrimonyModel.disability" formControlName="disability">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Vegetarian" [(ngModel)]="model.matrimonyModel.vegetarian" formControlName="vegetarian">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Own Home" [(ngModel)]="model.matrimonyModel.ownHome" formControlName="ownHome">
+              <mat-option [value]=true>
+                YES
+              </mat-option>
+              <mat-option [value]=false>
+                NO
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row wrap">
+          <mat-form-field class="mat-form-field-fullwidth">
+            <textarea matInput [(ngModel)]="model.matrimonyModel.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
+              matAutosizeMaxRows="5" formControlName="profileText"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <button mat-raised-button [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
+            <mat-icon>group</mat-icon>&nbsp;FAMILY
+          </button>
+          <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
+            <mat-icon>backspace</mat-icon>&nbsp;BACK
+          </button>
+        </div>
       </form>
     </div>
   </div>
