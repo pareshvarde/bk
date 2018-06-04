@@ -10,7 +10,7 @@ namespace BK.ViewModel
     {
         [JsonProperty("memberId")]
         public int MemberId { get; set; }
-        
+
         [JsonProperty("maternalNukhId")]
         public int MaternalNukhId { get; set; }
 
@@ -48,7 +48,7 @@ namespace BK.ViewModel
         public bool Disability { get; set; }
 
         [JsonProperty("ownHome")]
-        public bool OwnHome  { get; set; }
+        public bool OwnHome { get; set; }
 
         [JsonProperty("vegetarian")]
         public bool Vegetarian { get; set; }
@@ -60,6 +60,21 @@ namespace BK.ViewModel
         public string Language { get; set; }
 
         [JsonProperty("profileText")]
-        public string ProfileText  { get; set; }
+        public string ProfileText { get; set; }
+    }
+
+    public class MatrimonyViewOnlyModel{
+
+        public MatrimonyViewOnlyModel()
+        {
+            this.MatrimonyModel = new MatrimonyViewModel();
+            this.MemberModel = new MemberViewModel();
+        }
+
+        [JsonProperty("matrimonyModel")]
+        public MatrimonyViewModel MatrimonyModel { get; set; }
+
+        [JsonProperty("memberModel")]
+        public MemberViewModel MemberModel { get; set; }
     }
 }

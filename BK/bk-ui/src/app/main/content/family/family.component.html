@@ -175,7 +175,7 @@
               <b>Name</b>
             </mat-header-cell>
             <mat-cell *matCellDef="let member">
-              <a *ngIf="member.matrimonialExists" [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
+              <a *ngIf="member.matrimonialExists" [routerLink]="['/matrimony-view/', member.memberId]">{{member.name}}</a>
               <span *ngIf="!member.matrimonialExists">{{member.name}} ({{member.age}} Years)</span>
               <button *ngIf="member.canEdit && member.matrimonialExists" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
