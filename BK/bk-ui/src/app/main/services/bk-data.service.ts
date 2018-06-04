@@ -13,6 +13,7 @@ import { MemberSearchBasicModel } from '../models/memberSearchBasicModel';
 import { MatrimonyModel } from '../models/matrimonyModel';
 import { MemberSearchParameter } from '../models/memberSearchParameter';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
+import { MatrimonySearchParameter } from '../models/matrimonySearchParameter';
 
 @Injectable()
 export class bkDataService {
@@ -201,6 +202,13 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
+  searchMatrimony(model: MatrimonySearchParameter){
+    this.blockUI.start("Please wait...");
+
+    return this.authHttp.post(this.API_URL + "member/search", model).pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);
+  }
   
   deleteMatrimony(memberId: number)
   {

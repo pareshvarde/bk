@@ -68,6 +68,16 @@
             </mat-form-field>
         </div>
 
+        <div fxLayout="row wrap">
+            <mat-form-field>
+              <mat-select placeholder="Occupation" [(ngModel)]="searchParameter.occupationId">
+                <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
+                  {{ n.occupation }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
         <div fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button color="accent" (click)="search()" class="submit-button" aria-label="Search">
                 <mat-icon>search</mat-icon>&nbsp;SEARCH

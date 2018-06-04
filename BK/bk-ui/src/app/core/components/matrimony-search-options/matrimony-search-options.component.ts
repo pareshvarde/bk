@@ -4,6 +4,7 @@ import { fuseAnimations } from '../../animations';
 import { CATEGORIES_DATA } from '../../../main/data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../../main/data/nukhsLookup';
 import { MatrimonySearchParameter } from '../../../main/models/matrimonySearchParameter';
+import { OCCUPATIONS_DATA } from '../../../main/data/occupations';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class MatrimonySearchOptionsComponent implements OnInit
     @Output() clearSearch = new EventEmitter<MatrimonySearchParameter>();
     readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
     readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
+    readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
     
     public player: AnimationPlayer;
 

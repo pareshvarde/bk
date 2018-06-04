@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
+import { MatrimonySearchParameter } from '../../models/matrimonySearchParameter';
 
 @Component({
   selector: 'app-matrimony-search',
@@ -11,20 +12,20 @@ export class MatrimonySearchComponent implements OnInit {
 
   results: any[] = [];
   totalCount: number = 0;
-  searchParameter: any;
+  searchParameter: MatrimonySearchParameter;
   pageNumber: number = 0;
   hasResult: boolean;
   readonly PAGE_SIZE: number = 5;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) {
-
+    this.searchParameter = new MatrimonySearchParameter();
   }
 
   ngOnInit() {
     this.search(this.searchParameter);
   }
 
-  search(searchParameter: any) {
+  search(searchParameter: MatrimonySearchParameter) {
 
     this.results = [];
     this.hasResult = true;
@@ -42,7 +43,7 @@ export class MatrimonySearchComponent implements OnInit {
     this.pageNumber = this.pageNumber + 1;
     this.searchParameter.currentPage = this.pageNumber;
 
-    this.dataService.searchMember(this.searchParameter).subscribe(
+    this.dataService.searchMatrimony(this.searchParameter).subscribe(
       (res) => {
 
         if (res.result.results.length < this.searchParameter.pageSize)
@@ -68,7 +69,7 @@ export class MatrimonySearchComponent implements OnInit {
     );
   }
 
-  clear(searchParameter: any) {
+  clear(searchParameter: MatrimonySearchParameter) {
     this.results = [];
     searchParameter.pageSize = this.PAGE_SIZE;
     this.search(searchParameter);
