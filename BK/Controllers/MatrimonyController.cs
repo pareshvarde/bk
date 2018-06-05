@@ -2,6 +2,7 @@
 using BK.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -177,6 +178,60 @@ namespace BK.Controllers
             }
 
             return Ok();
+        }
+
+        [Route("api/matrimony/search")]
+        [HttpPost]
+        public IHttpActionResult Search(MatrimonySearchModel model)
+        {            
+            int? categoryId = model.CategoryID.HasValue && model.CategoryID.Value > 0 ? model.CategoryID : null;
+            int? nukhId = model.NukhID.HasValue && model.NukhID.Value > 0 ? model.NukhID : null;
+            string city = string.IsNullOrWhiteSpace(model.City) ? null : model.City.Trim();
+            string state = string.IsNullOrWhiteSpace(model.State) ? null : model.State.Trim();
+            string country = string.IsNullOrWhiteSpace(model.Country) ? null : model.Country.Trim();
+            string Gender = string.IsNullOrWhiteSpace(model.Gender) ? null : model.Gender.Trim();
+            int? occupationId = model.OccupationId.HasValue && model.OccupationId.Value > 0 ? model.OccupationId : null;
+            int? maritalStatusId = model.MaritalStatusId.HasValue && model.MaritalStatusId.Value > 0 ? model.MaritalStatusId : null;
+            int? minAge = model.MinimumAge.HasValue && model.MinimumAge.Value > 0 ? model.MinimumAge : null;
+            int? maxAge = model.MaximumAge.HasValue && model.MaximumAge.Value > 0 ? model.MinimumAge : null;
+            int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
+            int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
+            DateTime? minDOB = null;
+            DateTime? maxDOB = null;
+
+            if (minAge.HasValue)
+                minDOB = DateTime.Today.AddYears(minAge.Value);
+
+            if (maxAge.HasValue)
+                maxDOB = DateTime.Today.AddYears(maxAge.Value);
+
+            MemberSearchResultModel mvm = new MemberSearchResultModel();
+
+            using (bkContext context = new bkContext())
+            {
+                ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
+
+                //List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber, pageSize, currentPage, oParameter).ToList();
+                var results = new List<bk_MemberSearch_Result>();
+
+                mvm.TotalRecords = (int)oParameter.Value;
+
+                foreach (var result in results)
+                {
+                    var item = new MemberSearchResultItemModel();
+
+                    item.Name = $"{result.FirstName} {result.LastName}";
+                    item.Address1 = $"{result.Address1}, {result.Address2}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
+                    item.Address2 = $"{result.City}, {result.State}, {result.Country}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
+                    item.MemberId = result.MemberID;
+                    item.FamilyId = result.FamilyID;
+                    item.Gender = result.Gender;
+
+                    mvm.Results.Add(item);
+                }
+            }
+
+            return Ok(mvm);
         }
     }
 }

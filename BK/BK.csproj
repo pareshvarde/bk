@@ -248,6 +248,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\FamilyViewModel.cs" />
+    <Compile Include="ViewModel\MatrimonySearchModel.cs" />
+    <Compile Include="ViewModel\MatrimonySearchResultModel.cs" />
     <Compile Include="ViewModel\MatrimonyViewModel.cs" />
     <Compile Include="ViewModel\MemberBasicSearchModel.cs" />
     <Compile Include="ViewModel\MemberSearchModel.cs" />
