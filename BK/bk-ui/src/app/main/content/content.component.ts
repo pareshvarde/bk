@@ -26,7 +26,7 @@ export class FuseContentComponent implements OnInit, OnDestroy {
     public confirmationOptions ={
         overlay: true,
         overlayClickToClose: false,
-        showCloseButton: false,
+        showCloseButton: true,
         confirmText: 'Yes',
         declineText: 'No'
     }
