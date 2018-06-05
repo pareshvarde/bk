@@ -42,6 +42,22 @@ namespace BK.ViewModel
 
         [JsonProperty("dob")]
         public DateTime? DOB { get; set; }
+
+        [JsonProperty("age")]
+        public int Age
+        {
+            get
+            {
+                if (!this.DOB.HasValue)
+                    return 0;
+
+                int age = DateTime.Today.Year - DOB.Value.Year;
+                if (age > 0 && this.DOB.Value > DateTime.Today.AddYears(-age))
+                    age--;
+
+                return age;
+            }
+        }
     }
 }
 

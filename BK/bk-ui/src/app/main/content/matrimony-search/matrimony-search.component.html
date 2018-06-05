@@ -6,8 +6,15 @@
             <img class="avatar" src="/assets/images/avatars/img_avatar_male.png" />
             <div class="h4"><a [routerLink]="['/member/', result.familyId, result.memberId]">{{result.name}}</a></div>
         </div>      
-        <div class="h5">{{result.address1}}</div>
-        <div class="h5">{{result.address2}}</div>
+        <div class="p-16 pt-0 line-height-1.75">
+                <div class="h4">Age</div>
+                <div class="h5 secondary-text">{{result.age}} Years</div>
+        </div>        
+        <div class="p-16 pt-0 line-height-1.75">
+                <div class="h4">Address</div>
+                <div class="h5 secondary-text">{{result.address1}}</div>
+                <div class="h5 secondary-text">{{result.address2}}</div>
+        </div>                
     </div>  
     <div class="row footer" fxLayoutAlign="center center" *ngIf="!hasResult">END OF SEARCH RESULT</div>
   </div>
