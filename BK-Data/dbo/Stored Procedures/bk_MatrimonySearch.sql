@@ -46,12 +46,12 @@ BEGIN
 			f.City,
 			f.State,
 			f.Country,
-			m.Gender,			
+			m.Gender,
 			m.DOB
 		FROM
 			Members m 
 			JOIN Matrimonials mat ON mat.MemberID = m.MemberID
-			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
+			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID AND fma.DefaultFamily = 1
 			JOIN Families f ON f.FamilyID = fma.FamilyId		
 		WHERE			
 			(@CategoryID IS NULL OR f.CategoryID = @CategoryID)

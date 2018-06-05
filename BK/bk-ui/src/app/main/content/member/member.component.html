@@ -179,6 +179,10 @@
             <button *ngIf="memberModel.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
               <mat-icon>edit</mat-icon>&nbsp;EDIT
             </button>
+            <button *ngIf="memberModel.canEdit" mat-raised-button (click)="markDefaultFamily()" color="accent" class="submit-button"
+              aria-label="Mark Default">
+              <mat-icon>accessibility</mat-icon>&nbsp;MARK DEFAULT
+            </button>
             <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
               <mat-icon>backspace</mat-icon>&nbsp;BACK
             </button>

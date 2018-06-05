@@ -336,6 +336,26 @@ namespace BK.Controllers
             return Ok();
         }
 
+        [Route("api/member/markDefaultFamily")]
+        [HttpGet]
+        public IHttpActionResult MarkDefaultFamily(int familyId, int memberId)
+        {
+            using (bkContext context = new bkContext())
+            {
+                if (!CanEditMember(familyId, memberId))
+                    return BadRequest("You do not have permission to edit this member");
+
+                List<FamilyMemberAssociation> fmAssociations = context.FamilyMemberAssociations.Where(m => m.MemberId == memberId).ToList();
+
+                foreach (var item in fmAssociations)
+                    item.DefaultFamily = item.FamilyId == familyId;
+
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
+
         [Route("api/member/search")]
         [HttpPost]
         public IHttpActionResult Search(MemberSearchModel model)
@@ -349,7 +369,7 @@ namespace BK.Controllers
             string emailAddress = string.IsNullOrWhiteSpace(model.Email) ? null : model.Email.Trim();
             string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
             int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
-            int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;            
+            int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
 
             MemberSearchResultModel mvm = new MemberSearchResultModel();
 
@@ -357,7 +377,7 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber,pageSize, currentPage, oParameter).ToList();
+                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber, pageSize, currentPage, oParameter).ToList();
 
                 mvm.TotalRecords = (int)oParameter.Value;
 

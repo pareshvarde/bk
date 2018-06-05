@@ -143,7 +143,7 @@ export class bkDataService {
       return this.handleAPIResponse(res);
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
-
+ 
   getFamilyLookup(memberId: number)
   {
     this.blockUI.start("Please wait...");
@@ -174,6 +174,14 @@ export class bkDataService {
     this.blockUI.start("Please wait...");
                
     return this.authHttp.get(this.API_URL + "member/decline?memberId=" + memberId + "&familyId=" + familyId).pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);
+  }
+
+  markDefaultFamily(familyId: number, memberId: number){
+    this.blockUI.start("Please wait...");
+               
+    return this.authHttp.get(this.API_URL + "member/markDefaultFamily?familyId=" + familyId + "&memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
     }),catchError((error : any) => this.handleAPIError(error)),);
   }

@@ -1,4 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[bk_MemberSearch]
+﻿
+CREATE PROCEDURE [dbo].[bk_MemberSearch]
 (    
 	@FirstName NVARCHAR(50) = NULL,
 	@LastName NVARCHAR(50) = NULL,
@@ -46,7 +47,7 @@ BEGIN
 			m.Gender
 		FROM
 			Members m 
-			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
+			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID AND fma.DefaultFamily = 1
 			JOIN Families f ON f.FamilyID = fma.FamilyId		
 		WHERE
 			(@FirstName IS NULL OR m.FirstName = @FirstName)

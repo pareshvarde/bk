@@ -11,6 +11,7 @@ import { bkAuthService } from '../../services/auth-service';
 import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
 import { RELATION_TYPES_DATA } from '../../data/relations';
 import { OCCUPATIONS_DATA } from '../../data/occupations';
+import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 
 @Component({
   selector: 'app-member',
@@ -35,7 +36,8 @@ export class MemberComponent implements OnInit {
   readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
+    private alertService: NotificationsService, public authService: bkAuthService, private location: Location,
+    private _confirmation: ConfirmationService) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -243,6 +245,27 @@ export class MemberComponent implements OnInit {
           this.alertService.error('', err.errors[0]);
         else
           this.alertService.error('', err);
+      }
+    );
+  }
+
+  markDefaultFamily(){
+    this._confirmation.create('', 'Are you sure you want to mark current family as default family for this member?').subscribe(
+      (ans: ResolveEmit) => {
+        if (!ans.resolved)
+          return;
+
+        this.dataService.markDefaultFamily(this.familyId, this.memberId).subscribe(
+          (res) => {
+            this.alertService.success("Member marked as default to this family");
+          },
+          (err) => {
+            if (err.errors)
+              this.alertService.error('', err.errors[0]);
+            else
+              this.alertService.error('', err);
+          }
+        );
       }
     );
   }
