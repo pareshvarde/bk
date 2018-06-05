@@ -26,18 +26,25 @@ namespace BK.Controllers
                               {
                                   f.FamilyID,
                                   m.FirstName,
-                                  m.LastName
+                                  m.LastName,                                  
                               }).Distinct().ToList();
+
+                int defaultFamilyId = 0;
+                FamilyMemberAssociation defaultAssociation = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId && x.DefaultFamily).FirstOrDefault();
+                if (defaultAssociation != null)
+                    defaultFamilyId = defaultAssociation.FamilyId;
 
                 List<FamilyLookupViewModel> response = new List<FamilyLookupViewModel>();
 
                 foreach (var item in result)
                 {
-                    response.Add(new FamilyLookupViewModel()
-                    {
-                        FamilyID = item.FamilyID,
-                        HeadOfFamily = $"{item.FirstName} {item.LastName}"
-                    });
+                    var temp = new FamilyLookupViewModel();
+
+                    temp.FamilyID = item.FamilyID;
+                    temp.HeadOfFamily = $"{item.FirstName} {item.LastName}";
+                    temp.DefaultFamily = item.FamilyID == defaultFamilyId;
+                        
+                    response.Add(temp);                        
                 }
 
                 return Ok(response);

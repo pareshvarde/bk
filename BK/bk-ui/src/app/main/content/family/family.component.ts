@@ -77,9 +77,18 @@ export class FamilyComponent implements OnInit {
       (res) => {
         this.familyLookup = res.result;
         if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId)
-          this.familyId = this.familyLookup[0].familyId;
+        {          
+          var defaultFamily = this.familyLookup.find(x => x.defaultFamily == true);
+          
+          if (defaultFamily)
+            this.familyId = defaultFamily.familyId;
+          else
+            this.familyId = this.familyLookup[0].familyId;
+        }
         else
+        {
           this.familyId = this.familyId * 1; //TRICK TO BIND IT BACK TO UI
+        }
 
         this.loadFamily();
       },

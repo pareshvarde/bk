@@ -12,6 +12,9 @@ namespace BK.ViewModel
         public int FamilyID { get; set; }
         
         [JsonProperty("hof")]
-        public string HeadOfFamily { get; set; }    
+        public string HeadOfFamily { get; set; }
+
+        [JsonProperty("defaultFamily")]
+        public bool DefaultFamily { get; set; }
     }
 }
