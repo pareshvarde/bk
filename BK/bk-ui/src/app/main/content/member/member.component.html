@@ -4,7 +4,7 @@
       <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
       <div fxLayout="row wrap">
         <mat-form-field>
-          <mat-select placeholder="Family" (change)="loadFamily()" [(ngModel)]="familyId">
+          <mat-select matTooltip="Member Head Of Family" placeholder="Family" (change)="loadFamily()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
               {{ n.hof }}
             </mat-option>
@@ -20,8 +20,8 @@
         </mat-radio-group>
       </div>
       <div *ngIf="addMode && existingAdd == null" fxLayout="row" fxLayoutAlign="center center">
-        <button mat-raised-button (click)="back()" color="accent" class="submit-button" aria-label="CANCEL">
-          <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+        <button matTooltip="Cancel" mat-raised-button (click)="back()" color="accent" class="submit-button" aria-label="CANCEL">
+          <mat-icon>cancel</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>CANCEL</span>
         </button>
       </div>
       <div *ngIf="existingAdd === false || !addMode">
@@ -165,26 +165,26 @@
           </div>
 
           <div *ngIf="(editMode || addMode) && memberModel.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
-              <mat-icon>save</mat-icon>&nbsp;SAVE
+            <button matTooltip="Save" mat-raised-button (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="memberForm.invalid">
+              <mat-icon>save</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>SAVE</span>
             </button>
-            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
-              <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+            <button matTooltip="Cancel" mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+              <mat-icon>cancel</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>CANCEL</span>
             </button>
           </div>
           <div *ngIf="!editMode && !addMode" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
-              <mat-icon>group</mat-icon>&nbsp;FAMILY
+            <button matTooltip="Family Detail" mat-raised-button [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
+              <mat-icon>group</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>FAMILY</span>
             </button>
-            <button *ngIf="memberModel.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
-              <mat-icon>edit</mat-icon>&nbsp;EDIT
+            <button matTooltip="Edit" *ngIf="memberModel.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+              <mat-icon>edit</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>EDIT</span>
             </button>
-            <button *ngIf="memberModel.canEdit" mat-raised-button (click)="markDefaultFamily()" color="accent" class="submit-button"
+            <button matTooltip="Mark Default Family" *ngIf="memberModel.canEdit" mat-raised-button (click)="markDefaultFamily()" color="accent" class="submit-button"
               aria-label="Mark Default">
-              <mat-icon>accessibility</mat-icon>&nbsp;MARK DEFAULT
+              <mat-icon>accessibility</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>MARK DEFAULT</span>
             </button>
-            <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
-              <mat-icon>backspace</mat-icon>&nbsp;BACK
+            <button matTooltip="Go Back" mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
+              <mat-icon>backspace</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>BACK</span>
             </button>
           </div>
         </form>
@@ -216,11 +216,11 @@
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="searchForm.invalid">
-              <mat-icon>search</mat-icon>&nbsp;SEARCH
+            <button matTooltip="Search" mat-raised-button (click)="searchMember()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="searchForm.invalid">
+              <mat-icon>search</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>SEARCH</span>
             </button>
-            <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
-              <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+            <button matTooltip="Clear" mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
+              <mat-icon>cancel</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>CANCEL</span>
             </button>
           </div>
         </form>
@@ -248,8 +248,8 @@
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="ADD">
-              <mat-icon>add_box</mat-icon>&nbsp;ADD
+            <button matTooltip="Add" mat-raised-button (click)="addToFamily()" color="accent" class="submit-button" aria-label="ADD">
+              <mat-icon>add_box</mat-icon>&nbsp;<span fxHide fxShow.gt-sm>ADD</span>
             </button>
           </div>
         </div>
