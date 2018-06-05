@@ -75,5 +75,6 @@
     <Build Include="dbo\Stored Procedures\bk_DeleteFamily.sql" />
     <Build Include="dbo\Stored Procedures\bk_DeleteMember.sql" />
     <Build Include="dbo\Stored Procedures\bk_MemberSearch.sql" />
+    <Build Include="dbo\Stored Procedures\bk_MatrimonySearch.sql" />
   </ItemGroup>
 </Project>

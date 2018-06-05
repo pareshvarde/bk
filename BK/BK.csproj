@@ -206,6 +206,9 @@
     <Compile Include="Context\bk_GetFamilyMembers_Result.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\bk_MatrimonySearch_Result.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\bk_MemberSearchBasic_Result.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>

@@ -46,7 +46,8 @@ BEGIN
 			f.City,
 			f.State,
 			f.Country,
-			m.Gender
+			m.Gender,			
+			m.DOB
 		FROM
 			Members m 
 			JOIN Matrimonials mat ON mat.MemberID = m.MemberID

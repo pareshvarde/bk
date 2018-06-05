@@ -189,7 +189,7 @@ namespace BK.Controllers
             string city = string.IsNullOrWhiteSpace(model.City) ? null : model.City.Trim();
             string state = string.IsNullOrWhiteSpace(model.State) ? null : model.State.Trim();
             string country = string.IsNullOrWhiteSpace(model.Country) ? null : model.Country.Trim();
-            string Gender = string.IsNullOrWhiteSpace(model.Gender) ? null : model.Gender.Trim();
+            string gender = string.IsNullOrWhiteSpace(model.Gender) ? null : model.Gender.Trim();
             int? occupationId = model.OccupationId.HasValue && model.OccupationId.Value > 0 ? model.OccupationId : null;
             int? maritalStatusId = model.MaritalStatusId.HasValue && model.MaritalStatusId.Value > 0 ? model.MaritalStatusId : null;
             int? minAge = model.MinimumAge.HasValue && model.MinimumAge.Value > 0 ? model.MinimumAge : null;
@@ -211,9 +211,8 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                //List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber, pageSize, currentPage, oParameter).ToList();
-                var results = new List<bk_MemberSearch_Result>();
-
+                List<bk_MatrimonySearch_Result> results = context.bk_MatrimonySearch(categoryId, nukhId, city, state, country, gender, occupationId, maritalStatusId, minDOB, maxDOB, pageSize, currentPage, oParameter).ToList();
+                
                 mvm.TotalRecords = (int)oParameter.Value;
 
                 foreach (var result in results)
@@ -226,6 +225,7 @@ namespace BK.Controllers
                     item.MemberId = result.MemberID;
                     item.FamilyId = result.FamilyID;
                     item.Gender = result.Gender;
+                    item.DOB = result.DOB;
 
                     mvm.Results.Add(item);
                 }

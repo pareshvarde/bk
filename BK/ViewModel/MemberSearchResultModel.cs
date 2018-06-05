@@ -39,6 +39,9 @@ namespace BK.ViewModel
         
         [JsonProperty("gender")]
         public string Gender { get; set; }
+
+        [JsonProperty("dob")]
+        public DateTime? DOB { get; set; }
     }
 }
 
