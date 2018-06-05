@@ -32,6 +32,9 @@ namespace BK.ViewModel
         [JsonProperty("state")]
         public string State { get; set; }
 
+        [JsonProperty("includeOnlyHOF")]
+        public bool IncludeOnlyHOF { get; set; }
+
         [JsonProperty("currentPage")]
         public int? CurrentPage { get; set; }
 

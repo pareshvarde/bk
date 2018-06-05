@@ -7,6 +7,7 @@ export class MemberSearchParameter{
     public nukhId: number;    
     public city: string;
     public state: string;
+    public includeOnlyHOF: boolean;
     public currentPage: number;
     public pageSize: number;
   }

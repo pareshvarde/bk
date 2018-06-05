@@ -11,6 +11,7 @@ CREATE PROCEDURE [dbo].[bk_MemberSearch]
 	@PhoneNumber NVARCHAR(15) = NULL,
 	@PageSize INT = 50,
 	@CurrentPage INT = 1,
+	@IncludeOnlyHOF BIT = NULL,
 	@TotalRecords INT OUTPUT
 )    
 AS
@@ -57,7 +58,8 @@ BEGIN
 			AND (@City IS NULL OR f.City = @City)
 			AND (@State IS NULL OR f.State = @State)
 			AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
-			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)		
+			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	
+			--AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 
 	)		
 
 	SELECT 
@@ -72,7 +74,7 @@ BEGIN
 		@TotalRecords = COUNT(1)
 	FROM
 		Members m 
-		JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
+		JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID AND fma.DefaultFamily = 1
 		JOIN Families f ON f.FamilyID = fma.FamilyId		
 	WHERE
 		(@FirstName IS NULL OR m.FirstName = @FirstName)
@@ -82,7 +84,8 @@ BEGIN
 		AND (@City IS NULL OR f.City = @City)
 		AND (@State IS NULL OR f.State = @State)
 		AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
-		AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)		
+		AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	
+		--AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 	
 			
 END
 

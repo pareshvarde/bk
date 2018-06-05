@@ -62,7 +62,10 @@
                 <input matInput [(ngModel)]="searchParameter.phoneNumber" placeholder="Phone Number">
             </mat-form-field>
         </div>
-        <div fxLayout="row" fxLayoutAlign="center center">
+        <div fxLayout="row wrap">
+            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="searchParameter.includeOnlyHOF">Only Head Of Family?</mat-checkbox>
+        </div>
+        <div style="padding-top: 10px;" fxLayout="row" fxLayoutAlign="center center">
             <button mat-raised-button color="accent" (click)="search()" class="submit-button" aria-label="Search">
                 <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>&nbsp;&nbsp;
