@@ -205,7 +205,7 @@ export class bkDataService {
   searchMatrimony(model: MatrimonySearchParameter){
     this.blockUI.start("Please wait...");
 
-    return this.authHttp.post(this.API_URL + "member/search", model).pipe(map((res) =>{
+    return this.authHttp.post(this.API_URL + "matrimony/search", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
