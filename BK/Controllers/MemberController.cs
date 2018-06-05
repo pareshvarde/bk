@@ -150,6 +150,7 @@ namespace BK.Controllers
                         FamilyId = model.FamilyId.Value,
                         RelatedId = model.RelatedMemberId,
                         RelationTypeId = model.RelationTypeId,
+                        DefaultFamily = !model.MemberID.HasValue,
                         CreatedOn = DateTime.Now,
                         CreatedBy = LoggedInMemberId
                     });

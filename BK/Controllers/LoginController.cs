@@ -58,6 +58,7 @@ namespace BK.Controllers
                 fmAssociation.Family = family;                
                 fmAssociation.Approved = true;                
                 fmAssociation.CreatedBy = 0;
+                fmAssociation.DefaultFamily = true;
 
                 context.Families.Add(family);
                 context.Members.Add(member);
