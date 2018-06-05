@@ -179,6 +179,8 @@
     <Content Include="HtmlTemplates\password_reset.html" />
     <Content Include="HtmlTemplates\familyAddition.html" />
     <Content Include="HtmlTemplates\welcome.html" />
+    <Content Include="Images\Profiles\female.png" />
+    <Content Include="Images\Profiles\male.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
