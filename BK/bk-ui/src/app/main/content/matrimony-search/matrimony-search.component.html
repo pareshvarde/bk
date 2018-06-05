@@ -4,7 +4,7 @@
     <div class="fuse-card matrimonyCard" *ngFor="let result of results">      
         <div class="row profileHeader" fxLayoutAlign="start center">
             <img class="avatar" src="/assets/images/avatars/img_avatar_male.png" />
-            <div class="h4"><a [routerLink]="['/member/', result.familyId, result.memberId]">{{result.name}}</a></div>
+            <div class="h4"><a [routerLink]="['/matrimony-view/', result.memberId]">{{result.name}}</a></div>
         </div>      
         <div class="contentItem pt-0 line-height-1.75">
                 <div class="h4">Age</div>
