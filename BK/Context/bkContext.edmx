@@ -31,6 +31,7 @@
           </Key>
           <Property Name="FamilyId" Type="int" Nullable="false" />
           <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="DefaultFamily" Type="bit" Nullable="false" />
           <Property Name="Approved" Type="bit" Nullable="false" />
           <Property Name="RelatedId" Type="int" />
           <Property Name="RelationTypeId" Type="int" />
@@ -397,6 +398,7 @@
           <NavigationProperty Name="lkRelationType" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="FamilyMemberAssociation" ToRole="lkRelationType" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
+          <Property Name="DefaultFamily" Type="Boolean" Nullable="false" />
           </EntityType>
         <EntityType Name="lkRelationType">
           <Key>
@@ -643,6 +645,7 @@
           <EntitySetMapping Name="FamilyMemberAssociations">
             <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
               <MappingFragment StoreEntitySet="FamilyMemberAssociation">
+                <ScalarProperty Name="DefaultFamily" ColumnName="DefaultFamily" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />

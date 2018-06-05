@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[FamilyMemberAssociation] (
     [FamilyId]       INT           NOT NULL,
     [MemberId]       INT           NOT NULL,
+    [DefaultFamily]  BIT           CONSTRAINT [DF_FamilyMemberAssociation_Default] DEFAULT ((0)) NOT NULL,
     [Approved]       BIT           CONSTRAINT [DF__tmp_ms_xx__Appro__40058253] DEFAULT ((0)) NOT NULL,
     [RelatedId]      INT           NULL,
     [RelationTypeId] INT           NULL,
@@ -14,6 +15,8 @@
     CONSTRAINT [FK_FamilyMemberAssociation_Members] FOREIGN KEY ([MemberId]) REFERENCES [dbo].[Members] ([MemberID]),
     CONSTRAINT [FK_FamilyMemberAssociation_Related] FOREIGN KEY ([RelatedId]) REFERENCES [dbo].[Members] ([MemberID])
 );
+
+
 
 
 

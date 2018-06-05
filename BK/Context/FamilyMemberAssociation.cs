@@ -23,6 +23,7 @@ namespace BK.Context
         public Nullable<int> ApprovedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
+        public bool DefaultFamily { get; set; }
     
         public virtual Family Family { get; set; }
         public virtual lkRelationType lkRelationType { get; set; }
