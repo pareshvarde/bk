@@ -16,6 +16,7 @@ namespace BK.Context
     {
         public int FamilyId { get; set; }
         public int MemberId { get; set; }
+        public bool DefaultFamily { get; set; }
         public bool Approved { get; set; }
         public Nullable<int> RelatedId { get; set; }
         public Nullable<int> RelationTypeId { get; set; }
@@ -23,10 +24,10 @@ namespace BK.Context
         public Nullable<int> ApprovedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
-        public bool DefaultFamily { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public Nullable<int> ModifiedBy { get; set; }
     
         public virtual Family Family { get; set; }
-        public virtual lkRelationType lkRelationType { get; set; }
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }
     }
