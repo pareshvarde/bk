@@ -27,6 +27,11 @@ namespace BK.Context
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Family> Families { get; set; }
+        public virtual DbSet<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }
+        public virtual DbSet<lkRelationType> lkRelationTypes { get; set; }
+        public virtual DbSet<Matrimonial> Matrimonials { get; set; }
+        public virtual DbSet<Member> Members { get; set; }
     
         public virtual ObjectResult<bk_MemberSearchBasic_Result> bk_MemberSearchBasic(Nullable<int> memberID, string phoneNumber, Nullable<long> aadhaarNumber, string email)
         {
