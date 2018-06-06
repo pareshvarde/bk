@@ -162,10 +162,10 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-          <button (click)="save()" mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
+          <button matTooltip="Save" (click)="save()" mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
             SAVE
           </button>
-          <button (click)="cancelEdit()" mat-raised-button class="submit-button" aria-label="CANCEL">
+          <button matTooltip="Cancel" (click)="cancelEdit()" mat-raised-button class="submit-button" aria-label="CANCEL">
             CANCEL
           </button>
         </div>        

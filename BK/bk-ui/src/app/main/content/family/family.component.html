@@ -16,10 +16,10 @@
           <span class="mat-title">Pending Approvals</span>
         </div>
         <div fxLayout="row" class="mb-8" fxLayoutWrap fxLayoutAlign="left center" *ngFor="let n of model.approvals">
-          <button mat-mini-fab color="accent" (click)="approveMember(n.addedToId, n.familyId)" class="mr-8">
+          <button matTooltip="Approve" mat-mini-fab color="accent" (click)="approveMember(n.addedToId, n.familyId)" class="mr-8">
             <mat-icon>done</mat-icon>
           </button>
-          <button mat-mini-fab color="accent" (click)="declineMember(n.addedToId, n.familyId)" class="mr-8">
+          <button matTooltip="Decline" mat-mini-fab color="accent" (click)="declineMember(n.addedToId, n.familyId)" class="mr-8">
             <mat-icon>cancel</mat-icon>
           </button>
           <a [routerLink]="['/member/',n.familyId,n.addedById]">{{n.addedByFirstName}} {{n.addedByLastName}}</a>&nbsp;added&nbsp;
@@ -85,48 +85,48 @@
             </mat-form-field>
           </div>
           <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button fxHide fxShow.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE"
+            <button matTooltip="Save" mat-raised-button fxHide fxShow.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE"
               [disabled]="familyForm.invalid">
               <mat-icon>save</mat-icon>&nbsp;SAVE
             </button>
-            <button mat-mini-fab fxShow fxHide.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
+            <button matTooltip="Save" mat-mini-fab fxShow fxHide.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
               <mat-icon>save</mat-icon>
             </button>
-            <button mat-raised-button fxHide fxShow.gt-sm (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            <button matTooltip="Cancel" mat-raised-button fxHide fxShow.gt-sm (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
               <mat-icon>cancel</mat-icon>&nbsp;CANCEL
             </button>
-            <button mat-mini-fab fxShow fxHide.gt-sm (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            <button matTooltip="Cancel" mat-mini-fab fxShow fxHide.gt-sm (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
               <mat-icon>cancel</mat-icon>
             </button>
           </div>
           <div fxLayout="row" fxLayoutAlign="center center">
-            <button *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="edit()" color="accent" class="submit-button"
+            <button matTooltip="Edit" *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="edit()" color="accent" class="submit-button"
               aria-label="EDIT">
               <mat-icon>edit</mat-icon>&nbsp;EDIT
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="edit()" color="accent" class="submit-button"
+            <button matTooltip="Edit" *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="edit()" color="accent" class="submit-button"
               aria-label="EDIT">
               <mat-icon>edit</mat-icon>
             </button>
-            <button *ngIf="!editMode" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
+            <button matTooltip="Go Back" *ngIf="!editMode" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
               <mat-icon>backspace</mat-icon>&nbsp;BACK
             </button>
-            <button *ngIf="!editMode" mat-mini-fab fxShow fxHide.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
+            <button matTooltip="Go Back" *ngIf="!editMode" mat-mini-fab fxShow fxHide.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
               <mat-icon>backspace</mat-icon>
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/fork', this.familyId]"
+            <button matTooltip="Fork Family" *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/fork', this.familyId]"
               class="submit-button" aria-label="FORK">
               <mat-icon>device_hub</mat-icon>&nbsp;FORK
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/fork', this.familyId]"
+            <button matTooltip="Fork Family" *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/fork', this.familyId]"
               class="submit-button" aria-label="FORK">
               <mat-icon>device_hub</mat-icon>
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="delete()" class="submit-button"
+            <button matTooltip="Delete Family" *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="delete()" class="submit-button"
               aria-label="DELETE">
               <mat-icon>delete_forever</mat-icon>&nbsp;DELETE
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="delete()" class="submit-button" aria-label="DELETE">
+            <button matTooltip="Delete Family" *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="delete()" class="submit-button" aria-label="DELETE">
               <mat-icon>delete_forever</mat-icon>
             </button>
           </div>
@@ -135,7 +135,7 @@
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
-          <button *ngIf="model.canEdit" mat-mini-fab color="accent" [routerLink]="['/member/',this.familyId,0]" class="ml-8">
+          <button matTooltip="Add Member" *ngIf="model.canEdit" mat-mini-fab color="accent" [routerLink]="['/member/',this.familyId,0]" class="ml-8">
             <mat-icon>person_add</mat-icon>
           </button>
         </div>
@@ -178,10 +178,10 @@
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let member">
-                <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
+                <button matTooltip="Delete" *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                   <mat-icon>delete</mat-icon>
                 </button>
-                <button *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button>
+                <button matTooltip="Edit" *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button>
                   <mat-icon>mode_edit</mat-icon>
                 </button>
               </mat-cell>
@@ -198,10 +198,10 @@
             <div fxLayout="row wrap">Married:&nbsp;<span *ngIf="member.married">Yes</span><span *ngIf="!member.married">No</span></div>
             <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>
             <div fxLayout="row wrap" fxLayoutAlign="end start">
-              <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
+              <button matTooltip="Delete Member" *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button>
+              <button matTooltip="Edit Member" *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button>
                 <mat-icon>mode_edit</mat-icon>
               </button>
             </div>
@@ -221,13 +221,13 @@
             <mat-cell *matCellDef="let member">
               <a *ngIf="member.matrimonialExists" [routerLink]="['/matrimony-view/', member.memberId]">{{member.name}}</a>
               <span *ngIf="!member.matrimonialExists">{{member.name}} ({{member.age}} Years)</span>
-              <button *ngIf="member.canEdit && member.matrimonialExists" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
+              <button matTooltip="Delete Matrimony" *ngIf="member.canEdit && member.matrimonialExists" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'edit']" mat-icon-button>
+              <button matTooltip="Edit Matrimony" *ngIf="member.canEdit && member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'edit']" mat-icon-button>
                 <mat-icon>mode_edit</mat-icon>
               </button>
-              <button *ngIf="member.canEdit && !member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'add']" mat-icon-button>
+              <button matTooltip="Add Matrimony" *ngIf="member.canEdit && !member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'add']" mat-icon-button>
                 <mat-icon>add_circle</mat-icon>
               </button>
             </mat-cell>

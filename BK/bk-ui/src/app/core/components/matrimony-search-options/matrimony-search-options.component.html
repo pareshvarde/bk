@@ -6,7 +6,7 @@
 
 <div #panel class="theme-options-panel mat-white-bg mat-elevation-z8">
 
-    <button mat-icon-button class="close-button" (click)="closeBar()">
+    <button matTooltip="Close" mat-icon-button class="close-button" (click)="closeBar()">
         <mat-icon>close</mat-icon>
     </button>
 
@@ -96,16 +96,16 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button fxHide fxShow.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
+            <button matTooltip="Search" mat-raised-button fxHide fxShow.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
                 <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>&nbsp;&nbsp;
-            <button mat-mini-fab fxShow fxHide.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
+            <button matTooltip="Search" mat-mini-fab fxShow fxHide.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
                 <mat-icon>search</mat-icon>
             </button>
-            <button mat-raised-button fxHide fxShow.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
+            <button matTooltip="Clear" mat-raised-button fxHide fxShow.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
                 <mat-icon>settings_backup_restore</mat-icon>&nbsp;CLEAR
             </button>&nbsp;&nbsp;
-            <button mat-mini-fab fxShow fxHide.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
+            <button matTooltip="Clear" mat-mini-fab fxShow fxHide.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
                 <mat-icon>settings_backup_restore</mat-icon>
             </button>
         </div>
