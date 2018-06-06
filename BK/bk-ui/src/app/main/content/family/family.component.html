@@ -85,25 +85,48 @@
             </mat-form-field>
           </div>
           <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
+            <button mat-raised-button fxHide fxShow.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE"
+              [disabled]="familyForm.invalid">
               <mat-icon>save</mat-icon>&nbsp;SAVE
             </button>
-            <button mat-raised-button (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+            <button mat-mini-fab fxShow fxHide.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE" [disabled]="familyForm.invalid">
+              <mat-icon>save</mat-icon>
+            </button>
+            <button mat-raised-button fxHide fxShow.gt-sm (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
               <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+            </button>
+            <button mat-mini-fab fxShow fxHide.gt-sm (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
+              <mat-icon>cancel</mat-icon>
             </button>
           </div>
           <div fxLayout="row" fxLayoutAlign="center center">
-            <button *ngIf="!editMode && model.canEdit" mat-raised-button (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+            <button *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="edit()" color="accent" class="submit-button"
+              aria-label="EDIT">
               <mat-icon>edit</mat-icon>&nbsp;EDIT
             </button>
-            <button *ngIf="!editMode" mat-raised-button (click)="back()" class="submit-button" aria-label="BACK">
+            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="!editMode" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
               <mat-icon>backspace</mat-icon>&nbsp;BACK
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-raised-button [routerLink]="['/family/fork', this.familyId]" class="submit-button" aria-label="FORK">
+            <button *ngIf="!editMode" mat-mini-fab fxShow fxHide.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
+              <mat-icon>backspace</mat-icon>
+            </button>
+            <button *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/fork', this.familyId]"
+              class="submit-button" aria-label="FORK">
               <mat-icon>device_hub</mat-icon>&nbsp;FORK
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-raised-button (click)="delete()" class="submit-button" aria-label="DELETE">
+            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/fork', this.familyId]"
+              class="submit-button" aria-label="FORK">
+              <mat-icon>device_hub</mat-icon>
+            </button>
+            <button *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="delete()" class="submit-button"
+              aria-label="DELETE">
               <mat-icon>delete_forever</mat-icon>&nbsp;DELETE
+            </button>
+            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="delete()" class="submit-button" aria-label="DELETE">
+              <mat-icon>delete_forever</mat-icon>
             </button>
           </div>
         </form>
