@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { NotificationsService } from 'angular2-notifications';
 import { bkAuthService } from '../../services/auth-service';
 import { bkDataService } from '../../services/bk-data.service';
@@ -29,7 +30,7 @@ export class MatrimonyViewComponent implements OnInit {
   readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;  
   
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService) {
+    private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
       this.route.params.subscribe(params => {
         
         if (params.memberId > 0)
@@ -98,5 +99,9 @@ export class MatrimonyViewComponent implements OnInit {
           this.alertService.error('', err);
       }
     );
+  }
+
+  back(){
+    this.location.back();
   }
 }

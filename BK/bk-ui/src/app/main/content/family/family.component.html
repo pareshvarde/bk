@@ -190,10 +190,10 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
         </div>
-        <div fxShow fxHide.gt-sm>
+        <div *ngIf="dataSource" fxShow fxHide.gt-sm>
           <div class="mobile-card" *ngFor="let member of dataSource.filteredData">
             <div fxLayout="row wrap">ID:&nbsp;{{member.memberId}}</div>
-            <div fxLayout="row wrap">Name:&nbsp;{{member.name}}</div>
+            <div fxLayout="row wrap">Name:&nbsp;<a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a></div>
             <div fxLayout="row wrap">Age:&nbsp;{{member.age}}&nbsp;Years</div>
             <div fxLayout="row wrap">Married:&nbsp;<span *ngIf="member.married">Yes</span><span *ngIf="!member.married">No</span></div>
             <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>

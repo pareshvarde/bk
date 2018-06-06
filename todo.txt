@@ -23,11 +23,7 @@ edits by minor?
 
 optimization
 =============
-tool tip on all buttons
-fork page mobile 
-family page mobile
-
 approval email only to default family members
 help icons on each page
 one person cannot be head of family in more than one family.
-enable save button so that person knows where error is
+enable save button so that person knows where error is.
