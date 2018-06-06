@@ -255,12 +255,18 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-          <button mat-raised-button [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
+          <button mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
             <mat-icon>group</mat-icon>&nbsp;FAMILY
           </button>
-          <button mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
+          <button mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
+            <mat-icon>group</mat-icon>
+          </button>
+          <button mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="CANCEL">
             <mat-icon>backspace</mat-icon>&nbsp;BACK
           </button>
+          <button mat-mini-fab fxShow fxHide.gt-sm (click)="back()" class="submit-button" aria-label="CANCEL">
+              <mat-icon>backspace</mat-icon>
+            </button>
         </div>
       </form>
     </div>

@@ -73,9 +73,9 @@
             </div>
             <div fxLayout="row wrap">
               <mat-form-field>
-                <mat-select placeholder="Relation" [(ngModel)]="member.relationTypeId">
-                  <mat-option *ngFor="let n of getRelations(member)" [value]="n.relationTypeId">
-                    {{ n.relationType }}
+                <mat-select placeholder="Related to" [(ngModel)]="member.relatedToId">
+                  <mat-option *ngFor="let n of model.members | callback: filterMember" [value]="n.memberId">
+                    {{ n.name }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
