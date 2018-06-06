@@ -96,11 +96,17 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-            <button mat-raised-button color="accent" (click)="search()" class="submit-button" aria-label="Search">
+            <button mat-raised-button fxHide fxShow.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
                 <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>&nbsp;&nbsp;
-            <button mat-raised-button class="submit-button" (click)="clear()" aria-label="CLEAR">
+            <button mat-mini-fab fxShow fxHide.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
+                    <mat-icon>search</mat-icon>
+            </button>
+            <button mat-raised-button fxHide fxShow.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
                 <mat-icon>settings_backup_restore</mat-icon>&nbsp;CLEAR
+            </button>&nbsp;&nbsp;
+            <button mat-mini-fab fxShow fxHide.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
+                    <mat-icon>settings_backup_restore</mat-icon>
             </button>
         </div>
     </div>
