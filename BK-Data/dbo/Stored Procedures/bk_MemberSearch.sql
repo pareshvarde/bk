@@ -59,7 +59,7 @@ BEGIN
 			AND (@State IS NULL OR f.State = @State)
 			AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
 			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	
-			--AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 
+			AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 
 	)		
 
 	SELECT 
