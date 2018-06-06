@@ -4,30 +4,65 @@
       <div class="title">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
-          <span class="mat-title famiyMemberHeader">Members</span>
+          <span class="mat-title famiyMemberHeader">Select Members</span>
         </div>
-        <mat-table #table [dataSource]="dataSource">
-          <ng-container matColumnDef="selected">
-            <mat-header-cell *matHeaderCellDef>
+        <div fxHide fxShow.gt-sm>
+          <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="selected">
+              <mat-header-cell *matHeaderCellDef>
 
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">
-              <mat-checkbox [(ngModel)]="member.selected"></mat-checkbox>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Name</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <mat-checkbox [(ngModel)]="member.selected"></mat-checkbox>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Name</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <a [routerLink]="['/member/',this.familyId,member.memberId]">{{member.name}}</a>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="relationTypeId">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Relation</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <mat-form-field>
+                  <mat-select placeholder="Relation" [(ngModel)]="member.relationTypeId">
+                    <mat-option *ngFor="let n of getRelations(member)" [value]="n.relationTypeId">
+                      {{ n.relationType }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="relatedToId">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Related</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <mat-form-field>
+                  <mat-select placeholder="Related to" [(ngModel)]="member.relatedToId">
+                    <mat-option *ngFor="let n of model.members | callback: filterMember" [value]="n.memberId">
+                      {{ n.name }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+        <div fxShow fxHide.gt-sm>
+          <div class="mobile-card" *ngFor="let member of dataSource.filteredData">
+            <div fxLayout="row wrap">
+              <mat-checkbox [(ngModel)]="member.selected"></mat-checkbox>&nbsp;
               <a [routerLink]="['/member/',this.familyId,member.memberId]">{{member.name}}</a>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="relationTypeId">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Relation</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">
+            </div>
+            <div fxLayout="row wrap">
               <mat-form-field>
                 <mat-select placeholder="Relation" [(ngModel)]="member.relationTypeId">
                   <mat-option *ngFor="let n of getRelations(member)" [value]="n.relationTypeId">
@@ -35,25 +70,19 @@
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="relatedToId">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Related</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">
+            </div>
+            <div fxLayout="row wrap">
               <mat-form-field>
-                <mat-select placeholder="Related to" [(ngModel)]="member.relatedToId">
-                  <mat-option *ngFor="let n of model.members | callback: filterMember" [value]="n.memberId">
-                    {{ n.name }}
+                <mat-select placeholder="Relation" [(ngModel)]="member.relationTypeId">
+                  <mat-option *ngFor="let n of getRelations(member)" [value]="n.relationTypeId">
+                    {{ n.relationType }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </mat-cell>
-          </ng-container>
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
       </div>
       <div class="bk-card">
         <div fxLayout="row">
