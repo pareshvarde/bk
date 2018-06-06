@@ -244,7 +244,8 @@ export class bkDataService {
 
   private handleAPIError(error: any): any {         
    this.blockUI.stop();
-
+    if (error.error && error.error.errors && error.error.errors.length > 0)
+      return observableThrowError(error.error.errors[0]);
     if (error.message)    
       return observableThrowError(error.message);
     else
