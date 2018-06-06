@@ -53,11 +53,11 @@
         <div fxLayout="row wrap">
             <mat-form-field>
                 <mat-select placeholder="Marital Status" [(ngModel)]="searchParameter.maritalStatusId">
-                  <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
-                    {{ n.status }}
-                  </mat-option>
+                    <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
+                        {{ n.status }}
+                    </mat-option>
                 </mat-select>
-              </mat-form-field>
+            </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
@@ -71,27 +71,27 @@
             </mat-form-field>
         </div>
 
-        
+
         <div fxLayout="row wrap">
             <mat-form-field>
                 <input matInput [(ngModel)]="searchParameter.minimumAge" placeholder="Minimum Age">
             </mat-form-field>
         </div>
 
-        
+
         <div fxLayout="row wrap">
             <mat-form-field>
                 <input matInput [(ngModel)]="searchParameter.maximumAge" placeholder="Maximum Age">
             </mat-form-field>
         </div>
-        
+
         <div fxLayout="row wrap">
             <mat-form-field>
-              <mat-select placeholder="Occupation" [(ngModel)]="searchParameter.occupationId">
-                <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
-                  {{ n.occupation }}
-                </mat-option>
-              </mat-select>
+                <mat-select placeholder="Occupation" [(ngModel)]="searchParameter.occupationId">
+                    <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
+                        {{ n.occupation }}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
 
@@ -100,13 +100,13 @@
                 <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>&nbsp;&nbsp;
             <button mat-mini-fab fxShow fxHide.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
-                    <mat-icon>search</mat-icon>
+                <mat-icon>search</mat-icon>
             </button>
             <button mat-raised-button fxHide fxShow.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
                 <mat-icon>settings_backup_restore</mat-icon>&nbsp;CLEAR
             </button>&nbsp;&nbsp;
             <button mat-mini-fab fxShow fxHide.gt-sm class="submit-button" (click)="clear()" aria-label="CLEAR">
-                    <mat-icon>settings_backup_restore</mat-icon>
+                <mat-icon>settings_backup_restore</mat-icon>
             </button>
         </div>
     </div>

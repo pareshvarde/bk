@@ -1,125 +1,134 @@
 <div id="family" fxLayout="column">
-    <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
-      <div id="family-form">
-        <div class="title">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>      
-        <div class="bk-card">
-          <div fxLayout="row" fxLayoutAlign="start center">
-                <span class="mat-title famiyMemberHeader">Members</span>                
-          </div>
-          <mat-table #table [dataSource]="dataSource">
-            <ng-container matColumnDef="selected">
-              <mat-header-cell *matHeaderCellDef>
-                
-              </mat-header-cell>
-              <mat-cell *matCellDef="let member"><mat-checkbox [(ngModel)]="member.selected"></mat-checkbox></mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="name">
-              <mat-header-cell *matHeaderCellDef>
-                <b>Name</b>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let member">
-                <a [routerLink]="['/member/',this.familyId,member.memberId]">{{member.name}}</a>
-              </mat-cell>
-            </ng-container>    
-            <ng-container matColumnDef="relationTypeId">
-              <mat-header-cell *matHeaderCellDef>
-                <b>Relation</b>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let member">
-                <mat-form-field>
-                  <mat-select placeholder="Relation" [(ngModel)]="member.relationTypeId">
-                    <mat-option *ngFor="let n of getRelations(member)" [value]="n.relationTypeId">
-                      {{ n.relationType }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="relatedToId">
-              <mat-header-cell *matHeaderCellDef>
-                <b>Related</b>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let member">
-                <mat-form-field>
-                  <mat-select placeholder="Related to" [(ngModel)]="member.relatedToId">
-                    <mat-option *ngFor="let n of model.members | callback: filterMember" [value]="n.memberId">
-                      {{ n.name }}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </mat-cell>
-            </ng-container>
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-          </mat-table>
+  <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
+    <div id="family-form">
+      <div class="title">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
+      <div class="bk-card">
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <span class="mat-title famiyMemberHeader">Members</span>
         </div>
-        <div class="bk-card">
-          <div fxLayout="row">
-            <span class="mat-title">Family Information</span>
-          </div>
-          <form name="familyForm" [formGroup]="forkForm" novalidate>
-            <div fxLayout="row wrap">
+        <mat-table #table [dataSource]="dataSource">
+          <ng-container matColumnDef="selected">
+            <mat-header-cell *matHeaderCellDef>
+
+            </mat-header-cell>
+            <mat-cell *matCellDef="let member">
+              <mat-checkbox [(ngModel)]="member.selected"></mat-checkbox>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef>
+              <b>Name</b>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let member">
+              <a [routerLink]="['/member/',this.familyId,member.memberId]">{{member.name}}</a>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="relationTypeId">
+            <mat-header-cell *matHeaderCellDef>
+              <b>Relation</b>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let member">
               <mat-form-field>
-                <mat-select placeholder="Category" [(ngModel)]="model.categoryId" formControlName="categoryId">
-                  <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
-                    {{ n.category }}
+                <mat-select placeholder="Relation" [(ngModel)]="member.relationTypeId">
+                  <mat-option *ngFor="let n of getRelations(member)" [value]="n.relationTypeId">
+                    {{ n.relationType }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-  
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="relatedToId">
+            <mat-header-cell *matHeaderCellDef>
+              <b>Related</b>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let member">
               <mat-form-field>
-                <mat-select placeholder="Nukh" [(ngModel)]="model.nukhId" formControlName="nukhId">
-                  <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
-                    {{ n.nukh }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-  
-              <mat-form-field>
-                <mat-select placeholder="Head Of Family" [(ngModel)]="model.hofId" formControlName="hof">
+                <mat-select placeholder="Related to" [(ngModel)]="member.relatedToId">
                   <mat-option *ngFor="let n of model.members | callback: filterMember" [value]="n.memberId">
                     {{ n.name }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
-            <div fxLayout="row wrap">
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
-              </mat-form-field>
-            </div>
-            <div fxLayout="row wrap">
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
-              </mat-form-field>
-  
-              <mat-form-field>
-                <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
-              </mat-form-field>
-            </div>
-            <div *ngIf="model.canEdit" fxLayout="row" fxLayoutAlign="center center">
-              <button mat-raised-button (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK" [disabled]="forkForm.invalid">
-                <mat-icon>device_hub</mat-icon>&nbsp;FORK
-              </button>
-              <button mat-raised-button (click)="cancel()" class="submit-button" aria-label="CANCEL">
-                <mat-icon>cancel</mat-icon>&nbsp;CANCEL
-              </button>
-            </div>         
-          </form>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+      <div class="bk-card">
+        <div fxLayout="row">
+          <span class="mat-title">Family Information</span>
         </div>
+        <form name="familyForm" [formGroup]="forkForm" novalidate>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <mat-select placeholder="Category" [(ngModel)]="model.categoryId" formControlName="categoryId">
+                <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
+                  {{ n.category }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Nukh" [(ngModel)]="model.nukhId" formControlName="nukhId">
+                <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
+                  {{ n.nukh }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-select placeholder="Head Of Family" [(ngModel)]="model.hofId" formControlName="hof">
+                <mat-option *ngFor="let n of model.members | callback: filterMember" [value]="n.memberId">
+                  {{ n.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <input matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap">
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
+            </mat-form-field>
+          </div>
+          <div *ngIf="model.canEdit" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button fxHide fxShow.gt-sm (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK"
+              [disabled]="forkForm.invalid">
+              <mat-icon>device_hub</mat-icon>&nbsp;FORK
+            </button>
+            <button mat-mini-fab fxShow fxHide.gt-sm (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK" [disabled]="forkForm.invalid">
+              <mat-icon>device_hub</mat-icon>
+            </button>
+            <button mat-raised-button fxHide fxShow.gt-sm (click)="cancel()" class="submit-button" aria-label="CANCEL">
+              <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+            </button>
+            <button mat-mini-fab fxShow fxHide.gt-sm (click)="cancel()" class="submit-button" aria-label="CANCEL">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
