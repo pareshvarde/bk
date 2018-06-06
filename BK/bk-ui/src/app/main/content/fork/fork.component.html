@@ -142,11 +142,10 @@
             </mat-form-field>
           </div>
           <div *ngIf="model.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button matTooltip="Fork Family" mat-raised-button fxHide fxShow.gt-sm (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK"
-              [disabled]="forkForm.invalid">
+            <button matTooltip="Fork Family" mat-raised-button fxHide fxShow.gt-sm (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK">
               <mat-icon>device_hub</mat-icon>&nbsp;FORK
             </button>
-            <button matTooltip="Fork Family" mat-mini-fab fxShow fxHide.gt-sm (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK" [disabled]="forkForm.invalid">
+            <button matTooltip="Fork Family" mat-mini-fab fxShow fxHide.gt-sm (click)="forkFamily()" color="accent" class="submit-button" aria-label="FORK">
               <mat-icon>device_hub</mat-icon>
             </button>
             <button matTooltip="Cancel" mat-raised-button fxHide fxShow.gt-sm (click)="cancel()" class="submit-button" aria-label="CANCEL">

@@ -127,6 +127,9 @@ export class FamilyComponent implements OnInit {
   }
 
   saveFamily() {
+    if (this.familyForm.invalid)
+      return;
+      
     this.dataService.saveFamily(this.model).subscribe(
       (res) => {
         this.alertService.success("Family details has been updated.");

@@ -168,12 +168,10 @@
           </div>
 
           <div *ngIf="(editMode || addMode) && memberModel.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button matTooltip="Save" mat-raised-button fxHide fxShow.gt-sm (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE"
-              [disabled]="memberForm.invalid">
+            <button matTooltip="Save" mat-raised-button fxHide fxShow.gt-sm (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE">
               <mat-icon>save</mat-icon>&nbsp;SAVE
             </button>
-            <button matTooltip="Save" mat-mini-fab fxShow fxHide.gt-sm (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE"
-              [disabled]="memberForm.invalid">
+            <button matTooltip="Save" mat-mini-fab fxShow fxHide.gt-sm (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE">
               <mat-icon>save</mat-icon>
             </button>
             <button matTooltip="Cancel" mat-raised-button fxHide fxShow.gt-sm (click)="cancelEdit()" class="submit-button" aria-label="CANCEL">
@@ -245,11 +243,11 @@
 
           <div fxLayout="row" fxLayoutAlign="center center">
             <button matTooltip="Search" fxHide fxShow.gt-sm mat-raised-button (click)="searchMember()" color="accent" class="submit-button"
-              aria-label="SAVE" [disabled]="searchForm.invalid">
+              aria-label="SAVE">
               <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>
             <button matTooltip="Search" fxShow fxHide.gt-sm mat-mini-fab (click)="searchMember()" color="accent" class="submit-button"
-              aria-label="SAVE" [disabled]="searchForm.invalid">
+              aria-label="SAVE">
               <mat-icon>search</mat-icon>
             </button>
             <button matTooltip="Clear" fxHide fxShow.gt-sm mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">

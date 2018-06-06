@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
   }
 
   processLogin(){
+    if (this.loginForm.invalid)
+      return;
+      
     let localStorage = window.localStorage;
     localStorage.removeItem('token');
 

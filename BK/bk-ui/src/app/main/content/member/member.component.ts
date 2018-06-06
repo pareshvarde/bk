@@ -185,6 +185,9 @@ export class MemberComponent implements OnInit {
   }
 
   saveMember() {
+    if (this.memberForm.invalid)
+      return;
+
     if (this.memberModel.dob && this.memberForm.controls['dob'].dirty)
       this.memberModel.dob.setMinutes(this.memberModel.dob.getMinutes() - this.memberModel.dob.getTimezoneOffset());
 
@@ -212,6 +215,8 @@ export class MemberComponent implements OnInit {
   }
 
   searchMember(){
+    if (this.searchForm.invalid)
+      return;
 
     return this.dataService.basicSearchMember(this.searchModel).subscribe(
       (res) => {

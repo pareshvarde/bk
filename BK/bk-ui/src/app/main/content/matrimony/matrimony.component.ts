@@ -95,6 +95,9 @@ export class MatrimonyComponent implements OnInit {
   }
 
   save() {
+    if (this.matrimonyForm.invalid)
+      return;
+
     this.dataService.saveMatrimony(this.model).subscribe(
       (res) => {
         this.alertService.success("Matrimony profile has been updated.");

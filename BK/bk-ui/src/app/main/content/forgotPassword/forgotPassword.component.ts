@@ -24,6 +24,9 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     processForgotPassword() {
+        if (this.forgotPasswordForm.invalid)
+            return;
+            
         let emailValue = this.forgotPasswordForm.controls.email.value;
         this.dataService.sendResetPasswordEmail(emailValue).subscribe(
             (res) => {

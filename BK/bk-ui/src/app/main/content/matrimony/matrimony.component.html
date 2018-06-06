@@ -162,13 +162,19 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-          <button matTooltip="Save" (click)="save()" mat-raised-button color="accent" class="submit-button" aria-label="SAVE" [disabled]="matrimonyForm.invalid">
-            SAVE
+          <button matTooltip="Save" (click)="save()" mat-raised-button fxHide fxShow.gt-sm color="accent" class="submit-button" aria-label="SAVE">
+            <mat-icon>save</mat-icon>&nbsp;SAVE
           </button>
-          <button matTooltip="Cancel" (click)="cancelEdit()" mat-raised-button class="submit-button" aria-label="CANCEL">
-            CANCEL
+          <button matTooltip="Save" (click)="save()" mat-mini-fab fxShow fxHide.gt-sm color="accent" class="submit-button" aria-label="SAVE">
+            <mat-icon>save</mat-icon>
           </button>
-        </div>        
+          <button matTooltip="Cancel" (click)="cancelEdit()" mat-raised-button fxHide fxShow.gt-sm class="submit-button" aria-label="CANCEL">
+            <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+          </button>
+          <button matTooltip="Cancel" (click)="cancelEdit()" mat-mini-fab fxShow fxHide.gt-sm class="submit-button" aria-label="CANCEL">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </form>
     </div>
   </div>

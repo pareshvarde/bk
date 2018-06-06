@@ -24,4 +24,3 @@ edits by minor?
 optimization
 =============
 help icons on each page
-enable save button so that person knows where error is.

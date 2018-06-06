@@ -48,7 +48,9 @@ export class RegisterComponent implements OnInit {
   }
 
   processRegistration(){
-    
+    if (this.registerForm.invalid)
+      return;
+
     this.formModel.dob.setMinutes(this.formModel.dob.getMinutes() - this.formModel.dob.getTimezoneOffset())
 
     this.dataService.register(this.formModel).subscribe(

@@ -29,6 +29,10 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   changePassword() {
+
+    if (this.changePasswordForm.invalid)
+      return;
+
     (<HTMLElement>document.querySelector('input[formControlName=currentPassword]')).focus();
 
     const tFormModel = (JSON.parse(JSON.stringify(this.formModel)));

@@ -28,6 +28,9 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   resetPassword() {
+    if (this.resetPasswordForm.invalid)
+      return;
+      
     let password = this.resetPasswordForm.controls.newPassword.value;    
     this.resetPasswordForm.reset();
     (<HTMLElement>document.querySelector('input[formControlName=newPassword]')).focus();   
