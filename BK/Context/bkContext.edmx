@@ -39,8 +39,13 @@
           <Property Name="ApprovedBy" Type="int" />
           <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
-          <Property Name="ModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="lkRelationTypes">
+          <Key>
+            <PropertyRef Name="RelationTypeId" />
+          </Key>
+          <Property Name="RelationTypeId" Type="int" Nullable="false" />
+          <Property Name="RelationType" Type="nvarchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="Matrimonials">
           <Key>
@@ -126,6 +131,18 @@
             </Principal>
             <Dependent Role="FamilyMemberAssociation">
               <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMemberAssociation_lkRelationTypes">
+          <End Role="lkRelationTypes" Type="Self.lkRelationTypes" Multiplicity="0..1" />
+          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lkRelationTypes">
+              <PropertyRef Name="RelationTypeId" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="RelationTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -216,6 +233,7 @@
         <EntityContainer Name="bkModelStoreContainer">
           <EntitySet Name="Families" EntityType="Self.Families" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FamilyMemberAssociation" EntityType="Self.FamilyMemberAssociation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lkRelationTypes" EntityType="Self.lkRelationTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Matrimonials" EntityType="Self.Matrimonials" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Families_HeadOfFamily" Association="Self.FK_Families_HeadOfFamily">
@@ -224,6 +242,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="Self.FK_FamilyMemberAssociation_Families">
             <End Role="Families" EntitySet="Families" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyMemberAssociation_lkRelationTypes" Association="Self.FK_FamilyMemberAssociation_lkRelationTypes">
+            <End Role="lkRelationTypes" EntitySet="lkRelationTypes" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="Self.FK_FamilyMemberAssociation_Members">
@@ -294,6 +316,7 @@
           </FunctionImport>
           <EntitySet Name="Families" EntityType="bkModel.Family" />
           <EntitySet Name="FamilyMemberAssociations" EntityType="bkModel.FamilyMemberAssociation" />
+          <EntitySet Name="lkRelationTypes" EntityType="bkModel.lkRelationType" />
           <EntitySet Name="Matrimonials" EntityType="bkModel.Matrimonial" />
           <EntitySet Name="Members" EntityType="bkModel.Member" />
           <AssociationSet Name="FK_Families_HeadOfFamily" Association="bkModel.FK_Families_HeadOfFamily">
@@ -302,6 +325,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="bkModel.FK_FamilyMemberAssociation_Families">
             <End Role="Family" EntitySet="Families" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyMemberAssociation_lkRelationTypes" Association="bkModel.FK_FamilyMemberAssociation_lkRelationTypes">
+            <End Role="lkRelationType" EntitySet="lkRelationTypes" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="bkModel.FK_FamilyMemberAssociation_Members">
@@ -411,11 +438,18 @@
           <Property Name="ApprovedBy" Type="Int32" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
-          <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
+          <NavigationProperty Name="lkRelationType" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="FamilyMemberAssociation" ToRole="lkRelationType" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
+        </EntityType>
+        <EntityType Name="lkRelationType">
+          <Key>
+            <PropertyRef Name="RelationTypeId" />
+          </Key>
+          <Property Name="RelationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="RelationType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="lkRelationType" ToRole="FamilyMemberAssociation" />
         </EntityType>
         <EntityType Name="Matrimonial">
           <Key>
@@ -506,6 +540,18 @@
             </Principal>
             <Dependent Role="FamilyMemberAssociation">
               <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FamilyMemberAssociation_lkRelationTypes">
+          <End Type="bkModel.lkRelationType" Role="lkRelationType" Multiplicity="0..1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lkRelationType">
+              <PropertyRef Name="RelationTypeId" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="RelationTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -654,8 +700,6 @@
           <EntitySetMapping Name="FamilyMemberAssociations">
             <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
               <MappingFragment StoreEntitySet="FamilyMemberAssociation">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
@@ -666,6 +710,14 @@
                 <ScalarProperty Name="DefaultFamily" ColumnName="DefaultFamily" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lkRelationTypes">
+            <EntityTypeMapping TypeName="bkModel.lkRelationType">
+              <MappingFragment StoreEntitySet="lkRelationTypes">
+                <ScalarProperty Name="RelationType" ColumnName="RelationType" />
+                <ScalarProperty Name="RelationTypeId" ColumnName="RelationTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -734,7 +786,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

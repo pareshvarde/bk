@@ -5,12 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="0bc2b65014524e5f8e02d2689f71dfec" Name="Diagram1" ZoomLevel="67">
-        <EntityTypeShape EntityType="bkModel.Family" Width="1.5" PointX="3" PointY="7.75" />
-        <EntityTypeShape EntityType="bkModel.FamilyMemberAssociation" Width="1.5" PointX="5.25" PointY="5.375" />
-        <EntityTypeShape EntityType="bkModel.Matrimonial" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="bkModel.Family" Width="1.5" PointX="3" PointY="1.375" />
+        <EntityTypeShape EntityType="bkModel.FamilyMemberAssociation" Width="5.125" PointX="5.25" PointY="4" />
+        <EntityTypeShape EntityType="bkModel.lkRelationType" Width="1.5" PointX="3" PointY="13" />
+        <EntityTypeShape EntityType="bkModel.Matrimonial" Width="1.5" PointX="3" PointY="6.25" />
         <EntityTypeShape EntityType="bkModel.Member" Width="1.5" PointX="0.75" PointY="2.75" />
         <AssociationConnector Association="bkModel.FK_Families_HeadOfFamily" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Families" />
+        <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Members" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Related" />
         <AssociationConnector Association="bkModel.FK_Matrimonials_Members" />

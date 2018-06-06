@@ -24,10 +24,9 @@ namespace BK.Context
         public Nullable<int> ApprovedBy { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public int CreatedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedOn { get; set; }
-        public Nullable<int> ModifiedBy { get; set; }
     
         public virtual Family Family { get; set; }
+        public virtual lkRelationType lkRelationType { get; set; }
         public virtual Member Member { get; set; }
         public virtual Member Member1 { get; set; }
     }
