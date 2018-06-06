@@ -23,6 +23,5 @@ edits by minor?
 
 optimization
 =============
-approval email only to default family members
 help icons on each page
 enable save button so that person knows where error is.
