@@ -24,6 +24,7 @@ edits by minor?
 optimization
 =============
 tool tip on all buttons
-small button on mobile
+fork page mobile 
+family page mobile
 
-default family for a member
+approval email only to default family members

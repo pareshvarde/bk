@@ -104,7 +104,8 @@
               aria-label="EDIT">
               <mat-icon>edit</mat-icon>&nbsp;EDIT
             </button>
-            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="edit()" color="accent" class="submit-button" aria-label="EDIT">
+            <button *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="edit()" color="accent" class="submit-button"
+              aria-label="EDIT">
               <mat-icon>edit</mat-icon>
             </button>
             <button *ngIf="!editMode" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
@@ -138,55 +139,75 @@
             <mat-icon>person_add</mat-icon>
           </button>
         </div>
-        <mat-table #table [dataSource]="dataSource">
-          <ng-container matColumnDef="memberId">
-            <mat-header-cell *matHeaderCellDef>
-              <b>ID</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.memberId}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Name</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">
-              <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="age">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Age</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.age}} Years</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="married">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Married</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">
-              <mat-checkbox disabled=true [checked]="member.married"></mat-checkbox>
-            </mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="relation">
-            <mat-header-cell *matHeaderCellDef>
-              <b>Relation</b>
-            </mat-header-cell>
-            <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
-          </ng-container>
-          <ng-container matColumnDef="actions">
-            <mat-header-cell *matHeaderCellDef></mat-header-cell>
-            <mat-cell *matCellDef="let member">
+        <div fxHide fxShow.gt-sm>
+          <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="memberId">
+              <mat-header-cell *matHeaderCellDef>
+                <b>ID</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">{{member.memberId}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="name">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Name</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="age">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Age</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">{{member.age}} Years</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="married">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Married</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <mat-checkbox disabled=true [checked]="member.married"></mat-checkbox>
+              </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="relation">
+              <mat-header-cell *matHeaderCellDef>
+                <b>Relation</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+                <button *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button>
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+        <div fxShow fxHide.gt-sm>
+          <div class="mobile-card" *ngFor="let member of dataSource.filteredData">
+            <div fxLayout="row wrap">ID:&nbsp;{{member.memberId}}</div>
+            <div fxLayout="row wrap">Name:&nbsp;{{member.name}}</div>
+            <div fxLayout="row wrap">Age:&nbsp;{{member.age}}&nbsp;Years</div>
+            <div fxLayout="row wrap">Married:&nbsp;<span *ngIf="member.married">Yes</span><span *ngIf="!member.married">No</span></div>
+            <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>
+            <div fxLayout="row wrap" fxLayoutAlign="end start">
               <button *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
               <button *ngIf="member.canEdit" [routerLink]="['/member/', this.familyId, member.memberId]" mat-icon-button>
                 <mat-icon>mode_edit</mat-icon>
               </button>
-            </mat-cell>
-          </ng-container>
-          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
+            </div>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
       </div>
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
