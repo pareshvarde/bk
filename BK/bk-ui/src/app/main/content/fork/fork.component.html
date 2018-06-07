@@ -139,7 +139,7 @@
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
+              <input type="number" matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
               <mat-error *ngIf="forkForm.controls['postalCode'].hasError('required')">Please enter a postalcode</mat-error>
             </mat-form-field>
 

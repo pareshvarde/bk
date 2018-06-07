@@ -18,19 +18,6 @@ optimization
 =============
 help icons on each page
 
-validations with messages
-=========================
-		login page
-		register
-		forgot password
-		reset password
-		directory
-		family
-		fork
-		matrimony
-		member
-	matri search
-	directory search
 =========================
  It looks like you're using ngModel on the same form field as formControlName. 
     Support for using the ngModel input property and ngModelChange event with 

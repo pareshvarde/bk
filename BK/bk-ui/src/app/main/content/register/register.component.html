@@ -34,20 +34,20 @@
         </div>
         <div fxLayout="row wrap">
           <mat-form-field>
-            <input matInput [(ngModel)]="formModel.email" placeholder="Email" formControlName="email">
+            <input type="email" matInput [(ngModel)]="formModel.email" placeholder="Email" formControlName="email">
             <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Please enter a valid email address</mat-error>
             <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Please enter a email address</mat-error>
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [(ngModel)]="formModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+            <input type="number" matInput [(ngModel)]="formModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
             <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('noWhitespace')">Only numbers without white space</mat-error>
             <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('isNumber')">Please enter a valid phone number</mat-error>
             <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('required')">Please enter a valid phone number</mat-error>            
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+            <input type="number" matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
             <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('isNumber')">Please enter a valid aadhaar number</mat-error>
             <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('noWhitespace')">Only numbers without white space</mat-error>
           </mat-form-field>
@@ -116,7 +116,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
+            <input matInput type="number" [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
             <mat-error *ngIf="registerForm.controls['postalCode'].hasError('required')">Please provide a postal code</mat-error>
           </mat-form-field>
 
