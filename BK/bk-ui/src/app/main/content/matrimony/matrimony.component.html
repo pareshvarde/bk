@@ -177,6 +177,7 @@
             <textarea matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="5" formControlName="profileText"></textarea>
             <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('required')">Please provide brief profile information</mat-error>
+            <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('maxlength')">Only 250 characters of text allowed</mat-error>
           </mat-form-field>
         </div>
 

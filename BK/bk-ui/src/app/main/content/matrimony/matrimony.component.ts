@@ -66,7 +66,7 @@ export class MatrimonyComponent implements OnInit {
       ownHome: new FormControl('', [Validators.required]),
       monthlyIncome: new FormControl('', [Validators.required, UniversalValidators.isNumber]),
       language: new FormControl('', [Validators.required]),
-      profileText: new FormControl('', [Validators.required])
+      profileText: new FormControl('', [Validators.required, Validators.maxLength(250)])
     })
   }
 
