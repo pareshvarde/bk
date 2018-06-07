@@ -154,6 +154,8 @@ namespace BK.Controllers
                 family.PostalCode = model.PostalCode;
                 family.State = model.State;
                 family.HeadOfFamilyID = model.HeadOfFamilyID;
+                family.ModifiedOn = DateTime.Now;
+                family.ModifiedBy = LoggedInMemberId;
 
                 context.SaveChanges();
             }
@@ -229,6 +231,8 @@ namespace BK.Controllers
                 newFam.CategoryID = model.CategoryID;
                 newFam.NukhID = model.NukhID;
                 newFam.HeadOfFamilyID = model.HeadOfFamilyID;
+                newFam.CreatedBy = LoggedInMemberId;
+                newFam.CreatedOn = DateTime.Now;
 
                 foreach (var item in selectedMembers)
                 {

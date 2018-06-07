@@ -30,6 +30,8 @@ namespace BK.Controllers
                     return BadRequest("Your current password is invalid. Please try again");
 
                 member.Password = model.NewPassword;
+                member.ModifiedBy = member.MemberID;
+                member.ModifiedOn = DateTime.Now;
 
                 context.SaveChanges();
             }
@@ -109,10 +111,15 @@ namespace BK.Controllers
                     member = context.Members.Where(x => x.MemberID == model.MemberID).FirstOrDefault();
                     if (member == null)
                         return BadRequest("Member record cannot be loaded. Please try again or contact Administrator for help");
+
+                    member.ModifiedBy = LoggedInMemberId;
+                    member.ModifiedOn = DateTime.Now;
                 }
                 else
                 {
                     member = new Member();
+                    member.CreatedOn = DateTime.Now;
+                    member.CreatedBy = LoggedInMemberId;
                     context.Members.Add(member);
                 }
 
@@ -308,7 +315,7 @@ namespace BK.Controllers
 
                 fmAssociation.Approved = true;
                 fmAssociation.ApprovedBy = LoggedInMemberId;
-                fmAssociation.ApprovedOn = DateTime.Now;
+                fmAssociation.ApprovedOn = DateTime.Now;                
 
                 context.SaveChanges();
             }
@@ -349,7 +356,20 @@ namespace BK.Controllers
                 List<FamilyMemberAssociation> fmAssociations = context.FamilyMemberAssociations.Where(m => m.MemberId == memberId).ToList();
 
                 foreach (var item in fmAssociations)
-                    item.DefaultFamily = item.FamilyId == familyId;
+                {
+                    if (item.FamilyId == familyId)
+                    {
+                        item.DefaultFamily = true;
+                        item.ModifiedBy = LoggedInMemberId;
+                        item.ModifiedOn = DateTime.Now;
+                    }
+                    else if (item.DefaultFamily)
+                    {
+                        item.DefaultFamily = false;
+                        item.ModifiedBy = LoggedInMemberId;
+                        item.ModifiedOn = DateTime.Now;
+                    }                                                            
+                }
 
                 context.SaveChanges();
             }

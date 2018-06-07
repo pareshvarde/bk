@@ -41,6 +41,7 @@ namespace BK.Controllers
                 member.Password = System.Web.Security.Membership.GeneratePassword(8, 2);                
                 member.Alive = true;
                 member.Active = true;
+                member.CreatedOn = DateTime.Now;
 
                 Family family = new Family();                
                 family.Address1 = register.Address1;
@@ -51,14 +52,15 @@ namespace BK.Controllers
                 family.Country = register.Country;
                 family.CategoryID = register.CategoryId;
                 family.NukhID = register.NukhId;
-                family.Member = member;                
+                family.Member = member;
+                family.CreatedOn = DateTime.Now;   
 
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
                 fmAssociation.Member = member;
                 fmAssociation.Family = family;                
-                fmAssociation.Approved = true;                
-                fmAssociation.CreatedBy = 0;
+                fmAssociation.Approved = true;                                        
                 fmAssociation.DefaultFamily = true;
+                fmAssociation.CreatedOn = DateTime.Now;
 
                 context.Families.Add(family);
                 context.Members.Add(member);
@@ -149,6 +151,8 @@ namespace BK.Controllers
 
                 member.PasswordUID = null;
                 member.Password = password;
+                member.ModifiedOn = DateTime.Now;
+                member.ModifiedBy = member.MemberID;
 
                 context.SaveChanges();
             }
