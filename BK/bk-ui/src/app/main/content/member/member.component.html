@@ -39,7 +39,7 @@
 
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.lastName" placeholder="Last Name" formControlName="lastName">
-              <mat-error *ngIf="memberForm.controls['lastName'].hasError('required')">Please provide a first name</mat-error>
+              <mat-error *ngIf="memberForm.controls['lastName'].hasError('required')">Please provide a last name</mat-error>
               <mat-error *ngIf="memberForm.controls['lastName'].hasError('nowhitespace')">Only letters without space</mat-error>
             </mat-form-field>
 
