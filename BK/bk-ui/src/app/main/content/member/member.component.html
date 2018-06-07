@@ -33,28 +33,37 @@
           <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
+              <mat-error *ngIf="memberForm.controls['firstName'].hasError('required')">Please provide a first name</mat-error>
+              <mat-error *ngIf="memberForm.controls['firstName'].hasError('noWhitespace')">Only letters without space</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.lastName" placeholder="Last Name" formControlName="lastName">
+              <mat-error *ngIf="memberForm.controls['lastName'].hasError('required')">Please provide a first name</mat-error>
+              <mat-error *ngIf="memberForm.controls['lastName'].hasError('noWhitespace')">Only letters without space</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.nickName" placeholder="Nick Name" formControlName="nickName">
+              <mat-error *ngIf="memberForm.controls['nickName'].hasError('noWhitespace')">Only letters without space</mat-error>
             </mat-form-field>
           </div>
 
           <div fxLayout="row wrap">
             <mat-form-field>
-              <input matInput [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
+              <input matInput type="email" [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
+              <mat-error *ngIf="memberForm.controls['email'].hasError('email')">Please provide valid email address</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [(ngModel)]="memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+              <input type="number" matInput [(ngModel)]="memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+              <mat-error *ngIf="memberForm.controls['phoneNumber'].hasError('isNumber')">Only numbers without space</mat-error>
+              <mat-error *ngIf="memberForm.controls['phoneNumber'].hasError('noWhitespace')">Only numbers without space</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+              <mat-error *ngIf="memberForm.controls['aadhaarNumber'].hasError('isNumber')">Only numbers without space</mat-error>
             </mat-form-field>
           </div>
 
@@ -69,6 +78,7 @@
               <mat-radio-button class="mr-8" value='O'>
                 Other
               </mat-radio-button>
+              <mat-error *ngIf="memberForm.controls['gender'].hasError('required')">Please select gender</mat-error>
             </mat-radio-group>
 
             <mat-form-field>
@@ -76,6 +86,7 @@
                 formControlName="dob">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="memberForm.controls['dob'].hasError('required')">Please provide date of birth</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -156,14 +167,17 @@
           <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
+              <mat-error *ngIf="memberForm.controls['facebookHandle'].hasError('noWhitespace')">Please provide handle without space</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.instagramHandle" placeholder="Instagram Handle" formControlName="instagramHandle">
+              <mat-error *ngIf="memberForm.controls['instagramHandle'].hasError('noWhitespace')">Please provide handle without space</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.twitterHandle" placeholder="Twitter Handle" formControlName="twitterHandle">
+              <mat-error *ngIf="memberForm.controls['twitterHandle'].hasError('noWhitespace')">Please provide handle without space</mat-error>
             </mat-form-field>
           </div>
 
@@ -220,24 +234,28 @@
           <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
+              <mat-error *ngIf="searchForm.controls['memberId'].hasError('isNumber')">Please enter only numbers</mat-error>
             </mat-form-field>
           </div>
 
           <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
+              <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('isNumber')">Please enter only numbers</mat-error>
             </mat-form-field>
           </div>
 
           <div fxLayout="row wrap">
             <mat-form-field>
               <input matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+              <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('isNumber')">Please enter only numbers</mat-error>
             </mat-form-field>
           </div>
 
           <div fxLayout="row wrap">
             <mat-form-field>
-              <input matInput [(ngModel)]="searchModel.emailAddress" placeholder="Email Address" formControlName="emailAddress">
+              <input matInput type="email" [(ngModel)]="searchModel.emailAddress" placeholder="Email Address" formControlName="emailAddress">
+              <mat-error *ngIf="searchForm.controls['emailAddress'].hasError('email')">Please provide valid email address</mat-error>
             </mat-form-field>
           </div>
 

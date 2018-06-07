@@ -28,7 +28,7 @@ validations with messages
 		family
 		fork
 		matrimony
-	member
+		member
 	matri search
 	directory search
 =========================
