@@ -5,13 +5,6 @@ password strength
 remember me
 	login page (refresh token?)
 	
-validations with messages
-	
-createdBy
-createdOn
-ModifiedBy
-ModifiedOn
-
 401 redirect
 sign up captcha
 
@@ -24,3 +17,17 @@ edits by minor?
 optimization
 =============
 help icons on each page
+
+validations with messages
+=========================
+	login page
+	register
+	forgot password
+	reset password
+	directory
+	family
+	fork
+	matrimony
+	member
+	matri search
+	directory search
