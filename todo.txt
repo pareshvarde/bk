@@ -21,8 +21,8 @@ help icons on each page
 validations with messages
 =========================
 		login page
-	register
-	forgot password
+		register
+		forgot password
 	reset password
 	directory
 	family
