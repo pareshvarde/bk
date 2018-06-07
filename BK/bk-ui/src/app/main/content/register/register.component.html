@@ -9,10 +9,10 @@
 
       <div class="information" fxLayout="column" fxLayoutAlign="top left">
         <ol>
-          <li>Please provide correct email address. You will receive your login information on provided email address</li>          
+          <li>Please provide correct email address. You will receive your login information on provided email address</li>
           <li>Try to provide both Phone number and Aadhaar number to keep you unique in the system</li>
-          <li>This registration will create a new family for you (Head Of Family as you). If you want to be a member of existing family please ask them
-            to add you with your email address</li>
+          <li>This registration will create a new family for you (Head Of Family as you). If you want to be a member of existing
+            family please ask them to add you with your email address</li>
         </ol>
       </div>
       <br/>
@@ -22,23 +22,34 @@
         <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
+            <mat-error *ngIf="registerForm.controls['firstName'].hasError('required')">Please enter a first name</mat-error>
+            <mat-error *ngIf="registerForm.controls['firstName'].hasError('noWhitespace')">Only letters with no space</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.lastName" placeholder="Last Name" formControlName="lastName">
+            <mat-error *ngIf="registerForm.controls['lastName'].hasError('required')">Please enter a last name</mat-error>
+            <mat-error *ngIf="registerForm.controls['lastName'].hasError('noWhitespace')">Only letters with no space</mat-error>
           </mat-form-field>
         </div>
         <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.email" placeholder="Email" formControlName="email">
+            <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Please enter a valid email address</mat-error>
+            <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Please enter a email address</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('noWhitespace')">Only numbers without white space</mat-error>
+            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('isNumber')">Please enter a valid phone number</mat-error>
+            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('required')">Please enter a valid phone number</mat-error>            
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+            <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('isNumber')">Please enter a valid aadhaar number</mat-error>
+            <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('noWhitespace')">Only numbers without white space</mat-error>
           </mat-form-field>
         </div>
 
@@ -49,6 +60,7 @@
                 {{ n.category }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="registerForm.controls['categoryId'].hasError('required')">Please provide a category</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -57,6 +69,7 @@
                 {{ n.nukh }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="registerForm.controls['nukhId'].hasError('required')">Please provide a nukh</mat-error>
           </mat-form-field>
         </div>
         <span class="gender">Gender</span>
@@ -78,6 +91,7 @@
               formControlName="dob">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="registerForm.controls['dob'].hasError('required')">Please provide a date of birth</mat-error>
           </mat-form-field>
         </div>
         <div fxLayout="row wrap">
@@ -93,18 +107,22 @@
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.city" placeholder="City" formControlName="city">
+            <mat-error *ngIf="registerForm.controls['city'].hasError('required')">Please provide a city</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.state" placeholder="State" formControlName="state">
+            <mat-error *ngIf="registerForm.controls['state'].hasError('required')">Please provide a state</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
+            <mat-error *ngIf="registerForm.controls['postalCode'].hasError('required')">Please provide a postal code</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="formModel.country" placeholder="Country" formControlName="country">
+            <mat-error *ngIf="registerForm.controls['country'].hasError('required')">Please provide a country</mat-error>
           </mat-form-field>
         </div>
         <button mat-raised-button (click)="processRegistration()" color="accent" class="submit-button" aria-label="REGISTER">
