@@ -10,6 +10,7 @@
                 {{ n.nukh }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['maternalNukhId'].hasError('required')">Please select a maternal nukh</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -18,12 +19,14 @@
                 {{ n.status }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['maritalStatusId'].hasError('required')">Please select martial status</mat-error>
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput type="time" [(ngModel)]="model.birthTime" placeholder="Birth Time" formControlName="birthTime">
+            <mat-error *ngIf="matrimonyForm.controls['birthTime'].hasError('required')">Please provide birth time</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -32,10 +35,13 @@
                 {{ n.feet }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['height'].hasError('required')">Please provide height</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="model.weight" placeholder="Weight" formControlName="weight">
+            <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('required')">Please provide weight</mat-error>
+            <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('isNumber')">Please input only numbers</mat-error>
           </mat-form-field>
         </div>
 
@@ -46,6 +52,7 @@
                 {{ n.type }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['bodyTypeId'].hasError('required')">Please select body type</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -54,6 +61,7 @@
                 {{ n.type }}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['complexionTypeId'].hasError('required')">Please select complexion type</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -68,16 +76,20 @@
                 MANGLIK
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['manglik'].hasError('required')">Please select manglik option</mat-error>
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
           <mat-form-field>
             <input matInput [(ngModel)]="model.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
+            <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('required')">Please provide monthly income</mat-error>
+            <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('isNumber')">Please input only numbers</mat-error>
           </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="model.language" placeholder="Mother Tongue" formControlName="language">
+            <mat-error *ngIf="matrimonyForm.controls['language'].hasError('required')">Please select mother tongue</mat-error>
           </mat-form-field>
         </div>
 
@@ -92,6 +104,7 @@
                 NO
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['smoke'].hasError('required')">Please select smoke option</mat-error>
           </mat-form-field>
 
 
@@ -104,6 +117,7 @@
                 NO
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['alcohol'].hasError('required')">Please select alcohol option</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -115,6 +129,7 @@
                 NO
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['tobacco'].hasError('required')">Please select tobacco option</mat-error>
           </mat-form-field>
         </div>
 
@@ -128,6 +143,7 @@
                 NO
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['disability'].hasError('required')">Please select disability option</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -139,6 +155,7 @@
                 NO
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['vegetarian'].hasError('required')">Please select food preference</mat-error>
           </mat-form-field>
 
           <mat-form-field>
@@ -150,6 +167,7 @@
                 NO
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="matrimonyForm.controls['ownHome'].hasError('required')">Please select home option</mat-error>
           </mat-form-field>
 
         </div>
@@ -158,6 +176,7 @@
           <mat-form-field class="mat-form-field-fullwidth">
             <textarea matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="5" formControlName="profileText"></textarea>
+            <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('required')">Please provide brief profile information</mat-error>
           </mat-form-field>
         </div>
 

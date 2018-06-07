@@ -26,8 +26,8 @@ validations with messages
 		reset password
 		directory
 		family
-	fork
-	matrimony
+		fork
+		matrimony
 	member
 	matri search
 	directory search
