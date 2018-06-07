@@ -39,6 +39,8 @@
           <Property Name="ApprovedBy" Type="int" />
           <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="int" />
         </EntityType>
         <EntityType Name="lkRelationTypes">
           <Key>
@@ -131,18 +133,6 @@
             </Principal>
             <Dependent Role="FamilyMemberAssociation">
               <PropertyRef Name="FamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FamilyMemberAssociation_lkRelationTypes">
-          <End Role="lkRelationTypes" Type="Self.lkRelationTypes" Multiplicity="0..1" />
-          <End Role="FamilyMemberAssociation" Type="Self.FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lkRelationTypes">
-              <PropertyRef Name="RelationTypeId" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="RelationTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -242,10 +232,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="Self.FK_FamilyMemberAssociation_Families">
             <End Role="Families" EntitySet="Families" />
-            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FamilyMemberAssociation_lkRelationTypes" Association="Self.FK_FamilyMemberAssociation_lkRelationTypes">
-            <End Role="lkRelationTypes" EntitySet="lkRelationTypes" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
           </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="Self.FK_FamilyMemberAssociation_Members">
@@ -442,6 +428,8 @@
           <NavigationProperty Name="lkRelationType" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="FamilyMemberAssociation" ToRole="lkRelationType" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int32" />
         </EntityType>
         <EntityType Name="lkRelationType">
           <Key>
@@ -700,6 +688,8 @@
           <EntitySetMapping Name="FamilyMemberAssociations">
             <EntityTypeMapping TypeName="bkModel.FamilyMemberAssociation">
               <MappingFragment StoreEntitySet="FamilyMemberAssociation">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
