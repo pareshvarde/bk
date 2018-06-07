@@ -62,7 +62,7 @@
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [(ngModel)]="memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+              <input type="number" matInput [(ngModel)]="memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
               <mat-error *ngIf="memberForm.controls['aadhaarNumber'].hasError('isNumber')">Only numbers without space</mat-error>
             </mat-form-field>
           </div>
@@ -233,21 +233,21 @@
         <form name="searchForm" [formGroup]="searchForm" novalidate>
           <div fxLayout="row wrap">
             <mat-form-field>
-              <input matInput [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
+              <input matInput type="number" [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
               <mat-error *ngIf="searchForm.controls['memberId'].hasError('isNumber')">Please enter only numbers</mat-error>
             </mat-form-field>
           </div>
 
           <div fxLayout="row wrap">
             <mat-form-field>
-              <input matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
+              <input type="number" matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
               <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('isNumber')">Please enter only numbers</mat-error>
             </mat-form-field>
           </div>
 
           <div fxLayout="row wrap">
             <mat-form-field>
-              <input matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+              <input type="number" matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
               <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('isNumber')">Please enter only numbers</mat-error>
             </mat-form-field>
           </div>
