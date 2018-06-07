@@ -39,6 +39,7 @@
                   {{ n.category }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="familyForm.controls['categoryId'].hasError('required')">Please select a category</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -47,6 +48,7 @@
                   {{ n.nukh }}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="familyForm.controls['nukhId'].hasError('required')">Please select a nukh</mat-error>
             </mat-form-field>
 
             <mat-form-field>
@@ -70,18 +72,22 @@
 
             <mat-form-field>
               <input matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
+              <mat-error *ngIf="familyForm.controls['city'].hasError('required')">Please enter a city</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
+              <mat-error *ngIf="familyForm.controls['state'].hasError('required')">Please enter a state</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
+              <input matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">              
+              <mat-error *ngIf="familyForm.controls['postalCode'].hasError('required')">Please enter a postalcode</mat-error>
             </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
+              <mat-error *ngIf="familyForm.controls['country'].hasError('required')">Please enter a country</mat-error>
             </mat-form-field>
           </div>
           <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">

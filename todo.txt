@@ -25,7 +25,7 @@ validations with messages
 		forgot password
 		reset password
 		directory
-	family
+		family
 	fork
 	matrimony
 	member
