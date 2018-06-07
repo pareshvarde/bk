@@ -22,7 +22,7 @@ export class ResetPasswordComponent implements OnInit {
 
   ngOnInit() {
     this.resetPasswordForm = new FormGroup({
-      newPassword: new FormControl('', Validators.required),
+      newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirmPassword: new FormControl('', Validators.required)      
     },PasswordValidators.mismatchedPasswords('newPassword','confirmPassword'));  
   }
