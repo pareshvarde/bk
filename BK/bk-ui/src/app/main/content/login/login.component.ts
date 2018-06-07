@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;  
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private dataService: bkDataService,
+  constructor(private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService) 
   { 
    

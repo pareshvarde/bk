@@ -23,8 +23,8 @@ validations with messages
 		login page
 		register
 		forgot password
-	reset password
-	directory
+		reset password
+		directory
 	family
 	fork
 	matrimony
