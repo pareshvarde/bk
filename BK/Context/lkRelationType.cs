@@ -14,16 +14,7 @@ namespace BK.Context
     
     public partial class lkRelationType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public lkRelationType()
-        {
-            this.FamilyMemberAssociations = new HashSet<FamilyMemberAssociation>();
-        }
-    
         public int RelationTypeId { get; set; }
         public string RelationType { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }
     }
 }

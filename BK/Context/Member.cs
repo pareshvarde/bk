@@ -48,7 +48,7 @@ namespace BK.Context
         public Nullable<System.DateTime> LastLoginOn { get; set; }
         public Nullable<System.Guid> PasswordUID { get; set; }
         public bool Active { get; set; }
-        public System.DateTime CreatedOn { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }

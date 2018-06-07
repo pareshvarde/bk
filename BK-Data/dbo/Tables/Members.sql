@@ -25,7 +25,7 @@
     [LastLoginOn]     DATETIME2 (7)    NULL,
     [PasswordUID]     UNIQUEIDENTIFIER NULL,
     [Active]          BIT              CONSTRAINT [DF_Members_Active] DEFAULT ((1)) NOT NULL,
-    [CreatedOn]       DATETIME2 (7)    CONSTRAINT [DF_FamilyMembers_CreatedOn] DEFAULT (getdate()) NOT NULL,
+    [CreatedOn]       DATETIME2 (7)    CONSTRAINT [DF_FamilyMembers_CreatedOn] DEFAULT (getdate()) NULL,
     [CreatedBy]       INT              NULL,
     [ModifiedOn]      DATETIME2 (7)    NULL,
     [ModifiedBy]      INT              NULL,

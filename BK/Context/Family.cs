@@ -30,8 +30,8 @@ namespace BK.Context
         public string State { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public System.DateTime CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
+        public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
     

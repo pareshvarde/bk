@@ -19,8 +19,8 @@
           <Property Name="State" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PostalCode" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="Country" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="CreatedBy" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" />
+          <Property Name="CreatedBy" Type="int" />
           <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
           <Property Name="ModifiedBy" Type="int" />
         </EntityType>
@@ -37,8 +37,8 @@
           <Property Name="RelationTypeId" Type="int" />
           <Property Name="ApprovedOn" Type="datetime2" Precision="7" />
           <Property Name="ApprovedBy" Type="int" />
-          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" />
+          <Property Name="CreatedBy" Type="int" />
           <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
           <Property Name="ModifiedBy" Type="int" />
         </EntityType>
@@ -107,7 +107,7 @@
           <Property Name="LastLoginOn" Type="datetime2" Precision="7" />
           <Property Name="PasswordUID" Type="uniqueidentifier" />
           <Property Name="Active" Type="bit" Nullable="false" />
-          <Property Name="CreatedOn" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime2" Precision="7" />
           <Property Name="CreatedBy" Type="int" />
           <Property Name="ModifiedOn" Type="datetime2" Precision="7" />
           <Property Name="ModifiedBy" Type="int" />
@@ -313,10 +313,6 @@
             <End Role="Family" EntitySet="Families" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
           </AssociationSet>
-          <AssociationSet Name="FK_FamilyMemberAssociation_lkRelationTypes" Association="bkModel.FK_FamilyMemberAssociation_lkRelationTypes">
-            <End Role="lkRelationType" EntitySet="lkRelationTypes" />
-            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
-          </AssociationSet>
           <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="bkModel.FK_FamilyMemberAssociation_Members">
             <End Role="Member" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
@@ -402,8 +398,8 @@
           <Property Name="State" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PostalCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CreatedBy" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="Int32" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_Families_HeadOfFamily" FromRole="Family" ToRole="Member" />
@@ -422,14 +418,13 @@
           <Property Name="RelationTypeId" Type="Int32" />
           <Property Name="ApprovedOn" Type="DateTime" Precision="7" />
           <Property Name="ApprovedBy" Type="Int32" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
-          <NavigationProperty Name="lkRelationType" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="FamilyMemberAssociation" ToRole="lkRelationType" />
-          <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
-          <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="7" />
+          <Property Name="CreatedBy" Type="Int32" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="Int32" />
+          <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
+          <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
+          <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
         </EntityType>
         <EntityType Name="lkRelationType">
           <Key>
@@ -437,7 +432,6 @@
           </Key>
           <Property Name="RelationTypeId" Type="Int32" Nullable="false" />
           <Property Name="RelationType" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_lkRelationTypes" FromRole="lkRelationType" ToRole="FamilyMemberAssociation" />
         </EntityType>
         <EntityType Name="Matrimonial">
           <Key>
@@ -498,7 +492,7 @@
           <Property Name="LastLoginOn" Type="DateTime" Precision="7" />
           <Property Name="PasswordUID" Type="Guid" />
           <Property Name="Active" Type="Boolean" Nullable="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="7" />
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="Int32" />
@@ -528,18 +522,6 @@
             </Principal>
             <Dependent Role="FamilyMemberAssociation">
               <PropertyRef Name="FamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FamilyMemberAssociation_lkRelationTypes">
-          <End Type="bkModel.lkRelationType" Role="lkRelationType" Multiplicity="0..1" />
-          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lkRelationType">
-              <PropertyRef Name="RelationTypeId" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="RelationTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

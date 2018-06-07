@@ -211,7 +211,7 @@ namespace BK.Controllers
                     html = html.Replace("{{username}}", member.EmailAddress);
                     html = html.Replace("{{password}}", member.Password);
                     html = html.Replace("{{addedBy}}", LoggedInMemberName);
-                    html = html.Replace("{{addedOn}}", fmAssociation.CreatedOn.ToString("dddd, dd MMMM yyyy hh:mm tt"));
+                    html = html.Replace("{{addedOn}}", fmAssociation.CreatedOn.Value.ToString("dddd, dd MMMM yyyy hh:mm tt"));
                     html = html.Replace("{{relation}}", $"{relationType.RelationType} Of {relatedMember.FirstName} {relatedMember.LastName}");
 
                     System.Threading.Tasks.Task.Factory.StartNew(() =>
