@@ -10,7 +10,7 @@
       <form name="loginForm" [formGroup]="loginForm" novalidate>
 
         <mat-form-field>
-          <input matInput bkAutofocus placeholder="Email" type="email" formControlName="email">                   
+          <input maxlength="100" matInput bkAutofocus placeholder="Email" type="email" formControlName="email">                   
           <mat-error *ngIf="loginForm.controls['email'].hasError('email')">Please enter a valid email address</mat-error>
           <mat-error *ngIf="loginForm.controls['email'].hasError('required')">Please enter a email address</mat-error>
           <mat-error *ngIf="loginForm.controls['email'].hasError('maxlength')">Maximum 100 characters allowed</mat-error>
