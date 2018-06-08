@@ -31,17 +31,19 @@
         </div>
 
         <div fxLayout="row wrap">
-          <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="model.memberModel.gender" formControlName="gender">
-            <mat-radio-button class="mr-8" value='M'>
-              Male
-            </mat-radio-button>
-            <mat-radio-button class="mr-8" value='F'>
-              Female
-            </mat-radio-button>
-            <mat-radio-button class="mr-8" value='O'>
-              Other
-            </mat-radio-button>
-          </mat-radio-group>
+          <mat-form-field>
+            <mat-select placeholder="Gender" [(ngModel)]="model.memberModel.gender" formControlName="gender">
+              <mat-option value='M'>
+                Male
+              </mat-option>
+              <mat-option value='F'>
+                Female
+              </mat-option>
+              <mat-option value='O'>
+                Other
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
 
           <mat-form-field>
             <input matInput [(ngModel)]="model.memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
@@ -99,7 +101,8 @@
 
         <div fxLayout="row wrap">
           <mat-form-field>
-            <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.matrimonyModel.maternalNukhId" formControlName="maternalNukhId" bkAutofocus>
+            <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.matrimonyModel.maternalNukhId" formControlName="maternalNukhId"
+              bkAutofocus>
               <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
                 {{ n.nukh }}
               </mat-option>
@@ -255,18 +258,20 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-          <button matTooltip="View Family" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
+          <button matTooltip="View Family" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', this.familyId]" color="accent"
+            class="submit-button" aria-label="FAMILY">
             <mat-icon>group</mat-icon>&nbsp;FAMILY
           </button>
-          <button matTooltip="View Family" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/', this.familyId]" color="accent" class="submit-button" aria-label="FAMILY">
+          <button matTooltip="View Family" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/', this.familyId]" color="accent"
+            class="submit-button" aria-label="FAMILY">
             <mat-icon>group</mat-icon>
           </button>
           <button matTooltip="Go Back" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="CANCEL">
             <mat-icon>backspace</mat-icon>&nbsp;BACK
           </button>
           <button matTooltip="Go Back" mat-mini-fab fxShow fxHide.gt-sm (click)="back()" class="submit-button" aria-label="CANCEL">
-              <mat-icon>backspace</mat-icon>
-            </button>
+            <mat-icon>backspace</mat-icon>
+          </button>
         </div>
       </form>
     </div>
