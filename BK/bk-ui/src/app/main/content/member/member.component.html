@@ -68,18 +68,21 @@
           </div>
 
           <div fxLayout="row wrap">
-            <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.gender" formControlName="gender">
-              <mat-radio-button class="mr-8" value='M'>
-                Male
-              </mat-radio-button>
-              <mat-radio-button class="mr-8" value='F'>
-                Female
-              </mat-radio-button>
-              <mat-radio-button class="mr-8" value='O'>
-                Other
-              </mat-radio-button>
+            <mat-form-field>
+              <mat-select placeholder="Gender" [(ngModel)]="memberModel.gender" formControlName="gender">
+                <mat-option value='M'>
+                  Male
+                </mat-option>
+                <mat-option value='F'>
+                  Female
+                </mat-option>
+                <mat-option value='O'>
+                  Other
+                </mat-option>
+              </mat-select>
+
               <mat-error *ngIf="memberForm.controls['gender'].hasError('required')">Please select gender</mat-error>
-            </mat-radio-group>
+            </mat-form-field>
 
             <mat-form-field>
               <input matInput [(ngModel)]="memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
@@ -95,14 +98,17 @@
           </div>
 
           <div fxLayout="row wrap">
-            <mat-radio-group fxLayoutAlign="start center" [(ngModel)]="memberModel.alive" formControlName="alive">
-              <mat-radio-button class="mr-8" [value]=true>
-                Alive
-              </mat-radio-button>
-              <mat-radio-button class="mr-8" [value]=false>
-                Deceased
-              </mat-radio-button>
-            </mat-radio-group>
+            <mat-form-field>
+              <mat-select placeholder="Alive?" [(ngModel)]="memberModel.alive" formControlName="alive">
+                <mat-option [value]=true>
+                  Yes
+                </mat-option>
+                <mat-option [value]=false>
+                  No
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="memberForm.controls['alive'].hasError('required')">Please select living status</mat-error>
+            </mat-form-field>
 
             <mat-form-field *ngIf="!memberModel.alive">
               <input matInput [(ngModel)]="memberModel.dod" (focus)="dodPicker.open()" [matDatepicker]="dodPicker" placeholder="Date Of Death"
@@ -117,7 +123,17 @@
           </div>
 
           <div fxLayout="row wrap">
-            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="memberModel.married" formControlName="married">Married?</mat-checkbox>
+            <mat-form-field>
+              <mat-select placeholder="Marital Status" [(ngModel)]="memberModel.married" formControlName="married">
+                <mat-option [value]=true>
+                  Yes
+                </mat-option>
+                <mat-option [value]=false>
+                  No
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="memberForm.controls['married'].hasError('required')">Please select Marital status</mat-error>
+            </mat-form-field>
 
             <mat-form-field>
               <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
@@ -182,7 +198,8 @@
           </div>
 
           <div *ngIf="(editMode || addMode) && memberModel.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button matTooltip="Save" mat-raised-button fxHide fxShow.gt-sm (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE">
+            <button matTooltip="Save" mat-raised-button fxHide fxShow.gt-sm (click)="saveMember()" color="accent" class="submit-button"
+              aria-label="SAVE">
               <mat-icon>save</mat-icon>&nbsp;SAVE
             </button>
             <button matTooltip="Save" mat-mini-fab fxShow fxHide.gt-sm (click)="saveMember()" color="accent" class="submit-button" aria-label="SAVE">

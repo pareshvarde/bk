@@ -70,7 +70,7 @@ export class MemberComponent implements OnInit {
       dod: new FormControl('', null),
       birthPlace: new FormControl('', null),
       deathPlace: new FormControl('', null),
-      married: new FormControl('', null),
+      married: new FormControl('', [Validators.required]),
       educationLevel: new FormControl('', null),
       educationField: new FormControl('', null),
       occupationId: new FormControl('', null),
