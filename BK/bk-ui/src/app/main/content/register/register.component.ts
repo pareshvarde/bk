@@ -31,21 +31,21 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.registerForm = new FormGroup({      
-      firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
-      lastName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required]),
-      email: new FormControl('', [Validators.email,Validators.required]),
-      phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required]),
-      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, UniversalValidators.noWhitespace]),
+      firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required, Validators.maxLength(50)]),
+      lastName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required, , Validators.maxLength(50)]),
+      email: new FormControl('', [Validators.email,Validators.required, Validators.maxLength(100)]),
+      phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required, Validators.maxLength(15)]),
+      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, UniversalValidators.noWhitespace, Validators.maxLength(16)]),
       categoryId: new FormControl('', [Validators.required]),
       nukhId: new FormControl('', [Validators.required]),
       gender: new FormControl('M', null),
       dob: new FormControl('', [Validators.required]),
-      address1: new FormControl('', null),
-      address2: new FormControl('', null),
-      city: new FormControl('', [Validators.required]),
-      postalCode: new FormControl('', [Validators.required]),
-      state: new FormControl('', [Validators.required]),      
-      country: new FormControl('', [Validators.required]),
+      address1: new FormControl('', [Validators.maxLength(50)]),
+      address2: new FormControl('', [Validators.maxLength(50)]),
+      city: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      postalCode: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      state: new FormControl('', [Validators.required, Validators.maxLength(50)]),      
+      country: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     }); 
   }
 

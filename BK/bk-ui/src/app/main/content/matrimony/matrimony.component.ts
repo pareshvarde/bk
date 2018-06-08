@@ -67,7 +67,7 @@ export class MatrimonyComponent implements OnInit, OnDestroy {
       vegetarian: new FormControl('', [Validators.required]),
       ownHome: new FormControl('', [Validators.required]),
       monthlyIncome: new FormControl('', [Validators.required, UniversalValidators.isNumber]),
-      language: new FormControl('', [Validators.required]),
+      language: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       profileText: new FormControl('', [Validators.required, Validators.maxLength(250)])
     })
   }

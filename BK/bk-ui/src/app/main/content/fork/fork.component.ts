@@ -48,12 +48,12 @@ export class ForkComponent implements OnInit, OnDestroy {
     this.forkForm = new FormGroup({
       categoryId: new FormControl('', [Validators.required]),
       nukhId: new FormControl('', [Validators.required]),
-      address1: new FormControl('', null),
-      address2: new FormControl('', null),
-      city: new FormControl('', [Validators.required]),
-      postalCode: new FormControl('', [Validators.required]),
-      state: new FormControl('', [Validators.required]),
-      country: new FormControl('', [Validators.required]),
+      address1: new FormControl('', [Validators.maxLength(50)]),
+      address2: new FormControl('', [Validators.maxLength(50)]),
+      city: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      postalCode: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+      state: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      country: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       hof: new FormControl('', [Validators.required])
     });
   }

@@ -60,36 +60,36 @@ export class MemberComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.memberForm = new FormGroup({
-      firstName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required]),
-      lastName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required]),
-      nickName: new FormControl('', [UniversalValidators.noWhitespace]),
-      email: new FormControl('', [EmailValidators.normal]),
-      phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber]),
-      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
+      firstName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required, Validators.maxLength(50)]),
+      lastName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required, , Validators.maxLength(50)]),
+      nickName: new FormControl('', [UniversalValidators.noWhitespace, , Validators.maxLength(50)]),
+      email: new FormControl('', [EmailValidators.normal, , Validators.maxLength(100)]),
+      phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, , Validators.maxLength(15)]),
+      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
       gender: new FormControl('', [Validators.required]),
       alive: new FormControl('', [Validators.required]),
       dob: new FormControl('', [Validators.required]),
       dod: new FormControl('', null),
-      birthPlace: new FormControl('', null),
-      deathPlace: new FormControl('', null),
+      birthPlace: new FormControl('', [Validators.maxLength(50)]),
+      deathPlace: new FormControl('', [Validators.maxLength(50)]),
       married: new FormControl('', [Validators.required]),
-      educationLevel: new FormControl('', null),
-      educationField: new FormControl('', null),
+      educationLevel: new FormControl('', [Validators.maxLength(50)]),
+      educationField: new FormControl('', [Validators.maxLength(50)]),
       occupationId: new FormControl('', null),
-      companyName: new FormControl('', null),      
-      jobTitle: new FormControl('', null),
-      facebookHandle: new FormControl('', [UniversalValidators.noWhitespace]),
-      instagramHandle: new FormControl('', [UniversalValidators.noWhitespace]),
-      twitterHandle: new FormControl('', [UniversalValidators.noWhitespace]),
+      companyName: new FormControl('', [Validators.maxLength(50)]),      
+      jobTitle: new FormControl('', [Validators.maxLength(50)]),
+      facebookHandle: new FormControl('', [UniversalValidators.noWhitespace, Validators.maxLength(50)]),
+      instagramHandle: new FormControl('', [UniversalValidators.noWhitespace, Validators.maxLength(50)]),
+      twitterHandle: new FormControl('', [UniversalValidators.noWhitespace, Validators.maxLength(50)]),
       relationTypeId: new FormControl('', null),
       relatedMemberId: new FormControl('', null)
     });
 
     this.searchForm = new FormGroup({
       memberId: new FormControl('', [UniversalValidators.isNumber]),
-      phoneNumber: new FormControl('', [UniversalValidators.isNumber]),
-      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber]),
-      emailAddress: new FormControl('', [EmailValidators.normal])
+      phoneNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(15)]),
+      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
+      emailAddress: new FormControl('', [EmailValidators.normal, Validators.maxLength(100)])
     });   
 
     if (!this.addMode)

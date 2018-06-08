@@ -88,8 +88,9 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input matInput [(ngModel)]="model.language" placeholder="Mother Tongue" formControlName="language">
+            <input maxlength="50" matInput [(ngModel)]="model.language" placeholder="Mother Tongue" formControlName="language">
             <mat-error *ngIf="matrimonyForm.controls['language'].hasError('required')">Please select mother tongue</mat-error>
+            <mat-error *ngIf="matrimonyForm.controls['language'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
           </mat-form-field>
         </div>
 
@@ -174,7 +175,7 @@
 
         <div fxLayout="row wrap">
           <mat-form-field class="mat-form-field-fullwidth">
-            <textarea matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
+            <textarea maxlength="250" matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="5" formControlName="profileText"></textarea>
             <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('required')">Please provide brief profile information</mat-error>
             <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('maxlength')">Only 250 characters of text allowed</mat-error>

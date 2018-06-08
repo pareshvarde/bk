@@ -119,33 +119,39 @@
           </div>
           <div fxLayout="row wrap">
             <mat-form-field>
-              <input matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
+              <input maxlength="50" matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
+              <mat-error *ngIf="forkForm.controls['address1'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
+              <input maxlength="50" matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
+              <mat-error *ngIf="forkForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
           </div>
           <div fxLayout="row wrap">
 
             <mat-form-field>
-              <input matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
+              <input maxlength="50" matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
               <mat-error *ngIf="forkForm.controls['city'].hasError('required')">Please enter a city</mat-error>
+              <mat-error *ngIf="forkForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
+              <input maxlength="50" matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
               <mat-error *ngIf="forkForm.controls['state'].hasError('required')">Please enter a state</mat-error>              
+              <mat-error *ngIf="forkForm.controls['state'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input type="number" matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
+              <input maxlength="10" matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
               <mat-error *ngIf="forkForm.controls['postalCode'].hasError('required')">Please enter a postalcode</mat-error>
+              <mat-error *ngIf="forkForm.controls['postalCode'].hasError('maxlength')">Maximum 10 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field>
-              <input matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
+              <input maxlength="50" matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
               <mat-error *ngIf="forkForm.controls['country'].hasError('required')">Please enter a country</mat-error>
+              <mat-error *ngIf="forkForm.controls['country'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
           </div>
           <div *ngIf="model.canEdit" fxLayout="row" fxLayoutAlign="center center">
