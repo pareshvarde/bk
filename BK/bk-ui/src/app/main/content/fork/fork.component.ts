@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FamilyModel, FamilyMemberModel } from '../../models/familyModel';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -9,16 +9,18 @@ import { bkAuthService } from '../../services/auth-service';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { Location } from '@angular/common';
 import { RELATION_TYPES_DATA } from '../../data/relations';
-import { CATEGORIES_DATA} from '../../data/categories';
+import { CATEGORIES_DATA } from '../../data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-fork',
   templateUrl: './fork.component.html',
-  styleUrls: ['./fork.component.scss']  
+  styleUrls: ['./fork.component.scss']
 })
-export class ForkComponent implements OnInit {
-  
+export class ForkComponent implements OnInit, OnDestroy {
+
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   model: FamilyModel;
   forkForm: FormGroup;
   familyId: number;
@@ -37,7 +39,7 @@ export class ForkComponent implements OnInit {
         this.familyId = null;
 
       this.initializeComponent();
-    });    
+    });
   }
 
   displayedColumns = ['selected', 'name', 'relationTypeId', 'relatedToId'];
@@ -56,16 +58,21 @@ export class ForkComponent implements OnInit {
     });
   }
 
-  initializeComponent(){
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
+  initializeComponent() {
     this.model = new FamilyModel();
     this.dataSource = null;
-    this.loadFamily();   
+    this.loadFamily();
   }
 
   loadFamily() {
-    this.dataService.getFamilyDetail(this.familyId).subscribe(
+    this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.model = res.result;        
+        this.model = res.result;
         this.model.hofId = null;
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
       },
@@ -79,7 +86,7 @@ export class ForkComponent implements OnInit {
   }
 
   filterMember(member: FamilyMemberModel) {
-    return member.selected === true;    
+    return member.selected === true;
   }
 
   getRelations(member: FamilyMemberModel): any[] {
@@ -90,18 +97,17 @@ export class ForkComponent implements OnInit {
     else
       return RELATION_TYPES_DATA;
   }
-  
-  forkFamily(){
+
+  forkFamily() {
     if (this.forkForm.invalid)
       return;
 
-    if (this.model.members.filter(x => x.selected).length === 0)
-    {
+    if (this.model.members.filter(x => x.selected).length === 0) {
       this.alertService.alert('', 'Please select at least one family member to be part of new family');
       return;
     }
 
-    this.dataService.forkFamily(this.model).subscribe(
+    this.dataService.forkFamily(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.alertService.success("New family created successfully");
         this.router.navigate(['family', res.result]);
@@ -112,10 +118,10 @@ export class ForkComponent implements OnInit {
         else
           this.alertService.error('', err);
       }
-    );    
+    );
   }
 
-  cancel(){
+  cancel() {
     this.location.back();
   }
 }

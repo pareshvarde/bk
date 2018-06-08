@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FamilyModel } from '../../models/familyModel';
 import { Router, ActivatedRoute } from '@angular/router';
 import { bkDataService } from '../../services/bk-data.service';
@@ -12,6 +12,7 @@ import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
 import { RELATION_TYPES_DATA } from '../../data/relations';
 import { OCCUPATIONS_DATA } from '../../data/occupations';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-member',
@@ -19,8 +20,9 @@ import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
   styleUrls: ['./member.component.scss']  
 })
 
-export class MemberComponent implements OnInit {
+export class MemberComponent implements OnInit, OnDestroy {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   familyModel: FamilyModel;
   memberModel: MemberModel;
   searchMemberModel: MemberModel;
@@ -94,6 +96,11 @@ export class MemberComponent implements OnInit {
       this.memberForm.disable();
   }
 
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
   initializeComponent(){
     this.familyModel = new FamilyModel();      
     this.searchModel = new MemberSearchBasicModel();    
@@ -115,7 +122,7 @@ export class MemberComponent implements OnInit {
     if (!mId)
       mId = this.authService.memberId();
 
-    this.dataService.getFamilyLookup(mId).subscribe(
+    this.dataService.getFamilyLookup(mId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.familyLookup = res.result;
 
@@ -145,7 +152,7 @@ export class MemberComponent implements OnInit {
   }
 
   loadMember() {
-    return this.dataService.getMember(this.memberId, this.familyId).subscribe(
+    return this.dataService.getMember(this.memberId, this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.memberModel = res.result;        
       },
@@ -159,7 +166,7 @@ export class MemberComponent implements OnInit {
   }
 
   loadFamily() {
-    this.dataService.getFamilyDetail(this.familyId).subscribe(
+    this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.familyModel = res.result;   
              
@@ -199,7 +206,7 @@ export class MemberComponent implements OnInit {
 
     this.memberModel.familyId = this.familyId;
 
-    this.dataService.saveMember(this.memberModel).subscribe(
+    this.dataService.saveMember(this.memberModel).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.alertService.success("Member details has been updated.");
         this.memberForm.markAsPristine();
@@ -218,7 +225,7 @@ export class MemberComponent implements OnInit {
     if (this.searchForm.invalid)
       return;
 
-    return this.dataService.basicSearchMember(this.searchModel).subscribe(
+    return this.dataService.basicSearchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
       (res) => {
         
         if (res.result == null)
@@ -247,7 +254,7 @@ export class MemberComponent implements OnInit {
       return;
     }
 
-    return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId, this.memberModel.relatedMemberId, this.memberModel.relationTypeId).subscribe(
+    return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId, this.memberModel.relatedMemberId, this.memberModel.relationTypeId).takeUntil(this.destroyed$).subscribe(
       (res) => {        
         this.alertService.success("Member is added to your family");
         this.cancelEdit();
@@ -267,7 +274,7 @@ export class MemberComponent implements OnInit {
         if (!ans.resolved)
           return;
 
-        this.dataService.markDefaultFamily(this.familyId, this.memberId).subscribe(
+        this.dataService.markDefaultFamily(this.familyId, this.memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
             this.alertService.success("Member marked as default to this family");
           },

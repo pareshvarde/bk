@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { NotificationsService } from 'angular2-notifications';
@@ -11,14 +11,16 @@ import { MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 import { HEIGHT_DATA } from '../../data/height';
 import { BODY_TYPE_DATA } from '../../data/bodyType';
 import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-matrimony-view',
   templateUrl: './matrimony-view.component.html',
   styleUrls: ['./matrimony-view.component.scss']
 })
-export class MatrimonyViewComponent implements OnInit {
+export class MatrimonyViewComponent implements OnInit, OnDestroy {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   memberId: number;
   model: any;
   matrimonyViewForm: FormGroup
@@ -87,8 +89,13 @@ export class MatrimonyViewComponent implements OnInit {
     this.matrimonyViewForm.disable();
   }
 
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
   loadMatrimony(){
-    return this.dataService.getViewOnlyMatrimony(this.memberId).subscribe(
+    return this.dataService.getViewOnlyMatrimony(this.memberId).takeUntil(this.destroyed$).subscribe(
       (res) => {        
         this.model = res.result;        
       },

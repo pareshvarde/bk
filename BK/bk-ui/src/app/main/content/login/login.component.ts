@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
 import { Router } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
 import { NotificationsService } from 'angular2-notifications';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   loginForm: FormGroup;  
 
   constructor(private router: Router, private dataService: bkDataService,
@@ -28,6 +30,11 @@ export class LoginComponent implements OnInit {
     }); 
   }
 
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
   processLogin(){
     if (this.loginForm.invalid)
       return;
@@ -41,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.loginForm.reset();
     (<HTMLElement>document.querySelector('input[formControlName=email]')).focus();
     
-    this.dataService.login(emailValue, passwordValue).subscribe(
+    this.dataService.login(emailValue, passwordValue).takeUntil(this.destroyed$).subscribe(
       (res) =>{              
         let result = JSON.parse((<any>res)._body)        
         localStorage.setItem('token', result.access_token);

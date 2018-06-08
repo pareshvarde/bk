@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { MatrimonySearchParameter } from '../../models/matrimonySearchParameter';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-matrimony-search',
   templateUrl: './matrimony-search.component.html',
   styleUrls: ['./matrimony-search.component.scss']
 })
-export class MatrimonySearchComponent implements OnInit {
+export class MatrimonySearchComponent implements OnInit, OnDestroy {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   results: any[] = [];
   totalCount: number = 0;
   searchParameter: MatrimonySearchParameter;
@@ -23,6 +25,11 @@ export class MatrimonySearchComponent implements OnInit {
 
   ngOnInit() {
     this.search(this.searchParameter);
+  }
+
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
   }
 
   search(searchParameter: MatrimonySearchParameter) {
@@ -43,7 +50,7 @@ export class MatrimonySearchComponent implements OnInit {
     this.pageNumber = this.pageNumber + 1;
     this.searchParameter.currentPage = this.pageNumber;
 
-    this.dataService.searchMatrimony(this.searchParameter).subscribe(
+    this.dataService.searchMatrimony(this.searchParameter).takeUntil(this.destroyed$).subscribe(
       (res) => {
 
         if (res.result.results.length < this.searchParameter.pageSize)

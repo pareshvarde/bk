@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FamilyModel, FamilyMemberModel } from '../../models/familyModel';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -10,14 +10,16 @@ import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { CATEGORIES_DATA } from '../../data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { Location } from '@angular/common';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
   styleUrls: ['./family.component.scss']  
 })
-export class FamilyComponent implements OnInit {
+export class FamilyComponent implements OnInit, OnDestroy {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   model: FamilyModel;
   familyForm: FormGroup;
   familyId: number;
@@ -61,6 +63,11 @@ export class FamilyComponent implements OnInit {
     this.familyForm.disable();
   }
 
+  ngOnDestroy(){
+    this.destroyed$.next(true);
+    this.destroyed$.complete(); 
+  }
+
   initializeComponent() {
     this.model = new FamilyModel();
     this.familyLookup = new Array<any>();
@@ -73,7 +80,7 @@ export class FamilyComponent implements OnInit {
   loadFamilyLookup() {
     var mId = this.authService.memberId();
 
-    this.dataService.getFamilyLookup(mId).subscribe(
+    this.dataService.getFamilyLookup(mId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.familyLookup = res.result;
         if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId)
@@ -102,7 +109,7 @@ export class FamilyComponent implements OnInit {
   }
 
   loadFamily() {
-    this.dataService.getFamilyDetail(this.familyId).subscribe(
+    this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.model = res.result;
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
@@ -130,7 +137,7 @@ export class FamilyComponent implements OnInit {
     if (this.familyForm.invalid)
       return;
       
-    this.dataService.saveFamily(this.model).subscribe(
+    this.dataService.saveFamily(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.alertService.success("Family details has been updated.");
         this.familyForm.markAsPristine();
@@ -164,7 +171,7 @@ export class FamilyComponent implements OnInit {
         if (!ans.resolved)
           return;
 
-        this.dataService.deleteFamily(tModel).subscribe(
+        this.dataService.deleteFamily(tModel).takeUntil(this.destroyed$).subscribe(
           (res) => {
             this.alertService.success("Family has been deleted");
           },
@@ -192,7 +199,7 @@ export class FamilyComponent implements OnInit {
         if (!ans.resolved)
           return;
 
-        this.dataService.deleteMember(this.familyId, memberId).subscribe(
+        this.dataService.deleteMember(this.familyId, memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
             this.alertService.success("Member has been removed from the family");
             this.loadFamily();
@@ -208,7 +215,7 @@ export class FamilyComponent implements OnInit {
   }
 
   approveMember(memberId: number, familyId: number) {
-    this.dataService.approveMember(memberId, familyId).subscribe(
+    this.dataService.approveMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.alertService.success("Member family association approved");
         this.loadFamily();
@@ -223,7 +230,7 @@ export class FamilyComponent implements OnInit {
   }
 
   declineMember(memberId: number, familyId: number) {
-    this.dataService.declineMember(memberId, familyId).subscribe(
+    this.dataService.declineMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.alertService.success("Member family association removed");
         this.loadFamily();
@@ -246,7 +253,7 @@ export class FamilyComponent implements OnInit {
         if (!ans.resolved)
           return;
 
-        this.dataService.deleteMatrimony(memberId).subscribe(
+        this.dataService.deleteMatrimony(memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
             this.alertService.success("Matrimony profile has been removed");            
             this.loadFamily();

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatrimonyModel } from '../../models/matrimonyModel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -14,14 +14,16 @@ import { BODY_TYPE_DATA } from '../../data/bodyType';
 import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { ResolveEmit } from '@jaspero/ng-confirmations';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-matrimony',
   templateUrl: './matrimony.component.html',
   styleUrls: ['./matrimony.component.scss']
 })
-export class MatrimonyComponent implements OnInit {
+export class MatrimonyComponent implements OnInit, OnDestroy {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   memberId: number;  
   addMode: boolean;
   model: MatrimonyModel;
@@ -70,6 +72,11 @@ export class MatrimonyComponent implements OnInit {
     })
   }
 
+  ngOnDestroy() {
+    this.destroyed$.next(true);
+    this.destroyed$.complete();
+  }
+
   initializeComponent() {
     console.log(this.MARITAL_STATUS_DATA_LOCAL);
     this.model = new MatrimonyModel();
@@ -81,7 +88,7 @@ export class MatrimonyComponent implements OnInit {
   }
 
   loadMatrimony() {
-    return this.dataService.getMatrimony(this.memberId).subscribe(
+    return this.dataService.getMatrimony(this.memberId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.model = res.result;
       },
@@ -98,7 +105,7 @@ export class MatrimonyComponent implements OnInit {
     if (this.matrimonyForm.invalid)
       return;
 
-    this.dataService.saveMatrimony(this.model).subscribe(
+    this.dataService.saveMatrimony(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.alertService.success("Matrimony profile has been updated.");
         this.matrimonyForm.markAsPristine();

@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ChangeDetectionStrategy, Input} from "@angular/core";
 import { MemberSearchParameter } from '../../models/memberSearchParameter';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-directory',
   templateUrl: './directory.component.html',
   styleUrls: ['./directory.component.scss']
 })
-export class DirectoryComponent implements OnInit {
+export class DirectoryComponent implements OnInit, OnDestroy {
 
+  private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   results: any[]=[];
   totalCount: number = 0;
   searchParameter: MemberSearchParameter;
@@ -24,6 +26,11 @@ export class DirectoryComponent implements OnInit {
       
   ngOnInit() {
     this.search(this.searchParameter);
+  }
+
+  ngOnDestroy(){
+    this.destroyed$.next(true);
+    this.destroyed$.complete(); 
   }
 
   search(searchParameter: MemberSearchParameter){
@@ -44,7 +51,7 @@ export class DirectoryComponent implements OnInit {
     this.pageNumber = this.pageNumber + 1;
     this.searchParameter.currentPage = this.pageNumber;
 
-    this.dataService.searchMember(this.searchParameter).subscribe(
+    this.dataService.searchMember(this.searchParameter).takeUntil(this.destroyed$).subscribe(
       (res) => {     
         
         if (res.result.results.length < this.searchParameter.pageSize)
