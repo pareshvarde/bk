@@ -74,7 +74,7 @@ namespace BK.Controllers
                     InstagramHandle = member.InstagramHandle,
                     FacebookHandle = member.FacebookHandle,
                     TwitterHandle = member.TwitterHandle,
-                    Married = member.Married
+                    Married = member.Married                    
                 };
 
                 FamilyMemberAssociation fma = fmAssociation.FirstOrDefault(x => x.MemberId == memberId);
@@ -82,6 +82,7 @@ namespace BK.Controllers
                 {
                     vm.RelatedMemberId = fma.RelatedId;
                     vm.RelationTypeId = fma.RelationTypeId;
+                    vm.DefaultFamily = fma.DefaultFamily;
                 }
 
                 vm.canEdit = CanEditMember(fmAssociation, memberId);

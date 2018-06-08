@@ -243,11 +243,11 @@
               aria-label="EDIT">
               <mat-icon>edit</mat-icon>
             </button>
-            <button matTooltip="Mark Default Family" *ngIf="memberModel.canEdit" fxHide fxShow.gt-sm mat-raised-button (click)="markDefaultFamily()"
+            <button matTooltip="Mark Default Family" *ngIf="(memberModel.canEdit && !memberModel.defaultFamily)" fxHide fxShow.gt-sm mat-raised-button (click)="markDefaultFamily()"
               color="accent" class="submit-button" aria-label="Mark Default">
               <mat-icon>accessibility</mat-icon>&nbsp;MARK DEFAULT
             </button>
-            <button matTooltip="Mark Default Family" *ngIf="memberModel.canEdit" fxShow fxHide.gt-sm mat-mini-fab (click)="markDefaultFamily()"
+            <button matTooltip="Mark Default Family" *ngIf="(memberModel.canEdit && !memberModel.defaultFamily)" fxShow fxHide.gt-sm mat-mini-fab (click)="markDefaultFamily()"
               color="accent" class="submit-button" aria-label="Mark Default">
               <mat-icon>accessibility</mat-icon>
             </button>

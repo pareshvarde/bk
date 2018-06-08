@@ -24,6 +24,7 @@ export class MemberModel {
     relationTypeId:number;
     relatedMemberId: number;
     familyId: number;    
+    defaultFamily: boolean;
     canEdit: boolean;
 
     constructor() { }

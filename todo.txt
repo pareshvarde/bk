@@ -21,9 +21,8 @@ help icons on each page
     in Angular v7.
 	
 ===========================
-field validations numbers, dates and max length
-===========================
 auto scroll and focus to first invalid input
 ===========================
 profile picture
 ===========================
+

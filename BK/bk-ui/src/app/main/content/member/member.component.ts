@@ -276,6 +276,7 @@ export class MemberComponent implements OnInit, OnDestroy {
 
         this.dataService.markDefaultFamily(this.familyId, this.memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
+            this.memberModel.defaultFamily = true;
             this.alertService.success("Member marked as default to this family");
           },
           (err) => {
