@@ -1,7 +1,3 @@
-password strength
-	reset password	
-	change password
-	
 remember me
 	login page (refresh token?)
 	
@@ -23,3 +19,11 @@ help icons on each page
     Support for using the ngModel input property and ngModelChange event with 
     reactive form directives has been deprecated in Angular v6 and will be removed 
     in Angular v7.
+	
+===========================
+field validations numbers, dates and max length
+===========================
+auto scroll and focus to first invalid input
+===========================
+profile picture
+===========================
