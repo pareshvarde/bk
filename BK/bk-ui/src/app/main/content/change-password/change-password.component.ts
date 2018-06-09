@@ -40,12 +40,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   changePassword() {
 
     if (this.changePasswordForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");      
-      el.scrollIntoView();
-      el.focus();      
       return;
-    }
 
     (<HTMLElement>document.querySelector('input[formControlName=currentPassword]')).focus();
 

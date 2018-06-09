@@ -135,12 +135,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
 
   saveFamily() {
     if (this.familyForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");      
-      el.scrollIntoView();
-      el.focus();      
       return;
-    }
       
     this.dataService.saveFamily(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {

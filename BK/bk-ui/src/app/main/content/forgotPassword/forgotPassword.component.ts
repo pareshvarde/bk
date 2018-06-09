@@ -32,12 +32,8 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     }
 
     processForgotPassword() {
-        if (this.forgotPasswordForm.invalid) {
-            var el = <HTMLElement>document.querySelector("input.ng-invalid");
-            el.scrollIntoView();
-            el.focus();
+        if (this.forgotPasswordForm.invalid)
             return;
-        }
 
         let emailValue = this.forgotPasswordForm.controls.email.value;
         this.dataService.sendResetPasswordEmail(emailValue).takeUntil(this.destroyed$).subscribe(

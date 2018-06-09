@@ -103,12 +103,7 @@ export class MatrimonyComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.matrimonyForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");      
-      el.scrollIntoView();
-      el.focus();      
       return;
-    }
 
     this.dataService.saveMatrimony(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
