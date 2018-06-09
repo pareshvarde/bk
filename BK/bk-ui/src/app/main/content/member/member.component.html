@@ -4,7 +4,7 @@
       <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
       <div fxLayout="row wrap">
         <mat-form-field>
-          <mat-select matTooltip="Member Head Of Family" placeholder="Family" (ngModelChange)="loadFamily()" [(ngModel)]="familyId">
+          <mat-select matTooltip="Head Of Family" placeholder="Family" (ngModelChange)="loadFamily()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
               {{ n.hof }}
             </mat-option>
