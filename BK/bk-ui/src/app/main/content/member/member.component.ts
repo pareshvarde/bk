@@ -193,7 +193,12 @@ export class MemberComponent implements OnInit, OnDestroy {
 
   saveMember() {
     if (this.memberForm.invalid)
+    {      
+      var el = <HTMLElement> document.querySelector("input.ng-invalid");
+      if (el)      
+        el.focus();      
       return;
+    }
 
     if (this.memberModel.dob && this.memberForm.controls['dob'].dirty)
       this.memberModel.dob.setMinutes(this.memberModel.dob.getMinutes() - this.memberModel.dob.getTimezoneOffset());
@@ -223,7 +228,12 @@ export class MemberComponent implements OnInit, OnDestroy {
 
   searchMember(){
     if (this.searchForm.invalid)
+    {      
+      var el = <HTMLElement> document.querySelector("input.ng-invalid");
+      if (el)      
+        el.focus();      
       return;
+    }
 
     return this.dataService.basicSearchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
       (res) => {

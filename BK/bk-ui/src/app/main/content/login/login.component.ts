@@ -37,7 +37,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   processLogin(){
     if (this.loginForm.invalid)
+    {      
+      var el = <HTMLElement> document.querySelector("input.ng-invalid");
+      if (el)      
+        el.focus();      
       return;
+    }
       
     let localStorage = window.localStorage;
     localStorage.removeItem('token');

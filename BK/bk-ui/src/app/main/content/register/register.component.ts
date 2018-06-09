@@ -56,7 +56,12 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   processRegistration(){
     if (this.registerForm.invalid)
+    {      
+      var el = <HTMLElement> document.querySelector("input.ng-invalid");
+      if (el)      
+        el.focus();      
       return;
+    }
 
     this.formModel.dob.setMinutes(this.formModel.dob.getMinutes() - this.formModel.dob.getTimezoneOffset())
 

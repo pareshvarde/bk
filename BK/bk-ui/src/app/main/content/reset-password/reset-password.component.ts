@@ -36,7 +36,12 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   resetPassword() {
     if (this.resetPasswordForm.invalid)
+    {      
+      var el = <HTMLElement> document.querySelector("input.ng-invalid");
+      if (el)      
+        el.focus();      
       return;
+    }
       
     let password = this.resetPasswordForm.controls.newPassword.value;    
     this.resetPasswordForm.reset();
