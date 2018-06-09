@@ -21,8 +21,6 @@ help icons on each page
     in Angular v7.
 	
 ===========================
-auto scroll and focus to first invalid input
-===========================
 profile picture
 ===========================
 
