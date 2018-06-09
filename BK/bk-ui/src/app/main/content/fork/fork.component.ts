@@ -100,7 +100,12 @@ export class ForkComponent implements OnInit, OnDestroy {
 
   forkFamily() {
     if (this.forkForm.invalid)
+    {      
+      var el = <HTMLElement> document.querySelector("input.ng-invalid");      
+      el.scrollIntoView();
+      el.focus();      
       return;
+    }
 
     if (this.model.members.filter(x => x.selected).length === 0) {
       this.alertService.alert('', 'Please select at least one family member to be part of new family');
