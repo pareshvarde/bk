@@ -85,10 +85,12 @@ export class MatrimonySearchOptionsComponent implements OnInit
 
     search(){        
         this.performSearch.emit(this.searchParameter);
+        this.closeBar();
     }
 
     clear(){
         this.searchParameter = new MatrimonySearchParameter();        
         this.clearSearch.emit(this.searchParameter);
+        this.closeBar();
     }
 }

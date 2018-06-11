@@ -76,10 +76,12 @@ export class MemberSearchOptionsComponent implements OnInit
 
     search(){        
         this.performSearch.emit(this.searchParameter);
+        this.closeBar();
     }
 
     clear(){
         this.searchParameter = new MemberSearchParameter();        
         this.clearSearch.emit(this.searchParameter);
+        this.closeBar();
     }
 }
