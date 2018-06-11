@@ -22,6 +22,13 @@ namespace BK
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "DefaultPage",
+                routeTemplate: "{controller}/{action}/{id}",                
+                defaults: new { controller="login", Action="Index", id = RouteParameter.Optional }
+            );
+
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }

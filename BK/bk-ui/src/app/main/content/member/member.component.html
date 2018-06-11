@@ -133,10 +133,10 @@
               <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Marital Status" [(ngModel)]="memberModel.married" formControlName="married">
                 <mat-option [value]=true>
-                  Yes
+                  Married
                 </mat-option>
                 <mat-option [value]=false>
-                  No
+                  Single
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="memberForm.controls['married'].hasError('required')">Please select Marital status</mat-error>
