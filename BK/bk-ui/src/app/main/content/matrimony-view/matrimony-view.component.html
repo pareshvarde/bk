@@ -3,35 +3,35 @@
     <div *ngIf="model" id="matrimony-view-form">
       <form name="matrimonyViewForm" [formGroup]="matrimonyViewForm">
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.firstName" placeholder="First Name" formControlName="firstName">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.lastName" placeholder="Last Name" formControlName="lastName">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.nickName" placeholder="Nick Name" formControlName="nickName">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.email" placeholder="Email" formControlName="email">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Gender" [(ngModel)]="model.memberModel.gender" formControlName="gender">
               <mat-option value='M'>
                 Male
@@ -45,30 +45,30 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
               formControlName="dob">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.birthPlace" placeholder="Birth Place" formControlName="birthPlace">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.educationField" placeholder="Education Field" formControlName="educationField">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Occupation" [(ngModel)]="model.memberModel.occupationId" formControlName="occupationId">
               <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
                 {{ n.occupation }}
@@ -76,31 +76,31 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.companyName" placeholder="Company Name" formControlName="companyName">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.jobTitle" placeholder="Job Title" formControlName="jobTitle">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.instagramHandle" placeholder="Instagram Handle" formControlName="instagramHandle">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.memberModel.twitterHandle" placeholder="Twitter Handle" formControlName="twitterHandle">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.matrimonyModel.maternalNukhId" formControlName="maternalNukhId"
               bkAutofocus>
               <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
@@ -109,7 +109,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Marital Status" [(ngModel)]="model.matrimonyModel.maritalStatusId" formControlName="maritalStatusId">
               <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
                 {{ n.status }}
@@ -119,11 +119,11 @@
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput type="time" [(ngModel)]="model.matrimonyModel.birthTime" placeholder="Birth Time" formControlName="birthTime">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Height" [(ngModel)]="model.matrimonyModel.height" formControlName="height">
               <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
                 {{ n.feet }}
@@ -131,13 +131,13 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.matrimonyModel.weight" placeholder="Weight" formControlName="weight">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Body" [(ngModel)]="model.matrimonyModel.bodyTypeId" formControlName="bodyTypeId">
               <mat-option *ngFor="let n of BODYTYPE_DATA_LOCAL" [value]="n.id">
                 {{ n.type }}
@@ -145,7 +145,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Complexion" [(ngModel)]="model.matrimonyModel.complexionTypeId" formControlName="complexionTypeId">
               <mat-option *ngFor="let n of COMPLEXION_DATA_LOCAL" [value]="n.id">
                 {{ n.type }}
@@ -153,7 +153,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Mangal" [(ngModel)]="model.matrimonyModel.mangal" formControlName="manglik">
               <mat-option value='N'>
                 NOT MANGLIK
@@ -169,18 +169,18 @@
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.matrimonyModel.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <input matInput [(ngModel)]="model.matrimonyModel.language" placeholder="Mother Tongue" formControlName="language">
           </mat-form-field>
         </div>
 
         <div fxLayout="row wrap">
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Smoke" [(ngModel)]="model.matrimonyModel.smoke" formControlName="smoke">
               <mat-option [value]=true>
                 YES
@@ -192,7 +192,7 @@
           </mat-form-field>
 
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Alcohol" [(ngModel)]="model.matrimonyModel.alcohol" formControlName="alcohol">
               <mat-option [value]=true>
                 YES
@@ -203,7 +203,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Tobacco" [(ngModel)]="model.matrimonyModel.tobacco" formControlName="tobacco">
               <mat-option [value]=true>
                 YES
@@ -216,7 +216,7 @@
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Disability" [(ngModel)]="model.matrimonyModel.disability" formControlName="disability">
               <mat-option [value]=true>
                 YES
@@ -227,7 +227,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Vegetarian" [(ngModel)]="model.matrimonyModel.vegetarian" formControlName="vegetarian">
               <mat-option [value]=true>
                 YES
@@ -238,7 +238,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Own Home" [(ngModel)]="model.matrimonyModel.ownHome" formControlName="ownHome">
               <mat-option [value]=true>
                 YES
@@ -251,7 +251,7 @@
         </div>
 
         <div fxLayout="row wrap">
-          <mat-form-field class="mat-form-field-fullwidth">
+          <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'" class="mat-form-field-fullwidth">
             <textarea matInput [(ngModel)]="model.matrimonyModel.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
               matAutosizeMaxRows="5" formControlName="profileText"></textarea>
           </mat-form-field>
