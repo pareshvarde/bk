@@ -63,7 +63,7 @@ export class MemberComponent implements OnInit, OnDestroy {
       firstName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required, Validators.maxLength(50)]),
       lastName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required, , Validators.maxLength(50)]),
       nickName: new FormControl('', [UniversalValidators.noWhitespace, , Validators.maxLength(50)]),
-      email: new FormControl('', [EmailValidators.normal, , Validators.maxLength(100)]),
+      email: new FormControl('', [Validators.email, , Validators.maxLength(100)]),
       phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, , Validators.maxLength(15)]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
       gender: new FormControl('', [Validators.required]),
@@ -89,7 +89,7 @@ export class MemberComponent implements OnInit, OnDestroy {
       memberId: new FormControl('', [UniversalValidators.isNumber]),
       phoneNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(15)]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
-      emailAddress: new FormControl('', [EmailValidators.normal, Validators.maxLength(100)])
+      emailAddress: new FormControl('', [Validators.email, Validators.maxLength(100)])
     });   
 
     if (!this.addMode)
