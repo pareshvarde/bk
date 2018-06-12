@@ -17,7 +17,7 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
   searchParameter: MatrimonySearchParameter;
   pageNumber: number = 0;
   hasResult: boolean;
-  readonly PAGE_SIZE: number = 5;
+  readonly PAGE_SIZE: number = 50;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) {
     this.searchParameter = new MatrimonySearchParameter();

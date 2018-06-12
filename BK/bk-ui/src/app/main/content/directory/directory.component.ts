@@ -18,7 +18,7 @@ export class DirectoryComponent implements OnInit, OnDestroy {
   searchParameter: MemberSearchParameter;
   pageNumber: number = 0;
   hasResult: boolean;
-  readonly PAGE_SIZE: number = 5;
+  readonly PAGE_SIZE: number = 50;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
     this.searchParameter = new MemberSearchParameter();    
