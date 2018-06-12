@@ -25,6 +25,9 @@ namespace BK.Filters
             object content;
             List<string> modelStateErrors = new List<string>();
 
+            if (!request.RequestUri.ToString().ToLower().Contains("/api"))
+                return response;
+
             //Step 2: Get the Response Content
             if (response.TryGetContentValue(out content) && !response.IsSuccessStatusCode)
             {
