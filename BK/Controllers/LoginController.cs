@@ -114,7 +114,7 @@ namespace BK.Controllers
                 string html = File.ReadAllText(templatePath);
 
                 html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
-                html = html.Replace("{{action_url}}", $"{BaseUrl}/resetPassword/{member.PasswordUID.Value.ToString()} ");
+                html = html.Replace("{{action_url}}", $"{BaseUrl}/resetpassword/{member.PasswordUID.Value.ToString()} ");
 
                 System.Threading.Tasks.Task.Factory.StartNew(() => {
                     using (SmtpClient sClient = new SmtpClient())

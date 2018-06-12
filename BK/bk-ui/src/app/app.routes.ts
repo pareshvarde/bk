@@ -54,15 +54,15 @@ export const bkRoutes: Routes = [
         component: LoginComponent
     },
     {
-        path: "forgotPassword",
+        path: "forgotpassword",
         component: ForgotPasswordComponent
     },
     {
-        path: "resetPassword/:token",
+        path: "resetpassword/:token",
         component: ResetPasswordComponent
     },
     {
-        path: "changePassword",
+        path: "changepassword",
         component: ChangePasswordComponent,
         canActivate: [AuthGuard]
     },
