@@ -98,7 +98,7 @@ export function tokenGetter() {
         JwtModule.forRoot({
             config: {
               tokenGetter: tokenGetter,
-              whitelistedDomains: ['localhost:60067']              
+              whitelistedDomains: ['pareshvarde-001-site1.etempurl.com']              
             }
         })     
     ],

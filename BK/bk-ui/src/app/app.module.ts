@@ -28,7 +28,7 @@ import { AuthGuard } from './main/guards/auth-guard'
         HttpModule,
         HttpClientModule,
         BrowserAnimationsModule,
-        RouterModule.forRoot(bkRoutes, { useHash: true }),
+        RouterModule.forRoot(bkRoutes),
         SharedModule,
         TranslateModule.forRoot(),
         FuseMainModule,
