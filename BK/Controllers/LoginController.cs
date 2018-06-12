@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace BK.Controllers
 {
-    public class LoginController : ApiController
+    public class LoginController : BaseController
     {      
         [Route("api/register")]
         [HttpPost]
@@ -72,7 +72,7 @@ namespace BK.Controllers
                 string html = File.ReadAllText(templatePath);
 
                 html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
-                html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/login/ ");
+                html = html.Replace("{{action_url}}", $"{BaseUrl}/login/ ");
                 html = html.Replace("{{username}}", member.EmailAddress);
                 html = html.Replace("{{password}}", member.Password);
                 
@@ -114,7 +114,7 @@ namespace BK.Controllers
                 string html = File.ReadAllText(templatePath);
 
                 html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
-                html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/resetPassword/{member.PasswordUID.Value.ToString()} ");
+                html = html.Replace("{{action_url}}", $"{BaseUrl}/resetPassword/{member.PasswordUID.Value.ToString()} ");
 
                 System.Threading.Tasks.Task.Factory.StartNew(() => {
                     using (SmtpClient sClient = new SmtpClient())

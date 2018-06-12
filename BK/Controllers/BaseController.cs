@@ -30,6 +30,14 @@ namespace BK.Controllers
             }
         }
 
+        protected string BaseUrl
+        {
+            get
+            {
+                return string.Format("{0}://{1}", Request.RequestUri.Scheme, Request.RequestUri.Host);                
+            }
+        }
+
         protected bool CanEditFamily(int familyId)
         {
             using (bkContext context = new bkContext())

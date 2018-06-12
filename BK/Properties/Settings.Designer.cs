@@ -22,14 +22,5 @@ namespace BK.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:4200/")]
-        public string BaseUrl {
-            get {
-                return ((string)(this["BaseUrl"]));
-            }
-        }
     }
 }

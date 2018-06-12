@@ -219,7 +219,7 @@ namespace BK.Controllers
                     string html = File.ReadAllText(templatePath);
 
                     html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
-                    html = html.Replace("{{action_url}}", $"{Properties.Settings.Default.BaseUrl.TrimEnd('/')}/login/ ");
+                    html = html.Replace("{{action_url}}", $"{BaseUrl}/login/ ");
                     html = html.Replace("{{username}}", member.EmailAddress);
                     html = html.Replace("{{password}}", member.Password);
                     html = html.Replace("{{addedBy}}", LoggedInMemberName);
