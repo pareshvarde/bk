@@ -38,7 +38,7 @@ namespace BK.Controllers
                 member.Phone = register.PhoneNumber;
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;
-                member.Password = System.Web.Security.Membership.GeneratePassword(8, 2);                
+                member.Password = System.Web.Security.Membership.GeneratePassword(8, 0);                
                 member.Alive = true;
                 member.Active = true;
                 member.CreatedOn = DateTime.Now;
