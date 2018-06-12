@@ -24,11 +24,17 @@ namespace BK
 
         public static void LogInfo(string msg, string category = "Logger")
         {
+            if (_logWriter == null)
+                InitApplogger();
+
             _logWriter.Write(msg, category, 0, -1, System.Diagnostics.TraceEventType.Information);
         }
 
         public static void LogException(Exception ex)
         {
+            if (_logWriter == null)
+                InitApplogger();
+
             IDictionary<string, object> stackTrace = new Dictionary<string, object>();
             stackTrace.Add("StackTrace", ex.StackTrace);
 
