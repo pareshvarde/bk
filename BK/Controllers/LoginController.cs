@@ -13,14 +13,7 @@ using System.Reflection;
 namespace BK.Controllers
 {
     public class LoginController : ApiController
-    {
-        [HttpGet, Route("")]
-        public IHttpActionResult Index()
-        {
-            var requestUri = Request.RequestUri;
-            return Redirect(requestUri.AbsoluteUri + "index.html");
-        }
-
+    {      
         [Route("api/register")]
         [HttpPost]
         public IHttpActionResult Register(RegisterViewModel register)

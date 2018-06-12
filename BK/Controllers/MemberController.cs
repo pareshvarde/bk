@@ -148,9 +148,13 @@ namespace BK.Controllers
 
                 if (model.FamilyId.HasValue)
                 {
+                    bool wasDefault = false;
                     FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
                     if (mAssociation != null)
+                    {
                         context.FamilyMemberAssociations.Remove(mAssociation);
+                        wasDefault = mAssociation.DefaultFamily;
+                    }
 
                     member.FamilyMemberAssociations.Add(new FamilyMemberAssociation()
                     {
@@ -158,7 +162,7 @@ namespace BK.Controllers
                         FamilyId = model.FamilyId.Value,
                         RelatedId = model.RelatedMemberId,
                         RelationTypeId = model.RelationTypeId,
-                        DefaultFamily = !model.MemberID.HasValue,
+                        DefaultFamily = member.MemberID == 0 || wasDefault,
                         CreatedOn = DateTime.Now,
                         CreatedBy = LoggedInMemberId
                     });
