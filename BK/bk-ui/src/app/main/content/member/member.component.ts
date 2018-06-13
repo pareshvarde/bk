@@ -319,6 +319,12 @@ export class MemberComponent implements OnInit, OnDestroy {
     if (event.srcElement.files.length === 0)
       return;
 
+    if (!event.srcElement.files[0].type.startsWith("image/"))
+    {
+      this.alertService.error("", "Only file of type image is supported");
+      return;
+    }
+
     let dialogRef = this.dialog.open(BkImageCropperComponent, {
       width: '350px',
       data: { imgEvent: event }
