@@ -10,6 +10,9 @@ using System.Web.Http;
 using System.Net.Mail;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+using System.Drawing;
+using Newtonsoft.Json;
+using System.Dynamic;
 
 namespace BK.Controllers
 {
@@ -74,7 +77,7 @@ namespace BK.Controllers
                     InstagramHandle = member.InstagramHandle,
                     FacebookHandle = member.FacebookHandle,
                     TwitterHandle = member.TwitterHandle,
-                    Married = member.Married                    
+                    Married = member.Married
                 };
 
                 FamilyMemberAssociation fma = fmAssociation.FirstOrDefault(x => x.MemberId == memberId);
@@ -320,7 +323,7 @@ namespace BK.Controllers
 
                 fmAssociation.Approved = true;
                 fmAssociation.ApprovedBy = LoggedInMemberId;
-                fmAssociation.ApprovedOn = DateTime.Now;                
+                fmAssociation.ApprovedOn = DateTime.Now;
 
                 context.SaveChanges();
             }
@@ -373,7 +376,7 @@ namespace BK.Controllers
                         item.DefaultFamily = false;
                         item.ModifiedBy = LoggedInMemberId;
                         item.ModifiedOn = DateTime.Now;
-                    }                                                            
+                    }
                 }
 
                 context.SaveChanges();
@@ -424,6 +427,40 @@ namespace BK.Controllers
             }
 
             return Ok(mvm);
+        }
+
+        [Route("api/member/uploadPhoto")]
+        [HttpPost]
+        public IHttpActionResult UploadPhoto(dynamic json)
+        {
+            dynamic model = JsonConvert.DeserializeObject<ExpandoObject>(json.ToString());
+            int memberId = Convert.ToInt32(model.memberId);
+
+            if (!CanEditMember(memberId))
+                return BadRequest("You do not have permission to edit this member");
+
+            if (string.IsNullOrWhiteSpace(model.image))
+                return BadRequest("No image content provided");
+
+            byte[] imageBytes = Convert.FromBase64String(model.image.Replace("data:image/png;base64,", ""));
+
+            using (MemoryStream stream = new MemoryStream(imageBytes))
+            {
+                Image img = Image.FromStream(stream);
+                string filePath = System.Web.Hosting.HostingEnvironment.MapPath(string.Format(@"~/Images/Profiles/{0}.jpg", memberId));
+                img.Save(filePath);
+            }
+
+            using (bkContext context = new bkContext())
+            {
+                Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
+                member.ModifiedBy = LoggedInMemberId;
+                member.ModifiedOn = DateTime.Now;
+
+                context.SaveChanges();
+            }
+
+            return Ok();
         }
     }
 }

@@ -103,6 +103,14 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
+  uploadProfilePhoto(model: any) {
+    this.blockUI.start("Please wait...");
+           
+    return this.authHttp.post(this.API_URL + "member/uploadPhoto", model).pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);
+  }
+
   searchMember(model: MemberSearchParameter){
     this.blockUI.start("Please wait...");
 

@@ -315,7 +315,7 @@ export class MemberComponent implements OnInit, OnDestroy {
   }
 
   fileChangeEvent(event: any): void {
-  
+
     if (event.srcElement.files.length === 0)
       return;
 
@@ -325,13 +325,27 @@ export class MemberComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {        
-        this.profileImage = result;
+      if (result) {
+        this.savePhoto(result);        
       }
     });
   }
 
   openFile() {
     document.getElementById('fileBrowser').click();
+  }
+
+  savePhoto(content: string) {
+    this.dataService.uploadProfilePhoto({ memberId: this.memberId, image: content }).takeUntil(this.destroyed$).subscribe(
+      (res) => {
+        this.profileImage = content;
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );
   }
 }
