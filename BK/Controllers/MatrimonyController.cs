@@ -105,7 +105,8 @@ namespace BK.Controllers
                 model.MemberModel.InstagramHandle = member.InstagramHandle;
                 model.MemberModel.FacebookHandle = member.FacebookHandle;
                 model.MemberModel.TwitterHandle = member.TwitterHandle;
-                model.MemberModel.Married = member.Married;       
+                model.MemberModel.Married = member.Married;
+                model.MemberModel.FamilyId = member.FamilyMemberAssociations.Where(x => x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault(); 
 
                 return Ok(model);
             }
