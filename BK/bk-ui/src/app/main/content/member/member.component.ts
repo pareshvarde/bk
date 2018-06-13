@@ -60,7 +60,7 @@ export class MemberComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.memberForm = new FormGroup({
-      firstName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required, Validators.maxLength(50)]),
+      firstName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       lastName: new FormControl('', [UniversalValidators.noWhitespace, Validators.required, , Validators.maxLength(50)]),
       nickName: new FormControl('', [UniversalValidators.noWhitespace, , Validators.maxLength(50)]),
       email: new FormControl('', [Validators.email, , Validators.maxLength(100)]),

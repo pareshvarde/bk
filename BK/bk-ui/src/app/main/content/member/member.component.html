@@ -33,8 +33,7 @@
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <input maxlength="50" matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
-              <mat-error *ngIf="memberForm.controls['firstName'].hasError('required')">Please provide a first name</mat-error>
-              <mat-error *ngIf="memberForm.controls['firstName'].hasError('noWhitespaceRequired')">Only letters without space</mat-error>
+              <mat-error *ngIf="memberForm.controls['firstName'].hasError('required')">Please provide a first name</mat-error>              
               <mat-error *ngIf="memberForm.controls['firstName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
