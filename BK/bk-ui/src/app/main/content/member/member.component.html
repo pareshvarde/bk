@@ -3,7 +3,7 @@
     <div id="member-form">
       <div fxLayout="row wrap" fxLayoutAlign="center center">
         <img class="avatar" (click)="openFile()" src="{{memberModel.photoUrl}}" />
-        <input style="display: none;" type="file" (change)="fileChangeEvent($event)" id="fileBrowser" />
+        <input style="display: none;" type="file" (change)="fileChangeEvent($event)" id="fileBrowser" accept="image/*"/>
         <!-- <button matTooltip="Edit Photo" (click)="openFile()" *ngIf="memberModel.canEdit" mat-icon-button>
           <mat-icon>mode_edit</mat-icon>
         </button> -->

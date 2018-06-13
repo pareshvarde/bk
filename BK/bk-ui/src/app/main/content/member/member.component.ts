@@ -324,7 +324,7 @@ export class MemberComponent implements OnInit, OnDestroy {
       data: { imgEvent: event }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().takeUntil(this.destroyed$).subscribe(result => {
       if (result) {
         this.savePhoto(result);
       }
