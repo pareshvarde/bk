@@ -258,11 +258,11 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-          <button matTooltip="View Family" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', this.familyId]" color="accent"
+          <button matTooltip="View Family" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', model.memberModel.familyId]" color="accent"
             class="submit-button" aria-label="FAMILY">
             <mat-icon>group</mat-icon>&nbsp;FAMILY
           </button>
-          <button matTooltip="View Family" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/', this.familyId]" color="accent"
+          <button matTooltip="View Family" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/', model.memberModel.familyId]" color="accent"
             class="submit-button" aria-label="FAMILY">
             <mat-icon>group</mat-icon>
           </button>
