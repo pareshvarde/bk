@@ -151,6 +151,8 @@
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relatedMemberId" formControlName="relatedMemberId">
+                <mat-option [value]=null>                      
+                </mat-option>
                 <mat-option *ngFor="let n of familyModel.members" [value]="n.memberId">
                   {{ n.name }}
                 </mat-option>
