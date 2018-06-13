@@ -61,6 +61,9 @@ namespace BK.ViewModel
 
         [JsonProperty("profileText")]
         public string ProfileText { get; set; }
+
+        [JsonProperty("photoUrl")]
+        public string PhotoUrl { get; set; }
     }
 
     public class MatrimonyViewOnlyModel{

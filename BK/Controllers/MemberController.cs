@@ -77,7 +77,8 @@ namespace BK.Controllers
                     InstagramHandle = member.InstagramHandle,
                     FacebookHandle = member.FacebookHandle,
                     TwitterHandle = member.TwitterHandle,
-                    Married = member.Married
+                    Married = member.Married,
+                    PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn)
                 };
 
                 FamilyMemberAssociation fma = fmAssociation.FirstOrDefault(x => x.MemberId == memberId);
@@ -421,6 +422,7 @@ namespace BK.Controllers
                     item.MemberId = result.MemberID;
                     item.FamilyId = result.FamilyID;
                     item.Gender = result.Gender;
+                    item.PhotoUrl = MemberWrapper.ProfilePhoto(result.MemberID, result.Gender, result.ModifiedOn);
 
                     mvm.Results.Add(item);
                 }

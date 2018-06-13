@@ -1,6 +1,13 @@
 <div id="matrimony-view" fxLayout="column">
   <div id="matrimony-view-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div *ngIf="model" id="matrimony-view-form">
+      <div fxLayout="row wrap" fxLayoutAlign="center center">
+        <img class="avatar" src="{{model.memberModel.photoUrl}}" />
+      </div>
+      <div fxLayout="row wrap" style="padding-bottom: 15px;" fxLayoutAlign="center center">
+          <div *ngIf="model.memberModel.firstName" class="title">{{model.memberModel.firstName}} {{model.memberModel.lastName}}</div>
+      </div>
+
       <form name="matrimonyViewForm" [formGroup]="matrimonyViewForm">
         <div fxLayout="row wrap">
           <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
@@ -258,12 +265,12 @@
         </div>
 
         <div fxLayout="row" fxLayoutAlign="center center">
-          <button matTooltip="View Family" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', model.memberModel.familyId]" color="accent"
-            class="submit-button" aria-label="FAMILY">
+          <button matTooltip="View Family" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', model.memberModel.familyId]"
+            color="accent" class="submit-button" aria-label="FAMILY">
             <mat-icon>group</mat-icon>&nbsp;FAMILY
           </button>
-          <button matTooltip="View Family" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/', model.memberModel.familyId]" color="accent"
-            class="submit-button" aria-label="FAMILY">
+          <button matTooltip="View Family" mat-mini-fab fxShow fxHide.gt-sm [routerLink]="['/family/', model.memberModel.familyId]"
+            color="accent" class="submit-button" aria-label="FAMILY">
             <mat-icon>group</mat-icon>
           </button>
           <button matTooltip="Go Back" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="CANCEL">

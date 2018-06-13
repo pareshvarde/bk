@@ -190,6 +190,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="bkAuthorizationServerProvider.cs" />
     <Compile Include="bkTokenFormat.cs" />
+    <Compile Include="Business\MemberWrapper.cs" />
     <Compile Include="Context\bkContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -274,6 +275,7 @@
     <Content Include="Context\bkContext.edmx.diagram">
       <DependentUpon>bkContext.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -285,12 +287,13 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Business\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

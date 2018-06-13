@@ -24,5 +24,6 @@ namespace BK.Context
         public string State { get; set; }
         public string Country { get; set; }
         public string Gender { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

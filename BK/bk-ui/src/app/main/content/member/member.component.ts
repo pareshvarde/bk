@@ -37,7 +37,7 @@ export class MemberComponent implements OnInit, OnDestroy {
   editMode: boolean;
   addMode: boolean;
   existingAdd: boolean;
-  profileImage: any = '';
+
   readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
@@ -326,19 +326,20 @@ export class MemberComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.savePhoto(result);        
+        this.savePhoto(result);
       }
     });
   }
 
   openFile() {
-    document.getElementById('fileBrowser').click();
+    if (this.memberModel.canEdit)
+      document.getElementById('fileBrowser').click();
   }
 
   savePhoto(content: string) {
     this.dataService.uploadProfilePhoto({ memberId: this.memberId, image: content }).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.profileImage = content;
+        this.memberModel.photoUrl = content;
       },
       (err) => {
         if (err.errors)

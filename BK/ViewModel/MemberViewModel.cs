@@ -88,6 +88,9 @@ namespace BK.ViewModel
 
         [JsonProperty("defaultFamily")]
         public bool DefaultFamily { get; set; }
+        
+        [JsonProperty("photoUrl")]
+        public string PhotoUrl { get; set; }
 
         [JsonProperty("canEdit")]
         public bool canEdit { get; set; }
@@ -98,7 +101,7 @@ namespace BK.ViewModel
         public MemberViewModelValidator()
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");            
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
             RuleFor(x => x.DOB).NotEmpty().WithMessage("Date Of Birth cannot be blank");
         }
     }

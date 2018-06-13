@@ -22,7 +22,7 @@ namespace BK.Controllers
             {
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == memberId);
                 if (mat == null)
-                    return BadRequest("Matrimony profile cannot be loaded");
+                    return BadRequest("Matrimony profile cannot be loaded");                
 
                 MatrimonyViewModel model = new MatrimonyViewModel();
 
@@ -43,7 +43,7 @@ namespace BK.Controllers
                 model.Smoke = mat.Smoke;
                 model.Tobacco = mat.Tobacco;
                 model.Vegetarian = mat.Vegetarian;
-                model.Weight = mat.Weight;
+                model.Weight = mat.Weight;                
 
                 return Ok(model);
             }
@@ -106,6 +106,7 @@ namespace BK.Controllers
                 model.MemberModel.FacebookHandle = member.FacebookHandle;
                 model.MemberModel.TwitterHandle = member.TwitterHandle;
                 model.MemberModel.Married = member.Married;
+                model.MemberModel.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);
                 model.MemberModel.FamilyId = member.FamilyMemberAssociations.Where(x => x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault(); 
 
                 return Ok(model);
@@ -227,6 +228,7 @@ namespace BK.Controllers
                     item.FamilyId = result.FamilyID;
                     item.Gender = result.Gender;
                     item.DOB = result.DOB;
+                    item.PhotoUrl = MemberWrapper.ProfilePhoto(result.MemberID, result.Gender, result.ModifiedOn);
 
                     mvm.Results.Add(item);
                 }
