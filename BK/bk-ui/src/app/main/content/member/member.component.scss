@@ -30,6 +30,17 @@
                     padding: 24px;
                     width: 100%;
                 }
+
+                .header{
+                    padding-bottom: 15px;
+                }
+                
+                .avatar{
+                    border-radius: 50%;
+                    width: 100px !important;
+                    height: 100px !important;
+                    min-width: 100px !important;
+                }
              
                 .title {
                     font-size: 20px;

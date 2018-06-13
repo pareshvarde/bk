@@ -1,0 +1,18 @@
+<image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="150"
+  format="jpg" (imageCropped)="imageCropped($event)"></image-cropper>
+<div fxLayout="row wrap" fxLayoutAlign="center center">
+  <button matTooltip="Save" fxHide fxShow.gt-sm mat-raised-button (click)="save()" color="accent" class="submit-button" aria-label="CANCEL">
+    <mat-icon>save</mat-icon>&nbsp;SAVE
+  </button>&nbsp;
+  <button matTooltip="Save" fxShow fxHide.gt-sm mat-mini-fab (click)="save()" color="accent" class="submit-button" aria-label="CANCEL">
+    <mat-icon>save</mat-icon>
+  </button>
+
+  <button matTooltip="Cancel" fxHide fxShow.gt-sm mat-raised-button (click)="cancel()" color="accent" class="submit-button"
+    aria-label="CANCEL">
+    <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+  </button>&nbsp;
+  <button matTooltip="Cancel" fxShow fxHide.gt-sm mat-mini-fab (click)="cancel()" color="accent" class="submit-button" aria-label="CANCEL">
+    <mat-icon>cancel</mat-icon>
+  </button>
+</div>

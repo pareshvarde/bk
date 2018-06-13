@@ -13,11 +13,13 @@ import { RELATION_TYPES_DATA } from '../../data/relations';
 import { OCCUPATIONS_DATA } from '../../data/occupations';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { ReplaySubject } from 'rxjs';
+import { MatDialog } from '@angular/material';
+import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
 
 @Component({
   selector: 'app-member',
   templateUrl: './member.component.html',
-  styleUrls: ['./member.component.scss']  
+  styleUrls: ['./member.component.scss']
 })
 
 export class MemberComponent implements OnInit, OnDestroy {
@@ -35,27 +37,28 @@ export class MemberComponent implements OnInit, OnDestroy {
   editMode: boolean;
   addMode: boolean;
   existingAdd: boolean;
+  profileImage: any = '';
   readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location,
-    private _confirmation: ConfirmationService) {
+    private _confirmation: ConfirmationService, public dialog: MatDialog) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
       else
         this.familyId = null;
-      
+
       if (params.memberId > 0)
         this.memberId = params.memberId;
       else
         this.memberId = null;
 
       this.existingAdd = null;
-      
-      this.initializeComponent();      
-    });    
+
+      this.initializeComponent();
+    });
   }
 
   ngOnInit() {
@@ -76,7 +79,7 @@ export class MemberComponent implements OnInit, OnDestroy {
       educationLevel: new FormControl('', [Validators.maxLength(50)]),
       educationField: new FormControl('', [Validators.maxLength(50)]),
       occupationId: new FormControl('', null),
-      companyName: new FormControl('', [Validators.maxLength(50)]),      
+      companyName: new FormControl('', [Validators.maxLength(50)]),
       jobTitle: new FormControl('', [Validators.maxLength(50)]),
       facebookHandle: new FormControl('', [UniversalValidators.noWhitespace, Validators.maxLength(50)]),
       instagramHandle: new FormControl('', [UniversalValidators.noWhitespace, Validators.maxLength(50)]),
@@ -90,7 +93,7 @@ export class MemberComponent implements OnInit, OnDestroy {
       phoneNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(15)]),
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
       emailAddress: new FormControl('', [Validators.email, Validators.maxLength(100)])
-    });   
+    });
 
     if (!this.addMode)
       this.memberForm.disable();
@@ -101,23 +104,23 @@ export class MemberComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  initializeComponent(){
-    this.familyModel = new FamilyModel();      
-    this.searchModel = new MemberSearchBasicModel();    
+  initializeComponent() {
+    this.familyModel = new FamilyModel();
+    this.searchModel = new MemberSearchBasicModel();
     this.memberModel = new MemberModel();
 
     this.memberModel.gender = 'M';
     this.memberModel.alive = true;
     this.memberModel.familyId = this.familyId;
     this.memberModel.canEdit = true;
-        
-    this.addMode = this.memberId == null;    
 
-    this.loadFamilyLookup();    
+    this.addMode = this.memberId == null;
+
+    this.loadFamilyLookup();
   }
-  
-  loadFamilyLookup() {    
-    
+
+  loadFamilyLookup() {
+
     var mId = this.memberId;
     if (!mId)
       mId = this.authService.memberId();
@@ -126,17 +129,15 @@ export class MemberComponent implements OnInit, OnDestroy {
       (res) => {
         this.familyLookup = res.result;
 
-        if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId)
-        {          
+        if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId) {
           var defaultFamily = this.familyLookup.find(x => x.defaultFamily == true);
-          
+
           if (defaultFamily)
             this.familyId = defaultFamily.familyId;
           else
             this.familyId = this.familyLookup[0].familyId;
         }
-        else
-        {
+        else {
           this.familyId = this.familyId * 1; //TRICK TO BIND IT BACK TO UI
         }
 
@@ -154,7 +155,7 @@ export class MemberComponent implements OnInit, OnDestroy {
   loadMember() {
     return this.dataService.getMember(this.memberId, this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.memberModel = res.result;        
+        this.memberModel = res.result;
       },
       (err) => {
         if (err.errors)
@@ -168,8 +169,8 @@ export class MemberComponent implements OnInit, OnDestroy {
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.familyModel = res.result;   
-             
+        this.familyModel = res.result;
+
         if (this.memberId > 0)
           this.loadMember();
       },
@@ -192,11 +193,10 @@ export class MemberComponent implements OnInit, OnDestroy {
   }
 
   saveMember() {
-    if (this.memberForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");
-      if (el)      
-        el.focus();      
+    if (this.memberForm.invalid) {
+      var el = <HTMLElement>document.querySelector("input.ng-invalid");
+      if (el)
+        el.focus();
       return;
     }
 
@@ -226,20 +226,18 @@ export class MemberComponent implements OnInit, OnDestroy {
     );
   }
 
-  searchMember(){
-    if (this.searchForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");
-      if (el)      
-        el.focus();      
+  searchMember() {
+    if (this.searchForm.invalid) {
+      var el = <HTMLElement>document.querySelector("input.ng-invalid");
+      if (el)
+        el.focus();
       return;
     }
 
     return this.dataService.basicSearchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        
-        if (res.result == null)
-        {
+
+        if (res.result == null) {
           this.alertService.error('', "No member found with provided search criteria. Please try again");
           this.searchMemberModel = null;
           return;
@@ -257,15 +255,14 @@ export class MemberComponent implements OnInit, OnDestroy {
     );
   }
 
-  addToFamily(){
-    if (!this.memberModel.relatedMemberId || !this.memberModel.relationTypeId)
-    {
-      this.alertService.error('','Please select relation type');
+  addToFamily() {
+    if (!this.memberModel.relatedMemberId || !this.memberModel.relationTypeId) {
+      this.alertService.error('', 'Please select relation type');
       return;
     }
 
     return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId, this.memberModel.relatedMemberId, this.memberModel.relationTypeId).takeUntil(this.destroyed$).subscribe(
-      (res) => {        
+      (res) => {
         this.alertService.success("Member is added to your family");
         this.cancelEdit();
       },
@@ -278,7 +275,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     );
   }
 
-  markDefaultFamily(){
+  markDefaultFamily() {
     this._confirmation.create('', 'Are you sure you want to mark current family as default family for this member?').subscribe(
       (ans: ResolveEmit) => {
         if (!ans.resolved)
@@ -303,17 +300,38 @@ export class MemberComponent implements OnInit, OnDestroy {
   cancelEdit() {
     this.editMode = false;
     this.memberForm.disable();
-    
+
     if (!this.memberModel.memberId)
       this.back();
   }
 
-  back(){
+  back() {
     this.location.back();
   }
 
-  edit(){
+  edit() {
     this.editMode = true;
     this.memberForm.enable();
+  }
+
+  fileChangeEvent(event: any): void {
+  
+    if (event.srcElement.files.length === 0)
+      return;
+
+    let dialogRef = this.dialog.open(BkImageCropperComponent, {
+      width: '350px',
+      data: { imgEvent: event }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {        
+        this.profileImage = result;
+      }
+    });
+  }
+
+  openFile() {
+    document.getElementById('fileBrowser').click();
   }
 }

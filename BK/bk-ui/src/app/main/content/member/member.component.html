@@ -1,7 +1,16 @@
 <div id="member" fxLayout="column">
   <div id="member-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="member-form">
-      <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center">
+        <div class="header" fxLayoutAlign="start center">
+          <img class="avatar" src="{{profileImage}}" />
+          <input style="display: none;" type="file" (change)="fileChangeEvent($event)" id="fileBrowser" />
+          <button matTooltip="Edit Photo" (click)="openFile()" *ngIf="memberModel.canEdit" mat-icon-button>
+            <mat-icon>mode_edit</mat-icon>
+          </button>
+        </div>
+        <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}'s Profile</div>
+      </div>
       <div fxLayout="row wrap">
         <mat-form-field>
           <mat-select matTooltip="Head Of Family" placeholder="Family" (ngModelChange)="loadFamily()" [(ngModel)]="familyId">
@@ -33,7 +42,7 @@
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <input maxlength="50" matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
-              <mat-error *ngIf="memberForm.controls['firstName'].hasError('required')">Please provide a first name</mat-error>              
+              <mat-error *ngIf="memberForm.controls['firstName'].hasError('required')">Please provide a first name</mat-error>
               <mat-error *ngIf="memberForm.controls['firstName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
@@ -52,7 +61,7 @@
           </div>
 
           <div fxLayout="row wrap">
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <input maxlength="100" matInput type="email" [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
               <mat-error *ngIf="memberForm.controls['email'].hasError('email')">Please provide valid email address</mat-error>
               <mat-error *ngIf="memberForm.controls['email'].hasError('maxlength')">Maximum 100 characters allowed</mat-error>
@@ -73,7 +82,7 @@
           </div>
 
           <div fxLayout="row wrap">
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Gender" [(ngModel)]="memberModel.gender" formControlName="gender">
                 <mat-option value='M'>
                   Male
@@ -104,7 +113,7 @@
           </div>
 
           <div fxLayout="row wrap">
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Alive?" [(ngModel)]="memberModel.alive" formControlName="alive">
                 <mat-option [value]=true>
                   Yes
@@ -129,7 +138,7 @@
           </div>
 
           <div fxLayout="row wrap">
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Marital Status" [(ngModel)]="memberModel.married" formControlName="married">
                 <mat-option [value]=true>
                   Married
@@ -151,7 +160,7 @@
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relatedMemberId" formControlName="relatedMemberId">
-                <mat-option [value]=null>                      
+                <mat-option [value]=null>
                 </mat-option>
                 <mat-option *ngFor="let n of familyModel.members" [value]="n.memberId">
                   {{ n.name }}
@@ -161,7 +170,7 @@
           </div>
 
           <div fxLayout="row wrap">
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <input maxlength="50" matInput [(ngModel)]="memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
               <mat-error *ngIf="memberForm.controls['educationLevel'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
@@ -173,7 +182,7 @@
           </div>
 
           <div fxLayout="row wrap">
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Occupation" [(ngModel)]="memberModel.occupationId" formControlName="occupationId">
                 <mat-option *ngFor="let n of OCCUPATION_DATA_LOCAL" [value]="n.id">
                   {{ n.occupation }}
@@ -193,7 +202,7 @@
           </div>
 
           <div fxLayout="row wrap">
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <input maxlength="50" matInput [(ngModel)]="memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
               <mat-error *ngIf="memberForm.controls['facebookHandle'].hasError('noWhitespaceRequired')">Please provide handle without space</mat-error>
               <mat-error *ngIf="memberForm.controls['facebookHandle'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
@@ -244,12 +253,12 @@
               aria-label="EDIT">
               <mat-icon>edit</mat-icon>
             </button>
-            <button matTooltip="Mark Default Family" *ngIf="(memberModel.canEdit && !memberModel.defaultFamily)" fxHide fxShow.gt-sm mat-raised-button (click)="markDefaultFamily()"
-              color="accent" class="submit-button" aria-label="Mark Default">
+            <button matTooltip="Mark Default Family" *ngIf="(memberModel.canEdit && !memberModel.defaultFamily)" fxHide fxShow.gt-sm
+              mat-raised-button (click)="markDefaultFamily()" color="accent" class="submit-button" aria-label="Mark Default">
               <mat-icon>accessibility</mat-icon>&nbsp;MARK DEFAULT
             </button>
-            <button matTooltip="Mark Default Family" *ngIf="(memberModel.canEdit && !memberModel.defaultFamily)" fxShow fxHide.gt-sm mat-mini-fab (click)="markDefaultFamily()"
-              color="accent" class="submit-button" aria-label="Mark Default">
+            <button matTooltip="Mark Default Family" *ngIf="(memberModel.canEdit && !memberModel.defaultFamily)" fxShow fxHide.gt-sm
+              mat-mini-fab (click)="markDefaultFamily()" color="accent" class="submit-button" aria-label="Mark Default">
               <mat-icon>accessibility</mat-icon>
             </button>
             <button matTooltip="Go Back" fxHide fxShow.gt-sm mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">

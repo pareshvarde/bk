@@ -12,9 +12,8 @@ import { FuseMatchMedia } from '../services/match-media.service';
 import { FuseNavbarVerticalService } from '../../main/navbar/vertical/navbar-vertical.service';
 import { FusePerfectScrollbarDirective } from '../directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
 import { FuseIfOnDomDirective } from '../directives/fuse-if-on-dom/fuse-if-on-dom.directive';
-import { FuseTranslationLoaderService } from '../services/translation-loader.service';
 import { CookieService } from 'ngx-cookie-service';
-import { TranslateModule } from '@ngx-translate/core';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
     declarations   : [
@@ -29,7 +28,8 @@ import { TranslateModule } from '@ngx-translate/core';
         CommonModule,
         FormsModule,
         FusePipesModule,
-        ReactiveFormsModule        
+        ReactiveFormsModule,
+        ImageCropperModule 
     ],
     exports        : [
         FlexLayoutModule,
@@ -42,7 +42,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FusePerfectScrollbarDirective,
         ReactiveFormsModule,        
         FuseIfOnDomDirective,
-        TranslateModule
+        ImageCropperModule        
     ],
     entryComponents: [
         
@@ -51,8 +51,7 @@ import { TranslateModule } from '@ngx-translate/core';
         CookieService,
         FuseMatchMedia,
         FuseNavbarVerticalService,
-        FuseMatSidenavHelperService,
-        FuseTranslationLoaderService
+        FuseMatSidenavHelperService        
     ]
 })
 

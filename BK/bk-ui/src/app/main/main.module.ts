@@ -42,6 +42,7 @@ import { ScrollToModule } from 'ng2-scroll-to';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { MatrimonySearchComponent } from './content/matrimony-search/matrimony-search.component';
 import { MatrimonySearchOptionsComponent } from '../core/components/matrimony-search-options/matrimony-search-options.component';
+import { BkImageCropperComponent } from '../core/components/bk-image-cropper/bk-image-cropper.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -79,7 +80,8 @@ export function tokenGetter() {
         MatrimonyComponent,
         MatrimonyViewComponent,
         DirectoryComponent,
-        MatrimonySearchComponent 
+        MatrimonySearchComponent,
+        BkImageCropperComponent
     ],
     providers:[
         ConfirmationService,
@@ -104,7 +106,11 @@ export function tokenGetter() {
     ],
     exports     : [
         FuseMainComponent
+    ],
+    entryComponents:[
+        BkImageCropperComponent
     ]
+
 })
 
 export class FuseMainModule
