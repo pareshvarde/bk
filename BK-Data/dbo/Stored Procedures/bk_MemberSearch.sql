@@ -45,7 +45,8 @@ BEGIN
 			f.City,
 			f.State,
 			f.Country,
-			m.Gender
+			m.Gender,
+			m.ModifiedOn
 		FROM
 			Members m 
 			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID AND fma.DefaultFamily = 1

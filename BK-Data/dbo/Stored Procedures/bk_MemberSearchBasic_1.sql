@@ -14,7 +14,8 @@ BEGIN
 		m.FirstName,
 		m.LastName,
 		m.DOB,
-		m.Gender				
+		m.Gender,
+		m.ModifiedOn
 	FROM
 		Members m 		
 	WHERE

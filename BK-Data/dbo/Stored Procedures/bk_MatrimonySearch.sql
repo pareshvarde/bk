@@ -47,7 +47,8 @@ BEGIN
 			f.State,
 			f.Country,
 			m.Gender,
-			m.DOB
+			m.DOB,
+			m.ModifiedOn
 		FROM
 			Members m 
 			JOIN Matrimonials mat ON mat.MemberID = m.MemberID
