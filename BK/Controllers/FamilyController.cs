@@ -96,6 +96,7 @@ namespace BK.Controllers
                     tmp.MatrimonialExists = item.MatrimonialExists.Value;
                     tmp.Gender = item.Gender;
                     tmp.Alive = item.Alive;
+                    tmp.DOD = item.DOD;
 
                     if (!string.IsNullOrEmpty(item.RelationType))
                         tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";                    

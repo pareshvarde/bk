@@ -48,6 +48,9 @@ BEGIN
 			f.State,
 			f.Country,
 			m.Gender,
+			m.Alive,
+			m.DOD,
+			m.DOB,
 			m.ModifiedOn
 		FROM
 			Members m 

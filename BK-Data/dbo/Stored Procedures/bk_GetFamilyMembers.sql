@@ -13,6 +13,7 @@ BEGIN
 		m.Married,
 		m.Gender,
 		m.Alive,
+		m.DOD,
 		f.HeadOfFamilyID,
 		lkm.FirstName rFirstName,
 		lkm.LastName rLastName,

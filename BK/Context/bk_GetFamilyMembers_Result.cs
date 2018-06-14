@@ -19,11 +19,12 @@ namespace BK.Context
         public Nullable<System.DateTime> DOB { get; set; }
         public bool Married { get; set; }
         public string Gender { get; set; }
+        public bool Alive { get; set; }
+        public Nullable<System.DateTime> DOD { get; set; }
         public int HeadOfFamilyID { get; set; }
         public string rFirstName { get; set; }
         public string rLastName { get; set; }
         public string RelationType { get; set; }
-        public bool Alive { get; set; }
         public Nullable<bool> MatrimonialExists { get; set; }
     }
 }

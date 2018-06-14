@@ -102,6 +102,9 @@ namespace BK.ViewModel
         [JsonProperty("matrimonialExists")]
         public bool MatrimonialExists { get; set; }
 
+        [JsonProperty("dod")]
+        public DateTime? DOD { get; set; }
+
         [JsonProperty("age")]
         public int Age
         {
@@ -109,7 +112,14 @@ namespace BK.ViewModel
                 if (!this.DOB.HasValue)
                     return 0;
 
+                if (!this.Alive && !this.DOD.HasValue)
+                    return 0;
+
                 int age = DateTime.Today.Year - DOB.Value.Year;
+
+                if (!this.Alive)
+                    age = this.DOD.Value.Year - DOB.Value.Year;  
+
                 if (age > 0 && this.DOB.Value > DateTime.Today.AddYears(-age))
                     age--;
 
