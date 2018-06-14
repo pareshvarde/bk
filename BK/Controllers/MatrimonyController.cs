@@ -229,6 +229,8 @@ namespace BK.Controllers
                     item.FamilyId = result.FamilyID;
                     item.Gender = result.Gender;
                     item.DOB = result.DOB;
+                    item.DOD = result.DOD;
+                    item.Alive = result.Alive;
                     item.PhotoUrl = MemberWrapper.ProfilePhoto(result.MemberID, result.Gender, result.ModifiedOn);
 
                     mvm.Results.Add(item);

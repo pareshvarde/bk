@@ -26,6 +26,8 @@ namespace BK.Context
         public string Country { get; set; }
         public string Gender { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
+        public bool Alive { get; set; }
+        public Nullable<System.DateTime> DOD { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }
