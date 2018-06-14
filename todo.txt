@@ -21,6 +21,11 @@ help icons on each page
     in Angular v7.
 	
 ===========================
-profile picture
+Mool Nivas
+Dadidal Family Link
+Naninal Family Link
+Area (District)
+Picture View
+Logged Image
 ===========================
 
