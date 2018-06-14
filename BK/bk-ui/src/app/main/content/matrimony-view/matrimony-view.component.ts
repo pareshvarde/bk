@@ -113,8 +113,8 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
 
   showPhoto(){
     var pictures: any[] = new Array();
-    pictures.push(this.model.photoUrl);    
-
+    pictures.push(this.model.memberModel.photoUrl);        
+    
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
       data: { images:  pictures}
     });
