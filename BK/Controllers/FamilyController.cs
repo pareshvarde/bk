@@ -68,6 +68,7 @@ namespace BK.Controllers
                 fvm.Address2 = f.Address2;
                 fvm.CategoryID = f.CategoryID;
                 fvm.City = f.City;
+                fvm.District = f.District;
                 fvm.Country = f.Country;
                 fvm.FamilyID = f.FamilyID;
                 fvm.NukhID = f.NukhID;
@@ -149,6 +150,7 @@ namespace BK.Controllers
                 family.Address2 = model.Address2;
                 family.CategoryID = model.CategoryID;
                 family.City = model.City;
+                family.District = model.District;
                 family.Country = model.Country;
                 family.NukhID = model.NukhID;
                 family.PostalCode = model.PostalCode;
@@ -225,6 +227,7 @@ namespace BK.Controllers
                 newFam.Address1 = model.Address1;
                 newFam.Address2 = model.Address2;
                 newFam.City = model.City;
+                newFam.District = model.District;
                 newFam.State = model.State;
                 newFam.PostalCode = model.PostalCode;
                 newFam.Country = model.Country;

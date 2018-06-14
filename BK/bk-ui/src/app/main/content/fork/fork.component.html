@@ -127,13 +127,18 @@
               <input maxlength="50" matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
               <mat-error *ngIf="forkForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
-          </div>
-          <div fxLayout="row wrap">
 
             <mat-form-field>
               <input maxlength="50" matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
               <mat-error *ngIf="forkForm.controls['city'].hasError('required')">Please enter a city</mat-error>
               <mat-error *ngIf="forkForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+
+          </div>
+          <div fxLayout="row wrap">
+            
+            <mat-form-field [floatLabel]="this.forkForm.disabled ? 'always':'auto'">
+              <input maxlength="50" matInput [(ngModel)]="model.district" placeholder="District (Area)" formControlName="district">
             </mat-form-field>
 
             <mat-form-field>

@@ -4,6 +4,7 @@ CREATE PROCEDURE [dbo].[bk_MatrimonySearch]
 	@CategoryID INT = NULL,
 	@NukhID INT = NULL,
 	@City NVARCHAR(50) = NULL,
+	@District NVARCHAR(50) = NULL,
 	@State NVARCHAR(50) = NULL,
 	@Country NVARCHAR(50) = NULL,
 	@Gender CHAR(1) = NULL,
@@ -44,6 +45,7 @@ BEGIN
 			f.Address1,
 			f.Address2,
 			f.City,
+			f.District,
 			f.State,
 			f.Country,
 			m.Gender,
@@ -58,6 +60,7 @@ BEGIN
 			(@CategoryID IS NULL OR f.CategoryID = @CategoryID)
 			AND (@NukhID IS NULL OR f.NukhID = @NukhID)
 			AND (@City IS NULL OR f.City = @City)
+			AND (@District IS NULL OR f.District = @District)
 			AND (@State IS NULL OR f.State = @State)
 			AND (@Country IS NULL OR f.Country = @Country)
 			AND (@Gender IS NULL OR m.Gender = @Gender)
@@ -80,12 +83,13 @@ BEGIN
 			FROM
 			Members m 
 			JOIN Matrimonials mat ON mat.MemberID = m.MemberID
-			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
+			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID AND fma.DefaultFamily = 1
 			JOIN Families f ON f.FamilyID = fma.FamilyId		
 		WHERE			
 			(@CategoryID IS NULL OR f.CategoryID = @CategoryID)
 			AND (@NukhID IS NULL OR f.NukhID = @NukhID)
 			AND (@City IS NULL OR f.City = @City)
+			AND (@District IS NULL OR f.District = @District)
 			AND (@State IS NULL OR f.State = @State)
 			AND (@Country IS NULL OR f.Country = @Country)
 			AND (@Gender IS NULL OR m.Gender = @Gender)

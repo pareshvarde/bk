@@ -14,6 +14,7 @@ export class FamilyModel{
     address1: string;
     address2: string;
     city: string;
+    district: string;
     state: string;
     postalcode: string;
     country: string; 

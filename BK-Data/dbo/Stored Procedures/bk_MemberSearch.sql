@@ -6,6 +6,7 @@ CREATE PROCEDURE [dbo].[bk_MemberSearch]
 	@CategoryID INT = NULL,
 	@NukhID INT = NULL,
 	@City NVARCHAR(50) = NULL,
+	@District NVARCHAR(50) = NULL,
 	@State NVARCHAR(50) = NULL,
 	@EmailAddress NVARCHAR(100) = NULL,
 	@PhoneNumber NVARCHAR(15) = NULL,
@@ -43,6 +44,7 @@ BEGIN
 			f.Address1,
 			f.Address2,
 			f.City,
+			f.District,
 			f.State,
 			f.Country,
 			m.Gender,
@@ -57,6 +59,7 @@ BEGIN
 			AND (@CategoryID IS NULL OR f.CategoryID = @CategoryID)
 			AND (@NukhID IS NULL OR f.NukhID = @NukhID)
 			AND (@City IS NULL OR f.City = @City)
+			AND (@District IS NULL OR f.District = @District)
 			AND (@State IS NULL OR f.State = @State)
 			AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
 			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	
@@ -83,6 +86,7 @@ BEGIN
 		AND (@CategoryID IS NULL OR f.CategoryID = @CategoryID)
 		AND (@NukhID IS NULL OR f.NukhID = @NukhID)
 		AND (@City IS NULL OR f.City = @City)
+		AND (@District IS NULL OR f.District = @District)
 		AND (@State IS NULL OR f.State = @State)
 		AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
 		AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	

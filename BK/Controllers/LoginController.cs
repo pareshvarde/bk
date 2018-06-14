@@ -47,6 +47,7 @@ namespace BK.Controllers
                 family.Address1 = register.Address1;
                 family.Address2 = register.Address2;
                 family.City = register.City;
+                family.District = register.District;
                 family.State = register.State;
                 family.PostalCode = register.PostalCode;
                 family.Country = register.Country;

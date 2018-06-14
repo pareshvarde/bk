@@ -51,7 +51,7 @@
               <mat-error *ngIf="familyForm.controls['nukhId'].hasError('required')">Please select a nukh</mat-error>
             </mat-form-field>
 
-            <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'" >
+            <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Head Of Family" [(ngModel)]="model.hofId" formControlName="hof">
                 <mat-option *ngFor="let n of model.members" [value]="n.memberId">
                   {{ n.name }}
@@ -69,13 +69,18 @@
               <input maxlength="50" matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
               <mat-error *ngIf="familyForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
-          </div>
-          <div fxLayout="row wrap">
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
               <input maxlength="50" matInput [(ngModel)]="model.city" placeholder="City" formControlName="city">
               <mat-error *ngIf="familyForm.controls['city'].hasError('required')">Please enter a city</mat-error>
               <mat-error *ngIf="familyForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+
+          </div>
+          <div fxLayout="row wrap">
+
+            <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
+              <input maxlength="50" matInput [(ngModel)]="model.district" placeholder="District (Area)" formControlName="district">
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
@@ -85,7 +90,7 @@
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="10" matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">              
+              <input maxlength="10" matInput [(ngModel)]="model.postalcode" placeholder="Postal Code" formControlName="postalCode">
               <mat-error *ngIf="familyForm.controls['postalCode'].hasError('required')">Please enter a postalcode</mat-error>
               <mat-error *ngIf="familyForm.controls['postalCode'].hasError('maxlength')">Maximum 10 characters allowed</mat-error>
             </mat-form-field>
@@ -97,7 +102,8 @@
             </mat-form-field>
           </div>
           <div *ngIf="editMode && model.canEdit" fxLayout="row" fxLayoutAlign="center center">
-            <button matTooltip="Save" mat-raised-button fxHide fxShow.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE">
+            <button matTooltip="Save" mat-raised-button fxHide fxShow.gt-sm (click)="saveFamily()" color="accent" class="submit-button"
+              aria-label="SAVE">
               <mat-icon>save</mat-icon>&nbsp;SAVE
             </button>
             <button matTooltip="Save" mat-mini-fab fxShow fxHide.gt-sm (click)="saveFamily()" color="accent" class="submit-button" aria-label="SAVE">
@@ -111,15 +117,16 @@
             </button>
           </div>
           <div fxLayout="row" fxLayoutAlign="center center">
-            <button matTooltip="Edit" *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="edit()" color="accent" class="submit-button"
-              aria-label="EDIT">
+            <button matTooltip="Edit" *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="edit()" color="accent"
+              class="submit-button" aria-label="EDIT">
               <mat-icon>edit</mat-icon>&nbsp;EDIT
             </button>
-            <button matTooltip="Edit" *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="edit()" color="accent" class="submit-button"
-              aria-label="EDIT">
+            <button matTooltip="Edit" *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="edit()" color="accent"
+              class="submit-button" aria-label="EDIT">
               <mat-icon>edit</mat-icon>
             </button>
-            <button matTooltip="Go Back" *ngIf="!editMode" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
+            <button matTooltip="Go Back" *ngIf="!editMode" mat-raised-button fxHide fxShow.gt-sm (click)="back()" class="submit-button"
+              aria-label="BACK">
               <mat-icon>backspace</mat-icon>&nbsp;BACK
             </button>
             <button matTooltip="Go Back" *ngIf="!editMode" mat-mini-fab fxShow fxHide.gt-sm (click)="back()" class="submit-button" aria-label="BACK">
@@ -133,11 +140,12 @@
               class="submit-button" aria-label="FORK">
               <mat-icon>device_hub</mat-icon>
             </button>
-            <button matTooltip="Delete Family" *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="delete()" class="submit-button"
-              aria-label="DELETE">
+            <button matTooltip="Delete Family" *ngIf="!editMode && model.canEdit" mat-raised-button fxHide fxShow.gt-sm (click)="delete()"
+              class="submit-button" aria-label="DELETE">
               <mat-icon>delete_forever</mat-icon>&nbsp;DELETE
             </button>
-            <button matTooltip="Delete Family" *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="delete()" class="submit-button" aria-label="DELETE">
+            <button matTooltip="Delete Family" *ngIf="!editMode && model.canEdit" mat-mini-fab fxShow fxHide.gt-sm (click)="delete()"
+              class="submit-button" aria-label="DELETE">
               <mat-icon>delete_forever</mat-icon>
             </button>
           </div>
@@ -146,7 +154,8 @@
       <div class="bk-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
-          <button matTooltip="Add Member" *ngIf="model.canEdit" mat-mini-fab color="accent" [routerLink]="['/member/',this.familyId,0]" class="ml-8">
+          <button matTooltip="Add Member" *ngIf="model.canEdit" mat-mini-fab color="accent" [routerLink]="['/member/',this.familyId,0]"
+            class="ml-8">
             <mat-icon>person_add</mat-icon>
           </button>
         </div>
@@ -204,9 +213,14 @@
         <div *ngIf="dataSource" fxShow fxHide.gt-sm>
           <div class="mobile-card" *ngFor="let member of dataSource.filteredData">
             <div fxLayout="row wrap">ID:&nbsp;{{member.memberId}}</div>
-            <div fxLayout="row wrap">Name:&nbsp;<a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a></div>
+            <div fxLayout="row wrap">Name:&nbsp;
+              <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
+            </div>
             <div fxLayout="row wrap">Age:&nbsp;{{member.age}}&nbsp;Years</div>
-            <div fxLayout="row wrap">Married:&nbsp;<span *ngIf="member.married">Yes</span><span *ngIf="!member.married">No</span></div>
+            <div fxLayout="row wrap">Married:&nbsp;
+              <span *ngIf="member.married">Yes</span>
+              <span *ngIf="!member.married">No</span>
+            </div>
             <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>
             <div fxLayout="row wrap" fxLayoutAlign="end start">
               <button matTooltip="Delete Member" *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
@@ -235,10 +249,12 @@
               <button matTooltip="Delete Matrimony" *ngIf="member.canEdit && member.matrimonialExists" mat-icon-button (click)="deleteMatrimony(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
               </button>
-              <button matTooltip="Edit Matrimony" *ngIf="member.canEdit && member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'edit']" mat-icon-button>
+              <button matTooltip="Edit Matrimony" *ngIf="member.canEdit && member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'edit']"
+                mat-icon-button>
                 <mat-icon>mode_edit</mat-icon>
               </button>
-              <button matTooltip="Add Matrimony" *ngIf="member.canEdit && !member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'add']" mat-icon-button>
+              <button matTooltip="Add Matrimony" *ngIf="member.canEdit && !member.matrimonialExists" [routerLink]="['/matrimony',member.memberId, 'add']"
+                mat-icon-button>
                 <mat-icon>add_circle</mat-icon>
               </button>
             </mat-cell>
@@ -247,7 +263,7 @@
           <mat-row *matRowDef="let row; columns: matriDisplayedColumns;"></mat-row>
         </mat-table>
         <div *ngIf="!matrimonyDatasource || matrimonyDatasource.filteredData.length === 0">
-          <div fxLayout="row" style="text-align: start; padding-bottom: 10px;">Family do not have any member eligible for matrimonial profile.</div>          
+          <div fxLayout="row" style="text-align: start; padding-bottom: 10px;">Family do not have any member eligible for matrimonial profile.</div>
           <div fxLayout="row" style="text-align: start">Only un-married, adult and alive members are eligible.</div>
         </div>
       </div>

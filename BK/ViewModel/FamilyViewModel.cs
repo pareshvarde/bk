@@ -42,6 +42,9 @@ namespace BK.ViewModel
         [JsonProperty("city")]
         public string City { get; set; }
 
+        [JsonProperty("district")]
+        public string District { get; set; }
+
         [JsonProperty("state")]
         public string State { get; set; }
 

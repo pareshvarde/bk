@@ -395,6 +395,7 @@ namespace BK.Controllers
             int? categoryId = model.CategoryID.HasValue && model.CategoryID.Value > 0 ? model.CategoryID : null;
             int? nukhId = model.NukhID.HasValue && model.NukhID.Value > 0 ? model.NukhID : null;
             string city = string.IsNullOrWhiteSpace(model.City) ? null : model.City.Trim();
+            string district = string.IsNullOrWhiteSpace(model.District) ? null : model.District.Trim();
             string state = string.IsNullOrWhiteSpace(model.State) ? null : model.State.Trim();
             string emailAddress = string.IsNullOrWhiteSpace(model.Email) ? null : model.Email.Trim();
             string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
@@ -408,7 +409,7 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, oParameter).ToList();
+                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, district, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, oParameter).ToList();
 
                 mvm.TotalRecords = (int)oParameter.Value;
 
@@ -418,7 +419,7 @@ namespace BK.Controllers
 
                     item.Name = $"{result.FirstName} {result.LastName}";
                     item.Address1 = $"{result.Address1}, {result.Address2}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
-                    item.Address2 = $"{result.City}, {result.State}, {result.Country}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
+                    item.Address2 = $"{result.City}, {result.District}, {result.State}, {result.Country}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
                     item.MemberId = result.MemberID;
                     item.FamilyId = result.FamilyID;
                     item.Gender = result.Gender;

@@ -109,13 +109,18 @@
             <input maxlength="50" matInput [(ngModel)]="formModel.address2" placeholder="Address 2" formControlName="address2">
             <mat-error *ngIf="registerForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
           </mat-form-field>
-        </div>
-        <div fxLayout="row wrap">
 
           <mat-form-field>
             <input maxlength="50" matInput [(ngModel)]="formModel.city" placeholder="City" formControlName="city">
             <mat-error *ngIf="registerForm.controls['city'].hasError('required')">Please provide a city</mat-error>
             <mat-error *ngIf="registerForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row wrap">
+
+          <mat-form-field>
+            <input maxlength="50" matInput [(ngModel)]="formModel.district" placeholder="District (Area)" formControlName="district">            
           </mat-form-field>
 
           <mat-form-field>

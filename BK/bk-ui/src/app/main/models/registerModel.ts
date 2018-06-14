@@ -11,6 +11,7 @@ export class RegisterModel{
     address1: string;
     address2: string;
     city: string;
+    district: string;
     postalCode: string;
     state: string;
     country: string;

@@ -7,7 +7,7 @@ using System.Web;
 namespace BK.ViewModel
 {
     public class MatrimonySearchModel
-    {        
+    {
         [JsonProperty("nukhId")]
         public int? NukhID { get; set; }
 
@@ -16,6 +16,9 @@ namespace BK.ViewModel
 
         [JsonProperty("city")]
         public string City { get; set; }
+
+        [JsonProperty("district")]
+        public string District { get; set; }
 
         [JsonProperty("state")]
         public string State { get; set; }

@@ -36,6 +36,8 @@ namespace BK.ViewModel
         public string Address2 { get; set; }
         [JsonProperty("city")]
         public string City { get; set; }
+        [JsonProperty("district")]
+        public string District { get; set; }
         [JsonProperty("postalCode")]       
         public string PostalCode { get; set; }
         [JsonProperty("state")]

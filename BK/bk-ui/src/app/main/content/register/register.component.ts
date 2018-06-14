@@ -43,6 +43,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
       address1: new FormControl('', [Validators.maxLength(50)]),
       address2: new FormControl('', [Validators.maxLength(50)]),
       city: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      district: new FormControl('', [Validators.maxLength(50)]),
       postalCode: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       state: new FormControl('', [Validators.required, Validators.maxLength(50)]),      
       country: new FormControl('', [Validators.required, Validators.maxLength(50)]),
