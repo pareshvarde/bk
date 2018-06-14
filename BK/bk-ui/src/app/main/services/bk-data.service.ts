@@ -111,6 +111,14 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
+  profilePhoto() {
+    this.blockUI.start("Please wait...");
+           
+    return this.authHttp.get(this.API_URL + "member/profilePhoto").pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);
+  }
+
   searchMember(model: MemberSearchParameter){
     this.blockUI.start("Please wait...");
 

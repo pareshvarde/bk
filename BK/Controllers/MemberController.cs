@@ -464,6 +464,29 @@ namespace BK.Controllers
 
             return Ok();
         }
+
+        [Route("api/member/profilePhoto")]
+        [HttpGet]
+        public IHttpActionResult ProfilePhoto()
+        {
+            string url = "";
+            DateTime? modifiedOn;
+            string gender;
+
+            using (bkContext context = new bkContext())
+            {
+                Member member = context.Members.FirstOrDefault(x => x.MemberID == LoggedInMemberId);
+                if (member != null)
+                {
+                    gender = member.Gender;
+                    modifiedOn = member.ModifiedOn;
+
+                    url = MemberWrapper.ProfilePhoto(LoggedInMemberId, gender, modifiedOn);
+                }
+            }
+          
+            return Ok(url);
+        }
     }
 }
 

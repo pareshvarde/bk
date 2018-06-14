@@ -17,7 +17,7 @@ namespace BK
             if (File.Exists(filePath))
                 return string.Format("images/profiles/{0}.jpg?{1}", memberId, modifiedOn.Value.Ticks);
 
-            if (gender == "M")
+            if (gender.ToLower() == "m")
                 return "images/profiles/male.png";
             else
                 return "images/profiles/female.png";            
