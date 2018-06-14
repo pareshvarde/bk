@@ -1,5 +1,5 @@
-<image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="200"
-  format="jpg" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()" (imageCropped)="imageCropped($event)"></image-cropper>
+<image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1" [resizeToWidth]="250"
+  format="jpeg" (imageLoaded)="imageLoaded()" (loadImageFailed)="loadImageFailed()" (imageCropped)="imageCropped($event)"></image-cropper>
 <div fxLayout="row wrap" fxLayoutAlign="center center">
   <button matTooltip="Save" fxHide fxShow.gt-sm mat-raised-button (click)="save()" color="accent" class="submit-button" aria-label="CANCEL">
     <mat-icon>save</mat-icon>&nbsp;SAVE
