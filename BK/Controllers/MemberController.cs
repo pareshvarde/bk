@@ -419,7 +419,7 @@ namespace BK.Controllers
 
                     item.Name = $"{result.FirstName} {result.LastName}";
                     item.Address1 = $"{result.Address1}, {result.Address2}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
-                    item.Address2 = $"{result.City}, {result.District}, {result.State}, {result.Country}".TrimEnd(' ').TrimEnd(',').TrimStart(',');
+                    item.Address2 = $"{result.City}, {result.District}, {result.State}, {result.Country}".TrimEnd(' ').TrimEnd(',').TrimStart(',').Replace(", , ", ", ");
                     item.MemberId = result.MemberID;
                     item.FamilyId = result.FamilyID;
                     item.Gender = result.Gender;
