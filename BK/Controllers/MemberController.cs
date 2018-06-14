@@ -448,7 +448,7 @@ namespace BK.Controllers
             if (string.IsNullOrWhiteSpace(model.image))
                 return BadRequest("No image content provided");
 
-            byte[] imageBytes = Convert.FromBase64String(model.image.Replace("data:image/png;base64,", ""));
+            byte[] imageBytes = Convert.FromBase64String(model.image.Replace("data:image/jpeg;base64,", ""));
 
             using (MemoryStream stream = new MemoryStream(imageBytes))
             {
