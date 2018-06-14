@@ -14,6 +14,7 @@ import { FusePerfectScrollbarDirective } from '../directives/fuse-perfect-scroll
 import { FuseIfOnDomDirective } from '../directives/fuse-if-on-dom/fuse-if-on-dom.directive';
 import { CookieService } from 'ngx-cookie-service';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { ImageViewerModule} from 'ngx-image-viewer';
 
 @NgModule({
     declarations   : [
@@ -29,7 +30,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         FormsModule,
         FusePipesModule,
         ReactiveFormsModule,
-        ImageCropperModule 
+        ImageCropperModule,
+        ImageViewerModule.forRoot()
     ],
     exports        : [
         FlexLayoutModule,
@@ -42,7 +44,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
         FusePerfectScrollbarDirective,
         ReactiveFormsModule,        
         FuseIfOnDomDirective,
-        ImageCropperModule        
+        ImageCropperModule,
+        ImageViewerModule
     ],
     entryComponents: [
         

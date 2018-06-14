@@ -12,6 +12,8 @@ import { HEIGHT_DATA } from '../../data/height';
 import { BODY_TYPE_DATA } from '../../data/bodyType';
 import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
 import { ReplaySubject } from 'rxjs';
+import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-matrimony-view',
@@ -32,7 +34,8 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
   readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;  
   
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService, private location: Location) {
+    private alertService: NotificationsService, public authService: bkAuthService, 
+    private location: Location, public dialog: MatDialog) {
       this.route.params.subscribe(params => {
         
         if (params.memberId > 0)
@@ -106,6 +109,15 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
           this.alertService.error('', err);
       }
     );
+  }
+
+  showPhoto(){
+    var pictures: any[] = new Array();
+    pictures.push(this.model.photoUrl);    
+
+    let dialogRef = this.dialog.open(BkImageViewerComponent, {
+      data: { images:  pictures}
+    });
   }
 
   back(){

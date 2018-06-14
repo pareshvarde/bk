@@ -3,7 +3,7 @@
   <div class="row header" fxLayoutAlign="center center">Displaying {{results.length}} of {{totalCount}} members</div>   
   <div class="fuse-card memberCard" *ngFor="let result of results">      
       <div class="row profileHeader" fxLayoutAlign="start center">
-          <img class="avatar" src="{{result.photoUrl}}" />
+          <img (click)="showPhoto(result.photoUrl)" class="avatar" src="{{result.photoUrl}}" />
           <div class="h4"><a [routerLink]="['/member/', result.familyId, result.memberId]">{{result.name}}</a></div>
       </div>      
       <div class="h5">{{result.address1}}</div>

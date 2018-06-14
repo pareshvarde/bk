@@ -2,7 +2,7 @@
   <div id="matrimony-view-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div *ngIf="model" id="matrimony-view-form">
       <div fxLayout="row wrap" fxLayoutAlign="center center">
-        <img *ngIf="model.memberModel.photoUrl" class="avatar" src="{{model.memberModel.photoUrl}}" />
+        <img *ngIf="model.memberModel.photoUrl" (click)="showPhoto()" class="avatar" src="{{model.memberModel.photoUrl}}" />
       </div>
       <div fxLayout="row wrap" fxLayoutAlign="center center">
           <div *ngIf="model.memberModel.firstName" class="title">{{model.memberModel.firstName}} {{model.memberModel.lastName}}</div>

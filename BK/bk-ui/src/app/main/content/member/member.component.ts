@@ -15,6 +15,7 @@ import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { ReplaySubject } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
+import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
 
 @Component({
   selector: 'app-member',
@@ -338,8 +339,17 @@ export class MemberComponent implements OnInit, OnDestroy {
   }
 
   openFile() {
-    if (this.memberModel.canEdit)
+    if (this.memberModel.canEdit){
       document.getElementById('fileBrowser').click();
+      return;
+    }
+
+    var pictures: any[] = new Array();
+    pictures.push(this.memberModel.photoUrl);    
+
+    let dialogRef = this.dialog.open(BkImageViewerComponent, {
+      data: { images:  pictures}
+    });
   }
 
   savePhoto(content: string) {

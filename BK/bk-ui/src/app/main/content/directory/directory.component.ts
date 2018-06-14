@@ -4,6 +4,8 @@ import { MemberSearchParameter } from '../../models/memberSearchParameter';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { ReplaySubject } from 'rxjs';
+import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-directory',
@@ -20,7 +22,7 @@ export class DirectoryComponent implements OnInit, OnDestroy {
   hasResult: boolean;
   readonly PAGE_SIZE: number = 50;
 
-  constructor(private dataService: bkDataService, private alertService: NotificationsService) { 
+  constructor(private dataService: bkDataService, private alertService: NotificationsService, public dialog: MatDialog) { 
     this.searchParameter = new MemberSearchParameter();    
   }
       
@@ -91,5 +93,14 @@ export class DirectoryComponent implements OnInit, OnDestroy {
       return true;
     else
       return false;
+  }
+
+  showPhoto(url: string){
+    var pictures: any[] = new Array();
+    pictures.push(url);    
+
+    let dialogRef = this.dialog.open(BkImageViewerComponent, {
+      data: { images:  pictures}
+    });
   }
 }
