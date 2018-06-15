@@ -95,6 +95,9 @@ namespace BK.ViewModel
         [JsonProperty("photoUrl")]
         public string PhotoUrl { get; set; }
 
+        [JsonProperty("modifiedOn")]
+        public DateTime? ModifiedOn { get; set; }
+
         [JsonProperty("canEdit")]
         public bool canEdit { get; set; }
     }

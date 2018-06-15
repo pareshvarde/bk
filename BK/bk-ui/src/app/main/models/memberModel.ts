@@ -27,6 +27,7 @@ export class MemberModel {
     familyId: number;    
     defaultFamily: boolean;
     photoUrl: string;    
+    modifiedOn: Date;
     canEdit: boolean;
 
     constructor() { }

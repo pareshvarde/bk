@@ -79,7 +79,8 @@ namespace BK.Controllers
                     TwitterHandle = member.TwitterHandle,
                     Married = member.Married,
                     Anniversary = member.Anniversary,
-                    PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn)
+                    PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn),
+                    ModifiedOn = member.ModifiedOn.HasValue ? member.ModifiedOn : member.CreatedOn
                 };
 
                 FamilyMemberAssociation fma = fmAssociation.FirstOrDefault(x => x.MemberId == memberId);
