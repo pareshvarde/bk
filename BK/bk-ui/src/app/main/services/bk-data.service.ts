@@ -17,7 +17,7 @@ import { MatrimonySearchParameter } from '../models/matrimonySearchParameter';
 
 @Injectable()
 export class bkDataService {
-  private API_URL = "http://pareshvarde-001-site1.etempurl.com/api/";
+  private API_URL = "/api/";
   @BlockUI() blockUI: NgBlockUI;
   
   constructor(private http: Http, public authHttp: HttpClient) { }

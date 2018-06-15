@@ -327,7 +327,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     }
 
     let dialogRef = this.dialog.open(BkImageCropperComponent, {
-      width: '500px',
+      width: '350px',
       data: { imgEvent: event }
     });
 
@@ -347,7 +347,7 @@ export class MemberComponent implements OnInit, OnDestroy {
     var pictures: any[] = new Array();
     pictures.push(this.memberModel.photoUrl);    
 
-    let dialogRef = this.dialog.open(BkImageViewerComponent, {
+    let dialogRef = this.dialog.open(BkImageViewerComponent, {      
       data: { images:  pictures}
     });
   }
