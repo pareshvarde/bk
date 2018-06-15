@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
 import { EmailValidators, UniversalValidators } from 'ng2-validators';
 import { bkDataService } from '../../services/bk-data.service';
@@ -14,7 +14,7 @@ import { ReplaySubject } from 'rxjs';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']  
 })
-export class RegisterComponent implements OnInit, OnDestroy {
+export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   registerForm: FormGroup;
@@ -23,10 +23,14 @@ export class RegisterComponent implements OnInit, OnDestroy {
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   
   constructor(private router: Router, private dataService: bkDataService, 
-    private alertService: NotificationsService) 
+    private alertService: NotificationsService, private cdr: ChangeDetectorRef) 
   {         
     this.formModel = new RegisterModel();
     this.formModel.gender = "M";
+  }
+  
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
   }
 
   ngOnInit() {

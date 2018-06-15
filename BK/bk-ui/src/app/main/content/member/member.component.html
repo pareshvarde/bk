@@ -41,20 +41,20 @@
 
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.firstName" placeholder="First Name" formControlName="firstName" bkAutofocus>
+              <input maxlength="50" matInput [ngModel]="memberModel.firstName | titlecase" (ngModelChange)="memberModel.firstName=$event" placeholder="First Name" formControlName="firstName" bkAutofocus>
               <mat-error *ngIf="memberForm.controls['firstName'].hasError('required')">Please provide a first name</mat-error>
               <mat-error *ngIf="memberForm.controls['firstName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.lastName" placeholder="Last Name" formControlName="lastName">
+              <input maxlength="50" matInput [ngModel]="memberModel.lastName | titlecase" (ngModelChange)="memberModel.lastName=$event" placeholder="Last Name" formControlName="lastName">
               <mat-error *ngIf="memberForm.controls['lastName'].hasError('required')">Please provide a last name</mat-error>
               <mat-error *ngIf="memberForm.controls['lastName'].hasError('noWhitespaceRequired')">Only letters without space</mat-error>
               <mat-error *ngIf="memberForm.controls['lastName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.nickName" placeholder="Nick Name" formControlName="nickName">
+              <input maxlength="50" matInput [ngModel]="memberModel.nickName | titlecase" (ngModelChange)="memberModel.nickName=$event" placeholder="Nick Name" formControlName="nickName">
               <mat-error *ngIf="memberForm.controls['nickName'].hasError('noWhitespaceRequired')">Only letters without space</mat-error>
               <mat-error *ngIf="memberForm.controls['nickName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
@@ -62,7 +62,7 @@
 
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="100" matInput type="email" [(ngModel)]="memberModel.email" placeholder="Email" formControlName="email">
+              <input maxlength="100" matInput type="email" [ngModel]="memberModel.email | lowercase" (ngModelChange)="memberModel.email=$event" placeholder="Email" formControlName="email">
               <mat-error *ngIf="memberForm.controls['email'].hasError('email')">Please provide valid email address</mat-error>
               <mat-error *ngIf="memberForm.controls['email'].hasError('maxlength')">Maximum 100 characters allowed</mat-error>
             </mat-form-field>
@@ -107,7 +107,7 @@
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.birthPlace" placeholder="Birth Place" formControlName="birthPlace">
+              <input maxlength="50" matInput [ngModel]="memberModel.birthPlace | titlecase" (ngModelChange)="memberModel.birthPlace=$event" placeholder="Birth Place" formControlName="birthPlace">
               <mat-error *ngIf="memberForm.controls['birthPlace'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
           </div>
@@ -133,7 +133,7 @@
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'" *ngIf="!memberModel.alive">
-              <input matInput [(ngModel)]="memberModel.deathPlace" placeholder="Death Place" formControlName="deathPlace">
+              <input matInput [ngModel]="memberModel.deathPlace | titlecase" (ngModelChange)="memberModel.deathPlace=$event" placeholder="Death Place" formControlName="deathPlace">
             </mat-form-field>
           </div>
 
@@ -180,12 +180,12 @@
 
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
+              <input maxlength="50" matInput [ngModel]="memberModel.educationLevel | titlecase" (ngModelChange)="memberModel.educationLevel=$event" placeholder="Education Level" formControlName="educationLevel">
               <mat-error *ngIf="memberForm.controls['educationLevel'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.educationField" placeholder="Education Field" formControlName="educationField">
+              <input maxlength="50" matInput [ngModel]="memberModel.educationField | titlecase" (ngModelChange)="memberModel.educationField=$event" placeholder="Education Field" formControlName="educationField">
               <mat-error *ngIf="memberForm.controls['educationField'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
           </div>
@@ -200,31 +200,31 @@
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.companyName" placeholder="Company Name" formControlName="companyName">
+              <input maxlength="50" matInput [ngModel]="memberModel.companyName | titlecase" (ngModelChange)="memberModel.companyName=$event" placeholder="Company Name" formControlName="companyName">
               <mat-error *ngIf="memberForm.controls['companyName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.jobTitle" placeholder="Job Title" formControlName="jobTitle">
+              <input maxlength="50" matInput [ngModel]="memberModel.jobTitle | titlecase" (ngModelChange)="memberModel.jobTitle=$event" placeholder="Job Title" formControlName="jobTitle">
               <mat-error *ngIf="memberForm.controls['jobTitle'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
           </div>
 
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.facebookHandle" placeholder="Facebook Handle" formControlName="facebookHandle">
+              <input maxlength="50" matInput [ngModel]="memberModel.facebookHandle | lowercase" (ngModelChange)="memberModel.facebookHandle=$event" placeholder="Facebook Handle" formControlName="facebookHandle">
               <mat-error *ngIf="memberForm.controls['facebookHandle'].hasError('noWhitespaceRequired')">Please provide handle without space</mat-error>
               <mat-error *ngIf="memberForm.controls['facebookHandle'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.instagramHandle" placeholder="Instagram Handle" formControlName="instagramHandle">
+              <input maxlength="50" matInput [ngModel]="memberModel.instagramHandle | lowercase" (ngModelChange)="memberModel.instagramHandle=$event" placeholder="Instagram Handle" formControlName="instagramHandle">
               <mat-error *ngIf="memberForm.controls['instagramHandle'].hasError('noWhitespaceRequired')">Please provide handle without space</mat-error>
               <mat-error *ngIf="memberForm.controls['instagramHandle'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="memberModel.twitterHandle" placeholder="Twitter Handle" formControlName="twitterHandle">
+              <input maxlength="50" matInput [ngModel]="memberModel.twitterHandle | lowercase" (ngModelChange)="memberModel.twitterHandle=$event" placeholder="Twitter Handle" formControlName="twitterHandle">
               <mat-error *ngIf="memberForm.controls['twitterHandle'].hasError('noWhitespaceRequired')">Please provide handle without space</mat-error>
               <mat-error *ngIf="memberForm.controls['twitterHandle'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>

@@ -21,8 +21,9 @@ help icons on each page
     in Angular v7.
 	
 ===========================
-Dadidal Family Link
-Naninal Family Link
+Dadidal Family Link (For Married Woman)
+Naninal Family Link (For All)
+In law Family Link (For Married Man)
 Logged Image
 Multiple Matrimonial full photos
 Preface Page

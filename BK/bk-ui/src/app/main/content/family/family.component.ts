@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { FamilyModel, FamilyMemberModel } from '../../models/familyModel';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -17,7 +17,7 @@ import { ReplaySubject } from 'rxjs';
   templateUrl: './family.component.html',
   styleUrls: ['./family.component.scss']  
 })
-export class FamilyComponent implements OnInit, OnDestroy {
+export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   model: FamilyModel;
@@ -32,7 +32,8 @@ export class FamilyComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService,
-    private _confirmation: ConfirmationService,  private location: Location) {
+    private _confirmation: ConfirmationService,  private location: Location,
+    private cdr: ChangeDetectorRef) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -46,6 +47,11 @@ export class FamilyComponent implements OnInit, OnDestroy {
 
   displayedColumns = ['memberId', 'name', 'age', 'married', 'relation', 'actions'];
   matriDisplayedColumns = ['name'];
+
+
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  }
 
   ngOnInit() {
     this.familyForm = new FormGroup({
@@ -125,6 +131,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
           if (!x.married && x.gender == 'M' && x.alive && x.age > 20)
             return true;
         }));
+              
       },
       (err) => {
         if (err.errors)

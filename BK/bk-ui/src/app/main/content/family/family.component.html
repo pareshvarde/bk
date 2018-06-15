@@ -61,17 +61,17 @@
           </div>
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="model.familyNative" placeholder="Mool Niwasi" formControlName="familyNative">
+              <input maxlength="50" matInput [ngModel]="model.familyNative | titlecase" (ngModelChange)="model.familyNative=$event" placeholder="Mool Niwasi" formControlName="familyNative">
               <mat-error *ngIf="familyForm.controls['familyNative'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="model.address1" placeholder="Address 1" formControlName="address1">
+              <input maxlength="50" matInput [ngModel]="model.address1 | titlecase"  (ngModelChange)="model.address1=$event" placeholder="Address 1" formControlName="address1">
               <mat-error *ngIf="familyForm.controls['address1'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="model.address2" placeholder="Address 2" formControlName="address2">
+              <input maxlength="50" matInput [ngModel]="model.address2 | titlecase" (ngModelChange)="model.address2=$event" placeholder="Address 2" formControlName="address2">
               <mat-error *ngIf="familyForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
@@ -79,18 +79,18 @@
           <div fxLayout="row wrap">
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="model.city" placeholder="City/Village" formControlName="city">
+              <input maxlength="50" matInput [ngModel]="model.city | titlecase" (ngModelChange)="model.city=$event" placeholder="City/Village" formControlName="city">
               <mat-error *ngIf="familyForm.controls['city'].hasError('required')">Please enter a city</mat-error>
               <mat-error *ngIf="familyForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="model.district" placeholder="District (Area)" formControlName="district">
+              <input maxlength="50" matInput [ngModel]="model.district | titlecase" (ngModelChange)="model.district=$event" placeholder="District (Area)" formControlName="district">
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="model.state" placeholder="State" formControlName="state">
+              <input maxlength="50" matInput [ngModel]="model.state | titlecase" (ngModelChange)="model.state=$event" placeholder="State" formControlName="state">
               <mat-error *ngIf="familyForm.controls['state'].hasError('required')">Please enter a state</mat-error>
               <mat-error *ngIf="familyForm.controls['state'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
@@ -103,7 +103,7 @@
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [(ngModel)]="model.country" placeholder="Country" formControlName="country">
+              <input maxlength="50" matInput [ngModel]="model.country | titlecase" (ngModelChange)="model.country=$event" placeholder="Country" formControlName="country">
               <mat-error *ngIf="familyForm.controls['country'].hasError('required')">Please enter a country</mat-error>
               <mat-error *ngIf="familyForm.controls['country'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>

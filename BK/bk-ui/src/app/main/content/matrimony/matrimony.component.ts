@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { MatrimonyModel } from '../../models/matrimonyModel';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -21,7 +21,7 @@ import { ReplaySubject } from 'rxjs';
   templateUrl: './matrimony.component.html',
   styleUrls: ['./matrimony.component.scss']
 })
-export class MatrimonyComponent implements OnInit, OnDestroy {
+export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   memberId: number;  
@@ -36,7 +36,8 @@ export class MatrimonyComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, 
-    private _confirmation: ConfirmationService, private location: Location) {
+    private _confirmation: ConfirmationService, private location: Location,
+    private cdr: ChangeDetectorRef) {
 
     this.route.params.subscribe(params => {
       if (params.memberId > 0)
@@ -50,6 +51,10 @@ export class MatrimonyComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  }
+  
   ngOnInit() {
     this.matrimonyForm = new FormGroup({
       maternalNukhId: new FormControl('', [Validators.required]),

@@ -88,7 +88,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input maxlength="50" matInput [(ngModel)]="model.language" placeholder="Mother Tongue" formControlName="language">
+            <input maxlength="50" matInput [ngModel]="model.language | titlecase" (ngModelChange)="model.language=$event" placeholder="Mother Tongue" formControlName="language">
             <mat-error *ngIf="matrimonyForm.controls['language'].hasError('required')">Please select mother tongue</mat-error>
             <mat-error *ngIf="matrimonyForm.controls['language'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
           </mat-form-field>

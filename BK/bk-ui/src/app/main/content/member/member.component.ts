@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FamilyModel } from '../../models/familyModel';
 import { Router, ActivatedRoute } from '@angular/router';
 import { bkDataService } from '../../services/bk-data.service';
@@ -23,7 +23,7 @@ import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer
   styleUrls: ['./member.component.scss']
 })
 
-export class MemberComponent implements OnInit, OnDestroy {
+export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   familyModel: FamilyModel;
@@ -43,7 +43,7 @@ export class MemberComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location,
-    private _confirmation: ConfirmationService, public dialog: MatDialog) {
+    private _confirmation: ConfirmationService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
 
     this.route.params.subscribe(params => {
       if (params.familyId > 0)
@@ -62,6 +62,10 @@ export class MemberComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterViewChecked(){
+    this.cdr.detectChanges();
+  }
+  
   ngOnInit() {
     this.memberForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
