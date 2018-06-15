@@ -1,16 +1,7 @@
 remember me
-	login page (refresh token?)
-	
-401 redirect
-sign up captcha
+login page (refresh token?)
+sign up/login captcha
 
-birthday wish email
-anniversary?
-
-include child object in datacontext queries
-edits by minor?
-
-optimization
 =============
 help icons on each page
 
@@ -21,11 +12,12 @@ help icons on each page
     in Angular v7.
 	
 ===========================
+birthday/anniversary wish email
 Dadidal Family Link (For Married Woman)
 Naninal Family Link (For All)
-In law Family Link (For Married Man)
 Logged Image
 Multiple Matrimonial full photos
 Preface Page
+Last Modified On: member view page
 ===========================
 

@@ -164,7 +164,6 @@ namespace BK.Controllers
                     if (context.Members.Any(x => x.EmailAddress == member.EmailAddress && x.MemberID != member.MemberID))
                         return BadRequest("Email address is already registered with other member");
                 
-                //TODO: make sure this work and send an invitation email when a new member added to family with email address
                 FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
                 if (mAssociation == null)
                 {
