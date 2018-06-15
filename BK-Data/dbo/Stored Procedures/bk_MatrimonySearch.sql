@@ -50,6 +50,8 @@ BEGIN
 			f.Country,
 			m.Gender,
 			m.DOB,
+			m.Alive,
+			m.DOD,
 			m.ModifiedOn
 		FROM
 			Members m 

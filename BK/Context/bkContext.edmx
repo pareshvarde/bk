@@ -13,6 +13,7 @@
           <Property Name="NukhID" Type="int" Nullable="false" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
           <Property Name="HeadOfFamilyID" Type="int" Nullable="false" />
+          <Property Name="FamilyNative" Type="nvarchar" MaxLength="50" />
           <Property Name="Address1" Type="nvarchar" MaxLength="50" />
           <Property Name="Address2" Type="nvarchar" MaxLength="50" />
           <Property Name="District" Type="nvarchar" MaxLength="50" />
@@ -93,6 +94,7 @@
           <Property Name="DOD" Type="datetime2" Precision="7" />
           <Property Name="DeathPlace" Type="nvarchar" MaxLength="50" />
           <Property Name="Married" Type="bit" Nullable="false" />
+          <Property Name="Anniversary" Type="datetime2" Precision="7" />
           <Property Name="EducationLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="EducationField" Type="nvarchar" MaxLength="50" />
           <Property Name="OccupationID" Type="int" Nullable="false" />
@@ -362,6 +364,7 @@
           <NavigationProperty Name="Member" Relationship="bkModel.FK_Families_HeadOfFamily" FromRole="Family" ToRole="Member" />
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="Family" ToRole="FamilyMemberAssociation" />
           <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FamilyNative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="FamilyMemberAssociation">
           <Key>
@@ -458,6 +461,7 @@
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="FamilyMemberAssociations1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonial" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
+          <Property Name="Anniversary" Type="DateTime" Precision="7" />
         </EntityType>
         <Association Name="FK_Families_HeadOfFamily">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -603,6 +607,7 @@
           <EntitySetMapping Name="Families">
             <EntityTypeMapping TypeName="bkModel.Family">
               <MappingFragment StoreEntitySet="Families">
+                <ScalarProperty Name="FamilyNative" ColumnName="FamilyNative" />
                 <ScalarProperty Name="District" ColumnName="District" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
@@ -679,6 +684,7 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="bkModel.Member">
               <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="Anniversary" ColumnName="Anniversary" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

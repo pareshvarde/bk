@@ -52,6 +52,7 @@ namespace BK.Context
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> Anniversary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Family> Families { get; set; }

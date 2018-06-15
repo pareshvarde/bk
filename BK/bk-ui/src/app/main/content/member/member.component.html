@@ -148,8 +148,17 @@
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="memberForm.controls['married'].hasError('required')">Please select Marital status</mat-error>
+            </mat-form-field>  
+            
+            <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'" *ngIf="memberModel.married">
+              <input matInput [(ngModel)]="memberModel.anniversary" (focus)="picker1.open()" [matDatepicker]="picker1" placeholder="Marriage Anniversary"
+                formControlName="anniversary">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>              
             </mat-form-field>
+          </div>
 
+          <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Relation" [(ngModel)]="memberModel.relationTypeId" formControlName="relationTypeId">
                 <mat-option *ngFor="let n of getRelations()" [value]="n.relationTypeId">

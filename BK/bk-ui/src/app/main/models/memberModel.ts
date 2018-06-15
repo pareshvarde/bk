@@ -13,6 +13,7 @@ export class MemberModel {
     dod:Date;
     deathPlace: string;
     married: boolean;
+    anniversary: Date;
     educationLevel: string;
     educationField: string;
     occupationId: number;

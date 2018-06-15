@@ -53,6 +53,9 @@ namespace BK.ViewModel
         [JsonProperty("married")]
         public bool Married { get; set; }
 
+        [JsonProperty("anniversary")]
+        public DateTime? Anniversary { get; set; }
+
         [JsonProperty("educationLevel")]
         public string EducationLevel { get; set; }
 

@@ -77,6 +77,7 @@ export class MemberComponent implements OnInit, OnDestroy {
       birthPlace: new FormControl('', [Validators.maxLength(50)]),
       deathPlace: new FormControl('', [Validators.maxLength(50)]),
       married: new FormControl('', [Validators.required]),
+      anniversary: new FormControl('', null),
       educationLevel: new FormControl('', [Validators.maxLength(50)]),
       educationField: new FormControl('', [Validators.maxLength(50)]),
       occupationId: new FormControl('', null),
@@ -207,8 +208,14 @@ export class MemberComponent implements OnInit, OnDestroy {
     if (this.memberModel.dod && this.memberForm.controls['dod'].dirty)
       this.memberModel.dod.setMinutes(this.memberModel.dod.getMinutes() - this.memberModel.dod.getTimezoneOffset());
 
+    if (this.memberModel.anniversary && this.memberForm.controls['anniversary'].dirty)
+      this.memberModel.anniversary.setMinutes(this.memberModel.anniversary.getMinutes() - this.memberModel.anniversary.getTimezoneOffset());
+
     if (this.memberModel.alive === true && this.memberModel.dod)
       this.memberModel.dod = null;
+
+    if (!this.memberModel.married && this.memberModel.anniversary)
+      this.memberModel.anniversary = null;
 
     this.memberModel.familyId = this.familyId;
 

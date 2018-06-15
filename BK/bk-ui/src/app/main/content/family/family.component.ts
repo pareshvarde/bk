@@ -51,6 +51,7 @@ export class FamilyComponent implements OnInit, OnDestroy {
     this.familyForm = new FormGroup({
       categoryId: new FormControl('', [Validators.required]),
       nukhId: new FormControl('', [Validators.required]),
+      familyNative: new FormControl('', [Validators.maxLength(50)]),
       address1: new FormControl('', [Validators.maxLength(50)]),
       address2: new FormControl('', [Validators.maxLength(50)]),
       city: new FormControl('', [Validators.required, Validators.maxLength(50)]),

@@ -64,6 +64,7 @@ namespace BK.Controllers
                 List<bk_GetFamilyMembers_Result> members = context.bk_GetFamilyMembers(familyId).ToList();
 
                 FamilyViewModel fvm = new FamilyViewModel();
+                fvm.FamilyNative = f.FamilyNative;
                 fvm.Address1 = f.Address1;
                 fvm.Address2 = f.Address2;
                 fvm.CategoryID = f.CategoryID;
@@ -147,6 +148,7 @@ namespace BK.Controllers
                 if (!family.FamilyMemberAssociations.Any(x => x.MemberId == model.HeadOfFamilyID && x.Approved))
                     return BadRequest("Head Of family is not approved member of family");
 
+                family.FamilyNative = model.FamilyNative;
                 family.Address1 = model.Address1;
                 family.Address2 = model.Address2;
                 family.CategoryID = model.CategoryID;
@@ -225,6 +227,7 @@ namespace BK.Controllers
                     return BadRequest("Head Of Family is not approved member of the family");
 
                 Family newFam = new Family();
+                newFam.FamilyNative = model.FamilyNative;
                 newFam.Address1 = model.Address1;
                 newFam.Address2 = model.Address2;
                 newFam.City = model.City;

@@ -11,6 +11,7 @@ export class FamilyModel{
     familyId: number;
     nukhId: number;
     categoryId: number;
+    familyNative: string;
     address1: string;
     address2: string;
     city: string;

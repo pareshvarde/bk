@@ -21,7 +21,6 @@ help icons on each page
     in Angular v7.
 	
 ===========================
-Mool Nivas
 Dadidal Family Link
 Naninal Family Link
 Logged Image

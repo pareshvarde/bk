@@ -78,6 +78,7 @@ namespace BK.Controllers
                     FacebookHandle = member.FacebookHandle,
                     TwitterHandle = member.TwitterHandle,
                     Married = member.Married,
+                    Anniversary = member.Anniversary,
                     PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn)
                 };
 
@@ -149,6 +150,7 @@ namespace BK.Controllers
                 member.Phone = model.PhoneNumber;
                 member.TwitterHandle = model.TwitterHandle;
                 member.Married = model.Married;
+                member.Anniversary = model.Anniversary;
 
                 if (model.FamilyId.HasValue)
                 {

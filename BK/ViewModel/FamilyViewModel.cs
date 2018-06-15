@@ -33,6 +33,9 @@ namespace BK.ViewModel
         [JsonProperty("hofLastName")]
         public string HeadOfLastName { get; set; }
 
+        [JsonProperty("familyNative")]
+        public string FamilyNative { get; set; }
+
         [JsonProperty("address1")]
         public string Address1 { get; set; }
 

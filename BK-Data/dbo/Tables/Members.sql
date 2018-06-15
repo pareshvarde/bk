@@ -10,6 +10,7 @@
     [DOD]             DATETIME2 (7)    NULL,
     [DeathPlace]      NVARCHAR (50)    NULL,
     [Married]         BIT              CONSTRAINT [DF_Members_Married] DEFAULT ((0)) NOT NULL,
+    [Anniversary]     DATETIME2 (7)    NULL,
     [EducationLevel]  NVARCHAR (50)    NULL,
     [EducationField]  NVARCHAR (50)    NULL,
     [OccupationID]    INT              NOT NULL,
@@ -31,6 +32,8 @@
     [ModifiedBy]      INT              NULL,
     CONSTRAINT [PK_FamilyMembers_1] PRIMARY KEY CLUSTERED ([MemberID] ASC)
 );
+
+
 
 
 
