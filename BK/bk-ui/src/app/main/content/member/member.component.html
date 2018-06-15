@@ -37,7 +37,7 @@
         </button>
       </div>
       <div *ngIf="existingAdd === false || !addMode">
-        <div fxLayout="row wrap" class="modifiedOn mat-caption" fxLayoutAlign="top center">Last Modified {{memberModel.modifiedOn | amTimeAgo}}</div>
+        <div fxLayout="row wrap" class="modifiedOn mat-caption" fxLayoutAlign="top center">Last Modified {{memberModel.modifiedOn | amLocal | amTimeAgo}}</div>
         <form name="memberForm" [formGroup]="memberForm" novalidate>
 
           <div fxLayout="row wrap">

@@ -105,9 +105,13 @@ namespace BK.Controllers
                 model.MemberModel.InstagramHandle = member.InstagramHandle;
                 model.MemberModel.FacebookHandle = member.FacebookHandle;
                 model.MemberModel.TwitterHandle = member.TwitterHandle;
-                model.MemberModel.Married = member.Married;
+                model.MemberModel.Married = member.Married;                
                 model.MemberModel.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);
-                model.MemberModel.FamilyId = member.FamilyMemberAssociations.Where(x => x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault(); 
+                model.MemberModel.FamilyId = member.FamilyMemberAssociations.Where(x => x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault();
+
+                model.MemberModel.ModifiedOn = member.ModifiedOn;
+                if (mat.ModifiedOn > member.ModifiedOn)
+                    model.MemberModel.ModifiedOn = mat.ModifiedOn;                
 
                 return Ok(model);
             }

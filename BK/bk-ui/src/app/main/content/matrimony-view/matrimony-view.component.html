@@ -3,11 +3,12 @@
     <div *ngIf="model" id="matrimony-view-form">
       <div fxLayout="row wrap" fxLayoutAlign="center center">
         <img *ngIf="model.memberModel.photoUrl" (click)="showPhoto()" class="avatar" src="{{model.memberModel.photoUrl}}" />
-      </div>
+      </div>      
       <div fxLayout="row wrap" fxLayoutAlign="center center">
           <div *ngIf="model.memberModel.firstName" class="title">{{model.memberModel.firstName}} {{model.memberModel.lastName}}</div>
       </div>
 
+      <div fxLayout="row wrap" class="modifiedOn mat-caption" fxLayoutAlign="top center">Last Modified {{model.memberModel.modifiedOn | amLocal | amTimeAgo}}</div>
       <form name="matrimonyViewForm" [formGroup]="matrimonyViewForm">
         <div fxLayout="row wrap">
           <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
