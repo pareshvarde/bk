@@ -108,6 +108,8 @@ namespace BK.Controllers
                 if (!CanEditMember(model.FamilyId.Value, model.MemberID.Value))
                     return BadRequest("You do not have permission to edit this member");
 
+            bool sendWelcomeLetter = false;
+
             using (bkContext context = new bkContext())
             {
                 Member member = null;
@@ -120,13 +122,18 @@ namespace BK.Controllers
 
                     member.ModifiedBy = LoggedInMemberId;
                     member.ModifiedOn = DateTime.Now;
+
+                    sendWelcomeLetter = string.IsNullOrWhiteSpace(member.EmailAddress) && !string.IsNullOrWhiteSpace(model.Email);
                 }
                 else
                 {
                     member = new Member();
+                    member.Password = System.Web.Security.Membership.GeneratePassword(8, 0);
                     member.CreatedOn = DateTime.Now;
                     member.CreatedBy = LoggedInMemberId;
                     context.Members.Add(member);
+
+                    sendWelcomeLetter = !string.IsNullOrWhiteSpace(model.Email);
                 }
 
                 member.AadhaarNumber = model.AadhaarNumber;
@@ -138,7 +145,7 @@ namespace BK.Controllers
                 member.DOD = model.DOD;
                 member.EducationField = model.EducationField;
                 member.EducationLevel = model.EducationLevel;
-                member.EmailAddress = model.Email;
+                member.EmailAddress = string.IsNullOrWhiteSpace(model.Email) ? null : model.Email.Trim();
                 member.FacebookHandle = model.FacebookHandle;
                 member.FirstName = model.FirstName;
                 member.Gender = model.Gender;
@@ -151,34 +158,58 @@ namespace BK.Controllers
                 member.TwitterHandle = model.TwitterHandle;
                 member.Married = model.Married;
                 member.Anniversary = model.Anniversary;
-                member.Active = string.IsNullOrWhiteSpace(member.EmailAddress);                    
+                member.Active = !string.IsNullOrWhiteSpace(member.EmailAddress);
 
-                if (model.FamilyId.HasValue)
+                if (!string.IsNullOrWhiteSpace(member.EmailAddress))
+                    if (context.Members.Any(x => x.EmailAddress == member.EmailAddress && x.MemberID != member.MemberID))
+                        return BadRequest("Email address is already registered with other member");
+                
+                //TODO: make sure this work and send an invitation email when a new member added to family with email address
+                FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
+                if (mAssociation == null)
                 {
-                    bool wasDefault = false;
-                    FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
-                    if (mAssociation != null)
-                    {
-                        context.FamilyMemberAssociations.Remove(mAssociation);
-                        wasDefault = mAssociation.DefaultFamily;
-                    }
-
-                    member.FamilyMemberAssociations.Add(new FamilyMemberAssociation()
-                    {
-                        Approved = true,
-                        FamilyId = model.FamilyId.Value,
-                        RelatedId = model.RelatedMemberId,
-                        RelationTypeId = model.RelationTypeId,
-                        DefaultFamily = member.MemberID == 0 || wasDefault,
-                        CreatedOn = DateTime.Now,
-                        CreatedBy = LoggedInMemberId
-                    });
+                    mAssociation = new FamilyMemberAssociation();
+                    mAssociation.CreatedOn = DateTime.Now;
+                    mAssociation.CreatedBy = LoggedInMemberId;
+                    mAssociation.DefaultFamily = true;
+                    mAssociation.Approved = true;
+                    mAssociation.FamilyId = model.FamilyId.Value;
+                    member.FamilyMemberAssociations.Add(mAssociation);
                 }
+
+                mAssociation.RelatedId = model.RelatedMemberId;
+                mAssociation.RelationTypeId = model.RelationTypeId;
 
                 context.SaveChanges();
 
-                return Ok();
+                if (sendWelcomeLetter)
+                {
+                    string templatePath = System.Web.Hosting.HostingEnvironment.MapPath("~/HtmlTemplates/welcome_to_family.html");
+                    string html = File.ReadAllText(templatePath);
+
+                    html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
+                    html = html.Replace("{{addedby}}", LoggedInMemberFullName);
+                    html = html.Replace("{{action_url}}", $"{BaseUrl}/login/ ");
+                    html = html.Replace("{{username}}", member.EmailAddress);
+                    html = html.Replace("{{password}}", member.Password);
+
+                    System.Threading.Tasks.Task.Factory.StartNew(() => {
+                        using (SmtpClient sClient = new SmtpClient())
+                        {
+                            using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
+                            {
+                                mailMessage.Body = html;
+                                mailMessage.IsBodyHtml = true;
+                                mailMessage.Subject = "Brahmkshatriya Online Portal - Welcome Letter";
+
+                                sClient.Send(mailMessage);
+                            }
+                        }
+                    });
+                }                
             }
+
+            return Ok();
         }
 
         [Route("api/member/addtofamily")]
@@ -491,7 +522,7 @@ namespace BK.Controllers
                     url = MemberWrapper.ProfilePhoto(LoggedInMemberId, gender, modifiedOn);
                 }
             }
-          
+
             return Ok(url);
         }
     }

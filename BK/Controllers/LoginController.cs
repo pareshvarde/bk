@@ -34,7 +34,7 @@ namespace BK.Controllers
                 member.FirstName = register.FirstName;
                 member.LastName = register.LastName;
                 member.DOB = register.DateOfBirth;
-                member.EmailAddress = register.EmailAddress;
+                member.EmailAddress = register.EmailAddress.Trim();
                 member.Phone = register.PhoneNumber;
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;

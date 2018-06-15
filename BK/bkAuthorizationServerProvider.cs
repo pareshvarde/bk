@@ -40,6 +40,7 @@ namespace BK
             identity.AddClaim(new Claim("role", "user"));            
             identity.AddClaim(new Claim("memberId", fMember.MemberID.ToString(), ClaimValueTypes.Integer));
             identity.AddClaim(new Claim("name", fMember.FirstName));
+            identity.AddClaim(new Claim("fullname", string.Format("{0} {1}", fMember.FirstName, fMember.LastName)));
 
             var ticket = new AuthenticationTicket(identity, null);
 

@@ -30,6 +30,15 @@ namespace BK.Controllers
             }
         }
 
+        protected string LoggedInMemberFullName
+        {
+            get
+            {
+                ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
+                return principal.Claims.Where(c => c.Type == "fullname").Single().Value;                
+            }
+        }
+
         protected string BaseUrl
         {
             get
