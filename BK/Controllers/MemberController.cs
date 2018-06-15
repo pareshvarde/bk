@@ -151,6 +151,7 @@ namespace BK.Controllers
                 member.TwitterHandle = model.TwitterHandle;
                 member.Married = model.Married;
                 member.Anniversary = model.Anniversary;
+                member.Active = string.IsNullOrWhiteSpace(member.EmailAddress);                    
 
                 if (model.FamilyId.HasValue)
                 {
