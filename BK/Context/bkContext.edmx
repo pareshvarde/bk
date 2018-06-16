@@ -94,8 +94,6 @@
           <Property Name="DOD" Type="datetime2" Precision="7" />
           <Property Name="DeathPlace" Type="nvarchar" MaxLength="50" />
           <Property Name="Married" Type="bit" Nullable="false" />
-          <Property Name="MaternalFamilyId" Type="int" />
-          <Property Name="PaternalFamilyId" Type="int" />
           <Property Name="Anniversary" Type="datetime2" Precision="7" />
           <Property Name="EducationLevel" Type="nvarchar" MaxLength="50" />
           <Property Name="EducationField" Type="nvarchar" MaxLength="50" />
@@ -165,18 +163,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_MaternalFamilyId">
-          <End Role="Families" Type="Self.Families" Multiplicity="0..1" />
-          <End Role="Members" Type="Self.Members" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Families">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="Members">
-              <PropertyRef Name="MaternalFamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Matrimonials_Members">
           <End Role="Members" Type="Self.Members" Multiplicity="1" />
           <End Role="Matrimonials" Type="Self.Matrimonials" Multiplicity="0..1" />
@@ -186,18 +172,6 @@
             </Principal>
             <Dependent Role="Matrimonials">
               <PropertyRef Name="MemberID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PaternalFamilyId">
-          <End Role="Families" Type="Self.Families" Multiplicity="0..1" />
-          <End Role="Members" Type="Self.Members" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Families">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="Members">
-              <PropertyRef Name="PaternalFamilyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -273,17 +247,9 @@
             <End Role="Members" EntitySet="Members" />
             <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociation" />
           </AssociationSet>
-          <AssociationSet Name="FK_MaternalFamilyId" Association="Self.FK_MaternalFamilyId">
-            <End Role="Families" EntitySet="Families" />
-            <End Role="Members" EntitySet="Members" />
-          </AssociationSet>
           <AssociationSet Name="FK_Matrimonials_Members" Association="Self.FK_Matrimonials_Members">
             <End Role="Members" EntitySet="Members" />
             <End Role="Matrimonials" EntitySet="Matrimonials" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PaternalFamilyId" Association="Self.FK_PaternalFamilyId">
-            <End Role="Families" EntitySet="Families" />
-            <End Role="Members" EntitySet="Members" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -366,14 +332,6 @@
             <Parameter Name="CurrentPage" Mode="In" Type="Int32" />
             <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK_MaternalFamilyId" Association="bkModel.FK_MaternalFamilyId">
-            <End Role="Family" EntitySet="Families" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
-          <AssociationSet Name="FK_PaternalFamilyId" Association="bkModel.FK_PaternalFamilyId">
-            <End Role="Family" EntitySet="Families" />
-            <End Role="Member" EntitySet="Members" />
-          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="bk_PendingApprovals_Result">
           <Property Type="Int32" Name="AddedById" Nullable="false" />
@@ -407,8 +365,6 @@
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="Family" ToRole="FamilyMemberAssociation" />
           <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FamilyNative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Members" Relationship="bkModel.FK_MaternalFamilyId" FromRole="Family" ToRole="Member" />
-          <NavigationProperty Name="Members1" Relationship="bkModel.FK_PaternalFamilyId" FromRole="Family" ToRole="Member" />
         </EntityType>
         <EntityType Name="FamilyMemberAssociation">
           <Key>
@@ -506,10 +462,6 @@
           <NavigationProperty Name="FamilyMemberAssociations1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonial" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
           <Property Name="Anniversary" Type="DateTime" Precision="7" />
-          <Property Name="MaternalFamilyId" Type="Int32" />
-          <Property Name="PaternalFamilyId" Type="Int32" />
-          <NavigationProperty Name="Family" Relationship="bkModel.FK_MaternalFamilyId" FromRole="Member" ToRole="Family" />
-          <NavigationProperty Name="Family1" Relationship="bkModel.FK_PaternalFamilyId" FromRole="Member" ToRole="Family" />
         </EntityType>
         <Association Name="FK_Families_HeadOfFamily">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -630,30 +582,6 @@
           <Property Type="DateTime" Name="DOD" Nullable="true" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
         </ComplexType>
-        <Association Name="FK_MaternalFamilyId">
-          <End Type="bkModel.Family" Role="Family" Multiplicity="0..1" />
-          <End Type="bkModel.Member" Role="Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Family">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="MaternalFamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_PaternalFamilyId">
-          <End Type="bkModel.Family" Role="Family" Multiplicity="0..1" />
-          <End Type="bkModel.Member" Role="Member" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Family">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="Member">
-              <PropertyRef Name="PaternalFamilyId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -756,8 +684,6 @@
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="bkModel.Member">
               <MappingFragment StoreEntitySet="Members">
-                <ScalarProperty Name="PaternalFamilyId" ColumnName="PaternalFamilyId" />
-                <ScalarProperty Name="MaternalFamilyId" ColumnName="MaternalFamilyId" />
                 <ScalarProperty Name="Anniversary" ColumnName="Anniversary" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />

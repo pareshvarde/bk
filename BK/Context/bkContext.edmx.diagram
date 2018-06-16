@@ -15,8 +15,6 @@
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Members" />
         <AssociationConnector Association="bkModel.FK_FamilyMemberAssociation_Related" />
         <AssociationConnector Association="bkModel.FK_Matrimonials_Members" />
-        <AssociationConnector Association="bkModel.FK_MaternalFamilyId" />
-        <AssociationConnector Association="bkModel.FK_PaternalFamilyId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

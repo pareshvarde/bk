@@ -18,8 +18,6 @@ namespace BK.Context
         public Family()
         {
             this.FamilyMemberAssociations = new HashSet<FamilyMemberAssociation>();
-            this.Members = new HashSet<Member>();
-            this.Members1 = new HashSet<Member>();
         }
     
         public int FamilyID { get; set; }
@@ -42,9 +40,5 @@ namespace BK.Context
         public virtual Member Member { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Member> Members { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Member> Members1 { get; set; }
     }
 }

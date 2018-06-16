@@ -53,8 +53,6 @@ namespace BK.Context
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
         public Nullable<System.DateTime> Anniversary { get; set; }
-        public Nullable<int> MaternalFamilyId { get; set; }
-        public Nullable<int> PaternalFamilyId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Family> Families { get; set; }
@@ -63,7 +61,5 @@ namespace BK.Context
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FamilyMemberAssociation> FamilyMemberAssociations1 { get; set; }
         public virtual Matrimonial Matrimonial { get; set; }
-        public virtual Family Family { get; set; }
-        public virtual Family Family1 { get; set; }
     }
 }
