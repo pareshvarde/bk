@@ -98,18 +98,6 @@ namespace BK.ViewModel
         [JsonProperty("modifiedOn")]
         public DateTime? ModifiedOn { get; set; }
 
-        [JsonProperty("maternalFamilyId")]
-        public int? MaternalFamilyId { get; set; }
-
-        [JsonProperty("maternalFamilyName")]
-        public string MaternalFamilyName { get; set; }
-
-        [JsonProperty("paternalFamilyId")]
-        public int? PaternalFamilyId { get; set; }
-
-        [JsonProperty("paternalFamilyName")]
-        public string PaternalFamilyName { get; set; }
-
         [JsonProperty("canEdit")]
         public bool canEdit { get; set; }
     }
