@@ -398,6 +398,9 @@ namespace BK.Controllers
 
                 List<FamilyMemberAssociation> fmAssociations = context.FamilyMemberAssociations.Where(m => m.MemberId == memberId).ToList();
 
+                if (context.Families.Any(x => x.FamilyID != familyId && x.HeadOfFamilyID == memberId))
+                    return BadRequest("This member is Head Of Family in another family and cannot be marked default here");
+
                 foreach (var item in fmAssociations)
                 {
                     if (item.FamilyId == familyId)

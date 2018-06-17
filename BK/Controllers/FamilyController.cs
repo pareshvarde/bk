@@ -26,7 +26,7 @@ namespace BK.Controllers
                               {
                                   f.FamilyID,
                                   m.FirstName,
-                                  m.LastName,                                  
+                                  m.LastName,
                               }).Distinct().ToList();
 
                 int defaultFamilyId = 0;
@@ -43,8 +43,8 @@ namespace BK.Controllers
                     temp.FamilyID = item.FamilyID;
                     temp.HeadOfFamily = $"{item.FirstName} {item.LastName}";
                     temp.DefaultFamily = item.FamilyID == defaultFamilyId;
-                        
-                    response.Add(temp);                        
+
+                    response.Add(temp);
                 }
 
                 return Ok(response);
@@ -76,7 +76,7 @@ namespace BK.Controllers
                 fvm.PostalCode = f.PostalCode;
                 fvm.State = f.State;
                 fvm.HeadOfFamilyID = f.HeadOfFamilyID;
-                fvm.CanEdit = CanEditFamily(f.FamilyID);                
+                fvm.CanEdit = CanEditFamily(f.FamilyID);
 
                 Member hofMember = f.Member;
                 if (hofMember != null)
@@ -100,7 +100,7 @@ namespace BK.Controllers
                     tmp.DOD = item.DOD;
 
                     if (!string.IsNullOrEmpty(item.RelationType))
-                        tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";                    
+                        tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";
 
                     fvm.Members.Add(tmp);
                 }
@@ -223,6 +223,9 @@ namespace BK.Controllers
                 if (!fmAssociations.Any(x => x.MemberId == model.HeadOfFamilyID) || model.HeadOfFamilyID == 0)
                     return BadRequest("Invalid Head of Family supplied for the family");
 
+                if (context.Families.Any(x => x.HeadOfFamilyID == model.HeadOfFamilyID))
+                    return BadRequest("Head Of Family for new family is already a Head Of Family for another family");
+
                 if (!fmAssociations.Any(x => x.MemberId == model.HeadOfFamilyID && x.Approved))
                     return BadRequest("Head Of Family is not approved member of the family");
 
@@ -243,15 +246,22 @@ namespace BK.Controllers
 
                 foreach (var item in selectedMembers)
                 {
-                    newFam.FamilyMemberAssociations.Add(new FamilyMemberAssociation()
-                    {
-                        Approved = true,
-                        CreatedBy = LoggedInMemberId,
-                        CreatedOn = DateTime.Now,
-                        MemberId = item.MemberID,
-                        RelatedId = item.RelatedToId,
-                        RelationTypeId = item.RelationTypeId
-                    });
+                    List<FamilyMemberAssociation> associations = context.FamilyMemberAssociations.Where(x => x.MemberId == item.MemberID).ToList();
+                    foreach (var m in associations)
+                        if (m.Family.HeadOfFamilyID != item.MemberID)
+                            m.DefaultFamily = false;
+
+                    FamilyMemberAssociation fAssociation = new FamilyMemberAssociation();
+
+                    fAssociation.Approved = true;
+                    fAssociation.CreatedBy = LoggedInMemberId;
+                    fAssociation.CreatedOn = DateTime.Now;
+                    fAssociation.MemberId = item.MemberID;
+                    fAssociation.RelatedId = item.RelatedToId;
+                    fAssociation.RelationTypeId = item.RelationTypeId;
+                    fAssociation.DefaultFamily = !associations.Any(x => x.DefaultFamily == true);
+
+                    newFam.FamilyMemberAssociations.Add(fAssociation);
                 }
 
                 context.Families.Add(newFam);
