@@ -239,8 +239,10 @@ namespace BK.Controllers
                 if (relationType == null)
                     return BadRequest("Invalid relation type");
 
+                bool autoApproval = CanEditMember(memberId);
+
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
-                fmAssociation.Approved = false;
+                fmAssociation.Approved = autoApproval;
                 fmAssociation.CreatedBy = LoggedInMemberId;
                 fmAssociation.CreatedOn = DateTime.Now;
                 fmAssociation.FamilyId = familyId;
@@ -251,7 +253,7 @@ namespace BK.Controllers
                 context.FamilyMemberAssociations.Add(fmAssociation);
                 context.SaveChanges();
 
-                if (!string.IsNullOrWhiteSpace(member.EmailAddress))
+                if (!string.IsNullOrWhiteSpace(member.EmailAddress) && !autoApproval)
                 {
                     string templatePath = System.Web.Hosting.HostingEnvironment.MapPath("~/HtmlTemplates/familyAddition.html");
                     string html = File.ReadAllText(templatePath);
