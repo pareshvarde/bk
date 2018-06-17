@@ -26,3 +26,4 @@ directory click take to family screen instead of member screen
 after login direct to my family page
 family delete post screen
 member delete post screen
+unsubscribe all subscriptions
