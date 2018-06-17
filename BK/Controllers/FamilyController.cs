@@ -76,7 +76,7 @@ namespace BK.Controllers
                 fvm.PostalCode = f.PostalCode;
                 fvm.State = f.State;
                 fvm.HeadOfFamilyID = f.HeadOfFamilyID;
-                fvm.CanEdit = CanEditFamily(f.FamilyMemberAssociations.ToList());                
+                fvm.CanEdit = CanEditFamily(f.FamilyID);                
 
                 Member hofMember = f.Member;
                 if (hofMember != null)
