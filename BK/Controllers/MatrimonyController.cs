@@ -109,9 +109,9 @@ namespace BK.Controllers
                 model.MemberModel.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);
                 model.MemberModel.FamilyId = member.FamilyMemberAssociations.Where(x => x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault();
 
-                model.MemberModel.ModifiedOn = member.ModifiedOn;
-                if (mat.ModifiedOn > member.ModifiedOn)
-                    model.MemberModel.ModifiedOn = mat.ModifiedOn;                
+                model.MemberModel.ModifiedOn = mat.ModifiedOn.HasValue ? mat.ModifiedOn : mat.CreatedOn;                
+                if (member.ModifiedOn > model.MemberModel.ModifiedOn)
+                    model.MemberModel.ModifiedOn = member.ModifiedOn;                
 
                 return Ok(model);
             }
