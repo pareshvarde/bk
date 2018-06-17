@@ -12,14 +12,14 @@
         <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}</div>
       </div>
       <div fxLayout="row wrap">
-        <mat-form-field>
+        <mat-form-field *ngIf="!addMode">
           <mat-select matTooltip="Head Of Family" placeholder="Family" (ngModelChange)="changeRoute()" [(ngModel)]="familyId">
             <mat-option *ngFor="let n of familyLookup" [value]="n.familyId">
               {{ n.hof }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-radio-group *ngIf="addMode" fxLayoutAlign="start center" [(ngModel)]="existingAdd">
+        <mat-radio-group *ngIf="addMode" style="padding-bottom: 15px;" fxLayoutAlign="start center" [(ngModel)]="existingAdd">
           <mat-radio-button class="mr-8" [value]="false">
             New
           </mat-radio-button>
@@ -37,7 +37,7 @@
         </button>
       </div>
       <div *ngIf="existingAdd === false || !addMode">
-        <div fxLayout="row wrap" class="modifiedOn mat-caption" fxLayoutAlign="top center">Last Modified {{memberModel.modifiedOn | amLocal | amTimeAgo}}</div>
+        <div *ngIf="!addMode" fxLayout="row wrap" class="modifiedOn mat-caption" fxLayoutAlign="top center">Last Modified {{memberModel.modifiedOn | amLocal | amTimeAgo}}</div>
         <form name="memberForm" [formGroup]="memberForm" novalidate>
 
           <div fxLayout="row wrap">
