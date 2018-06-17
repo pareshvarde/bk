@@ -35,11 +35,8 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     private _confirmation: ConfirmationService, private location: Location,
     private cdr: ChangeDetectorRef) {
 
-    this.route.params.subscribe(params => {
-      if (params.familyId > 0)
-        this.familyId = params.familyId;
-      else
-        this.familyId = null;
+    this.route.params.subscribe(params => {      
+        this.familyId = params.familyId;      
 
       this.initializeComponent();
     });
@@ -82,43 +79,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.dataSource = null;
     this.matrimonyDatasource = null;
 
-    this.loadFamilyLookup();
-  }
-
-  loadFamilyLookup() {
-    var mId = this.authService.memberId();
-
-    this.dataService.getFamilyLookup(mId).takeUntil(this.destroyed$).subscribe(
-      (res) => {
-        this.familyLookup = res.result;
-        if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId) {
-          var defaultFamily = this.familyLookup.find(x => x.defaultFamily == true);
-
-          if (defaultFamily)
-            this.familyId = defaultFamily.familyId;
-          else
-            this.familyId = this.familyLookup[0].familyId;
-        }
-        else {
-          this.familyId = this.familyId * 1; //TRICK TO BIND IT BACK TO UI
-        }
-
-        this.loadFamily();
-      },
-      (err) => {
-        if (err.errors)
-          this.alertService.error('', err.errors[0]);
-        else
-          this.alertService.error('', err);
-      }
-    );
-  }
-
-  changeRoute() {
-    //it was not updating model immediately
-    setTimeout(() => {      
-      this.router.navigate(['family', this.familyId]);
-    }, 0);
+    this.loadFamily();
   }
 
   loadFamily() {
