@@ -15,7 +15,7 @@ import { ReplaySubject } from 'rxjs';
 @Component({
   selector: 'app-family',
   templateUrl: './family.component.html',
-  styleUrls: ['./family.component.scss']  
+  styleUrls: ['./family.component.scss']
 })
 export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
@@ -32,7 +32,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService,
-    private _confirmation: ConfirmationService,  private location: Location,
+    private _confirmation: ConfirmationService, private location: Location,
     private cdr: ChangeDetectorRef) {
 
     this.route.params.subscribe(params => {
@@ -49,7 +49,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   matriDisplayedColumns = ['name'];
 
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
 
@@ -71,9 +71,9 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.familyForm.disable();
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.destroyed$.next(true);
-    this.destroyed$.complete(); 
+    this.destroyed$.complete();
   }
 
   initializeComponent() {
@@ -91,17 +91,15 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.dataService.getFamilyLookup(mId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.familyLookup = res.result;
-        if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId)
-        {          
+        if (this.familyLookup && this.familyLookup.length > 0 && !this.familyId) {
           var defaultFamily = this.familyLookup.find(x => x.defaultFamily == true);
-          
+
           if (defaultFamily)
             this.familyId = defaultFamily.familyId;
           else
             this.familyId = this.familyLookup[0].familyId;
         }
-        else
-        {
+        else {
           this.familyId = this.familyId * 1; //TRICK TO BIND IT BACK TO UI
         }
 
@@ -116,7 +114,15 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
+  changeRoute() {
+    //it was not updating model immediately
+    setTimeout(() => {      
+      this.router.navigate(['family', this.familyId]);
+    }, 0);
+  }
+
   loadFamily() {
+
     this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.model = res.result;
@@ -131,7 +137,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
           if (!x.married && x.gender == 'M' && x.alive && x.age > 20)
             return true;
         }));
-              
+
       },
       (err) => {
         if (err.errors)
@@ -143,14 +149,13 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   saveFamily() {
-    if (this.familyForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");
-      if (el)      
-        el.focus();      
+    if (this.familyForm.invalid) {
+      var el = <HTMLElement>document.querySelector("input.ng-invalid");
+      if (el)
+        el.focus();
       return;
     }
-      
+
     this.dataService.saveFamily(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.alertService.success("Family details has been updated.");
@@ -258,9 +263,8 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
-  
-  deleteMatrimony(memberId: number, name: string)
-  {    
+
+  deleteMatrimony(memberId: number, name: string) {
     this._confirmation.create('', "Are you sure you want to remove matrimony profile of '" + name + "'?").subscribe(
       (ans: ResolveEmit) => {
 
@@ -269,7 +273,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.dataService.deleteMatrimony(memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
-            this.alertService.success("Matrimony profile has been removed");            
+            this.alertService.success("Matrimony profile has been removed");
             this.loadFamily();
           },
           (err) => {
@@ -282,7 +286,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
       })
   }
 
-  back(){
+  back() {
     this.location.back();
   }
 }

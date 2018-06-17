@@ -172,6 +172,14 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
+  changeRoute() {
+    //it was not updating model immediately
+    setTimeout(() => {      
+      this.router.navigate(['member', this.familyId, this.memberId]);
+    }, 0);
+  }
+
+
   loadFamily() {
     this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
