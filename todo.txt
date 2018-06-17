@@ -18,12 +18,8 @@ Naninal Family
 Logged Image
 Multiple Matrimonial full photos
 Preface Page
-allow person to edit family and default members of that family who created the family
 ===========================
-
-Fork - related to dropdown needs to be have blank entry
-add member - add/exiting radio text has to be descriptive.
-if I add an existing member to the family where I have edit right on family should be approved automatically.
+	
+add member - add/exiting radio text has to be descriptive.	
 think about mother of/father of and remove it.
-add sister of for married female
-family member order by age
+think about add sister of for married female	

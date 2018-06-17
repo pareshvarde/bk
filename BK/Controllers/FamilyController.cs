@@ -61,7 +61,7 @@ namespace BK.Controllers
                 if (f == null)
                     return BadRequest("Family record cannot be loaded.");
 
-                List<bk_GetFamilyMembers_Result> members = context.bk_GetFamilyMembers(familyId).ToList();
+                List<bk_GetFamilyMembers_Result> members = context.bk_GetFamilyMembers(familyId).ToList();                
 
                 FamilyViewModel fvm = new FamilyViewModel();
                 fvm.FamilyNative = f.FamilyNative;
@@ -104,6 +104,8 @@ namespace BK.Controllers
 
                     fvm.Members.Add(tmp);
                 }
+
+                fvm.Members = fvm.Members.OrderByDescending(x => x.Age).ToList();
 
                 List<bk_PendingApprovals_Result> approvals = context.bk_PendingApprovals(LoggedInMemberId).ToList();
                 foreach (var item in approvals)
