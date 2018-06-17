@@ -13,11 +13,11 @@ help icons on each page
 	
 ===========================
 birthday/anniversary wish email
-Dadidal Family Link (For Married Woman)
-Naninal Family Link (For All)
+Dadidal Family
+Naninal Family
 Logged Image
 Multiple Matrimonial full photos
 Preface Page
-Last Modified On: member view page
+allow person to edit family and default members of that family who created the family
 ===========================
 
