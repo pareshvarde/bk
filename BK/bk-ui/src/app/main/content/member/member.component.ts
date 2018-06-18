@@ -208,6 +208,10 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       return RELATION_TYPES_DATA;
   }
 
+  getRelatedMember(): any[]{
+    return this.familyModel.members.filter(x => x.married && x.memberId != this.memberId);
+  }
+
   saveMember() {
     if (this.memberForm.invalid) {
       var el = <HTMLElement>document.querySelector("input.ng-invalid");
