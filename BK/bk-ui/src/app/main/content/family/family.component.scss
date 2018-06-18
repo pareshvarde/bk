@@ -41,6 +41,41 @@
                 background: inherit !important;
             }
 
+            .mat-column-memberId
+            {
+                flex: 0 0 8%;
+            }
+
+            .mat-column-name
+            {
+                flex: 0 0 22%;
+            }
+
+            .mat-column-age
+            {
+                flex: 0 0 8%;
+            }
+
+            .mat-column-married
+            {
+                flex: 0 0 8%;
+            }
+
+            .mat-column-relation
+            {
+                flex: 0 0 22%;
+            }
+
+            .mat-column-paternal
+            {
+                flex: 0 0 22%;
+            }
+
+            .mat-column-actions
+            {
+                flex: 0 0 10%;
+            }
+
             .mobile-card{                
                 padding-bottom: 10px;
                 line-height: 1.5;
