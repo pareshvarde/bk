@@ -27,3 +27,5 @@ after login direct to my family page
 family delete post screen
 member delete post screen
 unsubscribe all subscriptions
+relation if single female show only daughter of
+related to show only married men/females
