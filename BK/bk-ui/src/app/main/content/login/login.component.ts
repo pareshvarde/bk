@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       (res) =>{              
         let result = JSON.parse((<any>res)._body)        
         localStorage.setItem('token', result.access_token);
-        this.router.navigate(['home']);
+        this.router.navigate(['family', 0]);
       },
       (err) =>{                  
         if (err.message)           
