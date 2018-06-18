@@ -100,7 +100,10 @@ namespace BK.Controllers
                     tmp.MatrimonialExists = item.MatrimonialExists.Value;
                     tmp.Gender = item.Gender;
                     tmp.Alive = item.Alive;
-                    tmp.DOD = item.DOD;
+                    tmp.DOD = item.DOD;                    
+                    tmp.PaternalFamilyId = item.PaternalFamilyId;
+                    if (tmp.PaternalFamilyId.HasValue)
+                        tmp.PaternalFamilyName = string.Format("{0}, {1}", item.PaternalFamilyName, item.PaternalFamilyAddress);
 
                     if (!string.IsNullOrEmpty(item.RelationType))
                         tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";

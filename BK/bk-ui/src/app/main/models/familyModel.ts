@@ -39,6 +39,8 @@ export class FamilyMemberModel{
     alive: boolean;
     relatedToId: number;
     relationTypeId: number;
+    paternalFamilyId: number;
+    paternalFamilyName: string;    
     matrimonialExists: boolean;
     age: number;
 }

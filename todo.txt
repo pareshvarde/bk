@@ -21,9 +21,10 @@ Preface Page
 ===========================
 	
 add member - add/exiting radio text has to be descriptive.	
-think about mother of/father of and remove it.
 directory click take to family screen instead of member screen
 family delete post screen
 member delete post screen
 unsubscribe all subscriptions
 related to show only married men/females
+
+=============================

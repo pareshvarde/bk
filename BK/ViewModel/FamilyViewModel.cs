@@ -108,6 +108,12 @@ namespace BK.ViewModel
         [JsonProperty("dod")]
         public DateTime? DOD { get; set; }
 
+        [JsonProperty("paternalFamilyId")]
+        public int? PaternalFamilyId { get; set; }
+
+        [JsonProperty("paternalFamilyName")]
+        public string PaternalFamilyName { get; set; }        
+
         [JsonProperty("age")]
         public int Age
         {
