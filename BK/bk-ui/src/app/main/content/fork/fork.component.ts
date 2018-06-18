@@ -18,7 +18,7 @@ import { ReplaySubject } from 'rxjs';
   templateUrl: './fork.component.html',
   styleUrls: ['./fork.component.scss']
 })
-export class ForkComponent implements OnInit, AfterViewChecked,  OnDestroy {
+export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   model: FamilyModel;
@@ -61,10 +61,10 @@ export class ForkComponent implements OnInit, AfterViewChecked,  OnDestroy {
     });
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
-  
+
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
@@ -99,18 +99,19 @@ export class ForkComponent implements OnInit, AfterViewChecked,  OnDestroy {
   getRelations(member: FamilyMemberModel): any[] {
     if (member.gender === 'M')
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
+    else if (member.gender === 'F' && !member.married)
+      return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
     else if (member.gender === 'F')
       return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
     else
-      return RELATION_TYPES_DATA;
+      return RELATION_TYPES_DATA;    
   }
 
   forkFamily() {
-    if (this.forkForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");
-      if (el)      
-        el.focus();      
+    if (this.forkForm.invalid) {
+      var el = <HTMLElement>document.querySelector("input.ng-invalid");
+      if (el)
+        el.focus();
       return;
     }
 

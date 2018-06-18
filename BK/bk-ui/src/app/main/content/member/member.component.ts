@@ -200,6 +200,8 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   getRelations(): any[] {
     if (this.memberModel.gender === 'M')
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
+    else if (this.memberModel.gender === 'F' && !this.memberModel.married)
+      return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
     else if (this.memberModel.gender === 'F')
       return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
     else
