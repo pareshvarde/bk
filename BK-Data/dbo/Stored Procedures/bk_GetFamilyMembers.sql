@@ -21,6 +21,9 @@ BEGIN
 		paternal.PaternalFamilyID PaternalFamilyId,
 		paternal.PaternalFamilyName PaternalFamilyName,
 		paternal.PaternalFamilyAddress PaternalFamilyAddress,
+		maternal.MaternalFamilyID MaternalFamilyId,
+		maternal.MaternalFamilyName MaternalFamilyName,
+		maternal.MaternalFamilyAddress MaternalFamilyAddress,
 		CAST(CASE WHEN mat.MemberID IS NOT NULL THEN 1 ELSE 0 END AS BIT) AS MatrimonialExists		
 	FROM
 		Members m 
@@ -31,11 +34,18 @@ BEGIN
 		LEFT JOIN Matrimonials mat ON mat.MemberID = m.MemberID		
 		OUTER APPLY
 		(
-			SELECT
+			SELECT TOP 1
 				PaternalFamilyID, PaternalFamilyName, PaternalFamilyAddress
 			FROM
 				GetPaternalFamily(m.MemberID, m.Gender, m.Married)
 		) paternal
+		OUTER APPLY
+		(
+			SELECT TOP 1
+				MaternalFamilyID, MaternalFamilyName, MaternalFamilyAddress
+			FROM	
+				GetMaternalFamily(m.MemberID)
+		) maternal
 	WHERE
 		fma.FamilyId = @FamilyID
 END

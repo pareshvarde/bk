@@ -26,5 +26,5 @@ family delete post screen
 member delete post screen
 unsubscribe all subscriptions
 related to show only married men/females
-
+remove OTHER gender
 =============================

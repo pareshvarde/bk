@@ -228,6 +228,9 @@
     <Compile Include="Context\FamilyMemberAssociation.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="Context\GetMaternalFamily_Result.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\GetPaternalFamily_Result.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>

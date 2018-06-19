@@ -28,6 +28,9 @@ namespace BK.Context
         public Nullable<int> PaternalFamilyId { get; set; }
         public string PaternalFamilyName { get; set; }
         public string PaternalFamilyAddress { get; set; }
+        public Nullable<int> MaternalFamilyId { get; set; }
+        public string MaternalFamilyName { get; set; }
+        public string MaternalFamilyAddress { get; set; }
         public Nullable<bool> MatrimonialExists { get; set; }
     }
 }

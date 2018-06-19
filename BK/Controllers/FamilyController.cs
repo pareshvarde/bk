@@ -105,6 +105,10 @@ namespace BK.Controllers
                     if (tmp.PaternalFamilyId.HasValue)
                         tmp.PaternalFamilyName = string.Format("{0}, {1}", item.PaternalFamilyName, item.PaternalFamilyAddress);
 
+                    tmp.MaternalFamilyId = item.MaternalFamilyId;
+                    if (tmp.MaternalFamilyId.HasValue)
+                        tmp.MaternalFamilyName = string.Format("{0}, {1}", item.MaternalFamilyName, item.MaternalFamilyAddress);
+
                     if (!string.IsNullOrEmpty(item.RelationType))
                         tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";
 

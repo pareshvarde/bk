@@ -43,12 +43,12 @@
 
             .mat-column-memberId
             {
-                flex: 0 0 8%;
+                flex: 0 0 5%;
             }
 
             .mat-column-name
             {
-                flex: 0 0 22%;
+                flex: 0 0 16%;
             }
 
             .mat-column-age
@@ -58,22 +58,27 @@
 
             .mat-column-married
             {
-                flex: 0 0 8%;
+                flex: 0 0 6%;
             }
 
             .mat-column-relation
             {
-                flex: 0 0 22%;
+                flex: 0 0 20%;
             }
 
             .mat-column-paternal
             {
-                flex: 0 0 22%;
+                flex: 0 0 20%;
+            }
+
+            .mat-column-maternal
+            {
+                flex: 0 0 20%;
             }
 
             .mat-column-actions
             {
-                flex: 0 0 10%;
+                flex: 0 0 5%;
             }
 
             .mobile-card{                

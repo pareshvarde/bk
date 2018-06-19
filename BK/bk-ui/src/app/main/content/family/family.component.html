@@ -193,6 +193,14 @@
               </mat-header-cell>
               <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
             </ng-container>
+            <ng-container matColumnDef="maternal">
+                <mat-header-cell *matHeaderCellDef>
+                  <b>Maternal Family</b>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let member">
+                    <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
+                </mat-cell>
+              </ng-container>
             <ng-container matColumnDef="paternal">
               <mat-header-cell *matHeaderCellDef>
                 <b>Paternal Family</b>
@@ -228,7 +236,8 @@
               <span *ngIf="!member.married">No</span>
             </div>
             <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>
-            <div *ngIf="member.paternalFamilyId" fxLayout="row wrap">Paternal Family:&nbsp;<a  [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a></div>
+            <div *ngIf="member.maternalFamilyId" fxLayout="row wrap">Maternal Family:&nbsp;<a  [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a></div>
+            <div *ngIf="member.paternalFamilyId" fxLayout="row wrap">Paternal Family:&nbsp;<a  [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a></div>            
             <div fxLayout="row wrap" fxLayoutAlign="end start">
               <button matTooltip="Delete Member" *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
