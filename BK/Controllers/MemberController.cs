@@ -121,6 +121,9 @@ namespace BK.Controllers
                     if (member == null)
                         return BadRequest("Member record cannot be loaded. Please try again or contact Administrator for help");
 
+                    if (member.EmailAddress != model.Email && member.LastLoginOn.HasValue)
+                        return BadRequest("You cannot change email address. Please contact Administrator for help");
+
                     member.ModifiedBy = LoggedInMemberId;
                     member.ModifiedOn = DateTime.Now;
 
@@ -135,7 +138,7 @@ namespace BK.Controllers
                     context.Members.Add(member);
 
                     sendWelcomeLetter = !string.IsNullOrWhiteSpace(model.Email);
-                }
+                }                
 
                 member.AadhaarNumber = model.AadhaarNumber;
                 member.Alive = model.Alive;
@@ -161,9 +164,10 @@ namespace BK.Controllers
                 member.Anniversary = model.Anniversary;
                 member.Active = !string.IsNullOrWhiteSpace(member.EmailAddress);
 
+                //TODO: check only if the email address has changed.
                 if (!string.IsNullOrWhiteSpace(member.EmailAddress))
                     if (context.Members.Any(x => x.EmailAddress == member.EmailAddress && x.MemberID != member.MemberID))
-                        return BadRequest("Email address is already registered with other member");
+                        return BadRequest("Email address is already registered with other member");                
                 
                 FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
                 if (mAssociation == null)

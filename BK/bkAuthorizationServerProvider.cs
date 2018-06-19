@@ -31,7 +31,7 @@ namespace BK
                     return;
                 }                
                                                 
-                fMember.LastLoginOn = DateTime.UtcNow;
+                fMember.LastLoginOn = DateTime.Now;
                 await _context.SaveChangesAsync();               
             }
 
