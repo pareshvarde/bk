@@ -208,7 +208,7 @@ namespace BK.Controllers
                 }
             }
 
-            return Ok();
+            return Ok(logOut);
         }
 
         [Route("api/family/fork")]
