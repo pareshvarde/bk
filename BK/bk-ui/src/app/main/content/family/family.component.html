@@ -228,6 +228,7 @@
               <span *ngIf="!member.married">No</span>
             </div>
             <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>
+            <div *ngIf="member.paternalFamilyId" fxLayout="row wrap">Paternal Family:&nbsp;<a  [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a></div>
             <div fxLayout="row wrap" fxLayoutAlign="end start">
               <button matTooltip="Delete Member" *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>
