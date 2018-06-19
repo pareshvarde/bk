@@ -81,7 +81,7 @@
           </mat-form-field>
         </div>        
         <div fxLayout="row wrap">
-          <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
+          <mat-form-field>
             <mat-select placeholder="Gender" [(ngModel)]="formModel.gender" formControlName="gender">
               <mat-option value=null></mat-option>
               <mat-option [value]=true>

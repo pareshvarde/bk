@@ -85,7 +85,7 @@
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Gender" [(ngModel)]="memberModel.gender" formControlName="gender">
-                <mat-option value=null></mat-option>
+                <mat-option></mat-option>
                 <mat-option [value]=true>
                   Male
                 </mat-option>
@@ -168,7 +168,7 @@
 
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
               <mat-select placeholder="Relation With" [(ngModel)]="memberModel.relatedMemberId" formControlName="relatedMemberId">
-                <mat-option [value]=null>
+                <mat-option>
                 </mat-option>
                 <mat-option *ngFor="let n of getRelatedMember()" [value]="n.memberId">
                   {{ n.name }}

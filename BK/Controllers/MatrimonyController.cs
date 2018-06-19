@@ -196,7 +196,7 @@ namespace BK.Controllers
             string district = string.IsNullOrWhiteSpace(model.District) ? null : model.District.Trim();
             string state = string.IsNullOrWhiteSpace(model.State) ? null : model.State.Trim();
             string country = string.IsNullOrWhiteSpace(model.Country) ? null : model.Country.Trim();
-            bool gender = model.Gender;
+            bool? gender = model.Gender;
             int? occupationId = model.OccupationId.HasValue && model.OccupationId.Value > 0 ? model.OccupationId : null;
             int? maritalStatusId = model.MaritalStatusId.HasValue && model.MaritalStatusId.Value > 0 ? model.MaritalStatusId : null;
             int? minAge = model.MinimumAge.HasValue && model.MinimumAge.Value > 0 ? model.MinimumAge : null;
