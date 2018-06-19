@@ -35,6 +35,9 @@ namespace BK
             if (_logWriter == null)
                 InitApplogger();
 
+            if (ex is OperationCanceledException)
+                return;            
+
             IDictionary<string, object> stackTrace = new Dictionary<string, object>();
             stackTrace.Add("StackTrace", ex.StackTrace);
 
