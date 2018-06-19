@@ -1,10 +1,3 @@
-remember me
-login page (refresh token?)
-sign up/login captcha
-
-=============
-help icons on each page
-
 =========================
  It looks like you're using ngModel on the same form field as formControlName. 
     Support for using the ngModel input property and ngModelChange event with 
@@ -13,16 +6,21 @@ help icons on each page
 	
 ===========================
 birthday/anniversary wish email
-Dadidal Family
-Naninal Family
 Logged Image
 Multiple Matrimonial full photos
-Preface Page
-===========================
-	
+About Us
+Remember Me
+Register/Login captcha
+help icons on each page
+===========================	
 add member - add/exiting radio text has to be descriptive
 directory click take to family screen instead of member screen
 unsubscribe all subscriptions
 related to show only married men/females
 edit and then cancel reload page
+add maternal and paternal on member screen
+mobile device padding on left/right
+=============================
+angular memory and performance analyser
+sql query performance and indexes
 =============================
