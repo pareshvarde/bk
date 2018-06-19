@@ -97,11 +97,11 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   getRelations(member: FamilyMemberModel): any[] {
-    if (member.gender === 'M')
+    if (member.gender === true)
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
-    else if (member.gender === 'F' && !member.married)
+    else if (member.gender === false && !member.married)
       return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
-    else if (member.gender === 'F')
+    else if (member.gender === false)
       return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
     else
       return RELATION_TYPES_DATA;    

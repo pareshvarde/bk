@@ -33,7 +33,7 @@ namespace BK.ViewModel
         public long? AadhaarNumber { get; set; }
 
         [JsonProperty("gender")]
-        public string Gender { get; set; }
+        public bool Gender { get; set; }
 
         [JsonProperty("dob")]
         public DateTime? DOB { get; set; }

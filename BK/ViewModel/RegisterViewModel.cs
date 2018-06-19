@@ -14,34 +14,49 @@ namespace BK.ViewModel
     {
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
+
         [JsonProperty("lastName")]
         public string LastName { get; set; }
+
         [JsonProperty("email")]
         public string EmailAddress { get; set; }
+
         [JsonProperty("phoneNumber")]
         public string PhoneNumber { get; set; }
+
         [JsonProperty("aadhaarNumber")]        
         public long? AadhaarNumber { get; set; }
+
         [JsonProperty("categoryId")]
         public int CategoryId { get; set; }
+
         [JsonProperty("nukhId")]
         public int NukhId { get; set; }
+
         [JsonProperty("gender")]
-        public string Gender { get; set; }
+        public bool Gender { get; set; }
+
         [JsonProperty("dob")]
         public DateTime? DateOfBirth { get; set; }
+
         [JsonProperty("address1")]
         public string Address1 { get; set; }
+
         [JsonProperty("address2")]
         public string Address2 { get; set; }
+
         [JsonProperty("city")]
         public string City { get; set; }
+
         [JsonProperty("district")]
         public string District { get; set; }
+
         [JsonProperty("postalCode")]       
         public string PostalCode { get; set; }
+
         [JsonProperty("state")]
         public string State { get; set; }
+
         [JsonProperty("country")]
         public string Country { get; set; }
 

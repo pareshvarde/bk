@@ -25,8 +25,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   constructor(private router: Router, private dataService: bkDataService, 
     private alertService: NotificationsService, private cdr: ChangeDetectorRef) 
   {         
-    this.formModel = new RegisterModel();
-    this.formModel.gender = "M";
+    this.formModel = new RegisterModel();    
   }
   
   ngAfterViewChecked(){
@@ -42,7 +41,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, UniversalValidators.noWhitespace, Validators.maxLength(16)]),
       categoryId: new FormControl('', [Validators.required]),
       nukhId: new FormControl('', [Validators.required]),
-      gender: new FormControl('M', null),
+      gender: new FormControl('M', [Validators.required]),
       dob: new FormControl('', [Validators.required]),
       address1: new FormControl('', [Validators.maxLength(50)]),
       address2: new FormControl('', [Validators.maxLength(50)]),

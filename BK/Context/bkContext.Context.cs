@@ -33,15 +33,6 @@ namespace BK.Context
         public virtual DbSet<Matrimonial> Matrimonials { get; set; }
         public virtual DbSet<Member> Members { get; set; }
     
-        public virtual ObjectResult<bk_PendingApprovals_Result> bk_PendingApprovals(Nullable<int> memberID)
-        {
-            var memberIDParameter = memberID.HasValue ?
-                new ObjectParameter("MemberID", memberID) :
-                new ObjectParameter("MemberID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_PendingApprovals_Result>("bk_PendingApprovals", memberIDParameter);
-        }
-    
         public virtual int bk_DeleteFamily(Nullable<int> familyID)
         {
             var familyIDParameter = familyID.HasValue ?
@@ -64,25 +55,70 @@ namespace BK.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bk_DeleteMember", familyIDParameter, memberIDParameter);
         }
     
-        public virtual ObjectResult<bk_MemberSearchBasic_Result> bk_MemberSearchBasic(Nullable<int> memberID, string phoneNumber, Nullable<long> aadhaarNumber, string email)
+        public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
         {
-            var memberIDParameter = memberID.HasValue ?
-                new ObjectParameter("MemberID", memberID) :
-                new ObjectParameter("MemberID", typeof(int));
+            var familyIDParameter = familyID.HasValue ?
+                new ObjectParameter("FamilyID", familyID) :
+                new ObjectParameter("FamilyID", typeof(int));
     
-            var phoneNumberParameter = phoneNumber != null ?
-                new ObjectParameter("PhoneNumber", phoneNumber) :
-                new ObjectParameter("PhoneNumber", typeof(string));
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
+        }
     
-            var aadhaarNumberParameter = aadhaarNumber.HasValue ?
-                new ObjectParameter("AadhaarNumber", aadhaarNumber) :
-                new ObjectParameter("AadhaarNumber", typeof(long));
+        public virtual ObjectResult<bk_MatrimonySearch_Result> bk_MatrimonySearch(Nullable<int> categoryID, Nullable<int> nukhID, string city, string district, string state, string country, Nullable<bool> gender, Nullable<int> occupationId, Nullable<int> maritalStatusId, Nullable<System.DateTime> minDOB, Nullable<System.DateTime> maxDOB, Nullable<int> pageSize, Nullable<int> currentPage, ObjectParameter totalRecords)
+        {
+            var categoryIDParameter = categoryID.HasValue ?
+                new ObjectParameter("CategoryID", categoryID) :
+                new ObjectParameter("CategoryID", typeof(int));
     
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
+            var nukhIDParameter = nukhID.HasValue ?
+                new ObjectParameter("NukhID", nukhID) :
+                new ObjectParameter("NukhID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearchBasic_Result>("bk_MemberSearchBasic", memberIDParameter, phoneNumberParameter, aadhaarNumberParameter, emailParameter);
+            var cityParameter = city != null ?
+                new ObjectParameter("City", city) :
+                new ObjectParameter("City", typeof(string));
+    
+            var districtParameter = district != null ?
+                new ObjectParameter("District", district) :
+                new ObjectParameter("District", typeof(string));
+    
+            var stateParameter = state != null ?
+                new ObjectParameter("State", state) :
+                new ObjectParameter("State", typeof(string));
+    
+            var countryParameter = country != null ?
+                new ObjectParameter("Country", country) :
+                new ObjectParameter("Country", typeof(string));
+    
+            var genderParameter = gender.HasValue ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(bool));
+    
+            var occupationIdParameter = occupationId.HasValue ?
+                new ObjectParameter("OccupationId", occupationId) :
+                new ObjectParameter("OccupationId", typeof(int));
+    
+            var maritalStatusIdParameter = maritalStatusId.HasValue ?
+                new ObjectParameter("MaritalStatusId", maritalStatusId) :
+                new ObjectParameter("MaritalStatusId", typeof(int));
+    
+            var minDOBParameter = minDOB.HasValue ?
+                new ObjectParameter("MinDOB", minDOB) :
+                new ObjectParameter("MinDOB", typeof(System.DateTime));
+    
+            var maxDOBParameter = maxDOB.HasValue ?
+                new ObjectParameter("MaxDOB", maxDOB) :
+                new ObjectParameter("MaxDOB", typeof(System.DateTime));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var currentPageParameter = currentPage.HasValue ?
+                new ObjectParameter("CurrentPage", currentPage) :
+                new ObjectParameter("CurrentPage", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MatrimonySearch_Result>("bk_MatrimonySearch", categoryIDParameter, nukhIDParameter, cityParameter, districtParameter, stateParameter, countryParameter, genderParameter, occupationIdParameter, maritalStatusIdParameter, minDOBParameter, maxDOBParameter, pageSizeParameter, currentPageParameter, totalRecords);
         }
     
         public virtual ObjectResult<bk_MemberSearch_Result> bk_MemberSearch(string firstName, string lastName, Nullable<int> categoryID, Nullable<int> nukhID, string city, string district, string state, string emailAddress, string phoneNumber, Nullable<int> pageSize, Nullable<int> currentPage, Nullable<bool> includeOnlyHOF, ObjectParameter totalRecords)
@@ -138,88 +174,34 @@ namespace BK.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearch_Result>("bk_MemberSearch", firstNameParameter, lastNameParameter, categoryIDParameter, nukhIDParameter, cityParameter, districtParameter, stateParameter, emailAddressParameter, phoneNumberParameter, pageSizeParameter, currentPageParameter, includeOnlyHOFParameter, totalRecords);
         }
     
-        public virtual ObjectResult<bk_MatrimonySearch_Result> bk_MatrimonySearch(Nullable<int> categoryID, Nullable<int> nukhID, string city, string district, string state, string country, string gender, Nullable<int> occupationId, Nullable<int> maritalStatusId, Nullable<System.DateTime> minDOB, Nullable<System.DateTime> maxDOB, Nullable<int> pageSize, Nullable<int> currentPage, ObjectParameter totalRecords)
-        {
-            var categoryIDParameter = categoryID.HasValue ?
-                new ObjectParameter("CategoryID", categoryID) :
-                new ObjectParameter("CategoryID", typeof(int));
-    
-            var nukhIDParameter = nukhID.HasValue ?
-                new ObjectParameter("NukhID", nukhID) :
-                new ObjectParameter("NukhID", typeof(int));
-    
-            var cityParameter = city != null ?
-                new ObjectParameter("City", city) :
-                new ObjectParameter("City", typeof(string));
-    
-            var districtParameter = district != null ?
-                new ObjectParameter("District", district) :
-                new ObjectParameter("District", typeof(string));
-    
-            var stateParameter = state != null ?
-                new ObjectParameter("State", state) :
-                new ObjectParameter("State", typeof(string));
-    
-            var countryParameter = country != null ?
-                new ObjectParameter("Country", country) :
-                new ObjectParameter("Country", typeof(string));
-    
-            var genderParameter = gender != null ?
-                new ObjectParameter("Gender", gender) :
-                new ObjectParameter("Gender", typeof(string));
-    
-            var occupationIdParameter = occupationId.HasValue ?
-                new ObjectParameter("OccupationId", occupationId) :
-                new ObjectParameter("OccupationId", typeof(int));
-    
-            var maritalStatusIdParameter = maritalStatusId.HasValue ?
-                new ObjectParameter("MaritalStatusId", maritalStatusId) :
-                new ObjectParameter("MaritalStatusId", typeof(int));
-    
-            var minDOBParameter = minDOB.HasValue ?
-                new ObjectParameter("MinDOB", minDOB) :
-                new ObjectParameter("MinDOB", typeof(System.DateTime));
-    
-            var maxDOBParameter = maxDOB.HasValue ?
-                new ObjectParameter("MaxDOB", maxDOB) :
-                new ObjectParameter("MaxDOB", typeof(System.DateTime));
-    
-            var pageSizeParameter = pageSize.HasValue ?
-                new ObjectParameter("PageSize", pageSize) :
-                new ObjectParameter("PageSize", typeof(int));
-    
-            var currentPageParameter = currentPage.HasValue ?
-                new ObjectParameter("CurrentPage", currentPage) :
-                new ObjectParameter("CurrentPage", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MatrimonySearch_Result>("bk_MatrimonySearch", categoryIDParameter, nukhIDParameter, cityParameter, districtParameter, stateParameter, countryParameter, genderParameter, occupationIdParameter, maritalStatusIdParameter, minDOBParameter, maxDOBParameter, pageSizeParameter, currentPageParameter, totalRecords);
-        }
-    
-        [DbFunction("bkContext", "GetPaternalFamily")]
-        public virtual IQueryable<GetPaternalFamily_Result> GetPaternalFamily(Nullable<int> memberID, string gender, Nullable<bool> married)
+        public virtual ObjectResult<bk_MemberSearchBasic_Result> bk_MemberSearchBasic(Nullable<int> memberID, string phoneNumber, Nullable<long> aadhaarNumber, string email)
         {
             var memberIDParameter = memberID.HasValue ?
                 new ObjectParameter("MemberID", memberID) :
                 new ObjectParameter("MemberID", typeof(int));
     
-            var genderParameter = gender != null ?
-                new ObjectParameter("Gender", gender) :
-                new ObjectParameter("Gender", typeof(string));
+            var phoneNumberParameter = phoneNumber != null ?
+                new ObjectParameter("PhoneNumber", phoneNumber) :
+                new ObjectParameter("PhoneNumber", typeof(string));
     
-            var marriedParameter = married.HasValue ?
-                new ObjectParameter("Married", married) :
-                new ObjectParameter("Married", typeof(bool));
+            var aadhaarNumberParameter = aadhaarNumber.HasValue ?
+                new ObjectParameter("AadhaarNumber", aadhaarNumber) :
+                new ObjectParameter("AadhaarNumber", typeof(long));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetPaternalFamily_Result>("[bkContext].[GetPaternalFamily](@MemberID, @Gender, @Married)", memberIDParameter, genderParameter, marriedParameter);
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearchBasic_Result>("bk_MemberSearchBasic", memberIDParameter, phoneNumberParameter, aadhaarNumberParameter, emailParameter);
         }
     
-        public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
+        public virtual ObjectResult<bk_PendingApprovals_Result> bk_PendingApprovals(Nullable<int> memberID)
         {
-            var familyIDParameter = familyID.HasValue ?
-                new ObjectParameter("FamilyID", familyID) :
-                new ObjectParameter("FamilyID", typeof(int));
+            var memberIDParameter = memberID.HasValue ?
+                new ObjectParameter("MemberID", memberID) :
+                new ObjectParameter("MemberID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_PendingApprovals_Result>("bk_PendingApprovals", memberIDParameter);
         }
     
         [DbFunction("bkContext", "GetMaternalFamily")]
@@ -230,6 +212,24 @@ namespace BK.Context
                 new ObjectParameter("MemberID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetMaternalFamily_Result>("[bkContext].[GetMaternalFamily](@MemberID)", memberIDParameter);
+        }
+    
+        [DbFunction("bkContext", "GetPaternalFamily")]
+        public virtual IQueryable<GetPaternalFamily_Result> GetPaternalFamily(Nullable<int> memberID, Nullable<bool> gender, Nullable<bool> married)
+        {
+            var memberIDParameter = memberID.HasValue ?
+                new ObjectParameter("MemberID", memberID) :
+                new ObjectParameter("MemberID", typeof(int));
+    
+            var genderParameter = gender.HasValue ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(bool));
+    
+            var marriedParameter = married.HasValue ?
+                new ObjectParameter("Married", married) :
+                new ObjectParameter("Married", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GetPaternalFamily_Result>("[bkContext].[GetPaternalFamily](@MemberID, @Gender, @Married)", memberIDParameter, genderParameter, marriedParameter);
         }
     }
 }

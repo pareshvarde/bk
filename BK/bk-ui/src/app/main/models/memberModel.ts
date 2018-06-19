@@ -6,7 +6,7 @@ export class MemberModel {
     email: string;
     phoneNumber: number;
     aadhaarNumber: number;        
-    gender: string;
+    gender: boolean;
     dob: Date;
     birthPlace: string;
     alive: boolean;

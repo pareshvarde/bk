@@ -7,7 +7,7 @@ CREATE PROCEDURE [dbo].[bk_MatrimonySearch]
 	@District NVARCHAR(50) = NULL,
 	@State NVARCHAR(50) = NULL,
 	@Country NVARCHAR(50) = NULL,
-	@Gender CHAR(1) = NULL,
+	@Gender BIT = NULL,
 	@OccupationId INT = NULL,
 	@MaritalStatusId INT = NULL,
 	@MinDOB DATETIME = NULL,

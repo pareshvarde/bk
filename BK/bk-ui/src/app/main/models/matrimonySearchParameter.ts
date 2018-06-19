@@ -5,7 +5,7 @@ export class MatrimonySearchParameter{
     public district: string;
     public state: string;
     public country: string;
-    public gender: string;
+    public gender: boolean;
     public occupationId: number;
     public maritalStatusId: number;
     public minimumAge: number;

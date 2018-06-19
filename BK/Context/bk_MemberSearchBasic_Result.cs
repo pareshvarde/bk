@@ -17,7 +17,7 @@ namespace BK.Context
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }
-        public string Gender { get; set; }
+        public bool Gender { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
     }
 }

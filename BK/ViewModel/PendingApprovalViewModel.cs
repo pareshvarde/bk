@@ -27,7 +27,7 @@ namespace BK.ViewModel
         public string AddedToLastName;
 
         [JsonProperty("addedOn")]
-        public DateTime AddedOn;
+        public DateTime? AddedOn;
 
         [JsonProperty("familyId")]
         public int FamilyId;

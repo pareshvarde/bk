@@ -6,7 +6,7 @@ export class RegisterModel{
     aadhaarNumber: number;
     categoryId: number;
     nukhId: number;
-    gender: string;
+    gender: boolean;
     dob: Date;
     address1: string;
     address2: string;

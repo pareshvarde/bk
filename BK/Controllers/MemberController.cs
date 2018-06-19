@@ -514,7 +514,7 @@ namespace BK.Controllers
         {
             string url = "";
             DateTime? modifiedOn;
-            string gender;
+            bool gender;
 
             using (bkContext context = new bkContext())
             {

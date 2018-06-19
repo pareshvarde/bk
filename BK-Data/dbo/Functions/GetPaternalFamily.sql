@@ -1,6 +1,6 @@
-﻿CREATE FUNCTION GetPaternalFamily(
+﻿CREATE FUNCTION [dbo].[GetPaternalFamily](
 	@MemberID INT,
-	@Gender CHAR(1),
+	@Gender BIT,
 	@Married BIT
 ) RETURNS @Result TABLE
 	(
@@ -9,7 +9,7 @@
 		PaternalFamilyAddress NVARCHAR(100)
 	)
 BEGIN
-	IF (@Gender = 'F' AND @Married = 1)
+	IF (@Gender = 0 AND @Married = 1)
 	BEGIN
 		INSERT INTO @Result
 			SELECT 
@@ -22,7 +22,7 @@ BEGIN
 				JOIN Members thof ON thof.MemberID = tFamily.HeadOfFamilyID
 			WHERE
 				tfma.RelationTypeID = 2
-				AND tm.Gender = 'F'
+				AND tm.Gender = 0
 				AND tm.Married = 1
 				AND tm.MemberID = @MemberID
 	END

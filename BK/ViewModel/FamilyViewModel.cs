@@ -91,7 +91,7 @@ namespace BK.ViewModel
         public bool Alive { get; set; }
 
         [JsonProperty("gender")]
-        public string Gender { get; set; }
+        public bool Gender { get; set; }
 
         [JsonProperty("selected")]
         public bool Selected { get; set; }

@@ -8,7 +8,7 @@ namespace BK
 {
     public class MemberWrapper
     {
-        public static string ProfilePhoto(int memberId, string gender, DateTime? modifiedOn)
+        public static string ProfilePhoto(int memberId, bool gender, DateTime? modifiedOn)
         {
             if (!modifiedOn.HasValue)
                 modifiedOn = DateTime.Now;
@@ -17,7 +17,7 @@ namespace BK
             if (File.Exists(filePath))
                 return string.Format("images/profiles/{0}.jpg?{1}", memberId, modifiedOn.Value.Ticks);
 
-            if (gender.ToLower() == "m")
+            if (gender)
                 return "images/profiles/male.png";
             else
                 return "images/profiles/female.png";            

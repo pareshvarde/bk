@@ -27,7 +27,7 @@ namespace BK.ViewModel
         public string Country { get; set; }
 
         [JsonProperty("gender")]
-        public string Gender { get; set; }
+        public bool Gender { get; set; }
 
         [JsonProperty("occupationId")]
         public int? OccupationId { get; set; }

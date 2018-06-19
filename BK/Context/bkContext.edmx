@@ -87,7 +87,7 @@
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="NickName" Type="nvarchar" MaxLength="50" />
-          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
           <Property Name="DOB" Type="datetime2" Precision="7" />
           <Property Name="BirthPlace" Type="nvarchar" MaxLength="50" />
           <Property Name="Alive" Type="bit" Nullable="false" />
@@ -192,7 +192,7 @@
           <Parameter Name="District" Type="nvarchar" Mode="In" />
           <Parameter Name="State" Type="nvarchar" Mode="In" />
           <Parameter Name="Country" Type="nvarchar" Mode="In" />
-          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="Gender" Type="bit" Mode="In" />
           <Parameter Name="OccupationId" Type="int" Mode="In" />
           <Parameter Name="MaritalStatusId" Type="int" Mode="In" />
           <Parameter Name="MinDOB" Type="datetime" Mode="In" />
@@ -225,6 +225,7 @@
         <Function Name="bk_PendingApprovals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MemberID" Type="int" Mode="In" />
         </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="GetMaternalFamily" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MemberID" Type="int" Mode="In" />
           <ReturnType>
@@ -239,7 +240,7 @@
         </Function>
         <Function Name="GetPaternalFamily" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MemberID" Type="int" Mode="In" />
-          <Parameter Name="Gender" Type="char" Mode="In" />
+          <Parameter Name="Gender" Type="bit" Mode="In" />
           <Parameter Name="Married" Type="bit" Mode="In" />
           <ReturnType>
             <CollectionType>
@@ -283,9 +284,14 @@
     <edmx:ConceptualModels>
       <Schema Namespace="bkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="bkContext" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="bk_PendingApprovals" ReturnType="Collection(bkModel.bk_PendingApprovals_Result)">
-          <Parameter Name="MemberID" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <EntitySet Name="Families" EntityType="bkModel.Family" />
+          <EntitySet Name="FamilyMemberAssociations" EntityType="bkModel.FamilyMemberAssociation" />
+          <EntitySet Name="lkRelationTypes" EntityType="bkModel.lkRelationType" />
+          <EntitySet Name="Matrimonials" EntityType="bkModel.Matrimonial" />
+          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="bkModel.FK_FamilyMemberAssociation_Families">
+            <End Role="Family" EntitySet="Families" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
           <FunctionImport Name="bk_DeleteFamily">
           <Parameter Name="FamilyID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -293,36 +299,24 @@
             <Parameter Name="FamilyID" Mode="In" Type="Int32" />
             <Parameter Name="MemberID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="Families" EntityType="bkModel.Family" />
-          <EntitySet Name="FamilyMemberAssociations" EntityType="bkModel.FamilyMemberAssociation" />
-          <EntitySet Name="lkRelationTypes" EntityType="bkModel.lkRelationType" />
-          <EntitySet Name="Matrimonials" EntityType="bkModel.Matrimonial" />
-          <EntitySet Name="Members" EntityType="bkModel.Member" />
-          <AssociationSet Name="FK_Families_HeadOfFamily" Association="bkModel.FK_Families_HeadOfFamily">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Family" EntitySet="Families" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FamilyMemberAssociation_Families" Association="bkModel.FK_FamilyMemberAssociation_Families">
-            <End Role="Family" EntitySet="Families" />
-            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="bkModel.FK_FamilyMemberAssociation_Members">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FamilyMemberAssociation_Related" Association="bkModel.FK_FamilyMemberAssociation_Related">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
-            <End Role="Member" EntitySet="Members" />
-            <End Role="Matrimonial" EntitySet="Matrimonials" />
-          </AssociationSet>
-          <FunctionImport Name="bk_MemberSearchBasic" ReturnType="Collection(bkModel.bk_MemberSearchBasic_Result)">
-            <Parameter Name="MemberID" Mode="In" Type="Int32" />
-            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
-            <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
-            <Parameter Name="Email" Mode="In" Type="String" />
+          <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
+          <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="bk_MatrimonySearch" ReturnType="Collection(bkModel.bk_MatrimonySearch_Result)">
+            <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="NukhID" Mode="In" Type="Int32" />
+            <Parameter Name="City" Mode="In" Type="String" />
+            <Parameter Name="District" Mode="In" Type="String" />
+            <Parameter Name="State" Mode="In" Type="String" />
+            <Parameter Name="Country" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="Boolean" />
+            <Parameter Name="OccupationId" Mode="In" Type="Int32" />
+            <Parameter Name="MaritalStatusId" Mode="In" Type="Int32" />
+            <Parameter Name="MinDOB" Mode="In" Type="DateTime" />
+            <Parameter Name="MaxDOB" Mode="In" Type="DateTime" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="CurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="bk_MemberSearch" ReturnType="Collection(bkModel.bk_MemberSearch_Result)">
             <Parameter Name="FirstName" Mode="In" Type="String" />
@@ -339,44 +333,41 @@
             <Parameter Name="IncludeOnlyHOF" Mode="In" Type="Boolean" />
             <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="bk_MatrimonySearch" ReturnType="Collection(bkModel.bk_MatrimonySearch_Result)">
-            <Parameter Name="CategoryID" Mode="In" Type="Int32" />
-            <Parameter Name="NukhID" Mode="In" Type="Int32" />
-            <Parameter Name="City" Mode="In" Type="String" />
-            <Parameter Name="District" Mode="In" Type="String" />
-            <Parameter Name="State" Mode="In" Type="String" />
-            <Parameter Name="Country" Mode="In" Type="String" />
-            <Parameter Name="Gender" Mode="In" Type="String" />
-            <Parameter Name="OccupationId" Mode="In" Type="Int32" />
-            <Parameter Name="MaritalStatusId" Mode="In" Type="Int32" />
-            <Parameter Name="MinDOB" Mode="In" Type="DateTime" />
-            <Parameter Name="MaxDOB" Mode="In" Type="DateTime" />
-            <Parameter Name="PageSize" Mode="In" Type="Int32" />
-            <Parameter Name="CurrentPage" Mode="In" Type="Int32" />
-            <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
+          <FunctionImport Name="bk_MemberSearchBasic" ReturnType="Collection(bkModel.bk_MemberSearchBasic_Result)">
+            <Parameter Name="MemberID" Mode="In" Type="Int32" />
+            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
+            <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="bk_PendingApprovals" ReturnType="Collection(bkModel.bk_PendingApprovals_Result)">
+          <Parameter Name="MemberID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetMaternalFamily" IsComposable="true" ReturnType="Collection(bkModel.GetMaternalFamily_Result)">
+          <Parameter Name="MemberID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetPaternalFamily" IsComposable="true" ReturnType="Collection(bkModel.GetPaternalFamily_Result)">
             <Parameter Name="MemberID" Mode="In" Type="Int32" />
-            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="Boolean" />
             <Parameter Name="Married" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
-            <Parameter Name="FamilyID" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetMaternalFamily" IsComposable="true" ReturnType="Collection(bkModel.GetMaternalFamily_Result)">
-            <Parameter Name="MemberID" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <EntitySet Name="Members" EntityType="bkModel.Member" />
+          <AssociationSet Name="FK_Families_HeadOfFamily" Association="bkModel.FK_Families_HeadOfFamily">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Family" EntitySet="Families" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyMemberAssociation_Members" Association="bkModel.FK_FamilyMemberAssociation_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FamilyMemberAssociation_Related" Association="bkModel.FK_FamilyMemberAssociation_Related">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="FamilyMemberAssociation" EntitySet="FamilyMemberAssociations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matrimonials_Members" Association="bkModel.FK_Matrimonials_Members">
+            <End Role="Member" EntitySet="Members" />
+            <End Role="Matrimonial" EntitySet="Matrimonials" />
+          </AssociationSet>
           </EntityContainer>
-        <ComplexType Name="bk_PendingApprovals_Result">
-          <Property Type="Int32" Name="AddedById" Nullable="false" />
-          <Property Type="String" Name="AddedByFirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="AddedByLastName" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="AddedToId" Nullable="false" />
-          <Property Type="String" Name="AddedToFirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="AddedToLastName" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="AddedOn" Nullable="false" />
-          <Property Type="Int32" Name="FamilyId" Nullable="false" />
-        </ComplexType>
         <EntityType Name="Family">
           <Key>
             <PropertyRef Name="FamilyID" />
@@ -395,10 +386,10 @@
           <Property Name="CreatedBy" Type="Int32" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="7" />
           <Property Name="ModifiedBy" Type="Int32" />
-          <NavigationProperty Name="Member" Relationship="bkModel.FK_Families_HeadOfFamily" FromRole="Family" ToRole="Member" />
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="Family" ToRole="FamilyMemberAssociation" />
           <Property Name="District" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FamilyNative" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Member" Relationship="bkModel.FK_Families_HeadOfFamily" FromRole="Family" ToRole="Member" />
         </EntityType>
         <EntityType Name="FamilyMemberAssociation">
           <Key>
@@ -420,7 +411,7 @@
           <NavigationProperty Name="Family" Relationship="bkModel.FK_FamilyMemberAssociation_Families" FromRole="FamilyMemberAssociation" ToRole="Family" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="FamilyMemberAssociation" ToRole="Member" />
           <NavigationProperty Name="Member1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="FamilyMemberAssociation" ToRole="Member" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="lkRelationType">
           <Key>
             <PropertyRef Name="RelationTypeId" />
@@ -457,6 +448,103 @@
           <Property Name="ExpiresOn" Type="DateTime" Precision="7" />
           <NavigationProperty Name="Member" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Matrimonial" ToRole="Member" />
         </EntityType>
+        <Association Name="FK_FamilyMemberAssociation_Families">
+          <End Type="bkModel.Family" Role="Family" Multiplicity="1" />
+          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Family">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="FamilyMemberAssociation">
+              <PropertyRef Name="FamilyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="bk_GetFamilyMembers_Result">
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="Boolean" Name="Married" Nullable="false" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="Boolean" Name="Alive" Nullable="false" />
+          <Property Type="DateTime" Name="DOD" Nullable="true" />
+          <Property Type="Int32" Name="HeadOfFamilyID" Nullable="false" />
+          <Property Type="String" Name="rFirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="rLastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="RelationType" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="PaternalFamilyId" Nullable="true" />
+          <Property Type="String" Name="PaternalFamilyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PaternalFamilyAddress" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="MaternalFamilyId" Nullable="true" />
+          <Property Type="String" Name="MaternalFamilyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MaternalFamilyAddress" Nullable="true" MaxLength="100" />
+          <Property Type="Boolean" Name="MatrimonialExists" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="bk_MatrimonySearch_Result">
+          <Property Type="Int64" Name="RowNum" Nullable="true" />
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="Int32" Name="FamilyID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="District" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="Boolean" Name="Alive" Nullable="false" />
+          <Property Type="DateTime" Name="DOD" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="bk_MemberSearch_Result">
+          <Property Type="Int64" Name="RowNum" Nullable="true" />
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="Int32" Name="FamilyID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="District" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="Boolean" Name="Alive" Nullable="false" />
+          <Property Type="DateTime" Name="DOD" Nullable="true" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="bk_MemberSearchBasic_Result">
+          <Property Type="Int32" Name="MemberID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="Boolean" Name="Gender" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="bk_PendingApprovals_Result">
+          <Property Type="Int32" Name="AddedById" Nullable="false" />
+          <Property Type="String" Name="AddedByFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AddedByLastName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="AddedToId" Nullable="false" />
+          <Property Type="String" Name="AddedToFirstName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AddedToLastName" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="AddedOn" Nullable="true" />
+          <Property Type="Int32" Name="FamilyId" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetMaternalFamily_Result">
+          <Property Type="Int32" Name="MaternalFamilyID" Nullable="true" />
+          <Property Type="String" Name="MaternalFamilyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MaternalFamilyAddress" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="GetPaternalFamily_Result">
+          <Property Type="Int32" Name="PaternalFamilyID" Nullable="true" />
+          <Property Type="String" Name="PaternalFamilyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PaternalFamilyAddress" Nullable="true" MaxLength="100" />
+        </ComplexType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="MemberID" />
@@ -465,13 +553,14 @@
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NickName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Precision="7" />
           <Property Name="BirthPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Alive" Type="Boolean" Nullable="false" />
           <Property Name="DOD" Type="DateTime" Precision="7" />
           <Property Name="DeathPlace" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Married" Type="Boolean" Nullable="false" />
+          <Property Name="Anniversary" Type="DateTime" Precision="7" />
           <Property Name="EducationLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EducationField" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="OccupationID" Type="Int32" Nullable="false" />
@@ -495,7 +584,6 @@
           <NavigationProperty Name="FamilyMemberAssociations" Relationship="bkModel.FK_FamilyMemberAssociation_Members" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="FamilyMemberAssociations1" Relationship="bkModel.FK_FamilyMemberAssociation_Related" FromRole="Member" ToRole="FamilyMemberAssociation" />
           <NavigationProperty Name="Matrimonial" Relationship="bkModel.FK_Matrimonials_Members" FromRole="Member" ToRole="Matrimonial" />
-          <Property Name="Anniversary" Type="DateTime" Precision="7" />
         </EntityType>
         <Association Name="FK_Families_HeadOfFamily">
           <End Type="bkModel.Member" Role="Member" Multiplicity="1" />
@@ -506,18 +594,6 @@
             </Principal>
             <Dependent Role="Family">
               <PropertyRef Name="HeadOfFamilyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FamilyMemberAssociation_Families">
-          <End Type="bkModel.Family" Role="Family" Multiplicity="1" />
-          <End Type="bkModel.FamilyMemberAssociation" Role="FamilyMemberAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Family">
-              <PropertyRef Name="FamilyID" />
-            </Principal>
-            <Dependent Role="FamilyMemberAssociation">
-              <PropertyRef Name="FamilyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -557,103 +633,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="bk_MemberSearchBasic_Result">
-          <Property Type="Int32" Name="MemberID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="DOB" Nullable="true" />
-          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
-          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="bk_MemberSearch_Result">
-          <Property Type="Int64" Name="RowNum" Nullable="true" />
-          <Property Type="Int32" Name="MemberID" Nullable="false" />
-          <Property Type="Int32" Name="FamilyID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Address1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Address2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="District" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
-          <Property Type="Boolean" Name="Alive" Nullable="false" />
-          <Property Type="DateTime" Name="DOD" Nullable="true" />
-          <Property Type="DateTime" Name="DOB" Nullable="true" />
-          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="bk_MatrimonySearch_Result">
-          <Property Type="Int64" Name="RowNum" Nullable="true" />
-          <Property Type="Int32" Name="MemberID" Nullable="false" />
-          <Property Type="Int32" Name="FamilyID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Address1" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Address2" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="District" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="State" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="Country" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
-          <Property Type="DateTime" Name="DOB" Nullable="true" />
-          <Property Type="Boolean" Name="Alive" Nullable="false" />
-          <Property Type="DateTime" Name="DOD" Nullable="true" />
-          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetPaternalFamily_Result">
-          <Property Type="Int32" Name="PaternalFamilyID" Nullable="true" />
-          <Property Type="String" Name="PaternalFamilyName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="PaternalFamilyAddress" Nullable="true" MaxLength="100" />
-        </ComplexType>
-        <ComplexType Name="bk_GetFamilyMembers_Result">
-          <Property Type="Int32" Name="MemberID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="DOB" Nullable="true" />
-          <Property Type="Boolean" Name="Married" Nullable="false" />
-          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" />
-          <Property Type="Boolean" Name="Alive" Nullable="false" />
-          <Property Type="DateTime" Name="DOD" Nullable="true" />
-          <Property Type="Int32" Name="HeadOfFamilyID" Nullable="false" />
-          <Property Type="String" Name="rFirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="rLastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="RelationType" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="PaternalFamilyId" Nullable="true" />
-          <Property Type="String" Name="PaternalFamilyName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="PaternalFamilyAddress" Nullable="true" MaxLength="100" />
-          <Property Type="Int32" Name="MaternalFamilyId" Nullable="true" />
-          <Property Type="String" Name="MaternalFamilyName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="MaternalFamilyAddress" Nullable="true" MaxLength="100" />
-          <Property Type="Boolean" Name="MatrimonialExists" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="GetMaternalFamily_Result">
-          <Property Type="Int32" Name="MaternalFamilyID" Nullable="true" />
-          <Property Type="String" Name="MaternalFamilyName" Nullable="true" MaxLength="100" />
-          <Property Type="String" Name="MaternalFamilyAddress" Nullable="true" MaxLength="100" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="bkModelStoreContainer" CdmEntityContainer="bkContext">
-          <FunctionImportMapping FunctionImportName="bk_PendingApprovals" FunctionName="bkModel.Store.bk_PendingApprovals">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="bkModel.bk_PendingApprovals_Result">
-                <ScalarProperty Name="AddedById" ColumnName="AddedById" />
-                <ScalarProperty Name="AddedByFirstName" ColumnName="AddedByFirstName" />
-                <ScalarProperty Name="AddedByLastName" ColumnName="AddedByLastName" />
-                <ScalarProperty Name="AddedToId" ColumnName="AddedToId" />
-                <ScalarProperty Name="AddedToFirstName" ColumnName="AddedToFirstName" />
-                <ScalarProperty Name="AddedToLastName" ColumnName="AddedToLastName" />
-                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
-                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="bk_DeleteFamily" FunctionName="bkModel.Store.bk_DeleteFamily" />
-          <FunctionImportMapping FunctionImportName="bk_DeleteMember" FunctionName="bkModel.Store.bk_DeleteMember" />
           <EntitySetMapping Name="Families">
             <EntityTypeMapping TypeName="bkModel.Family">
               <MappingFragment StoreEntitySet="Families">
@@ -731,51 +716,51 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Members">
-            <EntityTypeMapping TypeName="bkModel.Member">
-              <MappingFragment StoreEntitySet="Members">
-                <ScalarProperty Name="Anniversary" ColumnName="Anniversary" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="PasswordUID" ColumnName="PasswordUID" />
-                <ScalarProperty Name="LastLoginOn" ColumnName="LastLoginOn" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
-                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
-                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
-                <ScalarProperty Name="AadhaarNumber" ColumnName="AadhaarNumber" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="OccupationID" ColumnName="OccupationID" />
-                <ScalarProperty Name="EducationField" ColumnName="EducationField" />
-                <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
-                <ScalarProperty Name="Married" ColumnName="Married" />
-                <ScalarProperty Name="DeathPlace" ColumnName="DeathPlace" />
-                <ScalarProperty Name="DOD" ColumnName="DOD" />
-                <ScalarProperty Name="Alive" ColumnName="Alive" />
-                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="bk_MemberSearchBasic" FunctionName="bkModel.Store.bk_MemberSearchBasic">
+          <FunctionImportMapping FunctionImportName="bk_DeleteFamily" FunctionName="bkModel.Store.bk_DeleteFamily" />
+          <FunctionImportMapping FunctionImportName="bk_DeleteMember" FunctionName="bkModel.Store.bk_DeleteMember" />
+          <FunctionImportMapping FunctionImportName="bk_GetFamilyMembers" FunctionName="bkModel.Store.bk_GetFamilyMembers">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="bkModel.bk_MemberSearchBasic_Result">
+              <ComplexTypeMapping TypeName="bkModel.bk_GetFamilyMembers_Result">
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Married" ColumnName="Married" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Alive" ColumnName="Alive" />
+                <ScalarProperty Name="DOD" ColumnName="DOD" />
+                <ScalarProperty Name="HeadOfFamilyID" ColumnName="HeadOfFamilyID" />
+                <ScalarProperty Name="rFirstName" ColumnName="rFirstName" />
+                <ScalarProperty Name="rLastName" ColumnName="rLastName" />
+                <ScalarProperty Name="RelationType" ColumnName="RelationType" />
+                <ScalarProperty Name="PaternalFamilyId" ColumnName="PaternalFamilyId" />
+                <ScalarProperty Name="PaternalFamilyName" ColumnName="PaternalFamilyName" />
+                <ScalarProperty Name="PaternalFamilyAddress" ColumnName="PaternalFamilyAddress" />
+                <ScalarProperty Name="MaternalFamilyId" ColumnName="MaternalFamilyId" />
+                <ScalarProperty Name="MaternalFamilyName" ColumnName="MaternalFamilyName" />
+                <ScalarProperty Name="MaternalFamilyAddress" ColumnName="MaternalFamilyAddress" />
+                <ScalarProperty Name="MatrimonialExists" ColumnName="MatrimonialExists" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="bk_MatrimonySearch" FunctionName="bkModel.Store.bk_MatrimonySearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bkModel.bk_MatrimonySearch_Result">
+                <ScalarProperty Name="RowNum" ColumnName="RowNum" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Alive" ColumnName="Alive" />
+                <ScalarProperty Name="DOD" ColumnName="DOD" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </ComplexTypeMapping>
             </ResultMapping>
@@ -802,59 +787,29 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="bk_MatrimonySearch" FunctionName="bkModel.Store.bk_MatrimonySearch">
+          <FunctionImportMapping FunctionImportName="bk_MemberSearchBasic" FunctionName="bkModel.Store.bk_MemberSearchBasic">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="bkModel.bk_MatrimonySearch_Result">
-                <ScalarProperty Name="RowNum" ColumnName="RowNum" />
+              <ComplexTypeMapping TypeName="bkModel.bk_MemberSearchBasic_Result">
                 <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address1" ColumnName="Address1" />
-                <ScalarProperty Name="Address2" ColumnName="Address2" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="District" ColumnName="District" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Alive" ColumnName="Alive" />
-                <ScalarProperty Name="DOD" ColumnName="DOD" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetPaternalFamily" FunctionName="bkModel.Store.GetPaternalFamily">
+          <FunctionImportMapping FunctionImportName="bk_PendingApprovals" FunctionName="bkModel.Store.bk_PendingApprovals">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="bkModel.GetPaternalFamily_Result">
-                <ScalarProperty Name="PaternalFamilyID" ColumnName="PaternalFamilyID" />
-                <ScalarProperty Name="PaternalFamilyName" ColumnName="PaternalFamilyName" />
-                <ScalarProperty Name="PaternalFamilyAddress" ColumnName="PaternalFamilyAddress" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="bk_GetFamilyMembers" FunctionName="bkModel.Store.bk_GetFamilyMembers">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="bkModel.bk_GetFamilyMembers_Result">
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Married" ColumnName="Married" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="Alive" ColumnName="Alive" />
-                <ScalarProperty Name="DOD" ColumnName="DOD" />
-                <ScalarProperty Name="HeadOfFamilyID" ColumnName="HeadOfFamilyID" />
-                <ScalarProperty Name="rFirstName" ColumnName="rFirstName" />
-                <ScalarProperty Name="rLastName" ColumnName="rLastName" />
-                <ScalarProperty Name="RelationType" ColumnName="RelationType" />
-                <ScalarProperty Name="PaternalFamilyId" ColumnName="PaternalFamilyId" />
-                <ScalarProperty Name="PaternalFamilyName" ColumnName="PaternalFamilyName" />
-                <ScalarProperty Name="PaternalFamilyAddress" ColumnName="PaternalFamilyAddress" />
-                <ScalarProperty Name="MaternalFamilyId" ColumnName="MaternalFamilyId" />
-                <ScalarProperty Name="MaternalFamilyName" ColumnName="MaternalFamilyName" />
-                <ScalarProperty Name="MaternalFamilyAddress" ColumnName="MaternalFamilyAddress" />
-                <ScalarProperty Name="MatrimonialExists" ColumnName="MatrimonialExists" />
+              <ComplexTypeMapping TypeName="bkModel.bk_PendingApprovals_Result">
+                <ScalarProperty Name="AddedById" ColumnName="AddedById" />
+                <ScalarProperty Name="AddedByFirstName" ColumnName="AddedByFirstName" />
+                <ScalarProperty Name="AddedByLastName" ColumnName="AddedByLastName" />
+                <ScalarProperty Name="AddedToId" ColumnName="AddedToId" />
+                <ScalarProperty Name="AddedToFirstName" ColumnName="AddedToFirstName" />
+                <ScalarProperty Name="AddedToLastName" ColumnName="AddedToLastName" />
+                <ScalarProperty Name="AddedOn" ColumnName="AddedOn" />
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -867,6 +822,52 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPaternalFamily" FunctionName="bkModel.Store.GetPaternalFamily">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bkModel.GetPaternalFamily_Result">
+                <ScalarProperty Name="PaternalFamilyID" ColumnName="PaternalFamilyID" />
+                <ScalarProperty Name="PaternalFamilyName" ColumnName="PaternalFamilyName" />
+                <ScalarProperty Name="PaternalFamilyAddress" ColumnName="PaternalFamilyAddress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="bkModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="PasswordUID" ColumnName="PasswordUID" />
+                <ScalarProperty Name="LastLoginOn" ColumnName="LastLoginOn" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="TwitterHandle" ColumnName="TwitterHandle" />
+                <ScalarProperty Name="FacebookHandle" ColumnName="FacebookHandle" />
+                <ScalarProperty Name="InstagramHandle" ColumnName="InstagramHandle" />
+                <ScalarProperty Name="AadhaarNumber" ColumnName="AadhaarNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="OccupationID" ColumnName="OccupationID" />
+                <ScalarProperty Name="EducationField" ColumnName="EducationField" />
+                <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
+                <ScalarProperty Name="Anniversary" ColumnName="Anniversary" />
+                <ScalarProperty Name="Married" ColumnName="Married" />
+                <ScalarProperty Name="DeathPlace" ColumnName="DeathPlace" />
+                <ScalarProperty Name="DOD" ColumnName="DOD" />
+                <ScalarProperty Name="Alive" ColumnName="Alive" />
+                <ScalarProperty Name="BirthPlace" ColumnName="BirthPlace" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

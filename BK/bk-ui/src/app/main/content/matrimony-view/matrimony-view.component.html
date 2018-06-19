@@ -41,15 +41,12 @@
         <div fxLayout="row wrap">
           <mat-form-field [floatLabel]="this.matrimonyViewForm.disabled ? 'always':'auto'">
             <mat-select placeholder="Gender" [(ngModel)]="model.memberModel.gender" formControlName="gender">
-              <mat-option value='M'>
+              <mat-option [value]=true>
                 Male
               </mat-option>
-              <mat-option value='F'>
+              <mat-option [value]=false>
                 Female
-              </mat-option>
-              <mat-option value='O'>
-                Other
-              </mat-option>
+              </mat-option>              
             </mat-select>
           </mat-form-field>
 

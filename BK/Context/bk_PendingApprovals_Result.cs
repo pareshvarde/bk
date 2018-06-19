@@ -19,7 +19,7 @@ namespace BK.Context
         public int AddedToId { get; set; }
         public string AddedToFirstName { get; set; }
         public string AddedToLastName { get; set; }
-        public System.DateTime AddedOn { get; set; }
+        public Nullable<System.DateTime> AddedOn { get; set; }
         public int FamilyId { get; set; }
     }
 }

@@ -38,7 +38,7 @@ namespace BK.ViewModel
         public string Address2 { get; set; }
         
         [JsonProperty("gender")]
-        public string Gender { get; set; }
+        public bool Gender { get; set; }
 
         [JsonProperty("photoUrl")]
         public string PhotoUrl { get; set; }

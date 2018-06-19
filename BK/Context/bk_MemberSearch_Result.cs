@@ -24,7 +24,7 @@ namespace BK.Context
         public string District { get; set; }
         public string State { get; set; }
         public string Country { get; set; }
-        public string Gender { get; set; }
+        public bool Gender { get; set; }
         public bool Alive { get; set; }
         public Nullable<System.DateTime> DOD { get; set; }
         public Nullable<System.DateTime> DOB { get; set; }

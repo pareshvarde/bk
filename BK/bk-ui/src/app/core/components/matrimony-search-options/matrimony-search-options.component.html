@@ -70,9 +70,8 @@
             <mat-form-field>
                 <mat-select placeholder="Gender" [(ngModel)]="searchParameter.gender">
                     <mat-option value=null></mat-option>
-                    <mat-option value="M">Male</mat-option>
-                    <mat-option value="F">Female</mat-option>
-                    <mat-option value="O">Other</mat-option>
+                    <mat-option [value]=true>Male</mat-option>
+                    <mat-option [value]=false>Female</mat-option>                    
                 </mat-select>
             </mat-form-field>
         </div>

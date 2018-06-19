@@ -9,7 +9,7 @@
 BEGIN
 	--find parent
 	DECLARE @parentId INT
-	DECLARE @parentGender CHAR(1)
+	DECLARE @parentGender BIT
 
 	SELECT 
 		@parentId = RelatedId,
@@ -21,7 +21,7 @@ BEGIN
 	    fma.MemberId= @MemberID AND RelationTypeId IN (1,2)
 
 	--current member has set as daughter of/wife of father, find mother from father	
-	IF (@parentGender = 'M')
+	IF (@parentGender = 1)
 	BEGIN
 		SELECT
 			@parentId = MemberId
@@ -32,7 +32,7 @@ BEGIN
 	END
 
 	INSERT INTO @Result
-		SELECT *FROM GetPaternalFamily(@parentId, 'F',  1)
+		SELECT *FROM GetPaternalFamily(@parentId, 0,  1)
 	
 	RETURN	
 END

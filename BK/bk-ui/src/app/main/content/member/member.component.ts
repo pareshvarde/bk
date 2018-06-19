@@ -114,8 +114,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.familyModel = new FamilyModel();
     this.searchModel = new MemberSearchBasicModel();
     this.memberModel = new MemberModel();
-
-    this.memberModel.gender = 'M';
+    
     this.memberModel.alive = true;
     this.memberModel.familyId = this.familyId;
     this.memberModel.canEdit = true;
@@ -198,11 +197,11 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   getRelations(): any[] {
-    if (this.memberModel.gender === 'M')
+    if (this.memberModel.gender === true)
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
-    else if (this.memberModel.gender === 'F' && !this.memberModel.married)
+    else if (this.memberModel.gender === false && !this.memberModel.married)
       return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
-    else if (this.memberModel.gender === 'F')
+    else if (this.memberModel.gender === false)
       return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
     else
       return RELATION_TYPES_DATA;

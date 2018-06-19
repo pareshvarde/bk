@@ -3,7 +3,7 @@
     [FirstName]       NVARCHAR (50)    NOT NULL,
     [LastName]        NVARCHAR (50)    NOT NULL,
     [NickName]        NVARCHAR (50)    NULL,
-    [Gender]          CHAR (1)         CONSTRAINT [DF_FamilyMembers_Gender] DEFAULT ((1)) NOT NULL,
+    [Gender]          BIT              CONSTRAINT [DF_Members_Gender] DEFAULT ((1)) NOT NULL,
     [DOB]             DATETIME2 (7)    NULL,
     [BirthPlace]      NVARCHAR (50)    NULL,
     [Alive]           BIT              CONSTRAINT [DF_Members_Alive] DEFAULT ((1)) NOT NULL,
@@ -32,6 +32,8 @@
     [ModifiedBy]      INT              NULL,
     CONSTRAINT [PK_FamilyMembers_1] PRIMARY KEY CLUSTERED ([MemberID] ASC)
 );
+
+
 
 
 
