@@ -18,7 +18,7 @@ export class FuseToolbarComponent
     constructor(
         private router: Router,                
         private alertService: NotificationsService,
-        public authService: bkAuthService        
+        public authService: bkAuthService
     )
     {       
         router.events.subscribe(
@@ -36,9 +36,7 @@ export class FuseToolbarComponent
   
     logout()
     {
-        let localStorage = window.localStorage;
-        localStorage.removeItem('token');
-        this.router.navigate(['home']);  
+        this.authService.logout();
         this.alertService.success("You have been logged out from secure portal");      
     }
 }

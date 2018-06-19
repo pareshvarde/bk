@@ -64,7 +64,7 @@ namespace BK.Controllers
                 if (f == null)
                     return BadRequest("Family record cannot be loaded.");
 
-                List<bk_GetFamilyMembers_Result> members = context.bk_GetFamilyMembers(familyId).ToList();                
+                List<bk_GetFamilyMembers_Result> members = context.bk_GetFamilyMembers(familyId).ToList();
 
                 FamilyViewModel fvm = new FamilyViewModel();
                 fvm.FamilyNative = f.FamilyNative;
@@ -100,7 +100,7 @@ namespace BK.Controllers
                     tmp.MatrimonialExists = item.MatrimonialExists.Value;
                     tmp.Gender = item.Gender;
                     tmp.Alive = item.Alive;
-                    tmp.DOD = item.DOD;                    
+                    tmp.DOD = item.DOD;
                     tmp.PaternalFamilyId = item.PaternalFamilyId;
                     if (tmp.PaternalFamilyId.HasValue)
                         tmp.PaternalFamilyName = string.Format("{0}, {1}", item.PaternalFamilyName, item.PaternalFamilyAddress);
@@ -187,6 +187,7 @@ namespace BK.Controllers
             if (!CanEditFamily(model.FamilyID))
                 return BadRequest("You do not have rights to delete this family");
 
+            bool logOut = false;
             using (bkContext context = new bkContext())
             {
                 using (var tnx = context.Database.BeginTransaction())
@@ -201,6 +202,9 @@ namespace BK.Controllers
                         tnx.Rollback();
                         throw;
                     }
+
+                   //make sure logged in member is still active on the system                                        
+                   logOut = !context.Members.Any(x => x.MemberID == LoggedInMemberId);
                 }
             }
 

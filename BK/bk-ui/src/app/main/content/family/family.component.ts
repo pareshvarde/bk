@@ -153,7 +153,12 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.dataService.deleteFamily(tModel).takeUntil(this.destroyed$).subscribe(
           (res) => {
+            if (res.result){
+              this.authService.logout();
+            }
+
             this.alertService.success("Family has been deleted");
+            this.back();
           },
           (err) => {
             if (err.errors)
@@ -181,6 +186,12 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.dataService.deleteMember(this.familyId, memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
+            if (res.result){
+              this.authService.logout();
+              this.alertService.success("Member has been removed from the family");
+              return;  
+            }
+
             this.alertService.success("Member has been removed from the family");
             this.loadFamily();
           },

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt"
+import { Router } from '@angular/router';
 
 @Injectable()
 export class bkAuthService {
 
-  constructor() { }
+  constructor(private router: Router) { }
   jwtHelper: JwtHelperService = new JwtHelperService();
   
   authenticated(): boolean {
@@ -14,6 +15,12 @@ export class bkAuthService {
       return null;
       
     return !this.jwtHelper.isTokenExpired(token);    
+  }
+
+  logout(){
+    let localStorage = window.localStorage;
+    localStorage.removeItem('token');
+    this.router.navigate(['home']);  
   }
 
   memberId(): number {

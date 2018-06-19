@@ -138,7 +138,7 @@ namespace BK.Controllers
                     context.Members.Add(member);
 
                     sendWelcomeLetter = !string.IsNullOrWhiteSpace(model.Email);
-                }                
+                }
 
                 member.AadhaarNumber = model.AadhaarNumber;
                 member.Alive = model.Alive;
@@ -167,8 +167,8 @@ namespace BK.Controllers
                 //TODO: check only if the email address has changed.
                 if (!string.IsNullOrWhiteSpace(member.EmailAddress))
                     if (context.Members.Any(x => x.EmailAddress == member.EmailAddress && x.MemberID != member.MemberID))
-                        return BadRequest("Email address is already registered with other member");                
-                
+                        return BadRequest("Email address is already registered with other member");
+
                 FamilyMemberAssociation mAssociation = member.FamilyMemberAssociations.Where(f => f.FamilyId == model.FamilyId.Value).FirstOrDefault();
                 if (mAssociation == null)
                 {
@@ -197,7 +197,8 @@ namespace BK.Controllers
                     html = html.Replace("{{username}}", member.EmailAddress);
                     html = html.Replace("{{password}}", member.Password);
 
-                    System.Threading.Tasks.Task.Factory.StartNew(() => {
+                    System.Threading.Tasks.Task.Factory.StartNew(() =>
+                    {
                         using (SmtpClient sClient = new SmtpClient())
                         {
                             using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
@@ -210,7 +211,7 @@ namespace BK.Controllers
                             }
                         }
                     });
-                }                
+                }
             }
 
             return Ok();
@@ -297,6 +298,8 @@ namespace BK.Controllers
             if (!CanEditFamily(familyId))
                 return BadRequest("You do not have permission to edit this member");
 
+            bool logOut = false;
+
             using (bkContext context = new bkContext())
             {
                 using (var tnx = context.Database.BeginTransaction())
@@ -314,10 +317,14 @@ namespace BK.Controllers
                         tnx.Rollback();
                         throw;
                     }
+
+                    //if we are deleting logged in member from family log out him if he is entirely deleted from system
+                    if (memberId == LoggedInMemberId)
+                        logOut = !context.Members.Any(x => x.MemberID == LoggedInMemberId);
                 }
             }
 
-            return Ok();
+            return Ok(logOut);
         }
 
         [Route("api/member/basicsearch")]
