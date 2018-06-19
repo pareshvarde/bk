@@ -179,7 +179,7 @@
 
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="memberModel.educationLevel | titlecase" (ngModelChange)="memberModel.educationLevel=$event" placeholder="Education Level" formControlName="educationLevel">
+              <input maxlength="50" matInput [(ngModel)]="memberModel.educationLevel" placeholder="Education Level" formControlName="educationLevel">
               <mat-error *ngIf="memberForm.controls['educationLevel'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
