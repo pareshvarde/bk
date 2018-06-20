@@ -13,7 +13,7 @@ import { ChangePasswordComponent } from './main/content/change-password/change-p
 import { RegisterComponent } from './main/content/register/register.component';
 import { FamilyComponent } from './main/content/family/family.component';
 import { MemberComponent } from './main/content/member/member.component';
-import { AuthGuard } from './main/guards/auth-guard';
+import { AuthGuard, LoggedInGuard } from './main/guards/auth-guard';
 import { ForkComponent } from './main/content/fork/fork.component';
 import { MatrimonyComponent } from './main/content/matrimony/matrimony.component';
 import { MatrimonyViewComponent } from './main/content/matrimony-view/matrimony-view.component';
@@ -51,15 +51,18 @@ export const bkRoutes: Routes = [
     },
     {
         path: "login",
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [LoggedInGuard]
     },
     {
         path: "forgotpassword",
-        component: ForgotPasswordComponent
+        component: ForgotPasswordComponent,
+        canActivate: [LoggedInGuard]
     },
     {
         path: "resetpassword/:token",
-        component: ResetPasswordComponent
+        component: ResetPasswordComponent,
+        canActivate: [LoggedInGuard]
     },
     {
         path: "changepassword",
@@ -68,7 +71,8 @@ export const bkRoutes: Routes = [
     },
     {
         path: "register",
-        component: RegisterComponent
+        component: RegisterComponent,
+        canActivate: [LoggedInGuard]
     },
     {
         path: "family/:familyId",

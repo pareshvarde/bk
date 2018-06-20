@@ -17,7 +17,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { bkAuthService } from './main/services/auth-service';
-import { AuthGuard } from './main/guards/auth-guard';
+import { AuthGuard, LoggedInGuard } from './main/guards/auth-guard';
 
 @NgModule({
     declarations: [
@@ -44,7 +44,8 @@ import { AuthGuard } from './main/guards/auth-guard';
         },
         {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
         bkAuthService,
-        AuthGuard
+        AuthGuard,
+        LoggedInGuard
     ],
     bootstrap   : [
         AppComponent

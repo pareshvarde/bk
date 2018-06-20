@@ -17,3 +17,19 @@ export class AuthGuard implements CanActivate {
     }
   }
 }
+
+@Injectable()
+export class LoggedInGuard implements CanActivate {
+ 
+  constructor(private auth: bkAuthService, private router: Router) {}
+ 
+  canActivate() {
+      
+    if(!this.auth.authenticated()) {
+      return true;
+    } else {
+      this.router.navigate(['home']);
+      return false;
+    }
+  }
+}
