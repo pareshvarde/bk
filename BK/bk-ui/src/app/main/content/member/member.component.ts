@@ -333,7 +333,11 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   back() {
-    this.location.back();
+    
+    if (window.history.length > 1)
+      this.location.back();
+    else
+      this.router.navigate(['home']);
   }
 
   edit() {

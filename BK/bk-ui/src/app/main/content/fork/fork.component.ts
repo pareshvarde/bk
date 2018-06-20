@@ -135,6 +135,9 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   cancel() {
-    this.location.back();
+    if (window.history.length > 1)
+      this.location.back();
+    else  
+      this.router.navigate(['home']);
   }
 }

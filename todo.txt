@@ -24,6 +24,7 @@ mobile device padding on left/right
 maternal family: show Not Available
 paternal family: show Not Available in case of married females
 do not show login page/password reset/forgot password and register page if member is already logged in
+include more details on matrimony search details
 =============================
 angular memory and performance analyser
 sql query performance and indexes

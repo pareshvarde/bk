@@ -131,6 +131,9 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   cancelEdit() {
-    this.location.back();
+    if (window.history.length > 1)
+      this.location.back();
+    else
+      this.router.navigate(['home']);
   }
 }
