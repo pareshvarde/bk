@@ -132,9 +132,10 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
-  cancelEdit() {
+  cancelEdit() {    
     this.editMode = false;
     this.familyForm.disable();
+    this.loadFamily();
   }
 
   edit() {

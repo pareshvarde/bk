@@ -328,6 +328,8 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     if (!this.memberModel.memberId)
       this.back();
+    else
+      this.loadFamily();
   }
 
   back() {
