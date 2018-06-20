@@ -18,7 +18,6 @@ add member - add/exiting radio text has to be descriptive
 directory click take to family screen instead of member screen
 unsubscribe all subscriptions
 related to show only married men/females
-edit and then cancel reload page
 add maternal and paternal on member screen
 add maternal family link on matrimony screen
 mobile device padding on left/right
