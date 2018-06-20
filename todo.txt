@@ -12,6 +12,7 @@ About Us
 Remember Me
 Register/Login captcha
 help icons on each page
+help videos
 ===========================	
 add member - add/exiting radio text has to be descriptive
 directory click take to family screen instead of member screen
