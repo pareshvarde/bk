@@ -1,54 +1,54 @@
 <mat-sidenav-container>
 
-    <div id="fuse-main-content">
+    <div id="bk-main-content">
 
         <!-- TOOLBAR: Above -->
-        <ng-container *ngIf="fuseSettings.layout.toolbar === 'above'">
-            <fuse-toolbar class="above" [ngClass]="fuseSettings.colorClasses.toolbar"></fuse-toolbar>
+        <ng-container *ngIf="bkSettings.layout.toolbar === 'above'">
+            <bk-toolbar class="above" [ngClass]="bkSettings.colorClasses.toolbar"></bk-toolbar>
         </ng-container>
         <!-- / TOOLBAR: Above -->
 
         <!-- NAVBAR: Top -->
-        <fuse-navbar-horizontal class="top-navbar" fxHide fxShow.gt-md
-                                [ngClass]="fuseSettings.colorClasses.navbar"
-                                *ngIf="fuseSettings.layout.navigation === 'top'">
-        </fuse-navbar-horizontal>
+        <bk-navbar-horizontal class="top-navbar" fxHide fxShow.gt-md
+                                [ngClass]="bkSettings.colorClasses.navbar"
+                                *ngIf="bkSettings.layout.navigation === 'top'">
+        </bk-navbar-horizontal>
         <!-- / NAVBAR: Top -->
 
         <div id="wrapper">
 
             <!-- NAVBAR: Left -->
-            <fuse-navbar-vertical [folded]="fuseSettings.layout.navigationFolded"
+            <bk-navbar-vertical [folded]="bkSettings.layout.navigationFolded"
                                   class="left-navbar"
-                                  [ngClass]="fuseSettings.colorClasses.navbar"
-                                  *ngIf="fuseSettings.layout.navigation === 'left' || fuseSettings.layout.navigation === 'top'">
-            </fuse-navbar-vertical>
+                                  [ngClass]="bkSettings.colorClasses.navbar"
+                                  *ngIf="bkSettings.layout.navigation === 'left' || bkSettings.layout.navigation === 'top'">
+            </bk-navbar-vertical>
             <!-- / NAVBAR: Left -->
 
             <div class="content-wrapper">
 
                 <!-- TOOLBAR: Below -->
-                <ng-container *ngIf="fuseSettings.layout.toolbar === 'below'">
-                    <fuse-toolbar class="below" [ngClass]="fuseSettings.colorClasses.toolbar"></fuse-toolbar>
+                <ng-container *ngIf="bkSettings.layout.toolbar === 'below'">
+                    <bk-toolbar class="below" [ngClass]="bkSettings.colorClasses.toolbar"></bk-toolbar>
                 </ng-container>
                 <!-- / TOOLBAR: Below -->
 
-                <fuse-content></fuse-content>
+                <bk-content></bk-content>
 
                 <!-- FOOTER: Below -->
-                <!-- <ng-container *ngIf="fuseSettings.layout.footer === 'below'">
-                    <fuse-footer class="below" [ngClass]="fuseSettings.colorClasses.footer"></fuse-footer>
+                <!-- <ng-container *ngIf="bkSettings.layout.footer === 'below'">
+                    <bk-footer class="below" [ngClass]="bkSettings.colorClasses.footer"></bk-footer>
                 </ng-container> -->
                 <!-- / FOOTER: Below -->
 
             </div>
 
             <!-- NAVBAR: Right -->
-            <fuse-navbar-vertical [folded]="fuseSettings.layout.navigationFolded"
+            <bk-navbar-vertical [folded]="bkSettings.layout.navigationFolded"
                                   class="right-navbar"
-                                  [ngClass]="fuseSettings.colorClasses.navbar"
-                                  *ngIf="fuseSettings.layout.navigation === 'right'">
-            </fuse-navbar-vertical>
+                                  [ngClass]="bkSettings.colorClasses.navbar"
+                                  *ngIf="bkSettings.layout.navigation === 'right'">
+            </bk-navbar-vertical>
             <!-- / NAVBAR: Right -->
 
         </div>

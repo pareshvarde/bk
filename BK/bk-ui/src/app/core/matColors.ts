@@ -635,7 +635,7 @@ const matColors = {
             A700: white87
         }
     },
-    'fuse-dark': {
+    'bk-dark': {
         50      : '#ECECEE',
         100     : '#C5C6CB',
         200     : '#9EA1A9',

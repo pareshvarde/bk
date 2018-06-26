@@ -7,10 +7,10 @@ import { RouterModule, Routes, UrlSerializer } from '@angular/router';
 import 'hammerjs';
 import { SharedModule } from './core/modules/shared.module';
 import { AppComponent } from './app.component';
-import { FuseMainModule } from './main/main.module';
-import { FuseSplashScreenService } from './core/services/splash-screen.service';
-import { FuseConfigService } from './core/services/config.service';
-import { FuseNavigationService } from './core/components/navigation/navigation.service';
+import { bkMainModule } from './main/main.module';
+import { bkSplashScreenService } from './core/services/splash-screen.service';
+import { bkConfigService } from './core/services/config.service';
+import { bkNavigationService } from './core/components/navigation/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { bkRoutes } from './app.routes'
 import { BlockUIModule } from 'ng-block-ui';
@@ -31,13 +31,13 @@ import { AuthGuard, LoggedInGuard } from './main/guards/auth-guard';
         RouterModule.forRoot(bkRoutes),
         SharedModule,
         TranslateModule.forRoot(),
-        FuseMainModule,
+        bkMainModule,
         BlockUIModule.forRoot()
     ],
     providers   : [
-        FuseSplashScreenService,
-        FuseConfigService,
-        FuseNavigationService,
+        bkSplashScreenService,
+        bkConfigService,
+        bkNavigationService,
         {
             provide: UrlSerializer,
             useClass: LowerCaseUrlSerializer

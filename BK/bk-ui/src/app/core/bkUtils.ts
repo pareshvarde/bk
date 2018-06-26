@@ -1,4 +1,4 @@
-export class FuseUtils
+export class bkUtils
 {
     public static filterArrayByString(mainArr, searchText)
     {

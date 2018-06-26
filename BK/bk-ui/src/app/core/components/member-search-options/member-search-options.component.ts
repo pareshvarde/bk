@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { style, animate, AnimationBuilder, AnimationPlayer } from '@angular/animations';
-import { fuseAnimations } from '../../animations';
+import { bkAnimations } from '../../animations';
 import { CATEGORIES_DATA } from '../../../main/data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../../main/data/nukhsLookup';
 import { MemberSearchParameter } from '../../../main/models/memberSearchParameter';
@@ -10,7 +10,7 @@ import { MemberSearchParameter } from '../../../main/models/memberSearchParamete
     selector   : 'member-search-options',
     templateUrl: './member-search-options.component.html',
     styleUrls  : ['./member-search-options.component.scss'],
-    animations : fuseAnimations
+    animations : bkAnimations
 })
 export class MemberSearchOptionsComponent implements OnInit
 {

@@ -18,7 +18,7 @@ const customAnimation = animation([
     }
 });
 
-export const fuseAnimations = [
+export const bkAnimations = [
 
     trigger('animate', [transition('void => *', [useAnimation(customAnimation)])]),
 
@@ -143,7 +143,7 @@ export const fuseAnimations = [
     trigger('routerTransitionLeft', [
 
         transition('* => *', [
-            query('fuse-content > :enter, fuse-content > :leave', [
+            query('bk-content > :enter, bk-content > :leave', [
                 style({
                     position: 'absolute',
                     top     : 0,
@@ -152,7 +152,7 @@ export const fuseAnimations = [
                     right   : 0
                 })
             ], {optional: true}),
-            query('fuse-content > :enter', [
+            query('bk-content > :enter', [
                 style({
                     transform: 'translateX(100%)',
                     opacity  : 0
@@ -160,7 +160,7 @@ export const fuseAnimations = [
             ], {optional: true}),
             sequence([
                 group([
-                    query('fuse-content > :leave', [
+                    query('bk-content > :leave', [
                         style({
                             transform: 'translateX(0)',
                             opacity  : 1
@@ -171,7 +171,7 @@ export const fuseAnimations = [
                                 opacity  : 0
                             }))
                     ], {optional: true}),
-                    query('fuse-content > :enter', [
+                    query('bk-content > :enter', [
                         style({transform: 'translateX(100%)'}),
                         animate('600ms cubic-bezier(0.0, 0.0, 0.2, 1)',
                             style({
@@ -180,8 +180,8 @@ export const fuseAnimations = [
                             }))
                     ], {optional: true})
                 ]),
-                query('fuse-content > :leave', animateChild(), {optional: true}),
-                query('fuse-content > :enter', animateChild(), {optional: true})
+                query('bk-content > :leave', animateChild(), {optional: true}),
+                query('bk-content > :enter', animateChild(), {optional: true})
             ])
         ])
     ]),
@@ -189,7 +189,7 @@ export const fuseAnimations = [
     trigger('routerTransitionRight', [
 
         transition('* => *', [
-            query('fuse-content > :enter, fuse-content > :leave', [
+            query('bk-content > :enter, bk-content > :leave', [
                 style({
                     position: 'absolute',
                     top     : 0,
@@ -198,7 +198,7 @@ export const fuseAnimations = [
                     right   : 0
                 })
             ], {optional: true}),
-            query('fuse-content > :enter', [
+            query('bk-content > :enter', [
                 style({
                     transform: 'translateX(-100%)',
                     opacity  : 0
@@ -206,7 +206,7 @@ export const fuseAnimations = [
             ], {optional: true}),
             sequence([
                 group([
-                    query('fuse-content > :leave', [
+                    query('bk-content > :leave', [
                         style({
                             transform: 'translateX(0)',
                             opacity  : 1
@@ -217,7 +217,7 @@ export const fuseAnimations = [
                                 opacity  : 0
                             }))
                     ], {optional: true}),
-                    query('fuse-content > :enter', [
+                    query('bk-content > :enter', [
                         style({transform: 'translateX(-100%)'}),
                         animate('600ms cubic-bezier(0.0, 0.0, 0.2, 1)',
                             style({
@@ -226,8 +226,8 @@ export const fuseAnimations = [
                             }))
                     ], {optional: true})
                 ]),
-                query('fuse-content > :leave', animateChild(), {optional: true}),
-                query('fuse-content > :enter', animateChild(), {optional: true})
+                query('bk-content > :leave', animateChild(), {optional: true}),
+                query('bk-content > :enter', animateChild(), {optional: true})
             ])
         ])
     ]),
@@ -235,7 +235,7 @@ export const fuseAnimations = [
     trigger('routerTransitionUp', [
 
         transition('* => *', [
-            query('fuse-content > :enter, fuse-content > :leave', [
+            query('bk-content > :enter, bk-content > :leave', [
                 style({
                     position: 'absolute',
                     top     : 0,
@@ -244,14 +244,14 @@ export const fuseAnimations = [
                     right   : 0
                 })
             ], {optional: true}),
-            query('fuse-content > :enter', [
+            query('bk-content > :enter', [
                 style({
                     transform: 'translateY(100%)',
                     opacity  : 0
                 })
             ], {optional: true}),
             group([
-                query('fuse-content > :leave', [
+                query('bk-content > :leave', [
                     style({
                         transform: 'translateY(0)',
                         opacity  : 1
@@ -262,7 +262,7 @@ export const fuseAnimations = [
                             opacity  : 0
                         }))
                 ], {optional: true}),
-                query('fuse-content > :enter', [
+                query('bk-content > :enter', [
                     style({transform: 'translateY(100%)'}),
                     animate('600ms cubic-bezier(0.0, 0.0, 0.2, 1)',
                         style({
@@ -271,15 +271,15 @@ export const fuseAnimations = [
                         }))
                 ], {optional: true})
             ]),
-            query('fuse-content > :leave', animateChild(), {optional: true}),
-            query('fuse-content > :enter', animateChild(), {optional: true})
+            query('bk-content > :leave', animateChild(), {optional: true}),
+            query('bk-content > :enter', animateChild(), {optional: true})
         ])
     ]),
 
     trigger('routerTransitionDown', [
 
         transition('* => *', [
-            query('fuse-content > :enter, fuse-content > :leave', [
+            query('bk-content > :enter, bk-content > :leave', [
                 style({
                     position: 'absolute',
                     top     : 0,
@@ -288,7 +288,7 @@ export const fuseAnimations = [
                     right   : 0
                 })
             ], {optional: true}),
-            query('fuse-content > :enter', [
+            query('bk-content > :enter', [
                 style({
                     transform: 'translateY(-100%)',
                     opacity  : 0
@@ -296,7 +296,7 @@ export const fuseAnimations = [
             ], {optional: true}),
             sequence([
                 group([
-                    query('fuse-content > :leave', [
+                    query('bk-content > :leave', [
                         style({
                             transform: 'translateY(0)',
                             opacity  : 1
@@ -307,7 +307,7 @@ export const fuseAnimations = [
                                 opacity  : 0
                             }))
                     ], {optional: true}),
-                    query('fuse-content > :enter', [
+                    query('bk-content > :enter', [
                         style({transform: 'translateY(-100%)'}),
                         animate('600ms cubic-bezier(0.0, 0.0, 0.2, 1)',
                             style({
@@ -316,8 +316,8 @@ export const fuseAnimations = [
                             }))
                     ], {optional: true})
                 ]),
-                query('fuse-content > :leave', animateChild(), {optional: true}),
-                query('fuse-content > :enter', animateChild(), {optional: true})
+                query('bk-content > :leave', animateChild(), {optional: true}),
+                query('bk-content > :enter', animateChild(), {optional: true})
             ])
         ])
     ]),
@@ -326,7 +326,7 @@ export const fuseAnimations = [
 
         transition('* => *', group([
 
-            query('fuse-content > :enter, fuse-content > :leave ', [
+            query('bk-content > :enter, bk-content > :leave ', [
                 style({
                     position: 'absolute',
                     top     : 0,
@@ -336,12 +336,12 @@ export const fuseAnimations = [
                 })
             ], {optional: true}),
 
-            query('fuse-content > :enter', [
+            query('bk-content > :enter', [
                 style({
                     opacity: 0
                 })
             ], {optional: true}),
-            query('fuse-content > :leave', [
+            query('bk-content > :leave', [
                 style({
                     opacity: 1
                 }),
@@ -350,7 +350,7 @@ export const fuseAnimations = [
                         opacity: 0
                     }))
             ], {optional: true}),
-            query('fuse-content > :enter', [
+            query('bk-content > :enter', [
                 style({
                     opacity: 0
                 }),
@@ -359,8 +359,8 @@ export const fuseAnimations = [
                         opacity: 1
                     }))
             ], {optional: true}),
-            query('fuse-content > :enter', animateChild(), {optional: true}),
-            query('fuse-content > :leave', animateChild(), {optional: true})
+            query('bk-content > :enter', animateChild(), {optional: true}),
+            query('bk-content > :leave', animateChild(), {optional: true})
         ]))
     ])
 ];

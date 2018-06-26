@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
-    selector     : 'fuse-quick-panel',
+    selector     : 'bk-quick-panel',
     templateUrl  : './quick-panel.component.html',
     styleUrls    : ['./quick-panel.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FuseQuickPanelComponent implements OnInit
+export class bkQuickPanelComponent implements OnInit
 {
     date: Date;
     settings: any;

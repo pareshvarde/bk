@@ -1,21 +1,21 @@
 import { Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FuseMatchMedia } from '../../../core/services/match-media.service';
-import { FuseNavbarVerticalService } from './navbar-vertical.service';
+import { bkMatchMedia } from '../../../core/services/match-media.service';
+import { bkNavbarVerticalService } from './navbar-vertical.service';
 import { ObservableMedia } from '@angular/flex-layout';
-import { FuseMainComponent } from '../../main.component';
+import { bkMainComponent } from '../../main.component';
 import { NavigationEnd, Router } from '@angular/router';
-import { FuseNavigationService } from '../../../core/components/navigation/navigation.service';
-import { FusePerfectScrollbarDirective } from '../../../core/directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
+import { bkNavigationService } from '../../../core/components/navigation/navigation.service';
+import { bkPerfectScrollbarDirective } from '../../../core/directives/bk-perfect-scrollbar/bk-perfect-scrollbar.directive';
 import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/animations';
 
 @Component({
-    selector     : 'fuse-navbar-vertical',
+    selector     : 'bk-navbar-vertical',
     templateUrl  : './navbar-vertical.component.html',
     styleUrls    : ['./navbar-vertical.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FuseNavbarVerticalComponent implements OnInit, OnDestroy
+export class bkNavbarVerticalComponent implements OnInit, OnDestroy
 {
     private _backdropElement: HTMLElement | null = null;
     private _folded = false;
@@ -24,7 +24,7 @@ export class FuseNavbarVerticalComponent implements OnInit, OnDestroy
     @HostBinding('class.folded') isFoldedActive: boolean;
     @HostBinding('class.folded-open') isFoldedOpen: boolean;
     @HostBinding('class.initialized') initialized: boolean;
-    @ViewChild(FusePerfectScrollbarDirective) fusePerfectScrollbarDirective;
+    @ViewChild(bkPerfectScrollbarDirective) bkPerfectScrollbarDirective;
 
     @Input()
     set folded(value: boolean)
@@ -48,15 +48,15 @@ export class FuseNavbarVerticalComponent implements OnInit, OnDestroy
 
     matchMediaWatcher: Subscription;
     navigationServiceWatcher: Subscription;
-    fusePerfectScrollbarUpdateTimeout;
+    bkPerfectScrollbarUpdateTimeout;
 
     player: AnimationPlayer;
 
     constructor(
-        private fuseMainComponent: FuseMainComponent,
-        private fuseMatchMedia: FuseMatchMedia,
-        private fuseNavigationService: FuseNavigationService,
-        private navBarService: FuseNavbarVerticalService,
+        private bkMainComponent: bkMainComponent,
+        private bkMatchMedia: bkMatchMedia,
+        private bkNavigationService: bkNavigationService,
+        private navBarService: bkNavbarVerticalService,
         private router: Router,
         private _renderer: Renderer2,
         private _elementRef: ElementRef,
@@ -67,14 +67,14 @@ export class FuseNavbarVerticalComponent implements OnInit, OnDestroy
         navBarService.setNavBar(this);
 
         this.navigationServiceWatcher =
-            this.fuseNavigationService.onNavCollapseToggle.subscribe(() => {
-                this.fusePerfectScrollbarUpdateTimeout = setTimeout(() => {
-                    this.fusePerfectScrollbarDirective.update();
+            this.bkNavigationService.onNavCollapseToggle.subscribe(() => {
+                this.bkPerfectScrollbarUpdateTimeout = setTimeout(() => {
+                    this.bkPerfectScrollbarDirective.update();
                 }, 310);
             });
 
         this.matchMediaWatcher =
-            this.fuseMatchMedia.onMediaChange
+            this.bkMatchMedia.onMediaChange
                 .subscribe((mediaStep) => {
                     setTimeout(() => {
 
@@ -138,7 +138,7 @@ export class FuseNavbarVerticalComponent implements OnInit, OnDestroy
 
     ngOnDestroy()
     {
-        clearTimeout(this.fusePerfectScrollbarUpdateTimeout);
+        clearTimeout(this.bkPerfectScrollbarUpdateTimeout);
         this.matchMediaWatcher.unsubscribe();
         this.navigationServiceWatcher.unsubscribe();
     }
@@ -197,14 +197,14 @@ export class FuseNavbarVerticalComponent implements OnInit, OnDestroy
     activateFolded()
     {
         this.isFoldedActive = true;
-        this.fuseMainComponent.addClass('fuse-nav-bar-folded');
+        this.bkMainComponent.addClass('bk-nav-bar-folded');
         this.isFoldedOpen = false;
     }
 
     deActivateFolded()
     {
         this.isFoldedActive = false;
-        this.fuseMainComponent.removeClass('fuse-nav-bar-folded');
+        this.bkMainComponent.removeClass('bk-nav-bar-folded');
         this.isFoldedOpen = false;
     }
 
@@ -224,20 +224,20 @@ export class FuseNavbarVerticalComponent implements OnInit, OnDestroy
     {
         if ( !this.isClosed )
         {
-            this.fuseMainComponent.addClass('fuse-navbar-opened');
-            this.fuseMainComponent.removeClass('fuse-navbar-closed');
+            this.bkMainComponent.addClass('bk-navbar-opened');
+            this.bkMainComponent.removeClass('bk-navbar-closed');
         }
         else
         {
-            this.fuseMainComponent.addClass('fuse-navbar-closed');
-            this.fuseMainComponent.removeClass('fuse-navbar-opened');
+            this.bkMainComponent.addClass('bk-navbar-closed');
+            this.bkMainComponent.removeClass('bk-navbar-opened');
         }
     }
 
     private _attachBackdrop()
     {
         this._backdropElement = this._renderer.createElement('div');
-        this._backdropElement.classList.add('fuse-navbar-backdrop');
+        this._backdropElement.classList.add('bk-navbar-backdrop');
 
         this._renderer.appendChild(this._elementRef.nativeElement.parentElement, this._backdropElement);
 

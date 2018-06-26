@@ -1,16 +1,16 @@
 import { Directive, HostListener, Input } from '@angular/core';
-import { FuseNavbarVerticalService } from './navbar-vertical.service';
-import { FuseNavbarVerticalComponent } from './navbar-vertical.component';
+import { bkNavbarVerticalService } from './navbar-vertical.service';
+import { bkNavbarVerticalComponent } from './navbar-vertical.component';
 
 @Directive({
-    selector: '[fuseNavbarVertical]'
+    selector: '[bkNavbarVertical]'
 })
-export class FuseNavbarVerticalToggleDirective
+export class bkNavbarVerticalToggleDirective
 {
-    @Input() fuseNavbarVertical: string;
-    navbar: FuseNavbarVerticalComponent;
+    @Input() bkNavbarVertical: string;
+    navbar: bkNavbarVerticalComponent;
 
-    constructor(private navbarService: FuseNavbarVerticalService)
+    constructor(private navbarService: bkNavbarVerticalService)
     {
     }
 
@@ -19,11 +19,11 @@ export class FuseNavbarVerticalToggleDirective
     {
         this.navbar = this.navbarService.getNavBar();
 
-        if ( !this.navbar[this.fuseNavbarVertical] )
+        if ( !this.navbar[this.bkNavbarVertical] )
         {
             return;
         }
 
-        this.navbar[this.fuseNavbarVertical]();
+        this.navbar[this.bkNavbarVertical]();
     }
 }

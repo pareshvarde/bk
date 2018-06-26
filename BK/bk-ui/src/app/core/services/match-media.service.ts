@@ -2,7 +2,7 @@ import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable()
-export class FuseMatchMedia
+export class bkMatchMedia
 {
     activeMediaQuery: string;
     onMediaChange: EventEmitter<string> = new EventEmitter<string>();

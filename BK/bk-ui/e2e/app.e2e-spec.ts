@@ -1,10 +1,10 @@
-import { Fuse2Page } from './app.po';
+import { bkPage } from './app.po';
 
-describe('Fuse2 App', () => {
-    let page: Fuse2Page;
+describe('BK App', () => {
+    let page: bkPage;
 
     beforeEach(() => {
-        page = new Fuse2Page();
+        page = new bkPage();
     });
 
     it('should display welcome message', () => {

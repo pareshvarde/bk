@@ -1,4 +1,4 @@
-@import 'src/app/core/scss/fuse';
+@import 'src/app/core/scss/bk';
 
 :host {
     position: relative;
@@ -34,7 +34,7 @@
     }
 
     .user-button,
-    fuse-search-bar,
+    bk-search-bar,
     .language-button,
     .quick-panel-toggle-button {
         min-width: 64px;

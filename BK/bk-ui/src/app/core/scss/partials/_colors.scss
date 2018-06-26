@@ -39,7 +39,7 @@ $matColorsMap: (
     blue-grey: $mat-blue-grey,
     white: $mat-white,
     black: $mat-black,
-    fuse-dark: $mat-fusedark
+    bk-dark: $mat-bkdark
 );
 
 // Material color hues list
@@ -112,7 +112,7 @@ $matColorHues: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400
 @mixin generateMaterialElementColors($contrastColor) {
 
     // If the contrast color is white...
-    $fuseForeground: (
+    $bkForeground: (
         base: white,
         text: white,
         hint-text: rgba(white, 0.5),
@@ -122,7 +122,7 @@ $matColorHues: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400
     // If the contrast color is black...
     @if (rgba(black, 1) == rgba($contrastColor, 1)) {
 
-        $fuseForeground: (
+        $bkForeground: (
             base: black,
             hint-text: rgba(black, 0.38),
             divider: rgba(black, 0.12),
@@ -131,32 +131,32 @@ $matColorHues: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400
 
     // Native Input
     input[type="text"] {
-        color: map_get($fuseForeground, base);
+        color: map_get($bkForeground, base);
     }
 
     // Input
     .mat-input-placeholder {
-        color: map_get($fuseForeground, hint-text);
+        color: map_get($bkForeground, hint-text);
     }
 
     .mat-input-underline {
-        background-color: map_get($fuseForeground, divider);
+        background-color: map_get($bkForeground, divider);
     }
 
     // Select
     .mat-select-trigger,
     .mat-select-arrow {
-        color: map_get($fuseForeground, hint-text);
+        color: map_get($bkForeground, hint-text);
     }
 
     .mat-select-underline {
-        background-color: map_get($fuseForeground, divider);
+        background-color: map_get($bkForeground, divider);
     }
 
     .mat-select-disabled .mat-select-value,
     .mat-select-arrow,
     .mat-select-trigger {
-        color: map_get($fuseForeground, hint-text);
+        color: map_get($bkForeground, hint-text);
     }
 
     .mat-select-content,
@@ -165,7 +165,7 @@ $matColorHues: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, A100, A200, A400
     }
 
     .mat-select-value {
-        color: map_get($fuseForeground, text);
+        color: map_get($bkForeground, text);
     }
 }
 

@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostBinding, OnDestroy, OnInit, Renderer2, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { style, animate, AnimationBuilder, AnimationPlayer } from '@angular/animations';
-import { fuseAnimations } from '../../animations';
+import { bkAnimations } from '../../animations';
 import { CATEGORIES_DATA } from '../../../main/data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../../main/data/nukhsLookup';
 import { MatrimonySearchParameter } from '../../../main/models/matrimonySearchParameter';
@@ -12,7 +12,7 @@ import { MARITAL_STATUS_DATA } from '../../../main/data/maritalstatuses';
     selector   : 'matrimony-search-options',
     templateUrl: './matrimony-search-options.component.html',
     styleUrls  : ['./matrimony-search-options.component.scss'],
-    animations : fuseAnimations
+    animations : bkAnimations
 })
 export class MatrimonySearchOptionsComponent implements OnInit
 {

@@ -17,9 +17,9 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">        
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
 
-        <!-- FUSE Splash Screen CSS -->
+        <!-- bk Splash Screen CSS -->
         <style type="text/css">
-            #fuse-splash-screen {
+            #bk-splash-screen {
                 display: block;
                 position: absolute;
                 top: 0;
@@ -31,7 +31,7 @@
                 pointer-events: none;
             }
 
-            #fuse-splash-screen .center {
+            #bk-splash-screen .center {
                 display: block;
                 width: 100%;
                 position: absolute;
@@ -39,16 +39,16 @@
                 transform: translateY(-50%);
             }
 
-            #fuse-splash-screen .logo {
+            #bk-splash-screen .logo {
                 width: 128px;
                 margin: 0 auto;
             }
 
-            #fuse-splash-screen .logo img {
+            #bk-splash-screen .logo img {
                 filter: drop-shadow(0px 10px 6px rgba(0, 0, 0, 0.2))
             }
 
-            #fuse-splash-screen .spinner-wrapper {
+            #bk-splash-screen .spinner-wrapper {
                 display: block;
                 position: relative;
                 width: 100%;
@@ -56,7 +56,7 @@
                 height: 100px;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner {
+            #bk-splash-screen .spinner-wrapper .spinner {
                 position: absolute;
                 overflow: hidden;
                 left: 50%;
@@ -64,14 +64,14 @@
                 animation: outer-rotate 2.91667s linear infinite;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner {
+            #bk-splash-screen .spinner-wrapper .spinner .inner {
                 width: 100px;
                 height: 100px;
                 position: relative;
                 animation: sporadic-rotate 5.25s cubic-bezier(0.35, 0, 0.25, 1) infinite;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .gap {
+            #bk-splash-screen .spinner-wrapper .spinner .inner .gap {
                 position: absolute;
                 left: 49px;
                 right: 49px;
@@ -81,8 +81,8 @@
                 box-sizing: border-box;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .left,
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .right {
+            #bk-splash-screen .spinner-wrapper .spinner .inner .left,
+            #bk-splash-screen .spinner-wrapper .spinner .inner .right {
                 position: absolute;
                 top: 0;
                 height: 100px;
@@ -90,8 +90,8 @@
                 overflow: hidden;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .left .half-circle,
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .right .half-circle {
+            #bk-splash-screen .spinner-wrapper .spinner .inner .left .half-circle,
+            #bk-splash-screen .spinner-wrapper .spinner .inner .right .half-circle {
                 position: absolute;
                 top: 0;
                 width: 100px;
@@ -102,22 +102,22 @@
                 border-radius: 50%;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .left {
+            #bk-splash-screen .spinner-wrapper .spinner .inner .left {
                 left: 0;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .left .half-circle {
+            #bk-splash-screen .spinner-wrapper .spinner .inner .left .half-circle {
                 left: 0;
                 border-right-color: transparent;
                 animation: left-wobble 1.3125s cubic-bezier(0.35, 0, 0.25, 1) infinite;
                 -webkit-animation: left-wobble 1.3125s cubic-bezier(0.35, 0, 0.25, 1) infinite;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .right {
+            #bk-splash-screen .spinner-wrapper .spinner .inner .right {
                 right: 0;
             }
 
-            #fuse-splash-screen .spinner-wrapper .spinner .inner .right .half-circle {
+            #bk-splash-screen .spinner-wrapper .spinner .inner .right .half-circle {
                 right: 0;
                 border-left-color: transparent;
                 animation: right-wobble 1.3125s cubic-bezier(0.35, 0, 0.25, 1) infinite;
@@ -178,13 +178,13 @@
                 }
             }
         </style>
-        <!-- / FUSE Splash Screen CSS -->
+        <!-- / bk Splash Screen CSS -->
     </head>
 
     <body class="primary-800-bg">
 
-        <!-- FUSE Splash Screen -->
-        <fuse-splash-screen id="fuse-splash-screen">
+        <!-- bk Splash Screen -->
+        <bk-splash-screen id="bk-splash-screen">
 
             <div class="center">
 
@@ -210,10 +210,10 @@
 
             </div>
 
-        </fuse-splash-screen>
-        <!-- / FUSE Splash Screen -->
+        </bk-splash-screen>
+        <!-- / bk Splash Screen -->
 
-        <fuse-root></fuse-root>
+        <bk-root></bk-root>
 
     </body>
 

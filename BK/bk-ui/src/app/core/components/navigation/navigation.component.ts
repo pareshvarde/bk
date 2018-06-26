@@ -1,24 +1,24 @@
 import { Component, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { FuseNavigationService } from './navigation.service';
+import { bkNavigationService } from './navigation.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector     : 'fuse-navigation',
+    selector     : 'bk-navigation',
     templateUrl  : './navigation.component.html',
     styleUrls    : ['./navigation.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FuseNavigationComponent implements OnDestroy
+export class bkNavigationComponent implements OnDestroy
 {
     navigationModel: any[];
     navigationModelChangeSubscription: Subscription;
 
     @Input('layout') layout = 'vertical';
 
-    constructor(private fuseNavigationService: FuseNavigationService)
+    constructor(private bkNavigationService: bkNavigationService)
     {
         this.navigationModelChangeSubscription =
-            this.fuseNavigationService.onNavigationModelChange
+            this.bkNavigationService.onNavigationModelChange
                 .subscribe((navigationModel) => {
                     this.navigationModel = navigationModel;
                 });

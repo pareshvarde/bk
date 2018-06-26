@@ -1,34 +1,30 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import { MaterialModule } from './material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { FuseMatSidenavHelperDirective, FuseMatSidenavTogglerDirective } from '../directives/fuse-mat-sidenav-helper/fuse-mat-sidenav-helper.directive';
-import { FuseMatSidenavHelperService } from '../directives/fuse-mat-sidenav-helper/fuse-mat-sidenav-helper.service';
-import { FusePipesModule } from '../pipes/pipes.module';
-import { FuseMatchMedia } from '../services/match-media.service';
-import { FuseNavbarVerticalService } from '../../main/navbar/vertical/navbar-vertical.service';
-import { FusePerfectScrollbarDirective } from '../directives/fuse-perfect-scrollbar/fuse-perfect-scrollbar.directive';
-import { FuseIfOnDomDirective } from '../directives/fuse-if-on-dom/fuse-if-on-dom.directive';
+import { bkMatSidenavHelperDirective, bkMatSidenavTogglerDirective } from '../directives/bk-mat-sidenav-helper/bk-mat-sidenav-helper.directive';
+import { bkMatSidenavHelperService } from '../directives/bk-mat-sidenav-helper/bk-mat-sidenav-helper.service';
+import { bkPipesModule } from '../pipes/pipes.module';
+import { bkMatchMedia } from '../services/match-media.service';
+import { bkNavbarVerticalService } from '../../main/navbar/vertical/navbar-vertical.service';
+import { bkPerfectScrollbarDirective } from '../directives/bk-perfect-scrollbar/bk-perfect-scrollbar.directive';
 import { CookieService } from 'ngx-cookie-service';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImageViewerModule} from 'ngx-image-viewer';
 
 @NgModule({
     declarations   : [
-        FuseMatSidenavHelperDirective,
-        FuseMatSidenavTogglerDirective,                
-        FuseIfOnDomDirective,
-        FusePerfectScrollbarDirective        
+        bkMatSidenavHelperDirective,
+        bkMatSidenavTogglerDirective,                
+        bkPerfectScrollbarDirective        
     ],
     imports        : [
         FlexLayoutModule,
         MaterialModule,
         CommonModule,
         FormsModule,
-        FusePipesModule,
+        bkPipesModule,
         ReactiveFormsModule,
         ImageCropperModule,
         ImageViewerModule.forRoot()
@@ -38,12 +34,11 @@ import { ImageViewerModule} from 'ngx-image-viewer';
         MaterialModule,
         CommonModule,
         FormsModule,
-        FuseMatSidenavHelperDirective,
-        FuseMatSidenavTogglerDirective,
-        FusePipesModule,                
-        FusePerfectScrollbarDirective,
-        ReactiveFormsModule,        
-        FuseIfOnDomDirective,
+        bkMatSidenavHelperDirective,
+        bkMatSidenavTogglerDirective,
+        bkPipesModule,                
+        bkPerfectScrollbarDirective,
+        ReactiveFormsModule,                
         ImageCropperModule,
         ImageViewerModule
     ],
@@ -52,9 +47,9 @@ import { ImageViewerModule} from 'ngx-image-viewer';
     ],
     providers      : [
         CookieService,
-        FuseMatchMedia,
-        FuseNavbarVerticalService,
-        FuseMatSidenavHelperService        
+        bkMatchMedia,
+        bkNavbarVerticalService,
+        bkMatSidenavHelperService        
     ]
 })
 

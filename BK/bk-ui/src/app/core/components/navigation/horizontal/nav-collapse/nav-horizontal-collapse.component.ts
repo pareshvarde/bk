@@ -1,18 +1,18 @@
 import { Component, HostBinding, HostListener, Input, OnDestroy } from '@angular/core';
-import { fuseAnimations } from '../../../../animations';
-import { FuseConfigService } from '../../../../services/config.service';
+import { bkAnimations } from '../../../../animations';
+import { bkConfigService } from '../../../../services/config.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-    selector   : 'fuse-nav-horizontal-collapse',
+    selector   : 'bk-nav-horizontal-collapse',
     templateUrl: './nav-horizontal-collapse.component.html',
     styleUrls  : ['./nav-horizontal-collapse.component.scss'],
-    animations : fuseAnimations
+    animations : bkAnimations
 })
-export class FuseNavHorizontalCollapseComponent implements OnDestroy
+export class bkNavHorizontalCollapseComponent implements OnDestroy
 {
     onSettingsChanged: Subscription;
-    fuseSettings: any;
+    bkSettings: any;
     isOpen = false;
 
     @HostBinding('class') classes = 'nav-item nav-collapse';
@@ -31,14 +31,14 @@ export class FuseNavHorizontalCollapseComponent implements OnDestroy
     }
 
     constructor(
-        private fuseConfig: FuseConfigService
+        private config: bkConfigService
     )
     {
         this.onSettingsChanged =
-            this.fuseConfig.onSettingsChanged
+            this.config.onSettingsChanged
                 .subscribe(
                     (newSettings) => {
-                        this.fuseSettings = newSettings;
+                        this.bkSettings = newSettings;
                     }
                 );
     }

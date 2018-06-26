@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../modules/shared.module';
 import { RouterModule } from '@angular/router';
-import { FuseNavigationComponent } from './navigation.component';
-import { FuseNavVerticalItemComponent } from './vertical/nav-item/nav-vertical-item.component';
-import { FuseNavVerticalCollapseComponent } from './vertical/nav-collapse/nav-vertical-collapse.component';
-import { FuseNavVerticalGroupComponent } from './vertical/nav-group/nav-vertical-group.component';
-import { FuseNavHorizontalItemComponent } from './horizontal/nav-item/nav-horizontal-item.component';
-import { FuseNavHorizontalCollapseComponent } from './horizontal/nav-collapse/nav-horizontal-collapse.component';
+import { bkNavigationComponent } from './navigation.component';
+import { bkNavVerticalItemComponent } from './vertical/nav-item/nav-vertical-item.component';
+import { bkNavVerticalCollapseComponent } from './vertical/nav-collapse/nav-vertical-collapse.component';
+import { bkNavVerticalGroupComponent } from './vertical/nav-group/nav-vertical-group.component';
+import { bkNavHorizontalItemComponent } from './horizontal/nav-item/nav-horizontal-item.component';
+import { bkNavHorizontalCollapseComponent } from './horizontal/nav-collapse/nav-horizontal-collapse.component';
 
 @NgModule({
     imports     : [
@@ -14,17 +14,17 @@ import { FuseNavHorizontalCollapseComponent } from './horizontal/nav-collapse/na
         RouterModule
     ],
     exports     : [
-        FuseNavigationComponent
+        bkNavigationComponent
     ],
     declarations: [
-        FuseNavigationComponent,
-        FuseNavVerticalGroupComponent,
-        FuseNavVerticalItemComponent,
-        FuseNavVerticalCollapseComponent,
-        FuseNavHorizontalItemComponent,
-        FuseNavHorizontalCollapseComponent
+        bkNavigationComponent,
+        bkNavVerticalGroupComponent,
+        bkNavVerticalItemComponent,
+        bkNavVerticalCollapseComponent,
+        bkNavHorizontalItemComponent,
+        bkNavHorizontalCollapseComponent
     ]
 })
-export class FuseNavigationModule
+export class bkNavigationModule
 {
 }

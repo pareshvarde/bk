@@ -1,11 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FuseUtils } from '../fuseUtils';
+import { bkUtils } from '../bkUtils';
 
 @Pipe({name: 'filter'})
 export class FilterPipe implements PipeTransform
 {
     transform(mainArr: any[], searchText: string, property: string): any
     {
-        return FuseUtils.filterArrayByString(mainArr, searchText);
+        return bkUtils.filterArrayByString(mainArr, searchText);
     }
 }

@@ -2,20 +2,20 @@
 import {map, filter} from 'rxjs/operators';
 import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { fuseAnimations } from '../../core/animations';
-import { FuseConfigService } from '../../core/services/config.service';
+import { bkAnimations } from '../../core/animations';
+import { bkConfigService } from '../../core/services/config.service';
 import { Subscription } from 'rxjs';
 import { Platform } from '@angular/cdk/platform';
 
 @Component({
-    selector: 'fuse-content',
+    selector: 'bk-content',
     templateUrl: './content.component.html',
     styleUrls: ['./content.component.scss'],
-    animations: fuseAnimations
+    animations: bkAnimations
 })
-export class FuseContentComponent implements OnInit, OnDestroy {
+export class bkContentComponent implements OnInit, OnDestroy {
     onSettingsChanged: Subscription;
-    fuseSettings: any;    
+    bkSettings: any;    
 
     public alertOptions  = {
         position: ["bottom", "right"],
@@ -40,14 +40,14 @@ export class FuseContentComponent implements OnInit, OnDestroy {
     constructor(
         private router: Router,
         private activatedRoute: ActivatedRoute,
-        private fuseConfig: FuseConfigService,
+        private config: bkConfigService,
         private platform: Platform
     ) {
         this.router.events.pipe(
             filter((event) => event instanceof NavigationEnd),
             map(() => this.activatedRoute),)
             .subscribe((event) => {
-                switch (this.fuseSettings.routerAnimation) {
+                switch (this.bkSettings.routerAnimation) {
                     case 'fadeIn':
                         this.routeAnimationFade = !this.routeAnimationFade;
                         break;
@@ -74,10 +74,10 @@ export class FuseContentComponent implements OnInit, OnDestroy {
             });
 
         this.onSettingsChanged =
-            this.fuseConfig.onSettingsChanged
+            this.config.onSettingsChanged
                 .subscribe(
                 (newSettings) => {
-                    this.fuseSettings = newSettings;
+                    this.bkSettings = newSettings;
                 }
                 );
     }

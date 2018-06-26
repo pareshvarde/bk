@@ -1,13 +1,13 @@
 import { AfterViewInit, Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import PerfectScrollbar from 'perfect-scrollbar';
-import { FuseConfigService } from '../../services/config.service';
+import { bkConfigService } from '../../services/config.service';
 import { Subscription } from 'rxjs';
 import { Platform } from '@angular/cdk/platform';
 
 @Directive({
-    selector: '[fusePerfectScrollbar]'
+    selector: '[bkPerfectScrollbar]'
 })
-export class FusePerfectScrollbarDirective implements OnInit, AfterViewInit, OnDestroy
+export class bkPerfectScrollbarDirective implements OnInit, AfterViewInit, OnDestroy
 {
     onSettingsChanged: Subscription;
     isDisableCustomScrollbars = false;
@@ -17,12 +17,12 @@ export class FusePerfectScrollbarDirective implements OnInit, AfterViewInit, OnD
 
     constructor(
         private element: ElementRef,
-        private fuseConfig: FuseConfigService,
+        private config: bkConfigService,
         private platform: Platform
     )
     {
         this.onSettingsChanged =
-            this.fuseConfig.onSettingsChanged
+            this.config.onSettingsChanged
                 .subscribe(
                     (settings) => {
                         this.isDisableCustomScrollbars = !settings.customScrollbars;

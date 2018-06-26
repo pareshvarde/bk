@@ -18,7 +18,7 @@
           <a [routerLink]="['/family/',n.familyId]">family</a>&nbsp;on&nbsp;{{n.addedOn | amDateFormat:'MMMM Do YYYY, hh:mm a'}}
         </div>
       </div>
-      <div class="bk-card">
+      <div class="bk-large-card">
         <div fxLayout="row">
           <span class="mat-title">Family Information</span>
         </div>
@@ -149,7 +149,7 @@
           </div>
         </form>
       </div>
-      <div class="bk-card">
+      <div class="bk-large-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Members</span>
           <button matTooltip="Add Member" *ngIf="model.canEdit" mat-mini-fab color="accent" [routerLink]="['/member/',this.familyId,0]"
@@ -250,7 +250,7 @@
           </div>
         </div>
       </div>
-      <div class="bk-card">
+      <div class="bk-large-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Matrimony</span>
         </div>

@@ -4,7 +4,7 @@ import { animate, AnimationBuilder, AnimationPlayer, style } from '@angular/anim
 import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable()
-export class FuseSplashScreenService
+export class bkSplashScreenService
 {
     splashScreenEl;
     public player: AnimationPlayer;
@@ -15,7 +15,7 @@ export class FuseSplashScreenService
         private router: Router
     )
     {
-        this.splashScreenEl = this.document.body.querySelector('#fuse-splash-screen');
+        this.splashScreenEl = this.document.body.querySelector('#bk-splash-screen');
 
         const hideOnLoad = this.router.events.subscribe((event) => {
                 if ( event instanceof NavigationEnd )

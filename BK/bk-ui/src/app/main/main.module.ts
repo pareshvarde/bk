@@ -4,15 +4,15 @@ import { MomentModule } from 'angular2-moment';
 import { SharedModule } from '../core/modules/shared.module';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { JasperoConfirmationsModule } from '@jaspero/ng-confirmations'
-import { FuseMainComponent } from './main.component';
-import { FuseContentComponent } from './content/content.component';
-import { FuseFooterComponent } from './footer/footer.component';
-import { FuseNavbarVerticalComponent } from './navbar/vertical/navbar-vertical.component';
-import { FuseToolbarComponent } from './toolbar/toolbar.component';
-import { FuseNavigationModule } from '../core/components/navigation/navigation.module';
-import { FuseNavbarVerticalToggleDirective } from './navbar/vertical/navbar-vertical-toggle.directive';
-import { FuseNavbarHorizontalComponent } from './navbar/horizontal/navbar-horizontal.component';
-import { FuseQuickPanelComponent } from './quick-panel/quick-panel.component';
+import { bkMainComponent } from './main.component';
+import { bkContentComponent } from './content/content.component';
+import { bkFooterComponent } from './footer/footer.component';
+import { bkNavbarVerticalComponent } from './navbar/vertical/navbar-vertical.component';
+import { bkToolbarComponent } from './toolbar/toolbar.component';
+import { bkNavigationModule } from '../core/components/navigation/navigation.module';
+import { bkNavbarVerticalToggleDirective } from './navbar/vertical/navbar-vertical-toggle.directive';
+import { bkNavbarHorizontalComponent } from './navbar/horizontal/navbar-horizontal.component';
+import { bkQuickPanelComponent } from './quick-panel/quick-panel.component';
 import { MemberSearchOptionsComponent } from '../core/components/member-search-options/member-search-options.component';
 import { HomeComponent } from './content/home/home.component';
 import { OriginComponent } from './content/origin/origin.component';
@@ -51,16 +51,16 @@ export function tokenGetter() {
 
 @NgModule({
     declarations: [
-        FuseContentComponent,
-        FuseFooterComponent,
-        FuseMainComponent,
-        FuseNavbarVerticalComponent,
-        FuseNavbarHorizontalComponent,
-        FuseToolbarComponent,
-        FuseNavbarVerticalToggleDirective,
+        bkContentComponent,
+        bkFooterComponent,
+        bkMainComponent,
+        bkNavbarVerticalComponent,
+        bkNavbarHorizontalComponent,
+        bkToolbarComponent,
+        bkNavbarVerticalToggleDirective,
         MemberSearchOptionsComponent, 
         MatrimonySearchOptionsComponent,       
-        FuseQuickPanelComponent,        
+        bkQuickPanelComponent,        
         HomeComponent,
         OriginComponent,
         NukhComponent,
@@ -95,7 +95,7 @@ export function tokenGetter() {
         RouterModule,        
         SimpleNotificationsModule.forRoot(),
         JasperoConfirmationsModule,
-        FuseNavigationModule,             
+        bkNavigationModule,             
         MomentModule,
         ScrollToModule.forRoot(),  
         InfiniteScrollModule,      
@@ -107,7 +107,7 @@ export function tokenGetter() {
         })     
     ],
     exports     : [
-        FuseMainComponent
+        bkMainComponent
     ],
     entryComponents:[
         BkImageCropperComponent,
@@ -116,6 +116,6 @@ export function tokenGetter() {
 
 })
 
-export class FuseMainModule
+export class bkMainModule
 {
 }

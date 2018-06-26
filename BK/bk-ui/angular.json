@@ -99,7 +99,7 @@
             ],
             "exclude": [
               "**/node_modules/**",
-              "**/src/app/fuse-fake-db/**/*",
+              "**/src/app/bk-fake-db/**/*",
               "**/src/assets/angular-material-examples/**/*"
             ]
           }
@@ -126,7 +126,7 @@
             ],
             "exclude": [
               "**/node_modules/**",
-              "**/src/app/fuse-fake-db/**/*",
+              "**/src/app/bk-fake-db/**/*",
               "**/src/assets/angular-material-examples/**/*"
             ]
           }

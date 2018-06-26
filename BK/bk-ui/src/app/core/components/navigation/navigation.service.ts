@@ -3,7 +3,7 @@ import { NavigationModel } from '../../../navigation.model';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
-export class FuseNavigationService
+export class bkNavigationService
 {
     onNavCollapseToggle = new EventEmitter<any>();
     onNavCollapseToggled = new EventEmitter<any>();

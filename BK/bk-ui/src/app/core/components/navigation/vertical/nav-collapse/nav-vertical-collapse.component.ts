@@ -1,22 +1,22 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
-import { FuseNavigationService } from '../../navigation.service';
+import { bkNavigationService } from '../../navigation.service';
 import { NavigationEnd, Router } from '@angular/router';
-import { fuseAnimations } from '../../../../animations';
+import { bkAnimations } from '../../../../animations';
 
 @Component({
-    selector   : 'fuse-nav-vertical-collapse',
+    selector   : 'bk-nav-vertical-collapse',
     templateUrl: './nav-vertical-collapse.component.html',
     styleUrls  : ['./nav-vertical-collapse.component.scss'],
-    animations : fuseAnimations
+    animations : bkAnimations
 })
-export class FuseNavVerticalCollapseComponent implements OnInit
+export class bkNavVerticalCollapseComponent implements OnInit
 {
     @Input() item: any;
     @HostBinding('class') classes = 'nav-collapse nav-item';
     @HostBinding('class.open') public isOpen = false;
 
     constructor(
-        private navigationService: FuseNavigationService,
+        private navigationService: bkNavigationService,
         private router: Router
     )
     {

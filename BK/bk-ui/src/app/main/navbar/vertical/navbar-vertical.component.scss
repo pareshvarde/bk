@@ -1,8 +1,8 @@
-@import "../../../core/scss/fuse";
+@import "../../../core/scss/bk";
 
-fuse-main {
+bk-main {
 
-    &.fuse-nav-bar-folded:not(.fuse-nav-bar-horizontal) {
+    &.bk-nav-bar-folded:not(.bk-nav-bar-horizontal) {
 
         .content-wrapper {
 
@@ -23,7 +23,7 @@ fuse-main {
     }
 }
 
-fuse-navbar-vertical {
+bk-navbar-vertical {
     display: flex;
     flex-direction: column;
     width: 240px;
@@ -139,14 +139,14 @@ fuse-navbar-vertical {
     }
 }
 
-fuse-navbar-horizontal + #wrapper > fuse-navbar-vertical {
+bk-navbar-horizontal + #wrapper > bk-navbar-vertical {
     display: none;
     @include media-breakpoint-down(md) {
         display: flex;
     }
 }
 
-.fuse-navbar-backdrop {
+.bk-navbar-backdrop {
     position: absolute;
     top: 0;
     bottom: 0;

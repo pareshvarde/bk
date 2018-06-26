@@ -1,25 +1,25 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FuseMainComponent } from '../../main.component';
+import { bkMainComponent } from '../../main.component';
 
 @Component({
-    selector     : 'fuse-navbar-horizontal',
+    selector     : 'bk-navbar-horizontal',
     templateUrl  : './navbar-horizontal.component.html',
     styleUrls    : ['./navbar-horizontal.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FuseNavbarHorizontalComponent implements OnInit, OnDestroy
+export class bkNavbarHorizontalComponent implements OnInit, OnDestroy
 {
-    constructor(private fuseMainComponent: FuseMainComponent)
+    constructor(private bkMainComponent: bkMainComponent)
     {
     }
 
     ngOnInit()
     {
-        this.fuseMainComponent.addClass('fuse-nav-bar-horizontal');
+        this.bkMainComponent.addClass('bk-nav-bar-horizontal');
     }
 
     ngOnDestroy()
     {
-        this.fuseMainComponent.removeClass('fuse-nav-bar-horizontal');
+        this.bkMainComponent.removeClass('bk-nav-bar-horizontal');
     }
 }

@@ -4,7 +4,7 @@ import { NavigationStart, Router } from '@angular/router';
 import { Platform } from '@angular/cdk/platform';
 
 @Injectable()
-export class FuseConfigService
+export class bkConfigService
 {
     settings: any;
     defaultSettings: any;

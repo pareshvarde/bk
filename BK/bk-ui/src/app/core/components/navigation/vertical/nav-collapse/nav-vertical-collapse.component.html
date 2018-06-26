@@ -5,8 +5,8 @@
 </a>
 <div class="children" [@slideInOut]="isOpen">
     <ng-container *ngFor="let item of item.children">
-        <fuse-nav-vertical-item *ngIf="item.type=='item'" [item]="item"></fuse-nav-vertical-item>
-        <fuse-nav-vertical-collapse *ngIf="item.type=='collapse'" [item]="item"></fuse-nav-vertical-collapse>
-        <fuse-nav-vertical-group *ngIf="item.type=='group'" [item]="item"></fuse-nav-vertical-group>
+        <bk-nav-vertical-item *ngIf="item.type=='item'" [item]="item"></bk-nav-vertical-item>
+        <bk-nav-vertical-collapse *ngIf="item.type=='collapse'" [item]="item"></bk-nav-vertical-collapse>
+        <bk-nav-vertical-group *ngIf="item.type=='group'" [item]="item"></bk-nav-vertical-group>
     </ng-container>
 </div>

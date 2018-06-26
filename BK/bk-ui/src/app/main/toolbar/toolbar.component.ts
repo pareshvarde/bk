@@ -4,13 +4,13 @@ import { bkAuthService } from '../services/auth-service';
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
-    selector   : 'fuse-toolbar',
+    selector   : 'bk-toolbar',
     templateUrl: './toolbar.component.html',
     styleUrls  : ['./toolbar.component.scss'],
     providers: [bkAuthService]    
 })
 
-export class FuseToolbarComponent
+export class bkToolbarComponent
 {    
     languages: any;    
     showLoadingBar: boolean;    

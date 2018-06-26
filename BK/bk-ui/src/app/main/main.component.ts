@@ -1,35 +1,35 @@
 import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FuseConfigService } from '../core/services/config.service';
+import { bkConfigService } from '../core/services/config.service';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
-    selector     : 'fuse-main',
+    selector     : 'bk-main',
     templateUrl  : './main.component.html',
     styleUrls    : ['./main.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class FuseMainComponent implements OnInit, OnDestroy
+export class bkMainComponent implements OnInit, OnDestroy
 {
     onSettingsChanged: Subscription;
-    fuseSettings: any;
-    @HostBinding('attr.fuse-layout-mode') layoutMode;
+    bkSettings: any;
+    @HostBinding('attr.bk-layout-mode') layoutMode;
 
     constructor(
         private _renderer: Renderer2,
         private _elementRef: ElementRef,
-        private fuseConfig: FuseConfigService,
+        private config: bkConfigService,
         private platform: Platform,
         @Inject(DOCUMENT) private document: any
     )
     {
         this.onSettingsChanged =
-            this.fuseConfig.onSettingsChanged
+            this.config.onSettingsChanged
                 .subscribe(
                     (newSettings) => {
-                        this.fuseSettings = newSettings;
-                        this.layoutMode = this.fuseSettings.layout.mode;
+                        this.bkSettings = newSettings;
+                        this.layoutMode = this.bkSettings.layout.mode;
                     }
                 );
 

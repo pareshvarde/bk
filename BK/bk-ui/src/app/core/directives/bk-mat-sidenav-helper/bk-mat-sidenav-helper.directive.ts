@@ -2,24 +2,24 @@ import { Directive, Input, OnInit, HostListener, OnDestroy, HostBinding } from '
 import { MatSidenav } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 import { Subscription } from 'rxjs';
-import { FuseMatchMedia } from '../../services/match-media.service';
-import { FuseMatSidenavHelperService } from './fuse-mat-sidenav-helper.service';
+import { bkMatchMedia } from '../../services/match-media.service';
+import { bkMatSidenavHelperService } from './bk-mat-sidenav-helper.service';
 
 @Directive({
-    selector: '[fuseMatSidenavHelper]'
+    selector: '[bkMatSidenavHelper]'
 })
-export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy
+export class bkMatSidenavHelperDirective implements OnInit, OnDestroy
 {
     matchMediaSubscription: Subscription;
 
     @HostBinding('class.mat-is-locked-open') isLockedOpen = true;
 
-    @Input('fuseMatSidenavHelper') id: string;
+    @Input('bkMatSidenavHelper') id: string;
     @Input('mat-is-locked-open') matIsLockedOpenBreakpoint: string;
 
     constructor(
-        private fuseMatSidenavService: FuseMatSidenavHelperService,
-        private fuseMatchMedia: FuseMatchMedia,
+        private bkMatSidenavService: bkMatSidenavHelperService,
+        private matchMedia: bkMatchMedia,
         private observableMedia: ObservableMedia,
         private matSidenav: MatSidenav
     )
@@ -28,7 +28,7 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy
 
     ngOnInit()
     {
-        this.fuseMatSidenavService.setSidenav(this.id, this.matSidenav);
+        this.bkMatSidenavService.setSidenav(this.id, this.matSidenav);
 
         if ( this.observableMedia.isActive(this.matIsLockedOpenBreakpoint) )
         {
@@ -43,7 +43,7 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy
             this.matSidenav.toggle(false);
         }
 
-        this.matchMediaSubscription = this.fuseMatchMedia.onMediaChange.subscribe(() => {
+        this.matchMediaSubscription = this.matchMedia.onMediaChange.subscribe(() => {
             if ( this.observableMedia.isActive(this.matIsLockedOpenBreakpoint) )
             {
                 this.isLockedOpen = true;
@@ -66,19 +66,19 @@ export class FuseMatSidenavHelperDirective implements OnInit, OnDestroy
 }
 
 @Directive({
-    selector: '[fuseMatSidenavToggler]'
+    selector: '[bkMatSidenavToggler]'
 })
-export class FuseMatSidenavTogglerDirective
+export class bkMatSidenavTogglerDirective
 {
-    @Input('fuseMatSidenavToggler') id;
+    @Input('bkMatSidenavToggler') id;
 
-    constructor(private fuseMatSidenavService: FuseMatSidenavHelperService)
+    constructor(private bkMatSidenavService: bkMatSidenavHelperService)
     {
     }
 
     @HostListener('click')
     onClick()
     {
-        this.fuseMatSidenavService.getSidenav(this.id).toggle();
+        this.bkMatSidenavService.getSidenav(this.id).toggle();
     }
 }

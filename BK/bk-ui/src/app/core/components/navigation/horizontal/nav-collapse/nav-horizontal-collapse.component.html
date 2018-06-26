@@ -6,12 +6,12 @@
 
 <div class="children" [ngClass]="{'open': isOpen}">
 
-    <div class="{{fuseSettings.colorClasses.navbar}}">
+    <div class="{{bkSettings.colorClasses.navbar}}">
 
         <ng-container *ngFor="let item of item.children">
-            <fuse-nav-horizontal-item *ngIf="item.type=='item'" [item]="item"></fuse-nav-horizontal-item>
-            <fuse-nav-horizontal-collapse *ngIf="item.type=='collapse'" [item]="item"></fuse-nav-horizontal-collapse>
-            <fuse-nav-horizontal-collapse *ngIf="item.type=='group'" [item]="item"></fuse-nav-horizontal-collapse>
+            <bk-nav-horizontal-item *ngIf="item.type=='item'" [item]="item"></bk-nav-horizontal-item>
+            <bk-nav-horizontal-collapse *ngIf="item.type=='collapse'" [item]="item"></bk-nav-horizontal-collapse>
+            <bk-nav-horizontal-collapse *ngIf="item.type=='group'" [item]="item"></bk-nav-horizontal-collapse>
         </ng-container>
 
     </div>
