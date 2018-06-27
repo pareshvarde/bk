@@ -24,7 +24,14 @@ namespace BK
 
             using (bkContext _context = new bkContext())
             {
-                fMember = _context.Members.FirstOrDefault(m => m.EmailAddress == context.UserName && m.Password == context.Password);
+                fMember = _context.Members.FirstOrDefault(m => m.EmailAddress == context.UserName);
+
+                if (fMember != null)
+                {
+                    if (!fMember.Password.Equals(context.Password, StringComparison.Ordinal))
+                        fMember = null;
+                }
+
                 if (fMember == null)
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect.");

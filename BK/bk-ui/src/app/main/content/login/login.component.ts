@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Response } from '@angular/http/src/static_response';
 import { NotificationsService } from 'angular2-notifications';
 import { ReplaySubject } from 'rxjs';
+import { bkAuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;  
 
   constructor(private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService) 
+    private alertService: NotificationsService, private authService: bkAuthService) 
   { 
    
   }
@@ -57,7 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       (res) =>{              
         let result = JSON.parse((<any>res)._body)        
         localStorage.setItem('token', result.access_token);
-        this.router.navigate(['family', 0]);
+        this.loadFamily();
       },
       (err) =>{                  
         if (err.message)           
@@ -69,5 +70,19 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.alertService.error('Login Failed', err.error_description);        
       }
     );    
+  }
+
+  loadFamily(){
+    this.dataService.getDefaultFamily(this.authService.memberId()).takeUntil(this.destroyed$).subscribe(
+      (res) => {
+        this.router.navigate(['family', res.result])
+      },
+      (err) => {
+        if (err.errors)
+          this.alertService.error('', err.errors[0]);
+        else
+          this.alertService.error('', err);
+      }
+    );
   }
 }

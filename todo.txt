@@ -25,8 +25,6 @@ maternal family: show Not Available
 paternal family: show Not Available in case of married females
 include more details on matrimony search details	
 add student/ home maker/ looking for job/start up in occupation drop down
-my family -> fork breaks
-make password case sensitive
 =============================
 angular memory and performance analyser
 sql query performance and indexes
