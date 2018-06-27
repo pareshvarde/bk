@@ -56,10 +56,7 @@ namespace BK.Controllers
         public IHttpActionResult Get(int familyId)
         {
             using (bkContext context = new bkContext())
-            {
-                if (familyId == 0)
-                    familyId = context.FamilyMemberAssociations.Where(x => x.MemberId == LoggedInMemberId && x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault();
-
+            {                
                 Family f = context.Families.Where(x => x.FamilyID == familyId).FirstOrDefault();
                 if (f == null)
                     return BadRequest("Family record cannot be loaded.");
@@ -136,7 +133,7 @@ namespace BK.Controllers
 
                 return Ok(fvm);
             }
-        }
+        }      
 
         [Route("api/family/save")]
         [HttpPost]

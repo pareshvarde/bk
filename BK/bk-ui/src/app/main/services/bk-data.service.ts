@@ -169,6 +169,14 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
+  getDefaultFamily(memberId: number){
+    this.blockUI.start("Please wait...");
+               
+    return this.authHttp.get(this.API_URL + "member/defaultfamily?memberId=" + memberId).pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);
+  }
+
   getFamilyDetail(familyId: number)
   {
     this.blockUI.start("Please wait...");

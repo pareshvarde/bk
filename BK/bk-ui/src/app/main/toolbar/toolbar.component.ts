@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { bkAuthService } from '../services/auth-service';
 import { NotificationsService } from 'angular2-notifications';
+import { bkDataService } from '../services/bk-data.service';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
     selector   : 'bk-toolbar',
@@ -10,15 +12,15 @@ import { NotificationsService } from 'angular2-notifications';
     providers: [bkAuthService]    
 })
 
-export class bkToolbarComponent
+export class bkToolbarComponent implements OnDestroy
 {    
-    languages: any;    
+    private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);    
     showLoadingBar: boolean;    
 
     constructor(
         private router: Router,                
         private alertService: NotificationsService,
-        public authService: bkAuthService
+        public authService: bkAuthService, private dataService: bkDataService
     )
     {       
         router.events.subscribe(
@@ -33,7 +35,40 @@ export class bkToolbarComponent
                 }
             });      
     }
+
+    ngOnDestroy() {
+        this.destroyed$.next(true);
+        this.destroyed$.complete();
+      }
   
+    loadFamily(){
+        this.dataService.getDefaultFamily(this.authService.memberId()).takeUntil(this.destroyed$).subscribe(
+            (res) => {
+              this.router.navigate(['family', res.result])
+            },
+            (err) => {
+              if (err.errors)
+                this.alertService.error('', err.errors[0]);
+              else
+                this.alertService.error('', err);
+            }
+          );
+    }
+
+    loadMember(){
+        this.dataService.getDefaultFamily(this.authService.memberId()).takeUntil(this.destroyed$).subscribe(
+            (res) => {                
+              this.router.navigate(['member', res.result, this.authService.memberId()])
+            },
+            (err) => {
+              if (err.errors)
+                this.alertService.error('', err.errors[0]);
+              else
+                this.alertService.error('', err);
+            }
+          );
+    }
+
     logout()
     {
         this.authService.logout();

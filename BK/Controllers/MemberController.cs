@@ -541,6 +541,20 @@ namespace BK.Controllers
 
             return Ok(url);
         }
+
+        [Route("api/member/defaultfamily")]
+        [HttpGet]
+        public IHttpActionResult DefaultFamily(int memberId)
+        {
+            int familyId = 0;
+
+            using (bkContext context = new bkContext())
+            {
+                familyId = context.FamilyMemberAssociations.Where(x => x.MemberId == memberId && x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault();
+            }
+
+            return Ok(familyId);
+        }
     }
 }
 
