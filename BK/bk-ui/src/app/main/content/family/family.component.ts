@@ -35,7 +35,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     private _confirmation: ConfirmationService, private location: Location,
     private cdr: ChangeDetectorRef) {
 
-    this.route.params.subscribe(params => {      
+    this.route.params.takeUntil(this.destroyed$).subscribe(params => {      
         this.familyId = params.familyId;      
 
       this.initializeComponent();

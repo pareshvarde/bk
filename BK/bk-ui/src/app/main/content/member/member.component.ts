@@ -45,7 +45,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location,
     private _confirmation: ConfirmationService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
 
-    this.route.params.subscribe(params => {
+    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
       else

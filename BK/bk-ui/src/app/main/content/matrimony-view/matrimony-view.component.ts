@@ -36,7 +36,7 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, 
     private location: Location, public dialog: MatDialog) {
-      this.route.params.subscribe(params => {
+      this.route.params.takeUntil(this.destroyed$).subscribe(params => {
         
         if (params.memberId > 0)
           this.memberId = params.memberId;

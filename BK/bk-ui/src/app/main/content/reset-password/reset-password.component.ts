@@ -19,7 +19,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   resetToken: string
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService, private alertService: NotificationsService) {    
-    this.route.params.subscribe(params => this.resetToken = params.token);
+    this.route.params.takeUntil(this.destroyed$).subscribe(params => this.resetToken = params.token);
   }
 
   ngOnInit() {

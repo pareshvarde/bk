@@ -39,7 +39,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     private _confirmation: ConfirmationService, private location: Location,
     private cdr: ChangeDetectorRef) {
 
-    this.route.params.subscribe(params => {
+    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
       if (params.memberId > 0)
         this.memberId = params.memberId;
       else

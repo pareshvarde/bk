@@ -33,7 +33,7 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
     private _confirmation: ConfirmationService, private location: Location,
     private cdr: ChangeDetectorRef) {
 
-    this.route.params.subscribe(params => {
+    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
       else
