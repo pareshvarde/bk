@@ -7,6 +7,13 @@
             <div class="h4">
                 <a [routerLink]="['/matrimony-view/', result.memberId]">{{result.name}}</a>
             </div>
+            <div fxLayoutAlign="start center">
+                <a [routerLink]="['/family', result.familyId]">
+                    <button matTooltip="Family Detail" mat-icon-button>
+                        <mat-icon>group</mat-icon>
+                    </button>
+                </a>
+            </div>
         </div>
         <div class="contentItem pt-0 line-height-1.75">
             <div class="h4">Age</div>
