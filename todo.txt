@@ -15,7 +15,6 @@ help icons on each page
 help videos
 ===========================	
 add member - add/exiting radio text has to be descriptive
-directory click take to family screen instead of member screen
 unsubscribe all subscriptions
 related to show only married men/females
 add maternal and paternal on member screen
