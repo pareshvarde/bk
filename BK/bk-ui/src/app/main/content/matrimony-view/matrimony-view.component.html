@@ -1,6 +1,6 @@
 <div id="matrimony-view" fxLayout="column">
   <div id="matrimony-view-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
-    <div *ngIf="model" id="matrimony-view-form">
+    <div *ngIf="model" id="matrimony-view-form" class="bk-large-card">
       <div fxLayout="row wrap" fxLayoutAlign="center center">
         <img *ngIf="model.memberModel.photoUrl" (click)="showPhoto()" class="avatar" src="{{model.memberModel.photoUrl}}" />
       </div>      

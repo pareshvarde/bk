@@ -12,22 +12,11 @@
         background-size: cover;
 
         #family-form-wrapper {
-            flex: 1 0 auto;            
-
-            @include media-breakpoint('xs') {
-                padding: 16px;
-            }
+            flex: 1 0 auto;                       
 
             mat-table{
                 text-align: left !important;
-            }
-
-            .bk-large-card {                
-                @include mat-elevation(7);
-                padding: 16px 16px 16px 16px;
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
+            }           
 
             .mobile-card{                
                 padding-bottom: 10px;
@@ -37,7 +26,7 @@
 
             #family-form {       
                 width: 100%;                         
-                padding: 16px 32px 16px 32px;
+                padding: 10px;
                 text-align: center;                  
 
                 @include media-breakpoint('xs') {
@@ -79,13 +68,7 @@
                         @include media-breakpoint('xs') {
                             
                         }
-                    }
-                  
-                    mat-radio-group{
-                        margin-right: 20px;
-                        margin-bottom: 20px;
-                        width: 300px;                        
-                    }
+                    }                                      
                 }     
             }
         }

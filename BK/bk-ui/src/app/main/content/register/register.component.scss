@@ -13,12 +13,8 @@
 
         #register-form-wrapper {
             flex: 1 0 auto;
-            padding: 32px;
-
-            @include media-breakpoint('xs') {
-                padding: 16px;
-            }
-
+            padding: 10px;
+            
             .information{
                 text-align: left !important;
             }
@@ -29,14 +25,9 @@
 
             #register-form {
           
-                padding: 16px 32px 16px 32px;                
+                padding: 16px;
                 text-align: center;
-                @include mat-elevation(7);
-
-                @include media-breakpoint('xs') {                    
-                    width: 100%;
-                }
-
+               
                 .logo {
                     width: 128px;
                     margin: 20px auto;
@@ -54,17 +45,6 @@
                     mat-form-field {
                         width: 300px;
                         margin-right: 20px;
-                    }
-
-                    mat-radio-group{
-                        width: 300px;
-                        margin-right: 20px;
-                        padding-top: 5px;
-                        padding-bottom: 15px;
-                    }
-                    
-                    mat-checkbox {
-                        margin: 0;
                     }
                   
                     .submit-button {
