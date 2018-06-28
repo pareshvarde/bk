@@ -9,7 +9,6 @@ birthday/anniversary wish email
 Multiple Matrimonial full photos
 About Us
 Remember Me
-Register/Login captcha
 help icons on each page
 help videos
 ===========================	
@@ -23,6 +22,8 @@ paternal family: show Not Available in case of married females
 include more details on matrimony search details	
 add student/ home maker/ looking for job/start up in occupation drop down
 Logged Image
+
+
 =============================
 angular memory and performance analyser
 sql query performance and indexes
