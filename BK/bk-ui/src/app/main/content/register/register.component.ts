@@ -19,6 +19,9 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   registerForm: FormGroup;
   formModel: RegisterModel;    
+  captchaResponse: string;
+  registerClicked: boolean = false;
+
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   
@@ -59,27 +62,37 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   processRegistration(){
+    this.registerClicked = true;
+
+    if (!this.captchaResponse)
+      return;
+
     if (this.registerForm.invalid)
     {      
       var el = <HTMLElement> document.querySelector("input.ng-invalid");
       if (el)      
         el.focus();      
       return;
-    }
-
+    }    
+    
+    this.formModel.captchaResponse = this.captchaResponse;
     this.formModel.dob.setMinutes(this.formModel.dob.getMinutes() - this.formModel.dob.getTimezoneOffset())
 
     this.dataService.register(this.formModel).takeUntil(this.destroyed$).subscribe(
-      (res) => {      
-        this.alertService.success("Your registration completed successfully. Please check your email for your username and password.");
-        this.router.navigate(['login']);
-      },
-      (err) => {        
-        if (err.errors)
-          this.alertService.error('', err.errors[0]);
-        else
-          this.alertService.error('', err);
-      }
-    );
+       (res) => {      
+         this.alertService.success("Your registration completed successfully. Please check your email for your username and password.");
+         this.router.navigate(['login']);
+       },
+       (err) => {         
+         if (err.errors)
+           this.alertService.error('', err.errors[0]);
+         else
+           this.alertService.error('', err);
+       }
+     );
+  }
+
+  handleCorrectCaptcha(event: any){    
+    this.captchaResponse = event;
   }
 }

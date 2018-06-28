@@ -44,6 +44,7 @@ import { MatrimonySearchComponent } from './content/matrimony-search/matrimony-s
 import { MatrimonySearchOptionsComponent } from '../core/components/matrimony-search-options/matrimony-search-options.component';
 import { BkImageCropperComponent } from '../core/components/bk-image-cropper/bk-image-cropper.component';
 import { BkImageViewerComponent } from '../core/components/bk-image-viewer/bk-image-viewer.component';
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -98,7 +99,8 @@ export function tokenGetter() {
         bkNavigationModule,             
         MomentModule,
         ScrollToModule.forRoot(),  
-        InfiniteScrollModule,      
+        InfiniteScrollModule,   
+        ReCaptchaModule,   
         JwtModule.forRoot({
             config: {
               tokenGetter: tokenGetter,

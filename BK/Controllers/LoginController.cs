@@ -18,6 +18,9 @@ namespace BK.Controllers
         [HttpPost]
         public IHttpActionResult Register(RegisterViewModel register)
         {
+            if (!VerifyCaptcha(register.CaptchaResponse))
+                return BadRequest("Please refresh page and try again");
+
             using (bkContext context = new bkContext())
             {
                 if (context.Members.Any(f => f.EmailAddress == register.EmailAddress.Trim()))
@@ -159,6 +162,20 @@ namespace BK.Controllers
             }
 
             return Ok(true);
+        }
+
+        private bool VerifyCaptcha(string response)
+        {
+            if (string.IsNullOrWhiteSpace(response))
+                return false;
+
+            string privateKey = "6LfMDkQUAAAAAP1j6rZuMVsN1VGP92-_NCkcNcp1";
+
+            var client = new System.Net.WebClient();
+            var reply = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", privateKey, response));
+            var captchaResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(reply);
+
+            return captchaResponse.success;
         }
     }
 }

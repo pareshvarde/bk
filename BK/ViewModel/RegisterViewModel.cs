@@ -60,6 +60,9 @@ namespace BK.ViewModel
         [JsonProperty("country")]
         public string Country { get; set; }
 
+        [JsonProperty("captchaResponse")]
+        public string CaptchaResponse { get; set; }
+    
     }
 
     public class RegisterViewModelValidator : AbstractValidator<RegisterViewModel>

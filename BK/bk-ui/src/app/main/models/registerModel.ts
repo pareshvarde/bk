@@ -15,5 +15,6 @@ export class RegisterModel{
     postalCode: string;
     state: string;
     country: string;
+    captchaResponse: string;
   }
   
