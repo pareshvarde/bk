@@ -13,8 +13,12 @@
 
         #matrimony-view-form-wrapper {
             flex: 1 0 auto;
-            padding: 10px;
-            
+            padding: 32px;
+
+            @include media-breakpoint('xs') {
+                padding: 16px;
+            }
+
             .avatar{
                 border-radius: 50%;
                 width: 100px !important;
@@ -25,9 +29,16 @@
 
             #matrimony-view-form {       
                 width: 100%;                         
+                padding: 16px 32px 16px 32px;
+                text-align: center;
                 
-                text-align: center;                            
-                
+                @include mat-elevation(7);
+
+                @include media-breakpoint('xs') {
+                    padding: 24px;
+                    width: 100%;
+                }
+             
                 .modifiedOn{
                     padding-bottom: 15px;
                 }

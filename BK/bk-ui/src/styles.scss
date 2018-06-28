@@ -4,10 +4,3 @@
 .mat-form-field-underline{
     transform: perspective(1px);
 }
-
-.bk-large-card {                
-    @include mat-elevation(7);
-    padding: 16px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}

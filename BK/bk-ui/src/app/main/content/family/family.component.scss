@@ -14,6 +14,10 @@
         #family-form-wrapper {
             flex: 1 0 auto;            
 
+            @include media-breakpoint('xs') {
+                padding: 16px;
+            }
+
             mat-table{
                 text-align: left !important;
             }
@@ -25,7 +29,14 @@
             mat-cell:first-child, mat-header-cell:first-child{
                 padding-left: 0px;
             }
-        
+
+            .bk-large-card {                
+                @include mat-elevation(7);
+                padding: 16px 16px 16px 16px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
             .mat-table{
                 background: inherit !important;
             }
@@ -79,8 +90,14 @@
 
             #family-form {       
                 width: 100%;                         
-                padding: 10px 10px 10px 10px;
-                text-align: center;                                                                         
+                padding: 16px 32px 16px 32px;
+                text-align: center;                                
+
+                @include media-breakpoint('xs') {
+                    padding-left: 0px;
+                    padding-right: 0px;
+                    width: 100%;
+                }                            
 
                 .title {
                     font-size: 20px;
@@ -107,7 +124,13 @@
                         @include media-breakpoint('xs') {
                             
                         }
-                    }                                      
+                    }
+                  
+                    mat-radio-group{
+                        margin-right: 20px;
+                        margin-bottom: 20px;
+                        width: 300px;                        
+                    }
                 }     
             }
         }
