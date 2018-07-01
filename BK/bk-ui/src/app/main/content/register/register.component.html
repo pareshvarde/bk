@@ -1,167 +1,169 @@
 <div id="register" fxLayout="column">
   <div id="register-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="register-form">
-      <div class="logo">
-        <img src="assets/images/logo_2.png">
-      </div>
-
-      <div class="title">MEMBER REGISTRATION FORM</div>
-
-      <div class="information" fxLayout="column" fxLayoutAlign="top left">
-        <ol>
-          <li>Please provide correct email address. You will receive your login information on provided email address</li>
-          <li>Try to provide both Phone number and Aadhaar number to keep you unique in the system</li>
-          <li>This registration will create a new family for you (Head Of Family as you). If you want to be a member of existing
-            family please ask them to add you with your email address</li>
-        </ol>
-      </div>
-      <br/>
-
-      <form name="registerForm" [formGroup]="registerForm" novalidate>
-
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.firstName | titlecase" (ngModelChange)="formModel.firstName=$event" placeholder="First Name"
-              formControlName="firstName" bkAutofocus>
-            <mat-error *ngIf="registerForm.controls['firstName'].hasError('required')">Please enter a first name</mat-error>
-            <mat-error *ngIf="registerForm.controls['firstName'].hasError('noWhitespaceRequired')">Only letters with no space</mat-error>
-            <mat-error *ngIf="registerForm.controls['firstName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.lastName | titlecase" (ngModelChange)="formModel.lastName=$event" placeholder="Last Name"
-              formControlName="lastName">
-            <mat-error *ngIf="registerForm.controls['lastName'].hasError('required')">Please enter a last name</mat-error>
-            <mat-error *ngIf="registerForm.controls['lastName'].hasError('noWhitespaceRequired')">Only letters with no space</mat-error>
-            <mat-error *ngIf="registerForm.controls['lastName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
-        </div>
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <input maxlength="100" type="email" matInput [ngModel]="formModel.email | lowercase" (ngModelChange)="formModel.email=$event"
-              placeholder="Email" formControlName="email">
-            <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Please enter a valid email address</mat-error>
-            <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Please enter a email address</mat-error>
-            <mat-error *ngIf="registerForm.controls['email'].hasError('maxlength')">Maximum 100 characters allowed</mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input type="number" matInput [(ngModel)]="formModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
-            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('noWhitespaceRequired')">Only numbers without white space</mat-error>
-            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('numberRequired')">Please enter a valid phone number</mat-error>
-            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('required')">Please enter a valid phone number</mat-error>
-            <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('maxlength')">Maximum 15 characters allowed</mat-error>
-          </mat-form-field>
-
-          <mat-form-field>
-            <input type="number" matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
-            <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('numberRequired')">Please enter a valid aadhaar number</mat-error>
-            <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('noWhitespaceRequired')">Only numbers without white space</mat-error>
-            <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('maxlength')">Maximum 16 characters allowed</mat-error>
-          </mat-form-field>
+      <div class="bk-large-card">
+        <div class="logo">
+          <img src="assets/images/logo_2.png">
         </div>
 
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <mat-select placeholder="Category" [(ngModel)]="formModel.categoryId" formControlName="categoryId">
-              <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
-                {{ n.category }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="registerForm.controls['categoryId'].hasError('required')">Please provide a category</mat-error>
-          </mat-form-field>
+        <div class="title">MEMBER REGISTRATION FORM</div>
 
-          <mat-form-field>
-            <mat-select placeholder="Nukh" [(ngModel)]="formModel.nukhId" formControlName="nukhId">
-              <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
-                {{ n.nukh }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="registerForm.controls['nukhId'].hasError('required')">Please provide a nukh</mat-error>
-          </mat-form-field>
+        <div class="information" fxLayout="column" fxLayoutAlign="top left">
+          <ol>
+            <li>Please provide correct email address. You will receive your login information on provided email address</li>
+            <li>Try to provide both Phone number and Aadhaar number to keep you unique in the system</li>
+            <li>This registration will create a new family for you (Head Of Family as you). If you want to be a member of existing
+              family please ask them to add you with your email address</li>
+          </ol>
         </div>
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <mat-select placeholder="Gender" [(ngModel)]="formModel.gender" formControlName="gender">
-              <mat-option value=null></mat-option>
-              <mat-option [value]=true>
-                Male
-              </mat-option>
-              <mat-option [value]=false>
-                Female
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="registerForm.controls['gender'].hasError('required')">Please select gender</mat-error>
-          </mat-form-field>
+        <br/>
 
-          <mat-form-field>
-            <input matInput [(ngModel)]="formModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
-              formControlName="dob">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="registerForm.controls['dob'].hasError('required')">Please provide a date of birth</mat-error>
-          </mat-form-field>
-        </div>
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.address1 | titlecase" (ngModelChange)="formModel.address1=$event" placeholder="Address 1"
-              formControlName="address1">
-            <mat-error *ngIf="registerForm.controls['address1'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
+        <form name="registerForm" [formGroup]="registerForm" novalidate>
 
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.address2 | titlecase" (ngModelChange)="formModel.address2=$event" placeholder="Address 2"
-              formControlName="address2">
-            <mat-error *ngIf="registerForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.firstName | titlecase" (ngModelChange)="formModel.firstName=$event" placeholder="First Name"
+                formControlName="firstName" bkAutofocus>
+              <mat-error *ngIf="registerForm.controls['firstName'].hasError('required')">Please enter a first name</mat-error>
+              <mat-error *ngIf="registerForm.controls['firstName'].hasError('noWhitespaceRequired')">Only letters with no space</mat-error>
+              <mat-error *ngIf="registerForm.controls['firstName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.city | titlecase" (ngModelChange)="formModel.city=$event" placeholder="City"
-              formControlName="city">
-            <mat-error *ngIf="registerForm.controls['city'].hasError('required')">Please provide a city</mat-error>
-            <mat-error *ngIf="registerForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.lastName | titlecase" (ngModelChange)="formModel.lastName=$event" placeholder="Last Name"
+                formControlName="lastName">
+              <mat-error *ngIf="registerForm.controls['lastName'].hasError('required')">Please enter a last name</mat-error>
+              <mat-error *ngIf="registerForm.controls['lastName'].hasError('noWhitespaceRequired')">Only letters with no space</mat-error>
+              <mat-error *ngIf="registerForm.controls['lastName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <input maxlength="100" type="email" matInput [ngModel]="formModel.email | lowercase" (ngModelChange)="formModel.email=$event"
+                placeholder="Email" formControlName="email">
+              <mat-error *ngIf="registerForm.controls['email'].hasError('email')">Please enter a valid email address</mat-error>
+              <mat-error *ngIf="registerForm.controls['email'].hasError('required')">Please enter a email address</mat-error>
+              <mat-error *ngIf="registerForm.controls['email'].hasError('maxlength')">Maximum 100 characters allowed</mat-error>
+            </mat-form-field>
 
-        </div>
-        <div fxLayout="row wrap">
+            <mat-form-field>
+              <input type="number" matInput [(ngModel)]="formModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+              <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('noWhitespaceRequired')">Only numbers without white space</mat-error>
+              <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('numberRequired')">Please enter a valid phone number</mat-error>
+              <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('required')">Please enter a valid phone number</mat-error>
+              <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('maxlength')">Maximum 15 characters allowed</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.district | titlecase" (ngModelChange)="formModel.district=$event" placeholder="District (Area)"
-              formControlName="district">
-          </mat-form-field>
+            <mat-form-field>
+              <input type="number" matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+              <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('numberRequired')">Please enter a valid aadhaar number</mat-error>
+              <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('noWhitespaceRequired')">Only numbers without white space</mat-error>
+              <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('maxlength')">Maximum 16 characters allowed</mat-error>
+            </mat-form-field>
+          </div>
 
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.state | titlecase" (ngModelChange)="formModel.state=$event" placeholder="State"
-              formControlName="state">
-            <mat-error *ngIf="registerForm.controls['state'].hasError('required')">Please provide a state</mat-error>
-            <mat-error *ngIf="registerForm.controls['state'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <mat-select placeholder="Category" [(ngModel)]="formModel.categoryId" formControlName="categoryId">
+                <mat-option *ngFor="let n of CATEGORIES_DATA_LOCAL" [value]="n.id">
+                  {{ n.category }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="registerForm.controls['categoryId'].hasError('required')">Please provide a category</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <input maxlength="10" matInput [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
-            <mat-error *ngIf="registerForm.controls['postalCode'].hasError('required')">Please provide a postal code</mat-error>
-            <mat-error *ngIf="registerForm.controls['postalCode'].hasError('maxlength')">Maximum 10 characters allowed</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Nukh" [(ngModel)]="formModel.nukhId" formControlName="nukhId">
+                <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
+                  {{ n.nukh }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="registerForm.controls['nukhId'].hasError('required')">Please provide a nukh</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <mat-select placeholder="Gender" [(ngModel)]="formModel.gender" formControlName="gender">
+                <mat-option value=null></mat-option>
+                <mat-option [value]=true>
+                  Male
+                </mat-option>
+                <mat-option [value]=false>
+                  Female
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="registerForm.controls['gender'].hasError('required')">Please select gender</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="formModel.country | titlecase" (ngModelChange)="formModel.country=$event" placeholder="Country"
-              formControlName="country">
-            <mat-error *ngIf="registerForm.controls['country'].hasError('required')">Please provide a country</mat-error>
-            <mat-error *ngIf="registerForm.controls['country'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="center center">          
-            <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" site_key="6LfMDkQUAAAAAKP9qDi-85Ptb3o108ldtqB7jM2B"></re-captcha>            
-        </div>
-        <div *ngIf="registerClicked && !captchaResponse" fxLayout="row" fxLayoutAlign="center center" class="captchaMessage">
+            <mat-form-field>
+              <input matInput [(ngModel)]="formModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
+                formControlName="dob">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              <mat-error *ngIf="registerForm.controls['dob'].hasError('required')">Please provide a date of birth</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.address1 | titlecase" (ngModelChange)="formModel.address1=$event" placeholder="Address 1"
+                formControlName="address1">
+              <mat-error *ngIf="registerForm.controls['address1'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.address2 | titlecase" (ngModelChange)="formModel.address2=$event" placeholder="Address 2"
+                formControlName="address2">
+              <mat-error *ngIf="registerForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.city | titlecase" (ngModelChange)="formModel.city=$event" placeholder="City"
+                formControlName="city">
+              <mat-error *ngIf="registerForm.controls['city'].hasError('required')">Please provide a city</mat-error>
+              <mat-error *ngIf="registerForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+
+          </div>
+          <div fxLayout="row wrap">
+
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.district | titlecase" (ngModelChange)="formModel.district=$event" placeholder="District (Area)"
+                formControlName="district">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.state | titlecase" (ngModelChange)="formModel.state=$event" placeholder="State"
+                formControlName="state">
+              <mat-error *ngIf="registerForm.controls['state'].hasError('required')">Please provide a state</mat-error>
+              <mat-error *ngIf="registerForm.controls['state'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input maxlength="10" matInput [(ngModel)]="formModel.postalCode" placeholder="Postal Code" formControlName="postalCode">
+              <mat-error *ngIf="registerForm.controls['postalCode'].hasError('required')">Please provide a postal code</mat-error>
+              <mat-error *ngIf="registerForm.controls['postalCode'].hasError('maxlength')">Maximum 10 characters allowed</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="formModel.country | titlecase" (ngModelChange)="formModel.country=$event" placeholder="Country"
+                formControlName="country">
+              <mat-error *ngIf="registerForm.controls['country'].hasError('required')">Please provide a country</mat-error>
+              <mat-error *ngIf="registerForm.controls['country'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" site_key="6LfMDkQUAAAAAKP9qDi-85Ptb3o108ldtqB7jM2B"></re-captcha>
+          </div>
+          <div *ngIf="registerClicked && !captchaResponse" fxLayout="row" fxLayoutAlign="center center" class="captchaMessage">
             Please verify you are not a robot
-        </div>
+          </div>
 
-        <button mat-raised-button (click)="processRegistration()" color="accent" class="submit-button" aria-label="REGISTER">
-          REGISTER
-        </button>
+          <button mat-raised-button (click)="processRegistration()" color="accent" class="submit-button" aria-label="REGISTER">
+            REGISTER
+          </button>
 
-      </form>
+        </form>
+      </div>
     </div>
   </div>
 </div>

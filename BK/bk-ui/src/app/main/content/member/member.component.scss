@@ -12,24 +12,12 @@
         background-size: cover;
 
         #member-form-wrapper {
-            flex: 1 0 auto;
-            padding: 32px;
-
-            @include media-breakpoint('xs') {
-                padding: 16px;
-            }
+            flex: 1 0 auto;                     
 
             #member-form {       
                 width: 100%;                         
-                padding: 16px 32px 16px 32px;
-                text-align: center;
-                
-                @include mat-elevation(7);
-
-                @include media-breakpoint('xs') {
-                    padding: 24px;
-                    width: 100%;
-                }
+                padding: 10px;
+                text-align: center;                                
 
                 .modifiedOn{
                     padding-bottom: 15px;
@@ -55,41 +43,17 @@
                 mat-form-field {
                     width: 300px;
                     margin-right: 20px;
-                }
-
-                mat-radio-group{
-                    width: 300px;
-
-                    @include media-breakpoint('xs') {
-                        margin-bottom: 16px;
-                    }
-                }
+                }              
                 
                 form {
                     width: 100%;
                     text-align: left;
-                    padding-top: 1px;                   
+                    padding-top: 1px;                                       
 
                     .submit-button {                        
                         margin: 16px;
                         display: block;
-
-                        @include media-breakpoint('xs') {
-                            
-                        }
-                    }
-                  
-                    mat-radio-group{
-                        margin-right: 20px;
-                        margin-bottom: 20px;
-                        width: 300px;                        
-                    }
-
-                    mat-checkbox{
-                        margin-right: 20px;
-                        margin-bottom: 20px;
-                        width: 300px;                        
-                    }
+                    }                                    
                 }                              
             }
         }
