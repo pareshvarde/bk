@@ -17,12 +17,12 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-radio-group *ngIf="addMode" style="padding-bottom: 15px;" fxLayoutAlign="start center" [(ngModel)]="existingAdd">
-            <mat-radio-button class="mr-8" [value]="false">
-              New
+          <mat-radio-group *ngIf="addMode" fxLayout="column" style="padding-bottom: 15px; line-height: 1.75;" fxLayoutAlign="start start" [(ngModel)]="existingAdd">
+            <mat-radio-button [value]="false">
+              Add New Member
             </mat-radio-button>
-            <mat-radio-button class="mr-8" [value]="true">
-              Existing
+            <mat-radio-button [value]="true">
+              Add Existing Member
             </mat-radio-button>
           </mat-radio-group>
         </div>

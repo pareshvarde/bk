@@ -12,7 +12,6 @@ Remember Me
 help icons on each page
 help videos
 ===========================	
-add member - add/exiting radio text has to be descriptive
 related to show only married men/females
 add maternal and paternal on member screen
 add maternal family link on matrimony screen
