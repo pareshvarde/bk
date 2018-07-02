@@ -54,34 +54,47 @@ namespace BK.Controllers
 
                 List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
 
-                MemberViewModel vm = new MemberViewModel()
+                MemberViewModel vm = new MemberViewModel();
+
+                vm.MemberID = member.MemberID;
+                vm.FirstName = member.FirstName;
+                vm.LastName = member.LastName;
+                vm.NickName = member.NickName;
+                vm.Email = member.EmailAddress;
+                vm.PhoneNumber = member.Phone;
+                vm.AadhaarNumber = member.AadhaarNumber;
+                vm.Gender = member.Gender;
+                vm.DOB = member.DOB;
+                vm.BirthPlace = member.BirthPlace;
+                vm.Alive = member.Alive;
+                vm.DOD = member.DOD;
+                vm.DeathPlace = member.DeathPlace;
+                vm.EducationLevel = member.EducationLevel;
+                vm.EducationField = member.EducationField;
+                vm.OccupationId = member.OccupationID;
+                vm.CompanyName = member.CompanyName;
+                vm.JobTitle = member.JobTitle;
+                vm.InstagramHandle = member.InstagramHandle;
+                vm.FacebookHandle = member.FacebookHandle;
+                vm.TwitterHandle = member.TwitterHandle;
+                vm.Married = member.Married;
+                vm.Anniversary = member.Anniversary;
+                vm.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);                
+                vm.ModifiedOn = member.ModifiedOn.HasValue ? member.ModifiedOn : member.CreatedOn;
+
+                GetMaternalFamily_Result mResult = context.GetMaternalFamily(member.MemberID).FirstOrDefault();
+                if (mResult != null)
                 {
-                    MemberID = member.MemberID,
-                    FirstName = member.FirstName,
-                    LastName = member.LastName,
-                    NickName = member.NickName,
-                    Email = member.EmailAddress,
-                    PhoneNumber = member.Phone,
-                    AadhaarNumber = member.AadhaarNumber,
-                    Gender = member.Gender,
-                    DOB = member.DOB,
-                    BirthPlace = member.BirthPlace,
-                    Alive = member.Alive,
-                    DOD = member.DOD,
-                    DeathPlace = member.DeathPlace,
-                    EducationLevel = member.EducationLevel,
-                    EducationField = member.EducationField,
-                    OccupationId = member.OccupationID,
-                    CompanyName = member.CompanyName,
-                    JobTitle = member.JobTitle,
-                    InstagramHandle = member.InstagramHandle,
-                    FacebookHandle = member.FacebookHandle,
-                    TwitterHandle = member.TwitterHandle,
-                    Married = member.Married,
-                    Anniversary = member.Anniversary,
-                    PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn),
-                    ModifiedOn = member.ModifiedOn.HasValue ? member.ModifiedOn : member.CreatedOn
-                };
+                    vm.MaternalFamilyId = mResult.MaternalFamilyID;
+                    vm.MaternalFamilyName = string.Format("{0}, {1}", mResult.MaternalFamilyName, mResult.MaternalFamilyAddress);
+                }
+
+                GetPaternalFamily_Result pResult = context.GetPaternalFamily(member.MemberID, member.Gender, member.Married).FirstOrDefault();
+                if (pResult != null)
+                {
+                    vm.PaternalFamilyId = pResult.PaternalFamilyID;
+                    vm.PaternalFamilyName = string.Format("{0}, {1}", pResult.PaternalFamilyName, pResult.PaternalFamilyAddress);
+                }
 
                 FamilyMemberAssociation fma = fmAssociation.FirstOrDefault(x => x.MemberId == memberId);
                 if (fma != null)

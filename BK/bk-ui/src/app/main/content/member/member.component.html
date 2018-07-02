@@ -17,7 +17,8 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-radio-group *ngIf="addMode" fxLayout="column" style="padding-bottom: 15px; line-height: 1.75;" fxLayoutAlign="start start" [(ngModel)]="existingAdd">
+          <mat-radio-group *ngIf="addMode" fxLayout="column" style="padding-bottom: 15px; line-height: 1.75;" fxLayoutAlign="start start"
+            [(ngModel)]="existingAdd">
             <mat-radio-button [value]="false">
               Add New Member
             </mat-radio-button>
@@ -237,6 +238,18 @@
                 <mat-error *ngIf="memberForm.controls['twitterHandle'].hasError('noWhitespaceRequired')">Please provide handle without space</mat-error>
                 <mat-error *ngIf="memberForm.controls['twitterHandle'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
               </mat-form-field>
+
+            </div>
+
+            <div style="line-height:1.75">
+              <div fxLayout="row wrap">Maternal Family:&nbsp;
+                <a *ngIf="memberModel.maternalFamilyId" [routerLink]="['/family/', memberModel.maternalFamilyId]">{{memberModel.maternalFamilyName}}</a>
+                <span *ngIf="!memberModel.maternalFamilyId">Not Available</span>
+              </div>
+              <div *ngIf="memberModel.married && !memberModel.gender" fxLayout="row wrap">Paternal Family:&nbsp;
+                <a *ngIf="memberModel.paternalFamilyId" [routerLink]="['/family/', memberModel.paternalFamilyId]">{{memberModel.paternalFamilyName}}</a>
+                <span *ngIf="!memberModel.paternalFamilyId">Not Available</span>
+              </div>
             </div>
 
             <div *ngIf="(editMode || addMode) && memberModel.canEdit" fxLayout="row" fxLayoutAlign="center center">

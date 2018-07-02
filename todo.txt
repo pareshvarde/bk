@@ -13,10 +13,6 @@ help icons on each page
 help videos
 ===========================	
 related to show only married men/females
-add maternal and paternal on member screen
-add maternal family link on matrimony screen
-maternal family: show Not Available
-paternal family: show Not Available in case of married females
 include more details on matrimony search details	
 add student/ home maker/ looking for job/start up in occupation drop down
 Logged Image

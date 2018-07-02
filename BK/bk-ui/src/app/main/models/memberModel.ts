@@ -28,6 +28,10 @@ export class MemberModel {
     defaultFamily: boolean;
     photoUrl: string;    
     modifiedOn: Date;
+    paternalFamilyId: number;
+    paternalFamilyName: string;    
+    maternalFamilyId: number;
+    maternalFamilyName: string;    
     canEdit: boolean;
 
     constructor() { }

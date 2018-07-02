@@ -1,7 +1,7 @@
 <div id="family" fxLayout="column">
   <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="family-form">
-      <div class="title" *ngIf="model.hofFirstName">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>    
+      <div class="title" *ngIf="model.hofFirstName">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
       <div *ngIf="model.approvals.length > 0" class="bk-card">
         <div fxLayout="row">
           <span class="mat-title">Pending Approvals</span>
@@ -52,17 +52,20 @@
           </div>
           <div fxLayout="row wrap">
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="model.familyNative | titlecase" (ngModelChange)="model.familyNative=$event" placeholder="Mool Niwasi" formControlName="familyNative">
+              <input maxlength="50" matInput [ngModel]="model.familyNative | titlecase" (ngModelChange)="model.familyNative=$event" placeholder="Mool Niwasi"
+                formControlName="familyNative">
               <mat-error *ngIf="familyForm.controls['familyNative'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="model.address1 | titlecase"  (ngModelChange)="model.address1=$event" placeholder="Address 1" formControlName="address1">
+              <input maxlength="50" matInput [ngModel]="model.address1 | titlecase" (ngModelChange)="model.address1=$event" placeholder="Address 1"
+                formControlName="address1">
               <mat-error *ngIf="familyForm.controls['address1'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="model.address2 | titlecase" (ngModelChange)="model.address2=$event" placeholder="Address 2" formControlName="address2">
+              <input maxlength="50" matInput [ngModel]="model.address2 | titlecase" (ngModelChange)="model.address2=$event" placeholder="Address 2"
+                formControlName="address2">
               <mat-error *ngIf="familyForm.controls['address2'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
@@ -70,18 +73,21 @@
           <div fxLayout="row wrap">
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="model.city | titlecase" (ngModelChange)="model.city=$event" placeholder="City/Village" formControlName="city">
+              <input maxlength="50" matInput [ngModel]="model.city | titlecase" (ngModelChange)="model.city=$event" placeholder="City/Village"
+                formControlName="city">
               <mat-error *ngIf="familyForm.controls['city'].hasError('required')">Please enter a city</mat-error>
               <mat-error *ngIf="familyForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="model.district | titlecase" (ngModelChange)="model.district=$event" placeholder="District (Area)" formControlName="district">
+              <input maxlength="50" matInput [ngModel]="model.district | titlecase" (ngModelChange)="model.district=$event" placeholder="District (Area)"
+                formControlName="district">
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="model.state | titlecase" (ngModelChange)="model.state=$event" placeholder="State" formControlName="state">
+              <input maxlength="50" matInput [ngModel]="model.state | titlecase" (ngModelChange)="model.state=$event" placeholder="State"
+                formControlName="state">
               <mat-error *ngIf="familyForm.controls['state'].hasError('required')">Please enter a state</mat-error>
               <mat-error *ngIf="familyForm.controls['state'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
@@ -94,7 +100,8 @@
             </mat-form-field>
 
             <mat-form-field [floatLabel]="this.familyForm.disabled ? 'always':'auto'">
-              <input maxlength="50" matInput [ngModel]="model.country | titlecase" (ngModelChange)="model.country=$event" placeholder="Country" formControlName="country">
+              <input maxlength="50" matInput [ngModel]="model.country | titlecase" (ngModelChange)="model.country=$event" placeholder="Country"
+                formControlName="country">
               <mat-error *ngIf="familyForm.controls['country'].hasError('required')">Please enter a country</mat-error>
               <mat-error *ngIf="familyForm.controls['country'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
@@ -194,19 +201,21 @@
               <mat-cell *matCellDef="let member">{{member.relation}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="maternal">
-                <mat-header-cell *matHeaderCellDef>
-                  <b>Maternal Family</b>
-                </mat-header-cell>
-                <mat-cell *matCellDef="let member">
-                    <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
-                </mat-cell>
-              </ng-container>
+              <mat-header-cell *matHeaderCellDef>
+                <b>Maternal Family</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">
+                <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
+                <span *ngIf="!member.maternalFamilyId">Not Available</span>
+              </mat-cell>
+            </ng-container>
             <ng-container matColumnDef="paternal">
               <mat-header-cell *matHeaderCellDef>
                 <b>Paternal Family</b>
               </mat-header-cell>
               <mat-cell *matCellDef="let member">
-                  <a *ngIf="member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
+                <a *ngIf="member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
+                <span *ngIf="!member.paternalFamilyId && member.married && !member.gender">Not Available</span>
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
@@ -236,8 +245,14 @@
               <span *ngIf="!member.married">No</span>
             </div>
             <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>
-            <div *ngIf="member.maternalFamilyId" fxLayout="row wrap">Maternal Family:&nbsp;<a  [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a></div>
-            <div *ngIf="member.paternalFamilyId" fxLayout="row wrap">Paternal Family:&nbsp;<a  [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a></div>            
+            <div fxLayout="row wrap">Maternal Family:&nbsp;
+              <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
+              <span *ngIf="!member.maternalFamilyId">Not Available</span>
+            </div>
+            <div *ngIf="member.married && !member.gender" fxLayout="row wrap">Paternal Family:&nbsp;
+              <a *ngIf="member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
+              <span *ngIf="!member.paternalFamilyId">Not Available</span>
+            </div>
             <div fxLayout="row wrap" fxLayoutAlign="end start">
               <button matTooltip="Delete Member" *ngIf="model.canEdit" mat-icon-button (click)="deleteMember(member.memberId, member.name)">
                 <mat-icon>delete</mat-icon>

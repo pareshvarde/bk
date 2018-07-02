@@ -41,6 +41,8 @@ export class FamilyMemberModel{
     relationTypeId: number;
     paternalFamilyId: number;
     paternalFamilyName: string;    
+    maternalFamilyId: number;
+    maternalFamilyName: string;    
     matrimonialExists: boolean;
     age: number;
 }

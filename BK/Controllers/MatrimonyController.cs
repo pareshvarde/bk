@@ -111,7 +111,21 @@ namespace BK.Controllers
 
                 model.MemberModel.ModifiedOn = mat.ModifiedOn.HasValue ? mat.ModifiedOn : mat.CreatedOn;                
                 if (member.ModifiedOn > model.MemberModel.ModifiedOn)
-                    model.MemberModel.ModifiedOn = member.ModifiedOn;                
+                    model.MemberModel.ModifiedOn = member.ModifiedOn;
+
+                GetMaternalFamily_Result mResult = context.GetMaternalFamily(member.MemberID).FirstOrDefault();
+                if (mResult != null)
+                {
+                    model.MemberModel.MaternalFamilyId = mResult.MaternalFamilyID;
+                    model.MemberModel.MaternalFamilyName = string.Format("{0}, {1}", mResult.MaternalFamilyName, mResult.MaternalFamilyAddress);
+                }
+
+                GetPaternalFamily_Result pResult = context.GetPaternalFamily(member.MemberID, member.Gender, member.Married).FirstOrDefault();
+                if (pResult != null)
+                {
+                    model.MemberModel.PaternalFamilyId = pResult.PaternalFamilyID;
+                    model.MemberModel.PaternalFamilyName = string.Format("{0}, {1}", pResult.PaternalFamilyName, pResult.PaternalFamilyAddress);
+                }
 
                 return Ok(model);
             }

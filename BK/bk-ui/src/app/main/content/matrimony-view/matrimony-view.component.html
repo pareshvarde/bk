@@ -263,6 +263,11 @@
             </mat-form-field>
           </div>
 
+          <div fxLayout="row wrap">Maternal Family:&nbsp;
+              <a *ngIf="model.memberModel.maternalFamilyId" [routerLink]="['/family/', model.memberModel.maternalFamilyId]">{{memberModel.maternalFamilyName}}</a>
+              <span *ngIf="!model.memberModel.maternalFamilyId">Not Available</span>
+          </div>
+
           <div fxLayout="row" fxLayoutAlign="center center">
             <button matTooltip="View Family" mat-raised-button fxHide fxShow.gt-sm [routerLink]="['/family/', model.memberModel.familyId]"
               color="accent" class="submit-button" aria-label="FAMILY">
@@ -279,6 +284,7 @@
               <mat-icon>backspace</mat-icon>
             </button>
           </div>
+
         </form>
       </div>
     </div>
