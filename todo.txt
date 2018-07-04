@@ -14,7 +14,7 @@ help videos
 ===========================	
 related to show only married men/females and ignore self
 include more details on matrimony search details	
-don't use function calls in html which creates a multiple calls, use properties instead
+don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
 =============================
 angular memory and performance analyser
 sql query performance and indexes
