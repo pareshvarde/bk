@@ -247,9 +247,15 @@ namespace BK.Controllers
                     item.FamilyId = result.FamilyID;
                     item.Gender = result.Gender;
                     item.DOB = result.DOB;
-                    item.OccupationId = result.OccupationID;
-                    item.Education = $"{result.EducationLevel}-{result.EducationField}".TrimStart('-');
-                    
+                    item.OccupationId = result.OccupationID > 0 ? result.OccupationID : (int?) null;
+
+                    if (!string.IsNullOrWhiteSpace(result.EducationField) && !string.IsNullOrWhiteSpace(result.EducationLevel))
+                        item.Education = $"{result.EducationLevel} - {result.EducationField}";
+                    else if (!string.IsNullOrWhiteSpace(result.EducationLevel))
+                        item.Education = $"{result.EducationLevel}";
+                    else if (!string.IsNullOrWhiteSpace(result.EducationField))
+                        item.Education = $"{result.EducationField}";
+
                     item.PhotoUrl = MemberWrapper.ProfilePhoto(result.MemberID, result.Gender, result.ModifiedOn);
 
                     mvm.Results.Add(item);

@@ -44,8 +44,14 @@ namespace BK.ViewModel
         public string PhotoUrl { get; set; }
 
         [JsonProperty("dob")]
-        public DateTime? DOB { get; set; }    
-        
+        public DateTime? DOB { get; set; }
+
+        [JsonProperty("dod")]
+        public DateTime? DOD { get; set; }
+
+        [JsonProperty("alive")]
+        public bool? Alive { get; set; }
+
         [JsonProperty("education")]
         public string Education { get; set; }
 
@@ -59,8 +65,14 @@ namespace BK.ViewModel
             {
                 if (!this.DOB.HasValue)
                     return 0;
-                
+
+                if (this.Alive != null && !this.Alive.Value && !this.DOD.HasValue)
+                    return 0;
+
                 int age = DateTime.Today.Year - DOB.Value.Year;
+
+                if (this.Alive != null && !this.Alive.Value)
+                    age = this.DOD.Value.Year - DOB.Value.Year;
 
                 if (age > 0 && this.DOB.Value > DateTime.Today.AddYears(-age))
                     age--;

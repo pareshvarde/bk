@@ -5,6 +5,7 @@ import { MatrimonySearchParameter } from '../../models/matrimonySearchParameter'
 import { ReplaySubject } from 'rxjs';
 import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
 import { MatDialog } from '@angular/material';
+import { OCCUPATIONS_DATA } from '../../data/occupations';
 
 @Component({
   selector: 'app-matrimony-search',
@@ -20,6 +21,7 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
   pageNumber: number = 0;
   hasResult: boolean;
   readonly PAGE_SIZE: number = 25;
+  readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
   constructor(private dataService: bkDataService, private alertService: NotificationsService, public dialog: MatDialog) {
     this.searchParameter = new MatrimonySearchParameter();
@@ -44,6 +46,14 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
     this.performSearch();
   }
 
+  getOccupation(occupationId: number): string{
+    var filteredResult = this.OCCUPATION_DATA_LOCAL.filter(x => x.id == occupationId);
+    if (filteredResult && filteredResult.length > 0)
+      return filteredResult[0].occupation;
+    else
+      return "";
+  }
+
   performSearch() {
 
     if (!this.hasResult)
@@ -61,6 +71,7 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
           this.hasResult = true;
 
         res.result.results.forEach(element => {
+          element.occupation = this.getOccupation(element.occupationId);
           this.results.push(element);
         });
 
