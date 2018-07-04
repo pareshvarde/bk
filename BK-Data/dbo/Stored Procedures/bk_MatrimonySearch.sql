@@ -50,8 +50,9 @@ BEGIN
 			f.Country,
 			m.Gender,
 			m.DOB,
-			m.Alive,
-			m.DOD,
+			m.EducationField,
+			m.EducationLevel,
+			m.OccupationID,
 			m.ModifiedOn
 		FROM
 			Members m 
