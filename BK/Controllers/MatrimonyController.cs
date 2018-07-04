@@ -248,6 +248,7 @@ namespace BK.Controllers
                     item.Gender = result.Gender;
                     item.DOB = result.DOB;
                     item.OccupationId = result.OccupationID > 0 ? result.OccupationID : (int?) null;
+                    item.MonthlyIncome = result.MonthlyIncome > 0 ? result.MonthlyIncome : (int?)null;
 
                     if (!string.IsNullOrWhiteSpace(result.EducationField) && !string.IsNullOrWhiteSpace(result.EducationLevel))
                         item.Education = $"{result.EducationLevel} - {result.EducationField}";

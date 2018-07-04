@@ -57,6 +57,9 @@ namespace BK.ViewModel
 
         [JsonProperty("occupationId")]
         public int? OccupationId { get; set; }
+
+        [JsonProperty("monthlyIncome")]
+        public int? MonthlyIncome { get; set; }
       
         [JsonProperty("age")]
         public int Age

@@ -632,6 +632,7 @@
           <Property Type="String" Name="EducationLevel" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="OccupationID" Nullable="false" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
+          <Property Type="Int32" Name="MonthlyIncome" Nullable="false" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -866,6 +867,7 @@
                 <ScalarProperty Name="EducationLevel" ColumnName="EducationLevel" />
                 <ScalarProperty Name="OccupationID" ColumnName="OccupationID" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="MonthlyIncome" ColumnName="MonthlyIncome" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

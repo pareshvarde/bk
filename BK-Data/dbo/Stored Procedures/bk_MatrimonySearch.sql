@@ -52,8 +52,9 @@ BEGIN
 			m.DOB,
 			m.EducationField,
 			m.EducationLevel,
-			m.OccupationID,
-			m.ModifiedOn
+			m.OccupationID,			
+			m.ModifiedOn,
+			mat.MonthlyIncome
 		FROM
 			Members m 
 			JOIN Matrimonials mat ON mat.MemberID = m.MemberID

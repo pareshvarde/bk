@@ -30,5 +30,6 @@ namespace BK.Context
         public string EducationLevel { get; set; }
         public int OccupationID { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
+        public int MonthlyIncome { get; set; }
     }
 }
