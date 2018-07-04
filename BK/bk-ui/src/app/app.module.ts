@@ -18,6 +18,9 @@ import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { bkAuthService } from './main/services/auth-service';
 import { AuthGuard, LoggedInGuard } from './main/guards/auth-guard';
+import { GlobalService } from './main/services/global-service';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { bkDataService } from './main/services/bk-data.service';
 
 @NgModule({
     declarations: [
@@ -44,8 +47,11 @@ import { AuthGuard, LoggedInGuard } from './main/guards/auth-guard';
         },
         {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
         bkAuthService,
+        bkDataService,
         AuthGuard,
-        LoggedInGuard
+        GlobalService,
+        LoggedInGuard,
+        ConfirmationService
     ],
     bootstrap   : [
         AppComponent

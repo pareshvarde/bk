@@ -22,7 +22,7 @@
 
             <button *ngIf="authService.authenticated()" mat-button [matMenuTriggerFor]="userMenu" class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <img class="avatar" src="assets/images/avatars/profile.jpg">
+                    <img id="profileAvatar" class="avatar" [src]="globalService.avatarUrl">
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{authService.name()}}</span>
                     <mat-icon clsas="s-16">keyboard_arrow_down</mat-icon>
                 </div>

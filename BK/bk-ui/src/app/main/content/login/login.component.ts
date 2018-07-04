@@ -6,18 +6,19 @@ import { Response } from '@angular/http/src/static_response';
 import { NotificationsService } from 'angular2-notifications';
 import { ReplaySubject } from 'rxjs';
 import { bkAuthService } from '../../services/auth-service';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss']  
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   loginForm: FormGroup;  
 
-  constructor(private router: Router, private dataService: bkDataService,
+  constructor(private router: Router, private dataService: bkDataService, private globalService: GlobalService,
     private alertService: NotificationsService, private authService: bkAuthService) 
   { 
    
@@ -28,7 +29,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(100)]),
       password: new FormControl('', Validators.required),
       rememberMe: new FormControl(false, null)
-    }); 
+    });       
   }
 
   ngOnDestroy() {
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       (res) =>{              
         let result = JSON.parse((<any>res)._body)        
         localStorage.setItem('token', result.access_token);
+        this.globalService.setAvatarUrl();
         this.loadFamily();
       },
       (err) =>{                  

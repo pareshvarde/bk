@@ -16,6 +16,7 @@ import { ReplaySubject } from 'rxjs';
 import { MatDialog } from '@angular/material';
 import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
 import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-member',
@@ -43,7 +44,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private alertService: NotificationsService, public authService: bkAuthService, private location: Location,
-    private _confirmation: ConfirmationService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
+    private _confirmation: ConfirmationService, public globalService: GlobalService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
 
     this.route.params.takeUntil(this.destroyed$).subscribe(params => {
       if (params.familyId > 0)
@@ -386,6 +387,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.dataService.uploadProfilePhoto({ memberId: this.memberId, image: content }).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.memberModel.photoUrl = content;
+        this.globalService.avatarUrl = content;
       },
       (err) => {
         if (err.errors)

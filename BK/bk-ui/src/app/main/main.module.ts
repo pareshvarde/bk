@@ -29,12 +29,9 @@ import { ChangePasswordComponent } from './content/change-password/change-passwo
 import { RegisterComponent } from './content/register/register.component';
 import { FamilyComponent } from './content/family/family.component';
 import { MemberComponent } from './content/member/member.component';
-import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { ForkComponent } from './content/fork/fork.component';
 import { CallbackPipe } from './pipes/callback.pipe';
 import { MatrimonyComponent } from './content/matrimony/matrimony.component';
-import { bkAuthService } from './services/auth-service';
-import { bkDataService } from './services/bk-data.service';
 import { MatrimonyViewComponent } from './content/matrimony-view/matrimony-view.component';
 import { DirectoryComponent } from './content/directory/directory.component';
 import { JwtModule } from '@auth0/angular-jwt';
@@ -87,9 +84,7 @@ export function tokenGetter() {
         BkImageViewerComponent
     ],
     providers:[
-        ConfirmationService,
-        bkAuthService,
-        bkDataService
+     
     ],
     imports     : [
         SharedModule,

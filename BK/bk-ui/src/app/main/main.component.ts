@@ -1,8 +1,10 @@
-import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, HostBinding, Inject, OnDestroy, OnInit, Renderer2, ViewEncapsulation} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { bkConfigService } from '../core/services/config.service';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
+import { GlobalService } from './services/global-service';
+import { bkAuthService } from './services/auth-service';
 
 @Component({
     selector     : 'bk-main',
@@ -21,6 +23,8 @@ export class bkMainComponent implements OnInit, OnDestroy
         private _elementRef: ElementRef,
         private config: bkConfigService,
         private platform: Platform,
+        private globalService: GlobalService,
+        private authService: bkAuthService,
         @Inject(DOCUMENT) private document: any
     )
     {
@@ -40,9 +44,11 @@ export class bkMainComponent implements OnInit, OnDestroy
     }
 
     ngOnInit()
-    {
+    { 
+        if (this.authService.authenticated())
+            this.globalService.setAvatarUrl();
     }
-
+       
     ngOnDestroy()
     {
         this.onSettingsChanged.unsubscribe();

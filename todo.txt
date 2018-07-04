@@ -15,7 +15,6 @@ help videos
 related to show only married men/females and ignore self
 include more details on matrimony search details	
 add student/ home maker/ looking for job/start up in occupation drop down
-Logged Image
 don't use function calls in html which creates a multiple calls, use properties instead
 =============================
 angular memory and performance analyser
