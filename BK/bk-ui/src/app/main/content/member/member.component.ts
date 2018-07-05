@@ -387,7 +387,9 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.dataService.uploadProfilePhoto({ memberId: this.memberId, image: content }).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.memberModel.photoUrl = content;
-        this.globalService.avatarUrl = content;
+
+        if (this.memberId === this.authService.memberId())
+          this.globalService.avatarUrl = content;
       },
       (err) => {
         if (err.errors)
