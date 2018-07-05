@@ -75,6 +75,13 @@ export class NavigationModel
                 'type'    : 'item',
                 'url'     : 'matrimony-search',
                 'icon'    : 'wc',    
+            },
+            {
+                'id'      : 'aboutus',
+                'title'   : 'About Us',
+                'type'    : 'item',
+                'url'     : 'aboutus',
+                'icon'    : 'group_work',    
             }
         ];
     }

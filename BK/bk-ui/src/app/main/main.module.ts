@@ -42,6 +42,7 @@ import { MatrimonySearchOptionsComponent } from '../core/components/matrimony-se
 import { BkImageCropperComponent } from '../core/components/bk-image-cropper/bk-image-cropper.component';
 import { BkImageViewerComponent } from '../core/components/bk-image-viewer/bk-image-viewer.component';
 import { ReCaptchaModule } from 'angular2-recaptcha';
+import { AboutusComponent } from './content/aboutus/aboutus.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -81,7 +82,8 @@ export function tokenGetter() {
         DirectoryComponent,
         MatrimonySearchComponent,
         BkImageCropperComponent,
-        BkImageViewerComponent
+        BkImageViewerComponent,
+        AboutusComponent
     ],
     providers:[
      
