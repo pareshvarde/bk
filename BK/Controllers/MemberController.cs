@@ -13,6 +13,7 @@ using System.Data.Entity.Core.Objects;
 using System.Drawing;
 using Newtonsoft.Json;
 using System.Dynamic;
+using System.Text.RegularExpressions;
 
 namespace BK.Controllers
 {
@@ -145,7 +146,11 @@ namespace BK.Controllers
                 else
                 {
                     member = new Member();
-                    member.Password = System.Web.Security.Membership.GeneratePassword(8, 0);
+                    
+                    string tPassword = System.Web.Security.Membership.GeneratePassword(8, 0);
+                    tPassword = Regex.Replace(tPassword, @"[^a-zA-Z0-9]", m => "9");
+                    member.Password = tPassword;
+
                     member.CreatedOn = DateTime.Now;
                     member.CreatedBy = LoggedInMemberId;
                     context.Members.Add(member);

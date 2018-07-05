@@ -9,6 +9,7 @@ using BK.Context;
 using System.IO;
 using System.Net.Mail;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace BK.Controllers
 {
@@ -41,7 +42,11 @@ namespace BK.Controllers
                 member.Phone = register.PhoneNumber;
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;
-                member.Password = System.Web.Security.Membership.GeneratePassword(8, 0);                
+
+                string tPassword= System.Web.Security.Membership.GeneratePassword(8, 0);
+                tPassword = Regex.Replace(tPassword, @"[^a-zA-Z0-9]", m => "9");
+                member.Password = tPassword;
+
                 member.Alive = true;
                 member.Active = true;
                 member.CreatedOn = DateTime.Now;
