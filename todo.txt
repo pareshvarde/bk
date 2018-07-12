@@ -13,6 +13,8 @@ help icons on each page
 help videos
 ===========================	
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
+use message box for not data update.
+show a message on add member screen to make sure they add unique member
 =============================
 angular memory and performance analyser
 sql query performance and indexes
