@@ -14,6 +14,14 @@ export class GlobalService implements OnDestroy {
         this.resetAvatar();        
     }
 
+    public alertOptions ={
+        overlay: true,
+        overlayClickToClose: true,
+        showCloseButton: false,
+        confirmText: 'OK',
+        declineText: 'No'
+    }
+
     setAvatarUrl() {        
 
         if (this.avatarLoaded){            

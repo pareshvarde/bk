@@ -6,6 +6,8 @@ import { Response } from '@angular/http/src/static_response';
 import { NotificationsService } from 'angular2-notifications';
 import { PasswordValidators } from 'ng2-validators'
 import { ReplaySubject } from 'rxjs';
+import { GlobalService } from '../../services/global-service';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
 
 @Component({
   selector: 'app-reset-password',
@@ -18,7 +20,9 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   resetPasswordForm: FormGroup;  
   resetToken: string
 
-  constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService, private alertService: NotificationsService) {    
+  constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService, 
+    private notificationService: NotificationsService, private confirmationService: ConfirmationService,
+    private globalService: GlobalService) {    
     this.route.params.takeUntil(this.destroyed$).subscribe(params => this.resetToken = params.token);
   }
 
@@ -49,14 +53,14 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     
     this.dataService.resetPassword(password, this.resetToken).takeUntil(this.destroyed$).subscribe(
       (res) => {
-          this.alertService.success("Password has been reset, Please login with your new password now.");
+          this.confirmationService.create("Error", "Password has been reset, Please login with your new password now.", this.globalService.alertOptions);                  
           this.router.navigate(['login']);
       },
       (err) => {
           if (err.errors)
-              this.alertService.error('', err.errors[0]);
+            this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
           else
-              this.alertService.error('', err);
+            this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
   );
   }

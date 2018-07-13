@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { bkDataService } from '../../services/bk-data.service';
-import { NotificationsService } from 'angular2-notifications';
 import { MatrimonySearchParameter } from '../../models/matrimonySearchParameter';
 import { ReplaySubject } from 'rxjs';
 import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
 import { MatDialog } from '@angular/material';
 import { OCCUPATIONS_DATA } from '../../data/occupations';
+import { GlobalService } from '../../services/global-service';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
 
 @Component({
   selector: 'app-matrimony-search',
@@ -23,7 +24,8 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
   readonly PAGE_SIZE: number = 25;
   readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
-  constructor(private dataService: bkDataService, private alertService: NotificationsService, public dialog: MatDialog) {
+  constructor(private dataService: bkDataService, public dialog: MatDialog, 
+    private confirmationService: ConfirmationService, private globalService: GlobalService) {
     this.searchParameter = new MatrimonySearchParameter();
   }
 
@@ -82,9 +84,9 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+        this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+        this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }

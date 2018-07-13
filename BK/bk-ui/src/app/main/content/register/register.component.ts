@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
-import { EmailValidators, UniversalValidators } from 'ng2-validators';
+import { UniversalValidators } from 'ng2-validators';
 import { bkDataService } from '../../services/bk-data.service';
-import { NotificationsService } from 'angular2-notifications';
 import { Router } from '@angular/router';
 import { RegisterModel } from '../../models/registerModel';
 import { CATEGORIES_DATA } from '../../data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { ReplaySubject } from 'rxjs';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   
   constructor(private router: Router, private dataService: bkDataService, 
-    private alertService: NotificationsService, private cdr: ChangeDetectorRef) 
+    private cdr: ChangeDetectorRef, private confirmationService: ConfirmationService, private globalService: GlobalService) 
   {         
     this.formModel = new RegisterModel();    
   }
@@ -79,15 +80,15 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.formModel.dob.setMinutes(this.formModel.dob.getMinutes() - this.formModel.dob.getTimezoneOffset())
 
     this.dataService.register(this.formModel).takeUntil(this.destroyed$).subscribe(
-       (res) => {      
-         this.alertService.success("Your registration completed successfully. Please check your email for your username and password.");
-         this.router.navigate(['login']);
+       (res) => {              
+          this.confirmationService.create("Error", "Your registration completed successfully. Please check your email for your username and password.", this.globalService.alertOptions);         
+          this.router.navigate(['login']);
        },
        (err) => {         
          if (err.errors)
-           this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
          else
-           this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
        }
      );
   }

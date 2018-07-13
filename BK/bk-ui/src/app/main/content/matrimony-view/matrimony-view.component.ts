@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { NotificationsService } from 'angular2-notifications';
 import { bkAuthService } from '../../services/auth-service';
 import { bkDataService } from '../../services/bk-data.service';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -14,6 +13,8 @@ import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
 import { ReplaySubject } from 'rxjs';
 import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
 import { MatDialog } from '@angular/material';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-matrimony-view',
@@ -34,8 +35,8 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
   readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;  
   
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService, 
-    private location: Location, public dialog: MatDialog) {
+    private confirmationService: ConfirmationService, public authService: bkAuthService, 
+    private location: Location, public dialog: MatDialog, private globalService: GlobalService) {
       this.route.params.takeUntil(this.destroyed$).subscribe(params => {
         
         if (params.memberId > 0)
@@ -104,9 +105,9 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);          
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }

@@ -13,8 +13,8 @@ import { HEIGHT_DATA } from '../../data/height'
 import { BODY_TYPE_DATA } from '../../data/bodyType';
 import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
-import { ResolveEmit } from '@jaspero/ng-confirmations';
 import { ReplaySubject } from 'rxjs';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-matrimony',
@@ -24,7 +24,7 @@ import { ReplaySubject } from 'rxjs';
 export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-  memberId: number;  
+  memberId: number;
   addMode: boolean;
   model: MatrimonyModel;
   matrimonyForm: FormGroup;
@@ -32,29 +32,29 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
   readonly BODYTYPE_DATA_LOCAL = BODY_TYPE_DATA;
-  readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;  
+  readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService, 
-    private _confirmation: ConfirmationService, private location: Location,
-    private cdr: ChangeDetectorRef) {
+    private notificationService: NotificationsService, public authService: bkAuthService,
+    private confirmationService: ConfirmationService, private location: Location,
+    private globalService: GlobalService, private cdr: ChangeDetectorRef) {
 
     this.route.params.takeUntil(this.destroyed$).subscribe(params => {
       if (params.memberId > 0)
         this.memberId = params.memberId;
       else
-        this.memberId = null;      
+        this.memberId = null;
 
       this.addMode = params.action === 'add'
-      
+
       this.initializeComponent();
     });
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
-  
+
   ngOnInit() {
     this.matrimonyForm = new FormGroup({
       maternalNukhId: new FormControl('', [Validators.required]),
@@ -87,9 +87,9 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.model = new MatrimonyModel();
 
     if (!this.addMode)
-      this.loadMatrimony();   
+      this.loadMatrimony();
     else
-      this.model.memberId = this.memberId; 
+      this.model.memberId = this.memberId;
   }
 
   loadMatrimony() {
@@ -99,33 +99,32 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
 
   save() {
-    if (this.matrimonyForm.invalid)
-    {      
-      var el = <HTMLElement> document.querySelector("input.ng-invalid");
-      if (el)      
-        el.focus();      
+    if (this.matrimonyForm.invalid) {
+      var el = <HTMLElement>document.querySelector("input.ng-invalid");
+      if (el)
+        el.focus();
       return;
     }
 
     this.dataService.saveMatrimony(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.alertService.success("Matrimony profile has been updated.");
+        this.notificationService.success("Matrimony profile has been updated.");
         this.matrimonyForm.markAsPristine();
         this.cancelEdit();
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }

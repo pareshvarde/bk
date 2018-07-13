@@ -17,7 +17,7 @@ export class bkContentComponent implements OnInit, OnDestroy {
     onSettingsChanged: Subscription;
     bkSettings: any;    
 
-    public alertOptions  = {
+    public notificationOptions  = {
         position: ["bottom", "right"],
         timeOut: 5000,
         lastOnBottom: true     

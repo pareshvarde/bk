@@ -2,11 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
 import { Router } from '@angular/router';
-import { Response } from '@angular/http/src/static_response';
-import { NotificationsService } from 'angular2-notifications';
 import { ReplaySubject } from 'rxjs';
 import { bkAuthService } from '../../services/auth-service';
 import { GlobalService } from '../../services/global-service';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;  
 
   constructor(private router: Router, private dataService: bkDataService, private globalService: GlobalService,
-    private alertService: NotificationsService, private authService: bkAuthService) 
+    private confirmationService: ConfirmationService,  private authService: bkAuthService) 
   { 
    
   }
@@ -50,10 +49,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     localStorage.removeItem('token');
 
     let emailValue = this.loginForm.controls.email.value;
-    let passwordValue = this.loginForm.controls.password.value;
-
-    this.loginForm.reset();
-    (<HTMLElement>document.querySelector('input[formControlName=email]')).focus();
+    let passwordValue = this.loginForm.controls.password.value;    
     
     this.dataService.login(emailValue, passwordValue).takeUntil(this.destroyed$).subscribe(
       (res) =>{              
@@ -63,13 +59,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loadFamily();
       },
       (err) =>{                  
-        if (err.message)           
-        {
-          this.alertService.error('Login Failed', err.message);        
-          return;
-        }
-              
-        this.alertService.error('Login Failed', err.error_description);        
+        this.loginForm.reset();
+        (<HTMLElement>document.querySelector('input[formControlName=email]')).focus();
+
+        if (err.message)                   
+          this.confirmationService.create("Login Failed", err.message, this.globalService.alertOptions);
+        else              
+          this.confirmationService.create('Login Failed', err.error_description, this.globalService.alertOptions);
       }
     );    
   }
@@ -81,9 +77,9 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create('', err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create('', err, this.globalService.alertOptions);
       }
     );
   }

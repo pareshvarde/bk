@@ -43,8 +43,8 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService, private location: Location,
-    private _confirmation: ConfirmationService, public globalService: GlobalService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
+    private notificationService: NotificationsService, public authService: bkAuthService, private location: Location,
+    private confirmationService: ConfirmationService, public globalService: GlobalService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
 
     this.route.params.takeUntil(this.destroyed$).subscribe(params => {
       if (params.familyId > 0)
@@ -63,10 +63,10 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
 
-  ngAfterViewChecked(){
+  ngAfterViewChecked() {
     this.cdr.detectChanges();
   }
-  
+
   ngOnInit() {
     this.memberForm = new FormGroup({
       firstName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -115,7 +115,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.familyModel = new FamilyModel();
     this.searchModel = new MemberSearchBasicModel();
     this.memberModel = new MemberModel();
-    
+
     this.memberModel.alive = true;
     this.memberModel.familyId = this.familyId;
     this.memberModel.canEdit = true;
@@ -151,9 +151,9 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
@@ -165,16 +165,16 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
 
   changeRoute() {
     //it was not updating model immediately
-    setTimeout(() => {      
+    setTimeout(() => {
       this.router.navigate(['member', this.familyId, this.memberId]);
     }, 0);
   }
@@ -190,9 +190,9 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
@@ -208,7 +208,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       return RELATION_TYPES_DATA;
   }
 
-  getRelatedMember(): any[]{
+  getRelatedMember(): any[] {
     return this.familyModel.members.filter(x => x.married && x.memberId != this.memberId);
   }
 
@@ -239,15 +239,15 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     this.dataService.saveMember(this.memberModel).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.alertService.success("Member details has been updated.");
+        this.notificationService.success("Member details has been updated.");
         this.memberForm.markAsPristine();
         this.cancelEdit();
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
@@ -264,7 +264,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       (res) => {
 
         if (res.result == null) {
-          this.alertService.error('', "No member found with provided search criteria. Please try again");
+          this.confirmationService.create("Error", "No member found with provided search criteria. Please try again", this.globalService.alertOptions);          
           this.searchMemberModel = null;
           return;
         }
@@ -274,35 +274,35 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
 
   addToFamily() {
     if (!this.memberModel.relatedMemberId || !this.memberModel.relationTypeId) {
-      this.alertService.error('', 'Please select relation type');
+      this.confirmationService.create("Error", "Please select relation type", this.globalService.alertOptions);      
       return;
     }
 
     return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId, this.memberModel.relatedMemberId, this.memberModel.relationTypeId).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.alertService.success("Member is added to your family");
+        this.notificationService.success("Member is added to your family");
         this.cancelEdit();
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
 
   markDefaultFamily() {
-    this._confirmation.create('', 'Are you sure you want to mark current family as default family for this member?').subscribe(
+    this.confirmationService.create('', 'Are you sure you want to mark current family as default family for this member?').subscribe(
       (ans: ResolveEmit) => {
         if (!ans.resolved)
           return;
@@ -310,13 +310,13 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.dataService.markDefaultFamily(this.familyId, this.memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
             this.memberModel.defaultFamily = true;
-            this.alertService.success("Member marked as default to this family");
+            this.notificationService.success("Member marked as default to this family");
           },
           (err) => {
             if (err.errors)
-              this.alertService.error('', err.errors[0]);
+              this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
             else
-              this.alertService.error('', err);
+              this.confirmationService.create("Error", err, this.globalService.alertOptions);
           }
         );
       }
@@ -334,7 +334,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   back() {
-    
+
     if (window.history.length > 1)
       this.location.back();
     else
@@ -351,9 +351,8 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (event.srcElement.files.length === 0)
       return;
 
-    if (!event.srcElement.files[0].type.startsWith("image/"))
-    {
-      this.alertService.error("", "Only file of type image is supported");
+    if (!event.srcElement.files[0].type.startsWith("image/")) {
+      this.confirmationService.create("Error", "Only file of type image is supported", this.globalService.alertOptions);            
       return;
     }
 
@@ -370,16 +369,16 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   openFile() {
-    if (this.memberModel.canEdit){
+    if (this.memberModel.canEdit) {
       document.getElementById('fileBrowser').click();
       return;
     }
 
     var pictures: any[] = new Array();
-    pictures.push(this.memberModel.photoUrl);    
+    pictures.push(this.memberModel.photoUrl);
 
-    let dialogRef = this.dialog.open(BkImageViewerComponent, {      
-      data: { images:  pictures}
+    let dialogRef = this.dialog.open(BkImageViewerComponent, {
+      data: { images: pictures }
     });
   }
 
@@ -393,9 +392,9 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }

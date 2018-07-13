@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http/src/static_response';
 import { NotificationsService } from 'angular2-notifications';
 import { PasswordValidators } from 'ng2-validators'
 import  'rxjs/add/operator/takeUntil'
 import { ReplaySubject } from 'rxjs';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-change-password',
@@ -20,7 +20,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   changePasswordForm: FormGroup;
   formModel: changePasswordViewModel;
 
-  constructor(private dataService: bkDataService, private alertService: NotificationsService) {
+  constructor(private dataService: bkDataService, private notificationService: NotificationsService, 
+      private confirmationService: ConfirmationService, private globalService: GlobalService) {
     this.formModel = new changePasswordViewModel();
   }
 
@@ -55,13 +56,13 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
 
     this.dataService.changePassword(tFormModel).takeUntil(this.destroyed$).subscribe(
       (res) => {      
-        this.alertService.success("Your password has been changed.");
+        this.notificationService.success("Your password has been changed.");
       },
       (err) => {        
         if (err.errors)
-          this.alertService.error('',err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);          
         else
-          this.alertService.error('',err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);                    
       }
     );
   }

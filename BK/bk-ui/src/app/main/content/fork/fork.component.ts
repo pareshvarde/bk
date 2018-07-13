@@ -12,6 +12,7 @@ import { RELATION_TYPES_DATA } from '../../data/relations';
 import { CATEGORIES_DATA } from '../../data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { ReplaySubject } from 'rxjs';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-fork',
@@ -29,9 +30,9 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService,
-    private _confirmation: ConfirmationService, private location: Location,
-    private cdr: ChangeDetectorRef) {
+    private notificationService: NotificationsService, public authService: bkAuthService,
+    private confirmationService: ConfirmationService, private location: Location,
+    private cdr: ChangeDetectorRef, private globalService: GlobalService) {
 
     this.route.params.takeUntil(this.destroyed$).subscribe(params => {
       if (params.familyId > 0)
@@ -85,9 +86,9 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
@@ -116,20 +117,20 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     if (this.model.members.filter(x => x.selected).length === 0) {
-      this.alertService.alert('', 'Please select at least one family member to be part of new family');
+      this.confirmationService.create("Error", "Please select at least one family member to be part of new family", this.globalService.alertOptions);      
       return;
     }
 
     this.dataService.forkFamily(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.alertService.success("New family created successfully");
+        this.notificationService.success("New family created successfully");
         this.router.navigate(['family', res.result]);
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);                
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);                
       }
     );
   }

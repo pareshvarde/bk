@@ -11,6 +11,7 @@ import { CATEGORIES_DATA } from '../../data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { Location } from '@angular/common';
 import { ReplaySubject } from 'rxjs';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-family',
@@ -31,12 +32,12 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private alertService: NotificationsService, public authService: bkAuthService,
-    private _confirmation: ConfirmationService, private location: Location,
+    private notificationService: NotificationsService, public authService: bkAuthService,
+    private confirmationService: ConfirmationService, private location: Location, private globalService: GlobalService,
     private cdr: ChangeDetectorRef) {
 
-    this.route.params.takeUntil(this.destroyed$).subscribe(params => {      
-        this.familyId = params.familyId;      
+    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
+      this.familyId = params.familyId;
 
       this.initializeComponent();
     });
@@ -102,9 +103,9 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
@@ -119,20 +120,20 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     this.dataService.saveFamily(this.model).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.alertService.success("Family details has been updated.");
+        this.notificationService.success("Family details has been updated.");
         this.familyForm.markAsPristine();
         this.cancelEdit();
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
 
-  cancelEdit() {    
+  cancelEdit() {
     this.editMode = false;
     this.familyForm.disable();
     this.loadFamily();
@@ -147,25 +148,25 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     let tModel = new FamilyModel();
     tModel.familyId = this.model.familyId;
 
-    this._confirmation.create('', 'Are you sure you want to delete this family?').subscribe(
+    this.confirmationService.create('', 'Are you sure you want to delete this family?').subscribe(
       (ans: ResolveEmit) => {
         if (!ans.resolved)
           return;
 
         this.dataService.deleteFamily(tModel).takeUntil(this.destroyed$).subscribe(
           (res) => {
-            if (res.result){
+            if (res.result) {
               this.authService.logout();
             }
 
-            this.alertService.success("Family has been deleted");
+            this.notificationService.success("Family has been deleted");
             this.back();
           },
           (err) => {
             if (err.errors)
-              this.alertService.error('', err.errors[0]);
+              this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
             else
-              this.alertService.error('', err);
+              this.confirmationService.create("Error", err, this.globalService.alertOptions);
           }
         );
       }
@@ -175,11 +176,11 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   deleteMember(memberId: number, name: string) {
 
     if (this.model.hofId == memberId) {
-      this.alertService.error('', 'Head Of Family cannot be deleted');
+      this.confirmationService.create("Error", "Head Of Family cannot be deleted", this.globalService.alertOptions);
       return;
     }
 
-    this._confirmation.create('', "Are you sure you want to remove '" + name + "' from this family?").subscribe(
+    this.confirmationService.create('', "Are you sure you want to remove '" + name + "' from this family?").subscribe(
       (ans: ResolveEmit) => {
 
         if (!ans.resolved)
@@ -187,20 +188,20 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.dataService.deleteMember(this.familyId, memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
-            if (res.result){
+            if (res.result) {
               this.authService.logout();
-              this.alertService.success("Member has been removed from the family");
-              return;  
+              this.notificationService.success("Member has been removed from the family");
+              return;
             }
 
-            this.alertService.success("Member has been removed from the family");
+            this.notificationService.success("Member has been removed from the family");
             this.loadFamily();
           },
           (err) => {
             if (err.errors)
-              this.alertService.error('', err.errors[0]);
+              this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
             else
-              this.alertService.error('', err);
+              this.confirmationService.create("Error", err, this.globalService.alertOptions);
           }
         );
       })
@@ -209,14 +210,14 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   approveMember(memberId: number, familyId: number) {
     this.dataService.approveMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.alertService.success("Member family association approved");
+        this.notificationService.success("Member family association approved");
         this.loadFamily();
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
@@ -224,21 +225,21 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   declineMember(memberId: number, familyId: number) {
     this.dataService.declineMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.alertService.success("Member family association removed");
+        this.notificationService.success("Member family association removed");
         this.loadFamily();
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
 
 
   deleteMatrimony(memberId: number, name: string) {
-    this._confirmation.create('', "Are you sure you want to remove matrimony profile of '" + name + "'?").subscribe(
+    this.confirmationService.create('', "Are you sure you want to remove matrimony profile of '" + name + "'?").subscribe(
       (ans: ResolveEmit) => {
 
         if (!ans.resolved)
@@ -246,14 +247,14 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
         this.dataService.deleteMatrimony(memberId).takeUntil(this.destroyed$).subscribe(
           (res) => {
-            this.alertService.success("Matrimony profile has been removed");
+            this.notificationService.success("Matrimony profile has been removed");
             this.loadFamily();
           },
           (err) => {
             if (err.errors)
-              this.alertService.error('', err.errors[0]);
+              this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
             else
-              this.alertService.error('', err);
+              this.confirmationService.create("Error", err, this.globalService.alertOptions);
           }
         );
       })

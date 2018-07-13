@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
-import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 import { ReplaySubject } from 'rxjs';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
     selector: 'app-forgot-password',
@@ -15,8 +16,9 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
     private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
     forgotPasswordForm: FormGroup;
 
-    constructor(private formBuilder: FormBuilder, private dataService: bkDataService, private alertService: NotificationsService) {
-
+    constructor(private formBuilder: FormBuilder, private dataService: bkDataService, 
+        private notificationService: NotificationsService, private confirmationService: ConfirmationService, 
+        private globalService: GlobalService) {
     }
 
     ngOnInit() {
@@ -42,13 +44,13 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         let emailValue = this.forgotPasswordForm.controls.email.value;
         this.dataService.sendResetPasswordEmail(emailValue).takeUntil(this.destroyed$).subscribe(
             (res) => {
-                this.alertService.success("Please check your inbox for password reset link");
+                this.notificationService.success("Please check your inbox for password reset link");
             },
             (err) => {
                 if (err.errors)
-                    this.alertService.error('', err.errors[0]);
+                    this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
                 else
-                    this.alertService.error('', err);
+                    this.confirmationService.create("Error", err, this.globalService.alertOptions);
             }
         );
     }

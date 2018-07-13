@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ChangeDetectionStrategy, Input} from "@angular/core";
 import { MemberSearchParameter } from '../../models/memberSearchParameter';
 import { bkDataService } from '../../services/bk-data.service';
-import { NotificationsService } from 'angular2-notifications';
 import { ReplaySubject } from 'rxjs';
 import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
 import { MatDialog } from '@angular/material';
+import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { GlobalService } from '../../services/global-service';
 
 @Component({
   selector: 'app-directory',
@@ -22,7 +22,8 @@ export class DirectoryComponent implements OnInit, OnDestroy {
   hasResult: boolean;
   readonly PAGE_SIZE: number = 25;
 
-  constructor(private dataService: bkDataService, private alertService: NotificationsService, public dialog: MatDialog) { 
+  constructor(private dataService: bkDataService, private confirmationService: ConfirmationService, 
+    public dialog: MatDialog, private globalService: GlobalService) { 
     this.searchParameter = new MemberSearchParameter();    
   }
       
@@ -72,9 +73,9 @@ export class DirectoryComponent implements OnInit, OnDestroy {
       },
       (err) => {
         if (err.errors)
-          this.alertService.error('', err.errors[0]);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);                    
         else
-          this.alertService.error('', err);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);          
       }
     );
   }
