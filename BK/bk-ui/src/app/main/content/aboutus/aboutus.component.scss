@@ -1,8 +1,13 @@
-.aboutus-container{
-
+:host{
     width: 100%;
 
-    .peopleImage{
-        width: 245px;
+    .aboutus-container{
+        .peopleImage{
+            width: 200px;
+        }
+    }
+
+    .p-10{
+        padding: 10px;
     }
 }
