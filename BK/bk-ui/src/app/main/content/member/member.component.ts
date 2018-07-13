@@ -104,6 +104,9 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     if (!this.addMode)
       this.memberForm.disable();
+
+    if (!this.memberId)
+      this.confirmationService.create("", "Please do not add duplicate member. This would break the relationship chain. Please verify that member you are trying to add do not exists in the system. You can search member on <a href='/directory'>Directory</a>. If member already exists you can add an existing member to your family instead of adding new.", this.globalService.alertOptions);
   }
 
   ngOnDestroy() {
