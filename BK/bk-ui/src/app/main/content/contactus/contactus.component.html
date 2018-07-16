@@ -1,5 +1,23 @@
-<div class="contactus-container">  
+<div class="contactus-container">
   <div class="bk-large-card">
+    <div id="contactus-form" fxLayout="column" fxLayoutAlign="center center">
+      <form name="contactusForm" [formGroup]="contactusForm" novalidate>
+          <mat-form-field>
+              <input maxlength="50" matInput placeholder="Name" formControlName="name">
+              <mat-error *ngIf="contactusForm.controls['name'].hasError('required')">Maximum 50 characters allowed</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <input maxlength="50" type="email" matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="contactusForm.controls['email'].hasError('required')">Maximum 50 characters allowed</mat-error>
+              <mat-error *ngIf="contactusForm.controls['email'].hasError('email')">Please provide valid email address</mat-error>
+          </mat-form-field>
+          <mat-form-field>
+              <input maxlength="50" type="number" matInput placeholder="Phone" formControlName="phone">
+              <mat-error *ngIf="contactusForm.controls['phone'].hasError('required')">Maximum 50 characters allowed</mat-error>
+              <mat-error *ngIf="contactusForm.controls['phone'].hasError('isnumber')">Only numbers are allowed</mat-error>
+          </mat-form-field>
+      </form>
+    </div>
     Contact Us Works!
   </div>
 </div>
