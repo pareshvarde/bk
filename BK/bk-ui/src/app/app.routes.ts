@@ -20,6 +20,7 @@ import { MatrimonyViewComponent } from './main/content/matrimony-view/matrimony-
 import { DirectoryComponent } from './main/content/directory/directory.component';
 import { MatrimonySearchComponent } from './main/content/matrimony-search/matrimony-search.component';
 import { AboutusComponent } from './main/content/aboutus/aboutus.component';
+import { ContactusComponent } from './main/content/contactus/contactus.component';
 
 export const bkRoutes: Routes = [
     {
@@ -113,6 +114,10 @@ export const bkRoutes: Routes = [
     {
         path: "aboutus",
         component: AboutusComponent
+    },
+    {
+        path: "contactus",
+        component: ContactusComponent
     },
     {
         path      : '**',

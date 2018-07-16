@@ -77,6 +77,13 @@ export class NavigationModel
                 'icon'    : 'wc',    
             },
             {
+                'id'      : 'contactus',
+                'title'   : 'Contact Us',
+                'type'    : 'item',
+                'url'     : 'contactus',
+                'icon'    : 'contact_support',    
+            },
+            {
                 'id'      : 'aboutus',
                 'title'   : 'About Us',
                 'type'    : 'item',

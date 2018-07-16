@@ -43,6 +43,7 @@ import { BkImageCropperComponent } from '../core/components/bk-image-cropper/bk-
 import { BkImageViewerComponent } from '../core/components/bk-image-viewer/bk-image-viewer.component';
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import { AboutusComponent } from './content/aboutus/aboutus.component';
+import { ContactusComponent } from './content/contactus/contactus.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -83,7 +84,8 @@ export function tokenGetter() {
         MatrimonySearchComponent,
         BkImageCropperComponent,
         BkImageViewerComponent,
-        AboutusComponent
+        AboutusComponent,
+        ContactusComponent
     ],
     providers:[
      
