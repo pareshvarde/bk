@@ -1,7 +1,28 @@
+@import "src/app/core/scss/bk";
+
 :host{
     width: 100%;
 
     .contactus-container{
         flex: 1 0 auto;
+
+        #contactus-form{
+            width: 100%;                         
+            padding: 10px;
+
+            form{
+                width: 100%;
+                text-align: center;
+
+                mat-form-field {
+                    width: 90%;
+                    padding-bottom: 5px;
+
+                    @include media-breakpoint('xs') {
+                        width: 300px;
+                    }
+                }                
+            }            
+        }
     }    
 }

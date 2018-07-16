@@ -1,23 +1,57 @@
 <div class="contactus-container">
-  <div class="bk-large-card">
-    <div id="contactus-form" fxLayout="column" fxLayoutAlign="center center">
-      <form name="contactusForm" [formGroup]="contactusForm" novalidate>
-          <mat-form-field>
-              <input maxlength="50" matInput placeholder="Name" formControlName="name">
-              <mat-error *ngIf="contactusForm.controls['name'].hasError('required')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-              <input maxlength="50" type="email" matInput placeholder="Email" formControlName="email">
-              <mat-error *ngIf="contactusForm.controls['email'].hasError('required')">Maximum 50 characters allowed</mat-error>
-              <mat-error *ngIf="contactusForm.controls['email'].hasError('email')">Please provide valid email address</mat-error>
-          </mat-form-field>
-          <mat-form-field>
-              <input maxlength="50" type="number" matInput placeholder="Phone" formControlName="phone">
-              <mat-error *ngIf="contactusForm.controls['phone'].hasError('required')">Maximum 50 characters allowed</mat-error>
-              <mat-error *ngIf="contactusForm.controls['phone'].hasError('isnumber')">Only numbers are allowed</mat-error>
-          </mat-form-field>
-      </form>
+    <div class="bk-large-card">
+        <div id="contactus-form" fxLayout="column" fxLayoutAlign="center center">
+            <form name="contactusForm" [formGroup]="contactusForm" novalidate>
+                <div fxLayout="row wrap">
+                    <mat-form-field floatLabel="always">
+                        <input maxlength="50" matInput placeholder="Name" formControlName="name">
+                        <mat-error *ngIf="contactusForm.controls['name'].hasError('required')">Please provide your name</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row wrap">
+                    <mat-form-field floatLabel="always">
+                        <input maxlength="50" type="email" matInput placeholder="Email" formControlName="email">
+                        <mat-error *ngIf="contactusForm.controls['email'].hasError('required')">Please provide your email address</mat-error>
+                        <mat-error *ngIf="contactusForm.controls['email'].hasError('email')">Please provide valid email address</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row wrap">
+                    <mat-form-field floatLabel="always">
+                        <input maxlength="50" type="number" matInput placeholder="Phone" formControlName="phone">
+                        <mat-error *ngIf="contactusForm.controls['phone'].hasError('required')">Please provide phone number</mat-error>
+                        <mat-error *ngIf="contactusForm.controls['phone'].hasError('isnumber')">Only numbers are allowed</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row wrap">
+                    <mat-form-field floatLabel="always">
+                        <input maxlength="50" matInput placeholder="Subject" formControlName="subject">
+                        <mat-error *ngIf="contactusForm.controls['subject'].hasError('required')">Please provide subject</mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row wrap">
+                    <mat-form-field floatLabel="always">
+                        <textarea maxlength="250" matInput placeholder="Detail" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="10"
+                            formControlName="content"></textarea>
+                        <mat-error *ngIf="contactusForm.controls['content'].hasError('required')">Please provide detail</mat-error>
+                    </mat-form-field>
+                </div>
+
+
+                <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+                    <button matTooltip="Submit" (click)="save()" mat-raised-button fxHide fxShow.gt-sm color="accent" class="submit-button" aria-label="SAVE">
+                        <mat-icon>cloud_upload</mat-icon>&nbsp;SUBMIT
+                    </button>
+                    <button matTooltip="Submit" (click)="save()" mat-mini-fab fxShow fxHide.gt-sm color="accent" class="submit-button" aria-label="SAVE">
+                        <mat-icon>cloud_upload</mat-icon>
+                    </button>
+                    <button matTooltip="Cancel" (click)="cancel()" mat-raised-button fxHide fxShow.gt-sm class="submit-button" aria-label="CANCEL">
+                        <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+                    </button>
+                    <button matTooltip="Cancel" (click)="cancel()" mat-mini-fab fxShow fxHide.gt-sm class="submit-button" aria-label="CANCEL">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    Contact Us Works!
-  </div>
 </div>

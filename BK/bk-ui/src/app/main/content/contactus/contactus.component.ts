@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '../../../../../node_modules/@angular/forms';
 import { UniversalValidators } from '../../../../../node_modules/ng2-validators';
+import { Router } from '../../../../../node_modules/@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-contactus',
@@ -11,7 +13,7 @@ export class ContactusComponent implements OnInit {
 
   contactusForm: FormGroup;
   
-  constructor() { }
+  constructor(private router: Router, private location: Location) { }
 
   ngOnInit() {
     this.contactusForm = new FormGroup({
@@ -21,6 +23,17 @@ export class ContactusComponent implements OnInit {
       subject: new FormControl('', [Validators.required]),
       attachment: new FormControl('', null),
       content: new FormControl('', [Validators.required, Validators.maxLength(255)])
-    });
+    });  
+  }
+
+  save(){
+
+  }
+
+  cancel(){
+    if (window.history.length > 1)
+      this.location.back();
+    else
+      this.router.navigate(['home']);
   }
 }
