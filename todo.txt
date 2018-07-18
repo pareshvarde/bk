@@ -13,6 +13,9 @@ help icons on each page
 help videos
 ===========================	
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
+make DOB/DOB optional on add member
+about us page
+contact us page
 =============================
 angular memory and performance analyser
 sql query performance and indexes
