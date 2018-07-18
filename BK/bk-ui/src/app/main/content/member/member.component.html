@@ -104,8 +104,7 @@
                 <input matInput [(ngModel)]="memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
                   formControlName="dob">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-                <mat-error *ngIf="memberForm.controls['dob'].hasError('required')">Please provide date of birth</mat-error>
+                <mat-datepicker #picker></mat-datepicker>                
               </mat-form-field>
 
               <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">

@@ -77,7 +77,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
       gender: new FormControl('', [Validators.required]),
       alive: new FormControl('', [Validators.required]),
-      dob: new FormControl('', [Validators.required]),
+      dob: new FormControl('', null),
       dod: new FormControl('', null),
       birthPlace: new FormControl('', [Validators.maxLength(50)]),
       deathPlace: new FormControl('', [Validators.maxLength(50)]),

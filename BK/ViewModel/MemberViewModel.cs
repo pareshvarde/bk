@@ -119,8 +119,7 @@ namespace BK.ViewModel
         public MemberViewModelValidator()
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
-            RuleFor(x => x.DOB).NotEmpty().WithMessage("Date Of Birth cannot be blank");
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");            
         }
     }
 }
