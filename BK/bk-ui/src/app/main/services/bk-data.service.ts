@@ -251,6 +251,14 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
+  submitFeedback(model: any){
+    this.blockUI.start("Please wait...");
+
+    return this.http.post(this.API_URL + "feedback", model).pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);
+  }
+
   private getPublicHeader(): Headers{    
     const headers = new Headers(
       {

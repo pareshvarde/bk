@@ -169,6 +169,13 @@ namespace BK.Controllers
             return Ok(true);
         }
 
+        [Route("api/feedback")]
+        [HttpPost]
+        public IHttpActionResult Feedback(dynamic feedback)
+        {
+            return Ok();
+        }
+
         private bool VerifyCaptcha(string response)
         {
             if (string.IsNullOrWhiteSpace(response))
