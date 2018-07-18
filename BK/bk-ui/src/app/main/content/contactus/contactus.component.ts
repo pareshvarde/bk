@@ -38,7 +38,7 @@ export class ContactusComponent implements OnInit, OnDestroy {
   save(){
 
     var file : any = document.getElementById("fileBrowser");
-    var fileContent: any:
+    var fileContent: any;
     if (file && file.files.length > 0)
     {
       fileContent = file.files[0];
