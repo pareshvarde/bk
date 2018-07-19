@@ -22,5 +22,14 @@ namespace BK.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pareshvarde@yahoo.com;jiya.varde@gmail.com")]
+        public string SupportEmails {
+            get {
+                return ((string)(this["SupportEmails"]));
+            }
+        }
     }
 }

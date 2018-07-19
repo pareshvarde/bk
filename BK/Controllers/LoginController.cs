@@ -10,11 +10,14 @@ using System.IO;
 using System.Net.Mail;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Web;
+using BK.Properties;
+using System.Text;
 
 namespace BK.Controllers
 {
     public class LoginController : BaseController
-    {      
+    {
         [Route("api/register")]
         [HttpPost]
         public IHttpActionResult Register(RegisterViewModel register)
@@ -43,7 +46,7 @@ namespace BK.Controllers
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;
 
-                string tPassword= System.Web.Security.Membership.GeneratePassword(8, 0);
+                string tPassword = System.Web.Security.Membership.GeneratePassword(8, 0);
                 tPassword = Regex.Replace(tPassword, @"[^a-zA-Z0-9]", m => "9");
                 member.Password = tPassword;
 
@@ -51,7 +54,7 @@ namespace BK.Controllers
                 member.Active = true;
                 member.CreatedOn = DateTime.Now;
 
-                Family family = new Family();                
+                Family family = new Family();
                 family.Address1 = register.Address1;
                 family.Address2 = register.Address2;
                 family.City = register.City;
@@ -62,12 +65,12 @@ namespace BK.Controllers
                 family.CategoryID = register.CategoryId;
                 family.NukhID = register.NukhId;
                 family.Member = member;
-                family.CreatedOn = DateTime.Now;   
+                family.CreatedOn = DateTime.Now;
 
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
                 fmAssociation.Member = member;
-                fmAssociation.Family = family;                
-                fmAssociation.Approved = true;                                        
+                fmAssociation.Family = family;
+                fmAssociation.Approved = true;
                 fmAssociation.DefaultFamily = true;
                 fmAssociation.CreatedOn = DateTime.Now;
 
@@ -84,8 +87,9 @@ namespace BK.Controllers
                 html = html.Replace("{{action_url}}", $"{BaseUrl}/login/ ");
                 html = html.Replace("{{username}}", member.EmailAddress);
                 html = html.Replace("{{password}}", member.Password);
-                
-                System.Threading.Tasks.Task.Factory.StartNew(() => {
+
+                System.Threading.Tasks.Task.Factory.StartNew(() =>
+                {
                     using (SmtpClient sClient = new SmtpClient())
                     {
                         using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
@@ -97,11 +101,11 @@ namespace BK.Controllers
                             sClient.Send(mailMessage);
                         }
                     }
-                });                
+                });
             }
 
             return Ok();
-        }       
+        }
 
         [Route("api/sendResetPasswordEmail")]
         [HttpGet]
@@ -125,7 +129,8 @@ namespace BK.Controllers
                 html = html.Replace("{{name}}", $"{member.FirstName} {member.LastName}");
                 html = html.Replace("{{action_url}}", $"{BaseUrl}/resetpassword/{member.PasswordUID.Value.ToString()} ");
 
-                System.Threading.Tasks.Task.Factory.StartNew(() => {
+                System.Threading.Tasks.Task.Factory.StartNew(() =>
+                {
                     using (SmtpClient sClient = new SmtpClient())
                     {
                         using (MailMessage mailMessage = new MailMessage("brahmkshatriyaportal@gmail.com", member.EmailAddress))
@@ -137,7 +142,7 @@ namespace BK.Controllers
                             sClient.Send(mailMessage);
                         }
                     }
-                });                                              
+                });
             }
 
             return Ok(true);
@@ -171,8 +176,49 @@ namespace BK.Controllers
 
         [Route("api/feedback")]
         [HttpPost]
-        public IHttpActionResult Feedback(dynamic feedback)
+        public IHttpActionResult Feedback()
         {
+            string name = HttpContext.Current.Request.Params["name"];
+            string email = HttpContext.Current.Request.Params["email"];
+            string phone = HttpContext.Current.Request.Params["phone"];
+            string subject = HttpContext.Current.Request.Params["subject"];
+            string content = HttpContext.Current.Request.Params["content"];
+            HttpPostedFile postedFile = null;
+
+            if (HttpContext.Current.Request.Files.Count > 0)
+                postedFile = HttpContext.Current.Request.Files[0];
+
+            using (SmtpClient sClient = new SmtpClient())
+            {
+                using (MailMessage mailMessage = new MailMessage())
+                {
+                    StringBuilder builder = new StringBuilder();
+                    builder.AppendLine("New Contact Us request has been submitted details as follows.<br/><br/>");
+
+                    builder.AppendLine($"Name: {name}<br/>");
+                    builder.AppendLine($"Email: {email}<br/>");
+                    builder.AppendLine($"Phone: {phone}<br/><br/>");
+
+                    builder.AppendLine($"Detail: {content}<br/>");
+
+                    foreach (var address in Settings.Default.SupportEmails.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))
+                        mailMessage.To.Add(address);
+
+                    mailMessage.From = new MailAddress("brahmkshatriyaportal@gmail.com");
+                    mailMessage.Body = builder.ToString();
+                    mailMessage.IsBodyHtml = true;
+                    mailMessage.Subject = $"Brahmkshatriya - {subject}";
+
+                    if (postedFile != null)
+                    {
+                        Attachment attachment = new Attachment(postedFile.InputStream, postedFile.FileName, postedFile.ContentType);
+                        mailMessage.Attachments.Add(attachment);
+                    }
+
+                    sClient.Send(mailMessage);
+                }
+            }
+
             return Ok();
         }
 

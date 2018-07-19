@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '../../../../../node_modules/@angular/forms';
 import { UniversalValidators } from '../../../../../node_modules/ng2-validators';
 import { Router } from '../../../../../node_modules/@angular/router';
-import { Location } from '@angular/common';
+import { Location, formatDate } from '@angular/common';
 import { bkDataService } from '../../services/bk-data.service';
 import { ConfirmationService } from '../../../../../node_modules/@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
@@ -16,6 +16,7 @@ import { ReplaySubject } from '../../../../../node_modules/rxjs';
 export class ContactusComponent implements OnInit, OnDestroy {
 
   contactusForm: FormGroup;
+  attachment: any;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   
   constructor(private router: Router, private location: Location, public globalService: GlobalService,
@@ -35,25 +36,17 @@ export class ContactusComponent implements OnInit, OnDestroy {
     });  
   }
 
-  save(){
+  save(){   
 
-    var file : any = document.getElementById("fileBrowser");
-    var fileContent: any;
-    if (file && file.files.length > 0)
-    {
-      fileContent = file.files[0];
-    }
+    var formData: FormData = new FormData();
+    formData.append('name',this.contactusForm.controls.name.value);
+    formData.append('email',this.contactusForm.controls.email.value);
+    formData.append('phone',this.contactusForm.controls.phone.value);
+    formData.append('subject',this.contactusForm.controls.subject.value);
+    formData.append('content',this.contactusForm.controls.content.value);
+    formData.append('attachment',this.attachment);
 
-    var model ={
-      'name': this.contactusForm.controls.name.value,
-      'email':this.contactusForm.controls.email.value,
-      'phone':this.contactusForm.controls.phone.value,
-      'subject':this.contactusForm.controls.subject.value,
-      'content':this.contactusForm.controls.content.value,
-      'attachment': fileContent
-    };
-
-    this.dataService.submitFeedback(model).takeUntil(this.destroyed$).subscribe(
+    this.dataService.submitFeedback(formData).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.confirmationService.create("", "Your request has been sent to Administrators", this.globalService.alertOptions);
         this.router.navigate(['home']);
@@ -76,8 +69,12 @@ export class ContactusComponent implements OnInit, OnDestroy {
 
   fileChangeEvent(event: any){
     
-    if (event.srcElement.files.length === 0)     
+    if (event.srcElement.files.length === 0)  { 
+      this.attachment = null;
       return;            
+    }
+
+    this.attachment = event.srcElement.files[0]
   }
 
   ngOnDestroy() {
