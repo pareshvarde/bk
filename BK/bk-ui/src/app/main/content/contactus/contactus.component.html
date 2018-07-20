@@ -17,7 +17,7 @@
                 </div>
                 <div fxLayout="row wrap">
                     <mat-form-field floatLabel="always">
-                        <input maxlength="50" type="number" matInput placeholder="Phone" formControlName="phone">
+                        <input maxlength="50" min="0" type="number" oninput="validity.valid||(value='');" matInput placeholder="Phone" formControlName="phone">
                         <mat-error *ngIf="contactusForm.controls['phone'].hasError('required')">Please provide phone number</mat-error>
                         <mat-error *ngIf="contactusForm.controls['phone'].hasError('isnumber')">Only numbers are allowed</mat-error>
                     </mat-form-field>

@@ -40,7 +40,7 @@
           </mat-form-field>
 
           <mat-form-field>
-            <input type="number" matInput [(ngModel)]="model.weight" placeholder="Weight (kg)" formControlName="weight">
+            <input type="number" min="0" matInput [(ngModel)]="model.weight" placeholder="Weight (kg)" formControlName="weight">
             <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('required')">Please provide weight</mat-error>
             <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('numberRequired')">Please input only numbers</mat-error>
           </mat-form-field>
@@ -83,7 +83,7 @@
 
         <div fxLayout="row wrap">
           <mat-form-field>
-            <input type="number" matInput [(ngModel)]="model.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
+            <input type="number" min="0" matInput [(ngModel)]="model.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
             <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('required')">Please provide monthly income</mat-error>
             <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('numberRequired')">Please input only numbers</mat-error>
           </mat-form-field>

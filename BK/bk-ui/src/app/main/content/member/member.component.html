@@ -72,14 +72,14 @@
               </mat-form-field>
 
               <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-                <input type="number" matInput [(ngModel)]="memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
+                <input type="number" min="0" matInput [(ngModel)]="memberModel.phoneNumber" placeholder="Phone Number" formControlName="phoneNumber">
                 <mat-error *ngIf="memberForm.controls['phoneNumber'].hasError('numberRequired')">Only numbers without space</mat-error>
                 <mat-error *ngIf="memberForm.controls['phoneNumber'].hasError('noWhitespaceRequired')">Only numbers without space</mat-error>
                 <mat-error *ngIf="memberForm.controls['phoneNumber'].hasError('maxlength')">Maximum 15 characters allowed</mat-error>
               </mat-form-field>
 
               <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-                <input type="number" matInput [(ngModel)]="memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+                <input type="number" min="0" matInput [(ngModel)]="memberModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
                 <mat-error *ngIf="memberForm.controls['aadhaarNumber'].hasError('numberRequired')">Only numbers without space</mat-error>
                 <mat-error *ngIf="memberForm.controls['aadhaarNumber'].hasError('maxlength')">Maximum 16 characters allowed</mat-error>
               </mat-form-field>
@@ -304,14 +304,14 @@
           <form name="searchForm" [formGroup]="searchForm" novalidate>
             <div fxLayout="row wrap">
               <mat-form-field>
-                <input matInput type="number" [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
+                <input matInput type="number" min="0" [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
                 <mat-error *ngIf="searchForm.controls['memberId'].hasError('numberRequired')">Please enter only numbers</mat-error>
               </mat-form-field>
             </div>
 
             <div fxLayout="row wrap">
               <mat-form-field>
-                <input type="number" matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
+                <input type="number" min="0" matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
                 <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('numberRequired')">Please enter only numbers</mat-error>
                 <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('maxlength')">Maximum 15 characters allowed</mat-error>
               </mat-form-field>
@@ -319,7 +319,7 @@
 
             <div fxLayout="row wrap">
               <mat-form-field>
-                <input type="number" matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+                <input type="number" min="0" matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
                 <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('numberRequired')">Please enter only numbers</mat-error>
                 <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('maxlength')">Maximum 16 characters allowed</mat-error>
               </mat-form-field>
