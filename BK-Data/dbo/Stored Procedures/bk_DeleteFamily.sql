@@ -42,6 +42,16 @@ BEGIN
 	WHERE
 		tm.CanDelete = 1	
 
+	--if member being deleted is shown as related to someone clear that
+	--this could be when member being deleted is unapproved member in other family
+	UPDATE fma
+		SET fma.RelatedId = NULL, RelationTypeId = NULL
+	FROM
+		FamilyMemberAssociation fma
+		JOIN @Members m ON fma.RelatedId = m.MemberID	
+	WHERE
+		m.CanDelete = 1
+
 	--delete member if they are not part of any other family as approved member
 	DELETE m 
 	FROM 

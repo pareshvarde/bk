@@ -19,3 +19,10 @@ about us page
 angular memory and performance analyser
 sql query performance and indexes
 =============================
+Audits
+	--families without members
+	--members without family
+	--members without any default family
+	--families without head of family
+	--matrimony without correct status (alive, adult, single)
+	--family or members with junk entries
