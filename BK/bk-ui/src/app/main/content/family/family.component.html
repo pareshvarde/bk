@@ -239,12 +239,12 @@
             <div fxLayout="row wrap">Name:&nbsp;
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </div>
-            <div fxLayout="row wrap">Age:&nbsp;{{member.age}}&nbsp;Years</div>
+            <div fxLayout="row wrap">Age:&nbsp;<span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></div>      
             <div fxLayout="row wrap">Married:&nbsp;
               <span *ngIf="member.married">Yes</span>
               <span *ngIf="!member.married">No</span>
             </div>
-            <div fxLayout="row wrap">Relation:&nbsp;{{member.relation}}</div>
+            <div fxLayout="row wrap">Relation:&nbsp;<span *ngIf="member.relation">{{member.relation}}</span><span *ngIf="!member.relation">NA</span></div>
             <div fxLayout="row wrap">Maternal Family:&nbsp;
               <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
               <span *ngIf="!member.maternalFamilyId">Not Available</span>
