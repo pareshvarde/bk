@@ -25,3 +25,4 @@ Audits
 	--families without head of family
 	--matrimony without correct status (alive, adult, single)
 	--family or members with junk entries
+	--profile pictures without members

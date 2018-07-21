@@ -184,7 +184,7 @@
               <mat-header-cell *matHeaderCellDef>
                 <b>Age</b>
               </mat-header-cell>
-              <mat-cell *matCellDef="let member">{{member.age}} Years</mat-cell>
+              <mat-cell *matCellDef="let member" ><span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></mat-cell>              
             </ng-container>
             <ng-container matColumnDef="married">
               <mat-header-cell *matHeaderCellDef>
