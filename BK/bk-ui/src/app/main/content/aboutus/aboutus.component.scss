@@ -18,5 +18,9 @@
 
     .photoItem{
         margin-right: 20px;
+
+        @include media-breakpoint('xs') {            
+            width: 100%;
+        }
     }
 }
