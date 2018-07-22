@@ -13,9 +13,8 @@ help videos
 ===========================	
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
 add HOF avatar on family screen
-ghar javai
-widow/widower condition
-married bool to char again?
+widow/widower/divorcee/divorced martial status
+member profile text 100 characters limit
 terms and condition
 =============================
 angular memory and performance analyser
