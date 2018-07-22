@@ -8,7 +8,7 @@ import { bkDataService } from '../../services/bk-data.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators } from 'ng2-validators';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
-import { MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
+import { MATRIMONY_MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 import { HEIGHT_DATA } from '../../data/height'
 import { BODY_TYPE_DATA } from '../../data/bodyType';
 import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
@@ -29,7 +29,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   model: MatrimonyModel;
   matrimonyForm: FormGroup;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
-  readonly MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA;
+  readonly MARITAL_STATUS_DATA_LOCAL = MATRIMONY_MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
   readonly BODYTYPE_DATA_LOCAL = BODY_TYPE_DATA;
   readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;

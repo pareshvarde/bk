@@ -12,7 +12,7 @@ export class MemberModel {
     alive: boolean;
     dod:Date;
     deathPlace: string;
-    married: boolean;
+    maritalStatusId: number;
     anniversary: Date;
     educationLevel: string;
     educationField: string;

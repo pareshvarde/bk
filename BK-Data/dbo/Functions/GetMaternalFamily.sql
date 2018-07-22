@@ -32,7 +32,7 @@ BEGIN
 	END
 
 	INSERT INTO @Result
-		SELECT *FROM GetPaternalFamily(@parentId, 0,  1)
+		SELECT *FROM GetPaternalFamily(@parentId, 0,  2)
 	
 	RETURN	
 END

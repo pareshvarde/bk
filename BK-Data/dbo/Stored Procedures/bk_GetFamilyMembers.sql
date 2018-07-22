@@ -10,7 +10,7 @@ BEGIN
 		m.FirstName,
 		m.LastName,
 		m.DOB,
-		m.Married,
+		m.MaritalStatusID,
 		m.Gender,
 		m.Alive,
 		m.DOD,
@@ -37,7 +37,7 @@ BEGIN
 			SELECT TOP 1
 				PaternalFamilyID, PaternalFamilyName, PaternalFamilyAddress
 			FROM
-				GetPaternalFamily(m.MemberID, m.Gender, m.Married)
+				GetPaternalFamily(m.MemberID, m.Gender, m.MaritalStatusID)
 		) paternal
 		OUTER APPLY
 		(

@@ -185,15 +185,13 @@
                 <b>Age</b>
               </mat-header-cell>
               <mat-cell *matCellDef="let member" ><span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></mat-cell>              
-            </ng-container>
-            <ng-container matColumnDef="married">
-              <mat-header-cell *matHeaderCellDef>
-                <b>Married</b>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let member">
-                <mat-checkbox disabled=true [checked]="member.married"></mat-checkbox>
-              </mat-cell>
-            </ng-container>
+            </ng-container>            
+            <ng-container matColumnDef="maritalStatusId">
+                <mat-header-cell *matHeaderCellDef>
+                  <b>Marital Status</b>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let member">{{member.maritalStatusId}}</mat-cell>
+              </ng-container>
             <ng-container matColumnDef="relation">
               <mat-header-cell *matHeaderCellDef>
                 <b>Relation</b>
@@ -215,7 +213,7 @@
               </mat-header-cell>
               <mat-cell *matCellDef="let member">
                 <a *ngIf="member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
-                <span *ngIf="!member.paternalFamilyId && member.married && !member.gender">Not Available</span>
+                <span *ngIf="!member.paternalFamilyId && member.maritalStatusId > 1 && !member.gender">Not Available</span>
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
@@ -240,16 +238,15 @@
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </div>
             <div fxLayout="row wrap">Age:&nbsp;<span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></div>      
-            <div fxLayout="row wrap">Married:&nbsp;
-              <span *ngIf="member.married">Yes</span>
-              <span *ngIf="!member.married">No</span>
+            <div fxLayout="row wrap">Marital Status:&nbsp;
+              <span>{{member.maritalStatusId}}</span>              
             </div>
             <div fxLayout="row wrap">Relation:&nbsp;<span *ngIf="member.relation">{{member.relation}}</span><span *ngIf="!member.relation">NA</span></div>
             <div fxLayout="row wrap">Maternal Family:&nbsp;
               <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
               <span *ngIf="!member.maternalFamilyId">Not Available</span>
             </div>
-            <div *ngIf="member.married && !member.gender" fxLayout="row wrap">Paternal Family:&nbsp;
+            <div *ngIf="member.maritalStatusId > 1 && !member.gender" fxLayout="row wrap">Paternal Family:&nbsp;
               <a *ngIf="member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
               <span *ngIf="!member.paternalFamilyId">Not Available</span>
             </div>

@@ -50,8 +50,8 @@ namespace BK.ViewModel
         [JsonProperty("deathPlace")]
         public string DeathPlace { get; set; }
 
-        [JsonProperty("married")]
-        public bool Married { get; set; }
+        [JsonProperty("maritalStatusId")]
+        public int MaritalStatusId { get; set; }
 
         [JsonProperty("anniversary")]
         public DateTime? Anniversary { get; set; }

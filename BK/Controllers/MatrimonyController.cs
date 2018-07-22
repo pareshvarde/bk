@@ -105,7 +105,7 @@ namespace BK.Controllers
                 model.MemberModel.InstagramHandle = member.InstagramHandle;
                 model.MemberModel.FacebookHandle = member.FacebookHandle;
                 model.MemberModel.TwitterHandle = member.TwitterHandle;
-                model.MemberModel.Married = member.Married;                
+                model.MemberModel.MaritalStatusId = member.MaritalStatusID;                
                 model.MemberModel.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);
                 model.MemberModel.FamilyId = member.FamilyMemberAssociations.Where(x => x.DefaultFamily).Select(x => x.FamilyId).FirstOrDefault();
 
@@ -120,7 +120,7 @@ namespace BK.Controllers
                     model.MemberModel.MaternalFamilyName = string.Format("{0}, {1}", mResult.MaternalFamilyName, mResult.MaternalFamilyAddress);
                 }
 
-                GetPaternalFamily_Result pResult = context.GetPaternalFamily(member.MemberID, member.Gender, member.Married).FirstOrDefault();
+                GetPaternalFamily_Result pResult = context.GetPaternalFamily(member.MemberID, member.Gender, member.MaritalStatusID).FirstOrDefault();
                 if (pResult != null)
                 {
                     model.MemberModel.PaternalFamilyId = pResult.PaternalFamilyID;

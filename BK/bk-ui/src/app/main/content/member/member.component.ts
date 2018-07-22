@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { bkAuthService } from '../../services/auth-service';
 import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
 import { RELATION_TYPES_DATA } from '../../data/relations';
+import { MEMBER_MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 import { OCCUPATIONS_DATA } from '../../data/occupations';
 import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { ReplaySubject } from 'rxjs';
@@ -41,6 +42,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   existingAdd: boolean;
 
   readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
+  readonly MEMBER_MARITALSTATUS_DATA_LOCAL = MEMBER_MARITAL_STATUS_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private notificationService: NotificationsService, public authService: bkAuthService, private location: Location,
@@ -81,7 +83,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       dod: new FormControl('', null),
       birthPlace: new FormControl('', [Validators.maxLength(50)]),
       deathPlace: new FormControl('', [Validators.maxLength(50)]),
-      married: new FormControl('', [Validators.required]),
+      maritalStatusId: new FormControl('', [Validators.required]),
       anniversary: new FormControl('', null),
       educationLevel: new FormControl('', [Validators.maxLength(50)]),
       educationField: new FormControl('', [Validators.maxLength(50)]),
@@ -200,10 +202,11 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
-  getRelations(): any[] {
+  getRelations(): any[] {    
+
     if (this.memberModel.gender === true)
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
-    else if (this.memberModel.gender === false && !this.memberModel.married)
+    else if (this.memberModel.gender === false && this.memberModel.maritalStatusId != 2)
       return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
     else if (this.memberModel.gender === false)
       return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
@@ -212,7 +215,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   getRelatedMember(): any[] {
-    return this.familyModel.members.filter(x => x.married && x.memberId != this.memberId);
+    return this.familyModel.members.filter(x => x.maritalStatusId > 1 && x.memberId != this.memberId);
   }
 
   saveMember() {
@@ -235,7 +238,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (this.memberModel.alive === true && this.memberModel.dod)
       this.memberModel.dod = null;
 
-    if (!this.memberModel.married && this.memberModel.anniversary)
+    if (this.memberModel.maritalStatusId == 1 && this.memberModel.anniversary)
       this.memberModel.anniversary = null;
 
     this.memberModel.familyId = this.familyId;

@@ -78,8 +78,8 @@ namespace BK.ViewModel
         [JsonProperty("dob")]
         public DateTime? DOB { get; set; }
 
-        [JsonProperty("married")]
-        public bool Married { get; set; }
+        [JsonProperty("maritalStatusId")]
+        public int MaritalStatusId { get; set; }
 
         [JsonProperty("canEdit")]
         public bool CanEdit { get; set; }

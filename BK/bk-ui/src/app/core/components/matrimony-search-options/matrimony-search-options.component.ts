@@ -5,7 +5,7 @@ import { CATEGORIES_DATA } from '../../../main/data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../../main/data/nukhsLookup';
 import { MatrimonySearchParameter } from '../../../main/models/matrimonySearchParameter';
 import { OCCUPATIONS_DATA } from '../../../main/data/occupations';
-import { MARITAL_STATUS_DATA } from '../../../main/data/maritalstatuses';
+import { MATRIMONY_MARITAL_STATUS_DATA } from '../../../main/data/maritalstatuses';
 
 
 @Component({
@@ -26,7 +26,7 @@ export class MatrimonySearchOptionsComponent implements OnInit
     NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA.slice();
     CATEGORIES_DATA_LOCAL = CATEGORIES_DATA.slice();
     OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA.slice();
-    MARITAL_STATUS_DATA_LOCAL = MARITAL_STATUS_DATA.slice();
+    MARITAL_STATUS_DATA_LOCAL = MATRIMONY_MARITAL_STATUS_DATA.slice();
     
     public player: AnimationPlayer;
 

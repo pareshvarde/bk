@@ -78,9 +78,9 @@ namespace BK.Controllers
                 vm.InstagramHandle = member.InstagramHandle;
                 vm.FacebookHandle = member.FacebookHandle;
                 vm.TwitterHandle = member.TwitterHandle;
-                vm.Married = member.Married;
+                vm.MaritalStatusId = member.MaritalStatusID;
                 vm.Anniversary = member.Anniversary;
-                vm.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);                
+                vm.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);
                 vm.ModifiedOn = member.ModifiedOn.HasValue ? member.ModifiedOn : member.CreatedOn;
 
                 GetMaternalFamily_Result mResult = context.GetMaternalFamily(member.MemberID).FirstOrDefault();
@@ -90,7 +90,7 @@ namespace BK.Controllers
                     vm.MaternalFamilyName = string.Format("{0}, {1}", mResult.MaternalFamilyName, mResult.MaternalFamilyAddress);
                 }
 
-                GetPaternalFamily_Result pResult = context.GetPaternalFamily(member.MemberID, member.Gender, member.Married).FirstOrDefault();
+                GetPaternalFamily_Result pResult = context.GetPaternalFamily(member.MemberID, member.Gender, member.MaritalStatusID).FirstOrDefault();
                 if (pResult != null)
                 {
                     vm.PaternalFamilyId = pResult.PaternalFamilyID;
@@ -146,7 +146,7 @@ namespace BK.Controllers
                 else
                 {
                     member = new Member();
-                    
+
                     string tPassword = System.Web.Security.Membership.GeneratePassword(8, 0);
                     tPassword = Regex.Replace(tPassword, @"[^a-zA-Z0-9]", m => "9");
                     member.Password = tPassword;
@@ -178,7 +178,7 @@ namespace BK.Controllers
                 member.NickName = model.NickName;
                 member.Phone = model.PhoneNumber;
                 member.TwitterHandle = model.TwitterHandle;
-                member.Married = model.Married;
+                member.MaritalStatusID = model.MaritalStatusId;
                 member.Anniversary = model.Anniversary;
                 member.Active = !string.IsNullOrWhiteSpace(member.EmailAddress);
 

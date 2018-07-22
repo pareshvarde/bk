@@ -104,7 +104,7 @@
                 <input matInput [(ngModel)]="memberModel.dob" (focus)="picker.open()" [matDatepicker]="picker" placeholder="Date Of Birth"
                   formControlName="dob">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>                
+                <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
 
               <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
@@ -142,18 +142,15 @@
 
             <div fxLayout="row wrap">
               <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'">
-                <mat-select placeholder="Marital Status" [(ngModel)]="memberModel.married" formControlName="married">
-                  <mat-option [value]=true>
-                    Married
-                  </mat-option>
-                  <mat-option [value]=false>
-                    Single
+                <mat-select placeholder="Marital Status" [(ngModel)]="memberModel.maritalStatusId" formControlName="maritalStatusId">
+                  <mat-option *ngFor="let n of MEMBER_MARITALSTATUS_DATA_LOCAL" [value]="n.id">
+                    {{ n.status }}
                   </mat-option>
                 </mat-select>
-                <mat-error *ngIf="memberForm.controls['married'].hasError('required')">Please select Marital status</mat-error>
+                <mat-error *ngIf="memberForm.controls['maritalStatusId'].hasError('required')">Please select Marital status</mat-error>
               </mat-form-field>
 
-              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'" *ngIf="memberModel.married">
+              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'" *ngIf="memberModel.maritalStatusId > 1">
                 <input matInput [(ngModel)]="memberModel.anniversary" (focus)="picker1.open()" [matDatepicker]="picker1" placeholder="Marriage Anniversary"
                   formControlName="anniversary">
                 <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -245,7 +242,7 @@
                 <a *ngIf="memberModel.maternalFamilyId" [routerLink]="['/family/', memberModel.maternalFamilyId]">{{memberModel.maternalFamilyName}}</a>
                 <span *ngIf="!memberModel.maternalFamilyId">Not Available</span>
               </div>
-              <div *ngIf="memberModel.married && !memberModel.gender" fxLayout="row wrap">Paternal Family:&nbsp;
+              <div *ngIf="memberModel.maritalStatusId > 1 && !memberModel.gender" fxLayout="row wrap">Paternal Family:&nbsp;
                 <a *ngIf="memberModel.paternalFamilyId" [routerLink]="['/family/', memberModel.paternalFamilyId]">{{memberModel.paternalFamilyName}}</a>
                 <span *ngIf="!memberModel.paternalFamilyId">Not Available</span>
               </div>
@@ -304,7 +301,8 @@
           <form name="searchForm" [formGroup]="searchForm" novalidate>
             <div fxLayout="row wrap">
               <mat-form-field>
-                <input matInput type="number" min="0" [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId" bkAutofocus>
+                <input matInput type="number" min="0" [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId"
+                  bkAutofocus>
                 <mat-error *ngIf="searchForm.controls['memberId'].hasError('numberRequired')">Please enter only numbers</mat-error>
               </mat-form-field>
             </div>

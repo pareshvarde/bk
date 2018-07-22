@@ -90,7 +90,7 @@ namespace BK.Controllers
                     var tmp = new FamilyMemberViewModel();
 
                     tmp.DOB = item.DOB;
-                    tmp.Married = item.Married;
+                    tmp.MaritalStatusId = item.MaritalStatusID;
                     tmp.MemberID = item.MemberID;
                     tmp.Name = $"{item.FirstName} {item.LastName}";
                     tmp.CanEdit = CanEditMember(f.FamilyMemberAssociations.ToList(), item.MemberID);
