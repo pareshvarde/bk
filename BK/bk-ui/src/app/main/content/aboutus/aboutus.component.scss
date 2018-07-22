@@ -1,3 +1,5 @@
+@import "src/app/core/scss/bk";
+
 :host{
     width: 100%;
 
@@ -7,7 +9,14 @@
         }
     }
 
-    .p-10{
-        padding: 10px;
+    .detailItem{        
+        
+        @include media-breakpoint('xs') {            
+            padding-top: 10px;
+        }
+    }
+
+    .photoItem{
+        margin-right: 20px;
     }
 }

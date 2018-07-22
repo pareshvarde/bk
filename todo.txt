@@ -13,6 +13,9 @@ help videos
 ===========================	
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
 add HOF avatar on family screen
+ghar javai
+widow/widower condition
+married bool to char again?
 about us page
 =============================
 angular memory and performance analyser
@@ -23,6 +26,6 @@ Audits
 	--members without family
 	--members without any default family
 	--families without head of family
-	--matrimony without correct status (alive, adult, single)
+	--matrimony without correct status (alive, adult, single, dob)
 	--family or members with junk entries
 	--profile pictures without members
