@@ -14,7 +14,7 @@ help videos
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
 add HOF avatar on family screen
 show widow/widower based on gender
-member profile text 100 characters limit
+three matrimonial pictures
 terms and condition
 =============================
 angular memory and performance analyser
