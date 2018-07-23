@@ -43,7 +43,11 @@
                 mat-form-field {
                     width: 300px;
                     margin-right: 20px;
-                }              
+                }        
+                
+                .mat-form-field-fullwidth{
+                    width: 100% !important;
+                }
                 
                 form {
                     width: 100%;

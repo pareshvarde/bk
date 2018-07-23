@@ -110,6 +110,9 @@ namespace BK.ViewModel
         [JsonProperty("maternalFamilyName")]
         public string MaternalFamilyName { get; set; }
 
+        [JsonProperty("profileText")]
+        public string ProfileText { get; set; }
+
         [JsonProperty("canEdit")]
         public bool canEdit { get; set; }
     }
@@ -119,7 +122,8 @@ namespace BK.ViewModel
         public MemberViewModelValidator()
         {
             RuleFor(x => x.FirstName).NotEmpty().WithMessage("First Name cannot be blank");
-            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");            
+            RuleFor(x => x.LastName).NotEmpty().WithMessage("Last Name cannot be blank");
+            RuleFor(x => x.ProfileText).MaximumLength(100).WithMessage("Maximum 100 characters allowed for profile text");
         }
     }
 }

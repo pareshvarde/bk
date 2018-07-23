@@ -237,15 +237,23 @@
 
             </div>
 
-            <div style="line-height:1.75">
-              <div fxLayout="row wrap">Maternal Family:&nbsp;
+            <div style="line-height:2">
+              <div fxLayout="row wrap" class="secondary-text" style="font-size: 12px;">Maternal Family:&nbsp;
                 <a *ngIf="memberModel.maternalFamilyId" [routerLink]="['/family/', memberModel.maternalFamilyId]">{{memberModel.maternalFamilyName}}</a>
                 <span *ngIf="!memberModel.maternalFamilyId">Not Available</span>
               </div>
-              <div *ngIf="memberModel.maritalStatusId > 1 && !memberModel.gender" fxLayout="row wrap">Paternal Family:&nbsp;
+              <div *ngIf="memberModel.maritalStatusId > 1 && !memberModel.gender" fxLayout="row wrap" class="secondary-text" style="font-size: 12px;">Paternal Family:&nbsp;
                 <a *ngIf="memberModel.paternalFamilyId" [routerLink]="['/family/', memberModel.paternalFamilyId]">{{memberModel.paternalFamilyName}}</a>
                 <span *ngIf="!memberModel.paternalFamilyId">Not Available</span>
               </div>
+            </div>
+
+            <div fxLayout="row wrap" style="padding-top: 10px;">
+              <mat-form-field [floatLabel]="this.memberForm.disabled ? 'always':'auto'" class="mat-form-field-fullwidth">              
+                <textarea maxlength="250" matInput [(ngModel)]="memberModel.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
+                  matAutosizeMaxRows="5" formControlName="profileText"></textarea>                
+                <mat-error *ngIf="memberForm.controls['profileText'].hasError('maxlength')">Only 100 characters of text allowed</mat-error>
+              </mat-form-field>
             </div>
 
             <div *ngIf="(editMode || addMode) && memberModel.canEdit" fxLayout="row" fxLayoutAlign="center center">

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FluentValidation;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,5 +80,5 @@ namespace BK.ViewModel
 
         [JsonProperty("memberModel")]
         public MemberViewModel MemberModel { get; set; }
-    }
+    }    
 }

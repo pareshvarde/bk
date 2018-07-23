@@ -82,6 +82,7 @@ namespace BK.Controllers
                 vm.Anniversary = member.Anniversary;
                 vm.PhotoUrl = MemberWrapper.ProfilePhoto(member.MemberID, member.Gender, member.ModifiedOn);
                 vm.ModifiedOn = member.ModifiedOn.HasValue ? member.ModifiedOn : member.CreatedOn;
+                vm.ProfileText = member.ProfileText;
 
                 GetMaternalFamily_Result mResult = context.GetMaternalFamily(member.MemberID).FirstOrDefault();
                 if (mResult != null)
@@ -181,6 +182,7 @@ namespace BK.Controllers
                 member.MaritalStatusID = model.MaritalStatusId;
                 member.Anniversary = model.Anniversary;
                 member.Active = !string.IsNullOrWhiteSpace(member.EmailAddress);
+                member.ProfileText = model.ProfileText;
 
                 //TODO: check only if the email address has changed.
                 if (!string.IsNullOrWhiteSpace(member.EmailAddress))

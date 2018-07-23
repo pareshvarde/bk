@@ -94,7 +94,8 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       instagramHandle: new FormControl('', [UniversalValidators.noWhitespace, Validators.maxLength(50)]),
       twitterHandle: new FormControl('', [UniversalValidators.noWhitespace, Validators.maxLength(50)]),
       relationTypeId: new FormControl('', null),
-      relatedMemberId: new FormControl('', null)
+      relatedMemberId: new FormControl('', null),
+      profileText: new FormControl('', [Validators.maxLength(100)])
     });
 
     this.searchForm = new FormGroup({

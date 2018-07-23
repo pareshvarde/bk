@@ -263,7 +263,7 @@
             </mat-form-field>
           </div>
 
-          <div fxLayout="row wrap">Maternal Family:&nbsp;
+          <div fxLayout="row wrap" class="secondary-text" style="font-size: 12px;">Maternal Family:&nbsp;
               <a *ngIf="model.memberModel.maternalFamilyId" [routerLink]="['/family/', model.memberModel.maternalFamilyId]">{{memberModel.maternalFamilyName}}</a>
               <span *ngIf="!model.memberModel.maternalFamilyId">Not Available</span>
           </div>

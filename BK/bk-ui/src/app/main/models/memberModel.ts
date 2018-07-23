@@ -32,6 +32,7 @@ export class MemberModel {
     paternalFamilyName: string;    
     maternalFamilyId: number;
     maternalFamilyName: string;    
+    profileText: string;
     canEdit: boolean;
 
     constructor() { }
