@@ -207,7 +207,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     if (this.memberModel.gender === true)
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
-    else if (this.memberModel.gender === false && this.memberModel.maritalStatusId != 2)
+    else if (this.memberModel.gender === false && this.memberModel.maritalStatusId === 1)
       return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
     else if (this.memberModel.gender === false)
       return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
