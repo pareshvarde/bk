@@ -2,11 +2,9 @@
  It looks like you're using ngModel on the same form field as formControlName. 
     Support for using the ngModel input property and ngModelChange event with 
     reactive form directives has been deprecated in Angular v6 and will be removed 
-    in Angular v7.
-	
+    in Angular v7.	
 ===========================
 birthday/anniversary wish email
-Multiple Matrimonial full photos
 Remember Me
 help icons on each page
 help videos
