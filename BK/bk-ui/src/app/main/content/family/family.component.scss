@@ -33,12 +33,12 @@
             #largeScreen{
             .mat-column-memberId
             {
-                flex: 0 0 5%;
+                flex: 0 0 4%;
             }
 
             .mat-column-name
             {
-                flex: 0 0 16%;
+                flex: 0 0 15%;
             }
 
             .mat-column-age
@@ -48,7 +48,7 @@
 
             .mat-column-maritalStatusId
             {
-                flex: 0 0 6%;
+                flex: 0 0 8%;
             }
 
             .mat-column-relation
@@ -74,7 +74,7 @@
 
             .mobile-card{                
                 padding-bottom: 10px;
-                line-height: 1.5;
+                line-height: 2;
             }
 
             #family-form {       

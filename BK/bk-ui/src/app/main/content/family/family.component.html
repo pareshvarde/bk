@@ -190,7 +190,7 @@
                 <mat-header-cell *matHeaderCellDef>
                   <b>Marital Status</b>
                 </mat-header-cell>
-                <mat-cell *matCellDef="let member">{{member.maritalStatusId}}</mat-cell>
+                <mat-cell *matCellDef="let member">{{member.maritalStatus}}</mat-cell>
               </ng-container>
             <ng-container matColumnDef="relation">
               <mat-header-cell *matHeaderCellDef>
@@ -232,14 +232,14 @@
           </mat-table>
         </div>
         <div *ngIf="dataSource" fxShow fxHide.gt-sm>
-          <div class="mobile-card" *ngFor="let member of dataSource.filteredData">
+          <div class="mobile-card secondary-text"  *ngFor="let member of dataSource.filteredData">
             <div fxLayout="row wrap">ID:&nbsp;{{member.memberId}}</div>
             <div fxLayout="row wrap">Name:&nbsp;
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </div>
             <div fxLayout="row wrap">Age:&nbsp;<span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></div>      
             <div fxLayout="row wrap">Marital Status:&nbsp;
-              <span>{{member.maritalStatusId}}</span>              
+              <span>{{member.maritalStatus}}</span>              
             </div>
             <div fxLayout="row wrap">Relation:&nbsp;<span *ngIf="member.relation">{{member.relation}}</span><span *ngIf="!member.relation">NA</span></div>
             <div fxLayout="row wrap">Maternal Family:&nbsp;

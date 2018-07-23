@@ -12,6 +12,7 @@ import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { Location } from '@angular/common';
 import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
+import { MEMBER_MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 
 @Component({
   selector: 'app-family',
@@ -30,6 +31,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   matrimonyDatasource: any;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
+  readonly MEMBER_MARITALSTATUS_DATA_LOCAL = MEMBER_MARITAL_STATUS_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private notificationService: NotificationsService, public authService: bkAuthService,
@@ -88,6 +90,15 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.model = res.result;
+
+        this.model.members.forEach(element => {
+          var status = this.MEMBER_MARITALSTATUS_DATA_LOCAL.filter(x => x.id === element.maritalStatusId);
+          if (status && status.length > 0)
+            element.maritalStatus = status[0].status;
+          else
+            element.maritalStatus = "";          
+        });  
+
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
         this.matrimonyDatasource = new MatTableDataSource<FamilyMemberModel>(this.model.members.filter(x => {
           if (x.matrimonialExists)
