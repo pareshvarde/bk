@@ -148,7 +148,8 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     let dialogRef = this.dialog.open(BkImageCropperComponent, {      
-      width: '600px',      
+      width: '800px',      
+      maxHeight: '90vh',
       data: { imgEvent: event }
     });
 
