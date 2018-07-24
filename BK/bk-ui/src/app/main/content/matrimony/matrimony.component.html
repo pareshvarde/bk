@@ -1,203 +1,234 @@
 <div id="matrimony" fxLayout="column">
   <div id="matrimony-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="matrimony-form">
-        <div class="bk-large-card">
-      <form name="matrimonyForm" [formGroup]="matrimonyForm" novalidate>
+      <div class="bk-large-card">
+        <form name="matrimonyForm" [formGroup]="matrimonyForm" novalidate>
 
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.maternalNukhId" formControlName="maternalNukhId" bkAutofocus>
-              <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
-                {{ n.nukh }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['maternalNukhId'].hasError('required')">Please select a maternal nukh</mat-error>
-          </mat-form-field>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <mat-select placeholder="Maternal Nukh" [(ngModel)]="model.maternalNukhId" formControlName="maternalNukhId" bkAutofocus>
+                <mat-option *ngFor="let n of NUKHS_LOOKUP_DATA_LOCAL" [value]="n.id">
+                  {{ n.nukh }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['maternalNukhId'].hasError('required')">Please select a maternal nukh</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Marital Status" [(ngModel)]="model.maritalStatusId" formControlName="maritalStatusId">
-              <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
-                {{ n.status }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['maritalStatusId'].hasError('required')">Please select martial status</mat-error>
-          </mat-form-field>
-        </div>
+            <mat-form-field>
+              <mat-select placeholder="Marital Status" [(ngModel)]="model.maritalStatusId" formControlName="maritalStatusId">
+                <mat-option *ngFor="let n of MARITAL_STATUS_DATA_LOCAL" [value]="n.id">
+                  {{ n.status }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['maritalStatusId'].hasError('required')">Please select martial status</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <input matInput type="time" [(ngModel)]="model.birthTime" placeholder="Birth Time" formControlName="birthTime">
-            <mat-error *ngIf="matrimonyForm.controls['birthTime'].hasError('required')">Please provide birth time</mat-error>
-          </mat-form-field>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <input matInput type="time" [(ngModel)]="model.birthTime" placeholder="Birth Time" formControlName="birthTime">
+              <mat-error *ngIf="matrimonyForm.controls['birthTime'].hasError('required')">Please provide birth time</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Height" [(ngModel)]="model.height" formControlName="height">
-              <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
-                {{ n.feet }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['height'].hasError('required')">Please provide height</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Height" [(ngModel)]="model.height" formControlName="height">
+                <mat-option *ngFor="let n of HEIGHT_DATA_LOCAL" [value]="n.id">
+                  {{ n.feet }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['height'].hasError('required')">Please provide height</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <input type="number" min="0" matInput [(ngModel)]="model.weight" placeholder="Weight (kg)" formControlName="weight">
-            <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('required')">Please provide weight</mat-error>
-            <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('numberRequired')">Please input only numbers</mat-error>
-          </mat-form-field>
-        </div>
+            <mat-form-field>
+              <input type="number" min="0" matInput [(ngModel)]="model.weight" placeholder="Weight (kg)" formControlName="weight">
+              <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('required')">Please provide weight</mat-error>
+              <mat-error *ngIf="matrimonyForm.controls['weight'].hasError('numberRequired')">Please input only numbers</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <mat-select placeholder="Body" [(ngModel)]="model.bodyTypeId" formControlName="bodyTypeId">
-              <mat-option *ngFor="let n of BODYTYPE_DATA_LOCAL" [value]="n.id">
-                {{ n.type }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['bodyTypeId'].hasError('required')">Please select body type</mat-error>
-          </mat-form-field>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <mat-select placeholder="Body" [(ngModel)]="model.bodyTypeId" formControlName="bodyTypeId">
+                <mat-option *ngFor="let n of BODYTYPE_DATA_LOCAL" [value]="n.id">
+                  {{ n.type }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['bodyTypeId'].hasError('required')">Please select body type</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Complexion" [(ngModel)]="model.complexionTypeId" formControlName="complexionTypeId">
-              <mat-option *ngFor="let n of COMPLEXION_DATA_LOCAL" [value]="n.id">
-                {{ n.type }}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['complexionTypeId'].hasError('required')">Please select complexion type</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Complexion" [(ngModel)]="model.complexionTypeId" formControlName="complexionTypeId">
+                <mat-option *ngFor="let n of COMPLEXION_DATA_LOCAL" [value]="n.id">
+                  {{ n.type }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['complexionTypeId'].hasError('required')">Please select complexion type</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Mangal" [(ngModel)]="model.mangal" formControlName="manglik">
-              <mat-option value='N'>
-                NOT MANGLIK
-              </mat-option>
-              <mat-option value='A'>
-                AANSHIK MANGLIK
-              </mat-option>
-              <mat-option value='M'>
-                MANGLIK
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['manglik'].hasError('required')">Please select manglik option</mat-error>
-          </mat-form-field>
-        </div>
+            <mat-form-field>
+              <mat-select placeholder="Mangal" [(ngModel)]="model.mangal" formControlName="manglik">
+                <mat-option value='N'>
+                  NOT MANGLIK
+                </mat-option>
+                <mat-option value='A'>
+                  AANSHIK MANGLIK
+                </mat-option>
+                <mat-option value='M'>
+                  MANGLIK
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['manglik'].hasError('required')">Please select manglik option</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <input type="number" min="0" matInput [(ngModel)]="model.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
-            <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('required')">Please provide monthly income</mat-error>
-            <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('numberRequired')">Please input only numbers</mat-error>
-          </mat-form-field>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <input type="number" min="0" matInput [(ngModel)]="model.monthlyIncome" placeholder="Monthly Income" formControlName="monthlyIncome">
+              <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('required')">Please provide monthly income</mat-error>
+              <mat-error *ngIf="matrimonyForm.controls['monthlyIncome'].hasError('numberRequired')">Please input only numbers</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <input maxlength="50" matInput [ngModel]="model.language | titlecase" (ngModelChange)="model.language=$event" placeholder="Mother Tongue" formControlName="language">
-            <mat-error *ngIf="matrimonyForm.controls['language'].hasError('required')">Please select mother tongue</mat-error>
-            <mat-error *ngIf="matrimonyForm.controls['language'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
-          </mat-form-field>
-        </div>
+            <mat-form-field>
+              <input maxlength="50" matInput [ngModel]="model.language | titlecase" (ngModelChange)="model.language=$event" placeholder="Mother Tongue"
+                formControlName="language">
+              <mat-error *ngIf="matrimonyForm.controls['language'].hasError('required')">Please select mother tongue</mat-error>
+              <mat-error *ngIf="matrimonyForm.controls['language'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div fxLayout="row wrap">
+          <div fxLayout="row wrap">
 
-          <mat-form-field>
-            <mat-select placeholder="Smoke" [(ngModel)]="model.smoke" formControlName="smoke">
-              <mat-option [value]=true>
-                YES
-              </mat-option>
-              <mat-option [value]=false>
-                NO
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['smoke'].hasError('required')">Please select smoke option</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Smoke" [(ngModel)]="model.smoke" formControlName="smoke">
+                <mat-option [value]=true>
+                  YES
+                </mat-option>
+                <mat-option [value]=false>
+                  NO
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['smoke'].hasError('required')">Please select smoke option</mat-error>
+            </mat-form-field>
 
 
-          <mat-form-field>
-            <mat-select placeholder="Alcohol" [(ngModel)]="model.alcohol" formControlName="alcohol">
-              <mat-option [value]=true>
-                YES
-              </mat-option>
-              <mat-option [value]=false>
-                NO
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['alcohol'].hasError('required')">Please select alcohol option</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Alcohol" [(ngModel)]="model.alcohol" formControlName="alcohol">
+                <mat-option [value]=true>
+                  YES
+                </mat-option>
+                <mat-option [value]=false>
+                  NO
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['alcohol'].hasError('required')">Please select alcohol option</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Tobacco" [(ngModel)]="model.tobacco" formControlName="tobacco">
-              <mat-option [value]=true>
-                YES
-              </mat-option>
-              <mat-option [value]=false>
-                NO
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['tobacco'].hasError('required')">Please select tobacco option</mat-error>
-          </mat-form-field>
-        </div>
+            <mat-form-field>
+              <mat-select placeholder="Tobacco" [(ngModel)]="model.tobacco" formControlName="tobacco">
+                <mat-option [value]=true>
+                  YES
+                </mat-option>
+                <mat-option [value]=false>
+                  NO
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['tobacco'].hasError('required')">Please select tobacco option</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div fxLayout="row wrap">
-          <mat-form-field>
-            <mat-select placeholder="Disability" [(ngModel)]="model.disability" formControlName="disability">
-              <mat-option [value]=true>
-                YES
-              </mat-option>
-              <mat-option [value]=false>
-                NO
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['disability'].hasError('required')">Please select disability option</mat-error>
-          </mat-form-field>
+          <div fxLayout="row wrap">
+            <mat-form-field>
+              <mat-select placeholder="Disability" [(ngModel)]="model.disability" formControlName="disability">
+                <mat-option [value]=true>
+                  YES
+                </mat-option>
+                <mat-option [value]=false>
+                  NO
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['disability'].hasError('required')">Please select disability option</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Vegetarian" [(ngModel)]="model.vegetarian" formControlName="vegetarian">
-              <mat-option [value]=true>
-                YES
-              </mat-option>
-              <mat-option [value]=false>
-                NO
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['vegetarian'].hasError('required')">Please select food preference</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Vegetarian" [(ngModel)]="model.vegetarian" formControlName="vegetarian">
+                <mat-option [value]=true>
+                  YES
+                </mat-option>
+                <mat-option [value]=false>
+                  NO
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['vegetarian'].hasError('required')">Please select food preference</mat-error>
+            </mat-form-field>
 
-          <mat-form-field>
-            <mat-select placeholder="Own Home" [(ngModel)]="model.ownHome" formControlName="ownHome">
-              <mat-option [value]=true>
-                YES
-              </mat-option>
-              <mat-option [value]=false>
-                NO
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="matrimonyForm.controls['ownHome'].hasError('required')">Please select home option</mat-error>
-          </mat-form-field>
+            <mat-form-field>
+              <mat-select placeholder="Own Home" [(ngModel)]="model.ownHome" formControlName="ownHome">
+                <mat-option [value]=true>
+                  YES
+                </mat-option>
+                <mat-option [value]=false>
+                  NO
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="matrimonyForm.controls['ownHome'].hasError('required')">Please select home option</mat-error>
+            </mat-form-field>
 
-        </div>
+          </div>
 
-        <div fxLayout="row wrap">
-          <mat-form-field class="mat-form-field-fullwidth">
-            <textarea maxlength="250" matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize matAutosizeMinRows="2"
-              matAutosizeMaxRows="5" formControlName="profileText"></textarea>
-            <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('required')">Please provide brief profile information</mat-error>
-            <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('maxlength')">Only 250 characters of text allowed</mat-error>
-          </mat-form-field>
-        </div>
+          <div fxLayout="row wrap">
+            <mat-form-field class="mat-form-field-fullwidth">
+              <textarea maxlength="250" matInput [(ngModel)]="model.profileText" placeholder="Profile Description" matTextareaAutosize
+                matAutosizeMinRows="2" matAutosizeMaxRows="5" formControlName="profileText"></textarea>
+              <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('required')">Please provide brief profile information</mat-error>
+              <mat-error *ngIf="matrimonyForm.controls['profileText'].hasError('maxlength')">Only 250 characters of text allowed</mat-error>
+            </mat-form-field>
+          </div>
 
-        <div fxLayout="row" fxLayoutAlign="center center">
-          <button matTooltip="Save" (click)="save()" mat-raised-button fxHide fxShow.gt-sm color="accent" class="submit-button" aria-label="SAVE">
-            <mat-icon>save</mat-icon>&nbsp;SAVE
-          </button>
-          <button matTooltip="Save" (click)="save()" mat-mini-fab fxShow fxHide.gt-sm color="accent" class="submit-button" aria-label="SAVE">
-            <mat-icon>save</mat-icon>
-          </button>
-          <button matTooltip="Cancel" (click)="cancelEdit()" mat-raised-button fxHide fxShow.gt-sm class="submit-button" aria-label="CANCEL">
-            <mat-icon>cancel</mat-icon>&nbsp;CANCEL
-          </button>
-          <button matTooltip="Cancel" (click)="cancelEdit()" mat-mini-fab fxShow fxHide.gt-sm class="submit-button" aria-label="CANCEL">
-            <mat-icon>cancel</mat-icon>
-          </button>
-        </div>
-      </form>
+          <div fxLayout="row wrap" fxLayoutAlign="center center">
+            <h3>Photos (Click to upload)</h3>
+          </div>
+          <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <a>
+                <img class="avatar" src="assets/images/avatars/profile.jpg">
+              </a>
+              <button matTooltip="Delete" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <a>
+                <img class="avatar" src="assets/images/avatars/profile.jpg">
+              </a>
+              <button matTooltip="Delete" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <div fxLayout="column" fxLayoutAlign="center center">
+              <a>
+                <img class="avatar" src="assets/images/avatars/profile.jpg">
+              </a>
+              <button matTooltip="Delete" mat-icon-button>
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <button matTooltip="Save" (click)="save()" mat-raised-button fxHide fxShow.gt-sm color="accent" class="submit-button" aria-label="SAVE">
+              <mat-icon>save</mat-icon>&nbsp;SAVE
+            </button>
+            <button matTooltip="Save" (click)="save()" mat-mini-fab fxShow fxHide.gt-sm color="accent" class="submit-button" aria-label="SAVE">
+              <mat-icon>save</mat-icon>
+            </button>
+            <button matTooltip="Cancel" (click)="cancelEdit()" mat-raised-button fxHide fxShow.gt-sm class="submit-button" aria-label="CANCEL">
+              <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+            </button>
+            <button matTooltip="Cancel" (click)="cancelEdit()" mat-mini-fab fxShow fxHide.gt-sm class="submit-button" aria-label="CANCEL">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
