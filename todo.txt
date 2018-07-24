@@ -14,6 +14,9 @@ add HOF avatar on family screen
 show widow/widower based on gender
 three matrimonial pictures
 terms and condition
+in case of non edit mode family screen should show only available matrimony and not eligible ones.
+sort by in matrimony and directory search
+exiting member search additional criteria name, city
 =============================
 angular memory and performance analyser
 sql query performance and indexes
