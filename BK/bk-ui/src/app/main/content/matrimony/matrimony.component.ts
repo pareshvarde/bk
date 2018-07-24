@@ -15,6 +15,8 @@ import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
+import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-matrimony',
@@ -28,6 +30,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   addMode: boolean;
   model: MatrimonyModel;
   matrimonyForm: FormGroup;
+  photoNumber: number;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   readonly MARITAL_STATUS_DATA_LOCAL = MATRIMONY_MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
@@ -36,7 +39,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private notificationService: NotificationsService, public authService: bkAuthService,
-    private confirmationService: ConfirmationService, private location: Location,
+    private confirmationService: ConfirmationService, private location: Location, public dialog: MatDialog,
     private globalService: GlobalService, private cdr: ChangeDetectorRef) {
 
     this.route.params.takeUntil(this.destroyed$).subscribe(params => {
@@ -129,6 +132,37 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
+  openFile(fileNumber: number){    
+      this.photoNumber = fileNumber;
+      document.getElementById('fileBrowser').click();          
+  }
+
+  fileChangeEvent(event: any): void {
+
+    if (event.srcElement.files.length === 0)
+      return;
+
+    if (!event.srcElement.files[0].type.startsWith("image/")) {
+      this.confirmationService.create("Error", "Only file of type image is supported", this.globalService.alertOptions);            
+      return;
+    }
+
+    let dialogRef = this.dialog.open(BkImageCropperComponent, {      
+      width: '600px',      
+      data: { imgEvent: event }
+    });
+
+    dialogRef.afterClosed().takeUntil(this.destroyed$).subscribe(result => {
+      if (result) {
+        this.savePhoto(result);
+      }
+    });
+  }
+
+  savePhoto(content: string) {
+
+  }
+  
   cancelEdit() {
     if (window.history.length > 1)
       this.location.back();

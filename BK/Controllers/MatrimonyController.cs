@@ -158,7 +158,7 @@ namespace BK.Controllers
             using (bkContext context = new bkContext())
             {
                 if (!CanEditMember(model.MemberId))
-                    return BadRequest("You do not have permission to udpate this record");
+                    return BadRequest("You do not have permission to update this record");
 
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == model.MemberId); ;
 
