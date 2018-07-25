@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   
-  constructor(private router: Router, private dataService: bkDataService, public dialog: MatDialog
+  constructor(private router: Router, private dataService: bkDataService, public dialog: MatDialog,
     private cdr: ChangeDetectorRef, private confirmationService: ConfirmationService, private globalService: GlobalService) 
   {         
     this.formModel = new RegisterModel();    
