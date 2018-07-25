@@ -32,8 +32,8 @@ export class BkImageViewerComponent implements OnInit {
         fullscreen: 'fa fa-arrows-alt',
       },
       btnShow: {
-        zoomIn: false,
-        zoomOut: false,
+        zoomIn: true,
+        zoomOut: true,
         rotateClockwise: false,
         rotateCounterClockwise: false,
         next: true,
