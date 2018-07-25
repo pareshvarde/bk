@@ -16,6 +16,9 @@ export class MatrimonyModel {
     vegetarian: boolean;
     monthlyIncome: number;
     language: number;
+    photo1Url: string;
+    photo2Url: string;
+    photo3Url: string;
     profileText: string;
     expiresOn: Date;     
 }

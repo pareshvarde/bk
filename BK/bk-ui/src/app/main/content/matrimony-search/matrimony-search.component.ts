@@ -24,7 +24,7 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
   readonly PAGE_SIZE: number = 25;
   readonly OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA;
 
-  constructor(private dataService: bkDataService, public dialog: MatDialog, 
+  constructor(private dataService: bkDataService, public dialog: MatDialog,
     private confirmationService: ConfirmationService, private globalService: GlobalService) {
     this.searchParameter = new MatrimonySearchParameter();
   }
@@ -48,7 +48,7 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
     this.performSearch();
   }
 
-  getOccupation(occupationId: number): string{
+  getOccupation(occupationId: number): string {
     var filteredResult = this.OCCUPATION_DATA_LOCAL.filter(x => x.id == occupationId);
     if (filteredResult && filteredResult.length > 0)
       return filteredResult[0].occupation;
@@ -84,9 +84,9 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
       },
       (err) => {
         if (err.errors)
-        this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
-        this.confirmationService.create("Error", err, this.globalService.alertOptions);
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
@@ -107,12 +107,21 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
       return false;
   }
 
-  showPhoto(url: string){
+  showPhoto(model: any) {
     var pictures: any[] = new Array();
-    pictures.push(url);    
+    pictures.push(model.photoUrl);
+
+    if (model.photo1Url && model.photo1Url.indexOf('male') === -1)
+      pictures.push(model.photo1Url);
+
+    if (model.photo1Url && model.photo2Url.indexOf('male') === -1)
+      pictures.push(model.photo2Url);
+
+    if (model.photo1Url && model.photo3Url.indexOf('male') === -1)
+      pictures.push(model.photo3Url);
 
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
-      data: { images:  pictures}
+      data: { images: pictures }
     });
   }
 }

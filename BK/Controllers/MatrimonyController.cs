@@ -269,6 +269,9 @@ namespace BK.Controllers
                         item.Education = $"{result.EducationField}";
 
                     item.PhotoUrl = MemberWrapper.ProfilePhoto(result.MemberID, result.Gender, result.ModifiedOn);
+                    item.Photo1Url = MemberWrapper.MatrimonyPhoto(result.MemberID, result.Gender, 1, result.ModifiedOn);
+                    item.Photo2Url = MemberWrapper.MatrimonyPhoto(result.MemberID, result.Gender, 2, result.ModifiedOn);
+                    item.Photo3Url = MemberWrapper.MatrimonyPhoto(result.MemberID, result.Gender, 3, result.ModifiedOn);
 
                     mvm.Results.Add(item);
                 }
