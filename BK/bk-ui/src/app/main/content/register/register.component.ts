@@ -9,6 +9,8 @@ import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { ReplaySubject } from 'rxjs';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
+import { MatDialog } from '../../../../../node_modules/@angular/material';
+import { TermsComponent } from '../terms/terms.component';
 
 @Component({
   selector: 'app-register',
@@ -27,7 +29,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   
-  constructor(private router: Router, private dataService: bkDataService, 
+  constructor(private router: Router, private dataService: bkDataService, public dialog: MatDialog
     private cdr: ChangeDetectorRef, private confirmationService: ConfirmationService, private globalService: GlobalService) 
   {         
     this.formModel = new RegisterModel();    
@@ -62,6 +64,13 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
+  }
+
+  showTerms(){
+    let dialogRef = this.dialog.open(TermsComponent, {
+      width: '800px',
+      height: '90vh'
+    });
   }
 
   processRegistration(){

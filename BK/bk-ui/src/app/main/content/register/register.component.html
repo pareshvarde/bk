@@ -153,7 +153,7 @@
           </div>
           <div fxLayout="row" fxLayoutAlign="center center">
             <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="termsAccepted" formControlName="terms">
-              <a [routerLink]="['/terms']" target="_blank">I agree to terms and conditions</a>
+              <a (click)="showTerms()">I agree to terms and conditions</a>
             </mat-checkbox>
           </div>
           <div fxLayout="row" style="padding-top: 10px" fxLayoutAlign="center center">
