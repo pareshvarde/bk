@@ -21,6 +21,7 @@ import { DirectoryComponent } from './main/content/directory/directory.component
 import { MatrimonySearchComponent } from './main/content/matrimony-search/matrimony-search.component';
 import { AboutusComponent } from './main/content/aboutus/aboutus.component';
 import { ContactusComponent } from './main/content/contactus/contactus.component';
+import { TermsComponent } from './main/content/terms/terms.component';
 
 export const bkRoutes: Routes = [
     {
@@ -118,6 +119,10 @@ export const bkRoutes: Routes = [
     {
         path: "contactus",
         component: ContactusComponent
+    },
+    {
+        path: "terms",
+        component: TermsComponent
     },
     {
         path      : '**',

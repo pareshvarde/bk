@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   formModel: RegisterModel;    
   captchaResponse: string;
   registerClicked: boolean = false;
+  termsAccepted: boolean = false;
 
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
@@ -54,6 +55,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
       postalCode: new FormControl('', [Validators.required, Validators.maxLength(10)]),
       state: new FormControl('', [Validators.required, Validators.maxLength(50)]),      
       country: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      terms: new FormControl('', null)
     }); 
   }
 
@@ -63,6 +65,12 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   processRegistration(){
+
+    if (!this.termsAccepted){
+      this.confirmationService.create("Error", "Please read and agree to terms and condition.", this.globalService.alertOptions);          
+      return;
+    }
+
     this.registerClicked = true;
 
     if (!this.captchaResponse)

@@ -152,12 +152,16 @@
             </mat-form-field>
           </div>
           <div fxLayout="row" fxLayoutAlign="center center">
+            <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="termsAccepted" formControlName="terms">
+              <a [routerLink]="['/terms']" target="_blank">I agree to terms and conditions</a>
+            </mat-checkbox>
+          </div>
+          <div fxLayout="row" style="padding-top: 10px" fxLayoutAlign="center center">
             <re-captcha (captchaResponse)="handleCorrectCaptcha($event)" site_key="6LfMDkQUAAAAAKP9qDi-85Ptb3o108ldtqB7jM2B"></re-captcha>
           </div>
           <div *ngIf="registerClicked && !captchaResponse" fxLayout="row" fxLayoutAlign="center center" class="captchaMessage">
             Please verify you are not a robot
           </div>
-
           <button mat-raised-button (click)="processRegistration()" color="accent" class="submit-button" aria-label="REGISTER">
             REGISTER
           </button>
