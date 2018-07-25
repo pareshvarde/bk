@@ -190,7 +190,7 @@
           <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
-                <img id="img1" class="avatar" (click)="openFile(1)" src="assets/images/avatars/profile.jpg">
+                <img id="img1" class="avatar" (click)="openFile(1)" [src]="model.photo1Url">
               </a>
               <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
@@ -198,7 +198,7 @@
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
-                <img id="img2" class="avatar" (click)="openFile(2)" src="assets/images/avatars/profile.jpg">
+                <img id="img2" class="avatar" (click)="openFile(2)" [src]="model.photo2Url">
               </a>
               <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
@@ -206,7 +206,7 @@
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
-                <img id="img3" class="avatar" (click)="openFile(3)" src="assets/images/avatars/profile.jpg">
+                <img id="img3" class="avatar" (click)="openFile(3)" [src]="model.photo3Url">
               </a>
               <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>

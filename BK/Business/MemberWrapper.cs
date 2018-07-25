@@ -22,5 +22,20 @@ namespace BK
             else
                 return "images/profiles/female.png";            
         }
+
+        public static string MatrimonyPhoto(int memberId, bool gender, int photoNumber, DateTime? modifiedOn)
+        {
+            if (!modifiedOn.HasValue)
+                modifiedOn = DateTime.Now;
+
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath(string.Format(@"~/Images/Matrimonials/{0}_{1}.jpg", memberId, photoNumber));
+            if (File.Exists(filePath))
+                return string.Format("images/Matrimonials/{0}_{1}.jpg?{2}", memberId, photoNumber, modifiedOn.Value.Ticks);
+
+            if (gender)
+                return "images/profiles/male.png";
+            else
+                return "images/profiles/female.png";
+        }
     }
 }

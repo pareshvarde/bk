@@ -151,19 +151,29 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     var src = imageResult.resized && imageResult.resized.dataURL || imageResult.dataURL;
-
-    if (this.photoNumber === 1)
-      document.getElementById('img1').setAttribute('src', src);
-    else if (this.photoNumber === 2)
-      document.getElementById('img2').setAttribute('src', src);
-    else if (this.photoNumber === 3)
-      document.getElementById('img3').setAttribute('src', src);
-
+    
     this.savePhoto(src);
   }
 
   savePhoto(content: string) {
+    this.dataService.uploadMatrimonyPhoto({ memberId: this.memberId, image: content, photoNumber: this.photoNumber }).takeUntil(this.destroyed$).subscribe(
+      (res) => {
+        this.notificationService.success("Your photo has been uploaded.");
 
+        if (this.photoNumber === 1)
+          document.getElementById('img1').setAttribute('src', content);
+        else if (this.photoNumber === 2)
+          document.getElementById('img2').setAttribute('src', content);
+        else if (this.photoNumber === 3)
+          document.getElementById('img3').setAttribute('src', content);        
+      },
+      (err) => {
+        if (err.errors)
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
+        else
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
+      }
+    );
   }
 
   cancelEdit() {

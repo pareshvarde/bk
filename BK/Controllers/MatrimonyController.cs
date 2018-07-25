@@ -1,8 +1,12 @@
 ﻿using BK.Context;
 using BK.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
+using System.Drawing;
+using System.Dynamic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -21,6 +25,7 @@ namespace BK.Controllers
             using (bkContext context = new bkContext())
             {
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == memberId);
+                Member member = context.Members.FirstOrDefault(x => x.MemberID == memberId);
                 if (mat == null)
                     return BadRequest("Matrimony profile cannot be loaded");                
 
@@ -43,7 +48,10 @@ namespace BK.Controllers
                 model.Smoke = mat.Smoke;
                 model.Tobacco = mat.Tobacco;
                 model.Vegetarian = mat.Vegetarian;
-                model.Weight = mat.Weight;                
+                model.Weight = mat.Weight;
+                model.Photo1Url = MemberWrapper.MatrimonyPhoto(mat.MemberID, mat.Member.Gender, 1, mat.ModifiedOn);
+                model.Photo2Url = MemberWrapper.MatrimonyPhoto(mat.MemberID, mat.Member.Gender, 2, mat.ModifiedOn);
+                model.Photo3Url = MemberWrapper.MatrimonyPhoto(mat.MemberID, mat.Member.Gender, 3, mat.ModifiedOn);
 
                 return Ok(model);
             }
@@ -266,5 +274,47 @@ namespace BK.Controllers
             return Ok(mvm);
         }
 
+        [Route("api/matrimony/uploadPhoto")]
+        [HttpPost]
+        public IHttpActionResult UploadPhoto(dynamic json)
+        {
+            dynamic model = JsonConvert.DeserializeObject<ExpandoObject>(json.ToString());
+            int memberId = Convert.ToInt32(model.memberId);
+            int photoNumber = Convert.ToInt32(model.photoNumber);
+
+            if (!CanEditMember(memberId))
+                return BadRequest("You do not have permission to edit this member");
+
+            if (string.IsNullOrWhiteSpace(model.image))
+                return BadRequest("No image content provided");
+
+            if (photoNumber < 1 || photoNumber > 3)
+                return BadRequest("Invalid photo number");
+
+            byte[] imageBytes = Convert.FromBase64String(model.image.Replace("data:image/jpeg;base64,", ""));
+
+            using (MemoryStream stream = new MemoryStream(imageBytes))
+            {
+                Image img = Image.FromStream(stream);
+                string filePath = System.Web.Hosting.HostingEnvironment.MapPath(string.Format(@"~/Images/Matrimonials/{0}_{1}.jpg", memberId, photoNumber));
+                img.Save(filePath);
+            }
+
+            using (bkContext context = new bkContext())
+            {
+                Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == memberId);
+                if (mat != null)
+                {
+                    mat.ModifiedBy = LoggedInMemberId;
+                    mat.ModifiedOn = DateTime.Now;
+
+                    context.SaveChanges();
+                }
+            }
+
+            return Ok();
+        }
+
     }
 }
+

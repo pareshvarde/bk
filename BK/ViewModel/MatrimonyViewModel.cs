@@ -65,6 +65,15 @@ namespace BK.ViewModel
 
         [JsonProperty("photoUrl")]
         public string PhotoUrl { get; set; }
+
+        [JsonProperty("photo1Url")]
+        public string Photo1Url { get; set; }
+
+        [JsonProperty("photo2Url")]
+        public string Photo2Url { get; set; }
+
+        [JsonProperty("photo3Url")]
+        public string Photo3Url { get; set; }
     }
 
     public class MatrimonyViewOnlyModel{
