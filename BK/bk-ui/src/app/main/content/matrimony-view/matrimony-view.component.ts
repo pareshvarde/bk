@@ -113,7 +113,7 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
   }
 
   showPhoto() {
-    debugger;
+    
     var pictures: any[] = new Array();
     pictures.push(this.model.memberModel.photoUrl);
 
