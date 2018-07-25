@@ -1,13 +1,11 @@
 <div class="terms-container">
-  <div class="bk-large-card">
+  <div fxLayout="row wrap">
+    <h4>By creating an account or membership the member agrees to the following terms. The word "Group" indicates Administrator, Promoters
+      and Patrons
+    </h4>
     <div fxLayout="row wrap">
-      <h4>By creating an account or membership the member agrees to the following terms. Group indicates Administrator, Promoters
-        and Patrons
-      </h4>
-    </div>
-    <div fxLayout="row wrap">
-      <h4>The member agrees that a violation of any Membership Terms will result in a termination of the account without
-        any prior information.</h4>
+      <h4>The member agrees that a violation of any Membership Terms will result in a termination of the account without any
+        prior information.</h4>
     </div>
     <div fxLayout="row wrap">
       <ol>
@@ -18,7 +16,7 @@
           The member shall not give any false or misleading information in the account..
         </li>
         <li>
-          The member shall not use vulgar, racist, or other offensive or inappropriate language in your profile.
+          The member shall not use vulgar, racist or other offensive or inappropriate language in your profile.
         </li>
         <li>
           The member is responsible for maintaining the security of their password and any damages caused by others gaining access
@@ -29,8 +27,8 @@
           Group shall not be responsible for any abusive or fraudulent messages received by the member as a result of using the service.
         </li>
         <li>
-          Group shall not be liable for any loss or other damage of any sort arising out of use of this service, disruption in or
-          discontinuation of this service.
+          Group shall not be liable for any loss or other damage of any sort arising out of use of this service, disruption in or discontinuation
+          of this service.
         </li>
         <li>
           Group reserves the rights to refuse, modify or discontinue your membership at any time without further notice.
@@ -43,8 +41,8 @@
     <div fxLayout="row wrap">
       <h4>We request that all members abide by the following moral standards in order to make this a better and more useful service
         for everyone.</h4>
-      <h4>Good Intentions - You are using this service only to seek relationships that will eventually lead to marriages and family tree maintenance. Any
-        other intentions should be clearly stated in your profile to avoid misunderstandings.</h4>
+      <h4>Good Intentions - You are using this service only to seek relationships that will eventually lead to marriages and
+        family tree maintenance. Any other intentions should be clearly stated in your profile to avoid misunderstandings.</h4>
       <h4>
         <b>Truthfulness</b> - You will ensure that all information provided in your profile and also in correspondence with
         other members is true and accurate.</h4>
@@ -53,6 +51,11 @@
       <h4>
         <b>Tastefulness</b> - You will not use vulgar, racist, or other offensive or inappropriate language in your profile
         or in correspondence with other members.</h4>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" style="width: 100%;">
+      <button matTooltip="Close" mat-raised-button (click)="close()" color="accent" class="submit-button" aria-label="CLOSE">
+        <mat-icon>close</mat-icon>&nbsp;Close
+      </button>
     </div>
   </div>
 </div>
