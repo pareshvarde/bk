@@ -11,6 +11,7 @@ help videos
 ===========================	
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
 add HOF avatar on family screen
+photo orienatation
 show widow/widower based on gender
 in case of non edit mode family screen should show only available matrimony and not eligible ones.
 sort by in matrimony and directory search
