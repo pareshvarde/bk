@@ -91,7 +91,10 @@ namespace BK.Controllers
                 model.MatrimonyModel.Tobacco = mat.Tobacco;
                 model.MatrimonyModel.Vegetarian = mat.Vegetarian;
                 model.MatrimonyModel.Weight = mat.Weight;
-                
+                model.MatrimonyModel.Photo1Url = MemberWrapper.MatrimonyPhoto(mat.MemberID, mat.Member.Gender, 1, mat.ModifiedOn);
+                model.MatrimonyModel.Photo2Url = MemberWrapper.MatrimonyPhoto(mat.MemberID, mat.Member.Gender, 2, mat.ModifiedOn);
+                model.MatrimonyModel.Photo3Url = MemberWrapper.MatrimonyPhoto(mat.MemberID, mat.Member.Gender, 3, mat.ModifiedOn);
+
                 model.MemberModel.MemberID = member.MemberID;
                 model.MemberModel.FirstName = member.FirstName;
                 model.MemberModel.LastName = member.LastName;
