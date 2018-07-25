@@ -12,6 +12,7 @@ import { bkPerfectScrollbarDirective } from '../directives/bk-perfect-scrollbar/
 import { CookieService } from 'ngx-cookie-service';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { ImageViewerModule} from 'ngx-image-viewer';
+import { ImageUploadModule } from 'ng2-imageupload';
 
 @NgModule({
     declarations   : [
@@ -27,7 +28,8 @@ import { ImageViewerModule} from 'ngx-image-viewer';
         bkPipesModule,
         ReactiveFormsModule,
         ImageCropperModule,
-        ImageViewerModule.forRoot()
+        ImageViewerModule.forRoot(),
+        ImageUploadModule
     ],
     exports        : [
         FlexLayoutModule,
@@ -40,7 +42,8 @@ import { ImageViewerModule} from 'ngx-image-viewer';
         bkPerfectScrollbarDirective,
         ReactiveFormsModule,                
         ImageCropperModule,
-        ImageViewerModule
+        ImageViewerModule,
+        ImageUploadModule
     ],
     entryComponents: [
         

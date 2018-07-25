@@ -190,7 +190,7 @@
           <div fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px">
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
-                <img class="avatar" (click)="openFile(1)" src="assets/images/avatars/profile.jpg">
+                <img id="img1" class="avatar" (click)="openFile(1)" src="assets/images/avatars/profile.jpg">
               </a>
               <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
@@ -198,7 +198,7 @@
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
-                <img class="avatar" (click)="openFile(2)" src="assets/images/avatars/profile.jpg">
+                <img id="img2" class="avatar" (click)="openFile(2)" src="assets/images/avatars/profile.jpg">
               </a>
               <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
@@ -206,13 +206,13 @@
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
-                <img class="avatar" (click)="openFile(3)" src="assets/images/avatars/profile.jpg">
+                <img id="img3" class="avatar" (click)="openFile(3)" src="assets/images/avatars/profile.jpg">
               </a>
               <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
               </button>
-            </div>
-            <input style="display: none;" type="file" (change)="fileChangeEvent($event)" id="fileBrowser" accept="image/*" />
+            </div>            
+            <input imageUpload (imageSelected)="imageSelected($event)" [resizeOptions]="resizeOptions" style="display: none;" type="file" id="fileBrowser" accept="image/*" />
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">

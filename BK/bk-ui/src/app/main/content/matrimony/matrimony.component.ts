@@ -17,6 +17,7 @@ import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
 import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
 import { MatDialog } from '@angular/material';
+import { ResizeOptions, ImageResult } from '../../../../../node_modules/ng2-imageupload';
 
 @Component({
   selector: 'app-matrimony',
@@ -36,6 +37,11 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
   readonly BODYTYPE_DATA_LOCAL = BODY_TYPE_DATA;
   readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;
+
+  resizeOptions: ResizeOptions = {
+    resizeMaxHeight: 500,
+    resizeMaxWidth: 700
+  };
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private notificationService: NotificationsService, public authService: bkAuthService,
@@ -132,38 +138,34 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
-  openFile(fileNumber: number){    
-      this.photoNumber = fileNumber;
-      document.getElementById('fileBrowser').click();          
+  openFile(fileNumber: number) {
+    this.photoNumber = fileNumber;
+    document.getElementById('fileBrowser').click();
   }
 
-  fileChangeEvent(event: any): void {
-
-    if (event.srcElement.files.length === 0)
-      return;
-
-    if (!event.srcElement.files[0].type.startsWith("image/")) {
-      this.confirmationService.create("Error", "Only file of type image is supported", this.globalService.alertOptions);            
+  imageSelected(imageResult: ImageResult) {
+    
+    if (!imageResult.file.type.startsWith("image/")) {
+      this.confirmationService.create("Error", "Only file of type image is supported", this.globalService.alertOptions);
       return;
     }
 
-    let dialogRef = this.dialog.open(BkImageCropperComponent, {      
-      width: '800px',      
-      maxHeight: '90vh',
-      data: { imgEvent: event }
-    });
+    var src = imageResult.resized && imageResult.resized.dataURL || imageResult.dataURL;
 
-    dialogRef.afterClosed().takeUntil(this.destroyed$).subscribe(result => {
-      if (result) {
-        this.savePhoto(result);
-      }
-    });
+    if (this.photoNumber === 1)
+      document.getElementById('img1').setAttribute('src', src);
+    else if (this.photoNumber === 2)
+      document.getElementById('img2').setAttribute('src', src);
+    else if (this.photoNumber === 3)
+      document.getElementById('img3').setAttribute('src', src);
+
+    this.savePhoto(src);
   }
 
   savePhoto(content: string) {
 
   }
-  
+
   cancelEdit() {
     if (window.history.length > 1)
       this.location.back();
