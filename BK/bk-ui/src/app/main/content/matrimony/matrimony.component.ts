@@ -92,7 +92,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   initializeComponent() {
-    console.log(this.MARITAL_STATUS_DATA_LOCAL);
+    
     this.model = new MatrimonyModel();
 
     if (!this.addMode)
