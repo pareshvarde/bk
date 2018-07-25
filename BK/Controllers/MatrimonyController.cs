@@ -129,14 +129,7 @@ namespace BK.Controllers
                 {
                     model.MemberModel.MaternalFamilyId = mResult.MaternalFamilyID;
                     model.MemberModel.MaternalFamilyName = string.Format("{0}, {1}", mResult.MaternalFamilyName, mResult.MaternalFamilyAddress);
-                }
-
-                GetPaternalFamily_Result pResult = context.GetPaternalFamily(member.MemberID, member.Gender, member.MaritalStatusID).FirstOrDefault();
-                if (pResult != null)
-                {
-                    model.MemberModel.PaternalFamilyId = pResult.PaternalFamilyID;
-                    model.MemberModel.PaternalFamilyName = string.Format("{0}, {1}", pResult.PaternalFamilyName, pResult.PaternalFamilyAddress);
-                }
+                }               
 
                 return Ok(model);
             }

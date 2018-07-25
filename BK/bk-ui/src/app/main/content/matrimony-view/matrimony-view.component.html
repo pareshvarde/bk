@@ -264,7 +264,7 @@
           </div>
 
           <div fxLayout="row wrap" class="secondary-text" style="font-size: 12px;">Maternal Family:&nbsp;
-              <a *ngIf="model.memberModel.maternalFamilyId" [routerLink]="['/family/', model.memberModel.maternalFamilyId]">{{memberModel.maternalFamilyName}}</a>
+              <a *ngIf="model.memberModel.maternalFamilyId" [routerLink]="['/family/', model.memberModel.maternalFamilyId]">{{model.memberModel.maternalFamilyName}}</a>
               <span *ngIf="!model.memberModel.maternalFamilyId">Not Available</span>
           </div>
 
