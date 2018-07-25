@@ -32,21 +32,21 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
   readonly MARITAL_STATUS_DATA_LOCAL = MATRIMONY_MARITAL_STATUS_DATA;
   readonly HEIGHT_DATA_LOCAL = HEIGHT_DATA;
   readonly BODYTYPE_DATA_LOCAL = BODY_TYPE_DATA;
-  readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;  
-  
+  readonly COMPLEXION_DATA_LOCAL = COMPLEXION_TYPE_DATA;
+
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
-    private confirmationService: ConfirmationService, public authService: bkAuthService, 
+    private confirmationService: ConfirmationService, public authService: bkAuthService,
     private location: Location, public dialog: MatDialog, private globalService: GlobalService) {
-      this.route.params.takeUntil(this.destroyed$).subscribe(params => {
-        
-        if (params.memberId > 0)
-          this.memberId = params.memberId;
-        else
-          this.memberId = null;          
-                
-        if (this.memberId > 0)
-          this.loadMatrimony();
-      });    
+    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
+
+      if (params.memberId > 0)
+        this.memberId = params.memberId;
+      else
+        this.memberId = null;
+
+      if (this.memberId > 0)
+        this.loadMatrimony();
+    });
   }
 
   ngOnInit() {
@@ -59,12 +59,12 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
       aadhaarNumber: new FormControl('', null),
       gender: new FormControl('', null),
       alive: new FormControl('', null),
-      dob: new FormControl('', null),      
-      birthPlace: new FormControl('', null),            
+      dob: new FormControl('', null),
+      birthPlace: new FormControl('', null),
       educationLevel: new FormControl('', null),
       educationField: new FormControl('', null),
       occupationId: new FormControl('', null),
-      companyName: new FormControl('', null),      
+      companyName: new FormControl('', null),
       jobTitle: new FormControl('', null),
       facebookHandle: new FormControl('', null),
       instagramHandle: new FormControl('', null),
@@ -98,30 +98,40 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  loadMatrimony(){
+  loadMatrimony() {
     return this.dataService.getViewOnlyMatrimony(this.memberId).takeUntil(this.destroyed$).subscribe(
-      (res) => {        
-        this.model = res.result;        
+      (res) => {
+        this.model = res.result;
       },
       (err) => {
         if (err.errors)
-          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);          
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
           this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
   }
 
-  showPhoto(){
+  showPhoto() {
+    debugger;
     var pictures: any[] = new Array();
-    pictures.push(this.model.memberModel.photoUrl);        
-    
+    pictures.push(this.model.memberModel.photoUrl);
+
+    if (this.model.matrimonyModel.photo1Url && this.model.matrimonyModel.photo1Url.indexOf('male') === -1)
+      pictures.push(this.model.matrimonyModel.photo1Url);
+
+    if (this.model.matrimonyModel.photo2Url && this.model.matrimonyModel.photo2Url.indexOf('male') === -1)
+      pictures.push(this.model.matrimonyModel.photo2Url);
+
+    if (this.model.matrimonyModel.photo3Url && this.model.matrimonyModel.photo3Url.indexOf('male') === -1)
+      pictures.push(this.model.matrimonyModel.photo3Url);
+
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
-      data: { images:  pictures}
+      data: { images: pictures }
     });
   }
 
-  back(){
+  back() {
     if (window.history.length > 1)
       this.location.back();
     else
