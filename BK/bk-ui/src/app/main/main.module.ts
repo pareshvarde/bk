@@ -44,6 +44,7 @@ import { BkImageViewerComponent } from '../core/components/bk-image-viewer/bk-im
 import { ReCaptchaModule } from 'angular2-recaptcha';
 import { AboutusComponent } from './content/aboutus/aboutus.component';
 import { ContactusComponent } from './content/contactus/contactus.component';
+import { TermsComponent } from './content/terms/terms.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -85,7 +86,8 @@ export function tokenGetter() {
         BkImageCropperComponent,
         BkImageViewerComponent,
         AboutusComponent,
-        ContactusComponent
+        ContactusComponent,
+        TermsComponent
     ],
     providers:[
      
