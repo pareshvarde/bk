@@ -53,7 +53,7 @@ BEGIN
 			m.EducationField,
 			m.EducationLevel,
 			m.OccupationID,			
-			m.ModifiedOn,
+			CASE WHEN mat.ModifiedOn > m.ModifiedOn THEN mat.ModifiedOn ELSE m.ModifiedOn END ModifiedOn,
 			mat.MonthlyIncome
 		FROM
 			Members m 
