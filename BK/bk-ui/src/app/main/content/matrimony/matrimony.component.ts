@@ -45,7 +45,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private notificationService: NotificationsService, public authService: bkAuthService,
-    private confirmationService: ConfirmationService, private location: Location, public dialog: MatDialog,
+    private confirmationService: ConfirmationService, private location: Location,
     private globalService: GlobalService, private cdr: ChangeDetectorRef) {
 
     this.route.params.takeUntil(this.destroyed$).subscribe(params => {
