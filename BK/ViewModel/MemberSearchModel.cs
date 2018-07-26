@@ -38,6 +38,9 @@ namespace BK.ViewModel
         [JsonProperty("includeOnlyHOF")]
         public bool IncludeOnlyHOF { get; set; }
 
+        [JsonProperty("sortOrder")]
+        public string SortOrder { get; set; }
+
         [JsonProperty("currentPage")]
         public int? CurrentPage { get; set; }
 

@@ -41,6 +41,9 @@ namespace BK.ViewModel
         [JsonProperty("maximumAge")]
         public int? MaximumAge { get; set; }
 
+        [JsonProperty("sortOrder")]
+        public string SortOrder { get; set; }
+
         [JsonProperty("currentPage")]
         public int? CurrentPage { get; set; }
 

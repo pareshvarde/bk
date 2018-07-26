@@ -221,6 +221,7 @@ namespace BK.Controllers
             int? maxAge = model.MaximumAge.HasValue && model.MaximumAge.Value > 0 ? model.MinimumAge : null;
             int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
             int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
+            string sortOrder = string.IsNullOrWhiteSpace(model.SortOrder) ? null : model.SortOrder.Trim();
             DateTime? minDOB = null;
             DateTime? maxDOB = null;
 
@@ -236,7 +237,7 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                List<bk_MatrimonySearch_Result> results = context.bk_MatrimonySearch(categoryId, nukhId, city, district, state, country, gender, occupationId, maritalStatusId, minDOB, maxDOB, pageSize, currentPage, oParameter).ToList();
+                List<bk_MatrimonySearch_Result> results = context.bk_MatrimonySearch(categoryId, nukhId, city, district, state, country, gender, occupationId, maritalStatusId, minDOB, maxDOB, pageSize, currentPage, sortOrder, oParameter).ToList();
                 
                 mvm.TotalRecords = (int)oParameter.Value;
 

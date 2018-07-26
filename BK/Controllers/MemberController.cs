@@ -469,6 +469,7 @@ namespace BK.Controllers
             string state = string.IsNullOrWhiteSpace(model.State) ? null : model.State.Trim();
             string emailAddress = string.IsNullOrWhiteSpace(model.Email) ? null : model.Email.Trim();
             string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
+            string sortOrder = string.IsNullOrWhiteSpace(model.SortOrder) ? null : model.SortOrder.Trim();
             int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
             int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
             bool includeOnlyHOF = model.IncludeOnlyHOF;
@@ -479,7 +480,7 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, district, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, oParameter).ToList();
+                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, district, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, sortOrder, oParameter).ToList();
 
                 mvm.TotalRecords = (int)oParameter.Value;
 
