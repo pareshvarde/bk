@@ -53,7 +53,7 @@
                 <input matInput [(ngModel)]="searchParameter.district" placeholder="District (Area)">
             </mat-form-field>
         </div>
-        
+
         <div fxLayout="row wrap">
             <mat-form-field>
                 <input matInput [(ngModel)]="searchParameter.state" placeholder="State">
@@ -69,11 +69,39 @@
                 <input type="number" min="0" matInput [(ngModel)]="searchParameter.phoneNumber" placeholder="Phone Number">
             </mat-form-field>
         </div>
+
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <mat-select placeholder="Sort Order" [(ngModel)]="searchParameter.sortOrder">
+                    <mat-option value="memberid asc">
+                        Oldest First
+                    </mat-option>
+                    <mat-option value="memberid desc">
+                        Latest First
+                    </mat-option>
+                    <mat-option value="city asc">
+                        City Ascending
+                    </mat-option>
+                    <mat-option value="city desc">
+                        City Descending
+                    </mat-option>
+                    <mat-option value="state asc">
+                        State Ascending
+                    </mat-option>
+                    <mat-option value="state desc">
+                        State Descending
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
         <div fxLayout="row wrap">
             <mat-checkbox fxLayoutAlign="start center" [(ngModel)]="searchParameter.includeOnlyHOF">Only Head Of Family?</mat-checkbox>
         </div>
         <div style="padding-top: 10px;" fxLayout="row" fxLayoutAlign="center center">
-            <button matTooltip="Search" mat-raised-button fxHide fxShow.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
+            <button matTooltip="Search" mat-raised-button fxHide fxShow.gt-sm color="accent" (click)="search()" class="submit-button"
+                aria-label="Search">
                 <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>&nbsp;&nbsp;
             <button matTooltip="Search" mat-mini-fab fxShow fxHide.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">

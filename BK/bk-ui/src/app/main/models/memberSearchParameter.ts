@@ -9,6 +9,7 @@ export class MemberSearchParameter{
     public district: string;
     public state: string;
     public includeOnlyHOF: boolean;
+    public sortOrder: string;
     public currentPage: number;
     public pageSize: number;
   }

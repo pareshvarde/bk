@@ -10,6 +10,7 @@ export class MatrimonySearchParameter{
     public maritalStatusId: number;
     public minimumAge: number;
     public maximumAge: number;
+    public sortOrder: string;
     public currentPage: number;
     public pageSize: number;
   }

@@ -71,7 +71,7 @@
                 <mat-select placeholder="Gender" [(ngModel)]="searchParameter.gender">
                     <mat-option></mat-option>
                     <mat-option [value]=true>Male</mat-option>
-                    <mat-option [value]=false>Female</mat-option>                    
+                    <mat-option [value]=false>Female</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -100,8 +100,46 @@
             </mat-form-field>
         </div>
 
+        <div fxLayout="row wrap">
+            <mat-form-field>
+                <mat-select placeholder="Sort Order" [(ngModel)]="searchParameter.sortOrder">
+                    <mat-option value="createdon asc">
+                        Oldest First
+                    </mat-option>
+                    <mat-option value="createdon desc">
+                        Latest First
+                    </mat-option>
+                    <mat-option value="city asc">
+                        City Ascending
+                    </mat-option>
+                    <mat-option value="city desc">
+                        City Descending
+                    </mat-option>
+                    <mat-option value="state asc">
+                        State Ascending
+                    </mat-option>
+                    <mat-option value="state desc">
+                        State Descending
+                    </mat-option>
+                    <mat-option value="income asc">
+                        Income Low to High
+                    </mat-option>
+                    <mat-option value="income desc">
+                        Income High to Low
+                    </mat-option>
+                    <mat-option value="dob asc">
+                        Age younger to older
+                    </mat-option>
+                    <mat-option value="dob desc">
+                        Age older to younger
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
         <div fxLayout="row" fxLayoutAlign="center center">
-            <button matTooltip="Search" mat-raised-button fxHide fxShow.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
+            <button matTooltip="Search" mat-raised-button fxHide fxShow.gt-sm color="accent" (click)="search()" class="submit-button"
+                aria-label="Search">
                 <mat-icon>search</mat-icon>&nbsp;SEARCH
             </button>&nbsp;&nbsp;
             <button matTooltip="Search" mat-mini-fab fxShow fxHide.gt-sm color="accent" (click)="search()" class="submit-button" aria-label="Search">
