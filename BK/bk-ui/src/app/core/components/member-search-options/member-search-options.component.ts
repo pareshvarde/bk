@@ -21,8 +21,8 @@ export class MemberSearchOptionsComponent implements OnInit
     searchParameter: MemberSearchParameter;
     @Output() performSearch = new EventEmitter<MemberSearchParameter>();
     @Output() clearSearch = new EventEmitter<MemberSearchParameter>();
-    readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
-    readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
+    NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA.slice();
+    CATEGORIES_DATA_LOCAL = CATEGORIES_DATA.slice();
     
     public player: AnimationPlayer;
 
@@ -35,6 +35,9 @@ export class MemberSearchOptionsComponent implements OnInit
     {
         this.barClosed = true;         
         this.searchParameter = new MemberSearchParameter(); 
+
+        this.NUKHS_LOOKUP_DATA_LOCAL.unshift({id:null, occupation: ''});
+        this.CATEGORIES_DATA_LOCAL.unshift({id:null, category: ''});
     }
 
     ngOnInit()
