@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[bk_MatrimonySearch]
 	@MaxDOB DATETIME = NULL,	
 	@PageSize INT = 50,
 	@CurrentPage INT = 1,
+	@SortOrder NVARCHAR(50) = NULL,
 	@TotalRecords INT OUTPUT
 )    
 AS
@@ -31,13 +32,26 @@ BEGIN
 	IF (@CurrentPage IS NULL)
 		SET @CurrentPage = 1
 
+	IF (@SortOrder IS NULL)
+		SET @SortOrder = 'memberid asc'	
+
 	SELECT @FirstRecord = (@CurrentPage - 1) * @PageSize
 	SELECT @LastRecord = (@CurrentPage * @PageSize + 1);
 
 	WITH TempResult AS
 	(
 		SELECT
-			ROW_NUMBER() OVER(ORDER BY m.MemberId ASC) AS RowNum,
+			ROW_NUMBER() OVER(ORDER BY
+				CASE WHEN @sortOrder = 'city asc' then f.City END ASC,				
+				CASE WHEN @sortOrder = 'city desc' then f.City END DESC,	
+				CASE WHEN @sortOrder = 'state asc' then f.State END ASC,				
+				CASE WHEN @sortOrder = 'state desc' then f.State END DESC,	
+				CASE WHEN @sortOrder = 'memberid asc' then m.MemberID END ASC,
+				CASE WHEN @sortOrder = 'memberid desc' then m.MemberID END DESC,				
+				CASE WHEN @sortOrder = 'income asc' then mat.MonthlyIncome END ASC,
+				CASE WHEN @sortOrder = 'income desc' then mat.MonthlyIncome END DESC,				
+				CASE WHEN @sortOrder = 'dob asc' then m.DOB END ASC,
+				CASE WHEN @sortOrder = 'dob desc' then m.DOB END DESC) AS RowNum,
 			m.MemberID,
 			f.FamilyID,
 			m.FirstName,
@@ -53,7 +67,7 @@ BEGIN
 			m.EducationField,
 			m.EducationLevel,
 			m.OccupationID,			
-			CASE WHEN mat.ModifiedOn > m.ModifiedOn THEN mat.ModifiedOn ELSE m.ModifiedOn END ModifiedOn,
+			CASE WHEN mat.ModifiedOn > m.ModifiedOn THEN mat.ModifiedOn ELSE m.ModifiedOn END ModifiedOn,			
 			mat.MonthlyIncome
 		FROM
 			Members m 

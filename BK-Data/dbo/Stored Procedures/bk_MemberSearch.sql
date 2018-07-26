@@ -1,4 +1,5 @@
 ﻿
+--[bk_MemberSearch] null, null, null, null, null, null, null, null, null, 50, 1, NULL, NULL 
 CREATE PROCEDURE [dbo].[bk_MemberSearch]
 (    
 	@FirstName NVARCHAR(50) = NULL,
@@ -13,6 +14,7 @@ CREATE PROCEDURE [dbo].[bk_MemberSearch]
 	@PageSize INT = 50,
 	@CurrentPage INT = 1,
 	@IncludeOnlyHOF BIT = NULL,
+	@SortOrder NVARCHAR(50) = NULL,
 	@TotalRecords INT OUTPUT
 )    
 AS
@@ -23,6 +25,9 @@ BEGIN
 	
 	DECLARE @FirstRecord INT
 	DECLARE @LastRecord INT
+	
+	IF (@SortOrder IS NULL)
+		SET @SortOrder = 'memberid asc'	
 
 	IF (@PageSize IS NULL)
 		SET @PageSize = 50
@@ -36,7 +41,13 @@ BEGIN
 	WITH TempResult AS
 	(
 		SELECT
-			ROW_NUMBER() OVER(ORDER BY m.MemberId ASC) AS RowNum,
+			ROW_NUMBER() OVER(ORDER BY
+				CASE WHEN @sortOrder = 'city asc' then f.City END ASC,				
+				CASE WHEN @sortOrder = 'city desc' then f.City END DESC,	
+				CASE WHEN @sortOrder = 'state asc' then f.State END ASC,				
+				CASE WHEN @sortOrder = 'state desc' then f.State END DESC,	
+				CASE WHEN @sortOrder = 'memberid asc' then m.MemberID END ASC,
+				CASE WHEN @sortOrder = 'memberid desc' then m.MemberID END DESC) AS RowNum,
 			m.MemberID,
 			f.FamilyID,
 			m.FirstName,
@@ -66,7 +77,7 @@ BEGIN
 			AND (@State IS NULL OR f.State = @State)
 			AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
 			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	
-			AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 
+			AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 		
 	)		
 
 	SELECT 
@@ -75,7 +86,8 @@ BEGIN
 		TempResult
 	WHERE
 		RowNum > @FirstRecord
-		AND RowNum < @LastRecord
+		AND RowNum < @LastRecord	
+	
 
 	SELECT
 		@TotalRecords = COUNT(1)
