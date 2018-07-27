@@ -21,3 +21,15 @@ form {
     max-width: 300px;
     min-width: 300px;
 }
+
+.avatar{
+    border-radius: 50%;
+    width: 50px !important;
+    height: 50px !important;
+    min-width: 50px !important;
+    cursor: pointer;
+}
+
+.profileHeader{
+    padding-bottom: 10px;
+}
