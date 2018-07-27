@@ -217,13 +217,9 @@
           <Parameter Name="CurrentPage" Type="int" Mode="In" />
           <Parameter Name="IncludeOnlyHOF" Type="bit" Mode="In" />
           <Parameter Name="SortOrder" Type="nvarchar" Mode="In" />
-          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
-        </Function>
-        <Function Name="bk_MemberSearchBasic" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MemberID" Type="int" Mode="In" />
-          <Parameter Name="PhoneNumber" Type="nvarchar" Mode="In" />
           <Parameter Name="AadhaarNumber" Type="bigint" Mode="In" />
-          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="TotalRecords" Type="int" Mode="InOut" />
         </Function>
         <Function Name="bk_PendingApprovals" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="MemberID" Type="int" Mode="In" />
@@ -301,12 +297,6 @@
             <Parameter Name="FamilyID" Mode="In" Type="Int32" />
             <Parameter Name="MemberID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="bk_MemberSearchBasic" ReturnType="Collection(bkModel.bk_MemberSearchBasic_Result)">
-            <Parameter Name="MemberID" Mode="In" Type="Int32" />
-            <Parameter Name="PhoneNumber" Mode="In" Type="String" />
-            <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
-            <Parameter Name="Email" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="bk_PendingApprovals" ReturnType="Collection(bkModel.bk_PendingApprovals_Result)">
           <Parameter Name="MemberID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -369,6 +359,8 @@
             <Parameter Name="CurrentPage" Mode="In" Type="Int32" />
             <Parameter Name="IncludeOnlyHOF" Mode="In" Type="Boolean" />
             <Parameter Name="SortOrder" Mode="In" Type="String" />
+            <Parameter Name="MemberID" Mode="In" Type="Int32" />
+            <Parameter Name="AadhaarNumber" Mode="In" Type="Int64" />
             <Parameter Name="TotalRecords" Mode="InOut" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
@@ -464,14 +456,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="bk_MemberSearchBasic_Result">
-          <Property Type="Int32" Name="MemberID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="DOB" Nullable="true" />
-          <Property Type="Boolean" Name="Gender" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="bk_PendingApprovals_Result">
           <Property Type="Int32" Name="AddedById" Nullable="false" />
           <Property Type="String" Name="AddedByFirstName" Nullable="false" MaxLength="50" />
@@ -725,18 +709,6 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="bk_DeleteFamily" FunctionName="bkModel.Store.bk_DeleteFamily" />
           <FunctionImportMapping FunctionImportName="bk_DeleteMember" FunctionName="bkModel.Store.bk_DeleteMember" />
-          <FunctionImportMapping FunctionImportName="bk_MemberSearchBasic" FunctionName="bkModel.Store.bk_MemberSearchBasic">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="bkModel.bk_MemberSearchBasic_Result">
-                <ScalarProperty Name="MemberID" ColumnName="MemberID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="bk_PendingApprovals" FunctionName="bkModel.Store.bk_PendingApprovals">
             <ResultMapping>
               <ComplexTypeMapping TypeName="bkModel.bk_PendingApprovals_Result">

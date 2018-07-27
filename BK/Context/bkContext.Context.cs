@@ -55,27 +55,6 @@ namespace BK.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("bk_DeleteMember", familyIDParameter, memberIDParameter);
         }
     
-        public virtual ObjectResult<bk_MemberSearchBasic_Result> bk_MemberSearchBasic(Nullable<int> memberID, string phoneNumber, Nullable<long> aadhaarNumber, string email)
-        {
-            var memberIDParameter = memberID.HasValue ?
-                new ObjectParameter("MemberID", memberID) :
-                new ObjectParameter("MemberID", typeof(int));
-    
-            var phoneNumberParameter = phoneNumber != null ?
-                new ObjectParameter("PhoneNumber", phoneNumber) :
-                new ObjectParameter("PhoneNumber", typeof(string));
-    
-            var aadhaarNumberParameter = aadhaarNumber.HasValue ?
-                new ObjectParameter("AadhaarNumber", aadhaarNumber) :
-                new ObjectParameter("AadhaarNumber", typeof(long));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearchBasic_Result>("bk_MemberSearchBasic", memberIDParameter, phoneNumberParameter, aadhaarNumberParameter, emailParameter);
-        }
-    
         public virtual ObjectResult<bk_PendingApprovals_Result> bk_PendingApprovals(Nullable<int> memberID)
         {
             var memberIDParameter = memberID.HasValue ?
@@ -183,7 +162,7 @@ namespace BK.Context
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MatrimonySearch_Result>("bk_MatrimonySearch", categoryIDParameter, nukhIDParameter, cityParameter, districtParameter, stateParameter, countryParameter, genderParameter, occupationIdParameter, maritalStatusIdParameter, minDOBParameter, maxDOBParameter, pageSizeParameter, currentPageParameter, sortOrderParameter, totalRecords);
         }
     
-        public virtual ObjectResult<bk_MemberSearch_Result> bk_MemberSearch(string firstName, string lastName, Nullable<int> categoryID, Nullable<int> nukhID, string city, string district, string state, string emailAddress, string phoneNumber, Nullable<int> pageSize, Nullable<int> currentPage, Nullable<bool> includeOnlyHOF, string sortOrder, ObjectParameter totalRecords)
+        public virtual ObjectResult<bk_MemberSearch_Result> bk_MemberSearch(string firstName, string lastName, Nullable<int> categoryID, Nullable<int> nukhID, string city, string district, string state, string emailAddress, string phoneNumber, Nullable<int> pageSize, Nullable<int> currentPage, Nullable<bool> includeOnlyHOF, string sortOrder, Nullable<int> memberID, Nullable<long> aadhaarNumber, ObjectParameter totalRecords)
         {
             var firstNameParameter = firstName != null ?
                 new ObjectParameter("FirstName", firstName) :
@@ -237,7 +216,15 @@ namespace BK.Context
                 new ObjectParameter("SortOrder", sortOrder) :
                 new ObjectParameter("SortOrder", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearch_Result>("bk_MemberSearch", firstNameParameter, lastNameParameter, categoryIDParameter, nukhIDParameter, cityParameter, districtParameter, stateParameter, emailAddressParameter, phoneNumberParameter, pageSizeParameter, currentPageParameter, includeOnlyHOFParameter, sortOrderParameter, totalRecords);
+            var memberIDParameter = memberID.HasValue ?
+                new ObjectParameter("MemberID", memberID) :
+                new ObjectParameter("MemberID", typeof(int));
+    
+            var aadhaarNumberParameter = aadhaarNumber.HasValue ?
+                new ObjectParameter("AadhaarNumber", aadhaarNumber) :
+                new ObjectParameter("AadhaarNumber", typeof(long));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearch_Result>("bk_MemberSearch", firstNameParameter, lastNameParameter, categoryIDParameter, nukhIDParameter, cityParameter, districtParameter, stateParameter, emailAddressParameter, phoneNumberParameter, pageSizeParameter, currentPageParameter, includeOnlyHOFParameter, sortOrderParameter, memberIDParameter, aadhaarNumberParameter, totalRecords);
         }
     }
 }

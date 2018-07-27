@@ -213,9 +213,6 @@
     <Compile Include="Context\bk_MatrimonySearch_Result.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\bk_MemberSearchBasic_Result.cs">
-      <DependentUpon>bkContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\bk_MemberSearch_Result.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>
@@ -264,7 +261,6 @@
     <Compile Include="ViewModel\MatrimonySearchModel.cs" />
     <Compile Include="ViewModel\MatrimonySearchResultModel.cs" />
     <Compile Include="ViewModel\MatrimonyViewModel.cs" />
-    <Compile Include="ViewModel\MemberBasicSearchModel.cs" />
     <Compile Include="ViewModel\MemberSearchModel.cs" />
     <Compile Include="ViewModel\MemberSearchResultModel.cs" />
     <Compile Include="ViewModel\MemberViewModel.cs" />

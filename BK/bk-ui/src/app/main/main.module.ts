@@ -45,6 +45,7 @@ import { ReCaptchaModule } from 'angular2-recaptcha';
 import { AboutusComponent } from './content/aboutus/aboutus.component';
 import { ContactusComponent } from './content/contactus/contactus.component';
 import { TermsComponent } from './content/terms/terms.component';
+import { ExistingMemberAddComponent } from './content/member/existing-member-add.component';
 
 export function tokenGetter() {
     return localStorage.getItem('token');
@@ -87,7 +88,8 @@ export function tokenGetter() {
         BkImageViewerComponent,
         AboutusComponent,
         ContactusComponent,
-        TermsComponent
+        TermsComponent,
+        ExistingMemberAddComponent
     ],
     providers:[
      

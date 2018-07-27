@@ -15,6 +15,8 @@ CREATE PROCEDURE [dbo].[bk_MemberSearch]
 	@CurrentPage INT = 1,
 	@IncludeOnlyHOF BIT = NULL,
 	@SortOrder NVARCHAR(50) = NULL,
+	@MemberID INT = NULL,	
+	@AadhaarNumber BIGINT = NULL,	
 	@TotalRecords INT OUTPUT
 )    
 AS
@@ -78,6 +80,8 @@ BEGIN
 			AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
 			AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	
 			AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 		
+			AND (@MemberID IS NULL OR m.MemberID = @MemberID)
+			AND (@AadhaarNumber IS NULL OR m.AadhaarNumber = @AadhaarNumber)
 	)		
 
 	SELECT 
@@ -106,6 +110,8 @@ BEGIN
 		AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
 		AND (@PhoneNumber IS NULL OR m.Phone = @PhoneNumber)	
 		AND (@IncludeOnlyHOF IS NULL OR @IncludeOnlyHOF = 0 OR f.HeadOfFamilyID = m.MemberID) 	
+		AND (@MemberID IS NULL OR m.MemberID = @MemberID)
+		AND (@AadhaarNumber IS NULL OR m.AadhaarNumber = @AadhaarNumber)
 			
 END
 

@@ -345,36 +345,7 @@ namespace BK.Controllers
             }
 
             return Ok(logOut);
-        }
-
-        [Route("api/member/basicsearch")]
-        [HttpPost]
-        public IHttpActionResult BasicSearch(MemberBasicSearchModel model)
-        {
-            int? memberId = model.MemberID.HasValue && model.MemberID.Value > 0 ? model.MemberID : null;
-            string phoneNumber = string.IsNullOrWhiteSpace(model.PhoneNumber) ? null : model.PhoneNumber.Trim();
-            long? aadhaarNumber = model.AadhaarNumber.HasValue && model.AadhaarNumber.Value > 0 ? model.AadhaarNumber : null;
-            string emailAddress = string.IsNullOrWhiteSpace(model.EmailAddress) ? null : model.EmailAddress.Trim();
-
-            MemberViewModel mvm = null;
-
-            using (bkContext context = new bkContext())
-            {
-                bk_MemberSearchBasic_Result result = context.bk_MemberSearchBasic(memberId, phoneNumber, aadhaarNumber, emailAddress).FirstOrDefault();
-
-                if (result != null)
-                {
-                    mvm = new MemberViewModel();
-                    mvm.FirstName = result.FirstName;
-                    mvm.LastName = result.LastName;
-                    mvm.DOB = result.DOB;
-                    mvm.MemberID = result.MemberID;
-                    mvm.Gender = result.Gender;
-                }
-            }
-
-            return Ok(mvm);
-        }
+        }        
 
         [Route("api/member/approve")]
         [HttpGet]
@@ -480,7 +451,7 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, district, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, sortOrder, oParameter).ToList();
+                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, district, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, sortOrder, null, null, oParameter).ToList();
 
                 mvm.TotalRecords = (int)oParameter.Value;
 

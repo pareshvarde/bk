@@ -1,0 +1,99 @@
+<form name="searchForm" [formGroup]="searchForm" novalidate>
+  <div fxLayout="row wrap">
+    <mat-form-field>
+      <input matInput type="number" min="0" [(ngModel)]="searchModel.memberId" placeholder="Member Id" formControlName="memberId"
+        bkAutofocus>
+      <mat-error *ngIf="searchForm.controls['memberId'].hasError('numberRequired')">Please enter only numbers</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row wrap">
+    <mat-form-field>
+      <input type="number" min="0" matInput [(ngModel)]="searchModel.phoneNumber" placeholder="Mobile Number" formControlName="phoneNumber">
+      <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('numberRequired')">Please enter only numbers</mat-error>
+      <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('maxlength')">Maximum 15 characters allowed</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row wrap">
+    <mat-form-field>
+      <input type="number" min="0" matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
+      <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('numberRequired')">Please enter only numbers</mat-error>
+      <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('maxlength')">Maximum 16 characters allowed</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row wrap">
+    <mat-form-field>
+      <input maxlength="100" matInput type="email" [(ngModel)]="searchModel.email" placeholder="Email Address" formControlName="emailAddress">
+      <mat-error *ngIf="searchForm.controls['emailAddress'].hasError('email')">Please provide valid email address</mat-error>
+      <mat-error *ngIf="searchForm.controls['emailAddress'].hasError('maxlength')">Maximum 100 characters allowed</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row wrap">
+    <mat-form-field>
+      <input maxlength="50" matInput [(ngModel)]="searchModel.firstName" placeholder="First Name" formControlName="firstName">
+      <mat-error *ngIf="searchForm.controls['firstName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row wrap">
+    <mat-form-field>
+      <input maxlength="50" matInput [(ngModel)]="searchModel.city" placeholder="City" formControlName="city">
+      <mat-error *ngIf="searchForm.controls['city'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button matTooltip="Search" fxHide fxShow.gt-sm mat-raised-button (click)="searchMember()" color="accent" class="submit-button"
+      aria-label="SAVE">
+      <mat-icon>search</mat-icon>&nbsp;SEARCH
+    </button>
+    <button matTooltip="Search" fxShow fxHide.gt-sm mat-mini-fab (click)="searchMember()" color="accent" class="submit-button"
+      aria-label="SAVE">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button matTooltip="Clear" fxHide fxShow.gt-sm mat-raised-button (click)="back()" class="submit-button" aria-label="CANCEL">
+      <mat-icon>cancel</mat-icon>&nbsp;CANCEL
+    </button>
+    <button matTooltip="Clear" fxShow fxHide.gt-sm mat-mini-fab (click)="back()" class="submit-button" aria-label="CANCEL">
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </div>
+</form>
+<div id="searchResult" fxLayout="row wrap" *ngIf="searchResults">
+  <div class="bk-card memberCard" *ngFor="let result of searchResults">
+    <div fxLayout="row wrap" class="profileHeader" fxLayoutAlign="start center">
+      <img (click)="showPhoto(result.photoUrl)" class="avatar" src="{{result.photoUrl}}" />
+      <div class="h4">
+        <a [routerLink]="['/member/', result.familyId, result.memberId]">{{result.name}}</a>        
+      </div>
+    </div>
+    <div class="h5" fxLayoutAlign="start center">{{result.address1}}</div>
+    <div class="h5" fxLayoutAlign="start center">{{result.address2}}</div>
+    <div fxLayout="row wrap" fxLayoutAlign="start start">
+      <mat-form-field>
+        <mat-select placeholder="Relation" [(ngModel)]="result.relationTypeId">
+          <mat-option *ngFor="let n of getRelations(result)" [value]="n.relationTypeId">
+            {{ n.relationType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="start start">
+      <mat-form-field>
+        <mat-select placeholder="Relation With" [(ngModel)]="result.relatedMemberId">
+          <mat-option *ngFor="let n of getRelatedMember(result)" [value]="n.memberId">
+            {{ n.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end center">
+      <button matTooltip="Add" mat-mini-fab (click)="addToFamily(result)" color="accent" class="submit-button" aria-label="ADD">
+        <mat-icon>add_box</mat-icon>
+      </button>
+    </div>
+  </div>
+</div> 

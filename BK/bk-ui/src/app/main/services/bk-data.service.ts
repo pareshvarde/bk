@@ -3,13 +3,10 @@ import { map, catchError} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers  } from '@angular/http';
 import { HttpClient } from '@angular/common/http'
-import { HttpErrorResponse } from '@angular/common/http/src/response';
-import { error } from 'selenium-webdriver';
 import { changePasswordViewModel } from '../content/change-password/change-password.component';
 import { RegisterModel } from '../models/registerModel';
 import { MemberModel } from '../models/memberModel';
 import { FamilyModel } from '../models/familyModel';
-import { MemberSearchBasicModel } from '../models/memberSearchBasicModel';
 import { MatrimonyModel } from '../models/matrimonyModel';
 import { MemberSearchParameter } from '../models/memberSearchParameter';
 import { NgBlockUI, BlockUI } from 'ng-block-ui';
@@ -64,14 +61,6 @@ export class bkDataService {
     this.blockUI.start("Please wait...");
            
     return this.http.post(this.API_URL + "register", model,{headers: this.getPublicHeader()}).pipe(map((res) =>{
-      return this.handleAPIResponse(res);
-    }),catchError((error : any) => this.handleAPIError(error)),);
-  }
-
-  basicSearchMember(model: MemberSearchBasicModel){
-    this.blockUI.start("Please wait...");
-           
-    return this.authHttp.post(this.API_URL + "member/basicsearch", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
     }),catchError((error : any) => this.handleAPIError(error)),);
   }

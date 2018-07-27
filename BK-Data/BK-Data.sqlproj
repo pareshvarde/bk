@@ -72,7 +72,6 @@
     <Build Include="dbo\Tables\Members.sql" />
     <Build Include="dbo\Stored Procedures\bk_GetFamilyMembers.sql" />
     <Build Include="dbo\Stored Procedures\bk_PendingApprovals.sql" />
-    <Build Include="dbo\Stored Procedures\bk_MemberSearchBasic_1.sql" />
     <Build Include="dbo\Stored Procedures\bk_DeleteFamily.sql" />
     <Build Include="dbo\Stored Procedures\bk_DeleteMember.sql" />
     <Build Include="dbo\Stored Procedures\bk_MemberSearch.sql" />

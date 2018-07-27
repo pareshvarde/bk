@@ -8,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UniversalValidators, EmailValidators } from 'ng2-validators';
 import { Location } from '@angular/common';
 import { bkAuthService } from '../../services/auth-service';
-import { MemberSearchBasicModel } from '../../models/memberSearchBasicModel';
 import { RELATION_TYPES_DATA } from '../../data/relations';
 import { MEMBER_MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 import { OCCUPATIONS_DATA } from '../../data/occupations';
@@ -29,14 +28,11 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   familyModel: FamilyModel;
-  memberModel: MemberModel;
-  searchMemberModel: MemberModel;
-  searchModel: MemberSearchBasicModel;
+  memberModel: MemberModel;  
   familyId: number;
   memberId: number;
   familyLookup: any[];
-  memberForm: FormGroup;
-  searchForm: FormGroup;
+  memberForm: FormGroup;  
   editMode: boolean;
   addMode: boolean;
   existingAdd: boolean;
@@ -98,13 +94,6 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       profileText: new FormControl('', [Validators.maxLength(100)])
     });
 
-    this.searchForm = new FormGroup({
-      memberId: new FormControl('', [UniversalValidators.isNumber]),
-      phoneNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(15)]),
-      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
-      emailAddress: new FormControl('', [Validators.email, Validators.maxLength(100)])
-    });
-
     if (!this.addMode)
       this.memberForm.disable();
 
@@ -118,8 +107,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   initializeComponent() {
-    this.familyModel = new FamilyModel();
-    this.searchModel = new MemberSearchBasicModel();
+    this.familyModel = new FamilyModel();    
     this.memberModel = new MemberModel();
 
     this.memberModel.alive = true;
@@ -164,6 +152,22 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
+  getRelations(): any[] {    
+
+    if (this.memberModel.gender === true)
+      return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
+    else if (this.memberModel.gender === false && this.memberModel.maritalStatusId === 1)
+      return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
+    else if (this.memberModel.gender === false)
+      return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
+    else
+      return RELATION_TYPES_DATA;
+  }
+
+  getRelatedMember(): any[] {
+    return this.familyModel.members.filter(x => x.maritalStatusId > 1 && x.memberId != this.memberId);
+  }
+
   loadMember() {
     return this.dataService.getMember(this.memberId, this.familyId).takeUntil(this.destroyed$).subscribe(
       (res) => {
@@ -201,22 +205,6 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
           this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
-  }
-
-  getRelations(): any[] {    
-
-    if (this.memberModel.gender === true)
-      return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
-    else if (this.memberModel.gender === false && this.memberModel.maritalStatusId === 1)
-      return RELATION_TYPES_DATA.filter(x => (!x.male && !x.married) || x.relationTypeId == null);
-    else if (this.memberModel.gender === false)
-      return RELATION_TYPES_DATA.filter(x => !x.male || x.relationTypeId == null);
-    else
-      return RELATION_TYPES_DATA;
-  }
-
-  getRelatedMember(): any[] {
-    return this.familyModel.members.filter(x => x.maritalStatusId > 1 && x.memberId != this.memberId);
   }
 
   saveMember() {
@@ -259,54 +247,8 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     );
   }
 
-  searchMember() {
-    if (this.searchForm.invalid) {
-      var el = <HTMLElement>document.querySelector("input.ng-invalid");
-      if (el)
-        el.focus();
-      return;
-    }
 
-    return this.dataService.basicSearchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
-      (res) => {
 
-        if (res.result == null) {
-          this.confirmationService.create("Error", "No member found with provided search criteria. Please try again", this.globalService.alertOptions);          
-          this.searchMemberModel = null;
-          return;
-        }
-
-        this.searchMemberModel = res.result;
-        this.memberModel.gender = this.searchMemberModel.gender;
-      },
-      (err) => {
-        if (err.errors)
-          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
-        else
-          this.confirmationService.create("Error", err, this.globalService.alertOptions);
-      }
-    );
-  }
-
-  addToFamily() {
-    if (!this.memberModel.relatedMemberId || !this.memberModel.relationTypeId) {
-      this.confirmationService.create("Error", "Please select relation type", this.globalService.alertOptions);      
-      return;
-    }
-
-    return this.dataService.addMemberToFamily(this.familyId, this.searchMemberModel.memberId, this.memberModel.relatedMemberId, this.memberModel.relationTypeId).takeUntil(this.destroyed$).subscribe(
-      (res) => {
-        this.notificationService.success("Member is added to your family");
-        this.cancelEdit();
-      },
-      (err) => {
-        if (err.errors)
-          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
-        else
-          this.confirmationService.create("Error", err, this.globalService.alertOptions);
-      }
-    );
-  }
 
   markDefaultFamily() {
     this.confirmationService.create('', 'Are you sure you want to mark current family as default family for this member?').subscribe(
