@@ -11,6 +11,7 @@ import { NotificationsService } from '../../../../../node_modules/angular2-notif
 import { RELATION_TYPES_DATA } from '../../data/relations';
 import { Router } from '../../../../../node_modules/@angular/router';
 import { MemberSearchParameter } from '../../models/memberSearchParameter';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-existing-member-add',
@@ -22,11 +23,13 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;  
   searchResults: any[]=[];
   searchModel: MemberSearchParameter;  
+  readonly MAX_RESULT_COUNT: number = 20;
   @Input() familyModel: FamilyModel;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   
   constructor(private dataService: bkDataService, private confirmationService: ConfirmationService, 
-    public globalService: GlobalService, private notificationService: NotificationsService, private router: Router) {     
+    public globalService: GlobalService, private notificationService: NotificationsService, 
+    private router: Router, private location: Location) {     
       this.searchModel = new MemberSearchParameter();
   }
 
@@ -38,9 +41,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
       emailAddress: new FormControl('', [Validators.email, Validators.maxLength(100)]),
       city: new FormControl('', [Validators.maxLength(50)]),
       firstName: new FormControl('', [Validators.maxLength(50)])
-    });
-
-    console.log(this.familyModel);
+    });    
   }
 
   ngOnDestroy() {
@@ -59,6 +60,8 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
 
     return this.dataService.searchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
       (res) => {
+
+        this.searchModel.pageSize = this.MAX_RESULT_COUNT;
 
         if (res.result.totalRecords === 0) {
           this.confirmationService.create("Error", "No member found with provided search criteria. Please try again", this.globalService.alertOptions);          
@@ -98,6 +101,14 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
           this.confirmationService.create("Error", err, this.globalService.alertOptions);
       }
     );
+  }
+
+  back() {
+
+    if (window.history.length > 1)
+      this.location.back();
+    else
+      this.router.navigate(['home']);
   }
 
   getRelations(member: MemberModel): any[] {    
