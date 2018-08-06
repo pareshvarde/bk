@@ -12,7 +12,6 @@ help videos
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork)
 photo orienatation
 show widow/widower based on gender
-exiting member search additional criteria name, city
 matrimony edit should have validations on server about DOB, Alive, adult etc.
 =============================
 angular memory and performance analyser
