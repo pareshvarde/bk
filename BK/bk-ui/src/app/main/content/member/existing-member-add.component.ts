@@ -23,7 +23,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;  
   searchResults: any[]=[];
   searchModel: MemberSearchParameter;  
-  readonly MAX_RESULT_COUNT: number = 20;
+  readonly MAX_RESULT_COUNT: number = 25;
   @Input() familyModel: FamilyModel;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   
@@ -31,6 +31,8 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
     public globalService: GlobalService, private notificationService: NotificationsService, 
     private router: Router, private location: Location) {     
       this.searchModel = new MemberSearchParameter();
+      this.searchModel.pageSize = this.MAX_RESULT_COUNT;
+      this.searchModel.currentPage = 0;
   }
 
   ngOnInit() {
