@@ -67,16 +67,16 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
         return;
     }
 
+    this.searchResults = [];
+
     return this.dataService.searchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
       (res) => {
 
         if (res.result.totalRecords === 0) {
           this.confirmationService.create("Error", "No member found with provided search criteria. Please try again", this.globalService.alertOptions);          
-          this.searchResults = [];
           return;
         }
 
-        this.searchResults = [];
         res.result.results.forEach(element => {
           this.searchResults.push(element);
         });   
