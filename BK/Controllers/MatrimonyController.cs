@@ -165,7 +165,10 @@ namespace BK.Controllers
                     return BadRequest("You do not have permission to update this record");
 
                 Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == model.MemberId);
-                Member member = mat.Member;
+                Member member = context.Members.FirstOrDefault(x => x.MemberID == model.MemberId);
+
+                if (member == null)
+                    return BadRequest("Member record cannot be loaded. Please try again later");
 
                 if (!member.Alive)
                     return BadRequest("You cannot create a matrimony profile unless a member is alive");
