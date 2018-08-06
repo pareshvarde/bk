@@ -154,7 +154,7 @@ namespace BK.Controllers
 
             return Ok();
         }
-
+      
         [Route("api/matrimony/save")]
         [HttpPost]
         public IHttpActionResult Save(MatrimonyViewModel model)
@@ -164,7 +164,23 @@ namespace BK.Controllers
                 if (!CanEditMember(model.MemberId))
                     return BadRequest("You do not have permission to update this record");
 
-                Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == model.MemberId); ;
+                Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == model.MemberId);
+                Member member = mat.Member;
+
+                if (!member.Alive)
+                    return BadRequest("You cannot create a matrimony profile unless a member is alive");
+
+                if (member.MaritalStatusID == 2)
+                    return BadRequest("You cannot create a matrimony profile because person's marital status is set to Married");
+
+                if (!member.DOB.HasValue)
+                    return BadRequest("You cannot create a matrimony profile because person's Date Of Birth is missing");
+
+                if (member.Gender && MemberWrapper.Age(member.DOB.Value) < 21)
+                    return BadRequest("You cannot create a matrimony profile because person's age is less than 21");
+
+                if (!member.Gender && MemberWrapper.Age(member.DOB.Value) < 18)
+                    return BadRequest("You cannot create a matrimony profile because person's age is less than 18");
 
                 if (mat != null)
                 {                                        
@@ -218,7 +234,7 @@ namespace BK.Controllers
             int? occupationId = model.OccupationId.HasValue && model.OccupationId.Value > 0 ? model.OccupationId : null;
             int? maritalStatusId = model.MaritalStatusId.HasValue && model.MaritalStatusId.Value > 0 ? model.MaritalStatusId : null;
             int? minAge = model.MinimumAge.HasValue && model.MinimumAge.Value > 0 ? model.MinimumAge : null;
-            int? maxAge = model.MaximumAge.HasValue && model.MaximumAge.Value > 0 ? model.MinimumAge : null;
+            int? maxAge = model.MaximumAge.HasValue && model.MaximumAge.Value > 0 ? model.MaximumAge : null;
             int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
             int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
             string sortOrder = string.IsNullOrWhiteSpace(model.SortOrder) ? null : model.SortOrder.Trim();
@@ -226,10 +242,10 @@ namespace BK.Controllers
             DateTime? maxDOB = null;
 
             if (minAge.HasValue)
-                minDOB = DateTime.Today.AddYears(minAge.Value);
+                maxDOB = DateTime.Today.AddYears(minAge.Value * -1);
 
             if (maxAge.HasValue)
-                maxDOB = DateTime.Today.AddYears(maxAge.Value);
+                minDOB = DateTime.Today.AddYears(maxAge.Value * -1);
 
             MemberSearchResultModel mvm = new MemberSearchResultModel();
 

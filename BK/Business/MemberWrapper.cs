@@ -37,5 +37,15 @@ namespace BK
             else
                 return "images/profiles/female.png";
         }
+
+        public static int Age(DateTime dob)
+        {
+            int age = DateTime.Today.Year - dob.Year;            
+
+            if (age > 0 && dob > DateTime.Today.AddYears(-age))
+                age--;
+
+            return age;
+        }
     }
 }

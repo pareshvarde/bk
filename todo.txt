@@ -13,6 +13,7 @@ don't use function calls in html which creates a multiple calls, use properties 
 photo orienatation
 show widow/widower based on gender
 matrimony edit should have validations on server about DOB, Alive, adult etc.
+matrimony age search verify
 =============================
 angular memory and performance analyser
 sql query performance and indexes
