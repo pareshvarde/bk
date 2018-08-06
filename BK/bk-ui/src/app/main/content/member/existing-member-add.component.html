@@ -63,7 +63,7 @@
   </div>
 </form>
 <div id="searchResult" fxLayout="row wrap" *ngIf="searchResults">
-  <div *ngIf="searchResults.length === MAX_RESULT_COUNT" fxLayoutAlign="start center" class="searchResultHeader">Only top {{MAX_RESULT_COUNT}} members are displayed. Please provide more search criteria to refine your search or use&nbsp;<a [routerLink]="['/directory/']">Directory</a>&nbsp;to find member you are looking for</div>
+  <div fxLayout="row wrap" *ngIf="searchResults.length === MAX_RESULT_COUNT" fxLayoutAlign="start start" class="searchResultHeader">Only top {{MAX_RESULT_COUNT}} members are displayed. Please provide more search criteria to refine your search or use&nbsp;<a [routerLink]="['/directory/']">Directory</a>&nbsp;to find member you are looking for</div>
   <div class="bk-card memberCard" *ngFor="let result of searchResults">
     <div fxLayout="row wrap" class="profileHeader" fxLayoutAlign="start center">
       <img (click)="showPhoto(result.photoUrl)" class="avatar" src="{{result.photoUrl}}" />
