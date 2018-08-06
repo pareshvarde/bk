@@ -60,6 +60,13 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
       return;
     }
 
+    if (!this.searchModel.memberId && !this.searchModel.phoneNumber && !this.searchModel.aadhaarNumber
+          && !this.searchModel.email && !this.searchModel.city && !this.searchModel.firstName)
+    {
+        this.confirmationService.create("Error", 'Please provide at least one search parameter', this.globalService.alertOptions);
+        return;
+    }
+
     return this.dataService.searchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
       (res) => {
 
