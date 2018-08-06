@@ -94,7 +94,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
   addToFamily(memberModel: MemberModel) {
     
     if (!memberModel.relatedMemberId || !memberModel.relationTypeId) {
-      this.confirmationService.create("Error", "Please select relation type", this.globalService.alertOptions);      
+      this.confirmationService.create("Error", "Please provide relation", this.globalService.alertOptions);      
       return;
     }
 
