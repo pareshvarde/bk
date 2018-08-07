@@ -45,7 +45,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
 
-  displayedColumns = ['memberId', 'name', 'age', 'maritalStatusId', 'relation', 'maternal', 'paternal', 'actions'];
+  displayedColumns = ['memberId', 'name', 'age', 'alive', 'maritalStatusId', 'relation', 'maternal', 'paternal', 'actions'];
   matriDisplayedColumns = ['name'];
 
 
