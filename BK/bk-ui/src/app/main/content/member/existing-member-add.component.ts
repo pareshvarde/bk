@@ -12,6 +12,8 @@ import { RELATION_TYPES_DATA } from '../../data/relations';
 import { Router } from '../../../../../node_modules/@angular/router';
 import { MemberSearchParameter } from '../../models/memberSearchParameter';
 import { Location } from '@angular/common';
+import { MatDialog } from '../../../../../node_modules/@angular/material';
+import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
 
 @Component({
   selector: 'app-existing-member-add',
@@ -29,7 +31,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
   
   constructor(private dataService: bkDataService, private confirmationService: ConfirmationService, 
     public globalService: GlobalService, private notificationService: NotificationsService, 
-    private router: Router, private location: Location) {     
+    private router: Router, private location: Location, public dialog: MatDialog) {     
       this.searchModel = new MemberSearchParameter();
       this.searchModel.pageSize = this.MAX_RESULT_COUNT;
       this.searchModel.currentPage = 0;
@@ -133,5 +135,14 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
 
   getRelatedMember(member: MemberModel): any[] {
     return this.familyModel.members.filter(x => x.maritalStatusId > 1 && x.memberId != member.memberId);
+  }
+
+  showPhoto(url: string){
+    var pictures: any[] = new Array();
+    pictures.push(url);    
+
+    let dialogRef = this.dialog.open(BkImageViewerComponent, {
+      data: { images:  pictures}
+    });
   }
 }
