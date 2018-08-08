@@ -439,6 +439,8 @@ namespace BK.Controllers
             string sortOrder = string.IsNullOrWhiteSpace(model.SortOrder) ? null : model.SortOrder.Trim();
             int? currentPage = model.CurrentPage.HasValue && model.CurrentPage.Value > 0 ? model.CurrentPage : null;
             int? pageSize = model.PageSize.HasValue && model.PageSize.Value > 0 ? model.PageSize : null;
+            int? memberId = model.MemberId > 0 ? model.MemberId : (int?) null;
+            long? aadhaarNumber = model.AadhaarNumber > 0 ? model.AadhaarNumber : (long?)null;     
             bool includeOnlyHOF = model.IncludeOnlyHOF;
 
             MemberSearchResultModel mvm = new MemberSearchResultModel();
@@ -447,7 +449,7 @@ namespace BK.Controllers
             {
                 ObjectParameter oParameter = new ObjectParameter("TotalRecords", typeof(int));
 
-                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, district, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, sortOrder, null, null, oParameter).ToList();
+                List<bk_MemberSearch_Result> results = context.bk_MemberSearch(firstName, lastName, categoryId, nukhId, city, district, state, emailAddress, phoneNumber, pageSize, currentPage, includeOnlyHOF, sortOrder, memberId, aadhaarNumber, oParameter).ToList();
 
                 mvm.TotalRecords = (int)oParameter.Value;
 
