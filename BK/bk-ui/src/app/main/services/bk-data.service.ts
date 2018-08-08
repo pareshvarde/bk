@@ -65,11 +65,11 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
-  addMemberToFamily(familyId: number, memberId:number, relatedId: number, relationTypeId: number)
+  addMemberToFamily(familyId: number, memberId:number, relatedId: number, relationTypeId: number, relationType: string)
   {
     this.blockUI.start("Please wait...");
 
-    var url = this.API_URL + "/member/addtofamily?familyId=" + familyId + "&memberId=" + memberId + "&relatedId=" + relatedId + "&relationTypeId=" + relationTypeId;
+    var url = this.API_URL + "/member/addtofamily?familyId=" + familyId + "&memberId=" + memberId + "&relatedId=" + relatedId + "&relationTypeId=" + relationTypeId + "&relationType=" + relationType;
     
     return this.authHttp.get(url).pipe(map((res) =>{
       return this.handleAPIResponse(res);

@@ -22,19 +22,19 @@ import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer
 })
 export class ExistingMemberAddComponent implements OnInit, OnDestroy {
 
-  searchForm: FormGroup;  
-  searchResults: any[]=[];
-  searchModel: MemberSearchParameter;  
+  searchForm: FormGroup;
+  searchResults: any[] = [];
+  searchModel: MemberSearchParameter;
   readonly MAX_RESULT_COUNT: number = 25;
   @Input() familyModel: FamilyModel;
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-  
-  constructor(private dataService: bkDataService, private confirmationService: ConfirmationService, 
-    public globalService: GlobalService, private notificationService: NotificationsService, 
-    private router: Router, private location: Location, public dialog: MatDialog) {     
-      this.searchModel = new MemberSearchParameter();
-      this.searchModel.pageSize = this.MAX_RESULT_COUNT;
-      this.searchModel.currentPage = 0;
+
+  constructor(private dataService: bkDataService, private confirmationService: ConfirmationService,
+    public globalService: GlobalService, private notificationService: NotificationsService,
+    private router: Router, private location: Location, public dialog: MatDialog) {
+    this.searchModel = new MemberSearchParameter();
+    this.searchModel.pageSize = this.MAX_RESULT_COUNT;
+    this.searchModel.currentPage = 0;
   }
 
   ngOnInit() {
@@ -45,14 +45,14 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
       emailAddress: new FormControl('', [Validators.email, Validators.maxLength(100)]),
       city: new FormControl('', [Validators.maxLength(50)]),
       firstName: new FormControl('', [Validators.maxLength(50)])
-    });    
+    });
   }
 
   ngOnDestroy() {
     this.destroyed$.next(true);
     this.destroyed$.complete();
   }
-  
+
 
   searchMember() {
     if (this.searchForm.invalid) {
@@ -63,10 +63,9 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
     }
 
     if (!this.searchModel.memberId && !this.searchModel.phoneNumber && !this.searchModel.aadhaarNumber
-          && !this.searchModel.email && !this.searchModel.city && !this.searchModel.firstName)
-    {
-        this.confirmationService.create("Error", 'Please provide at least one search parameter', this.globalService.alertOptions);
-        return;
+      && !this.searchModel.email && !this.searchModel.city && !this.searchModel.firstName) {
+      this.confirmationService.create("Error", 'Please provide at least one search parameter', this.globalService.alertOptions);
+      return;
     }
 
     this.searchResults = [];
@@ -75,13 +74,13 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
       (res) => {
 
         if (res.result.totalRecords === 0) {
-          this.confirmationService.create("Error", "No member found with provided search criteria. Please try again", this.globalService.alertOptions);          
+          this.confirmationService.create("Error", "No member found with provided search criteria. Please try again", this.globalService.alertOptions);
           return;
         }
 
         res.result.results.forEach(element => {
           this.searchResults.push(element);
-        });   
+        });
       },
       (err) => {
         if (err.errors)
@@ -93,15 +92,22 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
   }
 
   addToFamily(memberModel: MemberModel) {
-    
+
     if (!memberModel.relatedMemberId || !memberModel.relationTypeId) {
-      this.confirmationService.create("Error", "Please provide relation", this.globalService.alertOptions);      
+      this.confirmationService.create("Error", "Please provide relation", this.globalService.alertOptions);
       return;
     }
 
-    return this.dataService.addMemberToFamily(this.familyModel.familyId, memberModel.memberId,memberModel.relatedMemberId, memberModel.relationTypeId).takeUntil(this.destroyed$).subscribe(
+    var relationType = '';
+    if (memberModel.relationTypeId) {
+      var relation = RELATION_TYPES_DATA.filter(x => x.relationTypeId === memberModel.relationTypeId);
+      if (relation && relation.length > 0)
+        relationType = relation[0].relationType;
+    }
+
+    return this.dataService.addMemberToFamily(this.familyModel.familyId, memberModel.memberId, memberModel.relatedMemberId, memberModel.relationTypeId, relationType).takeUntil(this.destroyed$).subscribe(
       (res) => {
-        this.notificationService.success("Member is added to your family");        
+        this.notificationService.success("Member is added to your family");
         this.router.navigate(['family', this.familyModel.familyId]);
       },
       (err) => {
@@ -121,7 +127,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
       this.router.navigate(['home']);
   }
 
-  getRelations(member: MemberModel): any[] {    
+  getRelations(member: MemberModel): any[] {
 
     if (member.gender === true)
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
@@ -137,12 +143,12 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
     return this.familyModel.members.filter(x => x.maritalStatusId > 1 && x.memberId != member.memberId);
   }
 
-  showPhoto(url: string){
+  showPhoto(url: string) {
     var pictures: any[] = new Array();
-    pictures.push(url);    
+    pictures.push(url);
 
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
-      data: { images:  pictures}
+      data: { images: pictures }
     });
   }
 }

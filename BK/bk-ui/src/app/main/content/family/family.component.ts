@@ -13,6 +13,7 @@ import { Location } from '@angular/common';
 import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
 import { MEMBER_MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
+import { RELATION_TYPES_DATA } from '../../data/relations'
 
 @Component({
   selector: 'app-family',
@@ -32,6 +33,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
   readonly CATEGORIES_DATA_LOCAL = CATEGORIES_DATA;
   readonly MEMBER_MARITALSTATUS_DATA_LOCAL = MEMBER_MARITAL_STATUS_DATA;
+  readonly RELATION_TYPES_DATA_LOCAL = RELATION_TYPES_DATA;
 
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private notificationService: NotificationsService, public authService: bkAuthService,
@@ -97,7 +99,13 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
             element.maritalStatus = status[0].status;
           else
             element.maritalStatus = "";          
-        });  
+
+          if (element.relationTypeId) {            
+            var relation = this.RELATION_TYPES_DATA_LOCAL.filter(x => x.relationTypeId === element.relationTypeId);
+            if (relation && relation.length > 0)
+              element.relation = relation[0].relationType + ' ' + element.relatedToName;
+          }
+        });
 
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
         this.matrimonyDatasource = new MatTableDataSource<FamilyMemberModel>(this.model.members.filter(x => {

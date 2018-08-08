@@ -65,7 +65,6 @@
     <Folder Include="dbo\Functions\" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\lkRelationTypes.sql" />
     <Build Include="dbo\Tables\FamilyMemberAssociation.sql" />
     <Build Include="dbo\Tables\Matrimonials.sql" />
     <Build Include="dbo\Tables\Families.sql" />

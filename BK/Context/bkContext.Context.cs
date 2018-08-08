@@ -29,7 +29,6 @@ namespace BK.Context
     
         public virtual DbSet<Family> Families { get; set; }
         public virtual DbSet<FamilyMemberAssociation> FamilyMemberAssociations { get; set; }
-        public virtual DbSet<lkRelationType> lkRelationTypes { get; set; }
         public virtual DbSet<Matrimonial> Matrimonials { get; set; }
         public virtual DbSet<Member> Members { get; set; }
     
@@ -62,15 +61,6 @@ namespace BK.Context
                 new ObjectParameter("MemberID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_PendingApprovals_Result>("bk_PendingApprovals", memberIDParameter);
-        }
-    
-        public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
-        {
-            var familyIDParameter = familyID.HasValue ?
-                new ObjectParameter("FamilyID", familyID) :
-                new ObjectParameter("FamilyID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
         }
     
         [DbFunction("bkContext", "GetMaternalFamily")]
@@ -225,6 +215,15 @@ namespace BK.Context
                 new ObjectParameter("AadhaarNumber", typeof(long));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_MemberSearch_Result>("bk_MemberSearch", firstNameParameter, lastNameParameter, categoryIDParameter, nukhIDParameter, cityParameter, districtParameter, stateParameter, emailAddressParameter, phoneNumberParameter, pageSizeParameter, currentPageParameter, includeOnlyHOFParameter, sortOrderParameter, memberIDParameter, aadhaarNumberParameter, totalRecords);
+        }
+    
+        public virtual ObjectResult<bk_GetFamilyMembers_Result> bk_GetFamilyMembers(Nullable<int> familyID)
+        {
+            var familyIDParameter = familyID.HasValue ?
+                new ObjectParameter("FamilyID", familyID) :
+                new ObjectParameter("FamilyID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
         }
     }
 }

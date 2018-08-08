@@ -17,7 +17,7 @@ BEGIN
 		f.HeadOfFamilyID,
 		lkm.FirstName rFirstName,
 		lkm.LastName rLastName,
-		lk.RelationType,
+		fma.RelationTypeId,
 		paternal.PaternalFamilyID PaternalFamilyId,
 		paternal.PaternalFamilyName PaternalFamilyName,
 		paternal.PaternalFamilyAddress PaternalFamilyAddress,
@@ -28,8 +28,7 @@ BEGIN
 	FROM
 		Members m 
 		JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
-		JOIN Families f ON f.FamilyID = fma.FamilyId
-		LEFT JOIN lkRelationTypes lk ON lk.RelationTypeId = fma.RelationTypeId
+		JOIN Families f ON f.FamilyID = fma.FamilyId		
 		LEFT JOIN Members lkm ON lkm.MemberID = fma.RelatedId
 		LEFT JOIN Matrimonials mat ON mat.MemberID = m.MemberID		
 		OUTER APPLY

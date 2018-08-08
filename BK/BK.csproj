@@ -231,9 +231,6 @@
     <Compile Include="Context\GetPaternalFamily_Result.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="Context\lkRelationType.cs">
-      <DependentUpon>bkContext.tt</DependentUpon>
-    </Compile>
     <Compile Include="Context\Matrimonial.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>

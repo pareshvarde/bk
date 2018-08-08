@@ -84,8 +84,8 @@ namespace BK.ViewModel
         [JsonProperty("canEdit")]
         public bool CanEdit { get; set; }
 
-        [JsonProperty("relation")]
-        public string Relation { get; set; }
+        [JsonProperty("relatedToName")]
+        public string RelatedToName { get; set; }
 
         [JsonProperty("alive")]
         public bool Alive { get; set; }

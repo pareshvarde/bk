@@ -239,7 +239,7 @@ namespace BK.Controllers
 
         [Route("api/member/addtofamily")]
         [HttpGet]
-        public IHttpActionResult AddToFamily(int familyId, int memberId, int relatedId, int relationTypeId)
+        public IHttpActionResult AddToFamily(int familyId, int memberId, int relatedId, int relationTypeId, string relationType)
         {
             if (!CanEditFamily(familyId))
                 return BadRequest("You do not have permission to edit this family");
@@ -259,11 +259,7 @@ namespace BK.Controllers
 
                 if (!relatedMember.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
                     return BadRequest("Related member is not part of the family");
-
-                lkRelationType relationType = context.lkRelationTypes.FirstOrDefault(x => x.RelationTypeId == relationTypeId);
-                if (relationType == null)
-                    return BadRequest("Invalid relation type");
-
+                
                 bool autoApproval = CanEditMember(memberId);
 
                 FamilyMemberAssociation fmAssociation = new FamilyMemberAssociation();
@@ -289,7 +285,7 @@ namespace BK.Controllers
                     html = html.Replace("{{password}}", member.Password);
                     html = html.Replace("{{addedBy}}", LoggedInMemberName);
                     html = html.Replace("{{addedOn}}", fmAssociation.CreatedOn.Value.ToString("dddd, dd MMMM yyyy hh:mm tt"));
-                    html = html.Replace("{{relation}}", $"{relationType.RelationType} Of {relatedMember.FirstName} {relatedMember.LastName}");
+                    html = html.Replace("{{relation}}", $"{relationType} {relatedMember.FirstName} {relatedMember.LastName}");
 
                     System.Threading.Tasks.Task.Factory.StartNew(() =>
                     {

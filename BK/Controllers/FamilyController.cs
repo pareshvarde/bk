@@ -106,8 +106,10 @@ namespace BK.Controllers
                     if (tmp.MaternalFamilyId.HasValue)
                         tmp.MaternalFamilyName = string.Format("{0}, {1}", item.MaternalFamilyName, item.MaternalFamilyAddress);
 
-                    if (!string.IsNullOrEmpty(item.RelationType))
-                        tmp.Relation = $"{item.RelationType} Of {item.rFirstName} {item.rLastName}";
+                    if (!string.IsNullOrEmpty(item.rFirstName))
+                        tmp.RelatedToName = $"{item.rFirstName} {item.rLastName}";
+
+                    tmp.RelationTypeId = item.RelationTypeId;
 
                     fvm.Members.Add(tmp);
                 }
