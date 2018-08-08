@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: 
+Disallow: /bin/
+Disallow: /Images/
+Disallow: /HtmlTemplates/
+Disallow: /assets/
