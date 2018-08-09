@@ -6,16 +6,21 @@
         <div fxLayout="row">
           <span class="mat-title">Pending Approvals</span>
         </div>
-        <div fxLayout="row" class="mb-8" fxLayoutWrap fxLayoutAlign="left center" *ngFor="let n of model.approvals">
-          <button matTooltip="Approve" mat-mini-fab color="accent" (click)="approveMember(n.addedToId, n.familyId)" class="mr-8">
-            <mat-icon>done</mat-icon>
-          </button>
-          <button matTooltip="Decline" mat-mini-fab color="accent" (click)="declineMember(n.addedToId, n.familyId)" class="mr-8">
-            <mat-icon>cancel</mat-icon>
-          </button>
-          <a [routerLink]="['/member/',n.familyId,n.addedById]">{{n.addedByFirstName}} {{n.addedByLastName}}</a>&nbsp;added&nbsp;
-          <a [routerLink]="['/member/',0,n.addedToId]">{{n.addedToFirstName}} {{n.addedToLastName}}</a>&nbsp;to&nbsp;
-          <a [routerLink]="['/family/',n.familyId]">family</a>&nbsp;on&nbsp;{{n.addedOn | amDateFormat:'MMMM Do YYYY, hh:mm a'}}
+        <div fxLayout="row wrap" class="mb-8" fxLayoutAlign="left center" *ngFor="let n of model.approvals">
+          <div fxLayout="row wrap">
+            <button matTooltip="Approve" mat-mini-fab color="accent" (click)="approveMember(n.addedToId, n.familyId)" class="mr-8">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button matTooltip="Decline" mat-mini-fab color="accent" (click)="declineMember(n.addedToId, n.familyId)" class="mr-8">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </div>
+          <div fxLayout="row wrap" class="approvalLine">
+            <a [routerLink]="['/member/',n.familyId,n.addedById]">{{n.addedByFirstName}} {{n.addedByLastName}}</a>&nbsp;added&nbsp;
+            <a [routerLink]="['/member/',0,n.addedToId]">{{n.addedToFirstName}} {{n.addedToLastName}}</a>&nbsp;to&nbsp;
+            <a [routerLink]="['/family/',n.familyId]">family</a>&nbsp;on&nbsp;{{n.addedOn | amDateFormat:'MMMM Do YYYY, hh:mm a'}}
+          </div>
+          <mat-divider></mat-divider>
         </div>
       </div>
       <div class="bk-large-card">
@@ -184,14 +189,17 @@
               <mat-header-cell *matHeaderCellDef>
                 <b>Age</b>
               </mat-header-cell>
-              <mat-cell *matCellDef="let member" ><span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></mat-cell>              
-            </ng-container>                        
+              <mat-cell *matCellDef="let member">
+                <span *ngIf="member.age > 0">{{member.age}} Years</span>
+                <span *ngIf="member.age <= 0">NA</span>
+              </mat-cell>
+            </ng-container>
             <ng-container matColumnDef="maritalStatusId">
-                <mat-header-cell *matHeaderCellDef>
-                  <b>Marital Status</b>
-                </mat-header-cell>
-                <mat-cell *matCellDef="let member">{{member.maritalStatus}}</mat-cell>
-              </ng-container>
+              <mat-header-cell *matHeaderCellDef>
+                <b>Marital Status</b>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let member">{{member.maritalStatus}}</mat-cell>
+            </ng-container>
             <ng-container matColumnDef="relation">
               <mat-header-cell *matHeaderCellDef>
                 <b>Relation</b>
@@ -232,16 +240,22 @@
           </mat-table>
         </div>
         <div *ngIf="dataSource" fxShow fxHide.gt-sm>
-          <div class="mobile-card secondary-text"  *ngFor="let member of dataSource.filteredData">
+          <div class="mobile-card secondary-text" *ngFor="let member of dataSource.filteredData">
             <div fxLayout="row wrap">ID:&nbsp;{{member.memberId}}</div>
             <div fxLayout="row wrap">Name:&nbsp;
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </div>
-            <div fxLayout="row wrap">Age:&nbsp;<span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></div>                  
-            <div fxLayout="row wrap">Marital Status:&nbsp;
-              <span>{{member.maritalStatus}}</span>              
+            <div fxLayout="row wrap">Age:&nbsp;
+              <span *ngIf="member.age > 0">{{member.age}} Years</span>
+              <span *ngIf="member.age <= 0">NA</span>
             </div>
-            <div fxLayout="row wrap">Relation:&nbsp;<span *ngIf="member.relation">{{member.relation}}</span><span *ngIf="!member.relation">NA</span></div>
+            <div fxLayout="row wrap">Marital Status:&nbsp;
+              <span>{{member.maritalStatus}}</span>
+            </div>
+            <div fxLayout="row wrap">Relation:&nbsp;
+              <span *ngIf="member.relation">{{member.relation}}</span>
+              <span *ngIf="!member.relation">NA</span>
+            </div>
             <div fxLayout="row wrap">Maternal Family:&nbsp;
               <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
               <span *ngIf="!member.maternalFamilyId">Not Available</span>
