@@ -98,9 +98,9 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
           if (status && status.length > 0)
             element.maritalStatus = status[0].status;
           else
-            element.maritalStatus = "";          
+            element.maritalStatus = "";
 
-          if (element.relationTypeId) {            
+          if (element.relationTypeId) {
             var relation = this.RELATION_TYPES_DATA_LOCAL.filter(x => x.relationTypeId === element.relationTypeId);
             if (relation && relation.length > 0)
               element.relation = relation[0].relationType + ' ' + element.relatedToName;
@@ -230,33 +230,47 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   approveMember(memberId: number, familyId: number) {
-    this.dataService.approveMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
-      (res) => {
-        this.notificationService.success("Member family association approved");
-        this.loadFamily();
-      },
-      (err) => {
-        if (err.errors)
-          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
-        else
-          this.confirmationService.create("Error", err, this.globalService.alertOptions);
-      }
-    );
+    this.confirmationService.create('', "Are you sure you want to approve this request?").subscribe(
+      (ans: ResolveEmit) => {
+
+        if (!ans.resolved)
+          return;
+
+        this.dataService.approveMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
+          (res) => {
+            this.notificationService.success("Member family association approved");
+            this.loadFamily();
+          },
+          (err) => {
+            if (err.errors)
+              this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
+            else
+              this.confirmationService.create("Error", err, this.globalService.alertOptions);
+          }
+        );
+      })
   }
 
   declineMember(memberId: number, familyId: number) {
-    this.dataService.declineMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
-      (res) => {
-        this.notificationService.success("Member family association removed");
-        this.loadFamily();
-      },
-      (err) => {
-        if (err.errors)
-          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
-        else
-          this.confirmationService.create("Error", err, this.globalService.alertOptions);
-      }
-    );
+    this.confirmationService.create('', "Are you sure you want to decline this request?").subscribe(
+      (ans: ResolveEmit) => {
+
+        if (!ans.resolved)
+          return;
+
+        this.dataService.declineMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
+          (res) => {
+            this.notificationService.success("Member family association removed");
+            this.loadFamily();
+          },
+          (err) => {
+            if (err.errors)
+              this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
+            else
+              this.confirmationService.create("Error", err, this.globalService.alertOptions);
+          }
+        );
+      })
   }
 
 

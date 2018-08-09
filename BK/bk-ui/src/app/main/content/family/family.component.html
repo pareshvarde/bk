@@ -17,7 +17,7 @@
           </div>
           <div fxLayout="row wrap" class="approvalLine">
             <a [routerLink]="['/member/',n.familyId,n.addedById]">{{n.addedByFirstName}} {{n.addedByLastName}}</a>&nbsp;added&nbsp;
-            <a [routerLink]="['/member/',0,n.addedToId]">{{n.addedToFirstName}} {{n.addedToLastName}}</a>&nbsp;to&nbsp;
+            <a [routerLink]="['/member/',0,n.addedToId]">{{n.addedToFirstName}} {{n.addedToLastName}}</a>&nbsp;to his/her&nbsp;
             <a [routerLink]="['/family/',n.familyId]">family</a>&nbsp;on&nbsp;{{n.addedOn | amDateFormat:'MMMM Do YYYY, hh:mm a'}}
           </div>
           <mat-divider></mat-divider>
