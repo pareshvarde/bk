@@ -6,11 +6,65 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-
 <url>
   <loc>http://brahmkshatriya.net.in/</loc>
   <lastmod>2018-08-08T08:05:35+00:00</lastmod>
 </url>
-
+<url>
+  <loc>http://brahmkshatriya.net.in/contactus</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/matrimony-search</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/directory</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/hostels</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/organizations</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/temples</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/gotras</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/nukhs</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/origin</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/home</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/register</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/forgotpassword</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/login</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
+<url>
+  <loc>http://brahmkshatriya.net.in/aboutus</loc>
+  <lastmod>2018-08-08T08:05:35+00:00</lastmod>
+</url>
 
 </urlset>

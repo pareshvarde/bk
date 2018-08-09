@@ -185,13 +185,7 @@
                 <b>Age</b>
               </mat-header-cell>
               <mat-cell *matCellDef="let member" ><span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></mat-cell>              
-            </ng-container>            
-            <ng-container matColumnDef="alive">
-              <mat-header-cell *matHeaderCellDef>
-                <b>Alive?</b>
-              </mat-header-cell>
-              <mat-cell *matCellDef="let member" ><span *ngIf="member.alive"><i class="fa fa-smile-o fa-2x" aria-hidden="true"></i></span><span *ngIf="!member.alive"><i class="fa fa-frown-o fa-2x" aria-hidden="true"></i></span></mat-cell>
-            </ng-container>     
+            </ng-container>                        
             <ng-container matColumnDef="maritalStatusId">
                 <mat-header-cell *matHeaderCellDef>
                   <b>Marital Status</b>
@@ -243,8 +237,7 @@
             <div fxLayout="row wrap">Name:&nbsp;
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
             </div>
-            <div fxLayout="row wrap">Age:&nbsp;<span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></div>      
-            <div fxLayout="row wrap">Alive?:&nbsp;<span *ngIf="member.alive"><i class="fa fa-smile-o fa-2x" aria-hidden="true"></i></span><span *ngIf="!member.alive"><i class="fa fa-frown-o fa-2x" aria-hidden="true"></i></span></div>
+            <div fxLayout="row wrap">Age:&nbsp;<span *ngIf="member.age > 0">{{member.age}} Years</span><span *ngIf="member.age <= 0">NA</span></div>                  
             <div fxLayout="row wrap">Marital Status:&nbsp;
               <span>{{member.maritalStatus}}</span>              
             </div>

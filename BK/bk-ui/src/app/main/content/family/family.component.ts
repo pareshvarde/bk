@@ -47,7 +47,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     });
   }
 
-  displayedColumns = ['memberId', 'name', 'age', 'alive', 'maritalStatusId', 'relation', 'maternal', 'paternal', 'actions'];
+  displayedColumns = ['memberId', 'name', 'age', 'maritalStatusId', 'relation', 'maternal', 'paternal', 'actions'];
   matriDisplayedColumns = ['name'];
 
 
@@ -105,6 +105,9 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
             if (relation && relation.length > 0)
               element.relation = relation[0].relationType + ' ' + element.relatedToName;
           }
+
+          if (!element.alive)
+            element.name = "Late " + element.name;
         });
 
         this.dataSource = new MatTableDataSource<FamilyMemberModel>(this.model.members);
