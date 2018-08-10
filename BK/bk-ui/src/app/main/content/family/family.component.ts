@@ -100,7 +100,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
           else
             element.maritalStatus = "";
 
-          if (element.relationTypeId) {
+          if (element.relationTypeId && element.relatedToName) {
             var relation = this.RELATION_TYPES_DATA_LOCAL.filter(x => x.relationTypeId === element.relationTypeId);
             if (relation && relation.length > 0)
               element.relation = relation[0].relationType + ' ' + element.relatedToName;

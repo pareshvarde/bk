@@ -25,3 +25,6 @@ Audits
 	--family or members with junk entries
 	--profile pictures without members
 	--matrimiony pictures without matrimony
+	--family with members with no relation count more than 1 (top level person don't show relation)
+	--pending approvals
+	--eligible for matrimony but no matrimony profile exists
