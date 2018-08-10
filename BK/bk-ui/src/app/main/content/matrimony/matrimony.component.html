@@ -192,7 +192,7 @@
               <a>
                 <img id="img1" class="avatar" (click)="openFile(1)" [src]="model.photo1Url">
               </a>
-              <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
+              <button matTooltip="Delete" (click)="deletePhoto(1)" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -200,7 +200,7 @@
               <a>
                 <img id="img2" class="avatar" (click)="openFile(2)" [src]="model.photo2Url">
               </a>
-              <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
+              <button matTooltip="Delete" (click)="deletePhoto(2)" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>
@@ -208,11 +208,12 @@
               <a>
                 <img id="img3" class="avatar" (click)="openFile(3)" [src]="model.photo3Url">
               </a>
-              <button matTooltip="Delete" mat-icon-button style="padding-right: 6px;">
+              <button matTooltip="Delete" (click)="deletePhoto(3)" mat-icon-button style="padding-right: 6px;">
                 <mat-icon>delete</mat-icon>
               </button>
-            </div>            
-            <input imageUpload (imageSelected)="imageSelected($event)" [resizeOptions]="resizeOptions" style="display: none;" type="file" id="fileBrowser" accept="image/*" />
+            </div>
+            <input imageUpload (imageSelected)="imageSelected($event)" [resizeOptions]="resizeOptions" style="display: none;" type="file"
+              id="fileBrowser" accept="image/*" />
           </div>
 
           <div fxLayout="row" fxLayoutAlign="center center">

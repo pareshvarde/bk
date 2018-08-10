@@ -334,6 +334,39 @@ namespace BK.Controllers
             return Ok();
         }
 
+        [Route("api/matrimony/deletePhoto")]
+        [HttpGet]
+        public IHttpActionResult DeletePhoto(int photoNumber, int memberId)
+        {
+            if (!CanEditMember(memberId))
+                return BadRequest("You do not have permission to edit this member");
+
+            if (photoNumber < 1 || photoNumber > 3)
+                return BadRequest("Invalid photo number");
+
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath(string.Format(@"~/Images/Matrimonials/{0}_{1}.jpg", memberId, photoNumber));
+
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+
+            string response = string.Empty;
+
+            using (bkContext context = new bkContext())
+            {
+                Matrimonial mat = context.Matrimonials.FirstOrDefault(x => x.MemberID == memberId);
+                if (mat != null)
+                {
+                    mat.ModifiedBy = LoggedInMemberId;
+                    mat.ModifiedOn = DateTime.Now;
+
+                    context.SaveChanges();
+                }
+
+                response = MemberWrapper.MatrimonyPhoto(memberId, mat.Member.Gender, photoNumber, mat.ModifiedOn);
+            }
+            
+            return Ok(response);
+        }
     }
 }
 

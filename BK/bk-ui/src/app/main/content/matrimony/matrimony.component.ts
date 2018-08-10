@@ -12,7 +12,7 @@ import { MATRIMONY_MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 import { HEIGHT_DATA } from '../../data/height'
 import { BODY_TYPE_DATA } from '../../data/bodyType';
 import { COMPLEXION_TYPE_DATA } from '../../data/complexionType';
-import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { ConfirmationService, ResolveEmit } from '@jaspero/ng-confirmations';
 import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
 import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
@@ -92,7 +92,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   initializeComponent() {
-    
+
     this.model = new MatrimonyModel();
 
     if (!this.addMode)
@@ -144,14 +144,14 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   imageSelected(imageResult: ImageResult) {
-    
+
     if (!imageResult.file.type.startsWith("image/")) {
       this.confirmationService.create("Error", "Only file of type image is supported", this.globalService.alertOptions);
       return;
     }
 
     var src = imageResult.resized && imageResult.resized.dataURL || imageResult.dataURL;
-    
+
     this.savePhoto(src);
   }
 
@@ -165,13 +165,40 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
         else if (this.photoNumber === 2)
           document.getElementById('img2').setAttribute('src', content);
         else if (this.photoNumber === 3)
-          document.getElementById('img3').setAttribute('src', content);        
+          document.getElementById('img3').setAttribute('src', content);
       },
       (err) => {
         if (err.errors)
           this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
         else
           this.confirmationService.create("Error", err, this.globalService.alertOptions);
+      }
+    );
+  }
+
+  deletePhoto(photoNumber: number) {
+    this.confirmationService.create('', 'Are you sure you want to delete this photo?').subscribe(
+      (ans: ResolveEmit) => {
+        if (!ans.resolved)
+          return;        
+
+        this.dataService.deleteMarimonyPhoto(this.memberId, photoNumber).takeUntil(this.destroyed$).subscribe(
+          (res) => {
+            this.notificationService.success("Photo has been deleted");
+            if (photoNumber === 1)
+              document.getElementById('img1').setAttribute('src', res.result);
+            else if (photoNumber === 2)
+              document.getElementById('img2').setAttribute('src', res.result);
+            else if (photoNumber === 3)
+              document.getElementById('img3').setAttribute('src', res.result);
+          },
+          (err) => {
+            if (err.errors)
+              this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
+            else
+              this.confirmationService.create("Error", err, this.globalService.alertOptions);
+          }
+        );
       }
     );
   }

@@ -108,6 +108,15 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
+  deleteMarimonyPhoto(memberId: number, photoNumber: number){
+    
+    this.blockUI.start("Please wait...");
+
+    return this.authHttp.get(this.API_URL + "matrimony/deletePhoto?photoNumber=" + photoNumber + "&memberId=" + memberId).pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);              
+  }
+
   profilePhoto() {
     this.blockUI.start("Please wait...");
            
