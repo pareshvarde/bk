@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   ngOnInit() {
     this.registerForm = new FormGroup({      
-      firstName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required, Validators.maxLength(50)]),
+      firstName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       lastName: new FormControl('', [UniversalValidators.noWhitespace,Validators.required, , Validators.maxLength(50)]),
       email: new FormControl('', [Validators.email,Validators.required, Validators.maxLength(100)]),
       phoneNumber: new FormControl('', [UniversalValidators.noWhitespace, UniversalValidators.isNumber, Validators.required, Validators.maxLength(15)]),

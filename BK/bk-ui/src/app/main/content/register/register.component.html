@@ -24,8 +24,7 @@
             <mat-form-field>
               <input maxlength="50" matInput [ngModel]="formModel.firstName | titlecase" (ngModelChange)="formModel.firstName=$event" placeholder="First Name"
                 formControlName="firstName" bkAutofocus>
-              <mat-error *ngIf="registerForm.controls['firstName'].hasError('required')">Please enter a first name</mat-error>
-              <mat-error *ngIf="registerForm.controls['firstName'].hasError('noWhitespaceRequired')">Only letters with no space</mat-error>
+              <mat-error *ngIf="registerForm.controls['firstName'].hasError('required')">Please enter a first name</mat-error>              
               <mat-error *ngIf="registerForm.controls['firstName'].hasError('maxlength')">Maximum 50 characters allowed</mat-error>
             </mat-form-field>
 
