@@ -67,27 +67,30 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
 </div>
-<div fxLayout="row wrap" fxLayoutAlign="start stretch"  fxHide fxShow.lt-md>  
-    <div *ngFor="let nukh of dataSource.filteredData"  class="bk-card nukhCardContainer">            
-        <div class="p-16">
-            <div class="h1">{{nukh.mainNukh}}</div>      
-        </div>    
-        <div class="p-16 pt-0 line-height-1.75">
-          Sub Nukhs:
-            <ol>
-              <li *ngIf=nukh.subNukh1>{{nukh.subNukh1}}</li>
-              <li *ngIf=nukh.subNukh2>{{nukh.subNukh2}}</li>
-              <li *ngIf=nukh.subNukh3>{{nukh.subNukh3}}</li>
-              <li *ngIf=nukh.subNukh4>{{nukh.subNukh4}}</li>
-              <li *ngIf=nukh.subNukh5>{{nukh.subNukh5}}</li>
-              <li *ngIf=nukh.subNukh6>{{nukh.subNukh6}}</li>
-              <li *ngIf=nukh.subNukh7>{{nukh.subNukh7}}</li>
-              <li *ngIf=nukh.subNukh8>{{nukh.subNukh8}}</li>
-              <li *ngIf=nukh.subNukh9>{{nukh.subNukh9}}</li>
-              <li *ngIf=nukh.subNukh10>{{nukh.subNukh10}}</li>
-              <li *ngIf=nukh.subNukh11>{{nukh.subNukh11}}</li>
-              <li *ngIf=nukh.subNukh12>{{nukh.subNukh12}}</li>
-            </ol>
-        </div>        
+<div fxLayout="row wrap" fxLayoutAlign="start stretch" fxHide fxShow.lt-md>
+  <div *ngFor="let nukh of dataSource.filteredData" class="bk-card nukhCardContainer">
+    <div class="p-16">
+      <div class="h1">{{nukh.mainNukh}}</div>
+    </div>
+    <div class="p-16 pt-0 line-height-1.75">
+      Sub Nukhs:
+      <ol>
+        <li *ngIf=nukh.subNukh1>{{nukh.subNukh1}}</li>
+        <li *ngIf=nukh.subNukh2>{{nukh.subNukh2}}</li>
+        <li *ngIf=nukh.subNukh3>{{nukh.subNukh3}}</li>
+        <li *ngIf=nukh.subNukh4>{{nukh.subNukh4}}</li>
+        <li *ngIf=nukh.subNukh5>{{nukh.subNukh5}}</li>
+        <li *ngIf=nukh.subNukh6>{{nukh.subNukh6}}</li>
+        <li *ngIf=nukh.subNukh7>{{nukh.subNukh7}}</li>
+        <li *ngIf=nukh.subNukh8>{{nukh.subNukh8}}</li>
+        <li *ngIf=nukh.subNukh9>{{nukh.subNukh9}}</li>
+        <li *ngIf=nukh.subNukh10>{{nukh.subNukh10}}</li>
+        <li *ngIf=nukh.subNukh11>{{nukh.subNukh11}}</li>
+        <li *ngIf=nukh.subNukh12>{{nukh.subNukh12}}</li>
+      </ol>
+    </div>
   </div>
+</div>
+<div fxLayout="row wrap" style="padding-top: 5px">
+  &nbsp;
 </div>

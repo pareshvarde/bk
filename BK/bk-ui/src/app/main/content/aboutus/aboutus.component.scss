@@ -9,11 +9,8 @@
         }
     }
 
-    .detailItem{        
-        
-        @include media-breakpoint('xs') {            
-            padding-top: 10px;
-        }
+    .detailItem{                        
+        padding-top: 10px;        
     }
 
     .photoItem{
