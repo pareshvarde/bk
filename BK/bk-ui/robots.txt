@@ -4,3 +4,4 @@ Disallow: /bin/
 Disallow: /Images/
 Disallow: /HtmlTemplates/
 Disallow: /assets/
+Sitemap: http://brahmkshatriya.net.in/sitemap.xml
