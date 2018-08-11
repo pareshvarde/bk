@@ -14,10 +14,6 @@
         #register-form-wrapper {
             flex: 1 0 auto;                
 
-            .information{
-                text-align: left !important;
-            }
-
             .information ol{
                 padding-left: 15px;
             }
@@ -25,7 +21,6 @@
             #register-form {
           
                 padding: 10px;
-                text-align: center;                                
 
                 .logo {
                     width: 128px;
@@ -38,8 +33,7 @@
                 }
 
                 form {
-                    width: 100%;
-                    text-align: left;
+                    width: 100%;                    
 
                     mat-form-field {
                         width: 300px;
