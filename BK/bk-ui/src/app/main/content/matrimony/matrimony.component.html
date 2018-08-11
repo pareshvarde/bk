@@ -2,6 +2,10 @@
   <div id="matrimony-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="matrimony-form">
       <div class="bk-large-card">
+        <div fxLayout="row wrap" fxLayoutAlign="center center">
+          <div *ngIf="memberModel.firstName" class="title">{{memberModel.firstName}} {{memberModel.lastName}}</div>
+        </div>
+
         <form name="matrimonyForm" [formGroup]="matrimonyForm" novalidate>
 
           <div fxLayout="row wrap">
@@ -203,7 +207,7 @@
               </a>
               <button [disabled]="!model.photo2Url || model.photo2Url.indexOf('male.png') > -1" matTooltip="Delete" (click)="deletePhoto(2)"
                 mat-icon-button style="padding-right: 6px;">
-                <mat-icon *ngIf="model.photo2Url && model.photo2Url.indexOf('male.png') === -1" >delete</mat-icon>
+                <mat-icon *ngIf="model.photo2Url && model.photo2Url.indexOf('male.png') === -1">delete</mat-icon>
               </button>
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
@@ -212,7 +216,7 @@
               </a>
               <button [disabled]="!model.photo3Url || model.photo3Url.indexOf('male.png') > -1" matTooltip="Delete" (click)="deletePhoto(3)"
                 mat-icon-button style="padding-right: 6px;">
-                <mat-icon *ngIf="model.photo3Url && model.photo3Url.indexOf('male.png') === -1" >delete</mat-icon>
+                <mat-icon *ngIf="model.photo3Url && model.photo3Url.indexOf('male.png') === -1">delete</mat-icon>
               </button>
             </div>
             <input imageUpload (imageSelected)="imageSelected($event)" [resizeOptions]="resizeOptions" style="display: none;" type="file"

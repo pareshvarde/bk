@@ -82,6 +82,14 @@ export class bkDataService {
     }),catchError((error : any) => this.handleAPIError(error)),);
   }
 
+  getMemberLookup(memberId: number){
+    this.blockUI.start("Please wait...");
+
+    return this.authHttp.get(this.API_URL + "/member/lookup?memberId=" + memberId).pipe(map((res) =>{
+      return this.handleAPIResponse(res);
+    }),catchError((error : any) => this.handleAPIError(error)),);
+  }
+
   saveMember(model: MemberModel){
     this.blockUI.start("Please wait...");
            

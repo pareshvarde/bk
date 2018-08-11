@@ -112,6 +112,26 @@ namespace BK.Controllers
             }
         }
 
+        [Route("api/member/lookup")]
+        [HttpGet]
+        public IHttpActionResult Lookup(int memberId)
+        {
+            using (bkContext context = new bkContext())
+            {
+                Member member = context.Members.Where(x => x.MemberID == memberId).FirstOrDefault();
+                if (member == null)
+                    return BadRequest("Your record cannot be loaded. Please try again or contact Administrator for help");
+
+                MemberViewModel vm = new MemberViewModel();
+
+                vm.FirstName = member.FirstName;
+                vm.LastName = member.LastName;
+                vm.Gender = member.Gender;
+
+                return Ok(vm);
+            }
+        }
+
         [Route("api/member/save")]
         [HttpPost]
         public IHttpActionResult Save(MemberViewModel model)

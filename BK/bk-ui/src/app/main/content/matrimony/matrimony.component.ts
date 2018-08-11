@@ -18,6 +18,7 @@ import { GlobalService } from '../../services/global-service';
 import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
 import { MatDialog } from '@angular/material';
 import { ResizeOptions, ImageResult } from '../../../../../node_modules/ng2-imageupload';
+import { MemberModel } from '../../models/memberModel';
 
 @Component({
   selector: 'app-matrimony',
@@ -27,9 +28,10 @@ import { ResizeOptions, ImageResult } from '../../../../../node_modules/ng2-imag
 export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
-  memberId: number;
+  memberId: number;  
   addMode: boolean;
   model: MatrimonyModel;
+  memberModel: MemberModel;
   matrimonyForm: FormGroup;
   photoNumber: number;
   readonly NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA;
@@ -52,9 +54,10 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
       if (params.memberId > 0)
         this.memberId = params.memberId;
       else
-        this.memberId = null;
+        this.memberId = null;      
 
       this.addMode = params.action === 'add'
+      this.memberModel = new MemberModel();
 
       this.initializeComponent();
     });
@@ -99,6 +102,23 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
       this.loadMatrimony();
     else
       this.model.memberId = this.memberId;
+    
+    this.loadMember();
+  }
+
+
+  loadMember() {
+    return this.dataService.getMemberLookup(this.memberId).takeUntil(this.destroyed$).subscribe(
+      (res) => {
+        this.memberModel = res.result;
+      },
+      (err) => {
+        if (err.errors)
+          this.confirmationService.create("Error", err.errors[0], this.globalService.alertOptions);
+        else
+          this.confirmationService.create("Error", err, this.globalService.alertOptions);
+      }
+    );
   }
 
   loadMatrimony() {
@@ -160,15 +180,15 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
       (res) => {
         this.notificationService.success("Your photo has been uploaded.");
 
-        if (this.photoNumber === 1){
+        if (this.photoNumber === 1) {
           document.getElementById('img1').setAttribute('src', content);
           this.model.photo1Url = content;
         }
-        else if (this.photoNumber === 2){
+        else if (this.photoNumber === 2) {
           document.getElementById('img2').setAttribute('src', content);
           this.model.photo2Url = content;
         }
-        else if (this.photoNumber === 3){
+        else if (this.photoNumber === 3) {
           document.getElementById('img3').setAttribute('src', content);
           this.model.photo3Url = content;
         }
@@ -186,20 +206,20 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.confirmationService.create('', 'Are you sure you want to delete this photo?').subscribe(
       (ans: ResolveEmit) => {
         if (!ans.resolved)
-          return;        
+          return;
 
         this.dataService.deleteMarimonyPhoto(this.memberId, photoNumber).takeUntil(this.destroyed$).subscribe(
           (res) => {
             this.notificationService.success("Photo has been deleted");
-            if (photoNumber === 1){
+            if (photoNumber === 1) {
               document.getElementById('img1').setAttribute('src', res.result);
               this.model.photo1Url = res.result;
             }
-            else if (photoNumber === 2){
+            else if (photoNumber === 2) {
               document.getElementById('img2').setAttribute('src', res.result);
               this.model.photo2Url = res.result;
             }
-            else if (photoNumber === 3){
+            else if (photoNumber === 3) {
               document.getElementById('img3').setAttribute('src', res.result);
               this.model.photo3Url = res.result;
             }
