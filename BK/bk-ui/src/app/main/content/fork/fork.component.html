@@ -1,7 +1,8 @@
 <div id="family" fxLayout="column">
   <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="family-form">
-      <div class="title">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
+      <div class="title" fxLayoutAlign="center center">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
+      <div fxLayout="row wrap" fxLayoutAlign="start start"><h3>TIP: This will create a new family from existing family. Please select members you want to copy in new family and provide updated address and head of family for this family.</h3></div>
       <div class="bk-large-card">
         <div fxLayout="row" fxLayoutAlign="start center">
           <span class="mat-title famiyMemberHeader">Select Members</span>
