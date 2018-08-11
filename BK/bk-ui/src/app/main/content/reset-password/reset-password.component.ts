@@ -53,7 +53,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     
     this.dataService.resetPassword(password, this.resetToken).takeUntil(this.destroyed$).subscribe(
       (res) => {
-          this.confirmationService.create("Error", "Password has been reset, Please login with your new password now.", this.globalService.alertOptions);                  
+          this.confirmationService.create("", "Password has been reset, Please login with your new password now.", this.globalService.alertOptions);                  
           this.router.navigate(['login']);
       },
       (err) => {

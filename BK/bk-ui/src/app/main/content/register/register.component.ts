@@ -98,7 +98,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     this.dataService.register(this.formModel).takeUntil(this.destroyed$).subscribe(
        (res) => {              
-          this.confirmationService.create("Error", "Your registration completed successfully. Please check your email for your username and password.", this.globalService.alertOptions);         
+          this.confirmationService.create("", "Your registration completed successfully. Please check your email for your username and password.", this.globalService.alertOptions);         
           this.router.navigate(['login']);
        },
        (err) => {         

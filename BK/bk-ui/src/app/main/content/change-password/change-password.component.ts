@@ -7,6 +7,8 @@ import  'rxjs/add/operator/takeUntil'
 import { ReplaySubject } from 'rxjs';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-change-password',
@@ -21,7 +23,8 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
   formModel: changePasswordViewModel;
 
   constructor(private dataService: bkDataService, private notificationService: NotificationsService, 
-      private confirmationService: ConfirmationService, private globalService: GlobalService) {
+      private confirmationService: ConfirmationService, private globalService: GlobalService,
+      private router: Router, private location: Location) {
     this.formModel = new changePasswordViewModel();
   }
 
@@ -55,8 +58,9 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     this.changePasswordForm.reset();    
 
     this.dataService.changePassword(tFormModel).takeUntil(this.destroyed$).subscribe(
-      (res) => {      
+      (res) => {              
         this.notificationService.success("Your password has been changed.");
+        this.back();
       },
       (err) => {        
         if (err.errors)
@@ -65,6 +69,14 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
           this.confirmationService.create("Error", err, this.globalService.alertOptions);                    
       }
     );
+  }
+
+  back() {
+
+    if (window.history.length > 1)
+      this.location.back();
+    else
+      this.router.navigate(['home']);
   }
 }
 

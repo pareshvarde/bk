@@ -38,6 +38,13 @@ export class ContactusComponent implements OnInit, OnDestroy {
 
   save(){   
 
+    if (this.contactusForm.invalid) {
+      var el = <HTMLElement>document.querySelector("input.ng-invalid");
+      if (el)
+        el.focus();
+      return;
+    }
+
     var formData: FormData = new FormData();
     formData.append('name',this.contactusForm.controls.name.value);
     formData.append('email',this.contactusForm.controls.email.value);
