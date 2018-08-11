@@ -1,7 +1,7 @@
 <div id="family" fxLayout="column">
   <div id="family-form-wrapper" fxLayout="column" fxLayoutAlign="top center">
     <div id="family-form">
-      <div class="title" *ngIf="model.hofFirstName">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
+      <div class="title" fxLayoutAlign="center center" *ngIf="model.hofFirstName">{{model.hofFirstName}} {{model.hofLastName}}'s Family</div>
       <div *ngIf="model.approvals.length > 0" class="bk-large-card">
         <div fxLayout="row">
           <span class="mat-title">Pending Approvals</span>
