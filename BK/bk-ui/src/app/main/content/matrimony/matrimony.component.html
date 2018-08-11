@@ -192,24 +192,27 @@
               <a>
                 <img id="img1" class="avatar" (click)="openFile(1)" [src]="model.photo1Url">
               </a>
-              <button matTooltip="Delete" (click)="deletePhoto(1)" mat-icon-button style="padding-right: 6px;">
-                <mat-icon>delete</mat-icon>
+              <button [disabled]="!model.photo1Url || model.photo1Url.indexOf('male.png') > -1" matTooltip="Delete" (click)="deletePhoto(1)"
+                mat-icon-button style="padding-right: 6px;">
+                <mat-icon *ngIf="model.photo1Url && model.photo1Url.indexOf('male.png') === -1">delete</mat-icon>
               </button>
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
                 <img id="img2" class="avatar" (click)="openFile(2)" [src]="model.photo2Url">
               </a>
-              <button matTooltip="Delete" (click)="deletePhoto(2)" mat-icon-button style="padding-right: 6px;">
-                <mat-icon>delete</mat-icon>
+              <button [disabled]="!model.photo2Url || model.photo2Url.indexOf('male.png') > -1" matTooltip="Delete" (click)="deletePhoto(2)"
+                mat-icon-button style="padding-right: 6px;">
+                <mat-icon *ngIf="model.photo2Url && model.photo2Url.indexOf('male.png') === -1" >delete</mat-icon>
               </button>
             </div>
             <div fxLayout="column" fxLayoutAlign="center center">
               <a>
                 <img id="img3" class="avatar" (click)="openFile(3)" [src]="model.photo3Url">
               </a>
-              <button matTooltip="Delete" (click)="deletePhoto(3)" mat-icon-button style="padding-right: 6px;">
-                <mat-icon>delete</mat-icon>
+              <button [disabled]="!model.photo3Url || model.photo3Url.indexOf('male.png') > -1" matTooltip="Delete" (click)="deletePhoto(3)"
+                mat-icon-button style="padding-right: 6px;">
+                <mat-icon *ngIf="model.photo3Url && model.photo3Url.indexOf('male.png') === -1" >delete</mat-icon>
               </button>
             </div>
             <input imageUpload (imageSelected)="imageSelected($event)" [resizeOptions]="resizeOptions" style="display: none;" type="file"

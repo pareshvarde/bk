@@ -160,12 +160,18 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
       (res) => {
         this.notificationService.success("Your photo has been uploaded.");
 
-        if (this.photoNumber === 1)
+        if (this.photoNumber === 1){
           document.getElementById('img1').setAttribute('src', content);
-        else if (this.photoNumber === 2)
+          this.model.photo1Url = content;
+        }
+        else if (this.photoNumber === 2){
           document.getElementById('img2').setAttribute('src', content);
-        else if (this.photoNumber === 3)
+          this.model.photo2Url = content;
+        }
+        else if (this.photoNumber === 3){
           document.getElementById('img3').setAttribute('src', content);
+          this.model.photo3Url = content;
+        }
       },
       (err) => {
         if (err.errors)
@@ -185,12 +191,18 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
         this.dataService.deleteMarimonyPhoto(this.memberId, photoNumber).takeUntil(this.destroyed$).subscribe(
           (res) => {
             this.notificationService.success("Photo has been deleted");
-            if (photoNumber === 1)
+            if (photoNumber === 1){
               document.getElementById('img1').setAttribute('src', res.result);
-            else if (photoNumber === 2)
+              this.model.photo1Url = res.result;
+            }
+            else if (photoNumber === 2){
               document.getElementById('img2').setAttribute('src', res.result);
-            else if (photoNumber === 3)
+              this.model.photo2Url = res.result;
+            }
+            else if (photoNumber === 3){
               document.getElementById('img3').setAttribute('src', res.result);
+              this.model.photo3Url = res.result;
+            }
           },
           (err) => {
             if (err.errors)
