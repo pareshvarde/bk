@@ -92,20 +92,20 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
   }
 
   addToFamily(memberModel: MemberModel) {
-
-    if (!memberModel.relatedMemberId || !memberModel.relationTypeId) {
-      this.confirmationService.create("Error", "Please provide relation", this.globalService.alertOptions);
-      return;
-    }
-
-    var relationType = '';
+    
+    var relationType = 'Unknown Relation';
     if (memberModel.relationTypeId) {
       var relation = RELATION_TYPES_DATA.filter(x => x.relationTypeId === memberModel.relationTypeId);
       if (relation && relation.length > 0)
         relationType = relation[0].relationType;
     }
 
-    return this.dataService.addMemberToFamily(this.familyModel.familyId, memberModel.memberId, memberModel.relatedMemberId, memberModel.relationTypeId, relationType).takeUntil(this.destroyed$).subscribe(
+    if (!memberModel.relatedMemberId){
+      memberModel.relatedMemberId = null;
+      memberModel.relationTypeId = null;
+    }
+
+    return this.dataService.addMemberToFamily({familyId: this.familyModel.familyId, memberId: memberModel.memberId, relatedId: memberModel.relatedMemberId, relationTypeId: memberModel.relationTypeId, relationType: relationType}).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.notificationService.success("Member is added to your family");
         this.router.navigate(['family', this.familyModel.familyId]);

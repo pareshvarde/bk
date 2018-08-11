@@ -238,9 +238,18 @@ namespace BK.Controllers
         }
 
         [Route("api/member/addtofamily")]
-        [HttpGet]
-        public IHttpActionResult AddToFamily(int familyId, int memberId, int relatedId, int relationTypeId, string relationType)
-        {
+        [HttpPost]
+        public IHttpActionResult AddToFamily(dynamic json)
+        {        
+            dynamic model = JsonConvert.DeserializeObject<ExpandoObject>(json.ToString());
+
+            int familyId = Convert.ToInt32(model.familyId);
+            int memberId = Convert.ToInt32(model.memberId);
+            string relationType = (string)model.relationType;
+            int? relatedId = (int?)model.relatedId;
+            int? relationTypeId = (int?)model.relationTypeId;
+                
+
             if (!CanEditFamily(familyId))
                 return BadRequest("You do not have permission to edit this family");
 
@@ -250,15 +259,19 @@ namespace BK.Controllers
                 if (member == null)
                     return BadRequest("Member cannot be located. Please try again later");
 
-                Member relatedMember = context.Members.Include(x => x.FamilyMemberAssociations).FirstOrDefault(x => x.MemberID == relatedId);
-                if (relatedMember == null)
-                    return BadRequest("Related member cannot be located. Please try again later");
+                Member relatedMember = null;
+                if (relatedId.HasValue)
+                {
+                    relatedMember = context.Members.Include(x => x.FamilyMemberAssociations).FirstOrDefault(x => x.MemberID == relatedId.Value);
+                    if (relatedMember == null)
+                        return BadRequest("Related member cannot be located. Please try again later");
+
+                    if (!relatedMember.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
+                        return BadRequest("Related member is not part of the family");
+                }
 
                 if (member.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
-                    return BadRequest("Member is already a part of selected family");
-
-                if (!relatedMember.FamilyMemberAssociations.Any(x => x.FamilyId == familyId))
-                    return BadRequest("Related member is not part of the family");
+                    return BadRequest("Member is already a part of selected family");                               
                 
                 bool autoApproval = CanEditMember(memberId);
 
@@ -285,7 +298,11 @@ namespace BK.Controllers
                     html = html.Replace("{{password}}", member.Password);
                     html = html.Replace("{{addedBy}}", LoggedInMemberName);
                     html = html.Replace("{{addedOn}}", fmAssociation.CreatedOn.Value.ToString("dddd, dd MMMM yyyy hh:mm tt"));
-                    html = html.Replace("{{relation}}", $"{relationType} {relatedMember.FirstName} {relatedMember.LastName}");
+
+                    if (relatedMember != null)
+                        html = html.Replace("{{relation}}", $"{relationType} {relatedMember.FirstName} {relatedMember.LastName}");
+                    else
+                        html = html.Replace("{{relation}}", "Unknown relationship");
 
                     System.Threading.Tasks.Task.Factory.StartNew(() =>
                     {
