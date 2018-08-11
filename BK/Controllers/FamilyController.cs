@@ -159,6 +159,9 @@ namespace BK.Controllers
                 if (!family.FamilyMemberAssociations.Any(x => x.MemberId == model.HeadOfFamilyID && x.Approved))
                     return BadRequest("Head Of family is not approved member of family");
 
+                if (context.Families.Any(x => x.FamilyID != model.FamilyID && x.HeadOfFamilyID == model.HeadOfFamilyID))
+                    return BadRequest("Selected Head Of Family is already a Head Of Family for another family. Please select other member as head of family.");                
+
                 family.FamilyNative = model.FamilyNative;
                 family.Address1 = model.Address1;
                 family.Address2 = model.Address2;
