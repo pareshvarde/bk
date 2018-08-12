@@ -32,9 +32,9 @@ namespace BK
             {
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/api/login"),
-                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(30),
                 Provider = new bkAuthorizationServerProvider(),
-                AccessTokenFormat = new bkTokenFormat("http://localhost:4200")
+                AccessTokenFormat = new bkTokenFormat("http://brahmkshatriya.net.in")
             };
 
             app.UseOAuthAuthorizationServer(OAuthServerOptions);                        
@@ -42,7 +42,7 @@ namespace BK
 
         private void ConfigureOAuthTokenConsumption(IAppBuilder app)
         {
-            var issuer = "http://localhost:4200";
+            var issuer = "http://brahmkshatriya.net.in";
             string audienceId = ConfigurationManager.AppSettings["as:AudienceId"];
             byte[] audienceSecret = TextEncodings.Base64Url.Decode
             (ConfigurationManager.AppSettings["as:AudienceSecret"]);

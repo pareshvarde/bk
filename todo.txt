@@ -5,7 +5,6 @@
     in Angular v7.	
 ===========================
 birthday/anniversary wish email
-Remember Me
 help icons on each page
 help videos
 ===========================	

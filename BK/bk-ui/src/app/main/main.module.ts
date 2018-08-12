@@ -48,7 +48,13 @@ import { TermsComponent } from './content/terms/terms.component';
 import { ExistingMemberAddComponent } from './content/member/existing-member-add.component';
 
 export function tokenGetter() {
-    return localStorage.getItem('token');
+    var token = null;
+    token = localStorage.getItem('token');
+
+    if (!token)
+        token = sessionStorage.getItem('token');
+
+    return token;
 }
 
 @NgModule({
