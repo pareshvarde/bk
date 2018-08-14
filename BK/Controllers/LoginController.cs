@@ -184,6 +184,22 @@ namespace BK.Controllers
             string phone = HttpContext.Current.Request.Params["phone"];
             string subject = HttpContext.Current.Request.Params["subject"];
             string content = HttpContext.Current.Request.Params["content"];
+
+            if (string.IsNullOrWhiteSpace(name))
+                return BadRequest("Please provide your name");
+
+            if (string.IsNullOrWhiteSpace(email))
+                return BadRequest("Please provide your email address");
+
+            if (string.IsNullOrWhiteSpace(phone))
+                return BadRequest("Please provide your phone number");
+
+            if (string.IsNullOrWhiteSpace(subject))
+                return BadRequest("Please provide subject for your feedback");
+
+            if (string.IsNullOrWhiteSpace(content))
+                return BadRequest("Please provide detail for your feedback");
+
             HttpPostedFile postedFile = null;
 
             if (HttpContext.Current.Request.Files.Count > 0)
