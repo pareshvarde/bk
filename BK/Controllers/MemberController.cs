@@ -156,13 +156,18 @@ namespace BK.Controllers
                     if (member == null)
                         return BadRequest("Member record cannot be loaded. Please try again or contact Administrator for help");
 
-                    if (member.EmailAddress != model.Email && member.LastLoginOn.HasValue)
+                    //if member record has email address and login was done no change in email address allowed
+                    if (!string.IsNullOrWhiteSpace(member.EmailAddress) && member.EmailAddress != model.Email && member.LastLoginOn.HasValue)
                         return BadRequest("You cannot change email address. Please contact Administrator for help");
 
                     member.ModifiedBy = LoggedInMemberId;
                     member.ModifiedOn = DateTime.Now;
 
+                    //if email was not available and later on provided
                     sendWelcomeLetter = string.IsNullOrWhiteSpace(member.EmailAddress) && !string.IsNullOrWhiteSpace(model.Email);
+
+                    if (!sendWelcomeLetter) //email changed and no earlier sign in attempt was made
+                        sendWelcomeLetter = !string.IsNullOrWhiteSpace(model.Email) && member.EmailAddress != model.Email && !member.LastLoginOn.HasValue;
                 }
                 else
                 {
