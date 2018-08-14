@@ -32,7 +32,6 @@ namespace BK.Context
         public bool Alive { get; set; }
         public Nullable<System.DateTime> DOD { get; set; }
         public string DeathPlace { get; set; }
-        public int MaritalStatusID { get; set; }
         public Nullable<System.DateTime> Anniversary { get; set; }
         public string EducationLevel { get; set; }
         public string EducationField { get; set; }
@@ -49,11 +48,12 @@ namespace BK.Context
         public Nullable<System.DateTime> LastLoginOn { get; set; }
         public Nullable<System.Guid> PasswordUID { get; set; }
         public bool Active { get; set; }
-        public string ProfileText { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public Nullable<int> CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public Nullable<int> ModifiedBy { get; set; }
+        public int MaritalStatusID { get; set; }
+        public string ProfileText { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Family> Families { get; set; }

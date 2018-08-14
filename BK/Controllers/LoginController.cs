@@ -45,6 +45,7 @@ namespace BK.Controllers
                 member.Phone = register.PhoneNumber;
                 member.AadhaarNumber = register.AadhaarNumber;
                 member.Gender = register.Gender;
+                member.MaritalStatusID = 2; //MARRIED
 
                 string tPassword = System.Web.Security.Membership.GeneratePassword(8, 0);
                 tPassword = Regex.Replace(tPassword, @"[^a-zA-Z0-9]", m => "9");
