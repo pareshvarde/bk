@@ -69,12 +69,13 @@ namespace BK.Controllers
 
         protected bool CanEditMember(int familyId, int memberId)
         {
-            using (bkContext context = new bkContext())
-            {
-                List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
+            return CanEditMember(memberId);
+            //using (bkContext context = new bkContext())
+            //{
+            //    List<FamilyMemberAssociation> fmAssociation = context.FamilyMemberAssociations.Where(x => x.FamilyId == familyId).ToList();
 
-                return CanEditMember(fmAssociation, memberId);
-            }
+            //    return CanEditMember(fmAssociation, memberId);
+            //}
         }
 
         protected bool CanEditMember(int memberId)
@@ -91,22 +92,22 @@ namespace BK.Controllers
 
         protected bool CanEditMember(List<FamilyMemberAssociation> fAssociations, int memberId)
         {
-            bool iCreatedFamily = false;
-            bool iCreatedMember = false;
+            return CanEditMember(memberId);
+            //bool iCreatedFamily = false;
+            //bool iCreatedMember = false;
 
-            using (bkContext context = new bkContext())
-            {
-                iCreatedMember = context.Members.Any(x => x.MemberID == memberId && x.CreatedBy == LoggedInMemberId);
-                iCreatedFamily = fAssociations.FirstOrDefault().Family.CreatedBy == LoggedInMemberId;
-            }
+            //using (bkContext context = new bkContext())
+            //{
+            //    iCreatedMember = context.Members.Any(x => x.MemberID == memberId && x.CreatedBy == LoggedInMemberId);
+            //    iCreatedFamily = fAssociations.FirstOrDefault().Family.CreatedBy == LoggedInMemberId;
+            //}
 
+            //bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId) &&
+            //           fAssociations.Any(x => x.MemberId == memberId && (x.MemberId == LoggedInMemberId || x.Approved));
 
-            bool canEdit = fAssociations.Any(x => x.MemberId == LoggedInMemberId) &&
-                       fAssociations.Any(x => x.MemberId == memberId && (x.MemberId == LoggedInMemberId || x.Approved));
+            //canEdit = canEdit || (iCreatedMember && iCreatedFamily);
 
-            canEdit = canEdit || (iCreatedMember && iCreatedFamily);
-
-            return canEdit;
+            //return canEdit;
         }
     }
 }
