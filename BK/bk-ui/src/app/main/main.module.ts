@@ -49,10 +49,7 @@ import { ExistingMemberAddComponent } from './content/member/existing-member-add
 
 export function tokenGetter() {
     var token = null;
-    token = localStorage.getItem('token');
-
-    if (!token)
-        token = sessionStorage.getItem('token');
+    token = localStorage.getItem('token');    
 
     return token;
 }

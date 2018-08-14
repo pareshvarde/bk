@@ -45,8 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return;
     }
           
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');    
 
     let emailValue = this.loginForm.controls.email.value;
     let passwordValue = this.loginForm.controls.password.value;    
@@ -55,10 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.dataService.login(emailValue, passwordValue).takeUntil(this.destroyed$).subscribe(
       (res) =>{              
         let result = JSON.parse((<any>res)._body)        
-        if (remember)
-          localStorage.setItem('token', result.access_token);
-        else
-          sessionStorage.setItem('token', result.access_token);
+        localStorage.setItem('token', result.access_token);        
 
         this.globalService.setAvatarUrl();
         this.loadFamily();

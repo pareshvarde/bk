@@ -9,10 +9,7 @@ export class bkAuthService {
   jwtHelper: JwtHelperService = new JwtHelperService();
   
   authenticated(): boolean {
-    var token = localStorage.getItem('token');
-
-    if (!token)
-      token = sessionStorage.getItem('token');
+    var token = localStorage.getItem('token');    
     
     if (!token)
       return null;
@@ -21,16 +18,12 @@ export class bkAuthService {
   }
 
   logout(){    
-    localStorage.removeItem('token');
-    sessionStorage.removeItem('token');
+    localStorage.removeItem('token');    
     this.router.navigate(['home']);  
   }
 
   memberId(): number {
     var token = localStorage.getItem('token');
-
-    if (!token)
-      token = sessionStorage.getItem('token');
 
     if (!token)
       return null;
@@ -40,10 +33,7 @@ export class bkAuthService {
   }
 
   name(): string {
-    var token = localStorage.getItem('token');
-    
-    if (!token)
-      token = sessionStorage.getItem('token');
+    var token = localStorage.getItem('token');      
 
     if (!token)
       return null;
