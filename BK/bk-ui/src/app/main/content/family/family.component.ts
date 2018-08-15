@@ -115,11 +115,13 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
           if (x.matrimonialExists)
             return true;
 
-          if (x.maritalStatusId != 2 && x.gender == false && x.alive && x.age > 17)
-            return true;
+          if (this.model.canEdit) {
+            if (x.maritalStatusId != 2 && x.gender == false && x.alive && x.age > 17)
+              return true;
 
-          if (x.maritalStatusId != 2 && x.gender == true && x.alive && x.age > 20)
-            return true;
+            if (x.maritalStatusId != 2 && x.gender == true && x.alive && x.age > 20)
+              return true;
+          }
         }));
 
       },
