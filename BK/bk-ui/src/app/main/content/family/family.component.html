@@ -220,8 +220,9 @@
                 <b>Paternal Family</b>
               </mat-header-cell>
               <mat-cell *matCellDef="let member">
-                <a *ngIf="member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
-                <span *ngIf="!member.paternalFamilyId && member.maritalStatusId > 1 && !member.gender">Not Available</span>
+                <a *ngIf="member.paternalFamilyId && familyId != member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
+                <span *ngIf="member.paternalFamilyId && familyId == member.paternalFamilyId">{{member.paternalFamilyName}}</span>
+                <span *ngIf="!member.paternalFamilyId">Not Available</span>
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="actions">
@@ -260,8 +261,9 @@
               <a *ngIf="member.maternalFamilyId" [routerLink]="['/family/', member.maternalFamilyId]">{{member.maternalFamilyName}}</a>
               <span *ngIf="!member.maternalFamilyId">Not Available</span>
             </div>
-            <div *ngIf="member.maritalStatusId > 1 && !member.gender" fxLayout="row wrap">Paternal Family:&nbsp;
-              <a *ngIf="member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
+            <div fxLayout="row wrap">Paternal Family:&nbsp;
+              <a *ngIf="member.paternalFamilyId && familyId != member.paternalFamilyId" [routerLink]="['/family/', member.paternalFamilyId]">{{member.paternalFamilyName}}</a>
+              <span *ngIf="member.paternalFamilyId && familyId == member.paternalFamilyId">{{member.paternalFamilyName}}</span>
               <span *ngIf="!member.paternalFamilyId">Not Available</span>
             </div>
             <div fxLayout="row wrap" fxLayoutAlign="end start">

@@ -242,8 +242,9 @@
                 <a *ngIf="memberModel.maternalFamilyId" [routerLink]="['/family/', memberModel.maternalFamilyId]">{{memberModel.maternalFamilyName}}</a>
                 <span *ngIf="!memberModel.maternalFamilyId">Not Available</span>
               </div>
-              <div *ngIf="memberModel.maritalStatusId > 1 && !memberModel.gender" fxLayout="row wrap" class="secondary-text" style="font-size: 12px;">Paternal Family:&nbsp;
-                <a *ngIf="memberModel.paternalFamilyId" [routerLink]="['/family/', memberModel.paternalFamilyId]">{{memberModel.paternalFamilyName}}</a>
+              <div fxLayout="row wrap" class="secondary-text" style="font-size: 12px;">Paternal Family:&nbsp;
+                <a *ngIf="memberModel.paternalFamilyId && familyId != memberModel.paternalFamilyId" [routerLink]="['/family/', memberModel.paternalFamilyId]">{{memberModel.paternalFamilyName}}</a>
+                <span *ngIf="memberModel.paternalFamilyId && familyId == memberModel.paternalFamilyId">{{memberModel.paternalFamilyName}}</span>
                 <span *ngIf="!memberModel.paternalFamilyId">Not Available</span>
               </div>
             </div>
