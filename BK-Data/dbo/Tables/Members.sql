@@ -9,7 +9,6 @@
     [Alive]           BIT              CONSTRAINT [DF_Members_Alive] DEFAULT ((1)) NOT NULL,
     [DOD]             DATETIME2 (7)    NULL,
     [DeathPlace]      NVARCHAR (50)    NULL,
-    [MaritalStatusID] INT              CONSTRAINT [DF_Members_MaritalStatusID] DEFAULT ((1)) NOT NULL,
     [Anniversary]     DATETIME2 (7)    NULL,
     [EducationLevel]  NVARCHAR (50)    NULL,
     [EducationField]  NVARCHAR (50)    NULL,
@@ -26,13 +25,16 @@
     [LastLoginOn]     DATETIME2 (7)    NULL,
     [PasswordUID]     UNIQUEIDENTIFIER NULL,
     [Active]          BIT              CONSTRAINT [DF_Members_Active] DEFAULT ((1)) NOT NULL,
-    [ProfileText]     NVARCHAR (100)   NULL,
     [CreatedOn]       DATETIME2 (7)    CONSTRAINT [DF_FamilyMembers_CreatedOn] DEFAULT (getdate()) NULL,
     [CreatedBy]       INT              NULL,
     [ModifiedOn]      DATETIME2 (7)    NULL,
     [ModifiedBy]      INT              NULL,
+    [MaritalStatusID] INT              CONSTRAINT [DF__Members__Marital__74AE54BC] DEFAULT ((2)) NOT NULL,
+    [ProfileText]     NVARCHAR (100)   NULL,
     CONSTRAINT [PK_FamilyMembers_1] PRIMARY KEY CLUSTERED ([MemberID] ASC)
 );
+
+
 
 
 
