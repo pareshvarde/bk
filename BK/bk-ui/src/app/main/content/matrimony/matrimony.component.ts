@@ -111,6 +111,13 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     return this.dataService.getMemberLookup(this.memberId).takeUntil(this.destroyed$).subscribe(
       (res) => {
         this.memberModel = res.result;
+
+        if (this.addMode){
+          if (this.memberModel.gender)
+            this.model.photo1Url = this.model.photo2Url = this.model.photo3Url = 'images/profiles/male.png';        
+          else
+            this.model.photo1Url = this.model.photo2Url = this.model.photo3Url = 'images/profiles/female.png';        
+        }
       },
       (err) => {
         if (err.errors)
