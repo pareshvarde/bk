@@ -110,6 +110,7 @@ namespace BK.Controllers
                         tmp.RelatedToName = $"{item.rFirstName} {item.rLastName}";
 
                     tmp.RelationTypeId = item.RelationTypeId;
+                    tmp.DefaultFamilyId = item.DefaultFamilyId;
 
                     fvm.Members.Add(tmp);
                 }

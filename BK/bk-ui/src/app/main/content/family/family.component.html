@@ -183,6 +183,11 @@
               </mat-header-cell>
               <mat-cell *matCellDef="let member">
                 <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
+                <a *ngIf="member.defaultFamilyId && member.defaultFamilyId != this.familyId" [routerLink]="['/family', member.defaultFamilyId]">
+                  <button matTooltip="View Default Family" mat-icon-button>
+                    <mat-icon>group</mat-icon>
+                  </button>
+                </a>
               </mat-cell>
             </ng-container>
             <ng-container matColumnDef="age">
@@ -245,6 +250,11 @@
             <div fxLayout="row wrap">ID:&nbsp;{{member.memberId}}</div>
             <div fxLayout="row wrap">Name:&nbsp;
               <a [routerLink]="['/member/', this.familyId, member.memberId]">{{member.name}}</a>
+              <a class="mobileDefaultFamilyLink" *ngIf="member.defaultFamilyId && member.defaultFamilyId != this.familyId" [routerLink]="['/family', member.defaultFamilyId]">
+                <button matTooltip="View Default Family" mat-icon-button>
+                  <mat-icon>group</mat-icon>
+                </button>
+              </a>
             </div>
             <div fxLayout="row wrap">Age:&nbsp;
               <span *ngIf="member.age > 0">{{member.age}} Years</span>

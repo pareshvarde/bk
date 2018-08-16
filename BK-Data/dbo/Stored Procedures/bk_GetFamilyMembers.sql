@@ -24,13 +24,14 @@ BEGIN
 		maternal.MaternalFamilyID MaternalFamilyId,
 		maternal.MaternalFamilyName MaternalFamilyName,
 		maternal.MaternalFamilyAddress MaternalFamilyAddress,
-		CAST(CASE WHEN mat.MemberID IS NOT NULL THEN 1 ELSE 0 END AS BIT) AS MatrimonialExists		
+		CAST(CASE WHEN mat.MemberID IS NOT NULL THEN 1 ELSE 0 END AS BIT) AS MatrimonialExists,
+		defaultFamily.DefaultFamilyId DefaultFamilyId
 	FROM
 		Members m 
 		JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID
 		JOIN Families f ON f.FamilyID = fma.FamilyId		
 		LEFT JOIN Members lkm ON lkm.MemberID = fma.RelatedId
-		LEFT JOIN Matrimonials mat ON mat.MemberID = m.MemberID		
+		LEFT JOIN Matrimonials mat ON mat.MemberID = m.MemberID
 		OUTER APPLY
 		(
 			SELECT TOP 1
@@ -45,6 +46,15 @@ BEGIN
 			FROM	
 				GetMaternalFamily(m.MemberID)
 		) maternal
+		OUTER APPLY
+		(
+			SELECT TOP 1 
+				tfma.FamilyId DefaultFamilyId
+			FROM
+				FamilyMemberAssociation tfma 
+			WHERE	
+				tfma.MemberId = m.MemberId and tfma.DefaultFamily = 1
+		) defaultFamily
 	WHERE
 		fma.FamilyId = @FamilyID
 END

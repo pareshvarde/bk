@@ -120,6 +120,9 @@ namespace BK.ViewModel
         [JsonProperty("maternalFamilyName")]
         public string MaternalFamilyName { get; set; }
 
+        [JsonProperty("defaultFamilyId")]
+        public int? DefaultFamilyId { get; set; }
+
         [JsonProperty("age")]
         public int Age
         {

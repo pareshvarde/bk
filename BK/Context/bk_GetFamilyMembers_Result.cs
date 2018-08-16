@@ -32,5 +32,6 @@ namespace BK.Context
         public string MaternalFamilyName { get; set; }
         public string MaternalFamilyAddress { get; set; }
         public Nullable<bool> MatrimonialExists { get; set; }
+        public Nullable<int> DefaultFamilyId { get; set; }
     }
 }

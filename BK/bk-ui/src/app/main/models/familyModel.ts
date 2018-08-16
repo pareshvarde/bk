@@ -46,5 +46,6 @@ export class FamilyMemberModel{
     maternalFamilyId: number;
     maternalFamilyName: string;    
     matrimonialExists: boolean;
+    defaultFamilyId: number;
     age: number;
 }
