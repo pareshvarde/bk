@@ -26,3 +26,7 @@ Audits
 	--family with members with no relation count more than 1 (top level person don't show relation)
 	--pending approvals
 	--eligible for matrimony but no matrimony profile exists
+	
+clean up
+	--remove need of gender and marital status for paternal family
+	--canedit member should not require family 
