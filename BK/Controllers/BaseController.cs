@@ -49,6 +49,9 @@ namespace BK.Controllers
 
         protected bool CanEditFamily(int familyId)
         {
+            if (LoggedInMemberId == 0)
+                return true;
+
             using (bkContext context = new bkContext())
             {
                 Family family = context.Families.Where(x => x.FamilyID == familyId).FirstOrDefault();
@@ -59,6 +62,9 @@ namespace BK.Controllers
 
         protected bool CanEditFamily(Family family)
         {
+            if (LoggedInMemberId == 0)
+                return true;
+
             using (bkContext context = new bkContext())
             {
                 bool canEdit = family.FamilyMemberAssociations.Any(x => x.MemberId == LoggedInMemberId) || family.CreatedBy == LoggedInMemberId;
@@ -69,6 +75,9 @@ namespace BK.Controllers
 
         protected bool CanEditMember(int familyId, int memberId)
         {
+            if (LoggedInMemberId == 0)
+                return true;
+
             return CanEditMember(memberId);
             //using (bkContext context = new bkContext())
             //{
@@ -80,6 +89,9 @@ namespace BK.Controllers
 
         protected bool CanEditMember(int memberId)
         {
+            if (LoggedInMemberId == 0)
+                return true;
+
             using (bkContext context = new bkContext())
             {
                 bool iCreatedMember = context.Members.Any(x => x.MemberID == memberId && x.CreatedBy == LoggedInMemberId);
@@ -92,6 +104,9 @@ namespace BK.Controllers
 
         protected bool CanEditMember(List<FamilyMemberAssociation> fAssociations, int memberId)
         {
+            if (LoggedInMemberId == 0)
+                return true;
+
             return CanEditMember(memberId);
             //bool iCreatedFamily = false;
             //bool iCreatedMember = false;
