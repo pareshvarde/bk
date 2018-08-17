@@ -49,7 +49,7 @@ namespace BK.Controllers
 
         protected bool CanEditFamily(int familyId)
         {
-            if (LoggedInMemberId == 0)
+            if (LoggedInMemberId == -1)
                 return true;
 
             using (bkContext context = new bkContext())
@@ -62,7 +62,7 @@ namespace BK.Controllers
 
         protected bool CanEditFamily(Family family)
         {
-            if (LoggedInMemberId == 0)
+            if (LoggedInMemberId == -1)
                 return true;
 
             using (bkContext context = new bkContext())
@@ -75,7 +75,7 @@ namespace BK.Controllers
 
         protected bool CanEditMember(int familyId, int memberId)
         {
-            if (LoggedInMemberId == 0)
+            if (LoggedInMemberId == -1)
                 return true;
 
             return CanEditMember(memberId);
@@ -89,7 +89,7 @@ namespace BK.Controllers
 
         protected bool CanEditMember(int memberId)
         {
-            if (LoggedInMemberId == 0)
+            if (LoggedInMemberId == -1)
                 return true;
 
             using (bkContext context = new bkContext())
@@ -104,7 +104,7 @@ namespace BK.Controllers
 
         protected bool CanEditMember(List<FamilyMemberAssociation> fAssociations, int memberId)
         {
-            if (LoggedInMemberId == 0)
+            if (LoggedInMemberId == -1)
                 return true;
 
             return CanEditMember(memberId);

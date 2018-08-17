@@ -23,7 +23,7 @@ namespace BK.Filters
                 ClaimsPrincipal principal = actionContext.Request.GetRequestContext().Principal as ClaimsPrincipal;
                 int memberId = Convert.ToInt32(principal.Claims.Where(c => c.Type == "memberId").Single().Value);
 
-                if (memberId == 0)
+                if (memberId == -1)
                     return;
 
                 using (bkContext context = new bkContext())

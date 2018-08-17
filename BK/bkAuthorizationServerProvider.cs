@@ -69,7 +69,7 @@ namespace BK
             }
             else if (isAdmin)
             {
-                identity.AddClaim(new Claim("memberId", "0", ClaimValueTypes.Integer));
+                identity.AddClaim(new Claim("memberId", "-1", ClaimValueTypes.Integer));
                 identity.AddClaim(new Claim("name", "Administrator"));
                 identity.AddClaim(new Claim("fullname", "System Administrator"));
             }
