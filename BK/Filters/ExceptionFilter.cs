@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http.Filters;
 
@@ -16,7 +17,10 @@ namespace BK.Filters
             if (actionExecutedContext.Exception.InnerException == null)            
                 exceptionMessage = actionExecutedContext.Exception.Message;            
             else            
-                exceptionMessage = actionExecutedContext.Exception.InnerException.Message;            
+                exceptionMessage = actionExecutedContext.Exception.InnerException.Message;
+
+            int memberId = GetLoggedInMemberId(actionExecutedContext);
+            actionExecutedContext.Exception.Data.Add("MemberID", memberId);
 
             //log this exception message 
             AppLogger.LogException(actionExecutedContext.Exception);
@@ -27,6 +31,19 @@ namespace BK.Filters
                 ReasonPhrase = exceptionMessage
             };
             actionExecutedContext.Response = response;
+        }
+
+        private int GetLoggedInMemberId(HttpActionExecutedContext actionExecutedContext)
+        {
+            try
+            {
+                ClaimsPrincipal principal = actionExecutedContext.Request.GetRequestContext().Principal as ClaimsPrincipal;
+                return Convert.ToInt32(principal.Claims.Where(c => c.Type == "memberId").Single().Value);
+            }
+            catch
+            {
+                return 0;
+            }
         }
     }
 }
