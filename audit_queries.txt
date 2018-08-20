@@ -1,0 +1,47 @@
+--families without members
+select 
+	F.FamilyId
+from 
+	Families f
+	OUTER APPLY
+	(	
+		SELECT TOP 1 FamilyId FROM FamilyMemberAssociation tfma WHERE tfma.FamilyId = f.FamilyID
+	) fma
+WHERE
+	fma.FamilyID IS NULL
+
+--members without family
+select 
+	m.MemberId
+from 
+	Members m
+	OUTER APPLY
+	(	
+		SELECT TOP 1 FamilyId FROM FamilyMemberAssociation tfma WHERE tfma.MemberId = m.MemberId
+	) fma
+WHERE
+	fma.FamilyID IS NULL
+
+--members without any default family
+select 
+	m.memberID
+FROM
+	members m
+	OUTER APPLY
+	(	
+		SELECT TOP 1 FamilyId FROM FamilyMemberAssociation tfma WHERE tfma.MemberId = m.MemberId AND DefaultFamily = 1 
+	) fma
+WHERE
+	fma.FamilyID IS NULL
+
+--families without head of family	
+select 
+	F.FamilyId
+from 
+	Families f
+	OUTER APPLY
+	(	
+		SELECT TOP 1 MemberID FROM Members tm WHERE tm.MemberID = f.HeadOfFamilyID				
+	) fma
+WHERE
+	fma.MemberID IS NULL
