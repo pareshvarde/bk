@@ -6,5 +6,6 @@ export const OCCUPATIONS_DATA:any[] =
     {id:4, occupation: 'Private Sector Job'},    
     {id:5, occupation: 'Public Sector Job'},           
     {id:6, occupation: 'Looking For Job'},    
-    {id:7, occupation: 'House Maker'}
+    {id:7, occupation: 'House Maker'},
+    {id:8, occupation: 'Retired'}
 ];
