@@ -138,5 +138,6 @@ export const NUKHS_LOOKUP_DATA: any[] =
     { id: 136, nukh: 'Vijniya' },
     { id: 137, nukh: 'Vinchhi' },
     { id: 138, nukh: 'Wamawadha' },
-    { id: 139, nukh: 'Warde' }
+    { id: 139, nukh: 'Warde' },
+    { id: 200, nukh: 'Other' }
 ];

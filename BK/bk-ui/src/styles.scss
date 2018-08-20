@@ -19,3 +19,11 @@ input[type=number]::-webkit-outer-spin-button {
     appearance: none;
     margin: 0; 
 }
+
+.mat-input-element:disabled {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-select-disabled .mat-select-value {
+    color: rgba(0, 0, 0, 0.87);
+}
