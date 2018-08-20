@@ -45,3 +45,16 @@ from
 	) fma
 WHERE
 	fma.MemberID IS NULL
+	
+--matrimony without correct status (alive, adult, single, dob)
+SELECT
+	m.MemberID
+FROM
+	Members m
+	JOIN Matrimonials mat on mat.memberid = m.memberid
+WHERE
+	m.Alive = 0
+	OR m.MaritalStatusId = 2
+	OR m.DOB IS NULL
+	OR (m.Gender = 1 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, '1982-10-15', GETDATE())/12 < 21) 
+	OR (m.Gender = 0 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, '1982-10-15', GETDATE())/12 < 18)
