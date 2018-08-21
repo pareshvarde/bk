@@ -56,5 +56,44 @@ WHERE
 	m.Alive = 0
 	OR m.MaritalStatusId = 2
 	OR m.DOB IS NULL
-	OR (m.Gender = 1 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, '1982-10-15', GETDATE())/12 < 21) 
-	OR (m.Gender = 0 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, '1982-10-15', GETDATE())/12 < 18)
+	OR (m.Gender = 1 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, m.DOB, GETDATE())/12 < 21) 
+	OR (m.Gender = 0 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, m.DOB, GETDATE())/12 < 18)
+
+--family with members with no relation count more than 1 (top level person don't show relation)
+SELECT 
+	f.FamilyId
+FROM
+	Families f
+	JOIN FamilyMemberAssociation fma ON fma.FamilyID = f.FamilyID
+WHERE
+	fma.RelatedId IS NULL
+	OR RelationTypeId IS NULL
+GROUP BY
+	f.FamilyID
+HAVING
+	COUNT(f.FamilyID) > 1
+	
+--pending approvals
+SELECT 
+	FamilyId, MemberId
+FROM 
+	FamilyMemberAssociation
+WHERE
+	Approved = 0
+	
+--eligible for matrimony but no matrimony profile exists
+SELECT
+	fma.FamilyID,
+	m.MemberID
+FROM
+	Members m
+	JOIN FamilyMemberAssociation fma ON fma.MemberID = m.MemberId
+	OUTER APPLY (SELECT MemberID from Matrimonials tmat WHERE tmat.MemberID = m.MemberID) mat	
+WHERE
+	m.Alive = 1
+	AND m.MaritalStatusId <> 2
+	AND m.DOB IS NOT NULL
+	AND ((m.Gender = 1 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, m.DOB, GETDATE())/12 > 20) OR 
+	(m.Gender = 0 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, m.DOB, GETDATE())/12 > 17))
+	AND mat.MemberID IS NULL
+
