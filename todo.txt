@@ -10,7 +10,6 @@ help videos
 ===========================	
 don't use function calls in html which creates a multiple calls, use properties instead (member, fork, existing member add)
 photo orienatation
-redirect url
 =============================
 angular memory and performance analyser
 sql query performance and indexes
