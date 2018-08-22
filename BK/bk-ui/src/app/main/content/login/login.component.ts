@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ReplaySubject } from 'rxjs';
 import { bkAuthService } from '../../services/auth-service';
 import { GlobalService } from '../../services/global-service';
@@ -16,8 +16,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private destroyed$: ReplaySubject<boolean> = new ReplaySubject(1);
   loginForm: FormGroup;  
+  returnUrl:string;
 
-  constructor(private router: Router, private dataService: bkDataService, private globalService: GlobalService,
+  constructor(private router: Router, private route: ActivatedRoute, private dataService: bkDataService, private globalService: GlobalService,
     private confirmationService: ConfirmationService,  private authService: bkAuthService) 
   { 
    
@@ -29,6 +30,8 @@ export class LoginComponent implements OnInit, OnDestroy {
       password: new FormControl('', Validators.required),
       rememberMe: new FormControl(false, null)
     });       
+    
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
   }
 
   ngOnDestroy() {
@@ -57,7 +60,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         localStorage.setItem('token', result.access_token);        
 
         this.globalService.setAvatarUrl();
-        this.loadFamily();
+        
+        if (this.returnUrl)
+          this.router.navigate([this.returnUrl]);
+        else
+          this.loadFamily();
       },
       (err) =>{                  
         this.loginForm.reset();
@@ -73,7 +80,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   loadFamily(){
     this.dataService.getDefaultFamily(this.authService.memberId()).takeUntil(this.destroyed$).subscribe(
-      (res) => {
+      (res) => {        
         this.router.navigate(['family', res.result])
       },
       (err) => {
