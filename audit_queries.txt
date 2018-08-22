@@ -22,6 +22,21 @@ from
 WHERE
 	fma.FamilyID IS NULL
 
+--families with single member
+SELECT
+	FamilyId
+FROM
+	Families f 
+	CROSS APPLY (
+		SELECT COUNT(tfma.MemberId) MemberCount
+		FROM
+			FamilyMemberAssociation tfma
+		WHERE
+			tfma.FamilyId = f.FamilyId
+	) fma
+WHERE
+	fma.MemberCount = 1
+	
 --members without any default family
 select 
 	m.memberID
