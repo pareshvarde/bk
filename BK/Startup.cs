@@ -10,6 +10,8 @@ using System.Configuration;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security;
+using FluentScheduler;
+using BK.Jobs;
 
 [assembly: OwinStartup(typeof(BK.Startup))]
 namespace BK
@@ -24,6 +26,8 @@ namespace BK
             WebApiConfig.Register(config);  
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
+
+            JobManager.Initialize(new bkJobRegistry());
         }
 
         public void ConfigureOAuth(IAppBuilder app)
