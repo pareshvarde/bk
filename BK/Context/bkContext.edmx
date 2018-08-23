@@ -169,6 +169,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="bk_AuditReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="bk_DeleteFamily" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FamilyID" Type="int" Mode="In" />
         </Function>
@@ -352,8 +353,9 @@
             <End Role="Matrimonial" EntitySet="Matrimonials" />
           </AssociationSet>
           <FunctionImport Name="bk_GetFamilyMembers" ReturnType="Collection(bkModel.bk_GetFamilyMembers_Result)">
-            <Parameter Name="FamilyID" Mode="In" Type="Int32" />
+          <Parameter Name="FamilyID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="bk_AuditReport" ReturnType="Collection(bkModel.bk_AuditReport_Result)" />
           </EntityContainer>
         <EntityType Name="Family">
           <Key>
@@ -609,6 +611,11 @@
           <Property Type="Boolean" Name="MatrimonialExists" Nullable="true" />
           <Property Type="Int32" Name="DefaultFamilyId" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="bk_AuditReport_Result">
+          <Property Type="Int32" Name="FamilyId" Nullable="true" />
+          <Property Type="Int32" Name="MemberId" Nullable="true" />
+          <Property Type="Int32" Name="AuditType" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -825,6 +832,15 @@
                 <ScalarProperty Name="MaternalFamilyAddress" ColumnName="MaternalFamilyAddress" />
                 <ScalarProperty Name="MatrimonialExists" ColumnName="MatrimonialExists" />
                 <ScalarProperty Name="DefaultFamilyId" ColumnName="DefaultFamilyId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="bk_AuditReport" FunctionName="bkModel.Store.bk_AuditReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bkModel.bk_AuditReport_Result">
+                <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="AuditType" ColumnName="AuditType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

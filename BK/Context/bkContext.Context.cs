@@ -225,5 +225,10 @@ namespace BK.Context
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_GetFamilyMembers_Result>("bk_GetFamilyMembers", familyIDParameter);
         }
+    
+        public virtual ObjectResult<bk_AuditReport_Result> bk_AuditReport()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<bk_AuditReport_Result>("bk_AuditReport");
+        }
     }
 }
