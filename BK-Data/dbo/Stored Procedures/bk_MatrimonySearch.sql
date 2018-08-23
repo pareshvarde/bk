@@ -33,7 +33,7 @@ BEGIN
 		SET @CurrentPage = 1
 
 	IF (@SortOrder IS NULL)
-		SET @SortOrder = 'memberid asc'	
+		SET @SortOrder = 'createdon desc'	
 
 	SELECT @FirstRecord = (@CurrentPage - 1) * @PageSize
 	SELECT @LastRecord = (@CurrentPage * @PageSize + 1);
@@ -46,8 +46,8 @@ BEGIN
 				CASE WHEN @sortOrder = 'city desc' then f.City END DESC,	
 				CASE WHEN @sortOrder = 'state asc' then f.State END ASC,				
 				CASE WHEN @sortOrder = 'state desc' then f.State END DESC,	
-				CASE WHEN @sortOrder = 'createdon asc' then m.MemberID END ASC,
-				CASE WHEN @sortOrder = 'createdon desc' then m.MemberID END DESC,				
+				CASE WHEN @sortOrder = 'createdon asc' then mat.CreatedOn END ASC,
+				CASE WHEN @sortOrder = 'createdon desc' then mat.CreatedOn END DESC,				
 				CASE WHEN @sortOrder = 'income asc' then mat.MonthlyIncome END ASC,
 				CASE WHEN @sortOrder = 'income desc' then mat.MonthlyIncome END DESC,				
 				CASE WHEN @sortOrder = 'dob asc' then m.DOB END ASC,

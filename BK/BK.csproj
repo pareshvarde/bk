@@ -206,6 +206,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>bkContext.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Context\bk_AuditReport_Result.cs">
+      <DependentUpon>bkContext.tt</DependentUpon>
+    </Compile>
     <Compile Include="Context\bk_GetFamilyMembers_Result.cs">
       <DependentUpon>bkContext.tt</DependentUpon>
     </Compile>

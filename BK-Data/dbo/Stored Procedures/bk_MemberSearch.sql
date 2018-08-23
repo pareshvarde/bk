@@ -29,7 +29,7 @@ BEGIN
 	DECLARE @LastRecord INT
 	
 	IF (@SortOrder IS NULL)
-		SET @SortOrder = 'memberid asc'	
+		SET @SortOrder = 'memberid desc'	
 
 	IF (@PageSize IS NULL)
 		SET @PageSize = 50
@@ -70,11 +70,11 @@ BEGIN
 			JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID AND fma.DefaultFamily = 1
 			JOIN Families f ON f.FamilyID = fma.FamilyId		
 		WHERE
-			(@FirstName IS NULL OR m.FirstName = @FirstName)
-			AND (@LastName IS NULL OR m.LastName = @LastName)
+			(@FirstName IS NULL OR m.FirstName LIKE @FirstName + '%')
+			AND (@LastName IS NULL OR m.LastName LIKE @LastName + '%')
 			AND (@CategoryID IS NULL OR f.CategoryID = @CategoryID)
 			AND (@NukhID IS NULL OR f.NukhID = @NukhID)
-			AND (@City IS NULL OR f.City = @City)
+			AND (@City IS NULL OR f.City LIKE @City + '%')
 			AND (@District IS NULL OR f.District = @District)
 			AND (@State IS NULL OR f.State = @State)
 			AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)
@@ -100,11 +100,11 @@ BEGIN
 		JOIN FamilyMemberAssociation fma ON fma.MemberId = m.MemberID AND fma.DefaultFamily = 1
 		JOIN Families f ON f.FamilyID = fma.FamilyId		
 	WHERE
-		(@FirstName IS NULL OR m.FirstName = @FirstName)
-		AND (@LastName IS NULL OR m.LastName = @LastName)
+		(@FirstName IS NULL OR m.FirstName LIKE @FirstName + '%')
+		AND (@LastName IS NULL OR m.LastName LIKE @LastName + '%')
 		AND (@CategoryID IS NULL OR f.CategoryID = @CategoryID)
 		AND (@NukhID IS NULL OR f.NukhID = @NukhID)
-		AND (@City IS NULL OR f.City = @City)
+		AND (@City IS NULL OR f.City LIKE @City + '%')
 		AND (@District IS NULL OR f.District = @District)
 		AND (@State IS NULL OR f.State = @State)
 		AND (@EmailAddress IS NULL OR m.EmailAddress = @EmailAddress)

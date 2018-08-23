@@ -77,5 +77,6 @@
     <Build Include="dbo\Stored Procedures\bk_MatrimonySearch.sql" />
     <Build Include="dbo\Functions\GetPaternalFamily.sql" />
     <Build Include="dbo\Functions\GetMaternalFamily.sql" />
+    <Build Include="dbo\Stored Procedures\bk_AuditReport.sql" />
   </ItemGroup>
 </Project>
