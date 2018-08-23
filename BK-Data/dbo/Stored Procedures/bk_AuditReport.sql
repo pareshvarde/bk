@@ -132,6 +132,17 @@ BEGIN
 			AND ((m.Gender = 1 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, m.DOB, GETDATE())/12 > 20) OR 
 			(m.Gender = 0 AND m.DOB IS NOT NULL AND DATEDIFF(MONTH, m.DOB, GETDATE())/12 > 17))
 			AND mat.MemberID IS NULL
+
+	--alive members withotu dob
+	INSERT INTO @Result (MemberId, AuditType)
+		SELECT
+			MemberId,
+			10
+		FROM
+			Members m
+		WHERE
+			m.Alive = 1
+			AND m.DOB IS NULL
 	
 	SELECT *FROM @Result
 END

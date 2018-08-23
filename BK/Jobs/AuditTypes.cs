@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace BK.Jobs
+{
+    public enum AuditTypes
+    {
+        FamilyWithoutMember,
+        MemberWithoutFamily,
+        FamilyWithSingleMember,
+        MemberWithoutDefaultFamily,
+        FamilyWithoutHOF,
+        InvalidMatrimony,
+        FamilyWithMissingRelation,
+        PendingApproval,
+        EligibleMatrimony,
+        AliveWithoutDOB
+    }
+}

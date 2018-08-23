@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Hosting;
+using BK.Context;
 
 namespace BK.Jobs
 {
@@ -52,6 +53,25 @@ namespace BK.Jobs
 
         private void GenerateAudit()
         {
+            List<bk_AuditReport_Result> result = null;
+
+            using (bkContext context = new bkContext())
+            {
+                result = context.bk_AuditReport().ToList();
+            }
+
+            if (result == null)
+                return;
+
+            var tResult = result.Where(x => x.AuditType == (int)AuditTypes.AliveWithoutDOB).ToList();
+            if (tResult != null && tResult.Count > 0)
+            {
+                
+            }
+            else
+            {
+
+            }
 
         }
     }
