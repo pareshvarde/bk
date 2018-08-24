@@ -7,7 +7,7 @@ namespace BK.Jobs
 {
     public enum AuditTypes
     {
-        FamilyWithoutMember,
+        FamilyWithoutMember = 1,
         MemberWithoutFamily,
         FamilyWithSingleMember,
         MemberWithoutDefaultFamily,

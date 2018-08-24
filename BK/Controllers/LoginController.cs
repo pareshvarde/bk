@@ -252,6 +252,16 @@ namespace BK.Controllers
 
             return captchaResponse.success;
         }
+
+        [Route("api/audit")]
+        [HttpGet]
+        public IHttpActionResult Audit()
+        {
+            Jobs.AuditJob auditJob = new Jobs.AuditJob();
+            auditJob.Execute();
+
+            return Ok();
+        }
     }
 }
 

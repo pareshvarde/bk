@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 using BK.Context;
+using System.Text;
+using System.IO;
 
 namespace BK.Jobs
 {
@@ -63,16 +65,49 @@ namespace BK.Jobs
             if (result == null)
                 return;
 
-            var tResult = result.Where(x => x.AuditType == (int)AuditTypes.AliveWithoutDOB).ToList();
-            if (tResult != null && tResult.Count > 0)
-            {
-                
-            }
-            else
-            {
+            var auditTypes = Enum.GetValues(typeof(AuditTypes));
 
-            }
+            string baseString = @"<tr><td>{0}</td><td>{1}</td></tr>";
+            string templatePath = System.Web.Hosting.HostingEnvironment.MapPath("~/HtmlTemplates/audit.html");
+            string html = File.ReadAllText(templatePath);
 
+            StringBuilder builder = new StringBuilder();
+
+            foreach(int auditType in auditTypes)
+            {
+                builder.Clear();
+
+                var tResult = result.Where(x => x.AuditType == auditType).ToList();
+
+                if (tResult != null && tResult.Count > 0)
+                {
+                    foreach(var item in tResult)
+                    {
+                        string member = string.Empty;
+                        string family = string.Empty;
+
+                        if (!item.FamilyId.HasValue)
+                            item.FamilyId = 0;
+
+                        
+
+                        if (item.FamilyId.HasValue && item.FamilyId.Value > 0)
+                            family = string.Format("<a href='http://brahmkshatriya.net.in/family/{0}'>Family</a>", item.FamilyId.Value);
+
+                        if (item.MemberId.HasValue && item.MemberId.Value > 0)
+                            member = string.Format("<a href='http://brahmkshatriya.net.in/member/{0}/{1}'>Member</a>", item.FamilyId.Value, item.MemberId.Value);
+
+                        builder.AppendLine(string.Format(baseString, family, member));
+                    }                    
+                }
+
+                string placeholder = "{{" + string.Format("audit_{0}", auditType) + "}}";
+                string textResult = builder.ToString();
+                if (string.IsNullOrWhiteSpace(textResult))
+                    textResult = "No discrepancy found on this audit.";
+
+                html = html.Replace(placeholder, textResult);
+            }                        
         }
     }
 }
