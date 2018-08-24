@@ -16,5 +16,7 @@ namespace BK.Context
         public Nullable<int> FamilyId { get; set; }
         public Nullable<int> MemberId { get; set; }
         public Nullable<int> AuditType { get; set; }
+        public string FamilyName { get; set; }
+        public string MemberName { get; set; }
     }
 }

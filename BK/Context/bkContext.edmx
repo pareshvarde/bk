@@ -615,6 +615,8 @@
           <Property Type="Int32" Name="FamilyId" Nullable="true" />
           <Property Type="Int32" Name="MemberId" Nullable="true" />
           <Property Type="Int32" Name="AuditType" Nullable="true" />
+          <Property Type="String" Name="FamilyName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MemberName" Nullable="true" MaxLength="100" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -841,6 +843,8 @@
                 <ScalarProperty Name="FamilyId" ColumnName="FamilyId" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="AuditType" ColumnName="AuditType" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="MemberName" ColumnName="MemberName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

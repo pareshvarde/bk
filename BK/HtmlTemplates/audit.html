@@ -16,22 +16,6 @@
             -webkit-text-size-adjust: none;
         }
 
-        @media only screen and (max-width: 600px) {
-            .email-body_inner {
-                width: 100% !important;
-            }
-
-            .email-footer {
-                width: 100% !important;
-            }
-        }
-
-        @media only screen and (max-width: 500px) {
-            .button {
-                width: 100% !important;
-            }
-        }
-
         p {
             margin-top: 10px;
             margin-bottom: 10px;
@@ -55,91 +39,141 @@
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Families Without having any member</p>
-                                                                <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse;  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">                                                                    
+                                                                <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse;  font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_1}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Members Without Family</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_2}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Family with only single member</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_3}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Member without any default family</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_4}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Family Without Head Of Family</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_5}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Invalid Active Matrimonies</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_6}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Family member missing relations</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_7}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Pending Approvals</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_8}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Eligible profiles but no active matrimony</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_9}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td style="box-sizing: border-box; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; word-break: break-word;">
                                                                 <p>Alive members without Date Of Birth</p>
                                                                 <table cellpadding="2" cellspacing="2" style="border: 1px solid black; border-collapse: collapse; font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <td>Family</td>
+                                                                            <td>Member</td>
+                                                                        </tr>
+                                                                    </thead>
                                                                     {{audit_10}}
-                                                                </table>
-                                                                <hr />
+                                                                </table>                                                                
                                                             </td>
                                                         </tr>
                                                     </table>

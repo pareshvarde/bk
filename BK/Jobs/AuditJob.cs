@@ -87,15 +87,13 @@ namespace BK.Jobs
                         string family = string.Empty;
 
                         if (!item.FamilyId.HasValue)
-                            item.FamilyId = 0;
-
-                        
+                            item.FamilyId = 0;                        
 
                         if (item.FamilyId.HasValue && item.FamilyId.Value > 0)
-                            family = string.Format("<a href='http://brahmkshatriya.net.in/family/{0}'>Family</a>", item.FamilyId.Value);
+                            family = string.Format("<a href='http://brahmkshatriya.net.in/family/{0}'>{1}</a>", item.FamilyId.Value, item.FamilyName);
 
                         if (item.MemberId.HasValue && item.MemberId.Value > 0)
-                            member = string.Format("<a href='http://brahmkshatriya.net.in/member/{0}/{1}'>Member</a>", item.FamilyId.Value, item.MemberId.Value);
+                            member = string.Format("<a href='http://brahmkshatriya.net.in/member/{0}/{1}'>{2}</a>", item.FamilyId.Value, item.MemberId.Value, item.MemberName);
 
                         builder.AppendLine(string.Format(baseString, family, member));
                     }                    
