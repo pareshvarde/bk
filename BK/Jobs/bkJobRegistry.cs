@@ -10,7 +10,7 @@ namespace BK.Jobs
     {
         public bkJobRegistry()
         {
-            Schedule<AuditJob>().ToRunEvery(1).Weeks().On(DayOfWeek.Sunday).At(6,0);
+            Schedule<AuditJob>().ToRunEvery(1).Weeks().On(DayOfWeek.Saturday).At(6,0);
         }
     }
 }

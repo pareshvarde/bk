@@ -179,6 +179,7 @@
       <DependentUpon>bkContext.edmx</DependentUpon>
       <LastGenOutput>bkContext.cs</LastGenOutput>
     </Content>
+    <Content Include="HtmlTemplates\audit.html" />
     <Content Include="HtmlTemplates\password_reset.html" />
     <Content Include="HtmlTemplates\familyAddition.html" />
     <Content Include="HtmlTemplates\welcome.html" />
@@ -284,7 +285,6 @@
     <Content Include="Context\bkContext.edmx.diagram">
       <DependentUpon>bkContext.edmx</DependentUpon>
     </Content>
-    <Content Include="libman.json" />
     <None Include="Properties\PublishProfiles\local.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
