@@ -97,6 +97,10 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
     return member.selected === true && member.maritalStatusId > 1;
   }
 
+  hofFilter(member: FamilyMemberModel) {
+    return member.selected === true;
+  }
+
   getRelations(member: FamilyMemberModel): any[] {
     if (member.gender === true)
       return RELATION_TYPES_DATA.filter(x => x.male || x.relationTypeId == null);
