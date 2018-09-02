@@ -13,7 +13,6 @@ import { bkConfigService } from './core/services/config.service';
 import { bkNavigationService } from './core/components/navigation/navigation.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { bkRoutes } from './app.routes'
-import { BlockUIModule } from 'ng-block-ui';
 import { LowerCaseUrlSerializer } from './lowerCaseUrlSerializer';
 import { MAT_DATE_LOCALE } from '@angular/material';
 import { bkAuthService } from './main/services/auth-service';
@@ -21,6 +20,7 @@ import { AuthGuard, LoggedInGuard } from './main/guards/auth-guard';
 import { GlobalService } from './main/services/global-service';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { bkDataService } from './main/services/bk-data.service';
+import { NgxUiLoaderModule } from  'ngx-ui-loader';
 
 @NgModule({
     declarations: [
@@ -34,8 +34,8 @@ import { bkDataService } from './main/services/bk-data.service';
         RouterModule.forRoot(bkRoutes),
         SharedModule,
         TranslateModule.forRoot(),
-        bkMainModule,
-        BlockUIModule.forRoot()
+        bkMainModule,        
+        NgxUiLoaderModule
     ],
     providers   : [
         bkSplashScreenService,

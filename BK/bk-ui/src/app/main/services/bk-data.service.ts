@@ -9,29 +9,28 @@ import { MemberModel } from '../models/memberModel';
 import { FamilyModel } from '../models/familyModel';
 import { MatrimonyModel } from '../models/matrimonyModel';
 import { MemberSearchParameter } from '../models/memberSearchParameter';
-import { NgBlockUI, BlockUI } from 'ng-block-ui';
 import { MatrimonySearchParameter } from '../models/matrimonySearchParameter';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Injectable()
 export class bkDataService {
   private API_URL = "/api/";
-  @BlockUI() blockUI: NgBlockUI;
-  
-  constructor(private http: Http, public authHttp: HttpClient) { }
+    
+  constructor(private http: Http, public authHttp: HttpClient, private ngxService: NgxUiLoaderService) { }
 
   login(userName: string, password: string): Observable<any> {
     
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.http.post(this.API_URL + "login", "username=" + userName + "&password=" + password + "&grant_type=password").pipe(map(response => {    
-      this.blockUI.stop();
+      this.ngxService.stop(); 
       return response;
     }),catchError((error: any) => this.handleAPIError(error)),);      
   };
 
   sendResetPasswordEmail(emailAddress: string) {
 
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.http.get(this.API_URL + "sendResetPasswordEmail?emailAddress=" + emailAddress).pipe(map((res) => {
       return this.handleAPIResponse(res);
@@ -40,7 +39,7 @@ export class bkDataService {
 
   resetPassword(password: string, token: string)
   {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.http.get(this.API_URL + "resetPassword?password=" + password + "&token=" + token).pipe(map((res)=>{
       return this.handleAPIResponse(res);
@@ -49,7 +48,7 @@ export class bkDataService {
 
   changePassword(model: changePasswordViewModel)
   { 
-    this.blockUI.start("Please wait...");    
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "/member/changePassword", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -58,7 +57,7 @@ export class bkDataService {
 
   register(model: RegisterModel)
   {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.http.post(this.API_URL + "register", model,{headers: this.getPublicHeader()}).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -67,7 +66,7 @@ export class bkDataService {
 
   addMemberToFamily(model: any)
   {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.post(this.API_URL + "/member/addtofamily", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -75,7 +74,7 @@ export class bkDataService {
   }
 
   getMember(memberId: number, familyId: number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.get(this.API_URL + "/member?memberId=" + memberId + "&familyId=" + familyId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -83,7 +82,7 @@ export class bkDataService {
   }
 
   getMemberLookup(memberId: number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.get(this.API_URL + "/member/lookup?memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -91,7 +90,7 @@ export class bkDataService {
   }
 
   saveMember(model: MemberModel){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "member/save", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -99,7 +98,7 @@ export class bkDataService {
   }
 
   uploadProfilePhoto(model: any) {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "member/uploadPhoto", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -107,7 +106,7 @@ export class bkDataService {
   }
 
   uploadMatrimonyPhoto(model: any) {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "matrimony/uploadPhoto", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -116,7 +115,7 @@ export class bkDataService {
 
   deleteMarimonyPhoto(memberId: number, photoNumber: number){
     
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.get(this.API_URL + "matrimony/deletePhoto?photoNumber=" + photoNumber + "&memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -124,7 +123,7 @@ export class bkDataService {
   }
 
   profilePhoto() {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.get(this.API_URL + "member/profilePhoto").pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -132,7 +131,7 @@ export class bkDataService {
   }
 
   searchMember(model: MemberSearchParameter){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.post(this.API_URL + "member/search", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -141,7 +140,7 @@ export class bkDataService {
 
   deleteMember(familyId: number, memberId: number)
   {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.get(this.API_URL + "/member/delete?familyId=" + familyId + "&memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -149,7 +148,7 @@ export class bkDataService {
   }
 
   saveFamily(model: FamilyModel){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "family/save", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -157,7 +156,7 @@ export class bkDataService {
   }
 
   forkFamily(model: FamilyModel){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "family/fork", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -165,7 +164,7 @@ export class bkDataService {
   }  
 
   deleteFamily(model: FamilyModel){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "family/delete", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -174,7 +173,7 @@ export class bkDataService {
  
   getFamilyLookup(memberId: number)
   {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "family/lookup?memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -182,7 +181,7 @@ export class bkDataService {
   }
 
   getDefaultFamily(memberId: number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "member/defaultfamily?memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -191,7 +190,7 @@ export class bkDataService {
 
   getFamilyDetail(familyId: number)
   {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "family?familyId=" + familyId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -199,7 +198,7 @@ export class bkDataService {
   }
   
   approveMember(memberId: number, familyId: number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "member/approve?memberId=" + memberId + "&familyId=" + familyId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -207,7 +206,7 @@ export class bkDataService {
   }
 
   declineMember(memberId: number, familyId: number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "member/decline?memberId=" + memberId + "&familyId=" + familyId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -215,7 +214,7 @@ export class bkDataService {
   }
 
   markDefaultFamily(familyId: number, memberId: number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "member/markDefaultFamily?familyId=" + familyId + "&memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -223,7 +222,7 @@ export class bkDataService {
   }
 
   getMatrimony(memberId:number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "matrimony?memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -231,7 +230,7 @@ export class bkDataService {
   }
 
   getViewOnlyMatrimony(memberId:number){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
                
     return this.authHttp.get(this.API_URL + "matrimony-view?memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -239,7 +238,7 @@ export class bkDataService {
   }
 
   saveMatrimony(model: MatrimonyModel){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
            
     return this.authHttp.post(this.API_URL + "matrimony/save", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -247,7 +246,7 @@ export class bkDataService {
   }
 
   searchMatrimony(model: MatrimonySearchParameter){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.post(this.API_URL + "matrimony/search", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -256,7 +255,7 @@ export class bkDataService {
   
   deleteMatrimony(memberId: number)
   {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.authHttp.get(this.API_URL + "/matrimony/delete?memberId=" + memberId).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -264,7 +263,7 @@ export class bkDataService {
   }
 
   submitFeedback(model: any){
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
 
     return this.http.post(this.API_URL + "feedback", model).pipe(map((res) =>{
       return this.handleAPIResponse(res);
@@ -282,12 +281,12 @@ export class bkDataService {
   }
 
   private handleAPIResponse(response: any) {    
-    this.blockUI.stop();
+    this.ngxService.stop(); 
     return response;    
   }
 
   private handleAPIError(error: any): any {         
-   this.blockUI.stop();
+    this.ngxService.stop(); 
     if (error.error && error.error.errors && error.error.errors.length > 0)
       return observableThrowError(error.error.errors[0]);
     if (error.message)    
