@@ -6,6 +6,7 @@ import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer
 import { MatDialog } from '@angular/material';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-directory',
@@ -54,7 +55,7 @@ export class DirectoryComponent implements OnInit, OnDestroy {
     this.pageNumber = this.pageNumber + 1;
     this.searchParameter.currentPage = this.pageNumber;
 
-    this.dataService.searchMember(this.searchParameter).takeUntil(this.destroyed$).subscribe(
+    this.dataService.searchMember(this.searchParameter).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {     
         
         if (res.result.results.length < this.searchParameter.pageSize)

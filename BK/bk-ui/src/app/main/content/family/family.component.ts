@@ -14,6 +14,7 @@ import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
 import { MEMBER_MARITAL_STATUS_DATA } from '../../data/maritalstatuses';
 import { RELATION_TYPES_DATA } from '../../data/relations'
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-family',
@@ -40,7 +41,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
     private confirmationService: ConfirmationService, private location: Location, private globalService: GlobalService,
     private cdr: ChangeDetectorRef) {
 
-    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
+    this.route.params.pipe(takeUntil(this.destroyed$)).subscribe(params => {
       this.familyId = params.familyId;
 
       this.initializeComponent();
@@ -89,7 +90,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   loadFamily() {
 
-    this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
+    this.dataService.getFamilyDetail(this.familyId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.model = res.result;
 
@@ -142,7 +143,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
       return;
     }
 
-    this.dataService.saveFamily(this.model).takeUntil(this.destroyed$).subscribe(
+    this.dataService.saveFamily(this.model).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.notificationService.success("Family details has been updated.");
         this.familyForm.markAsPristine();
@@ -177,7 +178,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!ans.resolved)
           return;
 
-        this.dataService.deleteFamily(tModel).takeUntil(this.destroyed$).subscribe(
+        this.dataService.deleteFamily(tModel).pipe(takeUntil(this.destroyed$)).subscribe(
           (res) => {
             if (res.result) {
               this.authService.logout();
@@ -210,7 +211,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!ans.resolved)
           return;
 
-        this.dataService.deleteMember(this.familyId, memberId).takeUntil(this.destroyed$).subscribe(
+        this.dataService.deleteMember(this.familyId, memberId).pipe(takeUntil(this.destroyed$)).subscribe(
           (res) => {
             if (res.result) {
               this.authService.logout();
@@ -238,7 +239,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!ans.resolved)
           return;
 
-        this.dataService.approveMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
+        this.dataService.approveMember(memberId, familyId).pipe(takeUntil(this.destroyed$)).subscribe(
           (res) => {
             this.notificationService.success("Member family association approved");
             this.loadFamily();
@@ -260,7 +261,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!ans.resolved)
           return;
 
-        this.dataService.declineMember(memberId, familyId).takeUntil(this.destroyed$).subscribe(
+        this.dataService.declineMember(memberId, familyId).pipe(takeUntil(this.destroyed$)).subscribe(
           (res) => {
             this.notificationService.success("Member family association removed");
             this.loadFamily();
@@ -283,7 +284,7 @@ export class FamilyComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!ans.resolved)
           return;
 
-        this.dataService.deleteMatrimony(memberId).takeUntil(this.destroyed$).subscribe(
+        this.dataService.deleteMatrimony(memberId).pipe(takeUntil(this.destroyed$)).subscribe(
           (res) => {
             this.notificationService.success("Matrimony profile has been removed");
             this.loadFamily();

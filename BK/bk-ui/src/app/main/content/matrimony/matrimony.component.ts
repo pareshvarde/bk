@@ -19,6 +19,7 @@ import { BkImageCropperComponent } from '../../../core/components/bk-image-cropp
 import { MatDialog } from '@angular/material';
 import { ResizeOptions, ImageResult } from '../../../../../node_modules/ng2-imageupload';
 import { MemberModel } from '../../models/memberModel';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-matrimony',
@@ -50,7 +51,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
     private confirmationService: ConfirmationService, private location: Location,
     private globalService: GlobalService, private cdr: ChangeDetectorRef) {
 
-    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
+    this.route.params.pipe(takeUntil(this.destroyed$)).subscribe(params => {
       if (params.memberId > 0)
         this.memberId = params.memberId;
       else
@@ -108,7 +109,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
   loadMember() {
-    return this.dataService.getMemberLookup(this.memberId).takeUntil(this.destroyed$).subscribe(
+    return this.dataService.getMemberLookup(this.memberId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.memberModel = res.result;
 
@@ -129,7 +130,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   loadMatrimony() {
-    return this.dataService.getMatrimony(this.memberId).takeUntil(this.destroyed$).subscribe(
+    return this.dataService.getMatrimony(this.memberId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.model = res.result;
       },
@@ -150,7 +151,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
       return;
     }
 
-    this.dataService.saveMatrimony(this.model).takeUntil(this.destroyed$).subscribe(
+    this.dataService.saveMatrimony(this.model).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.notificationService.success("Matrimony profile has been updated.");
         this.matrimonyForm.markAsPristine();
@@ -183,7 +184,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   savePhoto(content: string) {
-    this.dataService.uploadMatrimonyPhoto({ memberId: this.memberId, image: content, photoNumber: this.photoNumber }).takeUntil(this.destroyed$).subscribe(
+    this.dataService.uploadMatrimonyPhoto({ memberId: this.memberId, image: content, photoNumber: this.photoNumber }).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.notificationService.success("Your photo has been uploaded.");
 
@@ -215,7 +216,7 @@ export class MatrimonyComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!ans.resolved)
           return;
 
-        this.dataService.deleteMarimonyPhoto(this.memberId, photoNumber).takeUntil(this.destroyed$).subscribe(
+        this.dataService.deleteMarimonyPhoto(this.memberId, photoNumber).pipe(takeUntil(this.destroyed$)).subscribe(
           (res) => {
             this.notificationService.success("Photo has been deleted");
             if (photoNumber === 1) {

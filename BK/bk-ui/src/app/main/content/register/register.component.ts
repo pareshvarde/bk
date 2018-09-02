@@ -11,6 +11,7 @@ import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
 import { MatDialog } from '../../../../../node_modules/@angular/material';
 import { TermsComponent } from '../terms/terms.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -96,7 +97,7 @@ export class RegisterComponent implements OnInit, AfterViewChecked, OnDestroy {
     this.formModel.captchaResponse = this.captchaResponse;
     this.formModel.dob.setMinutes(this.formModel.dob.getMinutes() - this.formModel.dob.getTimezoneOffset())
 
-    this.dataService.register(this.formModel).takeUntil(this.destroyed$).subscribe(
+    this.dataService.register(this.formModel).pipe(takeUntil(this.destroyed$)).subscribe(
        (res) => {              
           this.confirmationService.create("", "Your registration completed successfully. Please check your email for your username and password.", this.globalService.alertOptions);         
           this.router.navigate(['login']);
