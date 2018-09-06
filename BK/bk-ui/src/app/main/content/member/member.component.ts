@@ -17,6 +17,7 @@ import { MatDialog } from '@angular/material';
 import { BkImageCropperComponent } from '../../../core/components/bk-image-cropper/bk-image-cropper.component';
 import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
 import { GlobalService } from '../../services/global-service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-member',
@@ -44,7 +45,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     private notificationService: NotificationsService, public authService: bkAuthService, private location: Location,
     private confirmationService: ConfirmationService, public globalService: GlobalService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
 
-    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
+    this.route.params.pipe(takeUntil(this.destroyed$)).subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
       else
@@ -125,7 +126,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
     if (!mId)
       mId = this.authService.memberId();
 
-    this.dataService.getFamilyLookup(mId).takeUntil(this.destroyed$).subscribe(
+    this.dataService.getFamilyLookup(mId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.familyLookup = res.result;
 
@@ -169,7 +170,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   loadMember() {
-    return this.dataService.getMember(this.memberId, this.familyId).takeUntil(this.destroyed$).subscribe(
+    return this.dataService.getMember(this.memberId, this.familyId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.memberModel = res.result;
       },
@@ -191,7 +192,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
 
   loadFamily() {
-    this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
+    this.dataService.getFamilyDetail(this.familyId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.familyModel = res.result;
 
@@ -232,7 +233,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
 
     this.memberModel.familyId = this.familyId;
 
-    this.dataService.saveMember(this.memberModel).takeUntil(this.destroyed$).subscribe(
+    this.dataService.saveMember(this.memberModel).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.notificationService.success("Member details has been updated.");
         this.memberForm.markAsPristine();
@@ -256,7 +257,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
         if (!ans.resolved)
           return;
 
-        this.dataService.markDefaultFamily(this.familyId, this.memberId).takeUntil(this.destroyed$).subscribe(
+        this.dataService.markDefaultFamily(this.familyId, this.memberId).pipe(takeUntil(this.destroyed$)).subscribe(
           (res) => {
             this.memberModel.defaultFamily = true;
             this.notificationService.success("Member marked as default to this family");
@@ -310,7 +311,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
       data: { imgEvent: event }
     });
 
-    dialogRef.afterClosed().takeUntil(this.destroyed$).subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(this.destroyed$)).subscribe(result => {
       if (result) {
         this.savePhoto(result);
       }
@@ -332,7 +333,7 @@ export class MemberComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   savePhoto(content: string) {
-    this.dataService.uploadProfilePhoto({ memberId: this.memberId, image: content }).takeUntil(this.destroyed$).subscribe(
+    this.dataService.uploadProfilePhoto({ memberId: this.memberId, image: content }).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.memberModel.photoUrl = content;
 

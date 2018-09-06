@@ -14,6 +14,7 @@ import { MemberSearchParameter } from '../../models/memberSearchParameter';
 import { Location } from '@angular/common';
 import { MatDialog } from '../../../../../node_modules/@angular/material';
 import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer/bk-image-viewer.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-existing-member-add',
@@ -70,7 +71,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
 
     this.searchResults = [];
 
-    return this.dataService.searchMember(this.searchModel).takeUntil(this.destroyed$).subscribe(
+    return this.dataService.searchMember(this.searchModel).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
 
         if (res.result.totalRecords === 0) {
@@ -105,7 +106,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
       memberModel.relationTypeId = null;
     }
 
-    return this.dataService.addMemberToFamily({familyId: this.familyModel.familyId, memberId: memberModel.memberId, relatedId: memberModel.relatedMemberId, relationTypeId: memberModel.relationTypeId, relationType: relationType}).takeUntil(this.destroyed$).subscribe(
+    return this.dataService.addMemberToFamily({familyId: this.familyModel.familyId, memberId: memberModel.memberId, relatedId: memberModel.relatedMemberId, relationTypeId: memberModel.relationTypeId, relationType: relationType}).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.notificationService.success("Member is added to your family");
         this.router.navigate(['family', this.familyModel.familyId]);

@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { OCCUPATIONS_DATA } from '../../data/occupations';
 import { GlobalService } from '../../services/global-service';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-matrimony-search',
@@ -64,7 +65,7 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
     this.pageNumber = this.pageNumber + 1;
     this.searchParameter.currentPage = this.pageNumber;
 
-    this.dataService.searchMatrimony(this.searchParameter).takeUntil(this.destroyed$).subscribe(
+    this.dataService.searchMatrimony(this.searchParameter).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
 
         if (res.result.results.length < this.searchParameter.pageSize)

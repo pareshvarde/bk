@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { NgxUiLoaderService } from 'ngx-ui-loader';
 
 @Component({
   selector: 'app-bk-image-cropper',
@@ -11,11 +11,10 @@ export class BkImageCropperComponent implements OnInit {
 
   imageChangedEvent: any = '';
   croppedImage: any = '';
-  @BlockUI() blockUI: NgBlockUI;
   
   constructor(
     public dialogRef: MatDialogRef<BkImageCropperComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,  private ngxService: NgxUiLoaderService) {
     this.imageChangedEvent = data.imgEvent;
   }
 
@@ -32,14 +31,14 @@ export class BkImageCropperComponent implements OnInit {
   }
 
   imageLoaded(){
-    this.blockUI.stop();
+    this.ngxService.stop(); 
   }
 
   loadImageFailed(){
-    this.blockUI.stop();
+    this.ngxService.stop(); 
   }
 
   ngOnInit() {
-    this.blockUI.start("Please wait...");
+    this.ngxService.start();
   }
 }

@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { ReplaySubject } from 'rxjs';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-forgot-password',
@@ -42,7 +43,7 @@ export class ForgotPasswordComponent implements OnInit, OnDestroy {
         }
 
         let emailValue = this.forgotPasswordForm.controls.email.value;
-        this.dataService.sendResetPasswordEmail(emailValue).takeUntil(this.destroyed$).subscribe(
+        this.dataService.sendResetPasswordEmail(emailValue).pipe(takeUntil(this.destroyed$)).subscribe(
             (res) => {
                 this.notificationService.success("Please check your inbox for password reset link");
             },

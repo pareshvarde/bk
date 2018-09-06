@@ -3,6 +3,7 @@ import { bkDataService } from './bk-data.service';
 import { bkAuthService } from './auth-service';
 import { ReplaySubject, Observable, Observer } from 'rxjs';
 import { debug } from 'util';
+import { takeUntil } from 'rxjs/operators';
 
 @Injectable()
 export class GlobalService implements OnDestroy {
@@ -28,7 +29,7 @@ export class GlobalService implements OnDestroy {
             return;
         }
 
-        this.dataService.profilePhoto().takeUntil(this.destroyed$).subscribe(
+        this.dataService.profilePhoto().pipe(takeUntil(this.destroyed$)).subscribe(
             (res) => {
                 this.avatarUrl = res.result;                
                 this.avatarLoaded = true;                

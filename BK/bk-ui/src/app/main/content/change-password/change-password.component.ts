@@ -3,12 +3,12 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { bkDataService } from '../../services/bk-data.service';
 import { NotificationsService } from 'angular2-notifications';
 import { PasswordValidators } from 'ng2-validators'
-import  'rxjs/add/operator/takeUntil'
 import { ReplaySubject } from 'rxjs';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-change-password',
@@ -57,7 +57,7 @@ export class ChangePasswordComponent implements OnInit, OnDestroy {
     const tFormModel = (JSON.parse(JSON.stringify(this.formModel)));
     this.changePasswordForm.reset();    
 
-    this.dataService.changePassword(tFormModel).takeUntil(this.destroyed$).subscribe(
+    this.dataService.changePassword(tFormModel).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {              
         this.notificationService.success("Your password has been changed.");
         this.back();

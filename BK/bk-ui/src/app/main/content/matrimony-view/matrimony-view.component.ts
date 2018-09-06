@@ -15,6 +15,7 @@ import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer
 import { MatDialog } from '@angular/material';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-matrimony-view',
@@ -37,7 +38,7 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService,
     private confirmationService: ConfirmationService, public authService: bkAuthService,
     private location: Location, public dialog: MatDialog, private globalService: GlobalService) {
-    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
+    this.route.params.pipe(takeUntil(this.destroyed$)).subscribe(params => {
 
       if (params.memberId > 0)
         this.memberId = params.memberId;
@@ -99,7 +100,7 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
   }
 
   loadMatrimony() {
-    return this.dataService.getViewOnlyMatrimony(this.memberId).takeUntil(this.destroyed$).subscribe(
+    return this.dataService.getViewOnlyMatrimony(this.memberId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.model = res.result;
       },

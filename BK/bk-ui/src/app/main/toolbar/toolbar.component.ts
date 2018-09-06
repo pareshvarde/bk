@@ -5,6 +5,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { bkDataService } from '../services/bk-data.service';
 import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../services/global-service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'bk-toolbar',
@@ -38,7 +39,7 @@ export class bkToolbarComponent implements OnDestroy {
     }
 
     loadFamily() {
-        this.dataService.getDefaultFamily(this.authService.memberId()).takeUntil(this.destroyed$).subscribe(
+        this.dataService.getDefaultFamily(this.authService.memberId()).pipe(takeUntil(this.destroyed$)).subscribe(
             (res) => {
                 this.router.navigate(['family', res.result])
             },
@@ -52,7 +53,7 @@ export class bkToolbarComponent implements OnDestroy {
     }
 
     loadMember() {
-        this.dataService.getDefaultFamily(this.authService.memberId()).takeUntil(this.destroyed$).subscribe(
+        this.dataService.getDefaultFamily(this.authService.memberId()).pipe(takeUntil(this.destroyed$)).subscribe(
             (res) => {
                 this.router.navigate(['member', res.result, this.authService.memberId()])
             },

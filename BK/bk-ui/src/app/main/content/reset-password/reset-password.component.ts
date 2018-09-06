@@ -8,6 +8,7 @@ import { PasswordValidators } from 'ng2-validators'
 import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-reset-password',
@@ -23,7 +24,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private router: Router, private dataService: bkDataService, 
     private notificationService: NotificationsService, private confirmationService: ConfirmationService,
     private globalService: GlobalService) {    
-    this.route.params.takeUntil(this.destroyed$).subscribe(params => this.resetToken = params.token);
+    this.route.params.pipe(takeUntil(this.destroyed$)).subscribe(params => this.resetToken = params.token);
   }
 
   ngOnInit() {
@@ -51,7 +52,7 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     this.resetPasswordForm.reset();
     (<HTMLElement>document.querySelector('input[formControlName=newPassword]')).focus();   
     
-    this.dataService.resetPassword(password, this.resetToken).takeUntil(this.destroyed$).subscribe(
+    this.dataService.resetPassword(password, this.resetToken).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
           this.confirmationService.create("", "Password has been reset, Please login with your new password now.", this.globalService.alertOptions);                  
           this.router.navigate(['login']);

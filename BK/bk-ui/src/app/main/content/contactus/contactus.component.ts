@@ -7,6 +7,7 @@ import { bkDataService } from '../../services/bk-data.service';
 import { ConfirmationService } from '../../../../../node_modules/@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
 import { ReplaySubject } from '../../../../../node_modules/rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-contactus',
@@ -53,7 +54,7 @@ export class ContactusComponent implements OnInit, OnDestroy {
     formData.append('content',this.contactusForm.controls.content.value);
     formData.append('attachment',this.attachment);
 
-    this.dataService.submitFeedback(formData).takeUntil(this.destroyed$).subscribe(
+    this.dataService.submitFeedback(formData).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.confirmationService.create("", "Your request has been sent to Administrators", this.globalService.alertOptions);
         this.router.navigate(['home']);

@@ -6,6 +6,7 @@ import { ReplaySubject } from 'rxjs';
 import { bkAuthService } from '../../services/auth-service';
 import { GlobalService } from '../../services/global-service';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -54,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     let passwordValue = this.loginForm.controls.password.value;    
     let remember = this.loginForm.controls.rememberMe.value;
     
-    this.dataService.login(emailValue, passwordValue).takeUntil(this.destroyed$).subscribe(
+    this.dataService.login(emailValue, passwordValue).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) =>{              
         let result = JSON.parse((<any>res)._body)        
         localStorage.setItem('token', result.access_token);        
@@ -79,7 +80,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loadFamily(){
-    this.dataService.getDefaultFamily(this.authService.memberId()).takeUntil(this.destroyed$).subscribe(
+    this.dataService.getDefaultFamily(this.authService.memberId()).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {        
         this.router.navigate(['family', res.result])
       },

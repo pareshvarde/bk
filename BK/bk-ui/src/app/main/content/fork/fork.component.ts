@@ -13,6 +13,7 @@ import { CATEGORIES_DATA } from '../../data/categories';
 import { NUKHS_LOOKUP_DATA } from '../../data/nukhsLookup';
 import { ReplaySubject } from 'rxjs';
 import { GlobalService } from '../../services/global-service';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-fork',
@@ -34,7 +35,7 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
     private confirmationService: ConfirmationService, private location: Location,
     private cdr: ChangeDetectorRef, private globalService: GlobalService) {
 
-    this.route.params.takeUntil(this.destroyed$).subscribe(params => {
+    this.route.params.pipe(takeUntil(this.destroyed$)).subscribe(params => {
       if (params.familyId > 0)
         this.familyId = params.familyId;
       else
@@ -78,7 +79,7 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   loadFamily() {
-    this.dataService.getFamilyDetail(this.familyId).takeUntil(this.destroyed$).subscribe(
+    this.dataService.getFamilyDetail(this.familyId).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.model = res.result;
         this.model.hofId = null;
@@ -125,7 +126,7 @@ export class ForkComponent implements OnInit, AfterViewChecked, OnDestroy {
       return;
     }
 
-    this.dataService.forkFamily(this.model).takeUntil(this.destroyed$).subscribe(
+    this.dataService.forkFamily(this.model).pipe(takeUntil(this.destroyed$)).subscribe(
       (res) => {
         this.notificationService.success("New family created successfully");
         this.router.navigate(['family', res.result]);

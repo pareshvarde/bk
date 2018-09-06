@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { bkSplashScreenService } from './core/services/splash-screen.service';
 import { TranslateService } from '@ngx-translate/core';
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 
 @Component({
     selector   : 'bk-root',
@@ -10,8 +9,6 @@ import { BlockUI, NgBlockUI } from 'ng-block-ui';
 })
 export class AppComponent
 {
-    @BlockUI() blockUI: NgBlockUI;    
-
     constructor(
         private bkSplashScreen: bkSplashScreenService,
         private translate: TranslateService
