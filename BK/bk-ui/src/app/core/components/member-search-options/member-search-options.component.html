@@ -10,7 +10,7 @@
         <mat-icon>close</mat-icon>
     </button>
 
-    <div class=".searchOptions">
+    <div *ngIf="searchParameter" class=".searchOptions">
         <div fxLayout="row wrap">
             <mat-form-field>
                 <input matInput [(ngModel)]="searchParameter.firstName" placeholder="First Name">
