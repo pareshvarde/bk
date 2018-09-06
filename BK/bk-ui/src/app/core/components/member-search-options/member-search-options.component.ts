@@ -18,9 +18,9 @@ export class MemberSearchOptionsComponent implements OnInit
     @ViewChild('panel') panel;
     @ViewChild('overlay') overlay: ElementRef;
 
-    @Input() searchParameter: MemberSearchParameter;
-    @Output() performSearch = new EventEmitter();
-    @Output() clearSearch = new EventEmitter();
+    searchParameter: MemberSearchParameter;
+    @Output() performSearch = new EventEmitter<MemberSearchParameter>();
+    @Output() clearSearch = new EventEmitter<MemberSearchParameter>();
     NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA.slice();
     CATEGORIES_DATA_LOCAL = CATEGORIES_DATA.slice();
     
@@ -33,7 +33,9 @@ export class MemberSearchOptionsComponent implements OnInit
         private renderer: Renderer2
     )
     {
-        this.barClosed = true;                 
+        this.barClosed = true;         
+        this.searchParameter = new MemberSearchParameter(); 
+
         this.NUKHS_LOOKUP_DATA_LOCAL.unshift({id:null, occupation: ''});
         this.CATEGORIES_DATA_LOCAL.unshift({id:null, category: ''});
     }
@@ -76,12 +78,13 @@ export class MemberSearchOptionsComponent implements OnInit
     }
 
     search(){        
-        this.performSearch.emit();
+        this.performSearch.emit(this.searchParameter);
         this.closeBar();
     }
 
-    clear(){        
-        this.clearSearch.emit();
+    clear(){
+        this.searchParameter = new MemberSearchParameter();        
+        this.clearSearch.emit(this.searchParameter);
         this.closeBar();
     }
 }

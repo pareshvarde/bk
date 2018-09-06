@@ -6,12 +6,7 @@ import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer
 import { MatDialog } from '@angular/material';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
-<<<<<<< HEAD
-import { URLSearchParams } from '@angular/http'
-import {Location } from '@angular/common';
-=======
 import { takeUntil } from 'rxjs/operators';
->>>>>>> b0489a595eaa3ef3f81603b5387b2674c6a7c2fd
 
 @Component({
   selector: 'app-directory',
@@ -29,13 +24,12 @@ export class DirectoryComponent implements OnInit, OnDestroy {
   readonly PAGE_SIZE: number = 25;
 
   constructor(private dataService: bkDataService, private confirmationService: ConfirmationService, 
-    public dialog: MatDialog, private globalService: GlobalService, private location: Location) { 
-    this.searchParameter = new MemberSearchParameter();       
+    public dialog: MatDialog, private globalService: GlobalService) { 
+    this.searchParameter = new MemberSearchParameter();    
   }
       
-  ngOnInit() {    
-    this.loadSearchParameter();
-    this.search();
+  ngOnInit() {
+    this.search(this.searchParameter);
   }
 
   ngOnDestroy(){
@@ -43,12 +37,12 @@ export class DirectoryComponent implements OnInit, OnDestroy {
     this.destroyed$.complete(); 
   }
 
-  search(){
+  search(searchParameter: MemberSearchParameter){
 
-    this.storeSearchParameter();    
     this.results = [];
     this.hasResult = true;
-    this.pageNumber = 0;    
+    this.pageNumber = 0;
+    this.searchParameter = searchParameter;
     this.searchParameter.pageSize = this.PAGE_SIZE;
     this.performSearch();    
   }
@@ -87,10 +81,10 @@ export class DirectoryComponent implements OnInit, OnDestroy {
     );
   }
 
-  clear(){    
+  clear(searchParameter: MemberSearchParameter){    
       this.results = [];           
-      this.searchParameter = new MemberSearchParameter();      
-      this.search();
+      searchParameter.pageSize = this.PAGE_SIZE;  
+      this.search(searchParameter);
   }
 
   hasScroll(): boolean{
@@ -111,39 +105,4 @@ export class DirectoryComponent implements OnInit, OnDestroy {
       data: { images:  pictures}
     });
   }
-
-  loadSearchParameter(){
-    var localSearchParameter = window.sessionStorage.getItem('directorysearch');
-    if (!localSearchParameter)
-      return;
-
-    this.searchParameter = JSON.parse(localSearchParameter);
-  }
-
-  storeSearchParameter(){
-    var localSearchParameter = JSON.stringify(this.searchParameter);
-    window.sessionStorage.setItem('directorysearch', localSearchParameter);
-  }
-
-  // loadQueryString(){
-  //   var pairs = location.search.slice(1).split('&');
-    
-  //   for (let i = 0; i < pairs.length ; i++)
-  //   {
-  //     var pair = pairs[i].split('=');
-  //     if (pair && pair.length === 2)
-  //       this.searchParameter[pair[0]] = decodeURIComponent(pair[1] || '');
-  //   }  
-  // }
-
-  // generateQueryString(){    
-  //   let params = new URLSearchParams();
-  //   for(let key in this.searchParameter){
-  //       params.set(key, encodeURIComponent(this.searchParameter[key])) 
-  //   }
-    
-  //   location.search = '';
-  //   this.location.go(this.location.path() + '?' +params.toString());
-  //   console.log(params.toString());
-  // }
 }
