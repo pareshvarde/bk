@@ -29,7 +29,7 @@ export class DirectoryComponent implements OnInit, OnDestroy {
   readonly PAGE_SIZE: number = 25;
 
   constructor(private dataService: bkDataService, private confirmationService: ConfirmationService, 
-    public dialog: MatDialog, private globalService: GlobalService, private location: Location) { 
+    public dialog: MatDialog, private globalService: GlobalService) { 
     this.searchParameter = new MemberSearchParameter();       
   }
       
