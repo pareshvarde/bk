@@ -6,8 +6,12 @@ import { BkImageViewerComponent } from '../../../core/components/bk-image-viewer
 import { MatDialog } from '@angular/material';
 import { ConfirmationService } from '@jaspero/ng-confirmations';
 import { GlobalService } from '../../services/global-service';
+<<<<<<< HEAD
+import { URLSearchParams } from '@angular/http'
+import {Location } from '@angular/common';
+=======
 import { takeUntil } from 'rxjs/operators';
-
+>>>>>>> b0489a595eaa3ef3f81603b5387b2674c6a7c2fd
 
 @Component({
   selector: 'app-directory',
