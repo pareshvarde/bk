@@ -29,7 +29,8 @@ export class DirectoryComponent implements OnInit, OnDestroy {
   }
       
   ngOnInit() {
-    this.search(this.searchParameter);
+    this.fetchFilters();
+    this.search();
   }
 
   ngOnDestroy(){
@@ -37,12 +38,12 @@ export class DirectoryComponent implements OnInit, OnDestroy {
     this.destroyed$.complete(); 
   }
 
-  search(searchParameter: MemberSearchParameter){
+  search(){
 
+    this.storeFilters();
     this.results = [];
     this.hasResult = true;
-    this.pageNumber = 0;
-    this.searchParameter = searchParameter;
+    this.pageNumber = 0;    
     this.searchParameter.pageSize = this.PAGE_SIZE;
     this.performSearch();    
   }
@@ -81,10 +82,11 @@ export class DirectoryComponent implements OnInit, OnDestroy {
     );
   }
 
-  clear(searchParameter: MemberSearchParameter){    
-      this.results = [];           
-      searchParameter.pageSize = this.PAGE_SIZE;  
-      this.search(searchParameter);
+  clear(){    
+      this.results = [];  
+      this.searchParameter = new MemberSearchParameter();
+      this.searchParameter.pageSize = this.PAGE_SIZE;  
+      this.search();
   }
 
   hasScroll(): boolean{
@@ -104,5 +106,18 @@ export class DirectoryComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
       data: { images:  pictures}
     });
+  }
+
+  storeFilters(){
+    var filterString = JSON.stringify(this.searchParameter);
+    sessionStorage.setItem('dfilter', filterString);
+  }
+
+  fetchFilters(){
+    var filterString = sessionStorage.getItem('dfilter');
+    if (!filterString)
+      return;
+    
+    this.searchParameter = JSON.parse(filterString);
   }
 }

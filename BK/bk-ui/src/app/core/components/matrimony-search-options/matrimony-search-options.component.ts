@@ -20,9 +20,9 @@ export class MatrimonySearchOptionsComponent implements OnInit
     @ViewChild('panel') panel;
     @ViewChild('overlay') overlay: ElementRef;
 
-    searchParameter: MatrimonySearchParameter;
-    @Output() performSearch = new EventEmitter<MatrimonySearchParameter>();
-    @Output() clearSearch = new EventEmitter<MatrimonySearchParameter>();
+    @Input() searchParameter: MatrimonySearchParameter;
+    @Output() performSearch = new EventEmitter();
+    @Output() clearSearch = new EventEmitter();
     NUKHS_LOOKUP_DATA_LOCAL = NUKHS_LOOKUP_DATA.slice();
     CATEGORIES_DATA_LOCAL = CATEGORIES_DATA.slice();
     OCCUPATION_DATA_LOCAL = OCCUPATIONS_DATA.slice();
@@ -84,13 +84,12 @@ export class MatrimonySearchOptionsComponent implements OnInit
     }
 
     search(){        
-        this.performSearch.emit(this.searchParameter);
+        this.performSearch.emit();
         this.closeBar();
     }
 
-    clear(){
-        this.searchParameter = new MatrimonySearchParameter();        
-        this.clearSearch.emit(this.searchParameter);
+    clear(){        
+        this.clearSearch.emit();
         this.closeBar();
     }
 }

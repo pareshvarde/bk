@@ -31,7 +31,8 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.search(this.searchParameter);
+    this.fetchFilters();
+    this.search();
   }
 
   ngOnDestroy() {
@@ -39,12 +40,11 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  search(searchParameter: MatrimonySearchParameter) {
-
+  search() {
+    this.storeFilters();
     this.results = [];
     this.hasResult = true;
-    this.pageNumber = 0;
-    this.searchParameter = searchParameter;
+    this.pageNumber = 0;    
     this.searchParameter.pageSize = this.PAGE_SIZE;
     this.performSearch();
   }
@@ -92,10 +92,11 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
     );
   }
 
-  clear(searchParameter: MatrimonySearchParameter) {
+  clear() {
     this.results = [];
-    searchParameter.pageSize = this.PAGE_SIZE;
-    this.search(searchParameter);
+    this.searchParameter = new MatrimonySearchParameter();
+    this.searchParameter.pageSize = this.PAGE_SIZE;
+    this.search();
   }
 
   hasScroll(): boolean {
@@ -124,5 +125,18 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
       data: { images: pictures }
     });
+  }
+
+  storeFilters(){
+    var filterString = JSON.stringify(this.searchParameter);
+    sessionStorage.setItem('mfilter', filterString);
+  }
+
+  fetchFilters(){
+    var filterString = sessionStorage.getItem('mfilter');
+    if (!filterString)
+      return;
+    
+    this.searchParameter = JSON.parse(filterString);
   }
 }

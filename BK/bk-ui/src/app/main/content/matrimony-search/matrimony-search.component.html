@@ -40,6 +40,6 @@
     <div class="row footer" fxLayoutAlign="center center" *ngIf="!hasResult">END OF SEARCH RESULT</div>
 </div>
 
-<matrimony-search-options (performSearch)="search($event)" (clearSearch)="clear($event)">
+<matrimony-search-options [searchParameter]="searchParameter" (performSearch)="search()" (clearSearch)="clear()">
 
 </matrimony-search-options>
