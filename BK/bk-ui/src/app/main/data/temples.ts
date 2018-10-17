@@ -66,7 +66,7 @@ export const TEMPLES_DATA: any[] =
       image: "jaisalmer.jpg",
       latitude: "26.9194822",
       longitude: "70.9211933",
-      address: "Samaj Bhavan Mohangarh Rd, Ghandi Colony",
+      address: "Samaj Bhavan Mohangarh Rd, Gandhi Colony",
       city: "Jaisalmer",
       state: "Rajasthan",
       country: "India",
