@@ -120,5 +120,17 @@ export const TEMPLES_DATA: any[] =
       country: "India",
       contactName: "<NOT AVAILABLE>",
       phoneNumber: "<NOT AVAILABLE>"
+    },
+    {    
+      name: "Hinglaj Mandir, Pokaran",
+      image: "pokaran.jpg",
+      latitude: "26.9853088",
+      longitude: "70.800758",
+      address: "Near Model School, Hinglaj Road",
+      city: "Pokaran",
+      state: "Rajasthan",
+      country: "India",
+      contactName: "Radhakishan Khatri",
+      phoneNumber: "9414269286"
     }
   ];
