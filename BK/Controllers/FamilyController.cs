@@ -14,6 +14,7 @@ namespace BK.Controllers
     {
 
         [Route("api/family/lookup")]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult GetLookup(int memberId)
         {
@@ -52,6 +53,7 @@ namespace BK.Controllers
         }
 
         [Route("api/family")]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult Get(int familyId)
         {

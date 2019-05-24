@@ -44,6 +44,7 @@ namespace BK.Controllers
         }
 
         [Route("api/member")]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult Get(int memberId, int familyId)
         {
@@ -113,6 +114,7 @@ namespace BK.Controllers
         }
 
         [Route("api/member/lookup")]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult Lookup(int memberId)
         {
@@ -466,6 +468,7 @@ namespace BK.Controllers
         }
 
         [Route("api/member/search")]
+        [AllowAnonymous]
         [HttpPost]
         public IHttpActionResult Search(MemberSearchModel model)
         {
@@ -575,6 +578,7 @@ namespace BK.Controllers
         }
 
         [Route("api/member/defaultfamily")]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult DefaultFamily(int memberId)
         {

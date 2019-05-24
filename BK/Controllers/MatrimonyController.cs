@@ -18,6 +18,7 @@ namespace BK.Controllers
     public class MatrimonyController : BaseController
     {
         [Route("api/matrimony")]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult Get(int memberId)
         {
@@ -58,6 +59,7 @@ namespace BK.Controllers
         }
 
         [Route("api/matrimony-view")]
+        [AllowAnonymous]
         [HttpGet]
         public IHttpActionResult GetMatrimony(int memberId)
         {
@@ -224,6 +226,7 @@ namespace BK.Controllers
         }
 
         [Route("api/matrimony/search")]
+        [AllowAnonymous]
         [HttpPost]
         public IHttpActionResult Search(MatrimonySearchModel model)
         {            

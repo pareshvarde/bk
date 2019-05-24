@@ -17,7 +17,14 @@ namespace BK.Controllers
             get
             {
                 ClaimsPrincipal principal = Request.GetRequestContext().Principal as ClaimsPrincipal;
-                return Convert.ToInt32(principal.Claims.Where(c => c.Type == "memberId").Single().Value);                
+                if (principal == null)
+                    return 0;
+
+                Claim claim = principal.Claims.Where(c => c.Type == "memberId").FirstOrDefault();
+                if (claim == null)
+                    return 0;
+
+                return Convert.ToInt32(claim.Value);                
             }
         }
 
@@ -49,6 +56,9 @@ namespace BK.Controllers
 
         protected bool CanEditFamily(int familyId)
         {
+            if (LoggedInMemberId == 0)
+                return false;
+
             if (LoggedInMemberId == -1)
                 return true;
 
@@ -62,6 +72,9 @@ namespace BK.Controllers
 
         protected bool CanEditFamily(Family family)
         {
+            if (LoggedInMemberId == 0)
+                return false;
+
             if (LoggedInMemberId == -1)
                 return true;
 
@@ -75,6 +88,9 @@ namespace BK.Controllers
 
         protected bool CanEditMember(int familyId, int memberId)
         {
+            if (LoggedInMemberId == 0)
+                return false;
+
             if (LoggedInMemberId == -1)
                 return true;
 
@@ -89,6 +105,9 @@ namespace BK.Controllers
 
         protected bool CanEditMember(int memberId)
         {
+            if (LoggedInMemberId == 0)
+                return false;
+
             if (LoggedInMemberId == -1)
                 return true;
 
@@ -104,6 +123,9 @@ namespace BK.Controllers
 
         protected bool CanEditMember(List<FamilyMemberAssociation> fAssociations, int memberId)
         {
+            if (LoggedInMemberId == 0)
+                return false;
+
             if (LoggedInMemberId == -1)
                 return true;
 

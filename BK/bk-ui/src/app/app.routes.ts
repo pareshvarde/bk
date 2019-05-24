@@ -80,12 +80,12 @@ export const bkRoutes: Routes = [
     {
         path: "family/:familyId",
         component: FamilyComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "member/:familyId/:memberId",
         component: MemberComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },    
     {
         path: "family/fork/:familyId",
@@ -100,17 +100,17 @@ export const bkRoutes: Routes = [
     {
         path: "matrimony-view/:memberId",
         component: MatrimonyViewComponent,
-        canActivate: [AuthGuard]
+        //canActivate: [AuthGuard]
     },
     {
         path: "directory",
         component: DirectoryComponent,
-        canActivate: [AuthGuard]        
+        //canActivate: [AuthGuard]        
     },
     {
         path: "matrimony-search",
         component: MatrimonySearchComponent,
-        canActivate: [AuthGuard]        
+        //canActivate: [AuthGuard]        
     },
     {
         path: "aboutus",
