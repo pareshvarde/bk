@@ -111,16 +111,21 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
 
   showPhoto(model: any) {
     var pictures: any[] = new Array();
-    pictures.push(model.photoUrl);
+    
+    if (model.photoUrl && model.photoUrl.indexOf('male') === -1)
+      pictures.push(model.photoUrl);
 
     if (model.photo1Url && model.photo1Url.indexOf('male') === -1)
       pictures.push(model.photo1Url);
 
-    if (model.photo1Url && model.photo2Url.indexOf('male') === -1)
+    if (model.photo2Url && model.photo2Url.indexOf('male') === -1)
       pictures.push(model.photo2Url);
 
-    if (model.photo1Url && model.photo3Url.indexOf('male') === -1)
+    if (model.photo3Url && model.photo3Url.indexOf('male') === -1)
       pictures.push(model.photo3Url);
+
+    if (pictures.length == 0)
+      pictures.push(model.photoUrl);
 
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
       data: { images: pictures }
@@ -130,6 +135,19 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
   storeFilters(){
     var filterString = JSON.stringify(this.searchParameter);
     sessionStorage.setItem('mfilter', filterString);
+  }
+
+  firstPhoto(model: any){
+    if (model.photoUrl && model.photoUrl.indexOf('male') != -1)
+      return model.photoUrl;
+    else if (model.photo1Url && model.photo1Url.indexOf('male') != -1)
+      return model.photo1Url;
+    else if (model.photo2Url && model.photo2Url.indexOf('male') != -1)
+      return model.photo2Url;
+    else if (model.photo3Url && model.photo3Url.indexOf('male') != -1)
+      return model.photo3Url;
+    else
+      return model.photoUrl;    
   }
 
   fetchFilters(){
