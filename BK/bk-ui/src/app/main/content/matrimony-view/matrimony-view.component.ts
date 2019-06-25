@@ -113,10 +113,25 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
     );
   }
 
+  firstPhoto(){
+    if (this.model.memberModel.photoUrl && this.model.memberModel.photoUrl.indexOf('male') === -1)
+      return this.model.memberModel.photoUrl;
+    else if (this.model.matrimonyModel.photo1Url && this.model.matrimonyModel.photo1Url.indexOf('male') === -1)
+      return this.model.matrimonyModel.photo1Url;
+    else if (this.model.matrimonyModel.photo2Url && this.model.matrimonyModel.photo2Url.indexOf('male') === -1)
+      return this.model.matrimonyModel.photo2Url;
+    else if (this.model.matrimonyModel.photo3Url && this.model.matrimonyModel.photo3Url.indexOf('male') === -1)
+      return this.model.matrimonyModel.photo3Url;
+    else
+      return this.model.memberModel.photoUrl;
+  }
+
   showPhoto() {
     
-    var pictures: any[] = new Array();
-    pictures.push(this.model.memberModel.photoUrl);
+    var pictures: any[] = new Array();    
+
+    if (this.model.memberModel.photoUrl && this.model.memberModel.photoUrl.indexOf('male') === -1)
+      pictures.push(this.model.memberModel.photoUrl);
 
     if (this.model.matrimonyModel.photo1Url && this.model.matrimonyModel.photo1Url.indexOf('male') === -1)
       pictures.push(this.model.matrimonyModel.photo1Url);
@@ -126,6 +141,9 @@ export class MatrimonyViewComponent implements OnInit, OnDestroy {
 
     if (this.model.matrimonyModel.photo3Url && this.model.matrimonyModel.photo3Url.indexOf('male') === -1)
       pictures.push(this.model.matrimonyModel.photo3Url);
+
+    if (pictures.length == 0)
+      pictures.push(this.model.memberModel.photoUrl);
 
     let dialogRef = this.dialog.open(BkImageViewerComponent, {
       data: { images: pictures }

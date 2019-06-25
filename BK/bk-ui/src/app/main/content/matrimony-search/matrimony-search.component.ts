@@ -138,13 +138,14 @@ export class MatrimonySearchComponent implements OnInit, OnDestroy {
   }
 
   firstPhoto(model: any){
-    if (model.photoUrl && model.photoUrl.indexOf('male') != -1)
+    
+    if (model.photoUrl && model.photoUrl.indexOf('male') === -1)
       return model.photoUrl;
-    else if (model.photo1Url && model.photo1Url.indexOf('male') != -1)
+    else if (model.photo1Url && model.photo1Url.indexOf('male') === -1)
       return model.photo1Url;
-    else if (model.photo2Url && model.photo2Url.indexOf('male') != -1)
+    else if (model.photo2Url && model.photo2Url.indexOf('male') === -1)
       return model.photo2Url;
-    else if (model.photo3Url && model.photo3Url.indexOf('male') != -1)
+    else if (model.photo3Url && model.photo3Url.indexOf('male') === -1)
       return model.photo3Url;
     else
       return model.photoUrl;    

@@ -3,7 +3,7 @@
     <div *ngIf="model" id="matrimony-view-form">
       <div class="bk-large-card">
         <div fxLayout="row wrap" fxLayoutAlign="center center">
-          <img *ngIf="model.memberModel.photoUrl" (click)="showPhoto()" class="avatar" src="{{model.memberModel.photoUrl}}" />
+          <img *ngIf="model.memberModel.photoUrl" (click)="showPhoto()" class="avatar" [src]="firstPhoto()" />
         </div>
         <div fxLayout="row wrap" fxLayoutAlign="center center">
           <div *ngIf="model.memberModel.firstName" class="title">{{model.memberModel.firstName}} {{model.memberModel.lastName}}</div>
