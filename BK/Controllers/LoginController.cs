@@ -31,19 +31,14 @@ namespace BK.Controllers
                     return BadRequest("Email address already registered. Please use forgot password on login page to recover your account");
 
                 if (context.Members.Any(f => f.Phone == register.PhoneNumber.Trim()))
-                    return BadRequest("Phone number already registered. Please contact Administrator for help");
-
-                if (register.AadhaarNumber.HasValue)
-                    if (context.Members.Any(f => f.AadhaarNumber == register.AadhaarNumber))
-                        return BadRequest("Aadhar number already registered. Please contact Administrator for help");
+                    return BadRequest("Phone number already registered. Please contact Administrator for help");                
 
                 Member member = new Member();
                 member.FirstName = register.FirstName;
                 member.LastName = register.LastName;
                 member.DOB = register.DateOfBirth;
                 member.EmailAddress = register.EmailAddress.Trim();
-                member.Phone = register.PhoneNumber;
-                member.AadhaarNumber = register.AadhaarNumber;
+                member.Phone = register.PhoneNumber;                
                 member.Gender = register.Gender;
                 member.MaritalStatusID = 2; //MARRIED
 

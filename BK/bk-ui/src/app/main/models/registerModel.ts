@@ -2,8 +2,7 @@ export class RegisterModel{
     firstName: string;
     lastName: string;
     email: string;
-    phoneNumber: number;
-    aadhaarNumber: number;
+    phoneNumber: number;    
     categoryId: number;
     nukhId: number;
     gender: boolean;

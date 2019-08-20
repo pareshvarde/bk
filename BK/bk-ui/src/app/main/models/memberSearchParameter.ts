@@ -10,8 +10,7 @@ export class MemberSearchParameter{
     public state: string;
     public includeOnlyHOF: boolean;
     public sortOrder: string;
-    public memberId: number;
-    public aadhaarNumber: number;
+    public memberId: number;    
     public currentPage: number;
     public pageSize: number;
   }

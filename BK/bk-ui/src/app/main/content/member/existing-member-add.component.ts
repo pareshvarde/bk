@@ -41,8 +41,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.searchForm = new FormGroup({
       memberId: new FormControl('', [UniversalValidators.isNumber]),
-      phoneNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(15)]),
-      aadhaarNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(16)]),
+      phoneNumber: new FormControl('', [UniversalValidators.isNumber, , Validators.maxLength(15)]),      
       emailAddress: new FormControl('', [Validators.email, Validators.maxLength(100)]),
       city: new FormControl('', [Validators.maxLength(50)]),
       firstName: new FormControl('', [Validators.maxLength(50)])
@@ -63,8 +62,7 @@ export class ExistingMemberAddComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (!this.searchModel.memberId && !this.searchModel.phoneNumber && !this.searchModel.aadhaarNumber
-      && !this.searchModel.email && !this.searchModel.city && !this.searchModel.firstName) {
+    if (!this.searchModel.memberId && !this.searchModel.phoneNumber && !this.searchModel.email && !this.searchModel.city && !this.searchModel.firstName) {
       this.confirmationService.create("Error", 'Please provide at least one search parameter', this.globalService.alertOptions);
       return;
     }

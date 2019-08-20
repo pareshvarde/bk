@@ -22,10 +22,7 @@ namespace BK.ViewModel
         public string EmailAddress { get; set; }
 
         [JsonProperty("phoneNumber")]
-        public string PhoneNumber { get; set; }
-
-        [JsonProperty("aadhaarNumber")]        
-        public long? AadhaarNumber { get; set; }
+        public string PhoneNumber { get; set; }        
 
         [JsonProperty("categoryId")]
         public int CategoryId { get; set; }

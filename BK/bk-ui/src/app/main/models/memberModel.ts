@@ -4,8 +4,7 @@ export class MemberModel {
     lastName: string;
     nickName: string;
     email: string;
-    phoneNumber: number;
-    aadhaarNumber: number;        
+    phoneNumber: number;  
     gender: boolean;
     dob: Date;
     birthPlace: string;

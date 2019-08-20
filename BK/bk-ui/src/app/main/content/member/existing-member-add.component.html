@@ -13,15 +13,7 @@
       <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('numberRequired')">Please enter only numbers</mat-error>
       <mat-error *ngIf="searchForm.controls['phoneNumber'].hasError('maxlength')">Maximum 15 characters allowed</mat-error>
     </mat-form-field>
-  </div>
-
-  <div fxLayout="row wrap">
-    <mat-form-field>
-      <input type="number" min="0" matInput [(ngModel)]="searchModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
-      <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('numberRequired')">Please enter only numbers</mat-error>
-      <mat-error *ngIf="searchForm.controls['aadhaarNumber'].hasError('maxlength')">Maximum 16 characters allowed</mat-error>
-    </mat-form-field>
-  </div>
+  </div> 
 
   <div fxLayout="row wrap">
     <mat-form-field>

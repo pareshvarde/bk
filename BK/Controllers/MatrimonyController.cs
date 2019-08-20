@@ -102,8 +102,7 @@ namespace BK.Controllers
                 model.MemberModel.LastName = member.LastName;
                 model.MemberModel.NickName = member.NickName;
                 model.MemberModel.Email = member.EmailAddress;
-                model.MemberModel.PhoneNumber = member.Phone;
-                model.MemberModel.AadhaarNumber = member.AadhaarNumber;
+                model.MemberModel.PhoneNumber = member.Phone;                
                 model.MemberModel.Gender = member.Gender;
                 model.MemberModel.DOB = member.DOB;
                 model.MemberModel.BirthPlace = member.BirthPlace;

@@ -42,10 +42,7 @@ namespace BK.ViewModel
         public string SortOrder { get; set; }
 
         [JsonProperty("memberId")]
-        public int MemberId { get; set; }
-
-        [JsonProperty("aadhaarNumber")]
-        public int AadhaarNumber { get; set; }
+        public int MemberId { get; set; }        
 
         [JsonProperty("currentPage")]
         public int? CurrentPage { get; set; }

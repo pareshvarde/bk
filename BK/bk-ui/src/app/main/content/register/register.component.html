@@ -51,14 +51,7 @@
               <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('numberRequired')">Please enter a valid phone number</mat-error>
               <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('required')">Please enter a valid phone number</mat-error>
               <mat-error *ngIf="registerForm.controls['phoneNumber'].hasError('maxlength')">Maximum 15 characters allowed</mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-              <input type="number" min="0" matInput [(ngModel)]="formModel.aadhaarNumber" placeholder="Aadhaar Number" formControlName="aadhaarNumber">
-              <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('numberRequired')">Please enter a valid aadhaar number</mat-error>
-              <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('noWhitespaceRequired')">Only numbers without white space</mat-error>
-              <mat-error *ngIf="registerForm.controls['aadhaarNumber'].hasError('maxlength')">Maximum 16 characters allowed</mat-error>
-            </mat-form-field>
+            </mat-form-field>            
           </div>
 
           <div fxLayout="row wrap">
