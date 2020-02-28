@@ -72,4 +72,8 @@ bk-main {
         margin: 0 auto;
         @include mat-elevation(8);
     }
+
+    .jaspero__confirmation{
+        position: inherit !important;
+    }
 }
